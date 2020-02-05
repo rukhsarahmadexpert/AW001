@@ -16,6 +16,7 @@ namespace IT.Web_New.Controllers
         List<CustomerNotificationViewModel> customerNotificationViewModels = new List<CustomerNotificationViewModel>();
         CustomerOrderStatistics customerOrderStatistics = new CustomerOrderStatistics();
 
+
         WebServices webServices = new WebServices();
 
         public ActionResult Index()
@@ -61,8 +62,10 @@ namespace IT.Web_New.Controllers
                     ViewBag.customerOrderStatistics = customerOrderStatistics;
 
                     var RequestedData = customerOrderStatistics.RequestedBySevenDayed;
-
+                    var userCompanyViewModel = new UserCompanyViewModel();
                     Session["RequestedData"] = RequestedData;
+                    userCompanyViewModel = Session["userCompanyViewModel"] as UserCompanyViewModel;
+                    TempData["Title"] = userCompanyViewModel.CompanyName;
 
                     return View();
                 }
