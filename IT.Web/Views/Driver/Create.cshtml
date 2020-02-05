@@ -1,0 +1,296 @@
+@model IT.Core.ViewModels.DriverViewModel
+@{
+    ViewBag.Title = "Create Driver";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Driver</a></li>
+    <li class="breadcrumb-item active">Create</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i> Create Driver
+    </h1>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Driver <span class="fw-300"></span>
+                </h2> 
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="panel-tag">
+                        Please add your Driver from here...
+                    </div>
+                    <form id="form1" action="/Driver/Create" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Driver Name</label>
+                                    <input type="text" id="Name" name="Name" class="form-control" placeholder="Enter Driver Name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">contact Number</label>
+                                    <input type="text" id="Contact" name="Contact" class="form-control" placeholder="contact Number">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Email Eddress</label>
+                                    <input type="email" id="Email" name="Email" class="form-control" placeholder="Enter Email Address">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Facebook ID</label>
+                                    <input type="text" id="Facebook" name="Facebook" class="form-control" placeholder="Enter facebook ID">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="single-label">
+                                        Select License Type
+                                    </label>
+                                    <select class="select2 form-control" id="LicienceList" name="LicienceList" multiple>
+
+                                        <option value="1">heavy</option>
+                                        <option value="2">Light</option>
+                                        <option value="3">Bus</option>
+
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">License Expiry</label>
+                                    <input type="date" id="LicenseExpiry" name="LicenseExpiry" class="form-control" placeholder="Enter License Expiry">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Nationality</label>
+                                    <input type="text" id="Nationality" name="Nationality" class="form-control" placeholder="Enter Nationality">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Notes</label>
+                                    <textarea class="form-control" id="Comments" name="Comments" placeholder="Notes"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!--   <h3 class="py-5">Driving License</h3> -->
+
+                                <div class="row">
+
+                                    <div class="col-md-4">
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>Driving License</b> Front side</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                    <input id="DrivingLicenseFrontFile" name="DrivingLicenseFrontFile" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>Driving License</b> Front side</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="DrivingLicenseBackPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                    <input id="DrivingLicenseBackFile" name="DrivingLicenseBackFile" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                     <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>UAE ID</b> Front side</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="IDUAECopyFrontPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                    <input id="IDUAECopyFrontFile" name="IDUAECopyFrontFile" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+
+                                     <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>UAE ID</b> Back side</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="IDUAECopyBackPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                    <input id="IDUAECopyBackFile" name="IDUAECopyBackFile" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>Passport (Details page)</b> </label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="PassportCopyPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                    <input id="PassportCopyFile" name="PassportCopyFile" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>Passport (Details page)</b> </label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="PassportBackPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                    <input id="PassportBackFile" name="PassportBackFile" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>Visa</b>  </label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="VisaCopyPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                    <input id="VisaCopyFile" name="VisaCopyFile" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>Driver Image</b>  </label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="DriverImageUrlPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                    <input id="DriverImageUrlFile" name="DriverImageUrlFile" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                @* <input type="hidden" name="ClientDocs" id="ClientDocs" value="ClientDocs"/>  
+                                <input type="hidden" name="CompanyId" id="CompanyId" value="1057" />
+                                <input type="hidden" name="CreatedBy" id="CreatedBy" value="2099" />*@
+                                <div class="row py-5">
+                                </div>
+
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                <button type="submit" id="Save" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                    Driver
+
+                                    <span>submit</span>
+                                </button>
+                            </div>
+
+                           
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+<script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
+<script>
+
+    $("#VisaCopyFile").change(function () {
+               readURL(this,"VisaCopyPreview");
+    });
+
+
+    $("#PassportBackFile").change(function () {
+               readURL(this,"PassportBackPreview");
+    });
+
+    $("#PassportCopyFile").change(function () {
+               readURL(this,"PassportCopyPreview");
+    });
+
+    $("#IDUAECopyBackFile").change(function () {
+               readURL(this,"IDUAECopyBackPreview");
+    });
+
+    $("#IDUAECopyFrontFile").change(function () {
+               readURL(this,"IDUAECopyFrontPreview");
+    });
+
+    $("#DrivingLicenseBackFile").change(function () {
+               readURL(this,"DrivingLicenseBackPreview");
+    });
+
+    $("#DrivingLicenseFrontFile").change(function () {
+               readURL(this,"DrivingLicenseFrontPreview");
+    });
+
+     $("#DriverImageUrlFile").change(function () {
+               readURL(this,"DriverImageUrlPreview");
+    });
+
+</script>
+}
+
+
+
+<style>
+
+
+    .pic {
+        display: none;
+    }
+
+    .newbtn {
+        cursor: pointer;
+    }
+
+    .blah {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        margin-top: 20px;
+    }
+</style>

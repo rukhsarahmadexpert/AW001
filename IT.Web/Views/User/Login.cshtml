@@ -1,0 +1,87 @@
+﻿@model IT.Core.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Aw Fuel - login form";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="utf-8">
+   
+    <meta name="description" content="Aw fuel trading">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
+    <!-- Call App Mode on ios devices -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- base css -->
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/vendors.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/app.bundle.css">
+    <!-- Place favicon.ico in the root directory -->
+        <link rel="apple-touch-icon" sizes="180x180" href="~/assets/staticImages/logo-1.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/staticImages/logo-1.png">
+   
+   
+    <!-- Optional: page related CSS -->
+    <!-- PHP docs -->
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/markdown.css">
+    	<link rel="stylesheet" media="screen, print" href="~/assets/css/page-login.css">
+</head>
+    <body>
+        <div class="blankpage-form-field">
+            <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
+                <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
+                    <img class="align-center" src="~/assets/staticImages/logo-1.png" style="width:70px; align-content:center" alt="AW Fuel" aria-roledescription="logo">
+                   
+                   <span class="page-logo-text mr-1 " style="margin-left:100px" >  Sign In</span>
+                    <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
+                </a>
+            </div>
+            <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
+                <form action="/User/Login" method="post">
+                    <div class="form-group">
+                        <!-- <label class="form-label" for="username">Email Address</label>-->
+                        <input type="email" id="UserName" name="UserName" class="form-control" placeholder="Enter Your Email Address">
+                        <span class="help-block">
+                            @Html.ValidationMessageFor(Model => Model.UserName, "", new { @class = "text-danger" })
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <!--<label class="form-label" for="password">Password</label>-->
+                        <input type="password" id="Password" name="Password" class="form-control" placeholder="enter Your Password">
+                        <span class="help-block">
+                            @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
+                        </span>
+                    </div>
+
+                    <div class="form-group text-left">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="rememberme">
+                            <label class="custom-control-label" for="rememberme"> Remember me</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default float-right mt-5">Sign In</button>
+                </form>
+
+                <div class="blankpage-footer text-center">
+                    <a href="#"><strong>Recover Password</strong></a> | <a href="/User/Registration"><strong>Register Account</strong></a>
+                </div>
+            </div>
+          
+        </div>
+       
+        <video poster="~/assets/staticImages/main-login-2.png" id="bgvid" playsinline autoplay muted loop>
+           
+        </video>
+  
+<script src="~/assets/js/vendors.bundle.js"></script>
+<script src="~/assets/js/app.bundle.js"></script>
+        <!-- Page related scripts -->
+    </body>
+</html>
+
+

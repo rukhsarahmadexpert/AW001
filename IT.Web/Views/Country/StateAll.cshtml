@@ -1,0 +1,68 @@
+﻿@model List<IT.Core.ViewModels.StateViewModel>
+@{
+    ViewBag.Title = "StateAll";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+    List<IT.Core.ViewModels.StateViewModel> stateViewModels = new List<IT.Core.ViewModels.StateViewModel>();
+    stateViewModels = Model as List<IT.Core.ViewModels.StateViewModel>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
+    <li class="breadcrumb-item active">state</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a href="/Country/AddUpdateState">
+                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>state</i></span>
+                    </a>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <!--      <div class="panel-tag">
+                                <p>Drivers Base Information</p>
+                            </div>-->
+                    <!-- datatable start -->
+                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-primary-600">
+                            <tr>
+
+                                <th>Country Name </th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in stateViewModels)
+                            {
+                                <tr>
+
+                                    <td>@item.States</td>
+
+                                    <td>
+                                        <form action="/Country/EditState" method="post">
+                                            <input type="hidden" name="Id" value="@item.Id" />
+                                            <input type="hidden" name="Name" value="@item.States" />
+                                            <input type="hidden" name="CountryId" value="@item.CountryId" />
+
+                                            <button type="submit" class="btn btn-sm"><i class="fal fa-edit"></i></button>
+                                        </form>
+                                       
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

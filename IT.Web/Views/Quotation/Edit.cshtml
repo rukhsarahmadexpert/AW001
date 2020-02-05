@@ -1,0 +1,290 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<link href="~/Content/css/Common/LPOInvoiceTable.css" rel="stylesheet" />
+<link href="~/Content/css/Common/Common-LPO.css" rel="stylesheet" />
+
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
+    <li class="breadcrumb-item active">Quotation</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a href="/Product/Create">
+                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Quotation</i></span>
+                    </a>
+                </h2>
+            </div>
+            <div class="panel show">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="data-table-list">
+                        <div class="basic-tb-hd">
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <h2></h2>
+                                </div>
+                                <div class="col-md-1">
+                                    @*<button class="btn btn-primary btn-sm" id="createNewEmployee"><i class="fa fa-plus"></i> New</button>*@
+                                </div>
+                            </div>
+                            @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_LPOInvoiceVenderPartialView.cshtml")
+                        </div>
+                        <div>
+                            @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_MainTableRowPartialView.cshtml")
+                            @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_EditFooterPartialView.cshtml")
+                        </div>
+                        <p></p>
+                        @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_LPO_InvoiceButtonPartialView.cshtml")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="ModelEditLPO" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h5>You want to change this FIle <span id="spanId" class="badge badge-light">Reason  ?</span></h5>
+                <br />
+                <textarea class="form-control" cols="5" role="3" id="ReasonUpdated"></textarea>
+            </div>
+            <hr />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" id="Update">Yes! Update</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="CancelEdit">No! Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<input hidden id="IsDownload" />
+
+
+
+@section Scripts{
+    <script src="~/Scripts/Common-Scripts/LOP-Invoice.js"></script>
+    <script>
+        $('#Venders').change(function () {
+            var Id = 0;
+            Id = $(this).val();
+
+            if (Id > 0) {
+                ajaxRequest("GET", "/Vender-Edit/" + Id, "json").then(function (result) {
+                    if (result != "Failed") {
+                        $('#VenderAddress').text(result.Address);
+                        $('#VenderPhone').text(result.LandLine);
+                        $('#VenderEmail').text(result.Email);
+                        $('#VenderVAT').text(result.TRN);
+                        $('#ContactPerson').text(result.Representative);
+                    }
+                    else {
+                        alert('data not found');
+                    }
+                });
+            }
+        });
+
+        $('#SaveEmail').click(function () {
+
+            var Id = $('#LPOId').val();
+
+            if (ValidLPO()) {
+                localStorage.setItem("SendByEmail", "True");
+                $('#IsDownload').val('');
+                CreateLPOInvoice("/Quotation/Update");
+            }
+
+            window.location.href = "/Email";
+
+        });
+
+        $('#SaveDraft').click(function () {
+
+            if ($('#ReasonUpdated').val() == "") {
+                alert("Please explain reason");
+            }
+            else {
+                if (ValidLPO()) {
+
+                    localStorage.removeItem("SendByEmail");
+
+                    $('#IsDownload').val('');
+                    CreateLPOInvoice("/Quotation/Update");
+                }
+            }
+        });
+
+        $('#SaveDownload').click(function () {
+            if ($('#ReasonUpdated').val() == "") {
+                alert("Please explain reason");
+            }
+            else {
+                if (ValidLPO()) {
+                    localStorage.removeItem("SendByEmail");
+                    $('#IsDownload').val("True");
+                    CreateLPOInvoice("/Quotation/Update");
+                }
+            }
+        });
+
+        //function CreateLPOInvoice(url, btnName, Message, returnulr) {
+
+        function CreateLPOInvoice(Url) {
+            if (1 == 1) {
+
+
+                var list = [], orderItem, CurrentRow;
+                var formData = new FormData();
+
+                $('#orderdetailsitems .tbodyGood tr').each(function () {
+                    CurrentRow = $(this).closest("tr");
+                    if (validateRow(CurrentRow)) {
+                        if (1 == 1) {
+                            orderItem = {
+                                ItemId: parseInt($(this).find('.product').val()),
+                                Description: $(this).find('.Description').val(),
+                                UnitId: parseInt($(this).find('.Unit').val()),
+                                UnitPrice: parseFloat($(this).find('.rate').val()),
+                                Qunatity: parseInt($(this).find('.quantity').val()),
+                                Total: parseFloat($(this).find('.RowSubTotal').val()),
+                                VAT: parseInt($(this).find('.vat').val()),
+                                SubTotal: parseInt($(this).find('.rownettotal').val()),
+                                LPOId: $('#LPOId').val(),
+                                Id: $(this).find('.detailId').val(),
+                            }
+                            list.push(orderItem);
+                        }
+                    }
+                });
+
+
+                if (list.length == 0) {
+                    $('#SubTotal').text('');
+                    $('#TotalVAT').text('');
+                    $('#gtotal').text('');
+                }
+
+                var empObj = {
+                    Id: $('#LPOId').val(),
+                    PONumber: $('#PONo').val(),
+                    RefrenceNumber: $('#RefrenceNo').val(),
+                    FromDate: $('#FromDate').val(),
+                    DueDate: $('#DueDate').val(),
+                    Total: $('#SubTotal').text(),
+                    VAT: $('#TotalVAT').text(),
+                    GrandTotal: $('#gtotal').text(),
+                    TermCondition: $('#TermCondition').val(),
+                    CustomerNote: $('#CustomerNote').val(),
+                    VenderId: $('#Venders').val(),
+                    IsDownload: $('#IsDownload').val(),
+                    ReasonUpdated: $('#ReasonUpdated').val()
+                };
+
+                for (var key in empObj) {
+                    formData.append(key, empObj[key]);
+                }
+
+                for (var i = 0; i < list.length; i++) {
+                    formData.append('lPOInvoiceDetailsList[' + i + '][ItemId]', list[i].ItemId)
+                    formData.append('lPOInvoiceDetailsList[' + i + '][Qunatity]', list[i].Qunatity)
+                    formData.append('lPOInvoiceDetailsList[' + i + '][UnitPrice]', list[i].UnitPrice)
+                    formData.append('lPOInvoiceDetailsList[' + i + '][Total]', list[i].Total)
+                    formData.append('lPOInvoiceDetailsList[' + i + '][VAT]', list[i].VAT)
+                    formData.append('lPOInvoiceDetailsList[' + i + '][SubTotal]', list[i].SubTotal)
+                    formData.append('lPOInvoiceDetailsList[' + i + '][Description]', list[i].Description)
+                    formData.append('lPOInvoiceDetailsList[' + i + '][UnitId]', list[i].UnitId)
+                    formData.append('lPOInvoiceDetailsList[' + i + '][LPOId]', list[i].LPOId)
+                    formData.append('lPOInvoiceDetailsList[' + i + '][Id]', list[i].Id)
+                }
+
+                if (list.length > 0) {
+
+                    $.ajax({
+                        url: Url,
+                        type: "POST",
+                        data: formData,
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+                        success: function (result) {
+                            if (result != "Failed") {
+                                list = [];
+                                //sucessAdd();
+                                //response(result, btnName, Message, returnulr, F)
+
+                                var SendEmail = localStorage.getItem("SendByEmail");
+
+                                if (SendEmail != null) {
+
+                                    localStorage.setItem("Id", result);
+                                    window.location.href = "/Email";
+                                }
+                                else {
+                                    window.location.href = "/Quotation/Details/" + result;
+                                }
+                            }
+                            else {
+                                alert(result);
+                            }
+                        },
+                        error: function (errormessage) {
+                            alert(errormessage);
+                        }
+                    });
+                }
+                else {
+                    alert('at least one itme in list', parseInt(list.length));
+                }
+            }
+            else {
+
+                al('Opration Failed, try againg later');
+            }
+        }
+
+        $(document).on('click', '.BtnRemove', function () {
+            var row = $(this).closest('tr');
+            deleteQuatation(row, "/Quotation/DeleteQuotationDetailsRow");
+
+        });
+
+        function deleteQuatation(currentRow, routeurl) {
+
+            var data = JSON.stringify({
+                Id: $('#LPOId').val(),
+                detailId: currentRow.find('.detailId').val(),
+                VAT: parseFloat(currentRow.find('.vat').val()),
+                RowTotal: parseFloat(currentRow.find('.RowSubTotal').val()),
+            })
+            ajaxRequest("POST", routeurl, data, "json").then(function (result) {
+                if (result == "Success") {
+                    //sucessUpdate();
+                    window.location.reload();
+                }
+                else {
+                    alert("Opration Failed")
+                }
+            });
+
+        }
+
+    </script>
+}

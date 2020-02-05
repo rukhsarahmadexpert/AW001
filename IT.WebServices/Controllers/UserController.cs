@@ -62,8 +62,8 @@ namespace IT.WebServices.Controllers
                 var doctorsList = unitOfWork.GetRepositoryInstance<DoctorViewModel>().ReadStoredProcedure("Doctor_Detail " + parameter, sqlParameters).ToList();
                 */
                 var userList = unitOfWork.GetRepositoryInstance<object>().WriteStoredProcedure("AddUser @FirstName,@LastName,@UserName,@Password"                    
-                    ,new SqlParameter("FirstName", System.Data.SqlDbType.VarChar) { Value = userViewModel.FirstName}
-                    ,new SqlParameter("LastName", System.Data.SqlDbType.VarChar) { Value  = userViewModel.LastName }
+                    ,new SqlParameter("FirstName", System.Data.SqlDbType.VarChar) { Value = userViewModel.FullName}
+                    ,new SqlParameter("LastName", System.Data.SqlDbType.VarChar) { Value  = userViewModel.FullName }
                     , new SqlParameter("UserName", System.Data.SqlDbType.VarChar) { Value = userViewModel.UserName }
                     , new SqlParameter("Password", System.Data.SqlDbType.VarChar) { Value = "12345" }
                     );

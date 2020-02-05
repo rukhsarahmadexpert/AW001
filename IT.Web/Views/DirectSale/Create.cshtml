@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Drect sale Create Create";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<main id="js-page-content" role="main" class="page-content">
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Direct Sale Order
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Direct sale <span class="fw-300"></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please Create new plate number here .....
+                        </div>
+                        <form action="/DirectSale/Create" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Trafic Plate Number <small>(Required)</small></label>
+                                        <input type="text" id="TraficPlateNumber" name="TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Driver Name <small>(Optional)</small></label>
+                                        <input type="text" id="DriverName" name="DriverName" class="form-control" placeholder="Driver Name">
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Contact Number <small>(Optional)</small></label>
+                                        <input type="text" id="ContactNumber" name="ContactNumber" class="form-control" placeholder="Contact Number">
+                                    </div>
+                                
+                                    <div class="row py-5">
+                                        <div class="col-md-12">
+                                            <button type="submit" id="TrafficPlateNumberSubmit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                                Submit
+                                                <span>Vehicle</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8 mb-3">
+                                    @Html.Partial("~/Views/Shared/PartialView/StorageGraph/StorgeGraphPartialView.cshtml")
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+@section scripts{
+<script>
+
+    //$(document).ready(function () {
+
+    //    $('#TrafficPlateNumberSubmit').click(function () {
+
+
+
+    //        var Data = JSON.stringify({
+
+               
+    //            DriverName: $('#DriverName').val(),
+    //            TraficPlateNumber : $('#TraficPlateNumber').val(),
+    //            ContactNumber: $('#ContactNumber').val(),
+    //     })
+    //        ajaxRequest("POST", "/DirectSale/Create", Data, "json").then(function (result) {
+
+    //            if (result != "failed") {
+    //                //console.log(result);
+    //                window.location.reload();
+    //            }
+    //            else {
+    //                    alert('there is some problem');
+    //                }
+
+    //        })
+    //    });
+
+    //})
+
+</script>
+ }

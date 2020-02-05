@@ -1,0 +1,2927 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @* @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    
+    <title>Dashbaord - AW Fuel Trading </title>
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
+    <!-- Call App Mode on ios devices -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- base css -->
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/vendors.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/app.bundle.css">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/staticImages/logo-1.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/staticImages/logo-1.png">
+    
+    <!-- Optional: page related CSS -->
+    <!-- PHP docs -->
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/statistics/chartjs/chartjs.css">
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/statistics/chartist/chartist.css">
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/markdown.css">
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/datagrid/datatables/datatables.bundle.css">
+
+    <!-- page related CSS below -->
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/formplugins/select2/select2.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/notifications/sweetalert2/sweetalert2.bundle.css">
+</head>
+<body class="mod-bg-1 ">
+    <!-- DOC: script to save and load page settings -->
+    <script>
+        /**
+         *	This script should be placed right after the body tag for fast execution
+         *	Note: the script is written in pure javascript and does not depend on thirdparty library
+         **/
+        'use strict';
+
+        var classHolder = document.getElementsByTagName("BODY")[0],
+            /**
+             * Load from localstorage
+             **/
+            themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
+                {},
+            themeURL = themeSettings.themeURL || '',
+            themeOptions = themeSettings.themeOptions || '';
+        /**
+         * Load theme options
+         **/
+        if (themeSettings.themeOptions) {
+            classHolder.className = themeSettings.themeOptions;
+            console.log("%c✔ Theme settings loaded", "color: #148f32");
+        }
+        else {
+            console.log("Heads up! Theme settings is empty or does not exist, loading default settings...");
+        }
+        if (themeSettings.themeURL && !document.getElementById('mytheme')) {
+            var cssfile = document.createElement('link');
+            cssfile.id = 'mytheme';
+            cssfile.rel = 'stylesheet';
+            cssfile.href = themeURL;
+            document.getElementsByTagName('head')[0].appendChild(cssfile);
+        }
+        /**
+         * Save to localstorage
+         **/
+        var saveSettings = function () {
+            themeSettings.themeOptions = String(classHolder.className).split(/[^\w-]+/).filter(function (item) {
+                return /^(nav|header|mod|display)-/i.test(item);
+            }).join(' ');
+            if (document.getElementById('mytheme')) {
+                themeSettings.themeURL = document.getElementById('mytheme').getAttribute("href");
+            };
+            localStorage.setItem('themeSettings', JSON.stringify(themeSettings));
+        }
+        /**
+         * Reset settings
+         **/
+        var resetSettings = function () {
+            localStorage.setItem("themeSettings", "");
+        }
+
+    </script>
+    <!-- BEGIN Page Wrapper -->
+    <div class="page-wrapper">
+        <div class="page-inner">
+            <!-- BEGIN Left Aside -->
+            <aside class="page-sidebar">
+                <div class="page-logo">
+                    <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
+                        <img src="~/assets/staticImages/logo-1.png" alt="Aw Fuel" style="width:60px" aria-roledescription="logo">
+                        <!--<span class="page-logo-text mr-1">Mena Energy</span>-->
+                        <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
+                        <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
+                    </a>
+                </div>
+                <!-- BEGIN PRIMARY NAVIGATION -->
+                <nav id="js-primary-nav" class="primary-nav" role="navigation">
+                    <div class="nav-filter">
+                        <div class="position-relative">
+                            <input type="text" id="nav_filter_input" placeholder="Filter menu" class="form-control" tabindex="0">
+                            <a href="#" onclick="return false;" class="btn-primary btn-search-close js-waves-off" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar">
+                                <i class="fal fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <img src="data:image/jpeg;base64,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" class="profile-image rounded-circle" alt="Rizwa afridi">
+                        <div class="info-card-text">
+                            <a href="#" class="d-flex align-items-center text-white">
+                                <span class="text-truncate text-truncate-sm d-inline-block">
+                                    Rizwan afridi
+                                </span>
+                            </a>
+                            <span class="d-inline-block text-truncate text-truncate-sm">Abu Dhabi</span>
+                        </div>
+                        <img src="~/assets/img/card-backgrounds/cover-4-lg.png" class="cover" alt="cover">
+                        <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
+                            <i class="fal fa-angle-down"></i>
+                        </a>
+                    </div>
+
+                    <ul class="nav-menu" id="js-nav-menu">
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-address-card"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Admin Information</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/AwfDriver/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Drivers</span><span class="">List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/AwfVehicle" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Vehicle</span><span class="">List</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-address-book"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Customer Orders</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/CustomerOrder/Admin" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Customer Order</span><span class="">List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-address-book"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Venders</span>
+                            </a>
+                            <ul>
+
+                                <li>
+                                    <a href="/Vender/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Venders</span><span class="">List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-database"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Storage</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/Storage/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Storage</span><span class="">List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-industry"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Companies</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/Company/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Companies</span><span class="">List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-users"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Designations</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/Designation/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Designation</span><span class="">List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-user"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Employees</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/Employee/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Employee</span><span class="">List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-list"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Products</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/ProductUnit/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Product Unit</span><span class="">List</span>
+                                    </a>
+                                    <a href="/Product/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Product</span><span class="">List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-chart-line"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Sale</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/Quotation/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Quotations</span><span class="">List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Invoice/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Invoice</span><span class="">List</span>
+                                    </a>
+                                </li>
+                               
+                            </ul>
+                        </li>
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-chart-line"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Purchase</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/LPO/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">LPO</span><span class="">List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Bill/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Bill</span><span class="">Bill</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-sitemap"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Master</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/AwfDriver/DriverLoginHistoryAllForAdmin" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Driver Login History</span><span class="">List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Site/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Sites</span><span class="">List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/FuelTransfer/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Fuel Transfer</span><span class="">List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/FuelTransfer/OrderTransferRequestsAll" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Order Transfer Requests</span><span class="">List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Web/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">App Versions</span><span class="">List</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/Company/CashCompany" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">CashCompany</span><span class="">Create</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/CustomerNotification/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Advertisement</span><span class="">List</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/Country/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Country</span><span class="">List</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Country/StateAll" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">State          </span><span class="">List</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/Country/CityAll" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">City</span><span class="">List</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="filter-message js-filter-message bg-success-600"></div>
+                </nav>
+                <!-- END PRIMARY NAVIGATION -->
+                <!-- NAV FOOTER -->
+                <div class="nav-footer shadow-top">
+                    <a href="#" onclick="return false;" data-action="toggle" data-class="nav-function-minify" class="hidden-md-down">
+                        <i class="ni ni-chevron-right"></i>
+                        <i class="ni ni-chevron-right"></i>
+                    </a>
+                </div> <!-- END NAV FOOTER -->
+            </aside>
+            <!-- END Left Aside -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN Page Header -->
+                <header class="page-header" role="banner">
+                    <!-- we need this logo when user switches to nav-function-top -->
+                    <div class="page-logo">
+                        <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
+                            <img src="~/assets/staticImages/logo-1.png" alt="Aw fuel" style="width:60px" aria-roledescription="logo">
+                            <!-- <span class="page-logo-text mr-1">Mena energy</span>-->
+                            <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
+                            <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
+                        </a>
+                    </div>
+                    <!-- DOC: nav menu layout change shortcut -->
+                    <div class="hidden-md-down dropdown-icon-menu position-relative">
+                        <a href="#" class="header-btn btn js-waves-off" data-action="toggle" data-class="nav-function-hidden" title="Hide Navigation">
+                            <i class="ni ni-menu"></i>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#" class="btn js-waves-off" data-action="toggle" data-class="nav-function-minify" title="Minify Navigation">
+                                    <i class="ni ni-minify-nav"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn js-waves-off" data-action="toggle" data-class="nav-function-fixed" title="Lock Navigation">
+                                    <i class="ni ni-lock-nav"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- DOC: mobile button appears during mobile width -->
+                    <div class="hidden-lg-up">
+                        <a href="#" class="header-btn btn press-scale-down" data-action="toggle" data-class="mobile-nav-on">
+                            <i class="ni ni-menu"></i>
+                        </a>
+                    </div>
+                    <div class="search">
+                        <form class="app-forms hidden-xs-down" role="search" action="https://smartadmin.lodev09.com/page_search.php" autocomplete="off">
+                            <input type="text" id="search-field" placeholder="Search for anything" class="form-control" tabindex="1">
+                            <a href="#" onclick="return false;" class="btn-danger btn-search-close js-waves-off d-none" data-action="toggle" data-class="mobile-search-on">
+                                <i class="fal fa-times"></i>
+                            </a>
+                        </form>
+                    </div>
+                    <div class="ml-auto d-flex">
+                        <!-- activate app search icon (mobile) -->
+                        <div class="hidden-sm-up">
+                            <a href="#" class="header-icon" data-action="toggle" data-class="mobile-search-on" data-focus="search-field" title="Search">
+                                <i class="fal fa-search"></i>
+                            </a>
+                        </div>
+                        <!-- app settings -->
+                        <div class="hidden-md-down">
+                            <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-settings">
+                                <i class="fal fa-cog"></i>
+                            </a>
+                        </div>
+                        <!-- app shortcuts -->
+                        <div>
+                            <a href="#" class="header-icon" data-toggle="dropdown" title="My Apps">
+                                <i class="fal fa-cube"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-animated w-auto h-auto">
+                                <div class="dropdown-header bg-trans-gradient d-flex justify-content-center align-items-center rounded-top">
+                                    <h4 class="m-0 text-center color-white">
+                                        Quick Shortcut
+                                        <small class="mb-0 opacity-80">User Applications & Addons</small>
+                                    </h4>
+                                </div>
+                                <div class="custom-scroll h-100">
+                                    <ul class="app-list">
+                                        <li>
+                                            <a href="#" class="app-list-item hover-white">
+                                                <span class="icon-stack">
+                                                    <i class="base-2 icon-stack-3x color-primary-600"></i>
+                                                    <i class="base-3 icon-stack-2x color-primary-700"></i>
+                                                    <i class="ni ni-settings icon-stack-1x text-white fs-lg"></i>
+                                                </span>
+                                                <span class="app-list-name">
+                                                    Services
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="app-list-item hover-white">
+                                                <span class="icon-stack">
+                                                    <i class="base-2 icon-stack-3x color-primary-400"></i>
+                                                    <i class="base-10 text-white icon-stack-1x"></i>
+                                                    <i class="ni md-profile color-primary-800 icon-stack-2x"></i>
+                                                </span>
+                                                <span class="app-list-name">
+                                                    Account
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="app-list-item hover-white">
+                                                <span class="icon-stack">
+                                                    <i class="base-9 icon-stack-3x color-success-400"></i>
+                                                    <i class="base-2 icon-stack-2x color-success-500"></i>
+                                                    <i class="ni ni-shield icon-stack-1x text-white"></i>
+                                                </span>
+                                                <span class="app-list-name">
+                                                    Security
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="app-list-item hover-white">
+                                                <span class="icon-stack">
+                                                    <i class="base-18 icon-stack-3x color-info-700"></i>
+                                                    <span class="position-absolute pos-top pos-left pos-right color-white fs-md mt-2 fw-400">28</span>
+                                                </span>
+                                                <span class="app-list-name">
+                                                    Calendar
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="app-list-item hover-white">
+                                                <span class="icon-stack">
+                                                    <i class="base-7 icon-stack-3x color-info-500"></i>
+                                                    <i class="base-7 icon-stack-2x color-info-700"></i>
+                                                    <i class="ni ni-graph icon-stack-1x text-white"></i>
+                                                </span>
+                                                <span class="app-list-name">
+                                                    Stats
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="app-list-item hover-white">
+                                                <span class="icon-stack">
+                                                    <i class="base-4 icon-stack-3x color-danger-500"></i>
+                                                    <i class="base-4 icon-stack-1x color-danger-400"></i>
+                                                    <i class="ni ni-envelope icon-stack-1x text-white"></i>
+                                                </span>
+                                                <span class="app-list-name">
+                                                    Messages
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="app-list-item hover-white">
+                                                <span class="icon-stack">
+                                                    <i class="base-4 icon-stack-3x color-fusion-400"></i>
+                                                    <i class="base-5 icon-stack-2x color-fusion-200"></i>
+                                                    <i class="base-5 icon-stack-1x color-fusion-100"></i>
+                                                    <i class="fal fa-keyboard icon-stack-1x color-info-50"></i>
+                                                </span>
+                                                <span class="app-list-name">
+                                                    Notes
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="app-list-item hover-white">
+                                                <span class="icon-stack">
+                                                    <i class="base-16 icon-stack-3x color-fusion-500"></i>
+                                                    <i class="base-10 icon-stack-1x color-primary-50 opacity-30"></i>
+                                                    <i class="base-10 icon-stack-1x fs-xl color-primary-50 opacity-20"></i>
+                                                    <i class="fal fa-dot-circle icon-stack-1x text-white opacity-85"></i>
+                                                </span>
+                                                <span class="app-list-name">
+                                                    Photos
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="app-list-item hover-white">
+                                                <span class="icon-stack">
+                                                    <i class="base-19 icon-stack-3x color-primary-400"></i>
+                                                    <i class="base-7 icon-stack-2x color-primary-300"></i>
+                                                    <i class="base-7 icon-stack-1x fs-xxl color-primary-200"></i>
+                                                    <i class="base-7 icon-stack-1x color-primary-500"></i>
+                                                    <i class="fal fa-globe icon-stack-1x text-white opacity-85"></i>
+                                                </span>
+                                                <span class="app-list-name">
+                                                    Maps
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="app-list-item hover-white">
+                                                <span class="icon-stack">
+                                                    <i class="base-5 icon-stack-3x color-success-700 opacity-80"></i>
+                                                    <i class="base-12 icon-stack-2x color-success-700 opacity-30"></i>
+                                                    <i class="fal fa-comment-alt icon-stack-1x text-white"></i>
+                                                </span>
+                                                <span class="app-list-name">
+                                                    Chat
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="app-list-item hover-white">
+                                                <span class="icon-stack">
+                                                    <i class="base-5 icon-stack-3x color-warning-600"></i>
+                                                    <i class="base-7 icon-stack-2x color-warning-800 opacity-50"></i>
+                                                    <i class="fal fa-phone icon-stack-1x text-white"></i>
+                                                </span>
+                                                <span class="app-list-name">
+                                                    Phone
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="app-list-item hover-white">
+                                                <span class="icon-stack">
+                                                    <i class="base-6 icon-stack-3x color-danger-600"></i>
+                                                    <i class="fal fa-chart-line icon-stack-1x text-white"></i>
+                                                </span>
+                                                <span class="app-list-name">
+                                                    Projects
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="w-100">
+                                            <a href="#" class="btn btn-default mt-4 mb-2 pr-5 pl-5"> Add more apps </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- app message -->
+                        <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-messenger">
+                            <i class="fal fa-globe"></i>
+                            <span class="badge badge-icon">!</span>
+                        </a>
+                        <!-- app notification -->
+                        <div>
+                            <a href="#" class="header-icon" data-toggle="dropdown" title="notifications">
+                                <i class="fal fa-bell"></i>
+                                <span class="badge badge-icon">0</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-animated dropdown-xl">
+                                <div class="dropdown-header bg-trans-gradient d-flex justify-content-center align-items-center rounded-top mb-2">
+                                    <h4 class="m-0 text-center color-white">
+                                        11 New
+                                        <small class="mb-0 opacity-80">Notifications</small>
+                                    </h4>
+                                </div>
+                                <ul class="nav nav-tabs nav-tabs-clean" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link px-4 fs-md js-waves-on fw-500" data-toggle="tab" href="#tab-messages" data-i18n="drpdwn.messages">Messages</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link px-4 fs-md js-waves-on fw-500" data-toggle="tab" href="#tab-feeds" data-i18n="drpdwn.feeds">Feeds</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link px-4 fs-md js-waves-on fw-500" data-toggle="tab" href="#tab-events" data-i18n="drpdwn.events">Events</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content tab-notification">
+                                    <div class="tab-pane active p-3 text-center">
+                                        <h5 class="mt-4 pt-4 fw-500">
+                                            <span class="d-block fa-3x pb-4 text-muted">
+                                                <i class="ni ni-arrow-up text-gradient opacity-70"></i>
+                                            </span> Select a tab above to activate
+                                            <small class="mt-3 fs-b fw-400 text-muted">
+                                                This blank page message helps protect your privacy, or you can show the first message here automatically through
+                                                <a href="#">settings page</a>
+                                            </small>
+                                        </h5>
+                                    </div>
+                                    <div class="tab-pane" id="tab-messages" role="tabpanel">
+                                        <div class="custom-scroll h-100">
+                                            <ul class="notification">
+
+                                                <li>
+                                                    <a href="#" class="d-flex align-items-center">
+                                                        <span class="status status-danger mr-2">
+                                                            <span class="profile-image rounded-circle d-inline-block" style="background-image:url('~/assets/img/demo/avatars/avatar-j.png')"></span>
+                                                        </span>
+                                                        <span class="d-flex flex-column flex-1 ml-1">
+                                                            <span class="name">Rukhsar</span>
+                                                            <span class="msg-a fs-sm">Msed quia non numquam eius</span>
+                                                            <span class="fs-nano text-muted mt-1">one day ago</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab-feeds" role="tabpanel">
+                                        <div class="custom-scroll h-100">
+                                            <ul class="notification">
+
+                                                <li>
+                                                    <div class="d-flex align-items-center show-child-on-hover">
+                                                        <div class="d-flex flex-column flex-1">
+                                                            <span class="name">
+                                                                Adison Lee <span class="fw-300 d-inline">replied to your video  </span>
+                                                            </span>
+                                                            <span class="msg-a fs-sm mt-2">Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day...</span>
+                                                            <span class="fs-nano text-muted mt-1">10 minutes ago</span>
+                                                        </div>
+                                                        <div class="show-on-hover-parent position-absolute pos-right pos-bottom p-3">
+                                                            <a href="#" class="text-muted" title="delete"><i class="fal fa-trash-alt"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab-events" role="tabpanel">
+                                        <div class="d-flex flex-column h-100">
+                                            <div class="h-auto">
+                                                <table class="table table-bordered table-calendar m-0 w-100 h-100 border-0">
+                                                    <tr>
+                                                        <th colspan="7" class="pt-3 pb-2 pl-3 pr-3 text-center">
+                                                            <div class="js-get-date h5 mb-2">[your date here]</div>
+                                                        </th>
+                                                    </tr>
+                                                    <tr class="text-center">
+                                                        <th>Sun</th>
+                                                        <th>Mon</th>
+                                                        <th>Tue</th>
+                                                        <th>Wed</th>
+                                                        <th>Thu</th>
+                                                        <th>Fri</th>
+                                                        <th>Sat</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted bg-faded">30</td>
+                                                        <td>1</td>
+                                                        <td>2</td>
+                                                        <td>3</td>
+                                                        <td>4</td>
+                                                        <td>5</td>
+                                                        <td><i class="fal fa-birthday-cake mt-1 ml-1 position-absolute pos-left pos-top text-primary"></i> 6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>7</td>
+                                                        <td>8</td>
+                                                        <td>9</td>
+                                                        <td class="bg-primary-300 pattern-0">10</td>
+                                                        <td>11</td>
+                                                        <td>12</td>
+                                                        <td>13</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>14</td>
+                                                        <td>15</td>
+                                                        <td>16</td>
+                                                        <td>17</td>
+                                                        <td>18</td>
+                                                        <td>19</td>
+                                                        <td>20</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>21</td>
+                                                        <td>22</td>
+                                                        <td>23</td>
+                                                        <td>24</td>
+                                                        <td>25</td>
+                                                        <td>26</td>
+                                                        <td>27</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>28</td>
+                                                        <td>29</td>
+                                                        <td>30</td>
+                                                        <td>31</td>
+                                                        <td class="text-muted bg-faded">1</td>
+                                                        <td class="text-muted bg-faded">2</td>
+                                                        <td class="text-muted bg-faded">3</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="flex-1 custom-scroll">
+                                                <div class="p-2">
+                                                    <div class="d-flex align-items-center text-left mb-3">
+                                                        <div class="width-5 fw-300 text-primary l-h-n mr-1 align-self-start fs-xxl">
+                                                            15
+                                                        </div>
+                                                        <div class="flex-1">
+                                                            <div class="d-flex flex-column">
+                                                                <span class="l-h-n fs-md fw-500 opacity-70">
+                                                                    October 2020
+                                                                </span>
+                                                                <span class="l-h-n fs-nano fw-400 text-secondary">
+                                                                    Friday
+                                                                </span>
+                                                            </div>
+                                                            <div class="mt-3">
+                                                                <p>
+                                                                    <strong>2:30PM</strong> - Doctor's appointment
+                                                                </p>
+                                                                <p>
+                                                                    <strong>3:30PM</strong> - Report overview
+                                                                </p>
+                                                                <p>
+                                                                    <strong>4:30PM</strong> - Meeting with Donnah V.
+                                                                </p>
+                                                                <p>
+                                                                    <strong>5:30PM</strong> - Late Lunch
+                                                                </p>
+                                                                <p>
+                                                                    <strong>6:30PM</strong> - Report Compression
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="py-2 px-3 bg-faded d-block rounded-bottom text-right border-faded border-bottom-0 border-right-0 border-left-0">
+                                    <a href="#" class="fs-xs fw-500 ml-auto">view all notifications</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- app user menu -->
+                        <div>
+                            <a href="#" data-toggle="dropdown" title="drlantern@gotbootstrap.com" class="header-icon d-flex align-items-center justify-content-center ml-2">
+                                <img src="data:image/jpeg;base64,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" class="profile-image rounded-circle" alt="Rizwan afridi">
+                                <!-- you can also add username next to the avatar with the codes below:
+                                        <span class="ml-1 mr-1 text-truncate text-truncate-header hidden-xs-down">Me</span>
+                                        <i class="ni ni-chevron-down hidden-xs-down"></i> -->
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-animated dropdown-lg">
+                                <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
+                                    <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
+                                        <span class="mr-2">
+                                            <img src="data:image/jpeg;base64,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" class="rounded-circle profile-image" alt="Rizwan afridi">
+                                        </span>
+                                        <div class="info-card-text">
+                                            <div class="fs-lg text-truncate text-truncate-lg">Rizwan afridi</div>
+                                            <span class="text-truncate text-truncate-md opacity-80">rizwan@itmolen.nl</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider m-0"></div>
+                                @*  <a href="#" class="dropdown-item" data-action="app-reset">
+                                        <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
+                                    </a>*@
+                                <a href="#" class="dropdown-item" data-toggle="modal" data-target=".js-modal-settings">
+                                    <span data-i18n="drpdwn.settings">Settings</span>
+                                </a>
+                                <div class="dropdown-divider m-0"></div>
+                                <a href="#" class="dropdown-item" data-action="app-fullscreen">
+                                    <span data-i18n="drpdwn.fullscreen">Fullscreen</span>
+                                    <i class="float-right text-muted fw-n">F11</i>
+                                </a>
+                                <a href="#" class="dropdown-item" data-action="app-print">
+                                    <span data-i18n="drpdwn.print">Print</span>
+                                    <i class="float-right text-muted fw-n">Ctrl + P</i>
+                                </a>
+
+                                <div class="dropdown-divider m-0"></div>
+                                <a class="dropdown-item fw-500 pt-3 pb-3" href="/User/logout">
+                                    <span data-i18n="drpdwn.page-logout">Logout</span>
+                                    <span class="float-right fw-n">&commat;Rizwan afridi</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <!-- END Page Header -->
+                <!-- BEGIN Page Content -->
+                <!-- the #js-page-content id is needed for some plugins to initialize -->
+                <main id="js-page-content" role="main" class="page-content">
+
+                    @RenderBody()
+
+                </main>
+                <!-- END Page Content -->
+                <!-- this overlay is activated only when mobile menu is triggered -->
+                <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+                <!-- BEGIN Page Footer -->
+                <footer class="page-footer" role="contentinfo">
+                    <div class="d-flex align-items-center flex-1 text-muted">
+                        <span class="hidden-md-down fw-700">Powered By <a href='https://itmolen.nl' class='text-primary fw-500' title='It Molen' target='_blank'>IT Molen</a>  | © AW Fuel 2019</span>
+                    </div>
+                    <div>
+                        <ul class="list-table m-0">
+                            <li><a href="/Home/Policy" class="text-secondary fw-700">Privacy Policy</a></li>
+                            <li class="pl-3"><a href="#" class="text-secondary fw-700">Term & Condition</a></li>
+
+                        </ul>
+                    </div>
+                </footer>
+                <!-- END Page Footer -->
+                <!-- BEGIN Shortcuts -->
+                <!-- modal shortcut -->
+                <div class="modal fade modal-backdrop-transparent" id="modal-shortcut" tabindex="-1" role="dialog" aria-labelledby="modal-shortcut" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-top modal-transparent" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <ul class="app-list w-auto h-auto p-0 text-left">
+                                    <li>
+                                        <a href="intel_introduction.html" class="app-list-item text-white border-0 m-0">
+                                            <div class="icon-stack">
+                                                <i class="base base-7 icon-stack-3x opacity-100 color-primary-500 "></i>
+                                                <i class="base base-7 icon-stack-2x opacity-100 color-primary-300 "></i>
+                                                <i class="fal fa-home icon-stack-1x opacity-100 color-white"></i>
+                                            </div>
+                                            <span class="app-list-name">
+                                                Home
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="page_inbox_general.html" class="app-list-item text-white border-0 m-0">
+                                            <div class="icon-stack">
+                                                <i class="base base-7 icon-stack-3x opacity-100 color-success-500 "></i>
+                                                <i class="base base-7 icon-stack-2x opacity-100 color-success-300 "></i>
+                                                <i class="ni ni-envelope icon-stack-1x text-white"></i>
+                                            </div>
+                                            <span class="app-list-name">
+                                                Inbox
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="intel_introduction.html" class="app-list-item text-white border-0 m-0">
+                                            <div class="icon-stack">
+                                                <i class="base base-7 icon-stack-2x opacity-100 color-primary-300 "></i>
+                                                <i class="fal fa-plus icon-stack-1x opacity-100 color-white"></i>
+                                            </div>
+                                            <span class="app-list-name">
+                                                Add More
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- END Shortcuts -->
+            </div>
+        </div>
+    </div>
+    <!-- END Page Wrapper -->
+    <!-- BEGIN Quick Menu -->
+    <!-- to add more items, please make sure to change the variable '$menu-items: number;' in your _page-components-shortcut.scss -->
+
+    <nav class="shortcut-menu">
+        <input type="checkbox" class="menu-open" name="menu-open" id="menu_open" />
+        <label for="menu_open" class="menu-open-button ">
+            <span class="app-shortcut-icon d-block"></span>
+        </label>
+        <a href="#" class="menu-item btn" data-toggle="tooltip" data-placement="left" title="Scroll Top">
+            <i class="fal fa-arrow-up"></i>
+        </a>
+        <a href="/User/logout" class="menu-item btn" data-toggle="tooltip" data-placement="left" title="Logout">
+            <i class="fal fa-sign-out"></i>
+        </a>
+        <a href="#" class="menu-item btn" data-action="app-fullscreen" data-toggle="tooltip" data-placement="left" title="Full Screen">
+            <i class="fal fa-expand"></i>
+        </a>
+        <a href="#" class="menu-item btn" data-action="app-print" data-toggle="tooltip" data-placement="left" title="Print page">
+            <i class="fal fa-print"></i>
+        </a>
+        <a href="#" class="menu-item btn" data-action="app-voice" data-toggle="tooltip" data-placement="left" title="Voice command">
+            <i class="fal fa-microphone"></i>
+        </a>
+
+        <!-- <div style="margin-right:100px;color:white;padding:2px 10px 3px 10px; border-radius:5px; ">
+         <a class="btn btn-sm btn-danger">
+            <h2 style="margin-top:5px">make order</h2>
+             </a>
+        </div>-->
+
+
+        <div class="demo" style="margin-bottom:0px; margin-right:60px">
+
+
+            <a href="/DirectSale/DirectSaleCreate">
+                <button class="btn btn-outline-primary">
+                    DIRECT SALE
+                </button>
+            </a>
+        </div>
+        <!-- <button type="button" class="btn btn-outline-primary" data-toggle="popover" data-placement="top" title="<h4 class='fw-500 width-sm'><i class='fal fa-file-check mr-2'></i>File permissions</h4>" data-html="true" data-content='
+
+
+                <div class="form-group">
+                                   <label class="form-label" for="single-default">
+                                       Basic Select
+                                   </label>
+                                   <select class="select2 form-control w-100" id="single-default">
+                                       <optgroup label="Alaskan/Hawaiian Time Zone">
+                                           <option value="AK">Alaska</option>
+                                           <option value="HI">Hawaii</option>
+                                       </optgroup>
+
+
+                                   </select>
+                                   <div class="help-block">Use <code>.select2</code> class for basic select2 control.</div>
+                               </div>
+               <div class="mb-2">
+                   <div class="custom-control custom-checkbox">
+                       <input type="checkbox" class="custom-control-input" id="checkmeout1">
+                       <label class="custom-control-label" for="checkmeout1">Write</label>
+                   </div>
+               </div>
+               <div class="mb-2">
+                   <div class="custom-control custom-checkbox">
+                       <input type="checkbox" class="custom-control-input" id="checkmeout2">
+                           <label class="custom-control-label" for="checkmeout2">Execute</label>
+                       </div>
+                   </div>
+               <hr>
+               <div class="d-flex">
+                   <a href="javascript:void(0);" class="btn btn-primary text-white ml-auto">Save</a>
+                   <a href="javascript:void(0);" class="btn btn-success ml-2 text-white">Reset</a></div>'>
+
+        Direct Order
+        </button>-->
+        </div>
+    </nav>
+    <!-- END Quick Menu -->
+    <!-- BEGIN Messenger -->
+    <div class="modal fade js-modal-messenger modal-backdrop-transparent" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-right">
+            <div class="modal-content h-100">
+                <div class="dropdown-header bg-trans-gradient d-flex align-items-center w-100">
+                    <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
+                        <span class="mr-2">
+                            <span class="rounded-circle profile-image d-block" style="background-image:url('~/assets/img/demo/avatars/avatar-d.png'); background-size: cover;"></span>
+                        </span>
+                        <div class="info-card-text">
+                            <a href="javascript:void(0);" class="fs-lg text-truncate text-truncate-lg text-white" data-toggle="dropdown" aria-expanded="false">
+                                Tracey Chang
+                                <i class="fal fa-angle-down d-inline-block ml-1 text-white fs-md"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Send Email</a>
+                                <a class="dropdown-item" href="#">Create Appointment</a>
+                                <a class="dropdown-item" href="#">Block User</a>
+                            </div>
+                            <span class="text-truncate text-truncate-md opacity-80">IT Director</span>
+                        </div>
+                    </div>
+                    <button type="button" class="close text-white position-absolute pos-top pos-right p-2 m-1 mr-2" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body p-0 h-100 d-flex">
+                    <!-- BEGIN msgr-list -->
+                    <div class="msgr-list d-flex flex-column bg-faded border-faded border-top-0 border-right-0 border-bottom-0 position-absolute pos-top pos-bottom">
+                        <div>
+                            <div class="height-4 width-3 h3 m-0 d-flex justify-content-center flex-column color-primary-500 pl-3 mt-2">
+                                <i class="fal fa-search"></i>
+                            </div>
+                            <input type="text" class="form-control bg-white" id="msgr_listfilter_input" placeholder="Filter contacts" aria-label="FriendSearch" data-listfilter="#js-msgr-listfilter">
+                        </div>
+                        <div class="flex-1 h-100 custom-scroll">
+                            <div class="w-100">
+                                <ul id="js-msgr-listfilter" class="list-unstyled m-0">
+                                    <li>
+                                        <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="tracey chang online">
+                                            <div class="d-table-cell align-middle status status-success status-sm ">
+                                                <span class="profile-image-md rounded-circle d-block" style="background-image:url('~/assets/img/demo/avatars/avatar-d.png'); background-size: cover;"></span>
+                                            </div>
+                                            <div class="d-table-cell w-100 align-middle pl-2 pr-2">
+                                                <div class="text-truncate text-truncate-md">
+                                                    Tracey Chang
+                                                    <small class="d-block font-italic text-success fs-xs">
+                                                        Online
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="oliver kopyuv online">
+                                            <div class="d-table-cell align-middle status status-success status-sm ">
+                                                <span class="profile-image-md rounded-circle d-block" style="background-image:url('~/assets/img/demo/avatars/avatar-b.png'); background-size: cover;"></span>
+                                            </div>
+                                            <div class="d-table-cell w-100 align-middle pl-2 pr-2">
+                                                <div class="text-truncate text-truncate-md">
+                                                    Oliver Kopyuv
+                                                    <small class="d-block font-italic text-success fs-xs">
+                                                        Online
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="dr john cook phd away">
+                                            <div class="d-table-cell align-middle status status-warning status-sm ">
+                                                <span class="profile-image-md rounded-circle d-block" style="background-image:url('~/assets/img/demo/avatars/avatar-e.png'); background-size: cover;"></span>
+                                            </div>
+                                            <div class="d-table-cell w-100 align-middle pl-2 pr-2">
+                                                <div class="text-truncate text-truncate-md">
+                                                    Dr. John Cook PhD
+                                                    <small class="d-block font-italic fs-xs">
+                                                        Away
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="ali amdaney online">
+                                            <div class="d-table-cell align-middle status status-success status-sm ">
+                                                <span class="profile-image-md rounded-circle d-block" style="background-image:url('~/assets/img/demo/avatars/avatar-g.png'); background-size: cover;"></span>
+                                            </div>
+                                            <div class="d-table-cell w-100 align-middle pl-2 pr-2">
+                                                <div class="text-truncate text-truncate-md">
+                                                    Ali Amdaney
+                                                    <small class="d-block font-italic fs-xs text-success">
+                                                        Online
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="sarah mcbrook online">
+                                            <div class="d-table-cell align-middle status status-success status-sm">
+                                                <span class="profile-image-md rounded-circle d-block" style="background-image:url('~/assets/img/demo/avatars/avatar-h.png'); background-size: cover;"></span>
+                                            </div>
+                                            <div class="d-table-cell w-100 align-middle pl-2 pr-2">
+                                                <div class="text-truncate text-truncate-md">
+                                                    Sarah McBrook
+                                                    <small class="d-block font-italic fs-xs text-success">
+                                                        Online
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="ali amdaney offline">
+                                            <div class="d-table-cell align-middle status status-sm">
+                                                <span class="profile-image-md rounded-circle d-block" style="background-image:url('~/assets/img/demo/avatars/avatar-a.png'); background-size: cover;"></span>
+                                            </div>
+                                            <div class="d-table-cell w-100 align-middle pl-2 pr-2">
+                                                <div class="text-truncate text-truncate-md">
+                                                    oliver.kopyuv@gotbootstrap.com
+                                                    <small class="d-block font-italic fs-xs">
+                                                        Offline
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="ali amdaney busy">
+                                            <div class="d-table-cell align-middle status status-danger status-sm">
+                                                <span class="profile-image-md rounded-circle d-block" style="background-image:url('~/assets/img/demo/avatars/avatar-j.png'); background-size: cover;"></span>
+                                            </div>
+                                            <div class="d-table-cell w-100 align-middle pl-2 pr-2">
+                                                <div class="text-truncate text-truncate-md">
+                                                    oliver.kopyuv@gotbootstrap.com
+                                                    <small class="d-block font-italic fs-xs text-danger">
+                                                        Busy
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="ali amdaney offline">
+                                            <div class="d-table-cell align-middle status status-sm">
+                                                <span class="profile-image-md rounded-circle d-block" style="background-image:url('~/assets/img/demo/avatars/avatar-c.png'); background-size: cover;"></span>
+                                            </div>
+                                            <div class="d-table-cell w-100 align-middle pl-2 pr-2">
+                                                <div class="text-truncate text-truncate-md">
+                                                    oliver.kopyuv@gotbootstrap.com
+                                                    <small class="d-block font-italic fs-xs">
+                                                        Offline
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="ali amdaney inactive">
+                                            <div class="d-table-cell align-middle">
+                                                <span class="profile-image-md rounded-circle d-block" style="background-image:url('~/assets/img/demo/avatars/avatar-m.png'); background-size: cover;"></span>
+                                            </div>
+                                            <div class="d-table-cell w-100 align-middle pl-2 pr-2">
+                                                <div class="text-truncate text-truncate-md">
+                                                    +714651347790
+                                                    <small class="d-block font-italic fs-xs opacity-50">
+                                                        Missed Call
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="filter-message js-filter-message"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <a class="fs-xl d-flex align-items-center p-3">
+                                <i class="fal fa-cogs"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- END msgr-list -->
+                    <!-- BEGIN msgr -->
+                    <div class="msgr d-flex h-100 flex-column bg-white">
+                        <!-- BEGIN custom-scroll -->
+                        <div class="custom-scroll flex-1 h-100">
+                            <div id="chat_container" class="w-100 p-4">
+                                <!-- start .chat-segment -->
+                                <div class="chat-segment">
+                                    <div class="time-stamp text-center mb-2 fw-400">
+                                        Jun 19
+                                    </div>
+                                </div>
+                                <!--  end .chat-segment -->
+                                <!-- start .chat-segment -->
+                                <div class="chat-segment chat-segment-sent">
+                                    <div class="chat-message">
+                                        <p>
+                                            Hey Ching, did you get my files?
+                                        </p>
+                                    </div>
+                                    <div class="text-right fw-300 text-muted mt-1 fs-xs">
+                                        3:00 pm
+                                    </div>
+                                </div>
+                                <!--  end .chat-segment -->
+                                <!-- start .chat-segment -->
+                                <div class="chat-segment chat-segment-get">
+                                    <div class="chat-message">
+                                        <p>
+                                            Hi
+                                        </p>
+                                        <p>
+                                            Sorry going through a busy time in office. Yes I analyzed the solution.
+                                        </p>
+                                        <p>
+                                            It will require some resource, which I could not manage.
+                                        </p>
+                                    </div>
+                                    <div class="fw-300 text-muted mt-1 fs-xs">
+                                        3:24 pm
+                                    </div>
+                                </div>
+                                <!--  end .chat-segment -->
+                                <!-- start .chat-segment -->
+                                <div class="chat-segment chat-segment-sent chat-start">
+                                    <div class="chat-message">
+                                        <p>
+                                            Okay
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--  end .chat-segment -->
+                                <!-- start .chat-segment -->
+                                <div class="chat-segment chat-segment-sent chat-end">
+                                    <div class="chat-message">
+                                        <p>
+                                            Sending you some dough today, you can allocate the resources to this project.
+                                        </p>
+                                    </div>
+                                    <div class="text-right fw-300 text-muted mt-1 fs-xs">
+                                        3:26 pm
+                                    </div>
+                                </div>
+                                <!--  end .chat-segment -->
+                                <!-- start .chat-segment -->
+                                <div class="chat-segment chat-segment-get chat-start">
+                                    <div class="chat-message">
+                                        <p>
+                                            Perfect. Thanks a lot!
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--  end .chat-segment -->
+                                <!-- start .chat-segment -->
+                                <div class="chat-segment chat-segment-get">
+                                    <div class="chat-message">
+                                        <p>
+                                            I will have them ready by tonight.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--  end .chat-segment -->
+                                <!-- start .chat-segment -->
+                                <div class="chat-segment chat-segment-get chat-end">
+                                    <div class="chat-message">
+                                        <p>
+                                            Cheers
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--  end .chat-segment -->
+                                <!-- start .chat-segment for timestamp -->
+                                <div class="chat-segment">
+                                    <div class="time-stamp text-center mb-2 fw-400">
+                                        Jun 20
+                                    </div>
+                                </div>
+                                <!--  end .chat-segment for timestamp -->
+                            </div>
+                        </div>
+                        <!-- END custom-scroll  -->
+                        <!-- BEGIN msgr__chatinput -->
+                        <div class="d-flex flex-column">
+                            <div class="border-faded border-right-0 border-bottom-0 border-left-0 flex-1 mr-3 ml-3 position-relative shadow-top">
+                                <div class="pt-3 pb-1 pr-0 pl-0 rounded-0" tabindex="-1">
+                                    <div id="msgr_input" contenteditable="true" data-placeholder="Type your message here..." class="height-10 form-content-editable"></div>
+                                </div>
+                            </div>
+                            <div class="height-8 px-3 d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                                <a href="javascript:void(0);" class="btn btn-icon fs-xl width-1 mr-1" data-toggle="tooltip" data-original-title="More options" data-placement="top">
+                                    <i class="fal fa-ellipsis-v-alt color-fusion-300"></i>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-icon fs-xl mr-1" data-toggle="tooltip" data-original-title="Attach files" data-placement="top">
+                                    <i class="fal fa-paperclip color-fusion-300"></i>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-icon fs-xl mr-1" data-toggle="tooltip" data-original-title="Insert photo" data-placement="top">
+                                    <i class="fal fa-camera color-fusion-300"></i>
+                                </a>
+                                <div class="ml-auto">
+                                    <a href="javascript:void(0);" class="btn btn-info">Send</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END msgr__chatinput -->
+                    </div>
+                    <!-- END msgr -->
+                </div>
+            </div>
+        </div>
+    </div> <!-- END Messenger -->
+    <!-- BEGIN Page Settings -->
+    <div class="modal fade js-modal-settings modal-backdrop-transparent" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-right modal-md">
+            <div class="modal-content">
+                <div class="dropdown-header bg-trans-gradient d-flex justify-content-center align-items-center w-100">
+                    <h4 class="m-0 text-center color-white">
+                        Layout Settings
+                        <small class="mb-0 opacity-80">User Interface Settings</small>
+                    </h4>
+                    <button type="button" class="close text-white position-absolute pos-top pos-right p-2 m-1 mr-2" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="settings-panel">
+                        <div class="mt-4 d-table w-100 px-5">
+                            <div class="d-table-cell align-middle">
+                                <h5 class="p-0">
+                                    App Layout
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="list" id="fh">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="header-function-fixed"></a>
+                            <span class="onoffswitch-title">Fixed Header</span>
+                            <span class="onoffswitch-title-desc">header is in a fixed at all times</span>
+                        </div>
+                        <div class="list" id="nff">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-function-fixed"></a>
+                            <span class="onoffswitch-title">Fixed Navigation</span>
+                            <span class="onoffswitch-title-desc">left panel is fixed</span>
+                        </div>
+                        <div class="list" id="nfm">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-function-minify"></a>
+                            <span class="onoffswitch-title">Minify Navigation</span>
+                            <span class="onoffswitch-title-desc">Skew nav to maximize space</span>
+                        </div>
+                        <div class="list" id="nfh">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-function-hidden"></a>
+                            <span class="onoffswitch-title">Hide Navigation</span>
+                            <span class="onoffswitch-title-desc">roll mouse on edge to reveal</span>
+                        </div>
+                        <div class="list" id="nft">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-function-top"></a>
+                            <span class="onoffswitch-title">Top Navigation</span>
+                            <span class="onoffswitch-title-desc">Relocate left pane to top</span>
+                        </div>
+                        <div class="list" id="mmb">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-main-boxed"></a>
+                            <span class="onoffswitch-title">Boxed Layout</span>
+                            <span class="onoffswitch-title-desc">Encapsulates to a container</span>
+                        </div>
+                        <div class="expanded">
+                            <ul class="">
+                                <li>
+                                    <div class="bg-fusion-50" data-action="toggle" data-class="mod-bg-1"></div>
+                                </li>
+                                <li>
+                                    <div class="bg-warning-200" data-action="toggle" data-class="mod-bg-2"></div>
+                                </li>
+                                <li>
+                                    <div class="bg-primary-200" data-action="toggle" data-class="mod-bg-3"></div>
+                                </li>
+                                <li>
+                                    <div class="bg-success-300" data-action="toggle" data-class="mod-bg-4"></div>
+                                </li>
+                            </ul>
+                            <div class="list" id="mbgf">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-fixed-bg"></a>
+                                <span class="onoffswitch-title">Fixed Background</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 d-table w-100 px-5">
+                            <div class="d-table-cell align-middle">
+                                <h5 class="p-0">
+                                    Mobile Menu
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="list" id="nmp">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-mobile-push"></a>
+                            <span class="onoffswitch-title">Push Content</span>
+                            <span class="onoffswitch-title-desc">Content pushed on menu reveal</span>
+                        </div>
+                        <div class="list" id="nmno">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-mobile-no-overlay"></a>
+                            <span class="onoffswitch-title">No Overlay</span>
+                            <span class="onoffswitch-title-desc">Removes mesh on menu reveal</span>
+                        </div>
+                        <div class="list" id="sldo">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-mobile-slide-out"></a>
+                            <span class="onoffswitch-title">Off-Canvas <sup>(beta)</sup></span>
+                            <span class="onoffswitch-title-desc">Content overlaps menu</span>
+                        </div>
+                        <div class="mt-4 d-table w-100 px-5">
+                            <div class="d-table-cell align-middle">
+                                <h5 class="p-0">
+                                    Accessibility
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="list" id="mbf">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-bigger-font"></a>
+                            <span class="onoffswitch-title">Bigger Content Font</span>
+                            <span class="onoffswitch-title-desc">content fonts are bigger for readability</span>
+                        </div>
+                        <div class="list" id="mhc">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-high-contrast"></a>
+                            <span class="onoffswitch-title">High Contrast Text (WCAG 2 AA)</span>
+                            <span class="onoffswitch-title-desc">4.5:1 text contrast ratio</span>
+                        </div>
+                        <div class="list" id="mcb">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-color-blind"></a>
+                            <span class="onoffswitch-title">Daltonism <sup>(beta)</sup> </span>
+                            <span class="onoffswitch-title-desc">color vision deficiency</span>
+                        </div>
+                        <div class="list" id="mpc">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-pace-custom"></a>
+                            <span class="onoffswitch-title">Preloader Inside</span>
+                            <span class="onoffswitch-title-desc">preloader will be inside content</span>
+                        </div>
+                        <div class="mt-4 d-table w-100 px-5">
+                            <div class="d-table-cell align-middle">
+                                <h5 class="p-0">
+                                    Global Modifications
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="list" id="mcbg">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-clean-page-bg"></a>
+                            <span class="onoffswitch-title">Clean Page Background</span>
+                            <span class="onoffswitch-title-desc">adds more whitespace</span>
+                        </div>
+                        <div class="list" id="mhni">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-hide-nav-icons"></a>
+                            <span class="onoffswitch-title">Hide Navigation Icons</span>
+                            <span class="onoffswitch-title-desc">invisible navigation icons</span>
+                        </div>
+                        <div class="list" id="dan">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-disable-animation"></a>
+                            <span class="onoffswitch-title">Disable CSS Animation</span>
+                            <span class="onoffswitch-title-desc">Disables CSS based animations</span>
+                        </div>
+                        <div class="list" id="mhic">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-hide-info-card"></a>
+                            <span class="onoffswitch-title">Hide Info Card</span>
+                            <span class="onoffswitch-title-desc">Hides info card from left panel</span>
+                        </div>
+                        <div class="list" id="mlph">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-lean-subheader"></a>
+                            <span class="onoffswitch-title">Lean Subheader</span>
+                            <span class="onoffswitch-title-desc">distinguished page header</span>
+                        </div>
+                        <div class="list" id="mnl">
+                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-nav-link"></a>
+                            <span class="onoffswitch-title">Hierarchical Navigation</span>
+                            <span class="onoffswitch-title-desc">Clear breakdown of nav links</span>
+                        </div>
+                        <div class="list mt-1">
+                            <span class="onoffswitch-title">Global Font Size <small>(RESETS ON REFRESH)</small> </span>
+                            <div class="btn-group btn-group-sm btn-group-toggle my-2" data-toggle="buttons">
+                                <label class="btn btn-default btn-sm" data-action="toggle-swap" data-class="root-text-sm" data-target="html">
+                                    <input type="radio" name="changeFrontSize"> SM
+                                </label>
+                                <label class="btn btn-default btn-sm" data-action="toggle-swap" data-class="root-text" data-target="html">
+                                    <input type="radio" name="changeFrontSize" checked=""> MD
+                                </label>
+                                <label class="btn btn-default btn-sm" data-action="toggle-swap" data-class="root-text-lg" data-target="html">
+                                    <input type="radio" name="changeFrontSize"> LG
+                                </label>
+                                <label class="btn btn-default btn-sm" data-action="toggle-swap" data-class="root-text-xl" data-target="html">
+                                    <input type="radio" name="changeFrontSize"> XL
+                                </label>
+                            </div>
+                            <span class="onoffswitch-title-desc d-block mb-g">Change <strong>root</strong> font size to effect rem values</span>
+                        </div>
+                        <div class="mt-2 d-table w-100 pl-5 pr-3">
+                            <div class="d-table-cell align-middle">
+                                <h5 class="p-0">
+                                    Theme colors <small>(overlays base css)</small>
+                                </h5>
+                                <div class="fs-xs text-muted p-2 alert alert-warning mt-3 mb-0">
+                                    <i class="fal fa-exclamation-triangle text-warning mr-2"></i>Due to network latency and CPU utilization, you may experience a brief flickering effect on page load which may show the intial applied theme for a split second. Setting the prefered style/theme in the header will prevent this from happening.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="expanded theme-colors pl-5 pr-3">
+                            <ul class="m-0">
+                                <li><a href="#" id="myapp-0" data-action="theme-update" data-themesave data-theme="" data-toggle="tooltip" data-placement="top" title="Wisteria (base css)" data-original-title="Wisteria (base css)"></a></li>
+                                <li><a href="#" id="myapp-1" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-1.css" data-toggle="tooltip" data-placement="top" title="Tapestry" data-original-title="Tapestry"></a></li>
+                                <li><a href="#" id="myapp-2" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-2.css" data-toggle="tooltip" data-placement="top" title="Atlantis" data-original-title="Atlantis"></a></li>
+                                <li><a href="#" id="myapp-3" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-3.css" data-toggle="tooltip" data-placement="top" title="Indigo" data-original-title="Indigo"></a></li>
+                                <li><a href="#" id="myapp-4" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-4.css" data-toggle="tooltip" data-placement="top" title="Dodger Blue" data-original-title="Dodger Blue"></a></li>
+                                <li><a href="#" id="myapp-5" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-5.css" data-toggle="tooltip" data-placement="top" title="Tradewind" data-original-title="Tradewind"></a></li>
+                                <li><a href="#" id="myapp-6" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-6.css" data-toggle="tooltip" data-placement="top" title="Cranberry" data-original-title="Cranberry"></a></li>
+                                <li><a href="#" id="myapp-7" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-7.css" data-toggle="tooltip" data-placement="top" title="Oslo Gray" data-original-title="Oslo Gray"></a></li>
+                                <li><a href="#" id="myapp-8" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-8.css" data-toggle="tooltip" data-placement="top" title="Chetwode Blue" data-original-title="Chetwode Blue"></a></li>
+                                <li><a href="#" id="myapp-9" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-9.css" data-toggle="tooltip" data-placement="top" title="Apricot" data-original-title="Apricot"></a></li>
+                                <li><a href="#" id="myapp-10" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-10.css" data-toggle="tooltip" data-placement="top" title="Blue Smoke" data-original-title="Blue Smoke"></a></li>
+                                <li><a href="#" id="myapp-11" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-11.css" data-toggle="tooltip" data-placement="top" title="Green Smoke" data-original-title="Green Smoke"></a></li>
+                                <li><a href="#" id="myapp-12" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-12.css" data-toggle="tooltip" data-placement="top" title="Wild Blue Yonder" data-original-title="Wild Blue Yonder"></a></li>
+                                <li><a href="#" id="myapp-13" data-action="theme-update" data-themesave data-theme="https://smartadmin.lodev09.com/~/assets/css/themes/cust-theme-13.css" data-toggle="tooltip" data-placement="top" title="Emerald" data-original-title="Emerald"></a></li>
+                            </ul>
+                        </div>
+                        <hr class="mb-0 mt-4">
+                        <div class="pl-5 pr-3 py-3 bg-faded">
+                            <div class="row no-gutters">
+                                <div class="col-6 pr-1">
+                                    <a href="#" class="btn btn-outline-danger fw-500 btn-block" data-action="app-reset">Reset Settings</a>
+                                </div>
+                                <div class="col-6 pl-1">
+                                    <a href="#" class="btn btn-danger fw-500 btn-block" data-action="factory-reset">Factory Reset</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span id="saving"></span>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END Page Settings -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/assets/js/vendors.bundle.js"></script>
+    <script src="~/assets/js/app.bundle.js"></script>    
+    <script src="~/assets/js/datagrid/datatables/datatables.bundle.js"></script>
+    <!-- datatbles buttons bundle contains:
+    + "jszip.js",
+    + "pdfmake.js",
+    + "vfs_fonts.js"
+    NOTE:   The file size is pretty big, but you can always use the
+            build.json file to deselect any components you do not need under "export" -->
+    <script src="~/assets/js/datagrid/datatables/datatables.export.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            // initialize datatable
+            $('#dt-basic-example').dataTable(
+                {
+                    responsive: true,
+                    lengthChange: false,
+                    dom:
+                        /*  --- Layout Structure
+                            --- Options
+                            l   -   length changing input control
+                            f   -   filtering input
+                            t   -   The table!
+                            i   -   Table information summary
+                            p   -   pagination control
+                            r   -   processing display element
+                            B   -   buttons
+                            R   -   ColReorder
+                            S   -   Select
+
+                            --- Markup
+                            < and >             - div element
+                            <"class" and >      - div with a class
+                            <"#id" and >        - div with an ID
+                            <"#id.class" and >  - div with an ID and a class
+
+                            --- Further reading
+                            https://datatables.net/reference/option/dom
+                            --------------------------------------
+                         */
+                        "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                    buttons: [
+                        /*{
+                            extend:    'colvis',
+                            text:      'Column Visibility',
+                            titleAttr: 'Col visibility',
+                            className: 'mr-sm-3'
+                        },*/
+                        {
+                            extend: 'pdfHtml5',
+                            text: 'PDF',
+                            titleAttr: 'Generate PDF',
+                            className: 'btn-outline-danger btn-sm mr-1'
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            text: 'Excel',
+                            titleAttr: 'Generate Excel',
+                            className: 'btn-outline-success btn-sm mr-1'
+                        },
+                        {
+                            extend: 'csvHtml5',
+                            text: 'CSV',
+                            titleAttr: 'Generate CSV',
+                            className: 'btn-outline-primary btn-sm mr-1'
+                        },
+                        {
+                            extend: 'copyHtml5',
+                            text: 'Copy',
+                            titleAttr: 'Copy to clipboard',
+                            className: 'btn-outline-primary btn-sm mr-1'
+                        },
+                        {
+                            extend: 'print',
+                            text: 'Print',
+                            titleAttr: 'Print Table',
+                            className: 'btn-outline-primary btn-sm'
+                        }
+                    ]
+                });
+
+        });
+
+    </script>
+    <script src="~/assets/js/formplugins/select2/select2.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(function () {
+
+                $('.select2').select2();
+                $('.select3').select2();
+
+
+
+                $(".select2-placeholder-multiple").select2(
+                    {
+                        placeholder: "Select State"
+                    });
+                $(".js-hide-search").select2(
+                    {
+                        minimumResultsForSearch: 1 / 0
+                    });
+                $(".js-max-length").select2(
+                    {
+                        maximumSelectionLength: 2,
+                        placeholder: "Select maximum 2 items"
+                    });
+                $(".select2-placeholder").select2(
+                    {
+                        placeholder: "Select a state",
+                        allowClear: true
+                    });
+
+
+
+                $(".js-select2-icons").select2(
+                    {
+                        minimumResultsForSearch: 1 / 0,
+                        templateResult: icon,
+                        templateSelection: icon,
+                        escapeMarkup: function (elm) {
+                            return elm
+                        }
+                    });
+
+                function icon(elm) {
+                    elm.element;
+                    return elm.id ? "<i class='" + $(elm.element).data("icon") + " mr-2'></i>" + elm.text : elm.text
+                }
+
+                $(".js-data-example-ajax").select2(
+                    {
+                        ajax:
+                        {
+                            url: "https://api.github.com/search/repositories",
+                            dataType: 'json',
+                            delay: 250,
+                            data: function (params) {
+                                return {
+                                    q: params.term, // search term
+                                    page: params.page
+                                };
+                            },
+                            processResults: function (data, params) {
+                                // parse the results into the format expected by Select2
+                                // since we are using custom formatting functions we do not need to
+                                // alter the remote JSON data, except to indicate that infinite
+                                // scrolling can be used
+                                params.page = params.page || 1;
+
+                                return {
+                                    results: data.items,
+                                    pagination:
+                                    {
+                                        more: (params.page * 30) < data.total_count
+                                    }
+                                };
+                            },
+                            cache: true
+                        },
+                        placeholder: 'Search for a repository',
+                        escapeMarkup: function (markup) {
+                            return markup;
+                        }, // let our custom formatter work
+                        minimumInputLength: 1,
+                        templateResult: formatRepo,
+                        templateSelection: formatRepoSelection
+                    });
+
+                function formatRepo(repo) {
+                    if (repo.loading) {
+                        return repo.text;
+                    }
+
+                    var markup = "<div class='select2-result-repository clearfix d-flex'>" +
+                        "<div class='select2-result-repository__avatar mr-2'><img src='" + repo.owner.avatar_url + "' class='width-2 height-2 mt-1 rounded' /></div>" +
+                        "<div class='select2-result-repository__meta'>" +
+                        "<div class='select2-result-repository__title fs-lg fw-500'>" + repo.full_name + "</div>";
+
+                    if (repo.description) {
+                        markup += "<div class='select2-result-repository__description fs-xs opacity-80 mb-1'>" + repo.description + "</div>";
+                    }
+
+                    markup += "<div class='select2-result-repository__statistics d-flex fs-sm'>" +
+                        "<div class='select2-result-repository__forks mr-2'><i class='fal fa-lightbulb'></i> " + repo.forks_count + " Forks</div>" +
+                        "<div class='select2-result-repository__stargazers mr-2'><i class='fal fa-star'></i> " + repo.stargazers_count + " Stars</div>" +
+                        "<div class='select2-result-repository__watchers mr-2'><i class='fal fa-eye'></i> " + repo.watchers_count + " Watchers</div>" +
+                        "</div>" +
+                        "</div></div>";
+
+                    return markup;
+                }
+
+                function formatRepoSelection(repo) {
+                    return repo.full_name || repo.text;
+                }
+
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        /* Activate smart panels */
+        $('#js-page-content').smartPanel();
+
+    </script>
+    <!-- The order of scripts is irrelevant. Please check out the plugin pages for more details about these plugins below: -->
+    <script src="~/assets/js/statistics/peity/peity.bundle.js"></script>
+    <script src="~/assets/js/statistics/flot/flot.bundle.js"></script>
+    <script src="~/assets/js/statistics/easypiechart/easypiechart.bundle.js"></script>
+    <script src="~/assets/js/datagrid/datatables/datatables.bundle.js"></script>
+    <script src="~/Scripts/CustomScript/common-script.js"></script>
+    <script src="~/assets/js/notifications/sweetalert2/sweetalert2.bundle.js"></script>    
+    <script src="~/assets/js/statistics/chartjs/chartjs.bundle.js"></script>
+    <script src="~/assets/js/statistics/chartist/chartist.js"></script>
+    <script>
+        /* defined datas */
+        var dataTargetProfit = [
+            [1354586000000, 200],
+            [1364587000000, 200],
+            [1374588000000, 200],
+            [1384589000000, 200],
+            [1394590000000, 200],
+            [1404591000000, 200],
+            [1414592000000, 200],
+            [1424593000000, 200],
+            [1434594000000, 200],
+            [1444595000000, 200],
+            [1454596000000, 688],
+            [1464597000000, 200]
+        ]
+        var dataProfit = [
+            [1354586000000, 500],
+            [1364587000000, 300],
+            [1374588000000, 300],
+            [1384589000000, 300],
+            [1394590000000, 980],
+            [1404591000000, 808],
+            [1414592000000, 720],
+            [1424593000000, 500],
+            [1434594000000, 500],
+            [1444595000000, 500],
+            [1454596000000, 500],
+            [1464597000000, 500]
+        ]
+        var dataSignups = [
+            [1354586000000, 647],
+            [1364587000000, 435],
+            [1374588000000, 784],
+            [1384589000000, 346],
+            [1394590000000, 487],
+            [1404591000000, 463],
+            [1414592000000, 479],
+            [1424593000000, 236],
+            [1434594000000, 843],
+            [1444595000000, 657],
+            [1454596000000, 241],
+            [1464597000000, 341]
+        ]
+        var dataSet1 = [
+            [0, 10],
+            [50, 10],
+            [200, 10],
+            [300, 10],
+            [400, 10],
+            [500, 6],
+            [600, 3]
+
+        ];
+        var dataSet2 = [
+            [0, 9],
+            [50, 10],
+            [200, 5],
+            [300, 3],
+            [400, 3],
+            [500, 5],
+            [600, 2]
+        ];
+
+
+        $(document).ready(function () {
+
+
+
+            /* flot toggle example */
+            var flot_toggle = function () {
+
+                var data = [
+                    {
+                        label: "Target Profit",
+                        data: dataTargetProfit,
+                        color: myapp_get_color.info_400,
+                        bars:
+                        {
+                            show: true,
+                            align: "center",
+                            barWidth: 30 * 30 * 60 * 1000 * 80,
+                            lineWidth: 0,
+                            /*fillColor: {
+                                colors: [myapp_get_color.primary_500, myapp_get_color.primary_900]
+                            },*/
+                            fillColor:
+                            {
+                                colors: [
+                                    {
+                                        opacity: 0.9
+                                    },
+                                    {
+                                        opacity: 0.1
+                                    }]
+                            }
+                        },
+                        highlightColor: 'rgba(255,255,255,0.3)',
+                        shadowSize: 0
+                    },
+                    {
+                        label: "Actual Profit",
+                        data: dataProfit,
+                        color: myapp_get_color.warning_500,
+                        lines:
+                        {
+                            show: true,
+                            lineWidth: 2
+                        },
+                        shadowSize: 0,
+                        points:
+                        {
+                            show: true
+                        }
+                    },
+                    {
+                        label: "User Signups",
+                        data: dataSignups,
+                        color: myapp_get_color.success_500,
+                        lines:
+                        {
+                            show: true,
+                            lineWidth: 2
+                        },
+                        shadowSize: 0,
+                        points:
+                        {
+                            show: true
+                        }
+                    }]
+
+                var options = {
+                    grid:
+                    {
+                        hoverable: true,
+                        clickable: true,
+                        tickColor: '#f2f2f2',
+                        borderWidth: 1,
+                        borderColor: '#f2f2f2'
+                    },
+                    tooltip: true,
+                    tooltipOpts:
+                    {
+                        cssClass: 'tooltip-inner',
+                        defaultTheme: false
+                    },
+                    xaxis:
+                    {
+                        mode: "time"
+                    },
+                    yaxes:
+                    {
+                        tickFormatter: function (val, axis) {
+                            return "$" + val;
+                        },
+                        max: 1200
+                    }
+
+                };
+
+                var plot2 = null;
+
+                function plotNow() {
+                    var d = [];
+                    $("#js-checkbox-toggles").find(':checkbox').each(function () {
+                        if ($(this).is(':checked')) {
+                            d.push(data[$(this).attr("name").substr(4, 1)]);
+                        }
+                    });
+                    if (d.length > 0) {
+                        if (plot2) {
+                            plot2.setData(d);
+                            plot2.draw();
+                        }
+                        else {
+                            plot2 = $.plot($("#flot-toggles"), d, options);
+                        }
+                    }
+
+                };
+
+                $("#js-checkbox-toggles").find(':checkbox').on('change', function () {
+                    plotNow();
+                });
+                plotNow()
+            }
+            flot_toggle();
+            /* flot toggle example -- end*/
+
+            /* flot area */
+            var flotArea = $.plot($('#flot-area'), [
+                {
+                    data: dataSet1,
+                    label: 'Requested Order',
+                    color: myapp_get_color.success_200
+                },
+                {
+                    data: dataSet2,
+                    label: 'Deliverd Order',
+                    color: myapp_get_color.info_200
+                }],
+                {
+                    series:
+                    {
+                        lines:
+                        {
+                            show: true,
+                            lineWidth: 2,
+                            fill: true,
+                            fillColor:
+                            {
+                                colors: [
+                                    {
+                                        opacity: 0
+                                    },
+                                    {
+                                        opacity: 0.5
+                                    }]
+                            }
+                        },
+                        shadowSize: 0
+                    },
+                    points:
+                    {
+                        show: true,
+                    },
+                    legend:
+                    {
+                        noColumns: 1,
+                        position: 'nw'
+                    },
+                    grid:
+                    {
+                        hoverable: true,
+                        clickable: true,
+                        borderColor: '#ddd',
+                        tickColor: '#ddd',
+                        aboveData: true,
+                        borderWidth: 0,
+                        labelMargin: 5,
+                        backgroundColor: 'transparent'
+                    },
+                    yaxis:
+                    {
+                        tickLength: 1,
+                        min: 0,
+                        max: 15,
+                        color: '#eee',
+                        font:
+                        {
+                            size: 0,
+                            color: '#999'
+                        }
+                    },
+                    xaxis:
+                    {
+                        tickLength: 1,
+                        color: '#eee',
+                        font:
+                        {
+                            size: 10,
+                            color: '#999'
+                        }
+                    }
+
+                });
+            /* flot area -- end */
+        });
+
+      @*//  @if(Session["On"])*@
+
+    </script>
+
+    <script>
+        /* line chart */
+        var lineChart = function () {
+            var config = {
+                type: 'line',
+                data:
+                {
+                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Actober", "November", "December"],
+                    datasets: [
+                        {
+                            label: "Remaining",
+                            borderColor: myapp_get_color.success_500,
+                            pointBackgroundColor: myapp_get_color.success_700,
+                            pointBorderColor: 'rgba(0, 0, 0, 0)',
+                            pointBorderWidth: 1,
+                            borderWidth: 1,
+                            pointRadius: 3,
+                            pointHoverRadius: 4,
+                            data: [
+                                23,
+                                75,
+                                60, -48, -9,
+                                26,
+                                45,
+                                5,
+                                54,
+                                34,
+                                14
+                            ],
+                            fill: false
+                        }]
+                },
+                options:
+                {
+                    responsive: true,
+                    title:
+                    {
+                        display: false,
+                        text: 'Line Chart'
+                    },
+                    tooltips:
+                    {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover:
+                    {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales:
+                    {
+                        xAxes: [
+                            {
+                                display: true,
+                                scaleLabel:
+                                {
+                                    display: false,
+                                    labelString: '6 months forecast'
+                                },
+                                gridLines:
+                                {
+                                    display: true,
+                                    color: "#f2f2f2"
+                                },
+                                ticks:
+                                {
+                                    beginAtZero: true,
+                                    fontSize: 11
+                                }
+                            }],
+                        yAxes: [
+                            {
+                                display: true,
+                                scaleLabel:
+                                {
+                                    display: false,
+                                    labelString: 'Profit margin (approx)'
+                                },
+                                gridLines:
+                                {
+                                    display: true,
+                                    color: "#f2f2f2"
+                                },
+                                ticks:
+                                {
+                                    beginAtZero: true,
+                                    fontSize: 11
+                                }
+                            }]
+                    }
+                }
+            };
+            new Chart($("#lineChart > canvas").get(0).getContext("2d"), config);
+        }
+        /* line chart -- end */
+
+
+        /* initialize all charts */
+        $(document).ready(function () {
+            lineChart();
+
+        });
+
+    </script>
+    
+    <script>
+        /* line chart area */
+        var lineChartArea = function () {
+            new Chartist.Line('#lineChartArea',
+                {
+                    labels: [1, 2, 3, 4, 5, 6, 7, 8],
+                    series: [
+                        [5, 9, 7, 8, 5, 3, 5, 4,]
+                    ]
+                },
+                {
+                    low: 0,
+                    showArea: true,
+                    fullWidth: true
+                });
+        }
+        /* line chart area -- end */
+
+        /* line scattered chart */
+        var lineScattered = function () {
+            var times = function (n) {
+                return Array.apply(null, new Array(n));
+            };
+
+            var data = times(52).map(Math.random).reduce(function (data, rnd, index) {
+                data.labels.push(index + 1);
+                data.series.forEach(function (series) {
+                    series.push(Math.random() * 100)
+                });
+
+                return data;
+            },
+                {
+                    labels: [],
+                    series: times(4).map(function () {
+                        return new Array()
+                    })
+                });
+
+            var options = {
+                showLine: false,
+                axisX:
+                {
+                    labelInterpolationFnc: function (value, index) {
+                        return index % 13 === 0 ? 'W' + value : null;
+                    }
+                }
+            };
+
+            var responsiveOptions = [
+                ['screen and (min-width: 640px)',
+                    {
+                        axisX:
+                        {
+                            labelInterpolationFnc: function (value, index) {
+                                return index % 4 === 0 ? 'W' + value : null;
+                            }
+                        }
+                    }]
+            ];
+
+            new Chartist.Line('#lineScattered', data, options, responsiveOptions);
+        }
+        /* line scattered chart -- end */
+
+        /* using events */
+        var usingEvents = function () {
+            var chart = new Chartist.Line('#usingEvents',
+                {
+                    labels: [1, 2, 3, 4, 5],
+                    series: [
+                        [12, 9, 7, 8, 5]
+                    ]
+                });
+
+            // Listening for draw events that get emitted by the Chartist chart
+            chart.on('draw', function (data) {
+                // If the draw event was triggered from drawing a point on the line chart
+                if (data.type === 'point') {
+                    // We are creating a new path SVG element that draws a triangle around the point coordinates
+                    var triangle = new Chartist.Svg('path',
+                        {
+                            d: ['M',
+                                data.x,
+                                data.y - 15,
+                                'L',
+                                data.x - 15,
+                                data.y + 8,
+                                'L',
+                                data.x + 15,
+                                data.y + 8,
+                                'z'
+                            ].join(' '),
+                            style: 'fill-opacity: 1'
+                        }, 'ct-area');
+
+                    // With data.element we get the Chartist SVG wrapper and we can replace the original point drawn by Chartist with our newly created triangle
+                    data.element.replace(triangle);
+                }
+            });
+        }
+        /* using events -- end */
+
+        /* bipolar */
+        var bipolar = function () {
+            new Chartist.Line('#bipolar',
+                {
+                    labels: [1, 2, 3, 4, 5, 6, 7, 8],
+                    series: [
+                        [1, 2, 3, 1, -2, 0, 1, 0],
+                        [-2, -1, -2, -1, -2.5, -1, -2, -1],
+                        [0, 0, 0, 1, 2, 2.5, 2, 1],
+                        [2.5, 2, 1, 0.5, 1, 0.5, -1, -2.5]
+                    ]
+                },
+                {
+                    high: 3,
+                    low: -3,
+                    showArea: true,
+                    showLine: false,
+                    showPoint: false,
+                    fullWidth: true,
+                    axisX:
+                    {
+                        showLabel: false,
+                        showGrid: false
+                    }
+                });
+        }
+        /* bipolar -- end */
+
+        /* smile animation */
+        var smileAnimation = function () {
+            var chart = new Chartist.Line('#smileAnimation',
+                {
+                    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+                    series: [
+                        [12, 9, 7, 8, 5, 4, 6, 2, 3, 3, 4, 6],
+                        [4, 5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
+                        [5, 3, 4, 5, 6, 3, 3, 4, 5, 6, 3, 4],
+                        [3, 4, 5, 6, 7, 6, 4, 5, 6, 7, 6, 3]
+                    ]
+                },
+                {
+                    low: 0
+                });
+
+            // Let's put a sequence number aside so we can use it in the event callbacks
+            var seq = 0,
+                delays = 80,
+                durations = 500;
+
+            // Once the chart is fully created we reset the sequence
+            chart.on('created', function () {
+                seq = 0;
+            });
+
+            // On each drawn element by Chartist we use the Chartist.Svg API to trigger SMIL animations
+            chart.on('draw', function (data) {
+                seq++;
+
+                if (data.type === 'line') {
+                    // If the drawn element is a line we do a simple opacity fade in. This could also be achieved using CSS3 animations.
+                    data.element.animate(
+                        {
+                            opacity:
+                            {
+                                // The delay when we like to start the animation
+                                begin: seq * delays + 2000,
+                                // Duration of the animation
+                                dur: durations,
+                                // The value where the animation should start
+                                from: 0,
+                                // The value where it should end
+                                to: 1
+                            }
+                        });
+                }
+                else if (data.type === 'label' && data.axis === 'x') {
+                    data.element.animate(
+                        {
+                            y:
+                            {
+                                begin: seq * delays,
+                                dur: durations,
+                                from: data.y + 100,
+                                to: data.y,
+                                // We can specify an easing function from Chartist.Svg.Easing
+                                easing: 'easeOutQuart'
+                            }
+                        });
+                }
+                else if (data.type === 'label' && data.axis === 'y') {
+                    data.element.animate(
+                        {
+                            x:
+                            {
+                                begin: seq * delays,
+                                dur: durations,
+                                from: data.x - 100,
+                                to: data.x,
+                                easing: 'easeOutQuart'
+                            }
+                        });
+                }
+                else if (data.type === 'point') {
+                    data.element.animate(
+                        {
+                            x1:
+                            {
+                                begin: seq * delays,
+                                dur: durations,
+                                from: data.x - 10,
+                                to: data.x,
+                                easing: 'easeOutQuart'
+                            },
+                            x2:
+                            {
+                                begin: seq * delays,
+                                dur: durations,
+                                from: data.x - 10,
+                                to: data.x,
+                                easing: 'easeOutQuart'
+                            },
+                            opacity:
+                            {
+                                begin: seq * delays,
+                                dur: durations,
+                                from: 0,
+                                to: 1,
+                                easing: 'easeOutQuart'
+                            }
+                        });
+                }
+                else if (data.type === 'grid') {
+                    // Using data.axis we get x or y which we can use to construct our animation definition objects
+                    var pos1Animation = {
+                        begin: seq * delays,
+                        dur: durations,
+                        from: data[data.axis.units.pos + '1'] - 30,
+                        to: data[data.axis.units.pos + '1'],
+                        easing: 'easeOutQuart'
+                    };
+
+                    var pos2Animation = {
+                        begin: seq * delays,
+                        dur: durations,
+                        from: data[data.axis.units.pos + '2'] - 100,
+                        to: data[data.axis.units.pos + '2'],
+                        easing: 'easeOutQuart'
+                    };
+
+                    var animations = {};
+                    animations[data.axis.units.pos + '1'] = pos1Animation;
+                    animations[data.axis.units.pos + '2'] = pos2Animation;
+                    animations['opacity'] = {
+                        begin: seq * delays,
+                        dur: durations,
+                        from: 0,
+                        to: 1,
+                        easing: 'easeOutQuart'
+                    };
+
+                    data.element.animate(animations);
+                }
+            });
+
+            // For the sake of the example we update the chart every time it's created with a delay of 10 seconds
+            chart.on('created', function () {
+                if (window.__exampleAnimateTimeout) {
+                    clearTimeout(window.__exampleAnimateTimeout);
+                    window.__exampleAnimateTimeout = null;
+                }
+                window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 12000);
+            });
+        }
+        /* smile animation -- end */
+
+        /* path animation */
+        var pathAnimation = function () {
+            var chart = new Chartist.Line('#pathAnimation',
+                {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                    series: [
+                        [1, 5, 2, 5, 4, 3],
+                        [2, 3, 4, 8, 1, 2],
+                        [5, 4, 3, 2, 1, 0.5]
+                    ]
+                },
+                {
+                    low: 0,
+                    showArea: true,
+                    showPoint: false,
+                    fullWidth: true
+                });
+
+            chart.on('draw', function (data) {
+                if (data.type === 'line' || data.type === 'area') {
+                    data.element.animate(
+                        {
+                            d:
+                            {
+                                begin: 2000 * data.index,
+                                dur: 2000,
+                                from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+                                to: data.path.clone().stringify(),
+                                easing: Chartist.Svg.Easing.easeOutQuint
+                            }
+                        });
+                }
+            });
+        }
+        /* path animation -- end */
+
+        /* line interpolation */
+        var lineInterpolation = function () {
+            var chart = new Chartist.Line('#lineInterpolation',
+                {
+                    labels: [1, 2, 3, 4, 5],
+                    series: [
+                        [1, 5, 10, 0, 1],
+                        [10, 15, 0, 1, 2]
+                    ]
+                },
+                {
+                    // Remove this configuration to see that chart rendered with cardinal spline interpolation
+                    // Sometimes, on large jumps in data values, it's better to use simple smoothing.
+                    lineSmooth: Chartist.Interpolation.simple(
+                        {
+                            divisor: 2
+                        }),
+                    fullWidth: true,
+                    chartPadding:
+                    {
+                        right: 20
+                    },
+                    low: 0
+                });
+        }
+        /* line interpolation -- end */
+
+        /* series overrides */
+        var seriesOverrides = function () {
+            var chart = new Chartist.Line('#seriesOverrides',
+                {
+                    labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
+                    // Naming the series with the series object array notation
+                    series: [
+                        {
+                            name: 'series-1',
+                            data: [5, 2, -4, 2, 0, -2, 5, -3]
+                        },
+                        {
+                            name: 'series-2',
+                            data: [4, 3, 5, 3, 1, 3, 6, 4]
+                        },
+                        {
+                            name: 'series-3',
+                            data: [2, 4, 3, 1, 4, 5, 3, 2]
+                        }]
+                },
+                {
+                    fullWidth: true,
+                    // Within the series options you can use the series names
+                    // to specify configuration that will only be used for the
+                    // specific series.
+                    series:
+                    {
+                        'series-1':
+                        {
+                            lineSmooth: Chartist.Interpolation.step()
+                        },
+                        'series-2':
+                        {
+                            lineSmooth: Chartist.Interpolation.simple(),
+                            showArea: true
+                        },
+                        'series-3':
+                        {
+                            showPoint: false
+                        }
+                    }
+                }, [
+                    // You can even use responsive configuration overrides to
+                    // customize your series configuration even further!
+                    ['screen and (max-width: 320px)',
+                        {
+                            series:
+                            {
+                                'series-1':
+                                {
+                                    lineSmooth: Chartist.Interpolation.none()
+                                },
+                                'series-2':
+                                {
+                                    lineSmooth: Chartist.Interpolation.none(),
+                                    showArea: false
+                                },
+                                'series-3':
+                                {
+                                    lineSmooth: Chartist.Interpolation.none(),
+                                    showPoint: true
+                                }
+                            }
+                        }]
+                ]);
+        }
+        /* series overrides -- end */
+
+        /* bar chart */
+        var barChart = function () {
+            var data = {
+                labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
+                series: [
+                    [1, 2, 4, 8, 6, -2, -1, -4, -6, -2]
+                ]
+            };
+
+            var options = {
+                high: 10,
+                low: -10,
+                axisX:
+                {
+                    labelInterpolationFnc: function (value, index) {
+                        return index % 2 === 0 ? value : null;
+                    }
+                }
+            };
+
+            new Chartist.Bar('#barChart', data, options);
+        }
+        /* bar chart end */
+
+        /* overlap bar mobile */
+        var overlapBarMobile = function () {
+            var data = {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                series: [
+                    [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
+                    [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
+                ]
+            };
+
+            var options = {
+                seriesBarDistance: 10
+            };
+
+            var responsiveOptions = [
+                ['screen and (max-width: 640px)',
+                    {
+                        seriesBarDistance: 5,
+                        axisX:
+                        {
+                            labelInterpolationFnc: function (value) {
+                                return value[0];
+                            }
+                        }
+                    }]
+            ];
+
+            new Chartist.Bar('#overlapBarMobile', data, options, responsiveOptions);
+        }
+        /* overlap bar mobile -- end */
+
+        /* peak circles */
+        var peakCircles = function () {
+            // Create a simple bi-polar bar chart
+            var chart = new Chartist.Bar('#peakCircles',
+                {
+                    labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
+                    series: [
+                        [1, 2, 4, 8, 6, -2, -1, -4, -6, -2]
+                    ]
+                },
+                {
+                    high: 10,
+                    low: -10,
+                    axisX:
+                    {
+                        labelInterpolationFnc: function (value, index) {
+                            return index % 2 === 0 ? value : null;
+                        }
+                    }
+                });
+
+            // Listen for draw events on the bar chart
+            chart.on('draw', function (data) {
+                // If this draw event is of type bar we can use the data to create additional content
+                if (data.type === 'bar') {
+                    // We use the group element of the current series to append a simple circle with the bar peek coordinates and a circle radius that is depending on the value
+                    data.group.append(new Chartist.Svg('circle',
+                        {
+                            cx: data.x2,
+                            cy: data.y2,
+                            r: Math.abs(Chartist.getMultiValue(data.value)) * 2 + 5
+                        }, 'ct-slice-pie'));
+                }
+            });
+        }
+        /* peak circles -- end */
+
+        /* multi line labels */
+        var multiLineLabels = function () {
+            new Chartist.Bar('#multiLineLabels',
+                {
+                    labels: ['First quarter of the year', 'Second quarter of the year', 'Third quarter of the year', 'Fourth quarter of the year'],
+                    series: [
+                        [60000, 40000, 80000, 70000],
+                        [40000, 30000, 70000, 65000],
+                        [8000, 3000, 10000, 6000]
+                    ]
+                },
+                {
+                    seriesBarDistance: 10,
+                    axisX:
+                    {
+                        offset: 60
+                    },
+                    axisY:
+                    {
+                        offset: 80,
+                        labelInterpolationFnc: function (value) {
+                            return value + ' CHF'
+                        },
+                        scaleMinSpace: 15
+                    }
+                });
+        }
+        /* multi line labels -- end */
+
+        /* stacked bar */
+        var stackedBar = function () {
+            new Chartist.Bar('#stackedBar',
+                {
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                    series: [
+                        [800000, 1200000, 1400000, 1300000],
+                        [200000, 400000, 500000, 300000],
+                        [100000, 200000, 400000, 600000]
+                    ]
+                },
+                {
+                    stackBars: true,
+                    axisY:
+                    {
+                        labelInterpolationFnc: function (value) {
+                            return (value / 1000) + 'k';
+                        }
+                    }
+                }).on('draw', function (data) {
+                    if (data.type === 'bar') {
+                        data.element.attr(
+                            {
+                                style: 'stroke-width: 30px'
+                            });
+                    }
+                });
+        }
+        /* stacked bar -- end */
+
+        /* horizontal bar */
+        var horizontalBar = function () {
+
+
+            new Chartist.Bar('#horizontalBar',
+                {
+                    labels: ['01-02-2020', '02-02-2020', '03-02-2020', '04-02-2020', '05-02-2020', '06-02-2020', '07-02-2020'],
+                    series: [
+                        [50, 40, 30, 70, 50, 100, 30],
+                        [30, 20, 90, 50, 100, 60, 40]
+                    ]
+                },
+                {
+                    seriesBarDistance: 10,
+                    reverseData: false,
+                    horizontalBars: false,
+                    axisY:
+                    {
+                        offset: 70,
+                        radio: 9
+                    }
+                });
+        }
+        /* horizontal bar -- end */
+
+        /* extream responsive */
+        var extreamResponsive = function () {
+            new Chartist.Bar('#extreamResponsive',
+                {
+                    labels: ['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4'],
+                    series: [
+                        [5, 4, 3, 7],
+                        [3, 2, 9, 5],
+                        [1, 5, 8, 4],
+                        [2, 3, 4, 6],
+                        [4, 1, 2, 1]
+                    ]
+                },
+                {
+                    // Default mobile configuration
+                    stackBars: true,
+                    axisX:
+                    {
+                        labelInterpolationFnc: function (value) {
+                            return value.split(/\s+/).map(function (word) {
+                                return word[0];
+                            }).join('');
+                        }
+                    },
+                    axisY:
+                    {
+                        offset: 20
+                    }
+                }, [
+                    // Options override for media > 400px
+                    ['screen and (min-width: 400px)',
+                        {
+                            reverseData: true,
+                            horizontalBars: true,
+                            axisX:
+                            {
+                                labelInterpolationFnc: Chartist.noop
+                            },
+                            axisY:
+                            {
+                                offset: 60
+                            }
+                        }],
+                    // Options override for media > 800px
+                    ['screen and (min-width: 800px)',
+                        {
+                            stackBars: false,
+                            seriesBarDistance: 10
+                        }],
+                    // Options override for media > 1000px
+                    ['screen and (min-width: 1000px)',
+                        {
+                            reverseData: false,
+                            horizontalBars: false,
+                            seriesBarDistance: 15
+                        }]
+                ]);
+        }
+        /* extream responsive -- end */
+
+        /* distributed series */
+        var distributedSeries = function () {
+            new Chartist.Bar('#distributedSeries',
+                {
+                    labels: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+                    series: [20, 60, 120, 200, 180, 20, 10]
+                },
+                {
+                    distributeSeries: true
+                });
+        }
+        /* distributed series -- end */
+
+        /* label palcement */
+        var labelPlacement = function () {
+            new Chartist.Bar('#labelPlacement',
+                {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    series: [
+                        [5, 4, 3, 7, 5, 10, 3],
+                        [3, 2, 9, 5, 4, 6, 4]
+                    ]
+                },
+                {
+                    axisX:
+                    {
+                        // On the x-axis start means top and end means bottom
+                        position: 'start'
+                    },
+                    axisY:
+                    {
+                        // On the y-axis start means left and end means right
+                        position: 'end'
+                    }
+                });
+        }
+        /* label palcement -- end */
+
+        /* pie chart */
+        var pieChart = function () {
+            var data = {
+                series: [5, 3, 4]
+            };
+
+            var sum = function (a, b) {
+                return a + b
+            };
+
+            new Chartist.Pie('#pieChart', data,
+                {
+                    labelInterpolationFnc: function (value) {
+                        return Math.round(value / data.series.reduce(sum) * 100) + '%';
+                    }
+                });
+        }
+        /* pie chart -- end */
+
+        /* pie chart labels */
+        var pieChartLabels = function () {
+            var data = {
+                labels: ['Bananas', 'Apples', 'Grapes'],
+                series: [20, 15, 40]
+            };
+
+            var options = {
+                labelInterpolationFnc: function (value) {
+                    return value[0]
+                }
+            };
+
+            var responsiveOptions = [
+                ['screen and (min-width: 640px)',
+                    {
+                        chartPadding: 30,
+                        labelOffset: 100,
+                        labelDirection: 'explode',
+                        labelInterpolationFnc: function (value) {
+                            return value;
+                        }
+                    }],
+                ['screen and (min-width: 1024px)',
+                    {
+                        labelOffset: 80,
+                        chartPadding: 20
+                    }]
+            ];
+
+            new Chartist.Pie('#pieChartLabels', data, options, responsiveOptions);
+        }
+        /* pie chart labels -- end */
+
+        /* guage chart */
+        var gaugeChart = function () {
+            new Chartist.Pie('#gaugeChart',
+                {
+                    series: [20, 10, 30, 40]
+                },
+                {
+                    donut: true,
+                    donutWidth: 60,
+                    startAngle: 270,
+                    total: 200,
+                    showLabel: false
+                });
+        }
+        /* guage chart -- end */
+
+        /* donut fill */
+        var donutFill = function () {
+            new Chartist.Pie('#donutFill',
+                {
+                    series: [20, 10, 30, 40]
+                },
+                {
+                    donut: true,
+                    donutWidth: 60,
+                    donutSolid: true,
+                    startAngle: 270,
+                    showLabel: true
+                });
+        }
+        /* donut fill -- end */
+
+        /* guage chart fill */
+        var gaugeChartFill = function () {
+            new Chartist.Pie('#gaugeChartFill',
+                {
+                    series: [20, 10, 30, 40]
+                },
+                {
+                    donut: true,
+                    donutWidth: 60,
+                    donutSolid: true,
+                    startAngle: 270,
+                    total: 200,
+                    showLabel: true
+                });
+        }
+        /* guage chart fill -- end */
+
+        /* initilize all charts on DOM ready */
+        $(document).ready(function () {
+            lineChartArea();
+            lineScattered();
+            usingEvents();
+            bipolar();
+            smileAnimation();
+            pathAnimation();
+            lineInterpolation();
+            seriesOverrides();
+            barChart();
+            overlapBarMobile();
+            peakCircles();
+            multiLineLabels();
+            stackedBar();
+            horizontalBar();
+            extreamResponsive();
+            distributedSeries();
+            labelPlacement();
+            pieChart();
+            pieChartLabels();
+            gaugeChart();
+            donutFill();
+            gaugeChartFill();
+        });
+
+    </script>
+    
+</body>
+</html>
+

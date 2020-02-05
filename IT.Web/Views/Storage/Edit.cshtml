@@ -1,0 +1,462 @@
+﻿@model List<IT.Core.ViewModels.StorageViewModel>
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+    List<IT.Core.ViewModels.StorageViewModel> storageViewModels = new List<IT.Core.ViewModels.StorageViewModel>();
+    storageViewModels = Model as List<IT.Core.ViewModels.StorageViewModel>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Storage</a></li>
+                            <li class="breadcrumb-item active">Create</li>
+                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+ </ol>
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Edit Storage
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Storage <span class="fw-300"></span>
+                    </h2>                    
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please Edit your Site from here...
+                        </div>
+                        <form action="/Storage/Update" method="post" enctype="application/x-www-form-urlencoded">
+                    
+                        </form>
+                    </div>
+                </div>
+           <div class="table-responsive-lg">
+              
+                <table class="table m-0 data-table" id="SiteTarget">
+                    <thead>
+                     <tr>
+                       <th>Product</th>
+                       <th>Source</th>
+                       <th>Site / Vehicle</th>
+                       <th style="width:140px">Description</th>
+                       <th style="width:90px">Quantity</th>
+                       <th>Site Action</th>
+                     </tr>
+                     </thead>
+
+                     <tbody>
+
+                        
+                          <tr>
+                            <td>
+                                 <div class="form-group mb-2">
+                                       <select id="ProductRow1" name="Product" class="select3 Product" required>
+                                          @foreach (var item in ViewBag.Products)
+                                          {
+                                                <option value="@item.Id" @(item.Id == storageViewModels[0].ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                          }
+                                      </select>
+                                 </div>  
+                            </td>
+                            <td>
+                                 <div class="form-group mb-2">
+                                      <select id="SourceRow1" name="Source" class="select3 Source" required>
+                                           <option value="0" selected >Select Source</option>
+                                           <option value="site" @(storageViewModels[0].Source == "site" ? "selected='selected'" : "")>Site Name</option>
+                                           <option value="client vehicle" @(storageViewModels[0].Source == "client vehicle" ? "selected='selected'" : "")>Client Vehicle</option>
+                                           <option value="admin vehicle" @(storageViewModels[0].Source == "admin vehicle" ? "selected='selected'" : "")>Admin Vehicle</option>
+                                      </select>
+                                 </div>   
+                            </td>
+                            <td>
+                                 <div class="form-group mb-2">
+                                      <select id="SiteVehicleRow1" name="Site" class="select2 Site" required>
+                                          @if (storageViewModels[0].Source == "site")
+                                          {
+                                            foreach (var item in ViewBag.Sites)
+                                            {
+                                                <option value="@item.Id" @(item.Id == storageViewModels[0].SiteId ? "selected='selected'" : "")>@item.SiteName </option>
+                                            }
+                                          }
+                                          else if(storageViewModels[0].Source == "client vehicle")
+                                          {
+                                              foreach (var item in ViewBag.Vehicle)
+                                            {
+                                                <option value="@item.Id" @(item.Id == storageViewModels[0].ClientVehicleId ? "selected='selected'" : "")>@item.TrafficPlateNumber</option>
+                                            }
+                                          }
+                                          else
+                                          {
+                                               foreach (var item in ViewBag.AdminVehicles)
+                                            {
+                                                <option value="@item.Id" @(item.Id == storageViewModels[0].VehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
+                                            }
+
+                                          }
+                                      </select>
+                                 </div>
+                            </td>
+
+                            <td style="width:140px">
+                                <div class="form-group mb-2" >
+                                       <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
+                                        <input type="text" id="Description" value="@storageViewModels[0].Decription" name="Description" class="form-control Description" placeholder="Description" />
+                                </div> 
+                            </td>
+
+                            <td style="width:90px"  >
+                                <div class="form-group mb-2">
+                                       <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
+                                        <input type="text" id="Quantity" name="Quantity" value="@storageViewModels[0].StockIn"  class="form-control Quantity" placeholder="" />  
+                                        <input type="hidden" name="Id1" id="Id1" class="Id" value="@storageViewModels[0].Id" />
+                                </div> 
+                            </td>
+
+                            <td>
+                                 <div class="form-group mb-2">
+                                      <select id="Action" name="Action" class="form-control Action" required>
+
+
+                                          <option value="1" selected="selected">Stock In</option>
+                                       @*  @if(@storageViewModels[0].StockIn == 0)
+                                          {
+                                            <option value="@storageViewModels[0].StockIn">Stock In</option>
+                                            <option value="@storageViewModels[0].StockOut" selected="selected">Stock Out</option>
+                                          }
+                                          else
+                                            {
+                                              <option value="@storageViewModels[0].StockIn" selected="selected">Stock In</option>
+                                              <option value="@storageViewModels[0].StockOut">Stock Out</option>
+                                            }*@
+
+                                          </select>
+                                 </div>  
+                            </td>
+                        </tr>
+
+
+                       <tr>
+                            <td>
+                                 <div class="form-group mb-2">
+                                       <select id="ProductRow2" name="Product" class="select3 Product" required>
+                                          @foreach (var item in ViewBag.Products)
+                                          {
+                                                <option value="@item.Id" @(item.Id == storageViewModels[1].ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                          }
+                                      </select>
+                                 </div>  
+                            </td>
+
+                           <td>
+                              
+                                 <div class="form-group mb-2">
+                                      <select id="SourceRow2" name="Source2" class="select3 Source" required>
+                                           <option value="0" selected >Select Source</option>
+                                           <option value="site" @(storageViewModels[1].Source == "site" ? "selected='selected'" : "")>Site Name</option>
+                                           <option value="client vehicle" @(storageViewModels[1].Source == "client vehicle" ? "selected='selected'" : "")>Client Vehicle</option>
+                                           <option value="admin vehicle" @(storageViewModels[1].Source == "admin vehicle" ? "selected='selected'" : "")>Admin Vehicle</option>
+                                      </select>
+                                 </div>   
+                            </td>
+
+
+                             <td>
+                                                            
+
+                                 <div class="form-group mb-2">
+                                      <select id="SiteVehicleRow2" name="Site2" class="select2 Site" required>
+                                          @if (storageViewModels[1].Source == "site")
+                                          {
+                                            foreach (var item in ViewBag.Sites)
+                                            {
+                                                <option value="@item.Id" @(item.Id == storageViewModels[1].SiteId ? "selected='selected'" : "")>@item.SiteName </option>
+                                            }
+                                          }
+                                          else if(storageViewModels[1].Source == "client vehicle")
+                                          {
+                                              foreach (var item in ViewBag.Vehicles)
+                                            {
+                                                <option value="@item.Id" @(item.Id == storageViewModels[1].ClientVehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
+                                            }
+                                          }
+                                          else
+                                          {
+                                               foreach (var item in ViewBag.AdminVehicles)
+                                            {
+                                                <option value="@item.Id" @(item.Id == storageViewModels[1].VehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
+                                            }
+
+                                          }
+                                      </select>
+                                 </div>
+                            </td>
+
+                           <td style="width:140px">
+                                <div class="form-group mb-2" >
+                                       <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
+                                        <input type="text" id="Description" value="@storageViewModels[1].Decription" name="Description" class="form-control Description" placeholder="Description" />
+                                </div> 
+                            </td>
+
+                            <td style="width:90px"  >
+                                <div class="form-group mb-2">
+                                       <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
+                                        <input type="text" id="Quantity" name="Quantity" value="@storageViewModels[1].StockOut"  class="form-control Quantity" placeholder="" />  
+                                    
+                                    <input type="hidden" name="Id1" id="Id1" class="Id" value="@storageViewModels[1].Id" />
+                                </div> 
+                            </td>
+
+                            <td>
+                                
+                               
+                                 <div class="form-group mb-2">
+                                      <select id="Action2" name="Action2" class="form-control Action" required>
+                                         @* <option value="@storageViewModels[1].StockIn" @(storageViewModels[1].StockIn == 0 ? "" : "selected='selected'")>Stock In</option> 
+                                          <option value="@storageViewModels[1].StockOut" @(storageViewModels[1].StockOut == 0 ? "" : "selected='selected'")>Stock Out</option> 
+                                             *@
+                                          <option value="0" selected>Stock Out</option>
+                                      </select>
+                                 </div>  
+                            </td>
+
+                       </tr>
+
+
+
+
+                                                                        
+                     </tbody>
+                </table>
+           </div>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <button type="button" id="UpdateRecord"  class="btn btn-primary btn-md btn-block waves-effect waves-themed">Storage
+                       <span>Update</span>
+                    </button>
+                  </div>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+
+@section scripts{
+<script>
+
+    $(document).ready(function () {
+
+         $('#SourceRow1').change(function () {
+           
+            var val = $(this).val();
+            if (val == 0)
+            {
+                return true
+            }
+            else if (val == "site")
+            {
+                loadOptionSelect("/Site/Index", "#SiteVehicleRow1", "#SourceRow1");               
+            }
+            if (val == "client vehicle")
+            {
+                loadOptionSelect("/Vehicle/Index", "#SiteVehicleRow1", "#SourceRow1");               
+            }
+            if (val == "admin vehicle")
+            {
+                loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow1", "#SourceRow1");               
+            }   
+        });
+
+        $('#SourceRow2').change(function () {
+            var val = $(this).val();
+            if (val == 0)
+            {
+                return true
+            }
+            else if (val == "site")
+            {
+                loadOptionSelect("/Site/Index", "#SiteVehicleRow2", "#SourceRow2");
+            }
+            if (val == "client vehicle")
+            {
+                loadOptionSelect("/Vehicle/Index", "#SiteVehicleRow2", "#SourceRow2");
+            }
+            if (val == "admin vehicle")
+            {
+                loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow2", "#SourceRow2");
+            }   
+        });
+
+        $('#UpdateRecord').click(function ()
+        {
+            alert("hello")
+            InsertStorge("/Storage/Update/");
+            window.location.href = "/Storage/Index"
+        });
+    });
+
+    //Update data
+    function InsertStorge(Url)
+    {
+        var list = [], orderItem, CurrentRow;
+        var formData = new FormData();
+        $('#SiteTarget tbody tr').each(function ()
+        {
+
+            CurrentRow = $(this).closest("tr");
+            var SiteId = "";
+            var VehicleId = "";
+            var ClientVehicleId = "";
+            if ($(this).find('.Source').val() == "site")
+            {
+
+                SiteId = $(this).find('.Site').val();
+                VehicleId = 0;
+                ClientVehicleId = 0;
+            }
+            else if ($(this).find('.Source').val() == "client vehicle")
+            {
+                VehicleId = $(this).find('.Site').val();
+                SiteId = 0;
+                ClientVehicleId = 0;
+                
+            }
+            else
+            {
+                VehicleId = 0;
+                SiteId = 0;
+                ClientVehicleId = $(this).find('.Site').val();
+            }
+
+            var StockIn = 0.0;
+            var StockOut = 0.0;
+            var ActionVal = false;
+            if ($(this).find('.Action').val() == true)
+            {
+                StockIn = parseFloat($(this).find('.Quantity').val());
+                StockOut = 0.0;
+                ActionVal = true;
+            }
+            else
+            {
+                StockOut = parseFloat($(this).find('.Quantity').val());
+                StockIn = 0.0;
+                ActionVal = false;
+            }
+            //if (validateRow(CurrentRow)) {
+            //if (IsDateSelected(CurrentRow)) {
+            if (1 == 1)
+            {
+                orderItem =
+                {
+                    Source: $(this).find('.Source').val(),
+                    SiteId: SiteId,
+                    VehicleId: VehicleId,
+                    ClientVehicleId: ClientVehicleId,
+                    Decription: $(this).find('.Description').val(),
+                    StockIn: StockIn,
+                    StockOut: StockOut,
+                    Action: ActionVal,
+                    ProductId: $(this).find('.Product').val(),
+                    Id: $(this).find('.Id').val(),
+                    
+                }
+                list.push(orderItem);
+                //IsValidationPass = true;
+            }
+        })
+
+        for (var i = 0; i < list.length; i++)
+        {
+            formData.append('storageViewModels[' + i + '][Id]', list[i].Id)
+            formData.append('storageViewModels[' + i + '][Source]', list[i].Source)
+            formData.append('storageViewModels[' + i + '][SiteId]', list[i].SiteId)
+            formData.append('storageViewModels[' + i + '][Id]', list[i].Id)
+            formData.append('storageViewModels[' + i + '][VehicleId]', list[i].VehicleId)
+            formData.append('storageViewModels[' + i + '][ClientVehicleId]', list[i].ClientVehicleId)
+            formData.append('storageViewModels[' + i + '][Decription]', list[i].Decription)
+            formData.append('storageViewModels[' + i + '][StockIn]', list[i].StockIn)
+            formData.append('storageViewModels[' + i + '][StockOut]', list[i].StockOut)
+            formData.append('storageViewModels[' + i + '][ProductId]', list[i].ProductId)
+            formData.append('storageViewModels[' + i + '][Action]', list[i].Action)
+        }
+
+        if (list.length > 0)
+        {
+            $.ajax({
+                url: Url,
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (result)
+                {
+                    if (result != "Failed")
+                    {
+                        list = [];
+                        alert("success");
+                        $.confirm({
+                            title: 'Success!',
+                            content: 'Opration successfully Completed',
+                            type: 'red',
+                            typeAnimated: true,
+                            buttons: {
+                                tryAgain: {
+                                    text: 'Ok',
+                                    btnClass: 'btn-red',
+                                    action: function () {
+                                    }
+                                },
+                                close: function () {
+                                }
+                            }
+                        });
+                    }
+                }
+            })
+        }
+    }
+    // end of Update data
+
+    //select for source load
+
+    function loadOptionSelect(url, targetId, sourceId)
+    {
+        ajaxRequest("POST", url, "", "json").then(function (result)
+        {
+            //debugger;
+            if (result != "failed")
+            {
+                $(targetId).empty();
+                $.each(result, function (value, item)
+                {
+                    if ($(sourceId).val() == "site")
+                    {
+                        $(targetId).append('<option value="' + item.Id + '">' + item.SiteName + '</option>');
+                    } else if ($(sourceId).val() == "admin vehicle")
+                    {
+                              $(targetId).html('<option value="' + item.Id + '">' + item.TraficPlateNumber + '</option>');
+                    }
+                    else
+                    {
+                              $(targetId).append('<option value="' + item.Id + '">' + item.TraficPlateNumber + '</option>');
+                    }
+                });
+            }
+            else
+            {
+                 $('.Site').append('<option value="">Select Option</option>');
+            }
+        })
+    }
+    //Select for source load
+
+</script>
+ }

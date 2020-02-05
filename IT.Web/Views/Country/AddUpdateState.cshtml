@@ -1,0 +1,76 @@
+﻿@model IT.Core.ViewModels.StateViewModel
+@{
+    ViewBag.Title = "Add Update State";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+    List<IT.Core.ViewModels.CountryViewModel> countryViewModels = new List<IT.Core.ViewModels.CountryViewModel>();
+    countryViewModels = ViewBag.Countries as List<IT.Core.ViewModels.CountryViewModel>;
+}
+
+<main id="js-page-content" role="main" class="page-content">
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Create State
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        State <span class="fw-300"></span>
+                    </h2>
+
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please add State from here...
+                        </div>
+                        <form action="/Country/AddUpdateState" method="post">
+                           
+
+                            <div class="row">
+                                <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+                                <div class="col-md-12">
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Countries</label>
+                                        <select id="CountryId" name="CountryId" class="select3 CountryId" required>
+                                            @foreach (var item in countryViewModels)
+                                            {
+                                               
+                                                <option value="@item.Id" @(Model.CountryId == item.Id ? "selected='selected'" : "")>@item.CountryName</option>
+
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">State Name</label>
+                                        <input type="text" id="States" value="@Model.States" name="States" class="form-control" placeholder="States Name">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row py-5">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        Submit
+                                        <span>State</span>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

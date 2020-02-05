@@ -1,0 +1,152 @@
+﻿@model IT.Core.ViewModels.SearchViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
+    <li class="breadcrumb-item active">Drivers</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a href="/CustomerSites/Create">
+                        <i class="fal fa-file-pdf"></i> Customer<span class="fw-300"><i>Reports</i></span>
+                    </a>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <form action="/ReportCustomer/RepoOrdersByDates" method="post">
+                                <div class="input-group flex-nowrap">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="addon-wrapping">Start Date</span>
+                                    </div>
+                                    @Html.EditorFor(model => model.fDate, new { htmlAttributes = new { @class = "form-control FromDate Input-height", @style = "font-size:12px", name = "FromDate", id = "FromDate", @title = "From Date" } })
+                                </div>
+                                <div class="input-group flex-nowrap mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="addon-wrapping">End Date</span>
+                                    </div>
+                                    @Html.EditorFor(model => model.Tdate, new { htmlAttributes = new { @class = "form-control ToDate Input-height", @style = "font-size:12px", name = "ToDate", id = "ToDate", @title = "To Date" } })
+                                </div>
+                                <div class="input-group flex-nowrap mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="addon-wrapping">Report Type</span>
+                                    </div>
+                                    <select class="form-control" id="ReportType" name="Flage">
+                                        <option value="0">Select Report Type</option>
+                                        <option value="VehicleReport">Vehicle Report</option>
+                                        <option value="OrderReport">Order Report</option>
+                                    </select>
+                                </div>
+                                <div class="input-group flex-nowrap mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" name="Status" id="wrappingSt">Status</span>
+                                    </div>
+                                    <select class="form-control" id="ReportStatus" name="searchkey" disabled></select>
+                                </div>
+                                <div class="input-group flex-nowrap mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" name="Status" id="wrappingSt">Status</span>
+                                    </div>
+                                    <select class="form-control" id="ReportStatusVehicle" name="SearchKey2" disabled>
+                                        <option value="All">All</option>
+                                        <option value="Created">Requested</option>
+                                        <option value="Deliverd">Deliverd</option>
+                                        <option value="Rejected">Rejected</option>
+                                    </select>
+                                </div>
+                                <div class="input-group flex-nowrap mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" name="Status" id="wrappingSt">Format</span>
+                                    </div>
+                                    <select class="form-control" id="ReportFormat" name="GroupBy" disabled>
+                                        <option value="0">Select Order Format</option>
+                                        <option value="ByDate">By Date</option>
+                                        <option value="ByVehicle">By Vehicle</option>
+                                    </select>
+                                </div>
+                                <div class="input-group flex-nowrap mt-2">
+                                    <button type="submit" class="btn btn-primary form-control">Submit</button>
+                                </div>
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            </form>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#ReportType').change(function () {
+
+                var TypeVal = $(this).val();
+                if (TypeVal == "VehicleReport")
+                {
+                    $('#ReportStatusVehicle').attr('disabled', false);
+                    $('#ReportFormat').attr('disabled', false);
+
+                    ajaxRequest('POST', '/Vehicle/VehicleByCompany', '', 'json').then(function (result) {
+                        if (result != "Failed") {
+                            $('#ReportStatus').empty();
+                            $('#wrappingSt').text('Vehicle');
+                            $.each(result, function (item, val) {
+                                $('#ReportStatus').append("<option value=" + val.VehicelId + ">" + val.TraficPlateNumber + "</option>")
+                            });
+                            $('#ReportStatus').attr('disabled', false);
+                        }
+                    });
+                }
+                else if (TypeVal == "OrderReport")
+                {
+                    $('#ReportStatusVehicle').attr('disabled', true);
+                    $('#ReportFormat').attr('disabled', true);
+                    $('#ReportStatus').empty();
+                    $('#wrappingSt').text('Status');
+                    $('#ReportStatus').append("<option value='All'>All</option>");
+                    $('#ReportStatus').append("<option value='Order Created'>Requested</option>");
+                    $('#ReportStatus').append("<option value='Order Deliverd'>Deliverd</option>");
+                    $('#ReportStatus').append("<option value='Order Rejected'>Rejected</option>");
+                    $('#ReportStatus').append("<option value='Order Accepted'>Accepted</option>");
+                    $('#ReportStatus').attr('disabled', false);
+                }
+                else {
+                        $('#ReportStatus').empty();
+                        $('#wrappingSt').text('Status');
+                        $('#ReportStatus').attr('disabled', true);
+                     }
+            });
+
+
+            $('#ReportStatus').change(function ()
+            {
+                if ($('#ReportType').val() == 'VehicleReport') {
+                    $('#ReportStatusVehicle').attr('disabled', false);
+                    $('#ReportFormat').attr('disabled', false);
+                }
+                else {
+                    $('#ReportStatusVehicle').attr('disabled', true);
+                    $('#ReportFormat').attr('disabled', true);
+                }
+            });
+        });
+
+    </script>
+
+}

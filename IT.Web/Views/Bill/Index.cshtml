@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
+    <li class="breadcrumb-item active">Bill</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a id="createNewBill" class="text-primary" style="cursor:pointer">
+                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Bill</i></span>
+                    </a>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <table id="BillTable" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Bill #</th>
+                                <th>Reference</th>
+                                <th>Vender</th>
+                                <th>Date</th>
+                                <th>Due Date</th>
+                                <th>Total</th>
+                                <th>VAT</th>
+                                <th> Grand Amount</th>
+                                <th>Oprater</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/Bill/_BillPartialView.cshtml")
+
+@section Scripts{
+
+    <script>
+
+        $('#createNewBill').click(function () {
+          
+            $('#BillModel').modal('show');
+
+            //  window.location.href = "/Invoice-Create";
+        });
+
+        $('#CreateBillFromLPO').click(function () {
+
+            if ($('#LPONumber').val() > 0) {
+
+                var Id = $('#LPONumber').val();
+
+                window.location.href = "/Bill/Create/" + Id;
+            }
+            else {
+                alert('Please select LPO Number first');
+            }
+
+        });
+
+
+        $(document).ready(function () {
+            BindDataTable();
+        });
+
+        var BindDataTable = function (response) {
+            $('#BillTable').DataTable({
+                responsive: true,
+                "bRetrieve": true,
+                "bServerSide": true,
+                "processing": true,
+                "sAjaxSource": "/Bill/GetAll",
+                "fnServerData": function (sSource, aoData, fnCallback) {
+                    $.ajax({
+                        type: "Get",
+                        data: aoData,
+                        url: sSource,
+                        success: fnCallback
+                    })
+                },
+                "aoColumns": [
+                    { "mData": "PONumber" },
+                    { "mData": "RefrenceNumber" },
+                    { "mData": "Name" },
+                    { "mData": "FDate" },
+                    { "mData": "DDate" },
+                    { "mData": "Total" },
+                    { "mData": "VAT" },
+                    { "mData": "GrandTotal" },
+                    { "mData": "UserName" },
+                    {
+                        "mData": "Id",
+                        "render": function (Id, type, full, meta) {
+                            return '<a href="#" onclick="ViewBill(' + Id + ')"><i class="fal fa-eye"></i></a>' + ' | ' + '<a href="#" onclick="DeleteBill(' + Id + ')"><i class="fal fa-remove"></i></a>'
+                        }
+                    },
+                ]
+            })
+        }
+
+
+        function ViewBill(Id) {
+            window.location.href = "/Bill/Details/" + Id;
+        }
+
+
+        function DeleteBill(Id) {
+
+
+            $('#BillId').val(Id);
+            $('#ModelDeleteBill').modal('show');
+        }
+
+        $('#DeleteBill').click(function () {
+
+            var Id = $('#BillId').val();
+
+            ajaxRequest("POST", "/Bill/Delete/" + Id, "", "json").then(function (result) {
+
+                if (result != "Failed") {
+                    sucessDelete();
+                    $('#BillTable').DataTable().ajax.reload();
+                    $('#ModelDeleteBill').modal('hide');
+                }
+                else {
+                    alert('Opration falied');
+                }
+            });
+
+        });
+    </script>
+
+}

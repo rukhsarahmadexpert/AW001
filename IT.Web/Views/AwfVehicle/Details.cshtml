@@ -1,0 +1,230 @@
+﻿@model IT.Core.ViewModels.VehicleViewModel
+@{
+    ViewBag.Title = "Vehicle Details";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+
+<ol class="breadcrumb page-breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Admin Vehicle</a></li> 
+                            <li class="breadcrumb-item active">Details</li>
+                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i>Vehicle Details
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Details <span class="fw-300"></span>
+                    </h2>                    
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Driver
+                        </div>
+                        <form id="form1" method="post" enctype="application/x-www-form-urlencoded">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <table class="table table-bordered table-hover m-0">
+                                                    <thead class="thead-themed">
+                                                        <tr>
+                                                            <th>Vehicle </th>
+                                                            <th>Information</th>
+                                                            
+                                                           
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr>
+                                                           <th>Trafic Plate Number </th>
+                                                            <th>@Model.TraficPlateNumber</th>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>Vehicle Type Name</th>
+                                                            <td>@Model.VehicleTypeName</td>
+                                                        </tr>
+
+                                                         <tr>
+                                                            <th>Place of Issue</th>
+                                                            <td>@Model.PlaceofIssue</td>
+                                                        </tr>
+
+                                                         <tr>
+                                                            <th>TC Number</th>
+                                                            <td>@Model.TCNumber</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>Model</th>
+                                                            <td>@Model.Model</td>
+                                                        </tr>
+
+                                                         <tr>
+                                                            <th>Color</th>
+                                                            <td>@Model.Color</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>InsuranceExpiry</th>
+                                                            <td>@Model.InsuranceExpiry</td>
+                                                        </tr>
+
+                                                         <tr>
+                                                            <th>Mulkia Expiry</th>
+                                                            <td>@Model.MulkiaExpiry</td>
+                                                        </tr>
+
+                                                         <tr>
+                                                            <th>Mulkia Expiry Date</th>
+                                                            <td>@Model.MulkiaExpiryDate</td>
+                                                        </tr>
+
+
+                                                          <tr>
+                                                            <th>Insurance Expiry Date</th>
+                                                            <td>@Model.InsuranceExpiryDate</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>Registered Region</th>
+                                                            <td>@Model.RegisteredRegion</td>
+                                                        </tr>
+
+
+                                                        <tr>
+                                                            <th>Brand</th>
+                                                            <td>@Model.Brand</td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <th colspan="2">Comments</th>
+                                                            </tr>
+                                                        <tr>
+                                                            <td colspan="2">@Model.Comments</td>
+                                                        </tr>
+                                                        
+
+                                                    </tbody>
+                                                </table>                                   
+
+                                 
+                                </div>
+                               <div class="col-md-6">
+                                 <!--   <h3 class="py-5">Driving License</h3> -->
+
+                                    <div class="row">
+
+                                       <div class="col-md-6">
+
+                                           <div class="row">
+                                                 <div class="col-md-12">
+                                                      <label class="form-label" >@Model.MulkiaFront1<b>Mulkia</b> Front side</label>
+                                                 </div>
+                                                 <div class="col-md-12">
+                                                      
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaFront1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
+	                                                   
+                                                 </div>
+                                            </div>  
+                                        </div>
+
+                                        <div class="col-md-6">
+                                             <div class="row">
+                                                 <div class="col-md-12">
+                                                      <label class="form-label" ><b>Mulkia</b> Back side</label>
+                                                 </div>
+                                                 <div class="col-md-12">
+                                                      
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaBack1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
+	                                                   
+                                                 </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                   
+
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                               <div class="col-md-12">
+                                                      <label class="form-label" style="margin-top:20px"><b>Mulkia</b> Front side 2</label>
+                                                 </div>
+                                                 <div class="col-md-12">
+                                                      
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaFront2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
+	                                                   
+                                                 </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                     <label class="form-label" style="margin-top:20px"><b>Mulkia</b> Back side 2</label>
+                                                </div>
+                                                 <div class="col-md-12">
+                                                      
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaBack2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
+	                                                   
+                                                 </div>
+                                            </div>
+                                        </div>
+
+                                    </div>                                    
+                                   
+
+                                    
+
+                                    
+
+
+                                </div>
+                             
+
+                             
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<style>
+
+
+.pic{
+     display: none;
+       }
+       
+ .newbtn{
+         cursor: pointer;
+      }
+      .blah{
+  max-width:100%;
+  width:100%;
+  height:100%;
+  max-height:160px;
+  margin-top:20px;
+}
+
+</style>
+
+

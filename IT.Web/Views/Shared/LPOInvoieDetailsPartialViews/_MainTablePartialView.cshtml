@@ -1,0 +1,67 @@
+﻿
+<div id="TableGood"  class="table-responsive">
+    <table class="table table-hover" id="orderdetailsitems">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Item
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Unit
+                </th>
+                <th>
+                    Rate
+                </th>
+                <th>
+                    Quantity
+                </th>
+                @*<th>
+                    Total
+                </th>*@
+                <th>
+                    VAT
+                </th>
+
+                <th class="text-center">
+                    Sub Total
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbodyGood">
+            @foreach (var item in ViewBag.lPOInvoiceDetails)
+            {
+
+                <tr id="mainrowgood">
+                    <td>
+                        @item.ItemName
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.UnitName
+                    </td>
+                    <td>
+                        @Math.Round(item.UnitPrice, 1)
+                    </td>
+                    <td>
+                        @item.Qunatity
+                    </td>
+                    @*<td>
+                        @Math.Round(item.Total, 1)
+                    </td>*@
+                    <td>
+                        @Math.Round(item.VAT, 1)
+                    </td>
+                    <td class="text-center">
+                        @Math.Round(item.SubTotal, 1)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

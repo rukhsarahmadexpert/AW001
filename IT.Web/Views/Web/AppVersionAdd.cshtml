@@ -1,0 +1,80 @@
+﻿@model IT.Core.ViewModels.AppVersionViewModel
+
+@{
+    ViewBag.Title = "AppVersionAdd";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">App version</a></li>
+    <li class="breadcrumb-item active">Create</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i> Create App version
+    </h1>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Driver <span class="fw-300"></span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="panel-tag">
+                        Please add App version from here...
+                    </div>
+                    <form action="/Web/AppVersionAdd" method="post" enctype="application/x-www-form-urlencoded">
+                        <input type="hidden" value="@Model.Id" name="Id" />
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">App version</label>
+                                    <input type="text" id="Name" value="@Model.AppVersion" name="appVersion" class="form-control" placeholder="Enter Driver Name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="single-label">
+                                        Select Type
+                                    </label>
+                                    <select class="select2 form-control" id="appType" name="appType">
+                                        @if (Model.AppType == "android")
+                                        {
+                                            <option value="android" selected>Android</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="0" disabled selected>Please Select Type</option>
+                                            <option value="android">Android</option>
+                                        }
+                                        @if (Model.AppType == "iOS")
+                                        {
+                                            <option value="iOS" selected>iOS</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="iOS">iOS</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" id="Save" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                    App Version
+
+                                    <span>submit</span>
+                                </button>
+                            </div>
+                            <div id="response"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

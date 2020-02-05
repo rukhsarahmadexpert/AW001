@@ -1,0 +1,58 @@
+﻿@model IT.Core.ViewModels.LPOInvoiceViewModel
+
+<h1 class="text-center font-weight-bold"><u>@ViewBag.titles</u></h1>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            @*<label>Cu Address:</label>*@
+            <div class="chosen-select-act fm-cmp-mg">
+                <select data-placeholder="Vender" class="chosen form-control" name="Vender" id="Venders" title="select Vender">
+                    @foreach (var Vender in ViewBag.Vender)
+                    {
+                        <option value="@Vender.Id">@Vender.Name</option>
+                    }
+                </select>
+            </div>
+            <p style="margin-top:10px">
+            </p>
+            <p><i class="glyphicon glyphicon-user"></i>Contact Person :<span id="ContactPerson"></span></p>
+            <p><i class="glyphicon glyphicon-road"></i>Address :  <span id="VenderAddress">Al garhoud afnan center, Duabi, UAE</span></p>
+            <p><i class="glyphicon glyphicon-earphone">Phone : </i> <span id="VenderPhone">+92 45 65465465</span></p>
+            <p><i class="glyphicon glyphicon-envelope">Email : </i> <span id="VenderEmail">vender@yahoo.com</span></p>
+            <p> <i class="glyphicon glyphicon-text-width">TRN : </i> <span id="VenderVAT">100002115552122</span></p>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="form-group">
+                <div class="nk-int-st">
+                    PO Number: <input type="text" class="form-control" readonly id="PONo" name="PONo" placeholder="PO Number" value="@ViewBag.PO">
+                </div>
+            </div>
+        </div>
+        <input type="hidden" class="form-control" id="RefrenceNo" name="RefrenceNo" value="00" placeholder="RefrenceNo">
+        <div class="form-group">
+            <div class="nk-datapk-ctm form-elet-mg" id="data_2">
+                <div class="input-group nk-int-st">
+                    <span class="input-group-addon"></span>
+                    From Date: @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", name = "FromDate", id = "FromDate" } })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="nk-datapk-ctm form-elet-mg" id="data_2">
+                <div class="input-group  nk-int-st">
+                    <span class="input-group-addon"></span>
+                    @*Due Date:<input type="text" class="form-control DueDate" id="DueDate" name="DueDate" value="@System.DateTime.Now.ToLongDateString()" title="Licence Expiry">*@
+                    Due Date: @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control", id = "DueDate" } })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

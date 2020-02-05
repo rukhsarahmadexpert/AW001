@@ -1,0 +1,83 @@
+﻿@model IT.Core.ViewModels.CustomerOrderListViewModel
+
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">AWFuel </a></li>
+
+    <li class="breadcrumb-item active">Dircet Order Details</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a href="/DirectSale/DirectsaleOrderAdd"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Direct Sale Order to this vehicle</i></span></a>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <h3 style="font-weight:bold">Order Details:</h3>
+                    <table class="table" style="border:1px solid">
+                        <tr>
+                            <th>Company Name</th>
+                            <th style="font:bold">@Model.CompanyName</th>
+                        </tr>
+                        <tr>
+                            <th>Total Deliverd Quantity</th>
+                            <td>@Model.DeliverdQuantity</td>
+                        </tr>
+                        <tr>
+                            <th>Order Number</th>
+                            <td>@Model.CustomerOrderNumber</td>
+                        </tr>
+                        <tr>
+                            <th>Deliverd By</th>
+                            <td>@Model.UserName</td>
+                        </tr>
+                        <tr>
+                            <th>Order Progress</th>
+                            <td style="color:green; font:bold">@Model.OrderProgress</td>
+                        </tr>
+                    </table>
+
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Deliverd Quantity</th>
+                                <th>To Driver Name</th>
+                                <th> To Vehicle Number</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (Model.customerOrderViewModels.Count > 0)
+                            {
+                                foreach (var item in Model.customerOrderViewModels)
+                                {
+
+                                    <tr>
+
+                                        <td>@item.ProductName</td>
+                                        <td>@item.OrderQuantity</td>
+                                        <td>@item.DriverName</td>
+                                        <td>@item.VehicleNumber</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <a href="/DirectSale/Details/@Model.customerOrderViewModels[0].VehicleId"> <i class="fal fa-list-alt"></i>  View <span class="fw-300"><i>Complete Details of this Vehicle</i></span></a>
+
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

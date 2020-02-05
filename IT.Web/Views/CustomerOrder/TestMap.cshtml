@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "TestMap";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Google Map Auto Complete</title>
+</head>
+<body>
+    <span>Location:</span><input type="text" style="width:200px" id="AutoCompleteTextBox" placeholder="Enter Address" /><br />
+    <label id="lblrecustl"></label>
+
+</body>
+</html>
+
+@section Scripts{
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4uKmaMGYr1tPczvqpfmGgavuBMY_jrWc&libraries=places"></script>
+    <script>
+
+
+        $(document).ready(function () {
+
+            var autocomplete;
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById('AutoCompleteTextBox')), {
+
+                types: ['getcode'],
+            });
+
+            google.maps.events.addListener(autocomplete, 'plac_changed', function () {
+
+                var near_place = autocomplete.getplace();
+            });
+
+        });
+
+
+            //google.maps.event.AddDomListener(window, 'load', intilize);
+
+            //function intilize() {
+            //    var acuocomplete = new google.maps.places.Autocomplete(document.getElementById('AutoCompleteTextBox'));
+
+            //    google.maps.events.AddListener(acuocomplete, 'plac_changed', function () {
+
+            //        var places = acuocomplete.getplace();
+            //        var location = "<b>Location</b>" + places.formatted_address + "</br>";
+            //        location += "<b>Lattitude</b>" + places.geometry.location.A + "</br>"
+            //        location += "<b>Longnitude</b>" + places.geometry.location.F + "</br>"
+
+            //    });
+            //    document.getElementById('lblrecustl').innerHTML = location;
+            //}
+    </script>
+
+}

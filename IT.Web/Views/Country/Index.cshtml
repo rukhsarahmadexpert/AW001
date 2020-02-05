@@ -1,0 +1,63 @@
+﻿@model  List<IT.Core.ViewModels.CountryViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+
+    List<IT.Core.ViewModels.CountryViewModel> countryViewModels = new List<IT.Core.ViewModels.CountryViewModel>();
+    countryViewModels = Model as List<IT.Core.ViewModels.CountryViewModel>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
+    <li class="breadcrumb-item active">Country</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a href="/Country/Create">
+                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Country</i></span>
+                    </a>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <!--      <div class="panel-tag">
+                                <p>Drivers Base Information</p>
+                            </div>-->
+                    <!-- datatable start -->
+                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-primary-600">
+                            <tr>
+                              
+                                <th>Country Name </th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in countryViewModels)
+                            {
+                                <tr>
+                                   
+                                    <td>@item.CountryName</td>
+                                   
+                                    <td>
+                                      
+                                        <a href="/Country/Edit/@item.Id?Name=@item.CountryName"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                        <i class="fal fa-trash-alt">
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

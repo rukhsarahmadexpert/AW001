@@ -1,0 +1,167 @@
+﻿@model IT.Core.ViewModels.CompnayModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Employee</a></li>
+    <li class="breadcrumb-item active">Details</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i>Company Details
+    </h1>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Details <span class="fw-300"></span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="panel-tag">
+                        Company complete Details...
+                    </div>                   
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-bordered table-hover m-0">
+                                    <thead class="thead-themed">
+                                        <tr>
+                                            <th>Company Name</th>
+                                            <th class="font-weight-bold" style="font-size:14px">@Model.Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Phone</th>
+                                            <td>@Model.Phone</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Cell</th>
+                                            <td>@Model.Cell</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Email</th>
+                                            <td>@Model.Email</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Country</th>
+                                            <td>@Model.Country</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">State</th>
+                                            <td>@Model.State</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">City</th>
+                                            <td>@Model.City</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Address</th>
+                                            <td>@Model.Address</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Web</th>
+                                            <td>@Model.Web</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">TRN No</th>
+                                            <td>@Model.TRN</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Status</th>
+                                            @if (Model.IsActive == false)
+                                            {
+                                            <td><span class="badge badge-danger">@Model.CurrentStatus</span></td>
+                                            }
+                                            else
+                                            {
+                                            <td><span class="badge badge-success">@Model.CurrentStatus</span></td>
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Logo</th>
+                                            <td>
+                                                <img id="LOGO" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.LogoUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt="Company Logo" style="height:100px; width:100px">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <!--   <h3 class="py-5">Driving License</h3> -->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <a href="/Driver/Index/?CompId=@Model.Id" class="btn btn-primary form-control">View Drivers</a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="/Vehicle/Index/?CompId=@Model.Id" class="btn btn-primary form-control">View Vehicle</a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="" class="btn btn-primary form-control">View Orders</a>
+                                    </div>
+                                </div>
+                                <hr />
+                                @if (Model.IsActive == true)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <form action="/Company/CompanyFrezeOrBlackListByAdmin" method="post">
+                                                <input type="hidden" name="Id" value="@Model.Id" />
+                                                <input type="hidden" value="Block List" name="Flage" />
+                                                <button type="submit" href="" class="btn btn-danger form-control">Block Company</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <form action="/Company/CompanyFrezeOrBlackListByAdmin" method="post">
+                                                <input type="hidden" name="Id" value="@Model.Id" />
+                                                <input type="hidden" value="Freeze" name="Flage" />
+                                                <button type="submit" href="" class="btn btn-dark form-control">Freeze Company</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form action="/Company/CompanyFrezeOrBlackListByAdmin" method="post">
+                                                <input type="hidden" name="Id" value="@Model.Id" />
+                                                <input type="hidden" value="Active" name="Flage" />
+                                                <button type="submit" href="" class="btn btn-info form-control">Active Company</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .pic {
+        display: none;
+    }
+
+    .newbtn {
+        cursor: pointer;
+    }
+
+    .blah {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        max-height: 160px;
+        margin-top: 20px;
+    }
+</style>

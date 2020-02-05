@@ -1,0 +1,89 @@
+﻿@model List<IT.Core.ViewModels.DriverLoginHistoryViewModel>
+@{
+    ViewBag.Title = "Driver Login History For Admin";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+    List<IT.Core.ViewModels.DriverLoginHistoryViewModel> driverLoginHistoryViewModels = new List<IT.Core.ViewModels.DriverLoginHistoryViewModel>();
+    driverLoginHistoryViewModels = Model as List<IT.Core.ViewModels.DriverLoginHistoryViewModel>;
+}
+
+ <ol class="breadcrumb page-breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Awfuel</a></li>  
+                            <li class="breadcrumb-item active">Drivers</li>
+                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+ </ol>                 
+                       <div class="row">
+                            <div class="col-xl-12">
+                                <div id="panel-1" class="panel">
+                                    <div class="panel-hdr">
+                                        <h2>
+                                           <a href=""> <i class="fal fa-plus-circle"></i>  Driver login <span class="fw-300"><i>History</i></span>
+                                           </a>
+                                        </h2>
+                                    </div>
+                                    <div class="panel-container show">
+                                        <div class="panel-content">
+                                    <!--      <div class="panel-tag">
+                                                <p>Drivers Base Information</p> 
+                                            </div>-->  
+                                            <!-- datatable start -->
+                                            <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                                                <thead class="bg-primary-600">
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Image</th>
+                                                        <th>Vehicle</th>
+                                                        <th>Order Status</th>
+                                                        <th>IsActive</th>
+                                                        <th>Release Vehicle</th>
+                                                       <!-- <th>Actions</th>-->
+                                                    </tr>
+                                                </thead>
+                                                <tbody>                                                    
+                                                    @foreach (var item in driverLoginHistoryViewModels)
+                                                    {
+                                                        <tr>
+                                                            <td>@item.Name</td>
+                                                            <td><img src="http://itmolen-001-site8.htempurl.com/ClientDocument/@item.DriverImageUrl" class="rounded-circle" width="50px" height="50px" /> </td>
+                                                            <td>@item.TraficPlateNumber</td>
+                                                            <td>@item.OrderStatus</td>
+                                                            <td>@item.IsActive</td>
+                                                            <td>
+                                                                <div>
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                             <form action="/AWFDriver/ReleaseVehicle" method="post">
+                                                                                <input type="hidden" name="Id" value="@item.DriverLoginId" />   
+                                                                                <button type="submit" class="btn btn-warning btn-sm btn-block waves-effect waves-themed">
+                                                                                Release 
+                                                                                </button>
+                                                                             </form>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                           <form action="/AWFDriver/DriverLogouByAdmin" method="post" onsubmit="return confirm('Please confirm you want to Logout ');" >
+                                                                                <input type="hidden" name="Id" value="@item.DriverLoginId" />   
+                                                                                <button type="submit" class="btn btn-danger btn-sm btn-block waves-effect waves-themed">
+                                                                                Logout 
+                                                                                </button>
+                                                                             </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td> 
+                                                        </tr>
+                                                    }   
+                                                </tbody>
+                                                
+                                            </table>
+                                            <!-- datatable end -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+    
+
+                
+

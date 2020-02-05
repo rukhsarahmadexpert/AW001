@@ -1,0 +1,152 @@
+﻿@model IT.Core.ViewModels.CompnayModel
+@{
+    ViewBag.Title = "Cash Company";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+}
+              <main id="js-page-content" role="main" class="page-content">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div id="panel-1" class="panel">
+                                    <div class="panel-hdr">
+                                        <h2>
+                                            Company <span class="fw-300"><i>Registration</i></span>
+                                        </h2>   
+                                    </div>
+                                    <div class="panel-container show">
+                                        <div class="panel-content">
+                                            <form action="/Company/CashCompanyCreate" method="post" enctype="multipart/form-data">
+                                                <div class="row">
+                                                    <div class="col-xl-2 p-2">
+                                                        <label class="newbtn">
+                                                            <img id="logoPreview" class="blah_cashCompany" src="/assets/staticImages/icon1.png" style="width:160px;">
+                                                            <input id="LogoUrl" name="LogoUrl" class='pic' onchange="readURL(this);" type="file">
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xl-5 p-2">
+                                                        <div class="input-group flex-nowrap">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fal fa-industry fs-xl"></i></span>
+                                                            </div>
+                                                            <input id="OwnerRepresentaive" name="OwnerRepresentaive" type="text" class="form-control" placeholder="Compnay Name" aria-label="CompanyName" aria-describedby="addon-wrapping-left">
+                                                        </div>
+                                                        <div class="input-group flex-nowrap mt-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fal fa-envelope fs-xl"></i></span>
+                                                            </div>
+                                                            <input id="Email" name="Email" type="email" class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="addon-wrapping-left">
+                                                        </div>
+                                                        <div class="input-group flex-nowrap mt-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fal fa-mobile fs-xl"></i></span>
+                                                            </div>
+                                                            <input id="Cell" name="Cell" type="text" class="form-control" placeholder="Mobile Number" aria-label="Mobile" aria-describedby="addon-wrapping-left">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-5 p-2">
+                                                        <div class="input-group flex-nowrap">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fal fa-user fs-xl"></i></span>
+                                                            </div>
+                                                            <input id="Owner" name="Owner" type="text" class="form-control" placeholder="Owner / Representative" aria-label="Owner" aria-describedby="addon-wrapping-left">
+                                                        </div>
+                                                        <div class="input-group flex-nowrap mt-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fal fa-phone fs-xl"></i></span>
+                                                            </div>
+                                                            <input id="Phone" name="Phone" type="text" class="form-control" placeholder="Phone Number" aria-label="Phone" aria-describedby="addon-wrapping-left">
+                                                        </div>
+                                                        <div class="input-group flex-nowrap mt-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fal fa-credit-card fs-xl"></i></span>
+                                                            </div>
+                                                            <input id="TRN" name="TRN" type="text" class="form-control" placeholder="Trn Number" aria-label="TrnNumber" aria-describedby="addon-wrapping-left">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    <div class="row ">
+                                                        <div class="col-xl-6 p-2">
+                                                            <div class="input-group flex-nowrap">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text"><i class="fal fa-building fs-xl"></i></span>
+                                                                </div>
+                                                                <input id="City" name="City" type="text" class="form-control" placeholder="Enter Your City" aria-label="City" aria-describedby="addon-wrapping-left">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 p-2">
+                                                            <div class="input-group flex-nowrap">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text"><i class="fal fa-address-card fs-xl"></i></span>
+                                                                </div>
+                                                                <input id="Address" name="Address" type="text" class="form-control" placeholder="Address" aria-label="Your Address" aria-describedby="addon-wrapping-left">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row ">
+                                                        <div class="col-xl-6 p-2">
+                                                            <div class="input-group flex-nowrap">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text"><i class="fal fa-globe fs-xl"></i></span>
+                                                                </div>
+                                                                <input id="Web" name="Web" type="text" class="form-control" placeholder="Enter Website URL" aria-label="Web" aria-describedby="addon-wrapping-left">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 p-2">
+                                                            <div class="input-group flex-nowrap">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text"><i class="fal fa-comment fs-xl"></i></span>
+                                                                </div>
+                                                                <input id="Remarks" name="Remarks" type="text" class="form-control" placeholder="Remarks" aria-label="Your Address" aria-describedby="addon-wrapping-left">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row ">                                                        
+                                                        <div class="col-xl-12 p-2">
+                                                            <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                                                Company
+                                                                <span>Submit</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+</form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                 </main>
+
+
+   
+
+
+
+@section Scripts{
+<script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
+<script>
+
+    $("#LogoUrl").change(function () {
+               readURL(this,"logoPreview");
+    });
+
+</script>
+}
+
+<style>
+
+
+.pic{
+     display: none;
+       }
+       
+ .newbtn{
+         cursor: pointer;
+      }
+      .blah{
+  max-width:100%;
+  width:300px;
+  height:auto;
+  margin-top:20px;
+}
+
+</style>

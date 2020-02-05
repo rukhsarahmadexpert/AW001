@@ -1,0 +1,55 @@
+﻿<div class="modal fade" id="BillModel" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="padding:40px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label>LPO Number:</label>
+                        <div class="chosen-select-act fm-cmp-mg">
+                            <select name="LPONumber" class="chosen" data-placeholder="Choose a lPO NO..." id="LPONumber">
+                                @foreach (var lpo in ViewBag.LPO)
+                                {
+                                    <option value="@lpo.Id">@lpo.PONumber</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" id="CreateBillFromLPO">Create  <i class="glyphicon glyphicon-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="ModelDeleteBill" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>Are you sure ?</h3><br />
+                <h5>You want to delete this record </h5>
+            </div>
+            <hr />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" id="DeleteBill">Yes! Delete</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No! Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="BillId" />
+
+
+
+

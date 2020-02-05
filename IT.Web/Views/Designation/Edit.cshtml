@@ -1,0 +1,362 @@
+﻿
+@model IT.Core.ViewModels.DesignationViewModel
+
+@{
+    ViewBag.Title = "Edit Designation";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+
+ <ol class="breadcrumb page-breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Designation</a></li>
+                            
+                            <li class="breadcrumb-item active">Create</li>
+                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+ </ol>
+
+
+  <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Designation <span class="fw-300"></span>
+                    </h2>                    
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please add your Designation from here...
+                        </div>
+
+                        @using (Html.BeginForm()) 
+                        {
+                        @Html.AntiForgeryToken()
+
+                    
+                       
+                            <div class="row">
+                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                 @Html.HiddenFor(model => model.Id)
+                                <div class="col-md-12">
+
+                                    <div class="row">
+                                        <div class="col-md-6 p-2">
+
+                                           <div class="form-group">
+                                                @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label" })
+                                               
+                                                    @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+                                              
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6 p-2">
+
+                                        <div class="form-group">
+                                           @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label" })
+                                        
+                                            @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+                                        
+                                        </div> 
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-6 p-2">
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            
+                                                @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+                                            </div>
+                                            
+
+                                        </div>
+
+                                        <div class="col-md-6 p-2">
+
+                                            <div class="form-group">
+                                                   @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                               
+                                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                               
+                                            </div>
+
+                                           
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-md-6 p-2">
+
+
+                                         <div class="form-group">
+                                            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label" })
+                                          
+                                                <div class="checkbox">
+                                                    @Html.EditorFor(model => model.IsActive)
+                                                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                                </div>
+                                            
+                                        </div>
+          
+
+                                        </div>
+
+                                      
+                                    </div>
+ 
+                                </div>
+                              
+                                 <div class="col-md-12 mt-5">
+
+                                       <button type="submit" id="Save"   class="btn btn-primary btn-sm btn-block waves-effect waves-themed">Designation
+
+                                            <span>submit</span>
+                                             </button>
+
+                                          
+                                 </div>
+
+                           
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+@*@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>DesignationViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsActive)
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+    *@
+
+
+
+
+
+@section Scripts{
+<script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+
+        
+      
+            $("#form1").submit(function () {
+                var jqxhr = $.post('http://localhost:64299/api/Driver/Add', $('#form1').serialize())
+                    .success(function (e) {
+                        alert(e.data);
+                    
+                         })
+                    .error(function (er) {
+                        alert(er.data);
+                    });
+                return false;
+            });
+     
+
+
+        $('#Save').click(function(){
+     
+        // show that something is loading
+        $('#response').html("<b>Loading response...</b>");         
+        /*
+         * 'post_receiver.php' - where you will pass the form data
+         * $(this).serialize() - to easily read form data
+         * function(data){... - data contains the response from post_receiver.php
+         */
+            $.post('POST', 'http://localhost:64299/api/Driver/Add', $('#form1').serialize(), function(data){
+             
+            // show the response
+            $('#response').html(data);
+             
+        }).fail(function(x) {
+         
+            // just in case posting your form failed
+           alert('#response');
+             
+        });
+ 
+        // to prevent refreshing the whole page page
+        return false;
+ 
+    });
+
+
+
+
+       @*  $("#Save").click(function () {
+
+            
+                 var formData = new FormData();
+                            formData.append('Name', $('#Name').val());
+                            formData.append('Contact', $('#Contact').val());
+                            formData.append('Email', $('#Email').val());
+                            formData.append('Facebook', $('#Facebook').val());
+                            formData.append('LicenseTypes', $('#LicenseTypes').val());
+                            formData.append('LicenseExpiry', $('#LicenseExpiry').val());
+                            formData.append('Nationality', $('#Nationality').val());
+                            formData.append('Comments', $('#Comments').val());
+                          
+                            formData.append( 'ClientDocs', 'ClientDocs');
+                            formData.append( 'CompanyId', 1);
+                            formData.append( 'CreatedBy', 2 );
+               
+                
+                            $.post("http://itmolen-001-site8.htempurl.com/api/Driver/Add", formData, function (msg) {
+                            console.log(msg);
+                });
+        }) *@
+
+
+                                    $("#IDUAECopyFront").change(function () {
+                                    readURL(this,"IDUAECopyFrontPreview");
+                                });
+
+
+                                    $("#IDUAECopyBack").change(function () {
+                                    readURL(this, "IDUAECopyBackPreview");
+                                });
+
+
+                                    $("#DrivingLicenseFront").change(function () {
+                                    readURL(this, "DrivingLicenseFrontPreview");
+                                });
+
+
+                                    $("#DrivingLicenseBack").change(function () {
+                                    readURL(this, "DrivingLicenseBackPreview");
+                                });
+
+                                    $("#PassportCopy").change(function () {
+                                    readURL(this, "PassportCopyPreview");
+                                });
+
+                                    $("#PassportBack").change(function () {
+                                    readURL(this, "PassportBackPreview");
+                                });
+
+
+                                    $("#VisaCopy").change(function () {
+                                    readURL(this, "VisaCopyPreview");
+                                });
+        
+    })
+
+
+
+
+   
+
+  
+
+   @* function PostApiRequest() {
+        $.post("http://itmolen-001-site8.htempurl.com/api/Driver/Add", $("#form1").serialize(), function (msg) {
+            alert("success");
+        });
+    }*@
+
+
+  
+
+</script>
+    }
+
+
+
+
+
+<style>
+
+
+.pic{
+     display: none;
+       }
+       
+ .newbtn{
+         cursor: pointer;
+      }
+      .blah{
+  max-width:100%;
+  width:100%;
+  height:auto;
+  margin-top:20px;
+}
+
+</style>
+

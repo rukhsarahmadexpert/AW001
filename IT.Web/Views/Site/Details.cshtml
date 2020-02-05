@@ -1,0 +1,162 @@
+﻿@model IT.Core.ViewModels.SiteViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<ol class="breadcrumb page-breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Sites</a></li>
+                            
+                            <li class="breadcrumb-item active">Create</li>
+                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+ </ol>
+
+    <div class="subheader">
+       
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Site <span class="fw-300">Details</span>
+                    </h2>                    
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        
+                        <form action="/CustomerSites/Create" method="post" enctype="application/x-www-form-urlencoded">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Site Name</label>
+                                        <input type="text"  id="SiteName" name="SiteName" value="@Model.SiteName" class="form-control" disabled />
+                                        <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+                                    </div>                                    
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Contact Person Name</label>
+                                        <input type="text" id="ContactPersonName" name="ContactPersonName" value="@Model.ContactPersonName" class="form-control" disabled />
+                                    </div>                                    
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Contact Phone</label>
+                                        <input type="text" id="ContactPhone" name="ContactPhone" value="@Model.ContactPhone" class="form-control" disabled />
+                                    </div>                                    
+
+                                </div>
+
+                                
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Site Cell</label>
+                                        <input type="text" id="SiteCell" name="SiteCell" value="@Model.SiteCell" class="form-control" disabled />
+                                    </div>                                    
+
+                                </div>
+
+                                
+                                
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">FaceBook</label>
+                                        <input type="text" id="FaceBook" name="FaceBook" value="@Model.FaceBook" class="form-control" disabled />
+                                    </div>                                    
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Site Email</label>
+                                        <input type="text" id="SiteEmail" name="SiteEmail" value="@Model.SiteEmail" class="form-control" disabled />
+                                    </div>                                    
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Address</label>
+                                        <input type="text" id="Address" name="Address" value="@Model.Address" class="form-control" disabled />
+
+                                    </div>                                    
+
+                                </div>
+
+                    
+
+                            
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@section scripts{
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&sensor=false"> </script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places">
+
+    </script>   
+    <script>
+
+        $(document).ready(function () {
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success);
+            } else {
+                alert("There is Some Problem on your current browser to get Geo Location!");
+            }
+
+            function success(position) {
+                var lat = position.coords.latitude;
+                var long = position.coords.longitude;
+                var city = position.coords.locality;
+                var Address = position.coords.url;
+                $('#Lattitue').val(lat);
+                $('#Longitude').val(long);
+                $('#LocationFullUrl').val(Address);
+              
+                var LatLng = new google.maps.LatLng(lat, long);
+                var mapOptions = {
+                    center: LatLng,
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var map = new google.maps.Map(document.getElementById("MyMapLOC"), mapOptions);
+                var marker = new google.maps.Marker({
+                    position: LatLng,
+                    title: "<div style = 'height:60px;width:200px'><b>Your location:</b><br />Latitude: "
+                        + lat + +"<br />Longitude: " + long
+                });
+
+                marker.setMap(map);
+                var getInfoWindow = new google.maps.InfoWindow({
+                    content: "<b>Your Current Location</b><br/> Latitude:" +
+                        lat + "<br /> Longitude:" + long + ""
+                });
+                getInfoWindow.open(map, marker);
+            }
+
+        })
+
+    </script>
+}
+
+
+

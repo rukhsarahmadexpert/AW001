@@ -1,0 +1,17 @@
+﻿@{
+    IT.Core.ViewModels.LPOInvoiceViewModel LPOInvoiceViewModel = new IT.Core.ViewModels.LPOInvoiceViewModel();
+
+    LPOInvoiceViewModel = ViewBag.lPOInvoiceViewModel as IT.Core.ViewModels.LPOInvoiceViewModel;
+}
+
+<div class="pull-right">
+
+    @if (LPOInvoiceViewModel.Heading != "BILL")
+    {
+        <button class="btn btn-success" id="LPOEdit"><i class="glyphicon glyphicon-pencil"></i> Edit</button>
+    }
+    <button class="btn btn-info" id="DownloadLPOInvoice"><i class="glyphicon glyphicon-save"></i> Download</button>
+    <button class="btn btn-warning" id="SendEmail"><i class="glyphicon glyphicon-envelope"></i> Send By Email</button>
+</div>
+
+<input type="hidden" id="LPOIdFromBIll" value="@LPOInvoiceViewModel.LPOId" />

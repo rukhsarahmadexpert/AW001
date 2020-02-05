@@ -1,0 +1,82 @@
+﻿@model IT.Core.ViewModels.ProductViewModel
+@{
+    ViewBag.Title = "Product Create";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<main id="js-page-content" role="main" class="page-content">
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Create Product
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Product <span class="fw-300"></span>
+                    </h2>
+
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please add Product from here...
+                        </div>
+                        <form action="/Product/Create" method="post">
+                            <input type="hidden" value="@Model.Id" name="Id" id="Id" />
+                            <div class="row">
+                                <div class="col-md-12 pt-3">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Product                         Name</label>
+                                        <input type="text" id="Name" name="Name" value="@Model.Name" class="form-control" placeholder="Product Name">
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6 pt-3">
+                                    <div class="form-group">
+                                        <label class="form-label" for="single-label">
+                                            Select Unit
+                                        </label>
+                                        <select class="select2 form-control" name="Unit" id="Unit">
+                                            @foreach (var item in ViewBag.productUnitViewModels)
+                                            {
+                                                <option value="@item.Id" @(item.Id == Model.Unit ? "selected='selected'" : "")>@item.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 pt-3">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Description</label>
+                                        <input type="text" id="UPrice" name="UPrice" value="@Model.UPrice" class="form-control" placeholder="Product Price">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 pt-3">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Description</label>
+                                        <textarea name="Description" id="Description" class="form-control">@Model.Description</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row py-5">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        Submit
+                                        <span>Product</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

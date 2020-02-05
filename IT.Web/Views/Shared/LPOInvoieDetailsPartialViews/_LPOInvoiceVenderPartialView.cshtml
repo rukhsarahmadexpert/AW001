@@ -1,0 +1,84 @@
+﻿
+
+@{
+    IT.Core.ViewModels.LPOInvoiceViewModel LPOInvoiceViewModel = new IT.Core.ViewModels.LPOInvoiceViewModel();
+
+    LPOInvoiceViewModel = ViewBag.lPOInvoiceViewModel as IT.Core.ViewModels.LPOInvoiceViewModel;
+
+    var DueDate = "";
+    var FromDate = "";
+    if (LPOInvoiceViewModel.Heading != "BILL")
+    {
+        DueDate = LPOInvoiceViewModel.DDate;
+        FromDate = LPOInvoiceViewModel.FDate;
+    }
+    else
+    {
+        DueDate = "03/19/2019";
+        FromDate = "03/19/2019";
+    }
+
+}
+
+<input type="hidden" id="LPOId" value="@LPOInvoiceViewModel.Id" />
+<h1 class="text-center font-weight-bold"><u>@LPOInvoiceViewModel.Heading</u></h1>
+<div class="row">
+    <div class="col-md-4">
+        <h5 class="font-weight-bold"><u>Vender Info:</u></h5>
+        <div class="form-group">
+            <p style="margin-top:10px">
+            </p>
+            <p><i class="glyphicon glyphicon-flag"></i>Representative: <span id="Company Name">@LPOInvoiceViewModel.Representative</span></p>
+            <p><i class="glyphicon glyphicon-user"> </i>Name: <span id="ContactPerson">@LPOInvoiceViewModel.Name</span></p>
+            <p><i class="glyphicon glyphicon-road"></i> Address: <span id="VenderAddress">@LPOInvoiceViewModel.Address</span></p>
+            <p><i class="glyphicon glyphicon-earphone"></i>Land Line : <span id="VenderPhone">@LPOInvoiceViewModel.LandLine</span></p>
+            <p><i class="glyphicon glyphicon-envelope"></i>Email :<span id="VenderEmail">@LPOInvoiceViewModel.Email</span></p>
+            <p> <i class="glyphicon glyphicon-text-width"></i>TRN : <span id="VenderVAT">@LPOInvoiceViewModel.TRN</span></p>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="pull-right">
+            <div class="form-group">
+                <div class="nk-datapk-ctm form-elet-mg" id="data_2">
+                    <div class="input-group  nk-int-st">
+                        <span class="input-group-addon"></span>
+                        @*From Date: <input type="text" class="form-control FromDate" id="FromDate" name="FromDate" value="@FromDate" title="Licence Expiry">*@
+                        From Date: @Html.EditorFor(model => LPOInvoiceViewModel.FromDate, new { htmlAttributes = new { @class = "form-control", name = "FromDate", id = "FromDate" } })
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="nk-datapk-ctm form-elet-mg" id="data_2">
+                    <div class="input-group  nk-int-st">
+                        <span class="input-group-addon"></span>
+
+                        Due Date: @Html.EditorFor(model => LPOInvoiceViewModel.DueDate, new { htmlAttributes = new { @class = "form-control", id = "DueDate" } })
+
+                        @*Due Date:<input type="text" class="form-control DueDate" id="DueDate" name="DueDate" value="@DueDate" title="Licence Expiry">*@
+                    </div>
+                </div>
+            </div>
+            <p> <p>NO # : <span id="PONumber">@LPOInvoiceViewModel.PONumber</span></p></p>
+
+            @if (LPOInvoiceViewModel.Heading == "BILL" || LPOInvoiceViewModel.Heading == "Invoice" || LPOInvoiceViewModel.Heading == "Purchase")
+            {
+                <p>Ref NO# : <label id="RefrenceNumber">@LPOInvoiceViewModel.RefrenceNumber</label></p>
+                @*//  <p>From Date : <span id="Company Name"></span></p>*@
+            }
+
+            @if (LPOInvoiceViewModel.Heading == "BILL")
+            {
+                <input type="text" id="BillNumbers" class="form-control" placeholder="Invoice Number" value="@LPOInvoiceViewModel.BillNumber" />
+            }
+        </div>
+    </div>
+</div>
+
+<input type="hidden" value="@LPOInvoiceViewModel.Id" id="LPOId" />
+
+<input type="hidden" value="@LPOInvoiceViewModel.VenderId" id="VenderId" />
+
+
+

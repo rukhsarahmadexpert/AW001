@@ -1,0 +1,220 @@
+﻿@model IT.Core.ViewModels.VehicleViewModel  
+@{
+    ViewBag.Title = "Admin Vehicle Edit";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<main id="js-page-content" role="main" class="page-content">
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Create Vehicle
+        </h1>
+    </div>
+    <div class="row"> 
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Vehicle <span class="fw-300"></span>
+                    </h2>
+
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please add your vehicle from here...
+                        </div>
+                        <form action="/AwfVehicle/Update" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6">
+
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="single-label">
+                                            Select Vehicle Type
+                                        </label>
+                                        
+                                         <select class="select2 form-control" name="VehicleType" id="VehicleType">
+                                          @foreach (var item in ViewBag.VehicleTypes)
+                                          {
+                                              
+                                                <option value="@item.Id" @(item.Id == @Model.VehicleType ? "selected='selected'" : "")>@item.VehicleType</option>
+                                          }
+                                         </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Trafic Plate Number</label>
+                                        <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+                                        <input type="text" id="TraficPlateNumber" name="TraficPlateNumber" value="@Model.TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Tc Number</label>
+                                        <input type="text" id="TCNumber" name="TCNumber" value="@Model.TCNumber" class="form-control" placeholder="Enter Tc Number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Model</label>
+                                        <input type="text" id="Model" name="Model" class="form-control" value="@Model.Model" placeholder="Enter Model">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Brand</label>
+                                        <input type="text" id="Brand" name="Brand" class="form-control" value="@Model.Brand"  placeholder="Enter Brand">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Color</label>
+                                        <input type="text" id="Color" name="Color" class="form-control" value="@Model.Color" placeholder="Enter Color">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Mulkia Expiry</label>
+                                        <input type="text" id="MulkiaExpiry" name="MulkiaExpiry" class="form-control" value="@Model.MulkiaExpiry" placeholder="Enter Mulkia Expiry">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Insurance Expiry</label>
+                                        <input type="date" id="InsuranceExpiry" name="InsuranceExpiry" class="form-control" value="@Model.InsuranceExpiry" placeholder="Enter Insurance Expiry">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Region</label>
+                                        <input type="text" id="RegisteredRegion" name="RegisteredRegion" value="@Model.RegisteredRegion" class="form-control" placeholder="Enter Region">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Notes</label>
+                                        <textarea name="Comments" id="Comments" class="form-control">@Model.Comments</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 1</b> Front side</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class=newbtn>
+                                                        <img id="MulkiaFront1Preview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaFront1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                        <input id="MulkiaFront1File" name="MulkiaFront1File" class='pic' onchange="readURL(this);" type="file">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 1</b> back side</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label>
+                                                        <img id="MulkiaBack1Preview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaBack1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                        <input id="MulkiaBack1File" name="MulkiaBack1File" class='pic' onchange="readURL(this);" type="file">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 2</b> Front side</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class=newbtn>
+                                                         <img id="MulkiaFront2Preview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaFront2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                       
+                                                        <input id="MulkiaFront2File" name="MulkiaFront2File" class='pic' onchange="readURL(this);" type="file">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 2</b> back side</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class=newbtn>
+                                                        <img id="MulkiaBack2Preview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaBack2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                        
+                                                        <input id="MulkiaBack2File" name="MulkiaBack2File" class='pic' onchange="readURL(this);" type="file">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row py-5">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                                Submit
+                                                <span>Vehicle</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+@section Scripts{
+    <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
+    <script>
+
+    $(document).ready(function () {
+
+        //$('#Save').click(function () {
+        //    PostApiRequest();
+        //})
+
+
+        $("#MulkiaFront1File").change(function () {
+        readURL(this,"MulkiaFront1Preview");
+    });
+
+
+        $("#MulkiaBack1File").change(function () {
+        readURL(this, "MulkiaBack1Preview");
+    });
+
+
+        $("#MulkiaFront2File").change(function () {
+        readURL(this, "MulkiaFront2Preview");
+    });
+
+
+        $("#MulkiaBack2File ").change(function () {
+        readURL(this, "MulkiaBack2Preview");
+    });
+
+    })
+
+
+
+    </script>
+}
+<style>
+
+
+    .pic {
+        display: none;
+    }
+
+    .newbtn {
+        cursor: pointer;
+    }
+
+    .blah {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        margin-top: 20px;
+    }
+</style>
+

@@ -1,0 +1,84 @@
+﻿@using System.Web.Mvc.Html 
+
+@model List<IT.Core.ViewModels.VehicleViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = ViewBag.LayoutName;
+
+     List<IT.Core.ViewModels.VehicleViewModel> VehicleViewModels = new List<IT.Core.ViewModels.VehicleViewModel>();
+     VehicleViewModels = Model as List<IT.Core.ViewModels.VehicleViewModel>;
+}
+
+ <ol class="breadcrumb page-breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Mena Energy</a></li>
+                            
+                            <li class="breadcrumb-item active">Vehicle</li>
+                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+                        </ol>
+                      
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div id="panel-1" class="panel">
+                                    <div class="panel-hdr">
+                                        <h2>
+                                            <a href="/Vehicle/Create">
+                                                <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Vehicle</i></span>
+                                            </a>
+                                        </h2>
+                                       
+                                    </div>
+                                    <div class="panel-container show">
+                                        <div class="panel-content">
+                                    <!--      <div class="panel-tag">
+                                                <p>Drivers Base Information</p>
+                                               
+                                               
+                                            </div>-->  
+                                            <!-- datatable start -->
+                                            <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                                                <thead class="bg-primary-600">
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>TraficPlateNumber</th>
+                                                        <th>Place of Issue</th>
+                                                        <th>TC Number</th>
+                                                        <th>Model</th>
+                                                        <th>Mulkia Expiry</th>
+                                                        <th>Insurance Expiry</th>
+                                                        <th>IsActive</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                    @if (VehicleViewModels != null && VehicleViewModels.Count > 0)
+                                                    {
+                                                        foreach (var item in VehicleViewModels)
+                                                        {
+
+                                                        <tr>
+                                                            <td>@item.VehicleTypeName</td>
+                                                            <td>@item.TraficPlateNumber</td>
+                                                            <td>@item.PlaceofIssue</td>
+                                                            <td>@item.TCNumber</td>
+                                                            <td>@item.Model</td>
+                                                            <td>@item.MulkiaExpiry</td>
+                                                            <td>@item.InsuranceExpiry</td>
+                                                            <td>@item.IsActive</td>
+                                                            <td>
+                                                                <a href="/Vehicle/Details/@item.Id"><i class="fal fa-eye"></i></a> &nbsp; &nbsp;
+                                                                <a href="/Vehicle/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                                                <i class="fal fa-trash-alt">
+                                                            </td>
+                                                        </tr>
+                                                        }
+                                                    }
+                                                </tbody>                                                
+                                            </table>
+                                            <!-- datatable end -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+

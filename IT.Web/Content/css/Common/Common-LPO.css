@@ -1,0 +1,93 @@
+﻿.image-Size {
+    max-width: 180px;
+    min-width: 100px;
+    max-height: 180px;
+    min-height: 45px;
+}
+
+image-Size-Logo {
+    max-width: 300px;
+    min-width: 100px;
+    max-height: 200px;
+    min-height: 45px;
+    margin-top: 33px;
+}
+
+.btn-height {
+    height: 33px !important;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /*margin: 4px 2px;*/
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.TableCloseService {
+    cursor: pointer;
+}
+
+.TableClose {
+    cursor: pointer;
+}
+
+.GoodsLink {
+    cursor: pointer;
+    color: blue;
+}
+
+.ServicesLink {
+    cursor: pointer;
+    color: blue;
+}
+
+/* pull-right on all except xs devices */
+/*@media (min-width: 992px) {
+    .pull-right-md {
+        float: right;
+    }
+}*/
+
+.FirstCapital {
+    text-transform: capitalize;
+}
+
+
+.Input-height {
+    height: 33px !important;
+}
+
+.btn-height {
+    height: 33px !important;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /*margin: 4px 2px;*/
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-height-Remove {
+    height: 28px !important;
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /*margin: 4px 2px;*/
+    cursor: pointer;
+    font-weight: bold;
+}

@@ -1,0 +1,77 @@
+﻿@model List<IT.Core.ViewModels.CompnayModel>
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+                List<IT.Core.ViewModels.CompnayModel> compnayModels = new List<IT.Core.ViewModels.CompnayModel>();
+                compnayModels = Model as List<IT.Core.ViewModels.CompnayModel>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Company</a></li>
+
+    <li class="breadcrumb-item active">List</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a href="/Company/CashCompany"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Cash Company</i></span>
+                </h2></a>
+
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <!--      <div class="panel-tag">
+                                <p>Drivers Base Information</p>
+
+
+                            </div>-->
+                    <!-- datatable start -->
+                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-primary-600">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>TRN</th>
+                                <th>Owner</th>
+                                <th>IsActive</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in compnayModels)
+                            {
+
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.TRN</td>
+                                    <td>@item.OwnerRepresentaive</td>
+                                    <td>@item.IsActive</td>
+                                    <td>
+                                        <a href="/Company/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                        <a href="/Company/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                        <i class="fal fa-trash-alt">
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

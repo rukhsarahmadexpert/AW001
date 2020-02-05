@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Mena Energy</a></li>
+
+    <li class="breadcrumb-item active">Drivers</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <button class="btn btn-primary btn-sm" id="createNewLPO"><i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"></span><i>LPO</i></button>
+
+                </h2>
+
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <!--      <div class="panel-tag">
+                        <p>Drivers Base Information</p>
+                    </div>-->
+                    <!-- datatable start -->                    
+                    <table id="#" class="table LPOTable table-bordered table-hover table-striped w-100">
+                        <thead class="bg-primary-600">
+                            <tr>
+                                <th>LPO #</th>
+                                <th>Vender</th>
+                                <th>Date</th>
+                                <th>Due Date</th>
+                                <th>Total</th>
+                                <th>VAT</th>
+                                <th>Grand Total</th>
+                                <th>Is Updated</th>
+                                <th>Oprater</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+            BindDataTable();
+        });
+
+        $('#createNewLPO').click(function () {
+
+            window.location.href = "/LPO/Create";
+        });
+
+        var BindDataTable = function (response) {
+            $('.LPOTable').DataTable({
+                responsive: true,
+                "bRetrieve": true,
+                "bServerSide": true,
+                "processing": true,
+                "sAjaxSource": "/LPO/GetAll",
+                "fnServerData": function (sSource, aoData, fnCallback) {
+                    $.ajax({
+                        type: "Get",
+                        data: aoData,
+                        url: sSource,
+                        success: fnCallback
+                    })
+                },
+                "aoColumns": [
+                    { "mData": "PONumber" },
+                    { "mData": "Name" },
+                    { "mData": "FDate" },
+                    { "mData": "DDate" },
+                    { "mData": "Total" },
+                    { "mData": "VAT" },
+                    { "mData": "GrandTotal" },
+                    { "mData": "IsUpdated" },
+                    { "mData": "UserName" },
+                    {
+                        "mData": "Id",
+                        "render": function (Id, type, full, meta) {
+                            return '<a href="#" onclick="EditLPO(' + Id + ')"><i class="fal fa-edit"></i>Edit</a>' + ' | ' + '<a href="#" onclick="ViewLPO(' + Id + ')"><i class="fal fa-eye"></i>Details</a>' + ' | ' + '<a href="#" onclick="CreateBill(' + Id + ')">Create Bill</a>'
+                        }
+                    },
+                ]
+            })
+        }
+
+
+        function EditLPO(Id) {
+            window.location.href = "/LPO/Edit/" + Id;
+        }
+
+
+        function ViewLPO(Id) {
+            window.location.href = "/LPO/Details/" + Id;
+        }
+
+
+        function CreateBill(Id) {
+
+            window.location.href = "/Bill-Create/" + Id;
+        }
+    </script>
+
+}
+
+

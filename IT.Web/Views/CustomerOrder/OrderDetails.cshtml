@@ -1,0 +1,476 @@
+﻿@model IT.Core.ViewModels.CustomerOrderGroupViewModel
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<head>
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 330px; /* The height is 400 pixels */
+            width: 100%; /* The width is the width of the web page */
+        }
+    </style>
+</head>
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Customer Order</a></li>
+    <li class="breadcrumb-item active">Details</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i>customer order Details
+    </h1>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Details <span class="fw-300"></span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <form id="form1" method="post" enctype="application/x-www-form-urlencoded">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-bordered table-hover m-0">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Order Id</th>
+                                            <td>@Model.CustomerOrderId</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">@Model.latitude</th>
+                                            <td>@Model.longitude</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Requested Quantity</th>
+                                            <td>@Model.RequestedQuantity</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Deliverd Quantity</th>
+                                            <td>@Model.DeliverdQuantity</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Order Progress</th>
+                                            <td>@Model.OrderProgress</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">User Name</th>
+                                            <td>@Model.UserName</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Created Date</th>
+                                            <td>@Model.CreatedDate</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Contact</th>
+                                            <td>@Model.Contact</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" scope="row">Notes</th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">@Model.CustomerNote</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <input type="hidden" id="Id" value="@Model.Id" />
+                                @if (Model.OrderProgress == "Order Created")
+                                {
+                                    <button type="button" class="btn btn-danger mt-1 m-1" style="float:right" data-toggle="modal" data-target=".rejectOrderButton">Reject Order</button>
+                                    <button type="button" class="btn btn-primary mt-1 m-1" id="btnAccept" style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Accept Order</button>
+                                }
+                                else if (Model.OrderProgress == "Order Accepted")
+                                {
+                                    <button type="button" onclick="AssignOrderToDriver()" class="btn btn-primary mt-1 m-1">Assign Order to Driver</button>
+                                }
+                                <a href="http://www.google.com/maps/place/@Model.latitude,@Model.longitude" target="_blank" class="btn btn-default mt-1 m-1" style="float:right" value="Accept Order"><i class="fal fa-map-marker"></i> Change Location</a>
+
+                            </div>
+                            <div class="col-md-6">
+                                <h3>My Google Maps Demo</h3>
+                                <!--The div element for the map -->
+                                <div id="map"></div>
+                            </div>
+
+                            <div class="col-lg-12 py-2" style="overflow-x:auto;">
+                                <!--Table small-->
+                                <div id="panel-7" class="panel">
+                                    <div class="frame-wrap">
+                                        <table class="table table-sm m-0" border="1" id="OrderDetails">
+                                            <thead class="bg-primary-500">
+                                                <tr>
+                                                    @if (Model.OrderProgress == "Order Accepted")
+                                                    {
+                                                    <th>                                                        
+                                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                                            <input type="checkbox" name="IsChecked" class="custom-control-input" id="CheckAll">
+                                                            <label class="custom-control-label" for="CheckAll">All</label>
+                                                        </div>
+                                                    </th>
+                                                    }
+                                                    <th>Name</th>
+                                                    <th>Requested Quantity</th>
+                                                    <th>Deliverd Quantity</th>
+                                                    <th>Order Progress</th>
+                                                    <th>Trafic Plate Number</th>
+                                                    <th>Driver Name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model.customerGroupOrderDetailsViewModels != null && Model.customerGroupOrderDetailsViewModels.Count > 0)
+                                                {
+                                                    foreach (var item in Model.customerGroupOrderDetailsViewModels)
+                                                    {
+
+                                                    <tr>
+                                                        @if (item.CurrentStatus == "Accepted")
+                                                        {
+                                                            //<td style="text-align:center"> <input type="checkbox" class="custom-checkbox" /></td>
+                                                            <td>
+                                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                                    <input type="checkbox" name="IsChecked" class="custom-control-input" id="@item.Id">
+                                                                    <label class="custom-control-label" for="@item.Id"></label>
+                                                                </div>
+                                                            </td>
+                                                        }
+                                                        <td><input type="hidden" class="Id" value="@item.Id" />@Model.Name</td>
+                                                        <td><input type="hidden" class="ClientVehicleId" value="@item.VehicleId"/><input type="hidden" class="RequestedQuantity" value="@item.RequestedQuantity">@item.RequestedQuantity</td>
+                                                        <td>@item.DeliverdQuantity</td>
+                                                        <td>@item.CurrentStatus</td>
+                                                        <td>@item.TraficPlateNumber</td>
+                                                        <td>@item.Name</td>
+                                                    </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade " id="acceptModel" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-right">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4">Assign Order To Driver</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card mb-g">
+                    <div class="card-body p-3">
+                        <div class="row" style="margin-bottom:10px">
+                            <div class="col-md-12">
+                                <select class="form-control w-100" id="OnlineDriverSelectList">
+                                    <option value="KS">Select Driver</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover m-0">
+                                    <thead class="thead-themed">
+                                        <tr style="background:#6a7eb5; color:white">
+                                            <th colspan="2">Driver Information</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Contact Number</th>
+                                            <td id="Contact"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Assigned Vehicle</th>
+                                            <td id="trafficPlateNumber"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-bordered table-hover mt-2">
+                                    <thead class="thead-themed">
+                                        <tr style="background:#6a7eb5; color:white">
+                                            <th colspan="2">Other Information</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>                                        
+                                        <tr>
+                                            <td colspan="2">
+                                                <input type="text" id="DeliveryNoteNumber" required rows="1" cols="5" class="form-control" placeholder="Delivert Note Number" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="OrderAssignToDriver" class="btn btn-primary">Order Transfer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel-container show">
+    <div class="panel-content">
+        <div class="modal fade rejectOrderButton" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-transparent" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-white">
+                            Reject Order
+                            <small class="m-0 text-white opacity-70">
+                                Give brief description of reject order
+                            </small>
+                        </h4>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <textarea id="Description" name="Description" class="form-control" rows="5"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="btnReject" class="btn btn-danger">Reject</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .pic {
+        display: none;
+    }
+
+    .newbtn {
+        cursor: pointer;
+    }
+
+    .blah {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        max-height: 160px;
+        margin-top: 20px;
+    }
+</style>
+
+@section scripts{
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa5w6RTuDzjLCfA1sXmJyD9uTwmqjLHnw&callback=initMap">
+    </script>
+    <script src="~/Scripts/CustomScript/LoadOnlineDriverScript.js"></script>
+    <script>
+        // Initialize and add the map
+        // function initMap() {
+        // The location of Uluru
+        
+
+        $(document).ready(function () {
+            var uluru = { lat: @Model.latitude, lng: @Model.longitude };
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 17, center: uluru });
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({ position: uluru, map: map });
+        });
+        // }
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#btnAccept').click(function () {
+
+                 $("#btnAccept").text('please wait...');
+                 $("#btnAccept").attr("disabled", true);
+
+                var Data = JSON.stringify({
+                    Id: $('#Id').val(),
+                    Status: true
+                })
+
+                ajaxRequest("POST", "/CustomerOrder/AcceptOrder", Data, "json").then(function (result) {
+
+                    if (result != "failed") {
+                        @*alert('Order Accepted');*@
+                        window.location.href = "/CustomerOrder/Admin"
+                    }
+                    else {
+                        alert('some error to accept order');
+                    }
+                })
+            })
+
+            $('#btnReject').click(function () {
+
+
+                 @*alert('Order Rejected 1');*@
+
+                $("#btnReject").text('please wait...');
+                $("#btnReject").attr("disabled", true);
+
+                 var Data = JSON.stringify({
+                     Id: $('#Id').val(),
+                     Description: $('#Description').val(),
+                    Status: false
+                    })
+
+                 ajaxRequest("POST", "/CustomerOrder/RejectOrder", Data, "json").then(function (resultReject) {
+
+                     if (resultReject != "failed") {
+
+                        @*alert('Order Rejected 2');
+                        window.location.reload();*@
+                         window.location.href = "/CustomerOrder/Admin"
+                    }
+                    else {
+                        alert('some error to reject order');
+                        window.location.reload();
+                    }
+                 })
+            })
+        })
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#CheckAll').click(function () {
+
+                if ($('#CheckAll').is(':checked') == true) {
+                    $('#OrderDetails tbody tr').each(function () {
+                        ($(this).find('input:checkbox[name=IsChecked]').prop("checked", true));
+                    })
+                }
+                else {
+                    $('#OrderDetails tbody tr').each(function () {
+                        ($(this).find('input:checkbox[name=IsChecked]').prop("checked", false));
+                    })
+                }
+            });
+
+
+            $('#OrderAssignToDriver').click(function () {
+              
+                if ($('#OnlineDriverSelectList').val() < 1) {
+                    alert('Please select driver');
+                    return true;
+                }
+                if ($('#DeliveryNoteNumber').val().trim() == '') {
+                    alert('Please provide delivery note Number');
+                    return true;
+                }
+                else {
+                    CustomerOrderAssignToDriver('/CustomerOrder/CustomerOrderAssignToDriver');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function AssignOrderToDriver()
+        {            
+            $('#acceptModel').modal('show');
+        }
+        
+        function CustomerOrderAssignToDriver(Url) {
+
+            var list = [], orderItem, CurrentRow;
+            var formData = new FormData();
+            var RequestedQuantity = 0;
+
+            $('#OrderDetails tbody tr').each(function () {
+                if ($(this).find('input:checkbox[name=IsChecked]').is(':checked') == true) {
+
+                    CurrentRow: $(this).closest("tr");
+
+                    RequestedQuantity = RequestedQuantity + parseInt($(this).find('.RequestedQuantity').val())
+                    orderItem = {
+                        Id: $(this).find('.Id').val(),
+                        VehicleId: $(this).find('.ClientVehicleId').val(),
+                    }
+                    list.push(orderItem);
+                }
+
+            });
+
+            var empObj = {
+                CustomerOrderId: $('#Id').val(),
+                RequestedQuantity: RequestedQuantity,
+                DriverId: $('#OnlineDriverSelectList').val(),
+                DeliveryNoteNumber: $('#DeliveryNoteNumber').val()
+            };
+
+            for (var key in empObj) {
+                formData.append(key, empObj[key]);
+            }
+
+            for (var i = 0; i < list.length; i++) {
+                    formData.append('customerOrderViewModels[' + i + '][Id]', list[i].Id),
+                    formData.append('customerOrderViewModels[' + i + '][VehicleId]', list[i].VehicleId)              
+            }
+            if (list.length > 0) {
+
+                $.ajax({
+                    url: Url,
+                    type: "POST",
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (result) {
+                        if (result != "Failed") {
+
+                            list = [];
+                            alert('Order assigned to driver successfully');
+                            window.location.href = "/CustomerOrder/Admin/?OrderProgress=Order Assigned";
+
+                        }
+                        else {
+                            alert(result);
+                        }
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage);
+                    }
+                });
+            }
+            else {
+                alert('Please Add item to list');
+            }
+        }
+
+    </script>
+}
+
+

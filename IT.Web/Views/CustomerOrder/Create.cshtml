@@ -1,0 +1,179 @@
+﻿@model IT.Core.ViewModels.CustomerOrderGroupViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<IT.Core.ViewModels.DriverModel> driverModels = new List<IT.Core.ViewModels.DriverModel>();
+    List<IT.Core.ViewModels.VehicleModel> vehicleModels = new List<IT.Core.ViewModels.VehicleModel>();
+    List<IT.Core.ViewModels.SiteViewModel> siteViewModels = new List<IT.Core.ViewModels.SiteViewModel>();
+
+
+    driverModels = ViewBag.driverModels as List<IT.Core.ViewModels.DriverModel>;
+    vehicleModels = ViewBag.vehicleModels as List<IT.Core.ViewModels.VehicleModel>;
+    siteViewModels = ViewBag.Sites as List<IT.Core.ViewModels.SiteViewModel>;
+}
+<main id="js-page-content" role="main" class="page-content">
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Create / Update Order
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Order create and update here...  <span class="fw-300"></span>
+                    </h2>    
+                    <div class="custom-control custom-radio mr-2">
+                        <input type="radio" class="custom-control-input" id="defaultCheckedRadio" name="defaultExampleRadios" checked="">
+                        <label class="custom-control-label" id="lbl1" for="defaultCheckedRadio">Order by Vehicle</label>
+                    </div>
+                   
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="defaultUncheckedRadio" name="defaultExampleRadios">
+                            <label class="custom-control-label" for="defaultUncheckedRadio">Bulk Order</label>
+                        </div>       
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please add or update your Order from here...
+                        </div>
+                        <input type="hidden" name="OrderId" id="OrderId" value="@Model.Id" />
+                        <input type="hidden" name="RequestedQuantity" id="RequestedQuantity" value="@Model.RequestedQuantity" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text font-weight-bold" id="basic-addon1">For Site:</span>
+                                    </div>
+                                    <select class="form-control" id="Site">
+                                        @foreach (var item in siteViewModels)
+                                        {
+                                            <option value="@item.Id">@item.SiteName</option>
+                                        }
+                                    </select>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text font-weight-bold" id="basic-addon2"><a href="/CustomerSites/Create"><span><i class="fal fa-plus-circle"></i></span> Add new site</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                        </div>
+
+
+                        <table class="table table-hover" id="CustomerOrderTable">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Driver</th>
+                                    <th>Vehicle</th>
+                                    <th>Quantity</th>
+                                    <th>Note</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.customerGroupOrderDetailsViewModels != null && Model.customerGroupOrderDetailsViewModels.Count > 0)
+                                {
+                                    foreach (var Modelitem in Model.customerGroupOrderDetailsViewModels)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <input type="hidden" class="Id" value="@Modelitem.Id" />
+                                                <select class="form-control product" id="product">
+                                                    @foreach (var item in ViewBag.product)
+                                                    {
+                                                        <option value="@item.Id" @(item.Id == Modelitem.ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                                    }
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-control Driver" id="Driver">
+                                                    @foreach (var item in driverModels)
+                                                    {
+                                                        <option value="@item.DriverId" @(item.DriverId == Modelitem.DriverId ? "selected='selected'" : "")>@item.DriverName</option>
+                                                    }
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-control vehicle" id="vehicle">
+                                                    @foreach (var item in vehicleModels)
+                                                    {
+                                                        <option value="@item.VehicelId" @(item.VehicelId == Modelitem.VehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
+                                                    }
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control Quantity" value="@Modelitem.RequestedQuantity" id="Quantity" style="width:100px" />
+                                            </td>
+                                            <td>
+                                                <textarea class="form-control Note" id="Note" value="@Modelitem.Comments" style="resize:vertical">@Modelitem.Comments</textarea>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger remove" value="Remove">x</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                                <tr id="MainRow">
+                                    <td>
+                                        <select class="form-control product" id="product">
+                                            @foreach (var item in ViewBag.product)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-control Driver" id="Driver">
+                                            @foreach (var item in driverModels)
+                                            {
+                                                <option value="@item.DriverId">@item.DriverName</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-control vehicle" id="vehicle">
+                                            @foreach (var item in vehicleModels)
+                                            {
+                                                <option value="@item.VehicelId">@item.TraficPlateNumber</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control Quantity" id="Quantity" style="width:100px" />
+                                    </td>
+                                    <td>
+                                        <textarea class="form-control Note" id="Note" style="resize:vertical"></textarea>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-success" id="AddNewRow" value="Add">+</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr />
+                        <input type="hidden" id="Lattitue" name="Lattitue">
+                        <input type="hidden" id="Longitude" name="longitude">
+                        <input type="hidden" id="PickingPoint" name="PickingPoint">
+                        <input type="hidden" id="LocationFullUrl" name="LocationFullUrl">
+
+                        <button id="SaveOrder" class="btn btn-primary"><span><i class="fal fa-save"></i></span> Save</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts{
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&sensor=false"></script>
+    @*<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>*@
+    <script src="~/Scripts/CustomScript/CustomerOrder.js"></script>
+}
+

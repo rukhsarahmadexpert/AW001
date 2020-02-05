@@ -1,0 +1,418 @@
+﻿@model List<IT.Core.ViewModels.StorageViewModel>
+@{
+    ViewBag.Title = "Vender Create";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+
+    List<IT.Core.ViewModels.StorageViewModel> storageViewModels = new List<IT.Core.ViewModels.StorageViewModel>();
+    storageViewModels = Model as List<IT.Core.ViewModels.StorageViewModel>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Storage</a></li>
+                            <li class="breadcrumb-item active">Create</li>
+                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+ </ol>
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Create Storage
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Driver <span class="fw-300"></span>
+                    </h2>                    
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please Add storage...
+                        </div>
+                        <form action="/Storage/Create" method="post" enctype="application/x-www-form-urlencoded">
+                    
+                        </form>
+                    </div>
+                </div>
+           <div class="table-responsive-lg">
+                <table class="table m-0 data-table" id="SiteTarget">
+                    <thead>
+                     <tr>
+                       <th>Product</th>
+                       <th>Source</th>
+                       <th>Site / Vehicle</th>
+                       <th style="width:140px">Description</th>
+                       <th style="width:90px">Quantity</th>
+                       <th>Site Action</th>
+                     </tr>
+                     </thead>
+
+                     <tbody>
+
+                     
+                        <tr>
+                            <td>
+                                 <div class="form-group mb-2">
+                                      <select id="ProductRow1" name="ProductRow1" class="select3 ProductRow1" required>
+                                           <option value="0" selected>Products</option>
+                                      </select>
+                                 </div>  
+                            </td>
+
+                            <td>
+                                 <div class="form-group mb-2">
+                                      <select id="SourceRow1" name="Source" class="select3 Source" required>
+                                            <option value="0" selected >Select Source</option>
+                                           <option value="site">Site Name</option>
+                                           <option value="client vehicle">Client Vehicle</option>
+                                           <option value="admin vehicle">Admin Vehicle</option>
+                                      </select>
+                                 </div>   
+                            </td>
+
+                            <td>
+                                 <div class="form-group mb-2">
+                                      <select id="SiteVehicleRow1" name="Site" class="select2 Site" required>
+                                            <option value="">Select Option</option> 
+                                      </select>
+                                 </div>
+                            </td>
+
+                            <td style="width:140px">
+                                <div class="form-group mb-2" >
+                                       <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
+                                        <input type="text" id="Description" name="Description" class="form-control Description" placeholder="Description" />
+                                </div> 
+                            </td>
+
+                            <td style="width:90px"  >
+                                <div class="form-group mb-2">
+                                       <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
+                                        <input type="text" id="Quantity" name="Quantity" class="form-control Quantity" placeholder="" />  
+                                </div> 
+                            </td>
+
+                            <td>
+                                 <div class="form-group mb-2">
+                                      <select id="Action" name="Action" class="form-control Action" required>
+                                                      
+                                                        <option value="1">Stock In</option>
+                                                     
+                                      </select>
+                                 </div>  
+                            </td>
+                        </tr>
+
+                         <tr>
+                             <td>
+                                 <div class="form-group mb-2">
+                                      <select id="ProductRow2" name="ProductRow2" class="select3 ProductRow1" required>
+                                           <option value="0" selected>Products</option>
+                                      </select>
+                                 </div>  
+                            </td>
+                            <td>
+                                 <div class="form-group mb-2">
+                                      <select id="SourceRow2" name="Source" class="select3 Source" required>
+                                            <option value="0" selected >Source</option>
+                                           <option value="site">Site Name</option>
+                                           <option value="client vehicle">Client Vehicle</option>
+                                           <option value="admin vehicle">Admin Vehicle</option>
+                                      </select>
+                                 </div>   
+                            </td>
+                            <td>
+                                 <div class="form-group mb-2">
+                                      <select id="SiteVehicleRow2" name="Site" class="select2 Site" required>
+                                            <option value="">Select Option</option> 
+                                      </select>
+                                 </div>
+                            </td>
+                            <td style="width:140px">
+                                <div class="form-group mb-2">
+                                       <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
+                                        <input type="text" id="Description" name="Description" class="form-control Description" placeholder="Description" />
+                                </div> 
+                            </td>
+                            <td style="width:90px">
+                                <div class="form-group mb-2">
+                                       <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
+                                        <input  type="text" id="Quantity" name="Quantity" class="form-control Quantity"  />   
+                                </div> 
+                            </td>
+                            <td>
+                                 <div class="form-group mb-2">
+                                      <select id="Action1" name="Action1" class="form-control Action" required>
+                                                      
+                                                        <option value="0">Stock Out</option>
+                                      </select>
+                                 </div>  
+                            </td>
+                        </tr>                                                     
+                     </tbody>
+                </table>
+           </div>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <button type="button" id="SaveRecord"  class="btn btn-primary btn-sm btn-block waves-effect waves-themed">Storage
+                       <span>Save</span>
+                    </button>
+                  </div>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+
+
+@section Scripts{ 
+   
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        loadOptionProduct("/Product/Index");
+        $('#SourceRow1').change(function () {
+           
+            var val = $(this).val();
+            if (val == 0)
+            {
+                return true
+            }
+            else if (val == "site")
+            {
+                loadOptionSelect("/Site/Index", "#SiteVehicleRow1", "#SourceRow1");               
+            }
+            if (val == "client vehicle")
+            {
+                loadOptionSelect("/Vehicle/Index", "#SiteVehicleRow1", "#SourceRow1");               
+            }
+            if (val == "admin vehicle")
+            {
+                loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow1", "#SourceRow1");               
+            }   
+        });
+
+        $('#SourceRow2').change(function () {
+            var val = $(this).val();
+            if (val == 0)
+            {
+                return true
+            }
+            else if (val == "site")
+            {
+                loadOptionSelect("/Site/Index", "#SiteVehicleRow2", "#SourceRow2");
+            }
+            if (val == "client vehicle")
+            {
+                loadOptionSelect("/Vehicle/Index", "#SiteVehicleRow2", "#SourceRow2");
+            }
+            if (val == "admin vehicle")
+            {
+                loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow2", "#SourceRow2");
+            }   
+        });
+        $('#SaveRecord').click(function ()
+        {
+            
+            InsertStorge("/Storage/Create/");
+            window.location.href = "/Storage/Index"
+        });
+    });
+
+
+    //insert data
+    function InsertStorge(Url)
+    {
+        var list = [], orderItem, CurrentRow;
+        var formData = new FormData();
+        $('#SiteTarget tbody tr').each(function ()
+        {
+
+            CurrentRow = $(this).closest("tr");
+
+
+            var SiteId = "";
+            var VehicleId = "";
+            var ClientVehicleId = "";
+            if ($(this).find('.Source').val() == "site")
+            {
+
+                SiteId = $(this).find('.Site').val();
+                VehicleId = 0;
+                ClientVehicleId = 0;
+            }
+            else if ($(this).find('.Source').val() == "admin vehicle")
+            {
+                VehicleId = $(this).find('.Site').val();
+                SiteId = 0;
+                ClientVehicleId = 0;
+                
+            }
+            else
+            {
+                VehicleId = 0;
+                SiteId = 0;
+                ClientVehicleId = $(this).find('.Site').val();
+            }
+
+            var StockIn = 0.0;
+            var StockOut = 0.0;
+            var ActionVal = false;
+            if ($(this).find('.Action').val() == true)
+            {
+                StockIn = parseFloat($(this).find('#Quantity').val());
+                StockOut = 0.0;
+                ActionVal = true;
+            }
+            else
+            {
+                StockOut = parseFloat($(this).find('#Quantity').val());
+                StockIn = 0.0;
+                ActionVal = false;
+            }
+            //if (validateRow(CurrentRow)) {
+            //if (IsDateSelected(CurrentRow)) {
+            if (1 == 1)
+            {
+                orderItem =
+                {
+                    Source: $(this).find('.Source').val(),
+                    SiteId: SiteId,
+                    VehicleId: VehicleId,
+                    ClientVehicleId: ClientVehicleId,
+                    Decription: $(this).find('.Description').val(),
+                    StockIn: StockIn,
+                    StockOut: StockOut,
+                    Action: ActionVal,
+                    ProductId:$(this).find('.ProductRow1').val(),
+
+                   
+                }
+                list.push(orderItem);
+                //IsValidationPass = true;
+            }
+        })               //else {
+        //    IsValidationPass = false;
+        //}
+        //}
+
+
+
+        for (var i = 0; i < list.length; i++)
+        {
+            formData.append('storageViewModels[' + i + '][Id]', list[i].Id)
+            formData.append('storageViewModels[' + i + '][Source]', list[i].Source)
+            formData.append('storageViewModels[' + i + '][SiteId]', list[i].SiteId)
+            formData.append('storageViewModels[' + i + '][VehicleId]', list[i].VehicleId)
+            formData.append('storageViewModels[' + i + '][ClientVehicleId]', list[i].ClientVehicleId)
+            formData.append('storageViewModels[' + i + '][Decription]', list[i].Decription)
+            formData.append('storageViewModels[' + i + '][StockIn]', list[i].StockIn)
+            formData.append('storageViewModels[' + i + '][StockOut]', list[i].StockOut)
+            formData.append('storageViewModels[' + i + '][ProductId]', list[i].ProductId)
+            formData.append('storageViewModels[' + i + '][Action]', list[i].Action)
+        }
+
+        if (list.length > 0)
+        {
+
+            $.ajax({
+                url: Url,
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (result)
+                {
+                    if (result != "Failed")
+                    {
+                        list = [];
+
+                        alert("success");
+                        $.confirm({
+                            title: 'Success!',
+                            content: 'Opration successfully Completed',
+                            type: 'red',
+                            typeAnimated: true,
+                            buttons: {
+                                tryAgain: {
+                                    text: 'Ok',
+                                    btnClass: 'btn-red',
+                                    action: function () {
+                                    }
+                                },
+                                close: function () {
+                                }
+                            }
+                        });
+                    }
+                }
+            })
+        }
+    }
+    // end of insert data
+
+
+
+    function loadOptionSelect(url, targetId, sourceId)
+    {
+        ajaxRequest("POST", url, "", "json").then(function (result)
+        {
+            //debugger;
+            if (result != "failed")
+            {
+                $(targetId).empty();
+                $.each(result, function (value, item)
+                {
+                    if ($(sourceId).val() == "site")
+                    {
+                        $(targetId).append('<option value="' + item.Id + '">' + item.SiteName + '</option>');
+                    } else if ($(sourceId).val() == "admin vehicle")
+                    {
+                              $(targetId).html('<option value="' + item.Id + '">' + item.TraficPlateNumber + '</option>');
+                    }
+                    else
+                    {
+                              $(targetId).append('<option value="' + item.Id + '">' + item.TraficPlateNumber + '</option>');
+                    }
+                });
+            }
+            else
+            {
+                 $('.Site').append('<option value="">Select Option</option>');
+            }
+        })
+    }
+
+    function loadOptionProduct(productUrl)
+    {
+        ajaxRequest("POST", productUrl, "", "json").then(function (result1)
+        {
+            //debugger;
+            if (result1 != "failed")
+            {
+                $.each(result1, function (value, item)
+                {
+                    console.log(item)
+                              $(".ProductRow1").append('<option value="' + item.Id + '">' + item.Name + '</option>');
+                });
+            }
+            else
+            {
+                 $('.ProductRow1').append('<option value="">Select Product</option>');
+            }
+        })
+    }
+
+
+ 
+    
+</script>
+     
+
+    }
+

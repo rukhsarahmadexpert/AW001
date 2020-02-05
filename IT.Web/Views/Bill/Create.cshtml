@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<link href="~/Content/css/Common/LPOInvoiceTable.css" rel="stylesheet" />
+<link href="~/Content/css/Common/Common-LPO.css" rel="stylesheet" />
+
+<main id="js-page-content" role="main" class="page-content">
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Create Bill
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Bill <span class="fw-300"></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please add your Bill from here...
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="data-table-list">
+                                    <div class="basic-tb-hd">
+                                        <div class="row">
+                                            <div class="col-md-11">
+                                                <h2></h2>
+                                            </div>
+                                            <div class="col-md-1">
+                                                @*<button class="btn btn-primary btn-sm" id="createNewEmployee"><i class="fa fa-plus"></i> New</button>*@
+                                            </div>
+                                        </div>
+                                        @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_LPOInvoiceVenderPartialView.cshtml")
+                                    </div>
+                                    <div>
+                                        @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_MainTableRowPartialView.cshtml")
+                                        @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_FooterTotalPartialView.cshtml")
+                                    </div>
+                                    <p></p>
+                                    @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_BillButtonPartialView.cshtml")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<input type="hidden" id="SendByEmail" />
+
+@section Scripts{
+
+    <script>
+
+        $('#BillSave').click(function () {
+
+            if (IsBillValid()) {
+
+                var Data = JSON.stringify({
+                    FromDate: $('#FromDate').val(),
+                    DueDate: $('#DueDate').val(),
+                    RefrenceNumber: $('#RefrenceNumber').text(),
+                    Id: $('#LPOId').val(),
+                    PONumber: $('#PONumber').text(),
+                    LPOId: $('#LPOId').val(),
+                    BillNumber: $('#BillNumbers').val()
+                })
+
+                ajaxRequest("POST", "/Bill/Create", Data, "json").then(function (result) {
+
+                    if (result != "Failed")
+                    {
+                      //  sucessAdd();
+                        window.location.href = "/Bill";
+                    }
+                    else {
+                        alert('Failed your opration');
+                    }
+                });
+            }
+        });
+
+        function IsBillValid() {
+
+            var IsValid = true;
+
+            if ($('#RefrenceNumber').text().trim() == "") {
+                $('#RefrenceNumber').css('border-color', 'Red');
+                IsValid = false;
+            }
+            else if ($('#PONumber').text() == "") {
+                $('#PONumber').css('border-color', 'Red');
+                IsValid = false;
+            }
+            else if ($('#FromDate').val().trim() == "03/19/2018") {
+                $('#FromDate').css('border-color', '1px solid #BDC7BC');
+                IsValid = false;
+                alert('select From Date');
+            }
+            else if ($('#DueDate').val().trim() == "03/19/2018") {
+                $('#DueDate').css('border-color', '1px solid #BDC7BC');
+                IsValid = false;
+                alert('select Due Date');
+            }
+            else if ($('#BillNumbers').val() == "") {
+                $('#BillNumbers').css('border-color', 'red');
+                IsValid = false;
+            }
+
+            return IsValid;
+        }
+
+    </script>
+
+}
+

@@ -1,0 +1,70 @@
+﻿@model List<IT.Core.ViewModels.StorageViewModel>
+@{
+    ViewBag.Title = "Storage Index";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+    List<IT.Core.ViewModels.StorageViewModel> storageViewModels = new List<IT.Core.ViewModels.StorageViewModel>();
+    storageViewModels = Model as List<IT.Core.ViewModels.StorageViewModel>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
+    <li class="breadcrumb-item active">Storage</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a href="/Storage/Create">
+                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Storage</i></span>
+                    </a>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <!--      <div class="panel-tag">
+                                <p>Drivers Base Information</p>
+                            </div>-->
+                    <!-- datatable start -->
+                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-primary-600">
+                            <tr>
+                                <th style="background-color:orangered">From Source</th>
+                                <th style="background-color:orangered">Souce Name</th>
+                                <th style="background-color:orangered">Stock Out</th>
+                                <th style="background-color:orange">To Source</th>
+                                <th style="background-color:orange">Source Name</th>
+                                <th style="background-color:orange">Stock In</th>
+                                <th>Operater</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in storageViewModels)
+                            {
+                                <tr>
+                                    <td style="background-color:orangered; color:white">@item.Source</td>
+                                    <td style="background-color:orangered; color:white">@item.From</td>
+                                    <td style="background-color:orangered; color:white">@item.StockOut</td>
+                                    <td style="background-color:orange; color:white">@item.ToSource</td>
+                                    <td style="background-color:orange; color:white">@item.To</td>
+                                    <td style="background-color:orange; color:white">@item.StockIn</td>
+                                    <td>@item.UserName</td>
+                                    <td>
+                                        <a href="/Storage/Index/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                        <a href="/Storage/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                        <i class="fal fa-trash-alt"> </i>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

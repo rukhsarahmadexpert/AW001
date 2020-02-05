@@ -1,0 +1,57 @@
+﻿@model IT.Core.ViewModels.CountryViewModel
+@{
+    ViewBag.Title = "Country Create";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<main id="js-page-content" role="main" class="page-content">
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Create Country
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Country <span class="fw-300"></span>
+                    </h2>
+
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please add |Country from here...
+                        </div>
+                        <form action="/Country/Create" method="post">
+                            <input type="hidden" value="@Model.Id" name="Id" id="Id" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Name</label>
+                                        <input type="text" id="CountryName" name="CountryName" value="@Model.CountryName" class="form-control" placeholder="Country Name">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row py-5">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        Submit
+                                        <span>Country</span>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

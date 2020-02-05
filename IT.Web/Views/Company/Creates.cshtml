@@ -1,0 +1,21 @@
+﻿@model IT.Core.ViewModels.CompnayModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Creates</title>
+</head>
+<body>
+    <div> 
+        <form action="/Company/Creat" enctype="multipart/form-data" method="post">
+            <input type="file" name="files" />
+            <input type="submit" value="submit"/>
+        </form>
+    </div>
+</body>
+</html>

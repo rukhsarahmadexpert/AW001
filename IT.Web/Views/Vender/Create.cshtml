@@ -1,0 +1,211 @@
+﻿
+    @model IT.Core.ViewModels.VenderViewModel
+@{
+    ViewBag.Title = "Vender Create";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+
+    List<IT.Core.ViewModels.CountryViewModel> countryViewModels = new List<IT.Core.ViewModels.CountryViewModel>();
+    countryViewModels = ViewBag.Countries as List<IT.Core.ViewModels.CountryViewModel>;
+}
+
+<main id="js-page-content" role="main" class="page-content">
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Create Vender
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Vender <span class="fw-300"></span>
+                    </h2>
+
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please add your Vender from here...
+                        </div>
+                        <form action="/Vender/Create" method="post">
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Title</label>
+                                        <select id="Title" name="Title" class="Title form-control" required>
+                                            <option value="Mr." @(Model.Title == "Mr." ? "selected='selected'" : "")>Mr.</option>
+                                            <option value="Mrs." @(Model.Title == "Mrs." ? "selected='selected'" : "")>Mrs.</option>
+                                            <option value="Madam." @(Model.Title == "Madam." ? "selected='selected'" : "")>Madam.</option>
+                                            <option value="Miss." @(Model.Title == "Miss." ? "selected='selected'" : "")>Miss.</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Name</label>
+                                        <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+                                        <input type="text" id="Name" value="@Model.Name" name="Name" class="form-control" placeholder="vender Name">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Representative</label>
+                                        <input type="text" id="Representative" name="Representative" value="@Model.Representative" class="form-control" placeholder="Representative">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Countries</label>
+                                        <select id="Country" name="Country" class="select3 Country" required>
+                                            @foreach (var item in countryViewModels)
+                                            {
+                                                <option value="@item.Id">@item.CountryName</option>
+
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">State</label>
+                                        <select id="State" name="State" class="select3 State" required>
+                                            @foreach (var item in countryViewModels.Where(x => x.Id == 3))
+                                            {
+                                                foreach (var item1 in item.stateViewModels)
+                                                {
+                                                    <option value="@item1.Id">@item1.States</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">City</label>
+                                        <select id="City" name="City" class="select3 City" required>
+                                            @foreach (var item in countryViewModels)
+                                            {
+                                                foreach (var item1 in item.stateViewModels)
+                                                {
+                                                    if (item1.cityViewModels != null && item1.cityViewModels.Count > 0)
+                                                    {
+                                                        foreach (var item2 in item1.cityViewModels)
+                                                        {
+
+                                                            <option value="@item2.Id" @(Model.City == item2.Id ? "selected='selected'" : "")>@item2.CityName</option>
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Address</label>
+                                        <input type="text" id="Address" value="@Model.Address" name="Address" class="form-control" placeholder="Address">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">LandLine</label>
+                                        <input type="text" id="LandLine" value="@Model.LandLine" name="LandLine" class="form-control" placeholder="LandLine">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Mobile</label>
+                                        <input type="text" id="Mobile" name="Mobile" value="@Model.Mobile" class="form-control" placeholder="Mobile">
+                                    </div>
+                                </div>
+                             
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Email</label>
+                                        <input type="text" id="Email" name="Email" value="@Model.Email" class="form-control" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Website</label>
+                                        <input type="text" id="Website" name="Website" value="@Model.Website" class="form-control" placeholder="Website">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">TRN</label>
+                                        <input type="text" id="TRN" name="TRN" value="@Model.TRN" class="form-control" placeholder="TRN">
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Remarks</label>
+                                        <textarea name="Remarks" id="Remarks" class="form-control">@Model.Remarks</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row py-5">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        Submit
+                                        <span>Vender</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+@section scripts {
+    
+    
+    <script>
+
+        $(document).load(function () {
+
+        });
+
+    </script>
+    
+    
+    }
+
+
