@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace IT.Core.ViewModels
 {
@@ -31,5 +32,7 @@ namespace IT.Core.ViewModels
         public int CompanyId { get; set; }
         public int UpdatedBy { get; set; }
         public int ProjectId { get; set; }
+        public HttpPostedFileBase PassportFrontFile { get; set; }
+        public HttpPostedFileBase PassportBackFile { get; set; }
     }
 }

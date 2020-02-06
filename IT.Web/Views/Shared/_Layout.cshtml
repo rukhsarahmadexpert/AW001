@@ -131,11 +131,12 @@
 
                     <ul class="nav-menu" id="js-nav-menu">
 
-                        <li class="open">
+                      
 
+                        <li class="open">
                             <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
                                 <i class="fal fa-address-card"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Customer Information</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Company Information</span>
                             </a>
                             <ul>
                                 <li>
@@ -145,20 +146,30 @@
                                 </li>
                                 <li>
                                     <a href="/Vehicle" title="Build Notes" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Vehicle</span><span class="">List</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/CustomerOrder" title="Build Notes" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Customer Order</span><span class="">List</span>
+                                        <span class="nav-link-text" data-i18n="">Vehicles</span><span class="">List</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
                         <li class="open">
                             <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
-                                <i class="fal fa-address-card"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Customer Site</span>
+                                <i class="fal fa-reply"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">My Orders</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/CustomerOrder" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">My Orders</span><span class="">List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-registered"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Registered Sites</span>
                             </a>
                             <ul>
                                 <li>
@@ -170,25 +181,25 @@
                         </li>
                         <li class="open">
                             <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
-                                <i class="fal fa-address-card"></i>
+                                <i class="fal fa-shopping-bag"></i>
                                 <span class="nav-link-text" data-i18n="nav.application_intel">Purchase</span>
                             </a>
                             <ul>
                                 <li>
                                     <a href="/CustomerQuotation/Index" title="Reports" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Quotation</span><span class="">List</span>
+                                        <span class="nav-link-text" data-i18n="">Quotations</span><span class="">List</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="/CustomerPurchase/Index" title="Reports" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Purchase</span><span class="">List</span>
+                                        <span class="nav-link-text" data-i18n="">Purchases</span><span class="">List</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="open">
                             <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
-                                <i class="fal fa-address-card"></i>
+                                <i class="fal fa-file"></i>
                                 <span class="nav-link-text" data-i18n="nav.application_intel">Reports</span>
                             </a>
                             <ul>
@@ -434,6 +445,7 @@
                                         </li>
                                     </ul>
                                 </div>
+
                             </div>
                         </div>
                         <!-- app message -->
@@ -690,7 +702,7 @@
                 <!-- BEGIN Page Footer -->
                 <footer class="page-footer" role="contentinfo">
                     <div class="d-flex align-items-center flex-1 text-muted">
-                        <span class="hidden-md-down fw-700">Powered By <a href='https://itmolen.nl' class='text-primary fw-500' title='It Molen' target='_blank'>IT Molen</a>  | © Mena Energy 2019</span>
+                        <span class="hidden-md-down fw-700">Powered By <a href='https://itmolen.nl' class='text-primary fw-500' title='It Molen' target='_blank'>IT Molen</a>  | © Aw Fuel 2020</span>
                     </div>
                     <div>
                         <ul class="list-table m-0">
@@ -709,7 +721,7 @@
                             <div class="modal-body">
                                 <ul class="app-list w-auto h-auto p-0 text-left">
                                     <li>
-                                        <a href="intel_introduction.html" class="app-list-item text-white border-0 m-0">
+                                        <a href="/Home/Index" class="app-list-item text-white border-0 m-0">
                                             <div class="icon-stack">
                                                 <i class="base base-7 icon-stack-3x opacity-100 color-primary-500 "></i>
                                                 <i class="base base-7 icon-stack-2x opacity-100 color-primary-300 "></i>
@@ -721,28 +733,18 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="page_inbox_general.html" class="app-list-item text-white border-0 m-0">
+                                        <a href="" class="app-list-item text-white border-0 m-0">
                                             <div class="icon-stack">
-                                                <i class="base base-7 icon-stack-3x opacity-100 color-success-500 "></i>
-                                                <i class="base base-7 icon-stack-2x opacity-100 color-success-300 "></i>
-                                                <i class="ni ni-envelope icon-stack-1x text-white"></i>
+                                                <i class="base base-7 icon-stack-3x opacity-100 color-warning-500 "></i>
+                                                <i class="base base-7 icon-stack-2x opacity-100 color-warning-500 "></i>
+                                                <i class="fal fa-bell icon-stack-1x text-white"></i>
                                             </div>
                                             <span class="app-list-name">
-                                                Inbox
+                                                Notifications
                                             </span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="intel_introduction.html" class="app-list-item text-white border-0 m-0">
-                                            <div class="icon-stack">
-                                                <i class="base base-7 icon-stack-2x opacity-100 color-primary-300 "></i>
-                                                <i class="fal fa-plus icon-stack-1x opacity-100 color-white"></i>
-                                            </div>
-                                            <span class="app-list-name">
-                                                Add More
-                                            </span>
-                                        </a>
-                                    </li>
+                                   
                                 </ul>
                             </div>
                         </div>

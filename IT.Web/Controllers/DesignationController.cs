@@ -167,5 +167,25 @@ namespace IT.Web_New.Controllers
                 throw;
             }
         }
+
+        [NonAction]
+        public List<DesignationViewModel> Designations()
+        {
+            try
+            {
+                var DesignationList = webServices.Post(new DesignationViewModel(), "Designation/All");
+
+                if (DesignationList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    designationViewModels = (new JavaScriptSerializer().Deserialize<List<DesignationViewModel>>(DesignationList.Data.ToString()));
+                  
+                }
+                return designationViewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
