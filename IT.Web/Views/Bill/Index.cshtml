@@ -59,15 +59,16 @@
 
         $('#CreateBillFromLPO').click(function () {
 
-            if ($('#LPONumber').val() > 0) {
+            //if ($('#LPONumber').val() > 0) {
 
-                var Id = $('#LPONumber').val();
+            //    var Id = $('#LPONumber').val();
 
-                window.location.href = "/Bill/Create/" + Id;
-            }
-            else {
-                alert('Please select LPO Number first');
-            }
+            //    window.location.href = "/Bill/Create/" + Id;
+            //}
+            //else {
+            //    alert('Please select LPO Number first');
+            //}
+            window.location.href = "/Bill/Create/1";
 
         });
 
@@ -104,7 +105,7 @@
                     {
                         "mData": "Id",
                         "render": function (Id, type, full, meta) {
-                            return '<a href="#" onclick="ViewBill(' + Id + ')"><i class="fal fa-eye"></i></a>' + ' | ' + '<a href="#" onclick="DeleteBill(' + Id + ')"><i class="fal fa-remove"></i></a>'
+                            return '<a href="#" onclick="ViewBill(' + Id + ')"><i class="fal fa-eye"></i></a>' + ' | ' + '<a href="#" onclick="EditBill(' + Id + ')"><i class="fal fa-pencil"></i></a>'
                         }
                     },
                 ]
@@ -117,11 +118,8 @@
         }
 
 
-        function DeleteBill(Id) {
-
-
-            $('#BillId').val(Id);
-            $('#ModelDeleteBill').modal('show');
+        function EditBill(Id) {
+            window.location.href = "/Bill/Edit/" + Id;
         }
 
         $('#DeleteBill').click(function () {
