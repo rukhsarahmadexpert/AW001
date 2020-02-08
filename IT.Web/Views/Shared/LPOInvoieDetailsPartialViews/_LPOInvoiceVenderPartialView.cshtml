@@ -39,38 +39,43 @@
     <div class="col-md-4"></div>
     <div class="col-md-4">
         <div class="pull-right">
-            <div class="form-group">
-                <div class="nk-datapk-ctm form-elet-mg" id="data_2">
-                    <div class="input-group  nk-int-st">
-                        <span class="input-group-addon"></span>
-                        @*From Date: <input type="text" class="form-control FromDate" id="FromDate" name="FromDate" value="@FromDate" title="Licence Expiry">*@
-                        From Date: @Html.EditorFor(model => LPOInvoiceViewModel.FromDate, new { htmlAttributes = new { @class = "form-control", name = "FromDate", id = "FromDate" } })
-
-                    </div>
+            <div class="input-group mb-1">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2">From Date:</span>
                 </div>
+                @Html.EditorFor(model => LPOInvoiceViewModel.FromDate, new { htmlAttributes = new { @class = "form-control", name = "FromDate", id = "FromDate" } })
             </div>
-            <div class="form-group">
-                <div class="nk-datapk-ctm form-elet-mg" id="data_2">
-                    <div class="input-group  nk-int-st">
-                        <span class="input-group-addon"></span>
-
-                        Due Date: @Html.EditorFor(model => LPOInvoiceViewModel.DueDate, new { htmlAttributes = new { @class = "form-control", id = "DueDate" } })
-
-                        @*Due Date:<input type="text" class="form-control DueDate" id="DueDate" name="DueDate" value="@DueDate" title="Licence Expiry">*@
-                    </div>
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2">From Date:</span>
                 </div>
+                @Html.EditorFor(model => LPOInvoiceViewModel.DueDate, new { htmlAttributes = new { @class = "form-control", id = "DueDate" } })
             </div>
-            <p> <p>NO # : <span id="PONumber">@LPOInvoiceViewModel.PONumber</span></p></p>
+            <div class="input-group mb-1">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2">No:</span>
+                </div>
+                <label type="text" class="form-control" id="PONumber">@LPOInvoiceViewModel.PONumber</label>
+            </div>
 
             @if (LPOInvoiceViewModel.Heading == "BILL" || LPOInvoiceViewModel.Heading == "Invoice" || LPOInvoiceViewModel.Heading == "Purchase")
             {
-                <p>Ref NO# : <label id="RefrenceNumber">@LPOInvoiceViewModel.RefrenceNumber</label></p>
-                @*//  <p>From Date : <span id="Company Name"></span></p>*@
+                @*<p>Ref NO# : <label id="RefrenceNumber">@LPOInvoiceViewModel.RefrenceNumber</label></p>*@
+                <div class="input-group mb-1">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon2">Ref NO# ::</span>
+                    </div>
+                    <label class="form-control" id="RefrenceNumber">@LPOInvoiceViewModel.RefrenceNumber</label>
+                </div>
             }
-
             @if (LPOInvoiceViewModel.Heading == "BILL")
             {
-                <input type="text" id="BillNumbers" class="form-control" placeholder="Invoice Number" value="@LPOInvoiceViewModel.BillNumber" />
+                <div class="input-group mb-1">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon2">Invoice NO# :</span>
+                    </div>
+                    <input type="text" id="BillNumbers" class="form-control" placeholder="Invoice Number" value="@LPOInvoiceViewModel.BillNumber" />
+                </div>              
             }
         </div>
     </div>

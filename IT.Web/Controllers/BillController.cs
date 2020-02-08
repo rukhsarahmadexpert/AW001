@@ -100,7 +100,6 @@ namespace IT.Web_New.Controllers
 
                     ViewBag.Vender = venderViewModels;
 
-
                     return View(lPOInvoiceVModel);
                 }
                 else

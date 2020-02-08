@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace IT.Core.ViewModels
 {
@@ -13,8 +14,12 @@ namespace IT.Core.ViewModels
         public int LPOId { get; set; }
         public Decimal GrandTotal { get; set; }
         public string TermCondition { get; set; }
-        public string CustomerNote { get; set; }
+        public string CustomerNote { get; set; }      
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FromDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DueDate { get; set; }
         public Decimal Balance { get; set; }
         public string PONumber { get; set; }
