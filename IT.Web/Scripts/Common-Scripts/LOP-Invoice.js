@@ -81,9 +81,9 @@ function CountTotalVat() {
         TotalVAT = parseFloat(GTotal) - parseFloat(ToatWTVAT);
 
     });
-    $('#TotalVAT').text(TotalVAT);
-    $('#SubTotal').text(ToatWTVAT);
-    $('#gtotal').text(GTotal);
+    $('#TotalVAT').text(parseFloat(TotalVAT).toFixed(2));
+    $('#SubTotal').text(parseFloat(ToatWTVAT).toFixed(2));
+    $('#gtotal').text(parseFloat(GTotal).toFixed(2));
 }
 
 function IsOneDecimalPoint(evt) {
