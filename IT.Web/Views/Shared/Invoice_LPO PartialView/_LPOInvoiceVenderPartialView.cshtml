@@ -28,7 +28,7 @@
     <div class="col-md-4">
         <div class="input-group mb-3">
             <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">PO Number:</span>
+                <span class="input-group-text" id="basic-addon2"  style="width:100px">PO Number:</span>
             </div>
             <input type="text" class="form-control" id="PONo" name="PONo" placeholder="PO Number" value="@ViewBag.PO">
         </div>
@@ -36,14 +36,14 @@
 
         <div class="input-group mb-1">
             <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">From Date:</span>
+                <span class="input-group-text" id="basic-addon2" style="width:100px">From Date:</span>
             </div>
             @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", name = "FromDate", id = "FromDate" } })
         </div>
 
         <div class="input-group mb-1">
             <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2"> Due Date: </span>
+                <span class="input-group-text" id="basic-addon2" style="width:100px"> Due Date: </span>
             </div>
             @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control", id = "DueDate" } })
         </div>
