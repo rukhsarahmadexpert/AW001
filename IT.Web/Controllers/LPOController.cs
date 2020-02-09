@@ -728,15 +728,20 @@ namespace IT.Web_New.Controllers
                 List<IT.Web.Models.LPOInvoiceDetailsModel> lPOInvoiceDetails = new List<LPOInvoiceDetailsModel>();
                 List<VenderModel> venderModels = new List<VenderModel>();
 
-                var LPOInvoice = webServices.Post(new IT.Web.Models.LPOInvoiceModel(), "LPO/EditReport/" + Id);
+                int CompanyId = Convert.ToInt32(Session["CompanyId"]);
+
+                LPOInvoiceModel lPOInvoiceModel = new LPOInvoiceModel();
+                lPOInvoiceModel.Id = Id;
+                lPOInvoiceModel.detailId = CompanyId;
+
+                var LPOInvoice = webServices.Post(lPOInvoiceModel, "LPO/EditReport/" + Id);
 
                 var LPOInvoiceModel = new IT.Web.Models.LPOInvoiceModel();
                 if (LPOInvoice.Data != "[]")
                 {
                     LPOInvoiceModel = (new JavaScriptSerializer()).Deserialize<IT.Web.Models.LPOInvoiceModel>(LPOInvoice.Data.ToString());
                 }
-                int CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
+                                
                 lPOInvoiceModels.Insert(0, LPOInvoiceModel);
                 compnayModels = LPOInvoiceModel.compnays;
                 lPOInvoiceDetails = LPOInvoiceModel.lPOInvoiceDetailsList;
@@ -747,6 +752,8 @@ namespace IT.Web_New.Controllers
                 Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
                 Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
 
+                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + LPOInvoiceModel.compnays[0].LogoUrl);
+                
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
 

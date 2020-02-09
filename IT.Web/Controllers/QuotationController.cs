@@ -647,7 +647,7 @@ namespace IT.Web_New.Controllers
                 {
                     lPOInvoiceModel = (new JavaScriptSerializer()).Deserialize<IT.Web.Models.LPOInvoiceModel>(LPOInvoice.Data.ToString());
                 }
-
+                
                 lPOInvoiceModels.Add(lPOInvoiceModel);
                 venderModels = lPOInvoiceModel.venders;
                 compnayModels = lPOInvoiceModel.compnays;
@@ -658,6 +658,8 @@ namespace IT.Web_New.Controllers
                 Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
                 Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
 
+                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + lPOInvoiceModel.compnays[0].LogoUrl);
+                
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
 
