@@ -16,11 +16,10 @@ namespace IT.Web_New.Controllers
     {
         WebServices webServices = new WebServices();
         List<CompnayModel> compnayModels = new List<CompnayModel>();
-
-        // GET: Company
+                
+        [HttpGet]
         public ActionResult Index()
         {
-
             try
             {
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
@@ -41,7 +40,7 @@ namespace IT.Web_New.Controllers
 
         }
 
-        // GET: Company/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
             try
@@ -72,11 +71,10 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        // GET: Company/Create
+        [HttpGet]
         public ActionResult Create(CompnayModel compnayModel)
         {
             return View();
-
         }
 
         [HttpGet]
@@ -91,8 +89,7 @@ namespace IT.Web_New.Controllers
             // await Creat(compnayModel,file);
             return View();
         }
-
-        // POST: Company/Create
+               
         [HttpPost]
         public ActionResult Create(CompnayModel compnayModel, HttpPostedFileBase LogoUrl)
         {
@@ -162,13 +159,12 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        // GET: Company/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Company/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -184,13 +180,12 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        // GET: Company/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Company/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -206,6 +201,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult CashCompany()
         {
             return View(new CompnayModel());

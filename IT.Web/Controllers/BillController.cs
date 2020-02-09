@@ -23,6 +23,7 @@ namespace IT.Web_New.Controllers
         List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
         List<LPOInvoiceViewModel> lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
         
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -311,7 +312,8 @@ namespace IT.Web_New.Controllers
                 throw;
             }
         }
-        
+
+        [HttpGet]
         public ActionResult Edit(int Id)
         {
             try
@@ -503,6 +505,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public static decimal CalculateVat(decimal vat, decimal Total)
         {
             decimal Result = 0;

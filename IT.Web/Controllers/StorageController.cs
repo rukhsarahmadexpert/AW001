@@ -17,6 +17,7 @@ namespace IT.Web_New.Controllers
         List<StorageViewModel> storageViewModels = new List<StorageViewModel>();
         StorageViewModel StorageViewModel = new StorageViewModel();
 
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -48,7 +49,6 @@ namespace IT.Web_New.Controllers
                                 storageViewModelObj.From = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
                                 storageViewModelObj.Source = item.Source;
                                 storageViewModelObj.UserName = item.UserName;
-
                             }
                             else
                             {
@@ -74,6 +74,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -110,6 +111,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Edit(int Id)
         {
             try
@@ -129,7 +131,6 @@ namespace IT.Web_New.Controllers
                 AwfVehicleController awfVehicleController = new AwfVehicleController();
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-
                 ViewBag.AdminVehicles = awfVehicleController.AdminVehicles();
                 ViewBag.Vehicles = vehicleController.Vehicles();
                 ViewBag.Sites = siteController.SitesList(CompanyId);
@@ -148,7 +149,6 @@ namespace IT.Web_New.Controllers
             try
             {
                 // var value = DateTime.Now.ToFileTime().ToString();
-
                 List<StorageViewModel> storageViewModels1 = new List<StorageViewModel>();
                 storageViewModels1 = storageViewListModel.storageViewModels;
 
