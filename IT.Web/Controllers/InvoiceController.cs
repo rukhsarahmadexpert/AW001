@@ -546,7 +546,7 @@ namespace IT.Web_New.Controllers
                 {
                     lPOInvoiceModel = (new JavaScriptSerializer()).Deserialize<IT.Web.Models.LPOInvoiceModel>(LPOInvoice.Data.ToString());
                 }
-
+                                
                 lPOInvoiceModels.Insert(0, lPOInvoiceModel);
                 compnayModels = lPOInvoiceModel.compnays;
                 lPOInvoiceDetails = lPOInvoiceModel.lPOInvoiceDetailsList;
@@ -579,6 +579,8 @@ namespace IT.Web_New.Controllers
                 string fileName = companyName + ".PDF";
                 //return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
 
+                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + lPOInvoiceModel.compnays[0].LogoUrl);
+                
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
 
