@@ -790,5 +790,76 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet]
+        public ActionResult LPOAllLByDateRange()
+        {
+
+            SearchViewModel searchViewModel = new SearchViewModel();
+            searchViewModel.FromDate = "2020-01-29";
+            searchViewModel.ToDate = "2020-01-30";
+            string pdfname = "";
+            try
+            {
+                ReportDocument Report = new ReportDocument();
+                Report.Load(Server.MapPath("~/Reports/LPO-Invoice/LPOInvoiceList.rpt"));
+
+                List<IT.Web.Models.CompnayModel> compnayModels = new List<Web.Models.CompnayModel>();
+                List<IT.Web.Models.LPOInvoiceModel> lPOInvoiceModels = new List<Web.Models.LPOInvoiceModel>();
+                
+                int CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                searchViewModel.CompanyId = CompanyId;
+
+                var LPOInvoice = webServices.Post(searchViewModel, "LPO/LPOAllLByDateRange");
+
+                var LPOInvoiceModel = new IT.Web.Models.LPOInvoiceModel();
+                if (LPOInvoice.Data != "[]")
+                {
+                    lPOInvoiceModels = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.LPOInvoiceModel>>(LPOInvoice.Data.ToString());
+                }
+
+                compnayModels = lPOInvoiceModels[0].compnays;
+                                
+                Report.Database.Tables[0].SetDataSource(compnayModels);
+                Report.Database.Tables[1].SetDataSource(lPOInvoiceModels);
+
+                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + compnayModels[0].LogoUrl);
+                Report.SetParameterValue("ReportHeading", "LPO List");
+
+                Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                stram.Seek(0, SeekOrigin.Begin);
+
+                string companyName;
+
+                if (lPOInvoiceModels.Count > 0)
+                {
+                    companyName = "LPO-" + lPOInvoiceModels[0].PONumber;
+                }
+                else
+                {
+                    companyName = "Data Not Found";
+                }
+                var root = Server.MapPath("/PDF/");
+                pdfname = String.Format("{0}.pdf", companyName);
+                var path = Path.Combine(root, pdfname);
+                path = Path.GetFullPath(path);
+
+                Report.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, path);
+
+                //stram.Close();
+                //byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+                // string fileName = companyName + ".PDF";
+                //return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+
+                // Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                stram.Seek(0, SeekOrigin.Begin);
+
+                return new FileStreamResult(stram, "application/pdf");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

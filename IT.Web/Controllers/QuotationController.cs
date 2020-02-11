@@ -27,6 +27,7 @@ namespace IT.Web_New.Controllers
         List<CompanyViewModel> companyViewModels = new List<CompanyViewModel>();
         int CompanyId;
 
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -152,6 +153,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             try
@@ -193,6 +195,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public string PoNumber()
         {
             string SerailNO = "";
@@ -500,6 +503,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [NonAction]
         public static decimal CalculateVat(decimal vat, decimal Total)
         {
             decimal Result = 0;
@@ -740,6 +744,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult MakeInvoice(int Id)
         {
             try
@@ -790,6 +795,32 @@ namespace IT.Web_New.Controllers
                 {
                     return View();
                 }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+                
+        [HttpGet]
+        public ActionResult IndexCustomer()
+        {
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+
+                SearchViewModel searchViewModel = new SearchViewModel();
+
+                searchViewModel.CompanyId = CompanyId;
+
+                var SiteList = webServices.Post(searchViewModel, "Quotation/QuotationAllByCustomer");
+
+                if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    lPOInvoiceViewModels = (new JavaScriptSerializer().Deserialize<List<LPOInvoiceViewModel>>(SiteList.Data.ToString()));
+                }
+                return View(lPOInvoiceViewModels);
 
             }
             catch (Exception ex)

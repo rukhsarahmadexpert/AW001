@@ -59,17 +59,15 @@
 
         $('#CreateBillFromLPO').click(function () {
 
-            //if ($('#LPONumber').val() > 0) {
+            if ($('#LPONumber').val() > 0) {
 
-            //    var Id = $('#LPONumber').val();
+                var Id = $('#LPONumber').val();
 
-            //    window.location.href = "/Bill/Create/" + Id;
-            //}
-            //else {
-            //    alert('Please select LPO Number first');
-            //}
-            window.location.href = "/Bill/Create/1";
-
+                window.location.href = "/Bill/Create/"+Id;
+            }
+            else {
+                alert('Please select LPO Number first');
+            }
         });
 
 

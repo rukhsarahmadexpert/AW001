@@ -19,11 +19,13 @@ namespace IT.Web_New.Controllers
         List<DirectSaleViewModel> directSaleViewModels = new List<DirectSaleViewModel>();
         List<VehicleViewModel> vehicleViewModels = new List<VehicleViewModel>();
 
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public ActionResult DirectSaleCreate()
         {
             return View();
@@ -52,6 +54,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -85,6 +88,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult DirectsaleOrderAdd()
         {
             DriverModel driverModel = new DriverModel();
@@ -154,6 +158,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult AllCashCompanyVehicle()
         {
             try
@@ -175,6 +180,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public ActionResult Details(int Id)
         {
             try
@@ -218,11 +224,13 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult GetLocation()
         {
             return View();
         }
 
+        [HttpGet]
         public ActionResult OrderDetails()
         {
             try

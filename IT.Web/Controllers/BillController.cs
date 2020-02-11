@@ -57,7 +57,7 @@ namespace IT.Web_New.Controllers
 
                     lPOInvoiceViewModel.Heading = "BILL";
 
-                    lPOInvoiceDetails = lPOInvoiceViewModel.lPOInvoiceDetailsList;
+                   // lPOInvoiceDetails = lPOInvoiceViewModel.lPOInvoiceDetailsList;
                     ViewBag.lPOInvoiceDetails = lPOInvoiceDetails;
 
                     HttpContext.Cache.Remove("LPOData");
@@ -100,6 +100,11 @@ namespace IT.Web_New.Controllers
                     venderViewModels.Insert(0, new VenderViewModel() { Id = 0, Name = "Select Vender" });
 
                     ViewBag.Vender = venderViewModels;
+
+                    List<VatModel> model = new List<VatModel>();
+                    model.Add(new VatModel() { Id = 0, VAT = 0 });
+                    model.Add(new VatModel() { Id = 5, VAT = 5 });
+                    ViewBag.VatDrop = model;
 
                     return View(lPOInvoiceVModel);
                 }

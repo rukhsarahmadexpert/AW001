@@ -237,6 +237,12 @@
       <DependentUpon>LPOInvoice.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\LPO-Invoice\LPOInvoiceList.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LPOInvoiceList.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\LPO-Invoice\LPOReport4.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -864,6 +870,7 @@
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Views\Bill\Edit.cshtml" />
+    <Content Include="Views\Quotation\IndexCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -906,6 +913,10 @@
     <EmbeddedResource Include="Reports\LPO-Invoice\LPOInvoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>LPOInvoice3.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LPO-Invoice\LPOInvoiceList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>LPOInvoiceList.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\LPO-Invoice\LPOReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
