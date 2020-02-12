@@ -12,6 +12,7 @@ using System.Web.Script.Serialization;
 namespace IT.Web_New.Controllers
 {
     [Autintication]
+    [ExceptionLog]
     public class AwfDriverController : Controller
     {
         WebServices webServices = new WebServices();

@@ -11,7 +11,9 @@ using System.Web.Script.Serialization;
 
 namespace IT.Web_New.Controllers
 {
+      
     [Autintication]
+    [ExceptionLog]
     public class CompanyController : Controller
     {
         WebServices webServices = new WebServices();

@@ -12,6 +12,7 @@ using System.Web.Script.Serialization;
 namespace IT.Web_New.Controllers
 {
     [Autintication]
+    [ExceptionLog]
     public class DriverController : Controller
     {
         WebServices webServices = new WebServices();
@@ -22,7 +23,6 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult Index(int CompId = 0)
         {
-
             if (CompId == 0)
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
@@ -70,7 +70,6 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-
                 if (Request.Files.Count > 0)
                 {
                     HttpPostedFileBase[] httpPostedFileBase = new HttpPostedFileBase[8];

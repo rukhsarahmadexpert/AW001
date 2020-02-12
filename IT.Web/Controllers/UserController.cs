@@ -1,5 +1,6 @@
 ﻿using IT.Core.ViewModels;
 using IT.Repository.WebServices;
+using IT.Web.MISC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Web.Script.Serialization;
 
 namespace IT.Web_New.Controllers
 {
+    [ExceptionLog]   
     public class UserController : Controller
     {
         WebServices webServices = new WebServices();

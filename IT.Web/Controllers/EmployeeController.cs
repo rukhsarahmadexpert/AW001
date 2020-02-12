@@ -11,6 +11,7 @@ using System.Web.Script.Serialization;
 
 namespace IT.Web_New.Controllers
 {
+    [ExceptionLog]
     [Autintication]
     public class EmployeeController : Controller
     {

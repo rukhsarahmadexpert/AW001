@@ -10,12 +10,12 @@ using System.Web.Script.Serialization;
 
 namespace IT.Web_New.Controllers
 {
+    [ExceptionLog]
     [Autintication]
     public class HomeController : Controller
     {
         List<CustomerNotificationViewModel> customerNotificationViewModels = new List<CustomerNotificationViewModel>();
         CustomerOrderStatistics customerOrderStatistics = new CustomerOrderStatistics();
-
 
         WebServices webServices = new WebServices();
 

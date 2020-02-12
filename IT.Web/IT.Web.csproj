@@ -202,6 +202,7 @@
     <Compile Include="MISC\BillPONumber.cs" />
     <Compile Include="MISC\CommonFile.cs" />
     <Compile Include="MISC\CustomerExpenseNumber.cs" />
+    <Compile Include="MISC\ExceptionLog.cs" />
     <Compile Include="MISC\ExpenseNumber.cs" />
     <Compile Include="MISC\HashPassword.cs" />
     <Compile Include="MISC\InvoicePNNumber.cs" />

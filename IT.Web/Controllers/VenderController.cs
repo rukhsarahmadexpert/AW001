@@ -10,6 +10,7 @@ using System.Web.Script.Serialization;
 
 namespace IT.Web_New.Controllers
 {
+    [ExceptionLog]
     [Autintication]
     public class VenderController : Controller
     {
@@ -21,7 +22,7 @@ namespace IT.Web_New.Controllers
         public ActionResult Index()
         {
             try
-            {
+            {              
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 PagingParameterModel pagingParameterModel = new PagingParameterModel
                 {

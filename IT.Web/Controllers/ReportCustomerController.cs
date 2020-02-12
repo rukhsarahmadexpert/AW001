@@ -1,6 +1,7 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using IT.Core.ViewModels;
 using IT.Repository.WebServices;
+using IT.Web.MISC;
 using IT.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ using System.Web.Script.Serialization;
 
 namespace IT.Web_New.Controllers
 {
+    [ExceptionLog]
+    [Autintication]
     public class ReportCustomerController : Controller
     {
         List<IT.Web.Models.ReportsByDatesViewModel> reportsByDatesViewModels = new List<IT.Web.Models.ReportsByDatesViewModel>();
