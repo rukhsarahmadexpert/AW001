@@ -870,6 +870,8 @@
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Views\Bill\Edit.cshtml" />
+    <Content Include="Views\Vender\Details.cshtml" />
+    <Content Include="Views\CustomerNotification\Details.cshtml" />
     <Content Include="Views\Quotation\IndexCustomer.cshtml" />
     <Content Include="Views\Invoice\CustomerIndex.cshtml" />
     <Content Include="Views\Bill\BillAllByLpoId.cshtml" />

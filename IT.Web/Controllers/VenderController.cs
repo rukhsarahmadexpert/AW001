@@ -114,5 +114,36 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet]
+        public ActionResult Details(int Id)
+        {
+            try
+            {
+                var venderResult = webServices.Post(new VenderViewModel(), "Vender/Edit/" + Id);
+
+                if (venderResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    venderViewModel = (new JavaScriptSerializer().Deserialize<VenderViewModel>(venderResult.Data.ToString()));
+                }
+
+
+                if (Request.IsAjaxRequest())
+                {
+                    return Json(venderViewModel, JsonRequestBehavior.AllowGet);
+                }
+
+                CountryController countryController = new CountryController();
+
+                ViewBag.Countries = countryController.Countries();
+
+                return View(venderViewModel);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

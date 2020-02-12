@@ -129,5 +129,28 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet]
+        public ActionResult Details(int Id)
+        {
+            try
+            {
+                SearchViewModel searchViewModel = new SearchViewModel();
+                searchViewModel.Id = Id;
+                var addResult = webServices.Post(searchViewModel, "Advertisement/Edit/");
+
+                if (addResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    customerNotificationViewModel = (new JavaScriptSerializer().Deserialize<CustomerNotificationViewModel>(addResult.Data.ToString()));
+                }
+
+                return View(customerNotificationViewModel);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
