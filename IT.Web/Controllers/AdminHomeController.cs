@@ -10,7 +10,7 @@ namespace IT.Web_New.Controllers
     [Autintication]
     public class AdminHomeController : Controller
     {
-        // GET: AdminHome
+        [HttpGet]
         public ActionResult Index()
         {
             return View();

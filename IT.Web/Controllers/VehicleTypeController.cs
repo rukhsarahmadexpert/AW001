@@ -14,6 +14,7 @@ namespace IT.Web_New.Controllers
         WebServices webServices = new WebServices();
         List<VehicleTypeViewModel> vehicleTypeViewModels = new List<VehicleTypeViewModel>();
 
+        [HttpGet]
         public ActionResult Index()
         {
             return View();

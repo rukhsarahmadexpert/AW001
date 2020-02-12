@@ -17,7 +17,7 @@ namespace IT.Web_New.Controllers
         List<ProductUnitViewModel> productUnitViewModels = new List<ProductUnitViewModel>();
         ProductUnitViewModel ProductUnitViewModel = new ProductUnitViewModel();
 
-        // GET: ProductUnit
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -36,19 +36,18 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        // GET: ProductUnit/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ProductUnit/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View(new ProductUnitViewModel());
         }
-
-        // POST: ProductUnit/Create
+                
         [HttpPost]
         public ActionResult Create(ProductUnitViewModel productUnitViewModel)
         {

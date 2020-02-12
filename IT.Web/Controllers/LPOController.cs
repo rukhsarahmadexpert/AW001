@@ -24,7 +24,7 @@ namespace IT.Web_New.Controllers
         List<LPOInvoiceViewModel> lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
         List<IT.Web.Models.LPOInvoiceModel> Models = new List<IT.Web.Models.LPOInvoiceModel>();
 
-        // GET: LPO/LPO
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
@@ -128,6 +128,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public ActionResult LPOConverted()
         {
             return View();
@@ -218,6 +219,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             try
@@ -581,6 +583,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [NonAction]
         public static decimal CalculateVat(decimal vat, decimal Total)
         {
             decimal Result = 0;
@@ -641,7 +644,7 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
-
+               
         public FileResult Download(string FileName)
         {
             string PAth = Server.MapPath("~/PDF/" + FileName);
@@ -861,5 +864,5 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
-    }
+    }  
 }

@@ -19,6 +19,7 @@ namespace IT.Web_New.Controllers
         DriverViewModel driverViewModel = new DriverViewModel();
         int CompanyId = 0;
 
+        [HttpGet]
         public ActionResult Index(int CompId = 0)
         {
 
@@ -58,6 +59,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             return View(new DriverViewModel());
@@ -205,6 +207,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Details(int Id)
         {
             CompanyId = Convert.ToInt32(Session["CompanyId"]);
@@ -231,6 +234,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Edit(int Id)
         {
 

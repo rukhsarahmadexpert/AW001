@@ -18,6 +18,7 @@ namespace IT.Web_New.Controllers
 
         WebServices webServices = new WebServices();
 
+        [HttpGet]
         public ActionResult Index()
         {
             SearchViewModel searchViewModel = new SearchViewModel();
@@ -27,6 +28,7 @@ namespace IT.Web_New.Controllers
             return View(searchViewModel);
         }
 
+        [HttpGet]
         public ActionResult ReportByVehicleAndDates(SearchViewModel searchViewModel)
         {
             var result = webServices.Post(searchViewModel, "AWReports/ReportByVehicleAndDates", false);

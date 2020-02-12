@@ -55,6 +55,16 @@ namespace IT.Web_New.Controllers
                     lPOInvoiceViewModel = (new JavaScriptSerializer().Deserialize<LPOInvoiceViewModel>(Result.Data.ToString()));
                     ViewBag.lPOInvoiceViewModel = lPOInvoiceViewModel;
 
+                    SearchViewModel searchViewModel = new SearchViewModel();
+                    searchViewModel.Id = Id;
+                    var ResultRemainingQuanntity = webServices.Post(searchViewModel, "Bill/LPOGetRemainingDetails");
+
+                    LpoRemainingQuantityViewModel lpoRemainingQuantityViewModel = new LpoRemainingQuantityViewModel();
+                    lpoRemainingQuantityViewModel = (new JavaScriptSerializer().Deserialize<LpoRemainingQuantityViewModel>(ResultRemainingQuanntity.Data.ToString()));
+
+                    ViewBag.lPOInvoiceViewModel = lPOInvoiceViewModel;
+                    ViewBag.lpoRemainingQuantityViewModel = lpoRemainingQuantityViewModel;
+
                     lPOInvoiceViewModel.Heading = "BILL";
 
                    // lPOInvoiceDetails = lPOInvoiceViewModel.lPOInvoiceDetailsList;
@@ -253,6 +263,24 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
 
+        }
+
+        [HttpGet]
+        public ActionResult BillAllByLpoId(int Id)
+        {
+            try
+            {
+                SearchViewModel searchViewModel = new SearchViewModel();
+                searchViewModel.Id = Id;
+                var result = webServices.Post(searchViewModel, "Bill/BillAllByLpoId");
+                lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
+                
+                return View(lPOInvoiceViewModels);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [HttpGet]

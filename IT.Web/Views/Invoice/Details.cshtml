@@ -1,7 +1,16 @@
 ﻿
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+    IT.Core.ViewModels.UserCompanyViewModel userCompanyViewModel = new IT.Core.ViewModels.UserCompanyViewModel();
+    userCompanyViewModel = Session["userCompanyViewModel"] as IT.Core.ViewModels.UserCompanyViewModel;
+    if (userCompanyViewModel.Authority == "CustomerAdmin")
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+    }
 }
 
 <link href="~/Content/css/Common/LPOInvoiceTable.css" rel="stylesheet" />

@@ -75,6 +75,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\LPOInvoiceDetails.cs" />
     <Compile Include="ViewModels\LPOInvoiceViewModel.cs" />
+    <Compile Include="ViewModels\LpoRemainingQuantityViewModel.cs" />
     <Compile Include="ViewModels\OrderTransferRequestsViewModel.cs" />
     <Compile Include="ViewModels\PagingParameterModel.cs" />
     <Compile Include="ViewModels\ProductUnitViewModel.cs" />

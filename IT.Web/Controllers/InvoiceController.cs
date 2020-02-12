@@ -25,11 +25,30 @@ namespace IT.Web_New.Controllers
         List<LPOInvoiceViewModel> lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
         List<CompanyViewModel> companyViewModels = new List<CompanyViewModel>();
 
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
+        public ActionResult CustomerIndex()
+        {
+            try
+            {
+                SearchViewModel searchViewModel = new SearchViewModel();
+                searchViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                var result = webServices.Post(searchViewModel, "Invoice/AllByCustomer");
+                lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
+
+                return View(lPOInvoiceViewModels);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+               
         [HttpGet]
         public JsonResult GetAll()
         {
@@ -125,6 +144,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             try
@@ -145,7 +165,7 @@ namespace IT.Web_New.Controllers
                 productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
                 ViewBag.ProductUnit = productUnitViewModels;
 
-                var Res = webServices.Post(new CompanyViewModel(), "Company/CompayAll");
+                var Res = webServices.Post(new CompanyViewModel(), "Company/CompayAllWithOutPagination");
                 companyViewModels = (new JavaScriptSerializer()).Deserialize<List<CompanyViewModel>>(Res.Data.ToString());
                 companyViewModels.Insert(0, new CompanyViewModel() { Id = 0, Name = "Select Customer Name" });
 
@@ -460,6 +480,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [NonAction]
         public static decimal CalculateVat(decimal vat, decimal Total)
         {
             decimal Result = 0;

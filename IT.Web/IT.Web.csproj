@@ -871,6 +871,8 @@
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Views\Bill\Edit.cshtml" />
     <Content Include="Views\Quotation\IndexCustomer.cshtml" />
+    <Content Include="Views\Invoice\CustomerIndex.cshtml" />
+    <Content Include="Views\Bill\BillAllByLpoId.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

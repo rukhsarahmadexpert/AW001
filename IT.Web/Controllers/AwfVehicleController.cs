@@ -23,6 +23,7 @@ namespace IT.Web_New.Controllers
         public List<VehicleViewModel> VehicleViewModels { get; private set; }
         int CompanyId;
 
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -56,7 +57,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
-
+        [HttpGet]
         public ActionResult Create()
         {
             VehicleTypeController vehicleTypeController = new VehicleTypeController();
@@ -163,7 +164,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
-
+        [HttpGet]
         public ActionResult Details(int id)
         {
             try
@@ -188,6 +189,7 @@ namespace IT.Web_New.Controllers
             return View(vehicleViewModel);
         }
 
+        [HttpGet]
         public ActionResult Edit(int Id)
         {
             try

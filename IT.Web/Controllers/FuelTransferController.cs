@@ -19,6 +19,8 @@ namespace IT.Web_New.Controllers
         List<TransferFromDriverViewModel> transferFromDriverViewModels = new List<TransferFromDriverViewModel>();
         List<SearchViewModel> searchViewModels = new List<SearchViewModel>();
         int CompanyId;
+
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -51,6 +53,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public ActionResult OrderTransferRequestsAll()
         {
             orderTransferRequestsViewModels = new List<OrderTransferRequestsViewModel>();
@@ -157,8 +160,6 @@ namespace IT.Web_New.Controllers
         [HttpPost]
         public ActionResult CustomerOrderGroupTransferFromDriverAdd(TransferFromDriverViewModel transferFromDriverViewModel)
         {
-
-
             try
             {
                 transferFromDriverViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
@@ -179,6 +180,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult CustomerOrderGroupTransferFromDriverAll()
         {
             CompanyId = Convert.ToInt32(Session["CompanyId"]);

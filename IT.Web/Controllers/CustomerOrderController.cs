@@ -269,6 +269,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             try

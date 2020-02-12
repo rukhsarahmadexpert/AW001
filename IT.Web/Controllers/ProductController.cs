@@ -16,8 +16,7 @@ namespace IT.Web_New.Controllers
         List<ProductUnitViewModel> productUnitViewModels = new List<ProductUnitViewModel>();
         ProductViewModel ProductViewModel = new ProductViewModel();
 
-        //int CompanyId;
-
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -40,6 +39,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             try
