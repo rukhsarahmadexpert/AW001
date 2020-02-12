@@ -1,6 +1,6 @@
 ﻿@model List<IT.Core.ViewModels.StateViewModel>
 @{
-    ViewBag.Title = "StateAll";
+    ViewBag.Title = "AW Fuel - All states";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 
     List<IT.Core.ViewModels.StateViewModel> stateViewModels = new List<IT.Core.ViewModels.StateViewModel>();
@@ -18,7 +18,7 @@
             <div class="panel-hdr">
                 <h2>
                     <a href="/Country/AddUpdateState">
-                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>state</i></span>
+                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>State</i></span>
                     </a>
                 </h2>
             </div>
@@ -32,7 +32,7 @@
                         <thead class="bg-primary-600">
                             <tr>
 
-                                <th>Country Name </th>
+                                <th>State Name </th>
                                 <th>Actions</th>
                             </tr>
                         </thead>

@@ -1,7 +1,16 @@
 ﻿@model IT.Core.ViewModels.AppVersionViewModel
 
 @{
-    ViewBag.Title = "AppVersionAdd";
+
+    if(Model.Id > 0)
+    {
+        ViewBag.Title = "Aw Fuel - App Version Edit";
+    }
+    else
+    {
+        ViewBag.Title = "Aw Fuel - App Version Create";
+    }
+
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
@@ -12,9 +21,19 @@
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 <div class="subheader">
+    @if(Model.Id > 0)
+    {
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i> Edit App version
+    </h1>
+    }
+    else
+    {
     <h1 class="subheader-title">
         <i class='subheader-icon fal fa-edit'></i> Create App version
     </h1>
+    }
+
 </div>
 <div class="row">
     <div class="col-xl-12">
@@ -64,11 +83,22 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
+
+                                @if (Model.Id > 0)
+                                {
                                 <button type="submit" id="Save" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
                                     App Version
-
-                                    <span>submit</span>
+                                    <span>Update</span>
                                 </button>
+                                }
+                                else
+                                {
+                                    <button type="submit" id="Save" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        App Version
+                                        <span>submit</span>
+                                    </button>
+                                }
+                                
                             </div>
                             <div id="response"></div>
                         </div>

@@ -1,6 +1,6 @@
 ﻿@model IT.Core.ViewModels.StateViewModel
 @{
-    ViewBag.Title = "Add Update State";
+    ViewBag.Title = "Aw Fuel - Add Or Update State";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 
     List<IT.Core.ViewModels.CountryViewModel> countryViewModels = new List<IT.Core.ViewModels.CountryViewModel>();
@@ -10,9 +10,19 @@
 <main id="js-page-content" role="main" class="page-content">
 
     <div class="subheader">
-        <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-edit'></i> Create State
-        </h1>
+        @if (Model.Id > 0)
+        {
+            <h1 class="subheader-title">
+                <i class='subheader-icon fal fa-edit'></i> Edit State
+            </h1>
+        }
+        else
+        {
+            <h1 class="subheader-title">
+                <i class='subheader-icon fal fa-edit'></i> Create State
+            </h1>
+        }
+
     </div>
     <div class="row">
         <div class="col-xl-12">
@@ -26,7 +36,14 @@
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-tag">
-                            Please add State from here...
+                            @if (Model.Id > 0)
+                            {
+                                <p>Please Update State from here...</p>
+                            }
+                            else
+                            {
+                                <p>Please add State from here...</p>
+                            }
                         </div>
                         <form action="/Country/AddUpdateState" method="post">
                            
@@ -58,10 +75,21 @@
 
                             <div class="row py-5">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                        Submit
-                                        <span>State</span>
-                                    </button>
+                                    @if (Model.Id > 0)
+                                    {
+                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                            Update
+                                            <span>State</span>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                            Submit
+                                            <span>State</span>
+                                        </button>
+                                    }
+
                                 </div>
                             </div>
 

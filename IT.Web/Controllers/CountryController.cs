@@ -269,9 +269,9 @@ namespace IT.Web_New.Controllers
             cityViewModel.StateId = StateId;
 
             CountryController countryController = new CountryController();
-            ViewBag.Countries = countryController.Countries();
+            ViewBag.States = countryController.States();
 
-            return View("AddUpdateCity", CityViewModel);
+            return View("AddUpdateCity", cityViewModel);
         }
 
     }

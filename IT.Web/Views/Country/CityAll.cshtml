@@ -1,6 +1,6 @@
 ﻿@model  List<IT.Core.ViewModels.CityViewModel>
 @{
-    ViewBag.Title = "CityAll";
+    ViewBag.Title = "AWFuel - All Cities";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 
     List<IT.Core.ViewModels.CityViewModel> cityViewModels = new List<IT.Core.ViewModels.CityViewModel>();
@@ -32,7 +32,7 @@
                         <thead class="bg-primary-600">
                             <tr>
 
-                                <th>Country Name </th>
+                                <th>City Name </th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -44,7 +44,7 @@
                                     <td>@item.CityName</td>
 
                                     <td>
-                                        <form action="/Country/EditState" method="post">
+                                        <form action="/Country/EditCity" method="post">
                                             <input type="hidden" name="Id" value="@item.Id" />
                                             <input type="hidden" name="Name" value="@item.CityName" />
                                             <input type="hidden" name="StateId" value="@item.StateId" />
