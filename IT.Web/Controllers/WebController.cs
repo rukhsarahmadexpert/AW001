@@ -16,6 +16,7 @@ namespace IT.Web_New.Controllers
         WebServices webServices = new WebServices();
         List<AppVersionViewModel> appVersionViewModels = new List<AppVersionViewModel>();
 
+        [HttpGet]
         public ActionResult Index(int Id = 0)
         {
             var AppVersionList = webServices.Post(new AppVersionViewModel(), "AppVersion/AppVersionAll");
@@ -37,6 +38,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public ActionResult AppVersionAdd()
         {
 

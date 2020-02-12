@@ -8,7 +8,7 @@ namespace IT.Web_New.Controllers
 {
     public class AWDepartmentController : Controller
     {
-        // GET: AWDepartment
+        [HttpGet]
         public ActionResult Index()
         {
             return View();

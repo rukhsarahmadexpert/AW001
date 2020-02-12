@@ -20,6 +20,7 @@ namespace IT.Web_New.Controllers
         DriverViewModel driverViewModel = new DriverViewModel();
         int CompanyId;
 
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -47,6 +48,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Details(int id)
         {
             try
@@ -72,6 +74,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             return View(new DriverViewModel());
@@ -220,6 +223,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Edit(int Id)
         {
             try
@@ -386,6 +390,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult DriverLoginHistoryWithAsignVehicle()
         {
             try
@@ -402,7 +407,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
-
+        [HttpGet]
         public ActionResult DriverLoginHistoryAllForAdmin()
         {
             try
@@ -451,8 +456,7 @@ namespace IT.Web_New.Controllers
             }
 
         }
-
-
+        
         [HttpPost]
         public ActionResult DriverLogouByAdmin(SearchViewModel searchViewModel)
         {

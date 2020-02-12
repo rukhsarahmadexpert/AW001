@@ -17,7 +17,7 @@ namespace IT.Web_New.Controllers
         VenderViewModel venderViewModel = new VenderViewModel();
         List<VenderViewModel> venderViewModels = new List<VenderViewModel>();
         int CompanyId;
-        // GET: Vender
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -44,6 +44,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
 

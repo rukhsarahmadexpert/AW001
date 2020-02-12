@@ -20,7 +20,7 @@ namespace IT.Web_New.Controllers
         List<EmployeeViewModel> employeeViewModels = new List<EmployeeViewModel>();
         EmployeeViewModel employeeViewModel = new EmployeeViewModel();
         int CompanyId = 0;
-        // GET: Employee
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -54,7 +54,7 @@ namespace IT.Web_New.Controllers
 
         }
 
-        // GET: Employee/Details/5
+        [HttpGet]
         public ActionResult Details(int Id)
         {
             CompanyId = Convert.ToInt32(Session["CompanyId"]);
@@ -74,15 +74,14 @@ namespace IT.Web_New.Controllers
             return View(employeeViewModel);
         }
 
-        // GET: Employee/Create
+        [HttpGet]
         public ActionResult Create()
         {
             DesignationController designationController = new DesignationController();
             ViewBag.Designations = designationController.Designations();
             return View();
         }
-
-        // POST: Employee/Create
+               
         [HttpPost]
         public ActionResult Create(EmployeeViewModel employeeViewModel)
         {
@@ -168,13 +167,12 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        // GET: Employee/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             return View();
         }
-
-        // POST: Employee/Edit/5
+               
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -190,13 +188,12 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        // GET: Employee/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             return View();
         }
-
-        // POST: Employee/Delete/5
+               
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

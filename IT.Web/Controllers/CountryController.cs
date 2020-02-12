@@ -18,7 +18,8 @@ namespace IT.Web_New.Controllers
         List<StateViewModel> stateViewModels = new List<StateViewModel>();
         CityViewModel CityViewModel = new CityViewModel();
         List<CityViewModel> cityViewModels = new List<CityViewModel>();
-        // GET: Country
+
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -41,7 +42,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        // State start
+        [HttpGet]
         public ActionResult StateAll()
         {
             try
@@ -64,6 +65,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult AddUpdateState()
         {
             CountryController countryController = new CountryController();
@@ -133,7 +135,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        // End state
+        [HttpGet]
         public ActionResult Create()
         {
             return View(new CountryViewModel());
@@ -167,6 +169,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet] 
         public ActionResult Edit(int Id, String Name)
         {
             CountryViewModel countryViewModel = new CountryViewModel();
@@ -195,7 +198,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        // City start
+        [HttpGet]
         public ActionResult CityAll()
         {
             try
@@ -218,6 +221,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult AddUpdateCity()
         {
             CountryController countryController = new CountryController();
@@ -267,6 +271,5 @@ namespace IT.Web_New.Controllers
             return View("AddUpdateCity", cityViewModel);
         }
 
-        // End City
     }
 }

@@ -16,8 +16,8 @@ namespace IT.Web_New.Controllers
         readonly UserViewModel userViewModel = new UserViewModel();
         readonly List<UserViewModel> userViewModelList = new List<UserViewModel>();
         UserCompanyViewModel userCompanyViewModel = new UserCompanyViewModel();
-       
 
+        [HttpGet]
         public ActionResult Index()
         {
             //var result = webServices.Post(new UserViewModel(), "User/GetAll");
@@ -25,6 +25,7 @@ namespace IT.Web_New.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult logout()
         {
             Session.Abandon();
@@ -32,6 +33,7 @@ namespace IT.Web_New.Controllers
             return Redirect(nameof(Login));
         }
 
+        [HttpGet]
         public ActionResult Add()
         {
             return View();

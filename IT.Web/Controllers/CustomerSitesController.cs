@@ -16,6 +16,7 @@ namespace IT.Web_New.Controllers
         SiteViewModel siteViewModel = new SiteViewModel();
         int CompanyId;
 
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -44,6 +45,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             return View(new SiteViewModel());
@@ -113,6 +115,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Edit(int Id)
         {
             try
@@ -142,6 +145,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Details(int Id)
         {
             try

@@ -23,6 +23,7 @@ namespace IT.Web_New.Controllers
         List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
         List<LPOInvoiceViewModel> lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
         
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -54,9 +55,19 @@ namespace IT.Web_New.Controllers
                     lPOInvoiceViewModel = (new JavaScriptSerializer().Deserialize<LPOInvoiceViewModel>(Result.Data.ToString()));
                     ViewBag.lPOInvoiceViewModel = lPOInvoiceViewModel;
 
+                    SearchViewModel searchViewModel = new SearchViewModel();
+                    searchViewModel.Id = Id;
+                    var ResultRemainingQuanntity = webServices.Post(searchViewModel, "Bill/LPOGetRemainingDetails");
+
+                    LpoRemainingQuantityViewModel lpoRemainingQuantityViewModel = new LpoRemainingQuantityViewModel();
+                    lpoRemainingQuantityViewModel = (new JavaScriptSerializer().Deserialize<LpoRemainingQuantityViewModel>(ResultRemainingQuanntity.Data.ToString()));
+
+                    ViewBag.lPOInvoiceViewModel = lPOInvoiceViewModel;
+                    ViewBag.lpoRemainingQuantityViewModel = lpoRemainingQuantityViewModel;
+
                     lPOInvoiceViewModel.Heading = "BILL";
 
-                    lPOInvoiceDetails = lPOInvoiceViewModel.lPOInvoiceDetailsList;
+                   // lPOInvoiceDetails = lPOInvoiceViewModel.lPOInvoiceDetailsList;
                     ViewBag.lPOInvoiceDetails = lPOInvoiceDetails;
 
                     HttpContext.Cache.Remove("LPOData");
@@ -99,6 +110,11 @@ namespace IT.Web_New.Controllers
                     venderViewModels.Insert(0, new VenderViewModel() { Id = 0, Name = "Select Vender" });
 
                     ViewBag.Vender = venderViewModels;
+
+                    List<VatModel> model = new List<VatModel>();
+                    model.Add(new VatModel() { Id = 0, VAT = 0 });
+                    model.Add(new VatModel() { Id = 5, VAT = 5 });
+                    ViewBag.VatDrop = model;
 
                     return View(lPOInvoiceVModel);
                 }
@@ -250,6 +266,24 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpGet]
+        public ActionResult BillAllByLpoId(int Id)
+        {
+            try
+            {
+                SearchViewModel searchViewModel = new SearchViewModel();
+                searchViewModel.Id = Id;
+                var result = webServices.Post(searchViewModel, "Bill/BillAllByLpoId");
+                lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
+                
+                return View(lPOInvoiceViewModels);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
         public ActionResult Details(int Id)
         {
             try
@@ -311,7 +345,8 @@ namespace IT.Web_New.Controllers
                 throw;
             }
         }
-        
+
+        [HttpGet]
         public ActionResult Edit(int Id)
         {
             try
@@ -503,6 +538,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public static decimal CalculateVat(decimal vat, decimal Total)
         {
             decimal Result = 0;

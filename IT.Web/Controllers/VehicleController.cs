@@ -23,7 +23,7 @@ namespace IT.Web_New.Controllers
         public List<DriverViewModel> VehicleViewModel { get; private set; }
         public List<VehicleViewModel> VehicleViewModels { get; private set; }
         int CompanyId = 0;
-        // GET: Vehicle
+        [HttpGet]
         public ActionResult Index(int CompId = 0)
         {
             if (CompId == 0)
@@ -71,6 +71,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public JsonResult GetAllVehicle()
         {
             try
@@ -90,6 +91,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Details(int id)
         {
             try
@@ -114,7 +116,7 @@ namespace IT.Web_New.Controllers
             return View(vehicleViewModel);
         }
 
-        // GET: Vehicle/Create
+        [HttpGet]
         public ActionResult Create()
         {
 
@@ -139,8 +141,7 @@ namespace IT.Web_New.Controllers
 
             //return View();
         }
-
-        // POST: Vehicle/Create
+               
         [HttpPost]
         public ActionResult Create(VehicleViewModel vehicleViewModel)
         {
@@ -240,7 +241,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        // GET: Vehicle/Edit/5
+        [HttpGet]
         public ActionResult Edit(int Id)
         {
             try
@@ -366,13 +367,12 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        // GET: Vehicle/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             return View();
         }
-
-        // POST: Vehicle/Delete/5
+               
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -418,6 +418,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [NonAction]
         public DriverVehicelViewModel DriverVehicels(int CompanyId)
         {
             SearchViewModel searchViewModel = new SearchViewModel();

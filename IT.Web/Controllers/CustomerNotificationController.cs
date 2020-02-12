@@ -16,6 +16,7 @@ namespace IT.Web_New.Controllers
         List<CustomerNotificationViewModel> customerNotificationViewModels = new List<CustomerNotificationViewModel>();
         CustomerNotificationViewModel customerNotificationViewModel = new CustomerNotificationViewModel();
 
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -38,6 +39,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             return View(new CustomerNotificationViewModel());

@@ -15,7 +15,7 @@ namespace IT.Web_New.Controllers
         List<DesignationViewModel> designationViewModels = new List<DesignationViewModel>();
         DesignationViewModel DesignationViewModel = new DesignationViewModel();
 
-        // GET: Designation
+       [HttpGet]
         public ActionResult Index()
         {
             try
@@ -45,19 +45,18 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        // GET: Designation/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Designation/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View(new DesignationViewModel());
         }
-
-        // POST: Designation/Create
+        
         [HttpPost]
         public ActionResult Create(DesignationViewModel designationViewModel)
         {
@@ -83,8 +82,7 @@ namespace IT.Web_New.Controllers
                 throw;
             }
         }
-
-        // GET: Designation/Edit/5
+                
         [HttpGet]
         public ActionResult Edit(int? Id)
         {
@@ -108,8 +106,7 @@ namespace IT.Web_New.Controllers
                 throw;
             }
         }
-
-        // POST: Designation/Edit/5
+               
         [HttpPost]
         public ActionResult Delete(int Id)
         {

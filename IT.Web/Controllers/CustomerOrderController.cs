@@ -99,6 +99,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Details(int Id)
         {
             try
@@ -163,6 +164,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult AdminDetails(int Id)
         {
             try
@@ -267,6 +269,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             try
@@ -465,6 +468,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult TestMap()
         {
             return View();
