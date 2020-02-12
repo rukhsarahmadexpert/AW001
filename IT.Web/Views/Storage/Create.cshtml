@@ -1,6 +1,6 @@
 ﻿@model List<IT.Core.ViewModels.StorageViewModel>
 @{
-    ViewBag.Title = "Vender Create";
+    ViewBag.Title = "AW Fuel - Create Storage";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 
 
@@ -390,16 +390,20 @@
 
     function loadOptionProduct(productUrl)
     {
-        ajaxRequest("POST", productUrl, "", "json").then(function (result1)
+       
+        ajaxRequest("Get", productUrl, "", "json").then(function (result1)
         {
+          
             //debugger;
             if (result1 != "failed")
             {
-                $.each(result1, function (value, item)
-                {
-                    console.log(item)
-                              $(".ProductRow1").append('<option value="' + item.Id + '">' + item.Name + '</option>');
-                });
+              
+                
+                    $.each(result1, function (value, item) {
+                        console.log(item)
+                        $(".ProductRow1").append('<option value="' + item.Id + '">' + item.Name + '</option>');
+                    });
+               
             }
             else
             {
