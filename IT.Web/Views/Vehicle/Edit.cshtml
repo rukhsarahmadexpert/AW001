@@ -1,14 +1,14 @@
 ﻿@model IT.Core.ViewModels.VehicleViewModel
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+    ViewBag.Title = "Edit Vehicle";
+    Layout = "~/Views/Shared/_layout.cshtml";
 }
 
 <main id="js-page-content" role="main" class="page-content">
 
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-edit'></i> Create Vehicle
+            <i class='subheader-icon fal fa-edit'></i> Edit Vehicle
         </h1>
     </div>
     <div class="row"> 
@@ -23,13 +23,11 @@
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-tag">
-                            Please add your vehicle from here...
+                            Please Edit vehicle from here...
                         </div>
                         <form action="/Vehicle/Update" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
-
-
                                     <div class="form-group">
                                         <label class="form-label" for="single-label">
                                             Select Vehicle Type
@@ -146,7 +144,7 @@
                                     <div class="row py-5">
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">
-                                                Submit
+                                                Update 
                                                 <span>Vehicle</span>
                                             </button>
                                         </div>

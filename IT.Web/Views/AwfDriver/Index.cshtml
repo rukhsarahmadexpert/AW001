@@ -3,7 +3,7 @@
 
 @model List<IT.Core.ViewModels.DriverViewModel>
 @{
-    ViewBag.Title = "Drivers List";
+    ViewBag.Title = "AW Fuel - Drivers List";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 
 
@@ -13,7 +13,7 @@
 }
 
                         <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">AW Fuel </a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">AW Fuel</a></li>
                             
                             <li class="breadcrumb-item active">Drivers</li>
                             <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
@@ -24,8 +24,10 @@
                                 <div id="panel-1" class="panel">
                                     <div class="panel-hdr">
                                         <h2>
-                                           <a href="/AwfDriver/Create"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Driver</i></span>
-                                        </h2></a>
+                                            <a href="/AwfDriver/Create">
+                                                <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Driver</i></span>
+                                            </a>
+                                        </h2>
                                        
                                     </div>
                                     <div class="panel-container show">
@@ -51,7 +53,6 @@
                                                 <tbody>                                                    
                                                     @foreach (var item in driverViewModels)
                                                     {
-
                                                         <tr>
                                                             <td>@item.Name</td>
                                                             <td>@item.Contact</td>
@@ -62,13 +63,12 @@
                                                             <td>
                                                                <a href="/AwfDriver/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
                                                                 <a href="/AwfDriver/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                                                <i class="fal fa-trash-alt">
+                                                                <i class="fal fa-trash-alt"></i>
                                                             </td>
                                                         </tr>
                                                     }                                                    
-                                                    
-                                                </tbody>
-                                                
+                                                  
+                                                </tbody>   
                                             </table>
                                             <!-- datatable end -->
                                         </div>

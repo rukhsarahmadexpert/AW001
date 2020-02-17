@@ -1,6 +1,6 @@
 ﻿@model IT.Core.ViewModels.DriverViewModel
 @{
-    ViewBag.Title = "Admin Driver Details";
+    ViewBag.Title = "AW Fuel - Driver Details";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
@@ -16,7 +16,7 @@
 
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-edit'></i>Driver Details
+            Driver Details
         </h1>
     </div>
     <div class="row">
@@ -24,7 +24,7 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Details <span class="fw-300"></span>
+                        <a href="/AwfDriver/Edit/@Model.Id"><i class="fal fa-edit"></i> Edit <span class="fw-200">Driver</span></a>
                     </h2>                    
                 </div>
                 <div class="panel-container show">
