@@ -1,20 +1,20 @@
 @model IT.Core.ViewModels.VehicleViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Vehicle Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Admin Vehicle</a></li> 
-                            <li class="breadcrumb-item active">Details</li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Vehicle</a></li> 
+                            <li class="breadcrumb-item active">Detail</li>
                             <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-edit'></i>Vehicle Details
+           Vehicle Detail
         </h1>
     </div>
     <div class="row">
@@ -22,13 +22,13 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Details <span class="fw-300"></span>
+                        <a href="/Vehicle/Edit/@Model.Id"><i class="fal fa-edit"></i> Edit <span class="fw-300">Details</span></a>
                     </h2>                    
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-tag">
-                            Driver
+                            Vehicle
                         </div>
                         <form id="form1" method="post" enctype="application/x-www-form-urlencoded">
                             <div class="row">
@@ -38,9 +38,7 @@
                                                     <thead class="thead-themed">
                                                         <tr>
                                                             <th>Vehicle </th>
-                                                            <th>Information</th>
-                                                            
-                                                           
+                                                            <th>Information</th>  
                                                         </tr>
                                                     </thead>
                                                     <tbody>

@@ -2,7 +2,7 @@
 
 @model List<IT.Core.ViewModels.VehicleViewModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Vehicles List";
     Layout = ViewBag.LayoutName;
 
      List<IT.Core.ViewModels.VehicleViewModel> VehicleViewModels = new List<IT.Core.ViewModels.VehicleViewModel>();
@@ -10,9 +10,9 @@
 }
 
  <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Mena Energy</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">AW Fuel</a></li>
                             
-                            <li class="breadcrumb-item active">Vehicle</li>
+                            <li class="breadcrumb-item active">Vehicles</li>
                             <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
                         </ol>
                       
@@ -49,13 +49,11 @@
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    
+                                                <tbody>                                                    
                                                     @if (VehicleViewModels != null && VehicleViewModels.Count > 0)
                                                     {
                                                         foreach (var item in VehicleViewModels)
                                                         {
-
                                                         <tr>
                                                             <td>@item.VehicleTypeName</td>
                                                             <td>@item.TraficPlateNumber</td>

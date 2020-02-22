@@ -72,6 +72,7 @@
     <Compile Include="ViewModels\DriverViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\ExceptionLogViewModel.cs" />
+    <Compile Include="ViewModels\FuelPricesViewModel.cs" />
     <Compile Include="ViewModels\FuelTransferViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\LPOInvoiceDetails.cs" />

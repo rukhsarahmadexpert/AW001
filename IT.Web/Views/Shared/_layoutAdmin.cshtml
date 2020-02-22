@@ -32,6 +32,79 @@
     <!-- page related CSS below -->
     <link rel="stylesheet" media="screen, print" href="~/assets/css/formplugins/select2/select2.bundle.css">
     <link rel="stylesheet" media="screen, print" href="~/assets/css/notifications/sweetalert2/sweetalert2.bundle.css">
+
+  <style>
+      .switchToggle input[type=checkbox] {
+          height: 0;
+          width: 0;
+          visibility: hidden;
+          position: absolute;
+      }
+
+      .switchToggle label {
+          cursor: pointer;
+          text-indent: -9999px;
+          width: 120px;
+          max-width: 120px;
+          height: 20px;
+          background: #d1d1d1;
+          display: block;
+          border-radius: 100px;
+          position: relative;
+      }
+
+          .switchToggle label:after {
+              content: '';
+              position: absolute;
+              left: 2px;
+              width: 20px;
+              height: 20px;
+              background: #fff;
+              border-radius: 100px;
+              transition: 0.3s;
+          }
+
+      .switchToggle input:checked + label, .switchToggle input:checked + input + label {
+          background: #3d4e7c;
+      }
+
+      .switchToggle input + label:before, .switchToggle input + input + label:before {
+          content: 'UnActive';
+          position: absolute;
+          left: 35px;
+          width: 26px;
+          height: 20px;
+          border-radius: 90px;
+          transition: 0.3s;
+          text-indent: 0;
+          color: #fff;
+      }
+
+      .switchToggle input:checked + label:before, .switchToggle input:checked + input + label:before {
+          content: 'Active';
+          position: absolute;
+          left: 10px;
+          width: 26px;
+          height: 20px;
+          border-radius: 90px;
+          transition: 0.3s;
+          text-indent: 0;
+          color: #fff;
+      }
+
+      .switchToggle input:checked + label:after, .switchToggle input:checked + input + label:after {
+          left: calc(100% - 1px);
+          transform: translateX(-100%);
+      }
+
+      .switchToggle label:active:after {
+          width: 40px;
+      }
+
+      .toggle-switchArea {
+          margin: 5px 0 5px 0;
+      }
+  </style>
 </head>
 <body class="mod-bg-1 ">
     <!-- DOC: script to save and load page settings -->
@@ -129,26 +202,6 @@
                    
 
                     <ul class="nav-menu" id="js-nav-menu">
-                                 
-                        <li class="open">
-                            <a href="#" title="Admin Information" class="" data-filter-tags="Admin Information">
-                                <i class="fal fa-address-card"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Admin Information</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="/AwfDriver/Index" title="Drivers" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Drivers</span><span class="">List</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/AwfVehicle" title="Vehicles" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Vehicles</span><span class="">List</span>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
 
                         <li class="open">
                             <a href="#" title="Companies" class=" " data-filter-tags="Companies">
@@ -179,6 +232,39 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="open">
+                            <a href="#" title="Drivers" class="" data-filter-tags="Drivers">
+                                <i class="fal fa-address-card"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Drivers</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/AwfDriver/Index" title="Drivers" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Drivers</span><span class="">List</span>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+                        <li class="open">
+                            <a href="#" title="Vehicles" class="" data-filter-tags="Vehicles">
+                                <i class="fal fa-car"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Vehicles</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/AwfVehicle" title="Vehicles" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Vehicles</span><span class="">List</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
 
                         <li class="open">
                             <a href="#" title="Products" class=" " data-filter-tags="Products">
@@ -240,7 +326,7 @@
 
                         <li class="open">
                             <a href="#" title="Customer Orders" class=" " data-filter-tags="Customer Orders">
-                                <i class="fal fa-address-book"></i>
+                                <i class="fal fa-exchange"></i>
                                 <span class="nav-link-text" data-i18n="nav.application_intel">Customer Orders</span>
                             </a>
                             <ul>
@@ -344,6 +430,12 @@
                                 <li>
                                     <a href="/Country/CityAll" title="City" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">City</span><span class="">List</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/FuelPrices/Index" title="City" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Fuel Prices</span><span class="">List</span>
                                     </a>
                                 </li>
 

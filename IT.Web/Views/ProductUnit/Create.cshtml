@@ -1,7 +1,16 @@
 ﻿@model IT.Core.ViewModels.ProductUnitViewModel
 
 @{
-    ViewBag.Title = "Prduct Unit Create";
+
+    if(Model.Id > 0)
+    {
+        ViewBag.Title = "AW Fuel - Edit Product Unit";
+    }
+    else
+    {
+        ViewBag.Title = "AW Fuel - Create Product Unit";
+    }
+
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 @*<label></label>*@
@@ -23,9 +32,21 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <div class="panel-tag">
-                            Please add Product Unit from here...
-                        </div>
+
+                        @if (Model.Id > 0)
+                        {
+                            <div class="panel-tag">
+                                Please Edit Product Unit from here...
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="panel-tag">
+                                Please Add Product Unit from here...
+                            </div>
+
+                        }
+
                         <form action="/ProductUnit/Create" method="post">
                             <input type="hidden" value="@Model.Id" name="Id" id="Id" />
                             <div class="row">
@@ -38,10 +59,20 @@
                             </div>
                             <div class="row py-5">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                        Submit
-                                        <span>Product Unit</span>
-                                    </button>
+                                    @if (Model.Id > 0)
+                                    {
+                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                            Update
+                                            <span>Product Unit</span>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                            Submit
+                                            <span>Product Unit</span>
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </form>

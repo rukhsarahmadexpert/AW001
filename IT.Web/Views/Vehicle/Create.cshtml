@@ -1,11 +1,9 @@
 ﻿
 @{
-                /**/
-
-                ViewBag.Title = "Vehicle Create";
+                ViewBag.Title = "Create Vehicle";
                 Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*<label></label>*@
+
 <main id="js-page-content" role="main" class="page-content">
 
     <div class="subheader">
@@ -30,13 +28,10 @@
                         <form action="/Vehicle/Create" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
-
-
                                     <div class="form-group">
                                         <label class="form-label" for="single-label">
                                             Select Vehicle Type
-                                        </label>
-                                        
+                                        </label>                                      
                                          <select class="select2 form-control" name="VehicleType" id="VehicleType">
                                           @foreach (var item in ViewBag.VehicleTypes)
                                           {
