@@ -269,7 +269,7 @@ namespace IT.Web_New.Controllers
                     {
                         httpPostedFileBase[2] = driverViewModel.DrivingLicenseBackFile;
                     }
-                    if (driverViewModel.DrivingLicenseBackFile != null)
+                    if (driverViewModel.DrivingLicenseFrontFile != null)
                     {
                         httpPostedFileBase[3] = driverViewModel.DrivingLicenseFrontFile;
                     }

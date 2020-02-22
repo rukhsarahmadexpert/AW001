@@ -12,8 +12,8 @@ namespace IT.Repository.WebServices
     public class WebServices
     {
         HttpClient httpClient;
-         // string baseURL = "http://localhost:64299/api/"; //ConfigurationManager.AppSettings["BaseURL"].ToString();
-          string baseURL = "http://itmolen-001-site8.htempurl.com/api/";
+          string baseURL = "http://localhost:64299/api/"; //ConfigurationManager.AppSettings["BaseURL"].ToString();
+       //   string baseURL = "http://itmolen-001-site8.htempurl.com/api/";
 
         ServiceResponseModel serviceResponseModel;
         public WebServices()
