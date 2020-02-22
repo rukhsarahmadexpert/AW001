@@ -59,7 +59,23 @@
                                                             <td>@item.Email</td>
                                                             <td>@item.Nationality</td>
                                                             <td>@item.Facebook</td>
-                                                            <td>@item.IsActive</td>
+                                                            <td>
+                                                                @if (@item.IsActive == true)
+                                                                {
+                                                                    <div class="switchToggle">
+                                                                        <input type="checkbox" id="@item.Id" checked>
+                                                                        <label for="@item.Id">Toggle</label>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="switchToggle">
+                                                                        <input type="checkbox" id="@item.Id">
+                                                                        <label for="@item.Id">Toggle</label>
+                                                                    </div>
+
+                                                                }
+                                                            </td>
                                                             <td>
                                                                <a href="/AwfEmployee/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
                                                                 <a href="/AwfEmployee/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;

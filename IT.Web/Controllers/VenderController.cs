@@ -74,7 +74,12 @@ namespace IT.Web_New.Controllers
                 if (venderResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     var reuslt = (new JavaScriptSerializer().Deserialize<int>(venderResult.Data));
+                    
                     return RedirectToAction(nameof(Index));
+                }
+                if (Request.IsAjaxRequest())
+                {
+                    return Json(venderViewModels, JsonRequestBehavior.AllowGet);
                 }
 
                 return View(venderViewModel);

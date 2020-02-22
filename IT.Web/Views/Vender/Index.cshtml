@@ -42,16 +42,34 @@
                             @foreach (var item in venderViewModels)
                             {
                                 <tr>
-                                    <td>@item.Name</td>
-                                    <td>@item.Email</td>
-                                    <td>@item.Representative</td>
-                                    <td>@item.TRN</td>
-                                    <td>@item.Mobile</td>
-                                    <td>@item.IsActive</td>
+                                    <td class="Name">@item.Name</td>
+                                    <td class="Email">@item.Email</td>
+                                    <td class="Representative">@item.Representative</td>
+                                    <td class="TRN">@item.TRN</td>
+                                    <td class="Mobile">@item.Mobile</td>
+                                    <td>
+                                        @if (@item.IsActive == true)
+                                        {
+                                            <div class="switchToggle">
+                                                <input type="checkbox" class="IsActive" value="0" id="@item.Id" checked>
+                                                <label for="@item.Id">Toggle</label>
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="switchToggle">
+                                                <input type="checkbox" class="IsActive" value="1" id="@item.Id">
+                                                <label for="@item.Id">Toggle</label>
+                                            </div>
+
+                                        }
+                                        <input type="hidden" name="Id" id="Id" value="@item.Id" />
+                                    </td>
                                     <td>
                                         <a href="/Vender/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
                                         <a href="/Vender/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                        <i class="fal fa-trash-alt">
+                                        <i class="fal fa-trash-alt"></i>
                                     </td>
                                 </tr>
                             }
@@ -63,4 +81,71 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts{
+
+    <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
+    <script>
+
+
+    $(document).ready(function () {
+        $(".IsActive").change(function () {
+            
+
+            if (this.checked) {
+                //Do stuff
+                var returnVal = confirm("Are you sure?");
+                $(this).prop("checked", returnVal);
+
+                var Data = JSON.stringify(
+                    {
+                        IsActive: $('.IsActive').val(),
+                        Id : $('#Id').val(),
+                    })
+                alert(Data);
+                ajaxRequest("POST", "/Vender/Create", Data, "json").then(function (result)
+                {
+                    if (result != "failed")
+                    {
+                      console.log(result);
+                      // window.location.reload();
+                    }
+                    else
+                    {
+                       alert('there is some problem');
+                    }
+                })
+
+        
+            }
+            else {
+                var returnVal = confirm("Are you sure?");
+                $(this).prop("", returnVal);
+                var Data = JSON.stringify(
+                    {
+                        IsActive: $('.IsActive').val(),
+                        Id: $('#Id').val(),
+                    })
+                alert(Data);
+                ajaxRequest("POST", "/Vender/Create", Data, "json").then(function (result) {
+                    if (result != "failed") {
+                        console.log(result);
+                        // window.location.reload();
+                    }
+                    else {
+                        alert('there is some problem');
+                    }
+                })
+               
+            }
+        });
+
+        });
+    </script>
+
+
+}
+
+
 
