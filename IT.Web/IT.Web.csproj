@@ -180,6 +180,7 @@
     <Compile Include="Controllers\DirectSaleController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\FuelPricesController.cs" />
     <Compile Include="Controllers\FuelTransferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
@@ -876,6 +877,8 @@
     <Content Include="Views\Quotation\IndexCustomer.cshtml" />
     <Content Include="Views\Invoice\CustomerIndex.cshtml" />
     <Content Include="Views\Bill\BillAllByLpoId.cshtml" />
+    <Content Include="Views\FuelPrices\Index.cshtml" />
+    <Content Include="Views\FuelPrices\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
