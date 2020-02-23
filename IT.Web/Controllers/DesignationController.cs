@@ -29,7 +29,6 @@ namespace IT.Web_New.Controllers
                 }
                 else
                 {
-
                     var result = webServices.Post(new DesignationViewModel(), "Designation/All");
 
                     if (result.StatusCode == System.Net.HttpStatusCode.Accepted)

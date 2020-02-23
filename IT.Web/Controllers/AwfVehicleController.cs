@@ -16,9 +16,9 @@ namespace IT.Web_New.Controllers
     public class AwfVehicleController : Controller
     {
         WebServices webServices = new WebServices();
-        List<VehicleViewModel> vehicleViewModels = new List<VehicleViewModel>();
+        readonly List<VehicleViewModel> vehicleViewModels = new List<VehicleViewModel>();
         VehicleViewModel vehicleViewModel = new VehicleViewModel();
-        List<VehicleTypeViewModel> vehicleTypeViewModels = new List<VehicleTypeViewModel>();
+        readonly List<VehicleTypeViewModel> vehicleTypeViewModels = new List<VehicleTypeViewModel>();
 
         public List<DriverViewModel> VehicleViewModel { get; private set; }
         public List<VehicleViewModel> VehicleViewModels { get; private set; }
@@ -145,15 +145,12 @@ namespace IT.Web_New.Controllers
                             content.Add(new StringContent(vehicleViewModel.InsuranceExpiry == null ? "" : vehicleViewModel.InsuranceExpiry), "InsuranceExpiry");
                             content.Add(new StringContent(vehicleViewModel.RegisteredRegion == null ? "" : vehicleViewModel.RegisteredRegion), "RegisteredRegion");
                             content.Add(new StringContent(vehicleViewModel.Comments == null ? "" : vehicleViewModel.Comments), "Comments");
-
-
-
+                                                       
                             var result = webServices.PostMultiPart(content, "AWFVehicle/Add", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                             {
                                 return Redirect(nameof(Index));
                             }
-
                         }
                     }
                 }
