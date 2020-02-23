@@ -17,7 +17,7 @@ namespace IT.Repository.WebServices
 
         ServiceResponseModel serviceResponseModel;
         public WebServices()
-        {
+        { 
             if (httpClient == null)
             {
                 httpClient = new HttpClient();
