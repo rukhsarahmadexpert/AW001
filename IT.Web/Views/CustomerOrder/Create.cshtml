@@ -6,7 +6,6 @@
     List<IT.Core.ViewModels.VehicleModel> vehicleModels = new List<IT.Core.ViewModels.VehicleModel>();
     List<IT.Core.ViewModels.SiteViewModel> siteViewModels = new List<IT.Core.ViewModels.SiteViewModel>();
 
-
     driverModels = ViewBag.driverModels as List<IT.Core.ViewModels.DriverModel>;
     vehicleModels = ViewBag.vehicleModels as List<IT.Core.ViewModels.VehicleModel>;
     siteViewModels = ViewBag.Sites as List<IT.Core.ViewModels.SiteViewModel>;
@@ -23,13 +22,12 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Order create and update here...  <span class="fw-300"></span>
+                        <span class="fw-300"></span>
                     </h2>    
                     <div class="custom-control custom-radio mr-2">
                         <input type="radio" class="custom-control-input" id="defaultCheckedRadio" name="defaultExampleRadios" checked="">
                         <label class="custom-control-label" id="lbl1" for="defaultCheckedRadio">Order by Vehicle</label>
-                    </div>
-                   
+                    </div>   
                         <div class="custom-control custom-radio">
                             <input type="radio" class="custom-control-input" id="defaultUncheckedRadio" name="defaultExampleRadios">
                             <label class="custom-control-label" for="defaultUncheckedRadio">Bulk Order</label>
@@ -46,7 +44,7 @@
                             <div class="col-md-6">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text font-weight-bold" id="basic-addon1">For Site:</span>
+                                        <span class="input-group-text font-weight-bold" id="basic-addon1">Sites</span>
                                     </div>
                                     <select class="form-control" id="Site">
                                         @foreach (var item in siteViewModels)
@@ -55,7 +53,7 @@
                                         }
                                     </select>
                                     <div class="input-group-append">
-                                        <span class="input-group-text font-weight-bold" id="basic-addon2"><a href="/CustomerSites/Create"><span><i class="fal fa-plus-circle"></i></span> Add new site</a></span>
+                                        <span class="input-group-text font-weight-bold" id="basic-addon2"><a href="/CustomerSites/Create"><span><i class="fal fa-plus-circle"></i></span> New Site</a></span>
                                     </div>
                                 </div>
                             </div>
@@ -176,5 +174,6 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&sensor=false"></script>
     @*<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>*@
     <script src="~/Scripts/CustomScript/CustomerOrder.js"></script>
+
 }
 
