@@ -16,9 +16,9 @@ namespace IT.Web_New.Controllers
     public class AwfVehicleController : Controller
     {
         WebServices webServices = new WebServices();
-        List<VehicleViewModel> vehicleViewModels = new List<VehicleViewModel>();
+        readonly List<VehicleViewModel> vehicleViewModels = new List<VehicleViewModel>();
         VehicleViewModel vehicleViewModel = new VehicleViewModel();
-        List<VehicleTypeViewModel> vehicleTypeViewModels = new List<VehicleTypeViewModel>();
+        readonly List<VehicleTypeViewModel> vehicleTypeViewModels = new List<VehicleTypeViewModel>();
 
         public List<DriverViewModel> VehicleViewModel { get; private set; }
         public List<VehicleViewModel> VehicleViewModels { get; private set; }
