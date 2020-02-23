@@ -14,5 +14,9 @@ namespace IT.Core.ViewModels
         public string UserName { get; set; }
         [Required(ErrorMessage = "Password Is Required")]
         public string Password { get; set; }
+
+        public string Token { get; set; }
+        public string DeviceId { get; set; }
+        public string Device { get; set; }
     }
 }

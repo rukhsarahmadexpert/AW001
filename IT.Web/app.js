@@ -17,10 +17,16 @@ messaging.requestPermission().then(function () {
 
     if (isTokenSentToServer()) {
         console.log('Token already sent')
+        messaging.getToken().then((currentTokens) =>
+        {
+            localStorage.setItem("BrowserToken", currentTokens);
+            //console.log(currentTokens);
+        });
     }
     else {
         getRegisterToken();
     }
+    
     return messaging.getToken();
 })
     //.then(function (token) {  
@@ -35,8 +41,9 @@ function getRegisterToken() {
     messaging.getToken().then((currentToken) => {
         if (currentToken) {
             console.log('have permission');
-            console.log(currentToken);
+            console.log(currentToken);           
             sendTokenToServer(currentToken);
+            localStorage.setItem("BrowserToken", currentTokens);
             // updateUIForPushEnabled(currentToken);
         } else {
             // Show permission request.
@@ -53,9 +60,8 @@ function getRegisterToken() {
 }
 
 messaging.onMessage((payload) => {
-      console.log('Message received. ', payload);
+   //   console.log('Message received. ', payload);
     // ...
-
     var title = payload.data.Titles;
     var options = {
         body: payload.data.Messages,
