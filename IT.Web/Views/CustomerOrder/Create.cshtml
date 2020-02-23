@@ -62,99 +62,100 @@
                             <div class="col-md-6"></div>
                         </div>
 
-
-                        <table class="table table-hover" id="CustomerOrderTable">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Driver</th>
-                                    <th>Vehicle</th>
-                                    <th>Quantity</th>
-                                    <th>Note</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (Model.customerGroupOrderDetailsViewModels != null && Model.customerGroupOrderDetailsViewModels.Count > 0)
-                                {
-                                    foreach (var Modelitem in Model.customerGroupOrderDetailsViewModels)
+                        <div class="table-responsive" style="width:100%">
+                            <table class="table table-hover" id="CustomerOrderTable">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Driver</th>
+                                        <th>Vehicle</th>
+                                        <th>Quantity</th>
+                                        <th>Note</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.customerGroupOrderDetailsViewModels != null && Model.customerGroupOrderDetailsViewModels.Count > 0)
                                     {
-                                        <tr>
-                                            <td>
-                                                <input type="hidden" class="Id" value="@Modelitem.Id" />
-                                                <select class="form-control product" id="product">
-                                                    @foreach (var item in ViewBag.product)
-                                                    {
-                                                        <option value="@item.Id" @(item.Id == Modelitem.ProductId ? "selected='selected'" : "")>@item.Name</option>
-                                                    }
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-control Driver" id="Driver">
-                                                    @foreach (var item in driverModels)
-                                                    {
-                                                        <option value="@item.DriverId" @(item.DriverId == Modelitem.DriverId ? "selected='selected'" : "")>@item.DriverName</option>
-                                                    }
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-control vehicle" id="vehicle">
-                                                    @foreach (var item in vehicleModels)
-                                                    {
-                                                        <option value="@item.VehicelId" @(item.VehicelId == Modelitem.VehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
-                                                    }
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control Quantity" value="@Modelitem.RequestedQuantity" id="Quantity" style="width:100px" />
-                                            </td>
-                                            <td>
-                                                <textarea class="form-control Note" id="Note" value="@Modelitem.Comments" style="resize:vertical">@Modelitem.Comments</textarea>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-danger remove" value="Remove">x</button>
-                                            </td>
-                                        </tr>
+                                        foreach (var Modelitem in Model.customerGroupOrderDetailsViewModels)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" class="Id" value="@Modelitem.Id" />
+                                                    <select class="form-control product" id="product">
+                                                        @foreach (var item in ViewBag.product)
+                                                        {
+                                                            <option value="@item.Id" @(item.Id == Modelitem.ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                                        }
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control Driver" id="Driver">
+                                                        @foreach (var item in driverModels)
+                                                        {
+                                                            <option value="@item.DriverId" @(item.DriverId == Modelitem.DriverId ? "selected='selected'" : "")>@item.DriverName</option>
+                                                        }
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control vehicle" id="vehicle">
+                                                        @foreach (var item in vehicleModels)
+                                                        {
+                                                            <option value="@item.VehicelId" @(item.VehicelId == Modelitem.VehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
+                                                        }
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control Quantity" value="@Modelitem.RequestedQuantity" id="Quantity" style="width:100px" />
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control Note" id="Note" value="@Modelitem.Comments" style="resize:vertical">@Modelitem.Comments</textarea>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger remove" value="Remove">x</button>
+                                                </td>
+                                            </tr>
+                                        }
                                     }
-                                }
 
-                                <tr id="MainRow">
-                                    <td>
-                                        <select class="form-control product" id="product">
-                                            @foreach (var item in ViewBag.product)
-                                            {
-                                                <option value="@item.Id">@item.Name</option>
-                                            }
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select class="form-control Driver" id="Driver">
-                                            @foreach (var item in driverModels)
-                                            {
-                                                <option value="@item.DriverId">@item.DriverName</option>
-                                            }
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select class="form-control vehicle" id="vehicle">
-                                            @foreach (var item in vehicleModels)
-                                            {
-                                                <option value="@item.VehicelId">@item.TraficPlateNumber</option>
-                                            }
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control Quantity" id="Quantity" style="width:100px" />
-                                    </td>
-                                    <td>
-                                        <textarea class="form-control Note" id="Note" style="resize:vertical"></textarea>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-success" id="AddNewRow" value="Add">+</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    <tr id="MainRow">
+                                        <td>
+                                            <select class="form-control product" id="product">
+                                                @foreach (var item in ViewBag.product)
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control Driver" id="Driver">
+                                                @foreach (var item in driverModels)
+                                                {
+                                                    <option value="@item.DriverId">@item.DriverName</option>
+                                                }
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control vehicle" id="vehicle">
+                                                @foreach (var item in vehicleModels)
+                                                {
+                                                    <option value="@item.VehicelId">@item.TraficPlateNumber</option>
+                                                }
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control Quantity" id="Quantity" style="width:100px" />
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control Note" id="Note" style="resize:vertical"></textarea>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-success" id="AddNewRow" value="Add">+</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
                         <hr />
                         <input type="hidden" id="Lattitue" name="Lattitue">
