@@ -1,7 +1,8 @@
-﻿$('#AddNewRow').click(function () {
+﻿$('#AddNewRow').click(function ()
+{
     var currentrow = $(this).closest("tr");
-
-    if (isValidRow(currentrow)) {
+    if (isValidRow(currentrow))
+    {
         var $newRow = $("#CustomerOrderTable tbody #MainRow").clone().removeAttr('id');
         $('.product', $newRow).val($("#MainRow .product").val());
         $('.Driver', $newRow).val($("#MainRow .Driver").val());
@@ -19,43 +20,42 @@
         $('#MainRow #vehicle').val(0).addClass('form-control');
         $('#MainRow #Quantity').val(0).addClass('form-control');
         $('#MainRow #Note').val(0).addClass('form-control');
-
-   
-        // clearfield();
     }
 });
 
-$(document).on('click', '.removeRow', function () {
+$(document).on('click', '.removeRow', function ()
+{
     var currentRow = $(this).closest('tr');
     currentRow.remove();
 });
 
-function isValidRow(currentRow) {
+function isValidRow(currentRow)
+{
     var isvalid = true;
     var TransictionTypeId = 0;
     TransictionTypeId = currentRow.find('.product').val();
-
-    if (parseInt(TransictionTypeId) == 0 || TransictionTypeId == "") {
+    if (parseInt(TransictionTypeId) == 0 || TransictionTypeId == "")
+    {
         isvalid = false;
     }
-
     return isvalid;
 }
 
-$(document).ready(function () {
-    $('#SaveOrder').click(function () {
+$(document).ready(function ()
+{
+
+    $('#SaveOrder').click(function ()
+    {
         CreateGroupOrder('/CustomerOrder/CustomerGroupOrderAdd');
     });
 
-    $('#Site').click(function () {
-
+    $('#Site').change(function ()
+    {
+      
         var Id = $(this).val();
-        if (parseInt(Id) > 0) {
-            var Data = JSON.stringify({
-                Id: Id
-            });
-
-            ajaxRequest("POST", "/CustomerSites/Edit", Data, "json").then(function (result)
+        if (parseInt(Id) > 0)
+        {
+            ajaxRequest("GET", "/CustomerSites/Edit/" + Id, "", "json").then(function (result)
             {
                 if (result != "Failed")
                 {
@@ -65,17 +65,18 @@ $(document).ready(function () {
                 }
             })
         }
-        else {
+        else
+        {
             return true;
         }
     });
 
 });
 
-$('.remove').click(function () {
+$('.remove').click(function ()
+{
 
     var currentRow = $(this).closest("tr");
-
     var Data = JSON.stringify({
         Id: $('#OrderId').val(),
         OrderAsignId: currentRow.find('.Id').val(),
@@ -83,21 +84,19 @@ $('.remove').click(function () {
         RowQuantity: currentRow.find('.Quantity').val(),
     })
     ajaxRequest("POST", "/CustomerOrder/CustomerOrderDetailsDelete", Data, "json").then(function (result) { if (result != "Failed") { window.location.reload() } });
-
 });
 
-function CreateGroupOrder(Url) {
+function CreateGroupOrder(Url)
+{
 
     var list = [], orderItem, CurrentRow;
     var formData = new FormData();
-
     var TotalQuantity = 0;
 
-    $('#CustomerOrderTable tbody tr').each(function () {
+    $('#CustomerOrderTable tbody tr').each(function ()
+    {
         CurrentRow: $(this).closest("tr");
-
         TotalQuantity = parseInt(TotalQuantity) + parseInt($(this).find('.Quantity').val());
-
         orderItem = {
             Id: $(this).find('.Id').val(),
             ProductId: $(this).find('.product').val(),
@@ -107,7 +106,6 @@ function CreateGroupOrder(Url) {
             Comments: $(this).find('.Note').val(),            
         }
         list.push(orderItem);
-
     });
 
     var empObj = {
@@ -121,11 +119,13 @@ function CreateGroupOrder(Url) {
         SiteId: $('#Site').val(),
     };
 
-    for (var key in empObj) {
+    for (var key in empObj)
+    {
         formData.append(key, empObj[key]);
     }
 
-    for (var i = 0; i < list.length; i++) {
+    for (var i = 0; i < list.length; i++)
+    {
         formData.append('customerOrderViewModels[' + i + '][Id]', list[i].Id),
         formData.append('customerOrderViewModels[' + i + '][VehicleId]', list[i].VehicleId),
         formData.append('customerOrderViewModels[' + i + '][DriverId]', list[i].DriverId),
@@ -133,7 +133,8 @@ function CreateGroupOrder(Url) {
         formData.append('customerOrderViewModels[' + i + '][Comments]', list[i].Comments)
         formData.append('customerOrderViewModels[' + i + '][ProductId]', list[i].ProductId)
     }
-    if (list.length > 0) {
+    if (list.length > 0)
+    {
 
         $.ajax({
             url: Url,
@@ -142,38 +143,46 @@ function CreateGroupOrder(Url) {
             dataType: 'json',
             contentType: false,
             processData: false,
-            success: function (result) {
-                if (result != "Failed") {
-
+            success: function (result)
+            {
+                if (result != "Failed")
+                {
                     list = [];
                     //swal("Good job!", "You clicked the button!", "success").dela;
                     alert('succeess');
                     window.location.href = "/CustomerOrder/Details/" + result.Id;
                      // swal("Deleted!", "Your imaginary file has been deleted.", "success");
                 }
-                else {
+                else
+                {
                     alert(result);
                 }
             },
-            error: function (errormessage) {
+            error: function (errormessage)
+            {
                 alert(errormessage);
             }
         });
     }
-    else {
+    else
+    {
         alert('Please Add item to list');
     }
 }
 
-$(document).ready(function () {
-
-    if (navigator.geolocation) {
+$(document).ready(function ()
+{
+    if (navigator.geolocation)
+    {
         navigator.geolocation.getCurrentPosition(success);
-    } else {
+    }
+    else
+    {
         alert("There is Some Problem on your current browser to get Geo Location!");
     }
 
-    function success(position) {
+    function success(position)
+    {
         var lat = position.coords.latitude;
         var long = position.coords.longitude;
         var city = position.coords.locality;
@@ -212,27 +221,26 @@ $('#defaultCheckedRadio').change(function ()
     {
         alert('Is Already in Order By Vehicle');
     }
-    else {
+    else
+    {
         window.location.reload();
-    }
-
-  
-    
+    }   
 });
 
-$('#defaultUncheckedRadio').change(function () {
-
-        if ($('#CustomerOrderTable tbody tr').length < 2) {
+$('#defaultUncheckedRadio').change(function ()
+{
+    if ($('#CustomerOrderTable tbody tr').length < 2)
+    {
             $('#AddNewRow').remove('id').hide();
             $('#Driver').empty();
             $('#vehicle').empty();
             $('#Driver').append('<option value="1" selected="selected">Bulk Driver</option>');
             $('#vehicle').append('<option value="1" selected="selected">Bulk Vehicle</option>');
-        }
-        else {
+    }
+    else
+    {
             $(this).attr('checked', false);
             $('#defaultCheckedRadio').attr('checked', true);
             alert('Please remove added rows first');
-        }
-    
+    }  
 });
