@@ -41,7 +41,7 @@ function getRegisterToken() {
             console.log('have permission');
             console.log(currentToken);           
             sendTokenToServer(currentToken);
-            localStorage.setItem("BrowserToken", currentTokens);
+            localStorage.setItem("BrowserToken", currentToken);
             // updateUIForPushEnabled(currentToken);
         } else {
             // Show permission request.
