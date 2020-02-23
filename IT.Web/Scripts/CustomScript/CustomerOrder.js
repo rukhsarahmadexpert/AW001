@@ -20,7 +20,7 @@
         $('#MainRow #Quantity').val(0).addClass('form-control');
         $('#MainRow #Note').val(0).addClass('form-control');
 
-
+   
         // clearfield();
     }
 });

@@ -16,7 +16,6 @@
 
 <ol class="breadcrumb page-breadcrumb">
     <li class="breadcrumb-item"><a href="javascript:void(0);">AWFuel</a></li>
-    <li class="breadcrumb-item">Customer</li>
     <li class="breadcrumb-item active">Dashboard</li>
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
@@ -29,11 +28,11 @@
   
     <div class="d-flex mr-0">
         <div class="mr-2">
-            <span class="peity-donut" data-peity="{ &quot;fill&quot;: [&quot;#2196F3&quot;, &quot;#9acffa&quot;],  &quot;innerRadius&quot;: 14, &quot;radius&quot;: 20 }">10/10</span>
+            <span class="peity-donut" data-peity="{ &quot;fill&quot;: [&quot;#2196F3&quot;, &quot;#9acffa&quot;],  &quot;innerRadius&quot;: 14, &quot;radius&quot;: 20 }">@Math.Round(fuelPricesViewModel.Price, 2)/100</span>
         </div>
         <div>
             <label class="fs-sm mb-0 mt-2 mt-md-0">Fuel Price</label>
-            <h4 class="font-weight-bold mb-0">@Math.Round(fuelPricesViewModel.Price, 2)</h4>
+            <h4 class="font-weight-bold mb-0">@Math.Round(fuelPricesViewModel.Price, 2) AED</h4>
             
         </div>
     </div>
