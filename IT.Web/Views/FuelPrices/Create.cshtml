@@ -61,9 +61,23 @@
                                     </div>
 
                                     <div class="col-md-6 pt-3">
+
                                         <div class="form-group">
-                                            <label class="form-label" for="simpleinput">Month</label>
-                                            <input type="text" id="Month " name="Month" value="@Model.Month" class="form-control" placeholder="Enter Month">
+                                            <label class="form-label text-muted" for="Month">Select Month</label>
+                                            <select class="form-control"id="Month " name="Month" value="@Model.Month">
+                                                <option value="January" @(Model.Month == "January" ? "selected='selected'" : "")>January</option>
+                                                <option value="February" @(Model.Month == "February" ? "selected='selected'" : "")>February</option>
+                                                <option value="March" @(Model.Month == "March" ? "selected='selected'" : "")>March</option>
+                                                <option value="April" @(Model.Month == "April" ? "selected='selected'" : "")>April</option>
+                                                <option value="May" @(Model.Month == "May" ? "selected='selected'" : "")>May</option>
+                                                <option value="June" @(Model.Month == "June" ? "selected='selected'" : "")>June</option>
+                                                <option value="July" @(Model.Month == "July" ? "selected='selected'" : "")>July</option>
+                                                <option value="August" @(Model.Month == "August" ? "selected='selected'" : "")>August</option>
+                                                <option value="September" @(Model.Month == "September" ? "selected='selected'" : "")>September</option>
+                                                <option value="October" @(Model.Month == "October" ? "selected='selected'" : "")>October</option>
+                                                <option value="November" @(Model.Month == "November" ? "selected='selected'" : "")>November</option>
+                                                <option value="December" @(Model.Month == "December" ? "selected='selected'" : "")>December</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
