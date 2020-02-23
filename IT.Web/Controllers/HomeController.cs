@@ -61,6 +61,15 @@ namespace IT.Web_New.Controllers
                     }
                     ViewBag.customerOrderStatistics = customerOrderStatistics;
 
+                    FuelPricesViewModel fuelPricesViewModel = new FuelPricesViewModel();
+
+                    var resultFuel = webServices.Post(fuelPricesViewModel, "FuelPrices/FuelPricesTopOne");
+                    if (resultFuel.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        fuelPricesViewModel = (new JavaScriptSerializer().Deserialize<FuelPricesViewModel>(resultFuel.Data.ToString()));
+                    }
+                    ViewBag.fuelPricesViewModel = fuelPricesViewModel;
+
                     var RequestedData = customerOrderStatistics.RequestedBySevenDayed;
                     var userCompanyViewModel = new UserCompanyViewModel();
                     Session["RequestedData"] = RequestedData;
@@ -130,6 +139,15 @@ namespace IT.Web_New.Controllers
                 }
                 ViewBag.customerOrderStatistics = customerOrderStatistics;
 
+                FuelPricesViewModel fuelPricesViewModel = new FuelPricesViewModel();
+
+                var resultFuel = webServices.Post(fuelPricesViewModel, "FuelPrices/FuelPricesTopOne");
+                if (resultFuel.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    fuelPricesViewModel = (new JavaScriptSerializer().Deserialize<FuelPricesViewModel>(resultFuel.Data.ToString()));
+                }
+                ViewBag.fuelPricesViewModel = fuelPricesViewModel;
+
                 return View();
             }
             catch (Exception)
@@ -149,5 +167,7 @@ namespace IT.Web_New.Controllers
         {
             return PartialView("~/Views/Shared/PartialView/StorageGraph/StorgeGraphPartialView.cshtml");
         }
+
+
     }
 }
