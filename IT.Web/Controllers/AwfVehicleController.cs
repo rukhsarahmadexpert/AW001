@@ -145,15 +145,12 @@ namespace IT.Web_New.Controllers
                             content.Add(new StringContent(vehicleViewModel.InsuranceExpiry == null ? "" : vehicleViewModel.InsuranceExpiry), "InsuranceExpiry");
                             content.Add(new StringContent(vehicleViewModel.RegisteredRegion == null ? "" : vehicleViewModel.RegisteredRegion), "RegisteredRegion");
                             content.Add(new StringContent(vehicleViewModel.Comments == null ? "" : vehicleViewModel.Comments), "Comments");
-
-
-
+                                                       
                             var result = webServices.PostMultiPart(content, "AWFVehicle/Add", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                             {
                                 return Redirect(nameof(Index));
                             }
-
                         }
                     }
                 }

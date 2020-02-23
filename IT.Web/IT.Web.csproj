@@ -253,6 +253,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.js" />
     <Content Include="assets\css\app.bundle.css" />
     <Content Include="assets\css\datagrid\datatables\datatables.bundle.css" />
     <Content Include="assets\css\fa-brands.css" />
@@ -581,9 +582,11 @@
     <Content Include="Content\css\wave\button.css" />
     <Content Include="Content\css\wave\waves.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="firebase-messaging-sw.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="logo-1.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -634,7 +637,9 @@
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\firebass.app.js" />
     <Content Include="Scripts\index.js.flow" />
+    <Content Include="manifest.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Common-Scripts\LOP-Invoice.js" />
