@@ -23,10 +23,10 @@ messaging.requestPermission().then(function () {
             console.log(currentTokens);
         });
     }
-    else {
+    else
+    {
         getRegisterToken();
-    }
-    
+    }    
     return messaging.getToken();
 })
     //.then(function (token) {  
@@ -41,7 +41,7 @@ function getRegisterToken() {
     messaging.getToken().then((currentToken) => {
         if (currentToken) {
             console.log('have permission');
-            console.log(currentToken);           
+            //console.log(currentToken);           
             sendTokenToServer(currentToken);
             localStorage.setItem("BrowserToken", currentToken);
             // updateUIForPushEnabled(currentToken);
