@@ -14,6 +14,7 @@ firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 messaging.requestPermission().then(function () {
     //console.log('have permission');
+
     if (isTokenSentToServer()) {
         console.log('Token already sent')
         messaging.getToken().then((currentTokens) =>
@@ -24,7 +25,8 @@ messaging.requestPermission().then(function () {
     }
     else {
         getRegisterToken();
-    }    
+    }
+    
     return messaging.getToken();
 })
     //.then(function (token) {  
