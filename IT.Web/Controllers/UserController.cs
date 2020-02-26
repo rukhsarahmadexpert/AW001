@@ -28,7 +28,7 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpGet]
-        public ActionResult logout()
+        public ActionResult Logout()
         {
             Session.Abandon();
             Session.Clear();
