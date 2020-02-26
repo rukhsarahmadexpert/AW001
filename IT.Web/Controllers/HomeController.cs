@@ -11,7 +11,7 @@ using System.Web.Script.Serialization;
 namespace IT.Web_New.Controllers
 {
     [ExceptionLog]
-    [Autintication]
+   
     public class HomeController : Controller
     {
         List<CustomerNotificationViewModel> customerNotificationViewModels = new List<CustomerNotificationViewModel>();
@@ -19,6 +19,12 @@ namespace IT.Web_New.Controllers
 
         WebServices webServices = new WebServices();
 
+        public ActionResult Details()
+        {
+            return View();
+        }
+
+        [Autintication]
         public ActionResult Index()
         {
             try
@@ -100,11 +106,14 @@ namespace IT.Web_New.Controllers
             return View();
         }
 
+        [Autintication]
         public ActionResult CustomerHomes()
         {
             return View();
         }
 
+
+        [Autintication]
         public ActionResult AdminHome()
         {
             try
@@ -166,7 +175,8 @@ namespace IT.Web_New.Controllers
         {
             return PartialView("~/Views/Shared/PartialView/StorageGraph/StorgeGraphPartialView.cshtml");
         }
-           
+
+        [Autintication]
         [HttpPost]
         public ActionResult UpdateToken(LoginViewModel loginViewModel)
         {
