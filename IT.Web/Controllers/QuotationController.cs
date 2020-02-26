@@ -21,7 +21,7 @@ namespace IT.Web_New.Controllers
 
         List<ProductViewModel> ProductViewModel = new List<ProductViewModel>();
         List<ProductUnitViewModel> productUnitViewModels = new List<ProductUnitViewModel>();
-        List<CustomerViewModel> customerViewModels = new List<CustomerViewModel>();
+        readonly List<CustomerViewModel> customerViewModels = new List<CustomerViewModel>();
         LPOInvoiceViewModel lPOInvoiceViewModel = new LPOInvoiceViewModel();
         List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
         List<LPOInvoiceViewModel> lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
@@ -35,13 +35,13 @@ namespace IT.Web_New.Controllers
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.PageSize = 100;
-
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                { 
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    CompanyId = CompanyId,
+                    PageSize = 100,
+                };
                 var SiteList = webServices.Post(new LPOInvoiceViewModel(), "Quotation/All");
 
                 if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -140,7 +140,7 @@ namespace IT.Web_New.Controllers
                     new
                     {
                         aaData = lPOInvoiceViewModels,
-                        sEcho = parm.sEcho,
+                        parm.sEcho,
                         iTotalDisplayRecords = totalCount,
                         data = lPOInvoiceViewModels,
                         iTotalRecords = totalCount,
@@ -181,13 +181,12 @@ namespace IT.Web_New.Controllers
                 ViewBag.PO = SerailNO;
                 ViewBag.titles = "Quotation";
 
-                LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel();
-
-                lPOInvoiceVModel.FromDate = System.DateTime.Now;
-                lPOInvoiceVModel.DueDate = System.DateTime.Now;
-
+                LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel
+                {
+                    FromDate = System.DateTime.Now,
+                    DueDate = System.DateTime.Now,
+                };
                 return View(lPOInvoiceVModel);
-
             }
             catch (Exception ex)
             {
@@ -375,9 +374,12 @@ namespace IT.Web_New.Controllers
                 }
                 ViewBag.ProductUnit = productUnitViewModels;
 
-                List<VatModel> model = new List<VatModel>();
-                model.Add(new VatModel() { Id = 0, VAT = 0 });
-                model.Add(new VatModel() { Id = 5, VAT = 5 });
+                List<VatModel> model = new List<VatModel>
+                { 
+                    new VatModel() { Id = 0, VAT = 0 },
+                    new VatModel() { Id = 5, VAT = 5 },
+                };
+
                 ViewBag.VatDrop = model;
 
                 if (Result.Data != "[]")
@@ -513,7 +515,7 @@ namespace IT.Web_New.Controllers
                 Result = Convert.ToDecimal((Total / 100) * vat);
                 return Result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Result;
             }
@@ -581,10 +583,11 @@ namespace IT.Web_New.Controllers
 
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                Web.Models.LPOInvoiceModel lPOInvoiceModel = new Web.Models.LPOInvoiceModel();
-                lPOInvoiceModel.Id = Id;
-                lPOInvoiceModel.detailId = CompanyId;
-
+                Web.Models.LPOInvoiceModel lPOInvoiceModel = new Web.Models.LPOInvoiceModel
+                { 
+                    Id = Id,
+                    detailId = CompanyId,
+                 };
                 var LPOInvoice = webServices.Post(lPOInvoiceModel, "Quotation/EditReport/" + Id);
 
                 if (LPOInvoice.Data != "[]")
@@ -642,10 +645,11 @@ namespace IT.Web_New.Controllers
 
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                Web.Models.LPOInvoiceModel lPOInvoiceModel = new Web.Models.LPOInvoiceModel();
-                lPOInvoiceModel.Id = Id;
-                lPOInvoiceModel.detailId = CompanyId;
-
+                Web.Models.LPOInvoiceModel lPOInvoiceModel = new Web.Models.LPOInvoiceModel
+                { 
+                    Id = Id,
+                    detailId = CompanyId,
+                };
                 var LPOInvoice = webServices.Post(lPOInvoiceModel, "Quotation/EditReport/" + Id);
 
                 if (LPOInvoice.Data != "[]")
@@ -811,10 +815,10 @@ namespace IT.Web_New.Controllers
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                SearchViewModel searchViewModel = new SearchViewModel();
-
-                searchViewModel.CompanyId = CompanyId;
-
+                SearchViewModel searchViewModel = new SearchViewModel
+                { 
+                    CompanyId = CompanyId,
+                };
                 var SiteList = webServices.Post(searchViewModel, "Quotation/QuotationAllByCustomer");
 
                 if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)

@@ -51,9 +51,10 @@ namespace IT.Web_New.Controllers
                     }
                     ViewBag.customerNotificationViewModels = customerNotificationViewModels;
 
-                    SearchViewModel searchViewModel = new SearchViewModel();
-                    searchViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
+                    SearchViewModel searchViewModel = new SearchViewModel
+                    { 
+                        CompanyId = Convert.ToInt32(Session["CompanyId"])
+                    };
                     var resultCustomerStatistics = webServices.Post(searchViewModel, "CustomerOrder/CustomerStatistics");
                     if (resultCustomerStatistics.StatusCode == System.Net.HttpStatusCode.Accepted)
                     {
@@ -106,7 +107,6 @@ namespace IT.Web_New.Controllers
 
         public ActionResult AdminHome()
         {
-
             try
             {
 
@@ -129,9 +129,10 @@ namespace IT.Web_New.Controllers
                 }
                 ViewBag.customerNotificationViewModels = customerNotificationViewModels;
 
-                SearchViewModel searchViewModel = new SearchViewModel();
-                searchViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
+                SearchViewModel searchViewModel = new SearchViewModel
+                {
+                    CompanyId = Convert.ToInt32(Session["CompanyId"])
+                };
                 var resultCustomerStatistics = webServices.Post(searchViewModel, "CustomerOrder/AdminStatistics");
                 if (resultCustomerStatistics.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -154,8 +155,6 @@ namespace IT.Web_New.Controllers
             {
                 throw;
             }
-
-
         }
 
         public ActionResult Policy()
@@ -167,7 +166,30 @@ namespace IT.Web_New.Controllers
         {
             return PartialView("~/Views/Shared/PartialView/StorageGraph/StorgeGraphPartialView.cshtml");
         }
+           
+        [HttpPost]
+        public ActionResult UpdateToken(LoginViewModel loginViewModel)
+        {
+            try
+            {
+                UserCompanyViewModel userCompanyViewModel = new UserCompanyViewModel();
+                userCompanyViewModel = Session["userCompanyViewModel"] as UserCompanyViewModel;
 
+                loginViewModel.Token = loginViewModel.Token ?? "token not availibe";
+                loginViewModel.Device = "web";
+                loginViewModel.DeviceId = System.Net.Dns.GetHostName().ToString();
+                loginViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                loginViewModel.Authority = userCompanyViewModel.Authority;
+                loginViewModel.UserName = userCompanyViewModel.UserName;
+
+                var result = webServices.Post(loginViewModel, "User/UpdateToken", false);
+                return Json("Success",JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

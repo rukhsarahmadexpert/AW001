@@ -24,10 +24,11 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            SearchViewModel searchViewModel = new SearchViewModel();
-            searchViewModel.fDate = System.DateTime.Now;
-            searchViewModel.Tdate = System.DateTime.Now;
-
+            SearchViewModel searchViewModel = new SearchViewModel
+            {
+                fDate = System.DateTime.Now,
+                Tdate = System.DateTime.Now,
+            };
             return View(searchViewModel);
         }
 
@@ -244,10 +245,13 @@ namespace IT.Web_New.Controllers
 
             }
             List<IT.Web.Models.CompnayModel> compnayModels = new List<IT.Web.Models.CompnayModel>();
-            PagingParameterModel pagingParameterModel = new PagingParameterModel();
-            pagingParameterModel.pageNumber = 1;
-            pagingParameterModel._pageSize = 1;
-            pagingParameterModel.PageSize = 100;
+            PagingParameterModel pagingParameterModel = new PagingParameterModel
+            { 
+                pageNumber = 1,
+                _pageSize = 1,
+                PageSize = 100,
+            };
+
             var CompanyList = webServices.Post(pagingParameterModel, "Company/CompayAll");
             if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
             {

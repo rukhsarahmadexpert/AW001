@@ -16,8 +16,8 @@ namespace IT.Web_New.Controllers
     public class EmployeeController : Controller
     {
         WebServices webServices = new WebServices();
-        List<CountryViewModel> CountryViewModel = new List<CountryViewModel>();
-        List<DesignationViewModel> designationViewModels = new List<DesignationViewModel>();
+        readonly List<CountryViewModel> CountryViewModel = new List<CountryViewModel>();
+        readonly List<DesignationViewModel> designationViewModels = new List<DesignationViewModel>();
         List<EmployeeViewModel> employeeViewModels = new List<EmployeeViewModel>();
         EmployeeViewModel employeeViewModel = new EmployeeViewModel();
         int CompanyId = 0;
@@ -139,24 +139,21 @@ namespace IT.Web_New.Controllers
                             content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
                             content.Add(new StringContent(employeeViewModel.Designation.ToString()), "Designation");
-                            content.Add(new StringContent(employeeViewModel.Name == null ? "" : employeeViewModel.Name), "Name");
-                            content.Add(new StringContent(employeeViewModel.LastName == null ? "" : employeeViewModel.LastName), "LastName");
-                            content.Add(new StringContent(employeeViewModel.Nationality == null ? "" : employeeViewModel.Nationality), "Nationality");
-                            content.Add(new StringContent(employeeViewModel.Facebook == null ? "" : employeeViewModel.Facebook), "Facebook");
-                            content.Add(new StringContent(employeeViewModel.Comments == null ? "" : employeeViewModel.Comments), "Comments");
-                            content.Add(new StringContent(employeeViewModel.Nation == null ? "" : employeeViewModel.Nation), "Nation");
-                            content.Add(new StringContent(employeeViewModel.Email == null ? "" : employeeViewModel.Email), "Email");
-                            content.Add(new StringContent(employeeViewModel.Contact == null ? "" : employeeViewModel.Contact), "Contact");
-                            content.Add(new StringContent(employeeViewModel.BasicSalary.ToString() == null ? "" : employeeViewModel.BasicSalary.ToString()), "BasicSalary");
-
-
-
+                            content.Add(new StringContent(employeeViewModel.Name ?? ""), "Name");
+                            content.Add(new StringContent(employeeViewModel.LastName ?? ""), "LastName");
+                            content.Add(new StringContent(employeeViewModel.Nationality ?? ""), "Nationality");
+                            content.Add(new StringContent(employeeViewModel.Facebook ?? ""), "Facebook");
+                            content.Add(new StringContent(employeeViewModel.Comments ?? ""), "Comments");
+                            content.Add(new StringContent(employeeViewModel.Nation ?? ""), "Nation");
+                            content.Add(new StringContent(employeeViewModel.Email ?? ""), "Email");
+                            content.Add(new StringContent(employeeViewModel.Contact ?? ""), "Contact");
+                            content.Add(new StringContent(employeeViewModel.BasicSalary.ToString() ?? ""), "BasicSalary");
+                                                       
                             var result = webServices.PostMultiPart(content, "Employee/Add", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                             {
                                 return Redirect(nameof(Index));
                             }
-
                         }
                     }
                 }

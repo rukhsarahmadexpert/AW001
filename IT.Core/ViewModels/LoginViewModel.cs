@@ -18,5 +18,7 @@ namespace IT.Core.ViewModels
         public string Token { get; set; }
         public string DeviceId { get; set; }
         public string Device { get; set; }
+        public string Authority { get; set; }
+        public int CompanyId { get; set; }
     }
 }

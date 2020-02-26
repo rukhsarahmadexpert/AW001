@@ -21,7 +21,7 @@ namespace IT.Web_New.Controllers
 
         List<ProductViewModel> ProductViewModel = new List<ProductViewModel>();
         List<ProductUnitViewModel> productUnitViewModels = new List<ProductUnitViewModel>();
-        List<CustomerViewModel> customerViewModels = new List<CustomerViewModel>();
+        readonly List<CustomerViewModel> customerViewModels = new List<CustomerViewModel>();
         LPOInvoiceViewModel lPOInvoiceViewModel = new LPOInvoiceViewModel();
         List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
         List<LPOInvoiceViewModel> lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
@@ -38,19 +38,21 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                SearchViewModel searchViewModel = new SearchViewModel();
-                searchViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                SearchViewModel searchViewModel = new SearchViewModel
+                {
+                    CompanyId = Convert.ToInt32(Session["CompanyId"])
+                };
                 var result = webServices.Post(searchViewModel, "Invoice/AllByCustomer");
                 lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
 
                 return View(lPOInvoiceViewModels);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
-               
+
         [HttpGet]
         public JsonResult GetAll()
         {
@@ -132,7 +134,7 @@ namespace IT.Web_New.Controllers
                     new
                     {
                         aaData = lPOInvoiceViewModels,
-                        sEcho = parm.sEcho,
+                        parm.sEcho,
                         iTotalDisplayRecords = totalCount,
                         data = lPOInvoiceViewModels,
                         iTotalRecords = totalCount,
@@ -178,14 +180,12 @@ namespace IT.Web_New.Controllers
 
                 ViewBag.titles = "Invoice";
 
-                LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel();
-
-                lPOInvoiceVModel.FromDate = System.DateTime.Now;
-                lPOInvoiceVModel.DueDate = System.DateTime.Now;
-
+                LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel
+                { 
+                    FromDate = System.DateTime.Now,
+                    DueDate = System.DateTime.Now,
+                };
                 return View(lPOInvoiceVModel);
-
-
             }
             catch (Exception ex)
             {
@@ -305,9 +305,11 @@ namespace IT.Web_New.Controllers
                 ViewBag.ProductUnit = productUnitViewModels;
 
 
-                List<VatModel> model = new List<VatModel>();
-                model.Add(new VatModel() { Id = 0, VAT = 0 });
-                model.Add(new VatModel() { Id = 5, VAT = 5 });
+                List<VatModel> model = new List<VatModel>
+                {
+                     new VatModel() { Id = 0, VAT = 0 },
+                     new VatModel() { Id = 5, VAT = 5 },
+                };
                 ViewBag.VatDrop = model;
 
                 if (Result.Data != "[]")
@@ -406,10 +408,11 @@ namespace IT.Web_New.Controllers
 
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                var lPOInvoiceModel = new IT.Web.Models.LPOInvoiceModel();
-
-                lPOInvoiceModel.Id = Id;
-                lPOInvoiceModel.detailId = CompanyId;
+                var lPOInvoiceModel = new IT.Web.Models.LPOInvoiceModel
+                { 
+                    Id = Id,
+                    detailId = CompanyId,
+                };
 
                 var LPOInvoice = webServices.Post(lPOInvoiceModel, "Bill/EditReport");
                 lPOInvoiceModel = (new JavaScriptSerializer()).Deserialize<IT.Web.Models.LPOInvoiceModel>(LPOInvoice.Data.ToString());
@@ -491,7 +494,7 @@ namespace IT.Web_New.Controllers
                 Result = Convert.ToDecimal((Total / 100) * vat);
                 return Result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Result;
             }
@@ -569,7 +572,7 @@ namespace IT.Web_New.Controllers
                 {
                     lPOInvoiceModel = (new JavaScriptSerializer()).Deserialize<IT.Web.Models.LPOInvoiceModel>(LPOInvoice.Data.ToString());
                 }
-                                
+
                 lPOInvoiceModels.Insert(0, lPOInvoiceModel);
                 compnayModels = lPOInvoiceModel.compnays;
                 lPOInvoiceDetails = lPOInvoiceModel.lPOInvoiceDetailsList;
@@ -603,7 +606,7 @@ namespace IT.Web_New.Controllers
                 //return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
 
                 Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + lPOInvoiceModel.compnays[0].LogoUrl);
-                
+
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
 
@@ -681,8 +684,6 @@ namespace IT.Web_New.Controllers
 
                 throw ex;
             }
-
-
         }
     }
 }

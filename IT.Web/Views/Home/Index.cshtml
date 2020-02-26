@@ -1,17 +1,17 @@
 ﻿@{
-                /**/
+    /**/
 
-                ViewBag.Title = "Customer dashboard";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Customer dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
-                List<IT.Core.ViewModels.CustomerNotificationViewModel> customerNotificationViewModels = new List<IT.Core.ViewModels.CustomerNotificationViewModel>();
-                customerNotificationViewModels = ViewBag.customerNotificationViewModels as List<IT.Core.ViewModels.CustomerNotificationViewModel>;
+    List<IT.Core.ViewModels.CustomerNotificationViewModel> customerNotificationViewModels = new List<IT.Core.ViewModels.CustomerNotificationViewModel>();
+    customerNotificationViewModels = ViewBag.customerNotificationViewModels as List<IT.Core.ViewModels.CustomerNotificationViewModel>;
 
-                IT.Core.ViewModels.CustomerOrderStatistics customerOrderStatistics = new IT.Core.ViewModels.CustomerOrderStatistics();
-                customerOrderStatistics = ViewBag.customerOrderStatistics as IT.Core.ViewModels.CustomerOrderStatistics;
+    IT.Core.ViewModels.CustomerOrderStatistics customerOrderStatistics = new IT.Core.ViewModels.CustomerOrderStatistics();
+    customerOrderStatistics = ViewBag.customerOrderStatistics as IT.Core.ViewModels.CustomerOrderStatistics;
 
-                IT.Core.ViewModels.FuelPricesViewModel fuelPricesViewModel = new IT.Core.ViewModels.FuelPricesViewModel();
-                fuelPricesViewModel = ViewBag.fuelPricesViewModel as IT.Core.ViewModels.FuelPricesViewModel;
+    IT.Core.ViewModels.FuelPricesViewModel fuelPricesViewModel = new IT.Core.ViewModels.FuelPricesViewModel();
+    fuelPricesViewModel = ViewBag.fuelPricesViewModel as IT.Core.ViewModels.FuelPricesViewModel;
 }
 
 <ol class="breadcrumb page-breadcrumb">
@@ -202,5 +202,6 @@
             });
         })
     </script>
+    <script src="~/Scripts/CustomScript/TokenScript.js"></script>
 }
 

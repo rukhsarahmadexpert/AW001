@@ -24,7 +24,7 @@ namespace IT.Web_New.Controllers
         LPOInvoiceViewModel lPOInvoiceViewModel = new LPOInvoiceViewModel();
         List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
         List<LPOInvoiceViewModel> lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
-        List<IT.Web.Models.LPOInvoiceModel> Models = new List<IT.Web.Models.LPOInvoiceModel>();
+        readonly List<IT.Web.Models.LPOInvoiceModel> Models = new List<IT.Web.Models.LPOInvoiceModel>();
 
         [HttpGet]
         public ActionResult Index()
@@ -116,7 +116,7 @@ namespace IT.Web_New.Controllers
                     new
                     {
                         aaData = lPOInvoiceViewModels,
-                        sEcho = parm.sEcho,
+                        parm.sEcho,
                         iTotalDisplayRecords = totalCount,
                         data = lPOInvoiceViewModels,
                         iTotalRecords = totalCount,
@@ -207,7 +207,7 @@ namespace IT.Web_New.Controllers
                     new
                     {
                         aaData = lPOInvoiceViewModels,
-                        sEcho = parm.sEcho,
+                        parm.sEcho,
                         iTotalDisplayRecords = totalCount,
                         data = lPOInvoiceViewModels,
                         iTotalRecords = totalCount,
@@ -293,11 +293,11 @@ namespace IT.Web_New.Controllers
                 ViewBag.titles = "LPO";
                 ViewBag.PO = SerailNO;
 
-                LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel();
-
-                lPOInvoiceVModel.FromDate = System.DateTime.Now;
-                lPOInvoiceVModel.DueDate = System.DateTime.Now;
-
+                LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel
+                { 
+                    FromDate = System.DateTime.Now,
+                    DueDate = System.DateTime.Now,
+                };
                 return View(lPOInvoiceVModel);
             }
             catch (Exception ex)
@@ -504,9 +504,11 @@ namespace IT.Web_New.Controllers
                 ViewBag.ProductUnit = productUnitViewModels;
 
 
-                List<VatModel> model = new List<VatModel>();
-                model.Add(new VatModel() { Id = 0, VAT = 0 });
-                model.Add(new VatModel() { Id = 5, VAT = 5 });
+                List<VatModel> model = new List<VatModel>
+                { 
+                    new VatModel() { Id = 0, VAT = 0 },
+                    new VatModel() { Id = 5, VAT = 5 },
+                };
                 ViewBag.VatDrop = model;
 
                 if (Result.Data != "[]")
@@ -594,7 +596,7 @@ namespace IT.Web_New.Controllers
                 Result = Convert.ToDecimal((Total / 100) * vat);
                 return Result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Result;
             }
@@ -735,11 +737,12 @@ namespace IT.Web_New.Controllers
 
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                LPOInvoiceModel lPOInvoiceModel = new LPOInvoiceModel();
-                lPOInvoiceModel.Id = Id;
-                lPOInvoiceModel.detailId = CompanyId;
-
-                var LPOInvoice = webServices.Post(lPOInvoiceModel, "LPO/EditReport/" + Id);
+                LPOInvoiceModel lPOInvoiceModel = new LPOInvoiceModel
+                { 
+                    Id = Id,
+                    detailId = CompanyId,
+                };
+            var LPOInvoice = webServices.Post(lPOInvoiceModel, "LPO/EditReport/" + Id);
 
                 var LPOInvoiceModel = new IT.Web.Models.LPOInvoiceModel();
                 if (LPOInvoice.Data != "[]")
@@ -799,10 +802,15 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult LPOAllLByDateRange()
         {
+            int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-            SearchViewModel searchViewModel = new SearchViewModel();
-            searchViewModel.FromDate = "2020-01-29";
-            searchViewModel.ToDate = "2020-01-30";
+
+            SearchViewModel searchViewModel = new SearchViewModel
+            { 
+            FromDate = "2020-01-29",
+            ToDate = "2020-01-30",
+            CompanyId = CompanyId,
+            };
             string pdfname = "";
             try
             {
@@ -812,8 +820,7 @@ namespace IT.Web_New.Controllers
                 List<IT.Web.Models.CompnayModel> compnayModels = new List<Web.Models.CompnayModel>();
                 List<IT.Web.Models.LPOInvoiceModel> lPOInvoiceModels = new List<Web.Models.LPOInvoiceModel>();
                 
-                int CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                searchViewModel.CompanyId = CompanyId;
+              
 
                 var LPOInvoice = webServices.Post(searchViewModel, "LPO/LPOAllLByDateRange");
 

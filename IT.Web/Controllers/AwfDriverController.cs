@@ -28,12 +28,12 @@ namespace IT.Web_New.Controllers
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.PageSize = 100;
-
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                {
+                    pageNumber = 1,
+                    CompanyId = CompanyId,
+                    PageSize = 100,
+                };
                 var DriverList = webServices.Post(pagingParameterModel, "AWFDriver/All");
 
                 if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -184,10 +184,10 @@ namespace IT.Web_New.Controllers
                             content.Add(new StringContent(UserId), "CreatedBy");
                             CompanyId = Convert.ToInt32(Session["CompanyId"]);
                             content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
-                            content.Add(new StringContent(driverViewModel.Name == null ? "" : driverViewModel.Name), "FullName");
-                            content.Add(new StringContent(driverViewModel.Contact == null ? "" : driverViewModel.Contact), "Contact");
-                            content.Add(new StringContent(driverViewModel.Email == null ? "" : driverViewModel.Email), "Email");
-                            content.Add(new StringContent(driverViewModel.Facebook == null ? "" : driverViewModel.Facebook), "Facebook");
+                            content.Add(new StringContent(driverViewModel.Name ?? ""), "FullName");
+                            content.Add(new StringContent(driverViewModel.Contact ?? ""), "Contact");
+                            content.Add(new StringContent(driverViewModel.Email ?? ""), "Email");
+                            content.Add(new StringContent(driverViewModel.Facebook ?? ""), "Facebook");
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
 
                             if (driverViewModel.LicienceList.ToList().Count == 1)
@@ -203,9 +203,9 @@ namespace IT.Web_New.Controllers
                                 content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() + "," + driverViewModel.LicienceList[1].ToString() + "," + driverViewModel.LicienceList[2].ToString() + "]"), "LicenseTypes");
                             }
 
-                            content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "DrivingLicenseExpiryDate");
-                            content.Add(new StringContent(driverViewModel.Nationality == null ? "" : driverViewModel.Nationality), "Nationality");
-                            content.Add(new StringContent(driverViewModel.Comments == null ? "" : driverViewModel.Comments), "Comments");
+                            content.Add(new StringContent(driverViewModel.LicenseExpiry ?? ""), "DrivingLicenseExpiryDate");
+                            content.Add(new StringContent(driverViewModel.Nationality ?? ""), "Nationality");
+                            content.Add(new StringContent(driverViewModel.Comments ?? ""), "Comments");
 
                             var result = webServices.PostMultiPart(content, "AWFDriver/Add", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -216,7 +216,7 @@ namespace IT.Web_New.Controllers
                         }
                     }
                 }
-                return RedirectToAction(nameof(Details), new { Id = driverViewModel.Id });
+                return RedirectToAction(nameof(Details), new { driverViewModel.Id });
             }
             catch (Exception ex)
             {
@@ -352,10 +352,10 @@ namespace IT.Web_New.Controllers
                             content.Add(new StringContent(driverViewModel.Id.ToString()), "Id");
                             CompanyId = Convert.ToInt32(Session["CompanyId"]);
                             content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
-                            content.Add(new StringContent(driverViewModel.Name == null ? "" : driverViewModel.Name), "FullName");
-                            content.Add(new StringContent(driverViewModel.Contact == null ? "" : driverViewModel.Contact), "Contact");
-                            content.Add(new StringContent(driverViewModel.Email == null ? "" : driverViewModel.Email), "Email");
-                            content.Add(new StringContent(driverViewModel.Facebook == null ? "" : driverViewModel.Facebook), "Facebook");
+                            content.Add(new StringContent(driverViewModel.Name ?? ""), "FullName");
+                            content.Add(new StringContent(driverViewModel.Contact ?? ""), "Contact");
+                            content.Add(new StringContent(driverViewModel.Email ?? ""), "Email");
+                            content.Add(new StringContent(driverViewModel.Facebook ?? ""), "Facebook");
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
 
                             if (driverViewModel.LicienceList.ToList().Count == 1)
@@ -370,9 +370,9 @@ namespace IT.Web_New.Controllers
                             {
                                 content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() + "," + driverViewModel.LicienceList[1].ToString() + "," + driverViewModel.LicienceList[2].ToString() + "]"), "LicenseTypes");
                             }
-                            content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "DrivingLicenseExpiryDate");
-                            content.Add(new StringContent(driverViewModel.Nationality == null ? "" : driverViewModel.Nationality), "Nationality");
-                            content.Add(new StringContent(driverViewModel.Comments == null ? "" : driverViewModel.Comments), "Comments");
+                            content.Add(new StringContent(driverViewModel.LicenseExpiry ?? ""), "DrivingLicenseExpiryDate");
+                            content.Add(new StringContent(driverViewModel.Nationality ?? ""), "Nationality");
+                            content.Add(new StringContent(driverViewModel.Comments ?? ""), "Comments");
 
                             var result = webServices.PostMultiPart(content, "AWFDriver/Update", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -383,7 +383,7 @@ namespace IT.Web_New.Controllers
                         }
                     }
                 }
-                return RedirectToAction(nameof(Details), new { Id = driverViewModel.Id });
+                return RedirectToAction(nameof(Details), new { driverViewModel.Id });
             }
             catch (Exception ex)
             {
@@ -414,12 +414,13 @@ namespace IT.Web_New.Controllers
             try
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.Id = CompanyId;
-                pagingParameterModel.PageSize = 100;
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                {
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    Id = CompanyId,
+                    PageSize = 100,
+                };
 
                 var DriverLoginList = webServices.Post(pagingParameterModel, "AWFDriver/DriverLoginHistoryAllForAdmin");
                 if (DriverLoginList.StatusCode == System.Net.HttpStatusCode.Accepted)

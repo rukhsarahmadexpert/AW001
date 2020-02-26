@@ -15,9 +15,9 @@ namespace IT.Web_New.Controllers
     public class SiteController : Controller
     {
         WebServices webServices = new WebServices();
-        List<DriverViewModel> driverViewModels = new List<DriverViewModel>();
+        readonly List<DriverViewModel> driverViewModels = new List<DriverViewModel>();
         List<SiteViewModel> siteViewModels = new List<SiteViewModel>();
-        DriverViewModel driverViewModel = new DriverViewModel();
+        readonly DriverViewModel driverViewModel = new DriverViewModel();
         int CompanyId;
 
         public SiteViewModel SiteViewModel { get; private set; }
@@ -29,15 +29,14 @@ namespace IT.Web_New.Controllers
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.PageSize = 100;
-
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                {
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    CompanyId = CompanyId,
+                    PageSize = 100,
+                };
                 var SiteList = webServices.Post(pagingParameterModel, "Site/All");
-
                 if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     siteViewModels = (new JavaScriptSerializer().Deserialize<List<SiteViewModel>>(SiteList.Data.ToString()));
@@ -47,7 +46,6 @@ namespace IT.Web_New.Controllers
                     return Json(siteViewModels, JsonRequestBehavior.AllowGet);
                 }
                 return View(siteViewModels);
-
             }
             catch (Exception ex)
             {
@@ -141,19 +139,17 @@ namespace IT.Web_New.Controllers
             try
             {
                 List<SiteViewModel> siteViewModels1 = new List<SiteViewModel>();
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = Id;
-                pagingParameterModel.PageSize = 100;
-
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                { 
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    CompanyId = Id,
+                    PageSize = 100,
+                };
                 var SiteList = webServices.Post(pagingParameterModel, "Site/All");
-
                 if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     siteViewModels1 = (new JavaScriptSerializer().Deserialize<List<SiteViewModel>>(SiteList.Data.ToString()));
-
                 }
                 return siteViewModels1;
             }

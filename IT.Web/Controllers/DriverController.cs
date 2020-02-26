@@ -35,15 +35,14 @@ namespace IT.Web_New.Controllers
             }
             try
             {
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = 1055;
-                pagingParameterModel.PageSize = 100;
-                pagingParameterModel.CompanyId = CompanyId;
-
-                var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                { 
+                    pageNumber = 1,
+                    _pageSize = 1,                   
+                    PageSize = 100,
+                    CompanyId = CompanyId,
+                };
+                 var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
 
                 if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -167,10 +166,10 @@ namespace IT.Web_New.Controllers
                             content.Add(new StringContent(UserId), "CreatedBy");
                             CompanyId = Convert.ToInt32(Session["CompanyId"]);
                             content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
-                            content.Add(new StringContent(driverViewModel.Name == null ? "" : driverViewModel.Name), "FullName");
-                            content.Add(new StringContent(driverViewModel.Contact == null ? "" : driverViewModel.Contact), "Contact");
-                            content.Add(new StringContent(driverViewModel.Email == null ? "" : driverViewModel.Email), "Email");
-                            content.Add(new StringContent(driverViewModel.Facebook == null ? "" : driverViewModel.Facebook), "Facebook");
+                            content.Add(new StringContent(driverViewModel.Name ?? ""), "FullName");
+                            content.Add(new StringContent(driverViewModel.Contact ?? ""), "Contact");
+                            content.Add(new StringContent(driverViewModel.Email ?? ""), "Email");
+                            content.Add(new StringContent(driverViewModel.Facebook ?? ""), "Facebook");
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
 
                             if (driverViewModel.LicienceList.ToList().Count == 1)
@@ -185,9 +184,9 @@ namespace IT.Web_New.Controllers
                             {
                                 content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() + "," + driverViewModel.LicienceList[1].ToString() + "," + driverViewModel.LicienceList[2].ToString() + "]"), "LicenseTypes");
                             }
-                            content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "DrivingLicenseExpiryDate");
-                            content.Add(new StringContent(driverViewModel.Nationality == null ? "" : driverViewModel.Nationality), "Nationality");
-                            content.Add(new StringContent(driverViewModel.Comments == null ? "" : driverViewModel.Comments), "Comments");
+                            content.Add(new StringContent(driverViewModel.LicenseExpiry ?? ""), "DrivingLicenseExpiryDate");
+                            content.Add(new StringContent(driverViewModel.Nationality ?? ""), "Nationality");
+                            content.Add(new StringContent(driverViewModel.Comments ?? ""), "Comments");
 
                             var result = webServices.PostMultiPart(content, "Driver/Add", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -198,7 +197,7 @@ namespace IT.Web_New.Controllers
                         }
                     }
                 }
-                return RedirectToAction(nameof(Details), new { Id = driverViewModel.Id });
+                return RedirectToAction(nameof(Details), new { driverViewModel.Id });
             }
             catch (Exception ex)
             {
@@ -365,10 +364,10 @@ namespace IT.Web_New.Controllers
                             content.Add(new StringContent(driverViewModel.Id.ToString()), "Id");
                             CompanyId = Convert.ToInt32(Session["CompanyId"]);
                             content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
-                            content.Add(new StringContent(driverViewModel.Name == null ? "" : driverViewModel.Name), "FullName");
-                            content.Add(new StringContent(driverViewModel.Contact == null ? "" : driverViewModel.Contact), "Contact");
-                            content.Add(new StringContent(driverViewModel.Email == null ? "" : driverViewModel.Email), "Email");
-                            content.Add(new StringContent(driverViewModel.Facebook == null ? "" : driverViewModel.Facebook), "Facebook");
+                            content.Add(new StringContent(driverViewModel.Name ?? ""), "FullName");
+                            content.Add(new StringContent(driverViewModel.Contact ?? ""), "Contact");
+                            content.Add(new StringContent(driverViewModel.Email ?? ""), "Email");
+                            content.Add(new StringContent(driverViewModel.Facebook ?? ""), "Facebook");
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
 
                             if (driverViewModel.LicienceList.ToList().Count == 1)
@@ -383,9 +382,9 @@ namespace IT.Web_New.Controllers
                             {
                                 content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() + "," + driverViewModel.LicienceList[1].ToString() + "," + driverViewModel.LicienceList[2].ToString() + "]"), "LicenseTypes");
                             }
-                            content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "LicenseExpiry");
-                            content.Add(new StringContent(driverViewModel.Nationality == null ? "" : driverViewModel.Nationality), "Nationality");
-                            content.Add(new StringContent(driverViewModel.Comments == null ? "" : driverViewModel.Comments), "Comments");
+                            content.Add(new StringContent(driverViewModel.LicenseExpiry ?? ""), "LicenseExpiry");
+                            content.Add(new StringContent(driverViewModel.Nationality ?? ""), "Nationality");
+                            content.Add(new StringContent(driverViewModel.Comments ?? ""), "Comments");
 
                             var result = webServices.PostMultiPart(content, "Driver/Update", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -396,7 +395,7 @@ namespace IT.Web_New.Controllers
                         }
                     }
                 }
-                return RedirectToAction(nameof(Details), new { Id = driverViewModel.Id });
+                return RedirectToAction(nameof(Details), new { driverViewModel.Id });
             }
             catch (Exception ex)
             {

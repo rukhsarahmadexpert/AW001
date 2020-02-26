@@ -20,6 +20,7 @@ messaging.requestPermission().then(function () {
         messaging.getToken().then((currentTokens) =>
         {
             localStorage.setItem("BrowserToken", currentTokens);
+            $('#Token').val(currentTokens);
             console.log(currentTokens);
         });
     }
@@ -41,9 +42,10 @@ function getRegisterToken() {
     messaging.getToken().then((currentToken) => {
         if (currentToken) {
             console.log('have permission');
-            //console.log(currentToken);           
+            console.log(currentToken);           
             sendTokenToServer(currentToken);
             localStorage.setItem("BrowserToken", currentToken);
+            $('#Token').val(currentToken);
             // updateUIForPushEnabled(currentToken);
         } else {
             // Show permission request.
@@ -65,7 +67,7 @@ messaging.onMessage((payload) => {
     var title = payload.data.Titles;
     var options = {
         body: payload.data.Messages,
-        icon: '~/logo-1.png',
+        icon: 'logo-1.png',
         image: payload.data.image,
     };
 

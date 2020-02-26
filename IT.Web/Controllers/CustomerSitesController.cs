@@ -26,12 +26,13 @@ namespace IT.Web_New.Controllers
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.PageSize = 100;
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                {
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    CompanyId = CompanyId,
+                    PageSize = 100
+                };
 
                 var SiteList = webServices.Post(pagingParameterModel, "CustomerSites/SiteAllCustomer");
 
@@ -94,14 +95,14 @@ namespace IT.Web_New.Controllers
             try
             {
                 List<SiteViewModel> siteViewModels = new List<SiteViewModel>();
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = CompId;
-                pagingParameterModel.PageSize = 100;
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                { 
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    CompanyId = CompId,
+                    PageSize = 100,
+                };
                 var SiteList = webServices.Post(pagingParameterModel, "CustomerSites/SiteAllCustomer");
-
                 if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     if (SiteList.Data != "[]")

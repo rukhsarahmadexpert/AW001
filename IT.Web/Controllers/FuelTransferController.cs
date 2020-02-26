@@ -18,7 +18,7 @@ namespace IT.Web_New.Controllers
         List<FuelTransferViewModel> fuelTransferViewModels = new List<FuelTransferViewModel>();
         List<OrderTransferRequestsViewModel> orderTransferRequestsViewModels = new List<OrderTransferRequestsViewModel>();
         List<TransferFromDriverViewModel> transferFromDriverViewModels = new List<TransferFromDriverViewModel>();
-        List<SearchViewModel> searchViewModels = new List<SearchViewModel>();
+        readonly List<SearchViewModel> searchViewModels = new List<SearchViewModel>();
         int CompanyId;
 
         [HttpGet]
@@ -28,13 +28,13 @@ namespace IT.Web_New.Controllers
             {
                 CompanyId = Convert.ToInt32(Session["companyId"]);
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.PageSize = 100;
-
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                {
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    CompanyId = CompanyId,
+                    PageSize = 100,
+                };
 
                 var FuelTransferList = webServices.Post(new FuelTransferViewModel(), "FuelTransfer/All");
 
@@ -62,8 +62,10 @@ namespace IT.Web_New.Controllers
             try
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                SearchViewModel searchViewModel = new SearchViewModel();
-                searchViewModel.CompanyId = CompanyId;
+                SearchViewModel searchViewModel = new SearchViewModel
+                { 
+                     CompanyId = CompanyId,
+                };
                 var OrderTransferRquestViewList = webServices.Post(searchViewModel, "FuelTransfer/OrderTransferRequestsAll");
                 if (OrderTransferRquestViewList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -116,8 +118,10 @@ namespace IT.Web_New.Controllers
             orderTransferRequestsViewModels = new List<OrderTransferRequestsViewModel>();
             try
             {
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-                pagingParameterModel.DriverId = orderTransferRequestsViewModel.DriverId;
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                { 
+                    DriverId = orderTransferRequestsViewModel.DriverId
+                };
                 var OrderTransferRquestViewList = webServices.Post(pagingParameterModel, "FuelTransfer/OrderTransferRequestsAllByDriverId");
                 if (OrderTransferRquestViewList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -186,21 +190,19 @@ namespace IT.Web_New.Controllers
         {
             CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-            PagingParameterModel pagingParameterModel = new PagingParameterModel();
-            pagingParameterModel.pageNumber = 1;
-            pagingParameterModel._pageSize = 1;
-            pagingParameterModel.CompanyId = CompanyId;
-            pagingParameterModel.PageSize = 100;
-
+            PagingParameterModel pagingParameterModel = new PagingParameterModel
+            { 
+                pageNumber = 1,
+                _pageSize = 1,
+                CompanyId = CompanyId,
+                PageSize = 100,
+            };
             var CustomerOrderGroupFromDriverList = webServices.Post(pagingParameterModel, "FuelTransfer/CustomerOrderGroupTransferFromDriverAll");
             if (CustomerOrderGroupFromDriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
                 transferFromDriverViewModels = (new JavaScriptSerializer().Deserialize<List<TransferFromDriverViewModel>>(CustomerOrderGroupFromDriverList.Data.ToString()));
             }
-
             return View(transferFromDriverViewModels);
-
-
         }
     }
 }

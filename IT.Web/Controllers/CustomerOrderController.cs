@@ -16,9 +16,9 @@ namespace IT.Web_New.Controllers
     {
         WebServices webServices = new WebServices();
         List<CustomerNoteOrderViewModel> customerNoteOrderViewModel = new List<CustomerNoteOrderViewModel>();
-        CustomerOrderViewModel CustomerOrderViewModel = new CustomerOrderViewModel();
+        readonly CustomerOrderViewModel CustomerOrderViewModel = new CustomerOrderViewModel();
         CustomerOrderGroupViewModel customerOrderGroupViewModel = new CustomerOrderGroupViewModel();
-        CustomerOrderListViewModel customerOrderListViewModel = new CustomerOrderListViewModel();
+        readonly CustomerOrderListViewModel customerOrderListViewModel = new CustomerOrderListViewModel();
         DriverVehicelViewModel driverVehicelViewModel = new DriverVehicelViewModel();
         VehicleController vehicleController = new VehicleController();
 
@@ -32,13 +32,13 @@ namespace IT.Web_New.Controllers
 
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.PageSize = 100;
-
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                { 
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    CompanyId = CompanyId,
+                    PageSize = 100,
+                };
                 pagingParameterModel.OrderProgress = OrderProgress;
                 if (IsSend == "False")
                 {
@@ -48,8 +48,6 @@ namespace IT.Web_New.Controllers
                 {
                     pagingParameterModel.IsSend = true;
                 }
-
-
                 var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId", false);
 
 
@@ -72,18 +70,18 @@ namespace IT.Web_New.Controllers
             try
             {
                 //CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.OrderProgress = OrderProgress;
-                //if (OrderProgress != "All")
-                //{
-                //    pagingParameterModel.CompanyId = CompanyId;
-                //}                
-                pagingParameterModel.IsSend = true;
-                pagingParameterModel.PageSize = 100;
-
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                { 
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    OrderProgress = OrderProgress,
+                    //if (OrderProgress != "All")
+                    //{
+                    //    pagingParameterModel.CompanyId = CompanyId;
+                    //}                
+                    IsSend = true,
+                    PageSize = 100,
+                };
 
                 var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId", false);
 
@@ -138,15 +136,15 @@ namespace IT.Web_New.Controllers
                     OrderProgress = "All";
                 }
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.OrderProgress = OrderProgress;
-                pagingParameterModel.IsSend = true;
-                pagingParameterModel.PageSize = 100;
-
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                { 
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    CompanyId = CompanyId,
+                    OrderProgress = OrderProgress,
+                    IsSend = true,
+                    PageSize = 100,
+                };
 
                 var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/GetAllCustomerOrderGroupByAdmin", false);
 
@@ -334,7 +332,7 @@ namespace IT.Web_New.Controllers
                     customerOrderListViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
                     customerOrderListViewModel.RequestThrough = "web";
                     customerOrderListViewModel.DeliveryNoteNumber = "0";
-                    customerOrderListViewModel.LocationFullUrl = customerOrderListViewModel.LocationFullUrl == null ? "UnKnown" : customerOrderListViewModel.LocationFullUrl;
+                    customerOrderListViewModel.LocationFullUrl = customerOrderListViewModel.LocationFullUrl ?? "UnKnown";
 
                     var result = webServices.Post(customerOrderListViewModel, "CustomerOrder/CustomerGroupOrderAdd");
 
@@ -369,7 +367,7 @@ namespace IT.Web_New.Controllers
                 {
                     customerOrderGroupViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderGroupViewModel>(CustomerOrderList.Data.ToString()));
                 }
-                return RedirectToAction("Details", new { Id = searchViewModel.Id });
+                return RedirectToAction("Details", new { searchViewModel.Id });
 
             }
             catch (Exception)

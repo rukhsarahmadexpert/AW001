@@ -15,7 +15,7 @@ namespace IT.Web.MISC
         WebServices webServices = new WebServices();
 
         ExceptionLogViewModel exceptionLogViewModel = new ExceptionLogViewModel();
-        HomeController Controller = new HomeController();
+        readonly HomeController Controller = new HomeController();
 
         public void OnException(ExceptionContext filterContext)
         {
@@ -83,7 +83,7 @@ namespace IT.Web.MISC
                     };
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 var model = new HandleErrorInfo(filterContext.Exception, "Controller", "Action");
                 string filepath = HttpContext.Current.Server.MapPath("~/DirectoryFolder");

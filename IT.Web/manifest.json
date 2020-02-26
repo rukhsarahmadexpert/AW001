@@ -3,5 +3,6 @@
   "short_name": "Pushwoosh Demo",
   "gcm_sender_id": "103953800507",
   "display": "standalone",
-  "gcm_user_visible_only": true
+  "gcm_user_visible_only": true,
+  "icons": []
 }

@@ -15,11 +15,11 @@ namespace IT.Web_New.Controllers
     public class CountryController : Controller
     {
         WebServices webServices = new WebServices();
-        CountryViewModel countryViewModel = new CountryViewModel();
+        readonly CountryViewModel countryViewModel = new CountryViewModel();
         List<CountryViewModel> countryViewModels = new List<CountryViewModel>();
-        StateViewModel StateViewModel = new StateViewModel();
+        readonly StateViewModel StateViewModel = new StateViewModel();
         List<StateViewModel> stateViewModels = new List<StateViewModel>();
-        CityViewModel CityViewModel = new CityViewModel();
+        readonly CityViewModel CityViewModel = new CityViewModel();
         List<CityViewModel> cityViewModels = new List<CityViewModel>();
 
         [HttpGet]
@@ -107,11 +107,12 @@ namespace IT.Web_New.Controllers
         [HttpPost]
         public ActionResult EditState(int Id, String Name, int CountryId = 0)
         {
-            StateViewModel stateViewModel = new StateViewModel();
-            stateViewModel.Id = Id;
-            stateViewModel.States = Name;
-            stateViewModel.CountryId = CountryId;
-
+            StateViewModel stateViewModel = new StateViewModel
+            { 
+                Id = Id,
+                States = Name,
+                CountryId = CountryId,
+            };
             CountryController countryController = new CountryController();
             ViewBag.Countries = countryController.Countries();
 
@@ -172,12 +173,14 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        [HttpGet] 
+        [HttpGet]
         public ActionResult Edit(int Id, String Name)
         {
-            CountryViewModel countryViewModel = new CountryViewModel();
-            countryViewModel.Id = Id;
-            countryViewModel.CountryName = Name;
+            CountryViewModel countryViewModel = new CountryViewModel
+            {
+                Id = Id,
+                CountryName = Name,
+            };
             return View("Create", countryViewModel);
         }
 
@@ -263,12 +266,13 @@ namespace IT.Web_New.Controllers
         [HttpPost]
         public ActionResult EditCity(int Id, String Name, int StateId = 0)
         {
-            CityViewModel cityViewModel = new CityViewModel();
-            cityViewModel.Id = Id;
-            cityViewModel.CityName = Name;
-            cityViewModel.StateId = StateId;
-
-            CountryController countryController = new CountryController();
+            CityViewModel cityViewModel = new CityViewModel
+            { 
+                Id = Id,
+                CityName = Name,
+                StateId = StateId,
+            };
+        CountryController countryController = new CountryController();
             ViewBag.States = countryController.States();
 
             return View("AddUpdateCity", cityViewModel);

@@ -186,8 +186,10 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                DriverModel driverModel = new DriverModel();
-                driverModel.VehicleId = Id;
+                DriverModel driverModel = new DriverModel
+                { 
+                    VehicleId = Id
+                };
                 var DetailsList = webServices.Post(driverModel, "Vehicle/DirectSaleDetailsByVehicleId");
                 if (DetailsList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -195,10 +197,12 @@ namespace IT.Web_New.Controllers
                     {
                         directSaleViewModels = (new JavaScriptSerializer().Deserialize<List<DirectSaleViewModel>>(DetailsList.Data.ToString()));
                     }
-                    DriverModel driverModel1 = new DriverModel();
+                    DriverModel driverModel1 = new DriverModel
+                    { 
 
-                    driverModel1.VehicleId = directSaleViewModels[0].VehicleId;
-                    driverModel1.TraficPlateNumber = directSaleViewModels[0].TraficPlateNumber;
+                    VehicleId = directSaleViewModels[0].VehicleId,
+                    TraficPlateNumber = directSaleViewModels[0].TraficPlateNumber,
+                    };
                     if (directSaleViewModels[0].ContactNumber != null)
                     {
                         driverModel1.ContactNumber = directSaleViewModels[0].ContactNumber;

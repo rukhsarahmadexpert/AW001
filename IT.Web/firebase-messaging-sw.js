@@ -14,3 +14,24 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
+
+messaging.setBackgroundMessageHandler(function (payload) {
+
+    var title = payload.data.Titles;
+    var options = {
+        body: payload.data.Messages,
+        icon: 'logo-1.png',
+        image: payload.data.image,
+       // Code = payload.data.Code,
+    };
+    return self.registration.showNotification(title, options);
+});
+
+self.addEventListener('notificationclick', function (event) {
+   // var code = event.notification.data.Code;
+
+    event.notification.close();
+    event.waitUntil(
+        clients.openWindow("https://www.awfuel.com")
+    );
+});

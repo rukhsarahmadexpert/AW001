@@ -24,10 +24,12 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.PageSize = 100;
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                {
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    PageSize = 100,
+                };
                 var CompanyList = webServices.Post(pagingParameterModel, "Company/CompayAll");
                 if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -49,8 +51,10 @@ namespace IT.Web_New.Controllers
             {
                 CompnayModel compnayModel = new CompnayModel();
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-                pagingParameterModel.Id = id;
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                {
+                    Id = id
+                };
                 var companyData = webServices.Post(pagingParameterModel, "Company/CompanyById");
                 if (companyData.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -115,18 +119,18 @@ namespace IT.Web_New.Controllers
                             content.Add(new StringContent("street Data"), "Street");
                             string UserId = Session["UserId"].ToString();
                             content.Add(new StringContent(UserId), "CreatedBy");
-                            content.Add(new StringContent(compnayModel.Postcode == null ? "" : compnayModel.Postcode), "Postcode");
-                            content.Add(new StringContent(compnayModel.City == null ? "" : compnayModel.City), "City");
-                            content.Add(new StringContent(compnayModel.Address == null ? "" : compnayModel.Address), "Address");
-                            content.Add(new StringContent(compnayModel.State == null ? "" : compnayModel.State), "State");
-                            content.Add(new StringContent(compnayModel.Country == null ? "" : compnayModel.Country), "Country");
-                            content.Add(new StringContent(compnayModel.Cell == null ? "" : compnayModel.Cell), "Cell");
-                            content.Add(new StringContent(compnayModel.Phone == null ? "" : compnayModel.Phone), "Phone");
-                            content.Add(new StringContent(compnayModel.Email == null ? "" : compnayModel.Email), "Email");
-                            content.Add(new StringContent(compnayModel.Web == null ? "" : compnayModel.Web), "Web");
-                            content.Add(new StringContent(compnayModel.TRN == null ? "" : compnayModel.TRN), "TRN");
-                            content.Add(new StringContent(compnayModel.Remarks == null ? "" : compnayModel.Remarks), "Remarks");
-                            content.Add(new StringContent(compnayModel.OwnerRepresentaive == null ? "" : compnayModel.OwnerRepresentaive), "OwnerRepresentaive");
+                            content.Add(new StringContent(compnayModel.Postcode ?? ""), "Postcode");
+                            content.Add(new StringContent(compnayModel.City ?? ""), "City");
+                            content.Add(new StringContent(compnayModel.Address ?? ""), "Address");
+                            content.Add(new StringContent(compnayModel.State?? ""), "State");
+                            content.Add(new StringContent(compnayModel.Country ?? ""), "Country");
+                            content.Add(new StringContent(compnayModel.Cell ?? ""), "Cell");
+                            content.Add(new StringContent(compnayModel.Phone ?? ""), "Phone");
+                            content.Add(new StringContent(compnayModel.Email?? ""), "Email");
+                            content.Add(new StringContent(compnayModel.Web ?? ""), "Web");
+                            content.Add(new StringContent(compnayModel.TRN ?? ""), "TRN");
+                            content.Add(new StringContent(compnayModel.Remarks ?? ""), "Remarks");
+                            content.Add(new StringContent(compnayModel.OwnerRepresentaive ?? ""), "OwnerRepresentaive");
                             content.Add(new StringContent("true"), "IsActive");
 
 
@@ -230,10 +234,10 @@ namespace IT.Web_New.Controllers
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
                             content.Add(new StringContent("Name"), "Name");
                             content.Add(new StringContent("street Data"), "Street");
-                            content.Add(new StringContent(compnayModel.Postcode == null ? "" : compnayModel.Postcode), "Postcode");
-                            content.Add(new StringContent(compnayModel.City == null ? "" : compnayModel.City), "City");
-                            content.Add(new StringContent(compnayModel.Street == null ? "" : compnayModel.Street), "State");
-                            content.Add(new StringContent(compnayModel.Country == null ? "" : compnayModel.Country), "Country");
+                            content.Add(new StringContent(compnayModel.Postcode ?? ""), "Postcode");
+                            content.Add(new StringContent(compnayModel.City ?? ""), "City");
+                            content.Add(new StringContent(compnayModel.Street ?? ""), "State");
+                            content.Add(new StringContent(compnayModel.Country ?? ""), "Country");
                             content.Add(new StringContent("true"), "IsCashCompany");
                             //  var result1 = client.PostAsync("http://itmolen-001-site8.htempurl.com/api/Company/Add", content).Result;
                             var result = webServices.PostMultiPart(content, "Company/Add", true);

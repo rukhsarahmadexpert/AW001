@@ -32,7 +32,13 @@ namespace IT.Web_New.Controllers
         {
             Session.Abandon();
             Session.Clear();
-            return Redirect(nameof(Login));
+
+            LoginViewModel loginViewModel = new LoginViewModel
+            { 
+                DeviceId = System.Net.Dns.GetHostName().ToString()
+            };
+            var result = webServices.Post(loginViewModel, "User/LogOut", false);           
+            return Redirect(nameof(Login));           
         }
 
         [HttpGet]

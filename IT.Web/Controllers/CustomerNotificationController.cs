@@ -71,8 +71,8 @@ namespace IT.Web_New.Controllers
                                 content.Add(fileContent);
                                 content.Add(new StringContent("ClientDocs"), "ClientDocs");
                                 content.Add(new StringContent(UserId), "CreatedBy");
-                                content.Add(new StringContent(customerNotificationViewModel.MessageTitle == null ? "" : customerNotificationViewModel.MessageTitle), "MessageTitle");
-                                content.Add(new StringContent(customerNotificationViewModel.MessageDescription == null ? "" : customerNotificationViewModel.MessageDescription), "MessageDescription");
+                                content.Add(new StringContent(customerNotificationViewModel.MessageTitle ?? ""), "MessageTitle");
+                                content.Add(new StringContent(customerNotificationViewModel.MessageDescription ?? ""), "MessageDescription");
 
                                 var result = webServices.PostMultiPart(content, "Advertisement/Add", true);
                                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -87,8 +87,8 @@ namespace IT.Web_New.Controllers
                                 content.Add(new StringContent("ClientDocs"), "ClientDocs");
                                 content.Add(new StringContent(UserId), "UpdatBy");
                                 content.Add(new StringContent(customerNotificationViewModel.Id.ToString()), "Id");
-                                content.Add(new StringContent(customerNotificationViewModel.MessageTitle == null ? "" : customerNotificationViewModel.MessageTitle), "MessageTitle");
-                                content.Add(new StringContent(customerNotificationViewModel.MessageDescription == null ? "" : customerNotificationViewModel.MessageDescription), "MessageDescription");
+                                content.Add(new StringContent(customerNotificationViewModel.MessageTitle ?? ""), "MessageTitle");
+                                content.Add(new StringContent(customerNotificationViewModel.MessageDescription ?? ""), "MessageDescription");
 
                                 var result = webServices.PostMultiPart(content, "Advertisement/Update", true);
                                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -115,8 +115,10 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                SearchViewModel searchViewModel = new SearchViewModel();
-                searchViewModel.Id = Id;
+                SearchViewModel searchViewModel = new SearchViewModel
+                { 
+                    Id = Id
+                };
                 var addResult = webServices.Post(searchViewModel, "Advertisement/Edit/");
 
                 if (addResult.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -138,20 +140,20 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                SearchViewModel searchViewModel = new SearchViewModel();
-                searchViewModel.Id = Id;
-                var addResult = webServices.Post(searchViewModel, "Advertisement/Edit/");
+                SearchViewModel searchViewModel = new SearchViewModel
+                { 
+                    Id = Id
+                };
 
+                var addResult = webServices.Post(searchViewModel, "Advertisement/Edit/");
                 if (addResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     customerNotificationViewModel = (new JavaScriptSerializer().Deserialize<CustomerNotificationViewModel>(addResult.Data.ToString()));
                 }
-
                 return View(customerNotificationViewModel);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
