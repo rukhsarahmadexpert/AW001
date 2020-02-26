@@ -5,6 +5,7 @@
 
     List<IT.Core.ViewModels.FuelPricesViewModel> fuelPricesViewModels = new List<IT.Core.ViewModels.FuelPricesViewModel>();
     fuelPricesViewModels = Model as List<IT.Core.ViewModels.FuelPricesViewModel>;
+
 }
 
 <ol class="breadcrumb page-breadcrumb">
@@ -45,7 +46,7 @@
                             <tr>
                                 <td>@item.Id</td>
                                 <td>@Math.Round(item.Price, 2)</td>
-                                <td>@item.Unit</td>
+                                <td>@item.UnitName</td>
                                 <td>@item.Month</td>
                                 <td>
                                     @if (@item.IsActive == true)
