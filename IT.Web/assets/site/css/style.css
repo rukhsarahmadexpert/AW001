@@ -934,11 +934,19 @@ Cta and quotes css
     color: #fff;
     margin-bottom: 20px; }
 
+
+.cover_img {
+    background-image: url(../images/banner4.jpg);
+    width: 101%;
+    height: 500px;
+}
+
 .cta-bg {
-  background: url(../site/images/bg2.jpg) no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  padding: 100px 0; }
+    background: url(../images/bg2.jpg) no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    padding: 100px 0;
+}
   .cta-bg h3 {
     color: #fff; }
 
@@ -1162,7 +1170,7 @@ h3.display-4 {
   font-weight: 300; }
 
 .hero-static-image {
-  background: url(../site/images/bg2.jpg) no-repeat;
+  background: url(../images/bg2.jpg) no-repeat;
   background-size: cover;
   padding-top: 160px;
   padding-bottom: 0px; }
@@ -1230,7 +1238,7 @@ Features and service icon boxes
   display: block; }
 
 .features-bg {
-  background: url(../images/banner2.jpg) no-repeat;
+  background: url(../images/banner7.jpg) no-repeat;
   background-attachment: fixed;
   background-size: cover;
   padding-top: 90px;
