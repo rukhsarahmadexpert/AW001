@@ -951,6 +951,10 @@
     <Content Include="Views\Shared\_LayoutSite.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\BulkStorage.cshtml" />
+    <Content Include="Views\Home\FuelTransportation.cshtml" />
+    <Content Include="Views\Home\Products.cshtml" />
+    <Content Include="Views\Home\Training.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
