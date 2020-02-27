@@ -635,10 +635,12 @@ Buttons
   .navbar.navbar-default.navbar-transparent {
     background-color: transparent;
     box-shadow: none; }
-  .navbar-transparent .navbar-brand img {
-    position: absolute;
-    top: 1.5rem;
-    margin-top: 0px; }
+    .navbar-transparent .navbar-brand img {
+        position: absolute;
+        top: 0.7rem;
+        /*top: 1.5rem;*/
+        margin-top: 0px;
+    }
     .navbar-transparent .navbar-brand img.logo-scroll {
       opacity: 0;
       visibility: hidden; }
