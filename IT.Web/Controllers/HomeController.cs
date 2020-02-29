@@ -94,15 +94,32 @@ namespace IT.Web_New.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            return View();
+        }
 
+        public ActionResult BulkStorage()
+        {
+            return View();
+        }
+
+        public ActionResult FuelTransportation()
+        {
+            return View();
+        }
+
+        public ActionResult Products()
+        {
+            return View();
+        }
+
+        public ActionResult Training()
+        {
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+           
             return View();
         }
 

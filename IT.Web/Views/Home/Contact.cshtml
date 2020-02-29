@@ -1,17 +1,81 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿
+@{
+    ViewBag.Title = "Aw Fuel - Contact Us";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="dzsparallaxer auto-init" data-options='{   direction: "reverse"}' style="height: 450px;">
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <div class="divimage dzsparallaxer--target cover_img ">
+    </div>
+    <div class=" parallax-text center-it page-title text-center">
+        <h1 class="text-uppercase">Contact Us</h1>
+
+    </div>
+</div><!--end page header-->
+
+
+<div class="container">
+    <div class="space-90"></div>
+    <div class='row'>
+        <div class="col-lg-6 col-md-7 margin-b-40">
+            <h3 class="margin-b-30">WE'RE VERY APPROACHABLE AND HERE TO HELP.</h3>
+
+            <form method="post" action="#" class="saas-contact">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12 margin-b-20">
+                                <input type="text" style="border: 1px solid; border-color: #035894" name="name" class="form-control" placeholder="Your Name" />
+                            </div>
+                            <div class="col-sm-12 margin-b-20">
+                                <input type="text" style="border: 1px solid; border-color: #035894" name="subject" class="form-control" placeholder="Subject" />
+                            </div>
+                            <div class="col-sm-12 margin-b-20">
+                                <input type="text"   style="border: 1px solid; border-color: #035894"  name="email" class="form-control" placeholder="Your Email Address" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 margin-b-20">
+                        <textarea name="message" style="border: 1px solid; border-color: #035894" class="form-control" rows="5" placeholder="Your Message"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <div class="data-status"></div> <!-- data submit status -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-right">
+                        <button type="submit" name="submit" class="btn btn-primary btn-rounded">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="col-lg-6 col-md-5 margin-b-40">
+            <h4>Address</h4>
+            <p class="margin-b-0">
+                Plot# 100, Mussafah M# 13,<br>
+                Abu Dhabi,  United Arab Emirates
+
+            </p>
+            <hr>
+            <h4>Phone</h4>
+            <p class="margin-b-0">
+                050-1234-5678<br>
+
+            </p>
+            <hr>
+            <h4>Email & support center</h4>
+            <p class="margin-b-0">
+                support@awfuel.com<br>
+                info@awfuel.com <br>
+
+            </p>
+        </div>
+    </div>
+    <div class='space-50'></div>
+</div>
+
+
