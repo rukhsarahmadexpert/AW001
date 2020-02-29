@@ -57,8 +57,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                 Note: if need in current location then don't change location! <i class="fal fa-arrow-right"></i>
+    <button class="float-right btn btn-info"><i class="fal fa-map-marker"></i> Deliver to Custom Location</button>
+</div>
                         </div>
+                        <div class="row" id="TransportaionOption" style="display:none">
+                            <div class="col-md-12">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="defaultUncheckedRadioT" name="Tranportation">
+                                    <label class="custom-control-label" for="defaultUncheckedRadioT">Self Pick-Up</label>
+                                </div>
+                                <div class="custom-control custom-radio mt-2">
+                                    <input type="radio" class="custom-control-input" id="defaultUncheckedRadioTS" checked="checked" name="Tranportation">
+                                    <label class="custom-control-label" for="defaultUncheckedRadioTS">Required Transportation</label>
+                                </div>
+                            </div>
+                        </div>
+                        <p></p>
 
                         <div class="table-responsive" style="width:100%">
                             <table class="table table-hover" id="CustomerOrderTable">
@@ -160,7 +176,6 @@
                         <input type="hidden" id="Longitude" name="longitude">
                         <input type="hidden" id="PickingPoint" name="PickingPoint">
                         <input type="hidden" id="LocationFullUrl" name="LocationFullUrl">
-
                         <button id="SaveOrder" class="btn btn-primary"><span><i class="fal fa-save"></i></span> Save</button>
 
                     </div>
@@ -174,6 +189,38 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&sensor=false"></script>
     @*<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>*@
     <script src="~/Scripts/CustomScript/CustomerOrder.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#defaultUncheckedRadioT').click(function () {
+                LoadDriverVehicleFromDb();          
+            });
+
+            $('#defaultUncheckedRadioTS').click(function ()
+            {
+                BulkDriverVehicleSet();
+            });                        
+        })
+               
+        function LoadDriverVehicleFromDb()
+        {
+            ajaxRequest("GET", "/Driver/Index", "", "json").then(function (result) {
+                $('#Driver').empty();
+                $.each(result, function (value, item) {
+                    $('#Driver').append('<option value=' + item.id + '>' + item.Name + '</option>');
+                })
+                $('#Driver').prepend('<option value="0" selected="selected">Select Driver</option>');
+            });
+            
+            ajaxRequest("GET", "/Vehicle/Index", "", "json").then(function (result) {
+                $('#vehicle').empty();
+                $.each(result, function (value, item) {
+                    $('#vehicle').append('<option value=' + item.id + '>' + item.TraficPlateNumber + '</option>');
+                })
+            });
+        }
+    </script>
 
 }
 

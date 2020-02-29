@@ -231,16 +231,22 @@ $('#defaultUncheckedRadio').change(function ()
 {
     if ($('#CustomerOrderTable tbody tr').length < 2)
     {
-            $('#AddNewRow').remove('id').hide();
-            $('#Driver').empty();
-            $('#vehicle').empty();
-            $('#Driver').append('<option value="1" selected="selected">Bulk Driver</option>');
-            $('#vehicle').append('<option value="1" selected="selected">Bulk Vehicle</option>');
+        BulkDriverVehicleSet();
     }
     else
     {
+            $('#TransportaionOption').css('display','none');
             $(this).attr('checked', false);
             $('#defaultCheckedRadio').attr('checked', true);
             alert('Please remove added rows first');
     }  
 });
+
+function BulkDriverVehicleSet() {
+    $('#TransportaionOption').css('display', 'block');
+    $('#AddNewRow').remove('id').hide();
+    $('#Driver').empty();
+    $('#vehicle').empty();
+    $('#Driver').append('<option value="1" selected="selected">Bulk Driver</option>');
+    $('#vehicle').append('<option value="1" selected="selected">Bulk Vehicle</option>');
+}

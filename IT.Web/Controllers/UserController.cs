@@ -66,7 +66,7 @@ namespace IT.Web_New.Controllers
             {
                 loginViewModel.Token = loginViewModel.Token ?? "token not availibe";
                 loginViewModel.Device = "web";
-                loginViewModel.DeviceId = System.Net.Dns.GetHostName().ToString();
+                loginViewModel.DeviceId = System.Environment.MachineName.ToString();
                 if (ModelState.IsValid)
                 {
                     var result = webServices.Post(loginViewModel, "User/Login", false);
@@ -142,5 +142,11 @@ namespace IT.Web_New.Controllers
 
             return View();
         }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
+
     }
 }

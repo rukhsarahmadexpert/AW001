@@ -42,14 +42,21 @@ namespace IT.Web_New.Controllers
                     PageSize = 100,
                     CompanyId = CompanyId,
                 };
-                 var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
+                var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
 
                 if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
+
+                    if (Request.IsAjaxRequest())
+                    {
+                        return Json(driverViewModels, JsonRequestBehavior.AllowGet);
+                    }
+
                     return View(driverViewModels);
                 }
 
+                
                 return View(driverViewModels);
             }
             catch (Exception ex)
@@ -402,5 +409,7 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
+
+
     }
 }

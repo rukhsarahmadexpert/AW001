@@ -341,7 +341,6 @@ namespace IT.Web_New.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -386,7 +385,6 @@ namespace IT.Web_New.Controllers
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
