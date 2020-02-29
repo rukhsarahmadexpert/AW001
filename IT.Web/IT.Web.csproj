@@ -959,6 +959,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\AWDepartment\" />
+    <Folder Include="Views\CustomerBooking\" />
     <Folder Include="Views\CustomerQuotation\" />
     <Folder Include="Views\VehicleType\" />
   </ItemGroup>
