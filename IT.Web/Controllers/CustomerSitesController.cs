@@ -110,7 +110,7 @@ namespace IT.Web_New.Controllers
                         siteViewModels = (new JavaScriptSerializer().Deserialize<List<SiteViewModel>>(SiteList.Data.ToString()));
                     }
                 }
-                siteViewModels.Insert(0, new SiteViewModel() { Id = 0, SiteName = "Select site" });
+                siteViewModels.Insert(0, new SiteViewModel() { Id = 0, SiteName = "Select Delivery Sites" });
                 return siteViewModels;
             }
             catch (Exception)

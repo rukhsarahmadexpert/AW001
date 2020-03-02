@@ -1,0 +1,218 @@
+﻿@model IT.Core.ViewModels.CustomerBookingViewModel
+@{
+    ViewBag.Title = "CustomerBookingGetById";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+    List<IT.Core.ViewModels.CompanyViewModel> companyViewModels = new List<IT.Core.ViewModels.CompanyViewModel>();
+    List<IT.Core.ViewModels.ProductViewModel> productViewModels = new List<IT.Core.ViewModels.ProductViewModel>();
+    List<IT.Core.ViewModels.ProductUnitViewModel> productUnitViewModels = new List<IT.Core.ViewModels.ProductUnitViewModel>();
+
+    companyViewModels = ViewBag.Companies as List<IT.Core.ViewModels.CompanyViewModel>;
+    productViewModels = ViewBag.Products as List<IT.Core.ViewModels.ProductViewModel>;
+    productUnitViewModels = ViewBag.ProductUnits as List<IT.Core.ViewModels.ProductUnitViewModel>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);"> Booking</a></li>
+    <li class="breadcrumb-item active">Edit</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i> Create Booking
+    </h1>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <span class="fw-300"></span>
+                </h2>
+            </div>
+            <form action="/CustomerBooking/CustomerBookingAdd" method="post" enctype="application/x-www-form-urlencoded">
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please Add Booking...
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-md-6                                    ">
+
+                                <div class="form-group mb-2">
+                                    <label>Company Name</label>
+                                    <select id="CompanyId" name="CompanyId" class="select3 Company" required>
+                                        @foreach (var item in companyViewModels)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6                                    ">
+
+                                <div class="form-group mb-2">
+                                    <label>Product Name</label>
+                                    <select id="ProductId" name="ProductId" class="select3 ProductId" required>
+                                        @foreach (var item in productViewModels)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="table-responsive-lg">
+                    <table class="table m-0 data-table" id="SiteTarget">
+                        <thead>
+                            <tr>
+                                <th>Quantity</th>
+                                <th>Description</th>
+                                <th width="200px"> Product Unit </th>
+                                <th>Unit Price</th>
+                                <th>VAT %</th>
+                                <th style="width:90px">Total Amount</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+
+                            <tr>
+                                <td style="width:200px">
+                                    <input type="text" class="form-control Quantity" name="BookQuantity" value="@Model.BookQuantity" id="Quantity" placeholder="QTY" />
+                                </td>
+
+                                <td style="width:320px">
+                                    <input type="text" class="form-control Description" name="Description" id="Description" placeholder="Description" />
+                                </td>
+
+                                <td style="width:250px !important">
+                                    <div class="form-group mb-2">
+
+                                        <select id="UnitId" name="UnitId" class="select3 UnitId" required>
+                                            <option>Product Unit</option>
+                                            @foreach (var item in productUnitViewModels)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <input type="text" name="UnitPrice" class="form-control UnitPrice" id="UnitPrice" placeholder="Unit Price" />
+                                </td>
+
+                                <td>
+                                    <div class="form-group mb-2">
+
+                                        <input type="hidden" name="VAT" id="VAT" class="VAT" />
+                                        <select id="VAT1" name="VAT1" class="form-control VAT1" required>
+
+                                            <option value="0">0</option>
+                                            <option value="5">5</option>
+
+                                        </select>
+                                    </div>
+                                </td>
+
+                                <td style="width:250px">
+                                    <input type="text" class="form-control TotalAmount" name="TotalAmount" id="TotalAmount" placeholder="Total Amount" />
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <button type="submit" id="SaveRecord" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                            Booking
+                            <span>Submit</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</div>
+
+@section scripts{
+
+
+    <script>
+
+
+        $(document).ready(function () {
+
+            $('input[name=\'BookQuantity\']').on('change keyup click', function () {
+                booking();
+            });
+
+            $('#UnitPrice').on('change keyup click', function () {
+                booking();
+            });
+
+        });
+
+        function booking() {
+
+           // $('#VAT1').empty();
+
+            var price = $('#UnitPrice').val();
+
+            var quantity = $('.Quantity').val();
+
+            var total = $('#TotalAmount').val(price * quantity);
+
+
+
+            @*$('#VAT1').append('<option>gtgtgtgt</option>');*@
+
+
+            var tt = $('#TotalAmount').val()
+            var vat_value = ((5 * tt) / 100);
+
+            @*$('#VAT').val(parseFloat(vat_value) + parseFloat(tt));*@
+
+            $('#VAT').val(vat_value);
+            $('#VAT1').change(function () {
+                var vt = $('#VAT1').val();
+                if (vt != 0) {
+
+                    $('#TotalAmount').val(parseFloat(vat_value) + parseFloat(tt));
+                }
+                else {
+                    $('#TotalAmount').val(tt);
+                }
+
+
+            });
+
+        }
+
+
+    </script>
+
+
+}
+

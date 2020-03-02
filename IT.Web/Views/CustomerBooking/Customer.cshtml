@@ -1,0 +1,98 @@
+﻿@model List<IT.Core.ViewModels.CustomerBookingViewModel>
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    List<IT.Core.ViewModels.CustomerBookingViewModel> customerBookingViewModels = new List<IT.Core.ViewModels.CustomerBookingViewModel>();
+    customerBookingViewModels = Model as List<IT.Core.ViewModels.CustomerBookingViewModel>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Customer Booking</a></li>
+
+    <li class="breadcrumb-item active">List</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a class="btn btn-primary btn-md" href="/CustomerBooking/Create">
+                        <i class="fal fa-plus-circle"></i> Request For New <span class="fw-300"><i>Booking</i></span>
+                    </a>
+                </h2>
+
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <!--      <div class="panel-tag">
+                                <p>Drivers Base Information</p>
+
+
+                            </div>-->
+                    <!-- datatable start -->
+                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-primary-600">
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Start Date</th>
+                                <th>Due Date</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>VAT</th>
+                                <th>Total Amount</th>
+                                <th>IsActive</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in customerBookingViewModels)
+                            {
+
+                                <tr>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.CreatedDate</td>
+                                    <td>@item.DueDate</td>
+                                    <td>@Math.Round(item.UnitPrice, 2)</td>
+                                    <td>@item.BookQuantity</td>
+                                    <td>@Math.Round(item.VAT, 2)</td>
+                                    <td>@Math.Round(item.TotalAmount, 2)</td>
+                                    <td>
+                                        @if (@item.IsActive == true)
+                                        {
+                                            <div class="switchToggle">
+                                                <input type="checkbox" id="@item.Id" checked>
+                                                <label for="@item.Id">Toggle</label>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="switchToggle">
+                                                <input type="checkbox" id="@item.Id">
+                                                <label for="@item.Id">Toggle</label>
+                                            </div>
+
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="/Driver/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                        <a href="/Driver/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                        <i class="fal fa-trash-alt">
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

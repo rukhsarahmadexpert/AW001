@@ -14,7 +14,7 @@
 
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-edit'></i> Create / Update Order
+            <i class='subheader-icon fal fa-edit'></i> Create / Update Delivery Order
         </h1>
     </div>
     <div class="row">
@@ -36,7 +36,7 @@
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-tag">
-                            Please add or update your Order from here...
+                            Please add or update your Delivery Order from here...
                         </div>
                         <input type="hidden" name="OrderId" id="OrderId" value="@Model.Id" />
                         <input type="hidden" name="RequestedQuantity" id="RequestedQuantity" value="@Model.RequestedQuantity" />
@@ -44,9 +44,10 @@
                             <div class="col-md-6">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text font-weight-bold" id="basic-addon1">Select Sites</span>
+                                        <span class="input-group-text font-weight-bold" id="basic-addon1"> Sites</span>
                                     </div>
                                     <select class="form-control" id="Site">
+                                      
                                         @foreach (var item in siteViewModels)
                                         {
                                             <option value="@item.Id">@item.SiteName</option>

@@ -48,19 +48,37 @@
                                                     @foreach (var item in driverViewModels)
                                                     {
 
-                                                        <tr>
-                                                            <td>@item.Name</td>
-                                                            <td>@item.Contact</td>
-                                                            <td>@item.Email</td>
-                                                            <td>@item.LicenseExpiry</td>
-                                                            <td>@item.Facebook</td>
-                                                            <td>@item.IsActive</td>
-                                                            <td>
-                                                               <a href="/Driver/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                                                <a href="/Driver/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                                                <i class="fal fa-trash-alt">
-                                                            </td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td>@item.Name</td>
+                                                        <td>@item.Contact</td>
+                                                        <td>@item.Email</td>
+                                                        <td>@item.LicenseExpiry</td>
+                                                        <td>@item.Facebook</td>
+                                                        <td>
+                                                        <td>
+                                                            @if (@item.IsActive == true)
+                                                            {
+                                                                <div class="switchToggle">
+                                                                    <input type="checkbox" id="@item.Id" checked>
+                                                                    <label for="@item.Id">Toggle</label>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="switchToggle">
+                                                                    <input type="checkbox" id="@item.Id">
+                                                                    <label for="@item.Id">Toggle</label>
+                                                                </div>
+
+                                                            }
+                                                        </td>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/Driver/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                                            <a href="/Driver/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                                            <i class="fal fa-trash-alt"></i>
+                                                        </td>
+                                                    </tr>
                                                     }                                                    
                                                     
                                                 </tbody>

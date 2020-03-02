@@ -101,5 +101,27 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
+
+
+        [NonAction]
+        public List<ProductUnitViewModel> ProductUnits()
+        {
+      
+            try
+            {
+
+                var ProductUnitList = webServices.Post(new ProductUnitViewModel(), "ProductUnit/All");
+                if (ProductUnitList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    productUnitViewModels = (new JavaScriptSerializer().Deserialize<List<ProductUnitViewModel>>(ProductUnitList.Data.ToString()));
+
+                }
+                return productUnitViewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
