@@ -173,6 +173,7 @@
     <Compile Include="Controllers\BillController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\CustomerBookingController.cs" />
     <Compile Include="Controllers\CustomerNotificationController.cs" />
     <Compile Include="Controllers\CustomerOrderController.cs" />
     <Compile Include="Controllers\CustomerSitesController.cs" />
@@ -956,11 +957,14 @@
     <Content Include="Views\Home\Products.cshtml" />
     <Content Include="Views\Home\Training.cshtml" />
     <Content Include="Views\User\Test.cshtml" />
+    <Content Include="Views\CustomerBooking\Index.cshtml" />
+    <Content Include="Views\CustomerBooking\Customer.cshtml" />
+    <Content Include="Views\CustomerBooking\AdminCreate.cshtml" />
+    <Content Include="Views\CustomerBooking\CustomerBookingGetById.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\AWDepartment\" />
-    <Folder Include="Views\CustomerBooking\" />
     <Folder Include="Views\CustomerQuotation\" />
     <Folder Include="Views\VehicleType\" />
   </ItemGroup>

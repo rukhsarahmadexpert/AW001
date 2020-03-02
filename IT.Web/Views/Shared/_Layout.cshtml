@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@TempData["Title"] </title>
     @* @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")*@
+        @Scripts.Render("~/bundles/modernizr")*@
 
     <title>Dashbaord - Aw Fuel Trading </title>
     <meta name="description" content="">
@@ -35,6 +35,79 @@
 
     <!-- page related CSS below -->
     <link rel="stylesheet" media="screen, print" href="~/assets/css/formplugins/select2/select2.bundle.css">
+
+    <style>
+        .switchToggle input[type=checkbox] {
+            height: 0;
+            width: 0;
+            visibility: hidden;
+            position: absolute;
+        }
+
+        .switchToggle label {
+            cursor: pointer;
+            text-indent: -9999px;
+            width: 120px;
+            max-width: 120px;
+            height: 20px;
+            background: #d1d1d1;
+            display: block;
+            border-radius: 100px;
+            position: relative;
+        }
+
+            .switchToggle label:after {
+                content: '';
+                position: absolute;
+                left: 2px;
+                width: 20px;
+                height: 20px;
+                background: #fff;
+                border-radius: 100px;
+                transition: 0.3s;
+            }
+
+        .switchToggle input:checked + label, .switchToggle input:checked + input + label {
+            background: #3d4e7c;
+        }
+
+        .switchToggle input + label:before, .switchToggle input + input + label:before {
+            content: 'UnActive';
+            position: absolute;
+            left: 35px;
+            width: 26px;
+            height: 20px;
+            border-radius: 90px;
+            transition: 0.3s;
+            text-indent: 0;
+            color: #fff;
+        }
+
+        .switchToggle input:checked + label:before, .switchToggle input:checked + input + label:before {
+            content: 'Active';
+            position: absolute;
+            left: 10px;
+            width: 26px;
+            height: 20px;
+            border-radius: 90px;
+            transition: 0.3s;
+            text-indent: 0;
+            color: #fff;
+        }
+
+        .switchToggle input:checked + label:after, .switchToggle i  nput:checked + input + label:after {
+            left: calc(100% - 1px);
+            transform: translateX(-100%);
+        }
+
+        .switchToggle label:active:after {
+            width: 40px;
+        }
+
+        .toggle-switchArea {
+            margin: 5px 0 5px 0;
+        }
+    </style>
 </head>
 <body class="mod-bg-1 ">
     <!-- DOC: script to save and load page settings -->
@@ -155,7 +228,7 @@
                             </a>
                             <ul>
                                 <li>
-                                    <a href="/Vehicle" title="Vehicles" class=" " data-filter-tags="">
+                                    <a href="/Vehicle/Index" title="Vehicles" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Vehicles</span><span class="">List</span>
                                     </a>
                                 </li>
@@ -228,7 +301,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="/OrderConfirmations/Index" title="Reserved Quantities" class=" " data-filter-tags="">
+                                    <a href="/CustomerBooking/Customer" title="Reserved Quantities" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Reserved Quantities</span><span class="">List</span>
                                     </a>
                                 </li>

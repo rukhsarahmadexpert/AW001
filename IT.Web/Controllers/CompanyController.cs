@@ -18,6 +18,7 @@ namespace IT.Web_New.Controllers
     {
         WebServices webServices = new WebServices();
         List<CompnayModel> compnayModels = new List<CompnayModel>();
+        List<CompanyViewModel> companyViewModels = new List<CompanyViewModel>();
                 
         [HttpGet]
         public ActionResult Index()
@@ -281,6 +282,26 @@ namespace IT.Web_New.Controllers
             {
 
                 throw;
+            }
+        }
+
+        [NonAction]
+        public List<CompanyViewModel> Companies()
+        {
+            try
+            {
+               
+                var CompanyList = webServices.Post(new CompanyViewModel(), "Company/CompayAll");
+                if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    companyViewModels = (new JavaScriptSerializer().Deserialize<List<CompanyViewModel>>(CompanyList.Data.ToString()));
+                   
+                }
+                return companyViewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
