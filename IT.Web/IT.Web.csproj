@@ -961,6 +961,8 @@
     <Content Include="Views\CustomerBooking\Customer.cshtml" />
     <Content Include="Views\CustomerBooking\AdminCreate.cshtml" />
     <Content Include="Views\CustomerBooking\CustomerBookingGetById.cshtml" />
+    <Content Include="Views\CustomerBooking\CustomerCreate.cshtml" />
+    <Content Include="Views\CustomerBooking\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

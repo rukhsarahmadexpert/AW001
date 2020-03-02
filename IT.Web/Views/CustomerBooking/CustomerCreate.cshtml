@@ -1,13 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "AdminCreate";
-    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+    ViewBag.Title = "CustomerCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
-    List<IT.Core.ViewModels.CompanyViewModel> companyViewModels = new List<IT.Core.ViewModels.CompanyViewModel>();
+
     List<IT.Core.ViewModels.ProductViewModel> productViewModels = new List<IT.Core.ViewModels.ProductViewModel>();
     List<IT.Core.ViewModels.ProductUnitViewModel> productUnitViewModels = new List<IT.Core.ViewModels.ProductUnitViewModel>();
 
-    companyViewModels = ViewBag.Companies as List<IT.Core.ViewModels.CompanyViewModel>;
+
     productViewModels = ViewBag.Products as List<IT.Core.ViewModels.ProductViewModel>;
     productUnitViewModels = ViewBag.ProductUnits as List<IT.Core.ViewModels.ProductUnitViewModel>;
 }
@@ -31,7 +31,7 @@
                     <span class="fw-300"></span>
                 </h2>
             </div>
-            <form action="/CustomerBooking/CustomerBookingAdd" method="post" enctype="application/x-www-form-urlencoded">
+            <form action="/CustomerBooking/CustomerCreate" method="post" enctype="application/x-www-form-urlencoded">
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-tag">
@@ -41,25 +41,13 @@
 
                         <div class="row">
 
-                            <div class="col-md-6                                    ">
+                          
 
-                                <div class="form-group mb-2">
-                                    <label>Company Name</label>
-                                    <select id="CompanyId" name="CompanyId" class="select3 Company" required>
-                                        @foreach (var item in companyViewModels)
-                                        {
-                                            <option value="@item.Id">@item.Name</option>
-                                        }
-                                    </select>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-6                                    ">
+                            <div class="col-md-6">
 
                                 <div class="form-group mb-2">
                                     <label>Product Name</label>
-                                    <select id="ProductId" name="ProductId" class="select3 ProductId" required>
+                                    <select id="ProductId" name="ProductId" class="select2 ProductId" required>
                                         @foreach (var item in productViewModels)
                                         {
                                             <option value="@item.Id">@item.Name</option>
@@ -97,7 +85,7 @@
                                 <td style="width:250px !important">
                                     <div class="form-group mb-2">
 
-                                        <select id="UnitId" name="UnitId" class="select3 UnitId" required>
+                                        <select id="UnitId" name="UnitId" class="form-control UnitId" required>
                                             <option>Product Unit</option>
                                             @foreach (var item in productUnitViewModels)
                                             {
@@ -114,7 +102,7 @@
                                 <td>
                                     <div class="form-group mb-2">
 
-                                       
+
                                         <select id="VAT1" name="VAT1" class="form-control VAT1" required>
 
                                             <option value="0">0</option>
@@ -138,7 +126,7 @@
                     <div class="panel-content">
                         <div class="row">
 
-                            <div class="col-md-10"> 
+                            <div class="col-md-10">
                             </div>
 
                             <div class="col-md-2">
@@ -147,7 +135,7 @@
                                     <thead>
                                         <tr>
                                             <th style="width:100px"><b>VAT 5% </b></th>
-                                            <td><input class="form-control" type="text" id="VAT" name="VAT" value="0"  /></td>
+                                            <td><input class="form-control" type="text" id="VAT" name="VAT" value="0" /></td>
                                         </tr>
 
                                         <tr>
@@ -192,18 +180,18 @@
         </div>
 
     </div>
-   
+
 
 </div>
 
 @section scripts{
-    
-    
+
+
     <script>
 
 
         $(document).ready(function () {
-           
+
             $('input[name=\'BookQuantity\']').on('change keyup click', function () {
                 booking();
             });
@@ -227,10 +215,10 @@
 
 
             @*$('#VAT1').append('<option>gtgtgtgt</option>');*@
-           
+
 
             var tt = $('#TotalAmount').val()
-           
+
 
             @*$('#VAT').val(parseFloat(vat_value) + parseFloat(tt));*@
 
@@ -253,7 +241,8 @@
 
 
     </script>
-    
-    
-    }
+
+
+}
+
 

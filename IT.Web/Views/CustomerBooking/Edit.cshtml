@@ -1,15 +1,16 @@
-﻿
+﻿@model IT.Core.ViewModels.CustomerBookingViewModel
 @{
-    ViewBag.Title = "AdminCreate";
-    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+                /**/
 
-    List<IT.Core.ViewModels.CompanyViewModel> companyViewModels = new List<IT.Core.ViewModels.CompanyViewModel>();
-    List<IT.Core.ViewModels.ProductViewModel> productViewModels = new List<IT.Core.ViewModels.ProductViewModel>();
-    List<IT.Core.ViewModels.ProductUnitViewModel> productUnitViewModels = new List<IT.Core.ViewModels.ProductUnitViewModel>();
+                ViewBag.Title = "Edit";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 
-    companyViewModels = ViewBag.Companies as List<IT.Core.ViewModels.CompanyViewModel>;
-    productViewModels = ViewBag.Products as List<IT.Core.ViewModels.ProductViewModel>;
-    productUnitViewModels = ViewBag.ProductUnits as List<IT.Core.ViewModels.ProductUnitViewModel>;
+
+                List<IT.Core.ViewModels.ProductViewModel> productViewModels = new List<IT.Core.ViewModels.ProductViewModel>();
+                List<IT.Core.ViewModels.ProductUnitViewModel> productUnitViewModels = new List<IT.Core.ViewModels.ProductUnitViewModel>();
+
+                productViewModels = ViewBag.Products as List<IT.Core.ViewModels.ProductViewModel>;
+                productUnitViewModels = ViewBag.ProductUnits as List<IT.Core.ViewModels.ProductUnitViewModel>;
 }
 
 <ol class="breadcrumb page-breadcrumb">
@@ -31,38 +32,26 @@
                     <span class="fw-300"></span>
                 </h2>
             </div>
-            <form action="/CustomerBooking/CustomerBookingAdd" method="post" enctype="application/x-www-form-urlencoded">
+            <form action="/CustomerBooking/Update" method="post" enctype="application/x-www-form-urlencoded">
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-tag">
                             Please Add Booking...
                         </div>
-
+                        <input type="hidden" name="Id" value="@Model.Id" />
 
                         <div class="row">
 
                             <div class="col-md-6                                    ">
 
                                 <div class="form-group mb-2">
-                                    <label>Company Name</label>
-                                    <select id="CompanyId" name="CompanyId" class="select3 Company" required>
-                                        @foreach (var item in companyViewModels)
-                                        {
-                                            <option value="@item.Id">@item.Name</option>
-                                        }
-                                    </select>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-6                                    ">
-
-                                <div class="form-group mb-2">
                                     <label>Product Name</label>
-                                    <select id="ProductId" name="ProductId" class="select3 ProductId" required>
+                                    <select id="ProductId" name="ProductId" class="select2 ProductId" required>
                                         @foreach (var item in productViewModels)
                                         {
-                                            <option value="@item.Id">@item.Name</option>
+
+                                            <option value="@item.Id" @(item.Id == Model.ProductId ? "selected='selected'" : "")>@item.Name</option>
+
                                         }
                                     </select>
                                 </div>
@@ -91,30 +80,31 @@
 
                             <tr>
                                 <td style="width:200px">
-                                    <input type="text" class="form-control Quantity" name="BookQuantity" id="Quantity" placeholder="QTY" />
+                                    <input type="text" class="form-control Quantity" value="@Model.BookQuantity" name="BookQuantity" id="Quantity" placeholder="QTY" />
                                 </td>
 
                                 <td style="width:250px !important">
                                     <div class="form-group mb-2">
 
-                                        <select id="UnitId" name="UnitId" class="select3 UnitId" required>
+                                        <select id="UnitId" name="UnitId" class="form-control UnitId" required>
                                             <option>Product Unit</option>
                                             @foreach (var item in productUnitViewModels)
                                             {
-                                                <option value="@item.Id">@item.Name</option>
+
+                                                <option value="@item.Id" @(item.Id == Model.UnitId ? "selected='selected'" : "")>@item.Name</option>
                                             }
                                         </select>
                                     </div>
                                 </td>
 
                                 <td>
-                                    <input type="text" name="UnitPrice" class="form-control UnitPrice" id="UnitPrice" placeholder="Unit Price" />
+                                    <input type="text" name="UnitPrice" class="form-control UnitPrice" value="@Model.UnitPrice" id="UnitPrice" placeholder="Unit Price" />
                                 </td>
 
                                 <td>
                                     <div class="form-group mb-2">
 
-                                       
+
                                         <select id="VAT1" name="VAT1" class="form-control VAT1" required>
 
                                             <option value="0">0</option>
@@ -125,7 +115,7 @@
                                 </td>
 
                                 <td style="width:250px">
-                                    <input type="text" class="form-control TotalAmount" name="TotalAmount" id="TotalAmount" placeholder="Total Amount" />
+                                    <input type="text" class="form-control TotalAmount" name="TotalAmount" value="@Model.TotalAmount" id="TotalAmount" placeholder="Total Amount" />
 
                                 </td>
                             </tr>
@@ -138,7 +128,7 @@
                     <div class="panel-content">
                         <div class="row">
 
-                            <div class="col-md-10"> 
+                            <div class="col-md-10">
                             </div>
 
                             <div class="col-md-2">
@@ -147,12 +137,12 @@
                                     <thead>
                                         <tr>
                                             <th style="width:100px"><b>VAT 5% </b></th>
-                                            <td><input class="form-control" type="text" id="VAT" name="VAT" value="0"  /></td>
+                                            <td><input class="form-control" type="text" id="VAT" name="VAT" value="@Model.VAT" /></td>
                                         </tr>
 
                                         <tr>
                                             <th style="width:100px"><b>Gand Total</b> </th>
-                                            <td><input class="form-control" type="text" id="gtotal" name="name" value="0" /></td>
+                                            <td><input class="form-control" type="text" id="gtotal" name="name" value="343" /></td>
                                         </tr>
                                     </thead>
                                 </table>
@@ -171,7 +161,7 @@
 
                                 <div class="form-group mb-2">
 
-                                    <textarea class="form-control Description" name="Description" id="Description" placeholder="Description"></textarea>
+                                    <textarea class="form-control Description" name="Description" id="Description" placeholder="Description">@Model.Description</textarea>
                                 </div>
 
                             </div>
@@ -192,18 +182,18 @@
         </div>
 
     </div>
-   
+
 
 </div>
 
 @section scripts{
-    
-    
+
+
     <script>
 
 
         $(document).ready(function () {
-           
+
             $('input[name=\'BookQuantity\']').on('change keyup click', function () {
                 booking();
             });
@@ -227,10 +217,10 @@
 
 
             @*$('#VAT1').append('<option>gtgtgtgt</option>');*@
-           
+
 
             var tt = $('#TotalAmount').val()
-           
+
 
             @*$('#VAT').val(parseFloat(vat_value) + parseFloat(tt));*@
 
@@ -253,7 +243,8 @@
 
 
     </script>
-    
-    
-    }
+
+
+}
+
 

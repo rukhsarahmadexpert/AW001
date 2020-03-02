@@ -1,20 +1,19 @@
 ﻿@model IT.Core.ViewModels.CustomerBookingViewModel
 @{
-    ViewBag.Title = "CustomerBookingGetById";
-    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+                ViewBag.Title = "CustomerBookingGetById";
+                Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+                List<IT.Core.ViewModels.CompanyViewModel> companyViewModels = new List<IT.Core.ViewModels.CompanyViewModel>();
+                List<IT.Core.ViewModels.ProductViewModel> productViewModels = new List<IT.Core.ViewModels.ProductViewModel>();
+                List<IT.Core.ViewModels.ProductUnitViewModel> productUnitViewModels = new List<IT.Core.ViewModels.ProductUnitViewModel>();
 
-    List<IT.Core.ViewModels.CompanyViewModel> companyViewModels = new List<IT.Core.ViewModels.CompanyViewModel>();
-    List<IT.Core.ViewModels.ProductViewModel> productViewModels = new List<IT.Core.ViewModels.ProductViewModel>();
-    List<IT.Core.ViewModels.ProductUnitViewModel> productUnitViewModels = new List<IT.Core.ViewModels.ProductUnitViewModel>();
-
-    companyViewModels = ViewBag.Companies as List<IT.Core.ViewModels.CompanyViewModel>;
-    productViewModels = ViewBag.Products as List<IT.Core.ViewModels.ProductViewModel>;
-    productUnitViewModels = ViewBag.ProductUnits as List<IT.Core.ViewModels.ProductUnitViewModel>;
+                companyViewModels = ViewBag.Companies as List<IT.Core.ViewModels.CompanyViewModel>;
+                productViewModels = ViewBag.Products as List<IT.Core.ViewModels.ProductViewModel>;
+                productUnitViewModels = ViewBag.ProductUnits as List<IT.Core.ViewModels.ProductUnitViewModel>;
 }
 
 <ol class="breadcrumb page-breadcrumb">
     <li class="breadcrumb-item"><a href="javascript:void(0);"> Booking</a></li>
-    <li class="breadcrumb-item active">Edit</li>
+    <li class="breadcrumb-item active">Create</li>
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 
@@ -31,13 +30,13 @@
                     <span class="fw-300"></span>
                 </h2>
             </div>
-            <form action="/CustomerBooking/CustomerBookingAdd" method="post" enctype="application/x-www-form-urlencoded">
+            <form action="/CustomerBooking/CustomerBookingUpdate" method="post" enctype="application/x-www-form-urlencoded">
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-tag">
                             Please Add Booking...
                         </div>
-
+                        <input type="hidden" name="Id" value="@Model.Id" />
 
                         <div class="row">
 
@@ -48,7 +47,7 @@
                                     <select id="CompanyId" name="CompanyId" class="select3 Company" required>
                                         @foreach (var item in companyViewModels)
                                         {
-                                            <option value="@item.Id">@item.Name</option>
+                                            <option value="@item.Id" @(item.Id == Model.CompanyId ? "selected='selected'" : "")>@item.Name</option>
                                         }
                                     </select>
                                 </div>
@@ -62,7 +61,9 @@
                                     <select id="ProductId" name="ProductId" class="select3 ProductId" required>
                                         @foreach (var item in productViewModels)
                                         {
-                                            <option value="@item.Id">@item.Name</option>
+
+                                            <option value="@item.Id" @(item.Id == Model.ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                        
                                         }
                                     </select>
                                 </div>
@@ -74,14 +75,11 @@
                 </div>
 
 
-
-
                 <div class="table-responsive-lg">
                     <table class="table m-0 data-table" id="SiteTarget">
                         <thead>
                             <tr>
                                 <th>Quantity</th>
-                                <th>Description</th>
                                 <th width="200px"> Product Unit </th>
                                 <th>Unit Price</th>
                                 <th>VAT %</th>
@@ -94,11 +92,7 @@
 
                             <tr>
                                 <td style="width:200px">
-                                    <input type="text" class="form-control Quantity" name="BookQuantity" value="@Model.BookQuantity" id="Quantity" placeholder="QTY" />
-                                </td>
-
-                                <td style="width:320px">
-                                    <input type="text" class="form-control Description" name="Description" id="Description" placeholder="Description" />
+                                    <input type="text" class="form-control Quantity" value="@Model.BookQuantity" name="BookQuantity" id="Quantity" placeholder="QTY" />
                                 </td>
 
                                 <td style="width:250px !important">
@@ -108,20 +102,21 @@
                                             <option>Product Unit</option>
                                             @foreach (var item in productUnitViewModels)
                                             {
-                                                <option value="@item.Id">@item.Name</option>
+
+                                                <option value="@item.Id" @(item.Id == Model.UnitId ? "selected='selected'" : "")>@item.Name</option>
                                             }
                                         </select>
                                     </div>
                                 </td>
 
                                 <td>
-                                    <input type="text" name="UnitPrice" class="form-control UnitPrice" id="UnitPrice" placeholder="Unit Price" />
+                                    <input type="text" name="UnitPrice" class="form-control UnitPrice" value="@Model.UnitPrice" id="UnitPrice" placeholder="Unit Price" />
                                 </td>
 
                                 <td>
                                     <div class="form-group mb-2">
 
-                                        <input type="hidden" name="VAT" id="VAT" class="VAT" />
+
                                         <select id="VAT1" name="VAT1" class="form-control VAT1" required>
 
                                             <option value="0">0</option>
@@ -132,7 +127,7 @@
                                 </td>
 
                                 <td style="width:250px">
-                                    <input type="text" class="form-control TotalAmount" name="TotalAmount" id="TotalAmount" placeholder="Total Amount" />
+                                    <input type="text" class="form-control TotalAmount" name="TotalAmount" value="@Model.TotalAmount" id="TotalAmount" placeholder="Total Amount" />
 
                                 </td>
                             </tr>
@@ -140,6 +135,53 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="panel-container">
+                    <div class="panel-content">
+                        <div class="row">
+
+                            <div class="col-md-10">
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th style="width:100px"><b>VAT 5% </b></th>
+                                            <td><input class="form-control" type="text" id="VAT"  name="VAT" value="@Model.VAT"  /></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th style="width:100px"><b>Gand Total</b> </th>
+                                            <td><input class="form-control" type="text" id="gtotal" name="name" value="343" /></td>
+                                        </tr>
+                                    </thead>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-container">
+                    <div class="panel-content">
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <div class="form-group mb-2">
+
+                                    <textarea class="form-control Description" name="Description"  id="Description" placeholder="Description">@Model.Description</textarea>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <button type="submit" id="SaveRecord" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
@@ -190,16 +232,17 @@
 
 
             var tt = $('#TotalAmount').val()
-            var vat_value = ((5 * tt) / 100);
+
 
             @*$('#VAT').val(parseFloat(vat_value) + parseFloat(tt));*@
 
-            $('#VAT').val(vat_value);
+            $('#VAT').val();
             $('#VAT1').change(function () {
                 var vt = $('#VAT1').val();
                 if (vt != 0) {
-
-                    $('#TotalAmount').val(parseFloat(vat_value) + parseFloat(tt));
+                    var vat_value = ((5 * tt) / 100);
+                    $('#VAT').val(vat_value);
+                    $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
                 }
                 else {
                     $('#TotalAmount').val(tt);
@@ -215,4 +258,3 @@
 
 
 }
-
