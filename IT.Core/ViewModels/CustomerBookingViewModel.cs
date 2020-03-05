@@ -12,6 +12,7 @@ namespace IT.Core.ViewModels
         public int CompanyId { get; set; }
         public int BookQuantity { get; set; }
         public decimal UnitPrice { get; set; }
+        public bool IsAccepted { get; set; }
         public decimal VAT { get; set; }
         public decimal TotalAmount { get; set; }
         public string Description { get; set; }
@@ -28,6 +29,9 @@ namespace IT.Core.ViewModels
         public string UnitName { get; set; }
         public string UserName { get; set; }
         public string CompanyName { get; set; }
+        public string bookingUpdateReason { get; set; }
+        public string UpdateReason { get; set; }
+        public string RejectedReason { get; set; }
 
     }
 }

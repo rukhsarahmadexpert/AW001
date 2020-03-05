@@ -963,6 +963,11 @@
     <Content Include="Views\CustomerBooking\CustomerBookingGetById.cshtml" />
     <Content Include="Views\CustomerBooking\CustomerCreate.cshtml" />
     <Content Include="Views\CustomerBooking\Edit.cshtml" />
+    <Content Include="Views\CustomerBooking\Details.cshtml" />
+    <Content Include="Views\CustomerBooking\CustomerBookingReserved.cshtml" />
+    <Content Include="Views\Shared\PartialView\Booking\BookingList.cshtml" />
+    <Content Include="Views\CustomerBooking\BookingReserved.cshtml" />
+    <Content Include="Views\CustomerBooking\BookingRemaining.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

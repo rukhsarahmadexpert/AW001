@@ -140,6 +140,17 @@
                                         </div>
                                     </div>
                                 }
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <form action="/CustomerBooking/CustomerBookingReserved" method="post">
+                                            <input type="hidden" name="CompanyId" value="@Model.Id" />
+                                            <button type="submit" href="" class="btn btn-primary form-control">Show Reserved and Remaining booking summary</button>
+                                        </form>
+                                       
+                                    </div>
+                                </div>
                             </div>
                         </div>
                 </div>

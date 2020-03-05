@@ -52,37 +52,41 @@
                             @foreach (var item in customerBookingViewModels)
                             {
 
-                                <tr>
-                                    <td>@item.ProductName</td>
-                                    <td>@item.CreatedDate</td>
-                                    <td>@item.DueDate</td>
-                                    <td>@Math.Round(item.UnitPrice, 2)</td>
-                                    <td>@item.BookQuantity</td>
-                                    <td>@Math.Round(item.VAT, 2)</td>
-                                    <td>@Math.Round(item.TotalAmount, 2)</td>
-                                    <td>
-                                        @if (@item.IsActive == true)
-                                        {
-                                            <div class="switchToggle">
-                                                <input type="checkbox" id="@item.Id" checked>
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="switchToggle">
-                                                <input type="checkbox" id="@item.Id">
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.CreatedDate</td>
+                                <td>@item.DueDate</td>
+                                <td>@Math.Round(item.UnitPrice, 2)</td>
+                                <td>@item.BookQuantity</td>
+                                <td>@Math.Round(item.VAT, 2)</td>
+                                <td>@Math.Round(item.TotalAmount, 2)</td>
+                                <td>
+                                    @if (item.IsActive == true && item.IsOpen == true && item.IsAccepted == false)
+                                    {
+                                        <span class="badge badge-primary">pending</span>
 
-                                        }
-                                    </td>
-                                    <td>
-                                        <a href="/CustomerBooking/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                        <a href="/CustomerBooking/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                        <i class="fal fa-trash-alt">
-                                    </td>
-                                </tr>
+                                    }
+                                    else if (item.IsActive == true && item.IsOpen == true && item.IsAccepted == true)
+                                    {
+                                        <span class="badge badge-success">Accepted</span>
+                                    }
+                                    else if (item.IsActive == false && item.IsOpen == true && item.IsAccepted == false)
+                                    {
+                                        <span class="badge badge-danger">Rejected</span>
+                                    }
+
+                                    else if (item.IsActive == false && item.IsOpen == false && item.IsAccepted == true)
+                                    {
+                                        <span class="badge badge-Secondary">Completed</span>
+                                    }
+
+                                </td>
+                                <td>
+                                    <a href="/CustomerBooking/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                    <a href="/CustomerBooking/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                   
+                                </td>
+                            </tr>
                             }
 
                         </tbody>

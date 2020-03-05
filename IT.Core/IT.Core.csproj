@@ -51,6 +51,7 @@
     <Compile Include="ViewModels\CompanyViewModel.cs" />
     <Compile Include="ViewModels\CompnayModel.cs" />
     <Compile Include="ViewModels\CountryViewModel.cs" />
+    <Compile Include="ViewModels\CustomerBookingReservedRemaining.cs" />
     <Compile Include="ViewModels\CustomerBookingViewModel.cs" />
     <Compile Include="ViewModels\CustomerGroupOrderDetailsViewModel.cs" />
     <Compile Include="ViewModels\CustomerNoteOrderViewModel.cs" />

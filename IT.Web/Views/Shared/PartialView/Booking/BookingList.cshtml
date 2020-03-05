@@ -1,0 +1,78 @@
+﻿@using System.Web.Mvc.Html
+@model IT.Core.ViewModels.CustomerBookingReservedRemaining
+
+<h3>
+    <a>
+        Reserved <span class="fw-300"><i>Booking</i></span>
+    </a>
+</h3>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped w-100">
+        <thead class="bg-primary-600">
+            <tr>
+                <th>Quantity</th>
+                <th>Price(AED)</th>
+                <th>VAT</th>
+                <th>Amount(AED)</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Reserved)
+            {
+                <tr>
+                    <td>@item.BookQuantity</td>
+                    <td>@item.UnitPrice</td>
+                    <td>@item.VAT</td>
+                    <td>@item.TotalAmount</td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+    <!-- datatable end -->
+
+</div>
+
+
+<br />
+<h3>
+  
+        Remaining <span class="fw-300"><i>Booking</i></span>
+   
+</h3>
+
+
+<div class="table-responsive">
+
+
+    <table class="table table-bordered table-hover table-striped w-100">
+        <thead class="bg-primary-600">
+            <tr>
+                <th>Quantity</th>
+                <th>Price(AED)</th>
+                <th>VAT</th>
+                <th>Amount(AED)</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Remaining)
+            {
+                <tr>
+                    <td>@item.BookQuantity</td>
+                    <td>@item.UnitPrice</td>
+                    <td>@item.VAT</td>
+                    <td>@item.TotalAmount</td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+    <!-- datatable end -->
+
+</div>
+
+

@@ -28,12 +28,7 @@
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
-                    <!--      <div class="panel-tag">
-                                <p>Drivers Base Information</p>
-
-
-                            </div>-->
-                    <!-- datatable start -->
+                   
                     <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
@@ -45,7 +40,7 @@
                                 <th>Quantity</th>
                                 <th>VAT</th>
                                 <th>Total Amount</th>
-                                <th>IsActive</th>
+                                <th>Order Status</th>
                                 <th>Actions</th>
                             </tr>   
                         </thead>
@@ -63,26 +58,32 @@
                                 <td>@Math.Round(item.VAT, 2)</td>
                                 <td>@Math.Round(item.TotalAmount, 2)</td>
                                 <td>
-                                    @if (@item.IsActive == true)
+                                    @if (item.IsActive == true && item.IsOpen == true && item.IsAccepted == false)
                                     {
-                                        <div class="switchToggle">
-                                            <input type="checkbox" id="@item.Id" checked>
-                                            <label for="@item.Id">Toggle</label>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="switchToggle">
-                                            <input type="checkbox" id="@item.Id">
-                                            <label for="@item.Id">Toggle</label>
-                                        </div>
+                                        <span class="badge badge-primary">pending</span>
 
                                     }
+                                    else if (item.IsActive == true && item.IsOpen == true && item.IsAccepted == true)
+                                    {
+                                        <span class="badge badge-success">Accepted</span>
+                                    }
+                                    else if (item.IsActive == false && item.IsOpen == true && item.IsAccepted == false)
+                                    {
+                                        <span class="badge badge-danger">Rejected</span>
+                                    }
+
+                                    else if (item.IsActive == false && item.IsOpen == false && item.IsAccepted == true)
+                                    {
+                                        <span class="badge badge-Secondary">Completed</span>
+                                    }
+                                   
                                 </td>
                                 <td>
-                                    <a href="/CustomerBooking/CustomerBookingGetById/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+
+
+                                    <a href="/CustomerBooking/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
                                     <a href="/CustomerBooking/CustomerBookingGetById/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                    <i class="fal fa-trash-alt">
+                                   
                                 </td>
                             </tr>
                             }

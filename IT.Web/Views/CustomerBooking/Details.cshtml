@@ -1,0 +1,308 @@
+﻿@model IT.Core.ViewModels.CustomerBookingViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Customer Booking</a></li>
+    <li class="breadcrumb-item active">Details</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i>customer Booking Details
+    </h1>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Details <span class="fw-300"></span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <form id="form1" method="post" enctype="application/x-www-form-urlencoded">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-bordered table-hover m-0">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Company Name</th>
+                                            <td>@Model.CompanyName</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Product Name</th>
+                                            <td>@Model.ProductName</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Unit</th>
+                                            <td>@Model.UnitName</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">Create Date</th>
+                                            <td>@Model.CreatedDate</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">Due Date</th>
+                                            <td>@Model.DueDate</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Price</th>
+                                            <td>@Model.UnitPrice</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">VAT</th>
+                                            <td>@Model.VAT</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">User Name</th>
+                                            <td>@Model.UserName</td>
+                                        </tr>
+                                   
+                                        <tr>
+                                            <th scope="row">Contact</th>
+                                            <td>@Model.BookQuantity</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" scope="row">Notes</th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">@Model.Description</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <input type="hidden" id="Id" value="@Model.Id" />
+
+                            </div>
+                            <div class="col-md-6">
+
+                                @if (Model.IsActive == true && Model.IsOpen == true && Model.IsAccepted == false)
+                                {
+                                    <button type="button" class="btn btn-danger mt-1 m-1" style="float:right" data-toggle="modal" data-target=".rejectOrderButton">Reject Order</button>
+                                    <button type="button" class="btn btn-primary mt-1 m-1" id="btnAccept" style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Accept Order</button>
+
+                                }
+                                else if (Model.IsActive == false && Model.IsOpen == false && Model.IsAccepted == true)
+                                {
+
+                                    <button type="button" class="btn btn-primary mt-1 m-1" disabled style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Order Completed</button>
+                                }
+                                else if (Model.IsActive == false && Model.IsOpen == true && Model.IsAccepted == false)
+                                {
+
+                                    <button type="button" d class="btn btn-danger mt-1 m-1" disabled style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Already Rejected</button>
+                                }
+                                else
+                                {
+
+                                    <button type="button" class="btn btn-danger mt-1 m-1" style="float:right" data-toggle="modal" data-target=".rejectOrderButton">Reject Order</button>
+
+                                }
+
+                                <button type="button" class="btn btn-warning mt-1 m-1" style="float:right" data-toggle="modal" data-target=".UpdateDate">Update Due Date</button>
+
+                                <div class="table-responsive mt-3" style="padding-top:30px !important">
+
+
+                                    <table class="table table-bordered table-hover m-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="row">Updated Date</th>
+                                                <th scope="row">Update Reason</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in ViewBag.customerBookingViewModels)
+                                            {
+                                                <tr>
+                                                    <td>@item.CreatedDate</td>
+                                                    <td>@item.UpdateReason</td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel-container show">
+    <div class="panel-content">
+        <div class="modal fade UpdateDate" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-transparent" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-white">
+                            Update Due Date Order
+                            <small class="m-0 text-white opacity-70">
+                                PLease Update Due Date
+                            </small>
+                        </h4>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="date" class="form-control" name="DueDate" id="DueDate" value="@Model.DueDate" />
+                        </div>
+                        <div class="form-group">
+                            <textarea id="UpdateReason" name="UpdateReason" class="form-control" rows="5">@Model.UpdateReason</textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" id="btnUpdateDate" class="btn btn-warning">Update Date</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel-container show">
+    <div class="panel-content">
+        <div class="modal fade rejectOrderButton" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-transparent" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-white">
+                            Reject Order
+                            <small class="m-0 text-white opacity-70">
+                                Give brief description of reject order
+                            </small>
+                        </h4>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <textarea id="Description" name="Description" class="form-control" rows="5"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="btnReject" class="btn btn-danger">Reject</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    
+    <script>
+        $(document).ready(function () {
+
+            $('#btnAccept').click(function () {
+
+                $("#btnAccept").text('please wait...');
+                $("#btnAccept").attr("disabled", true);
+
+                var Data = JSON.stringify({
+                    Id: $('#Id').val(),
+                    IsAccepted: true,
+                    IsActive: true
+                })
+
+                ajaxRequest("POST", "/CustomerBooking/CustomerBookingAcceptReject", Data, "json").then(function (result) {
+
+                    if (result != "failed") {
+                         //alert('Order Accepted');
+                        window.location.href = "/CustomerBooking/Index"
+                    }
+                    else {
+                        alert('some error to accept order');
+                    }
+                });
+            });
+
+
+            $('#btnReject').click(function () {
+
+
+                @* alert('Order Rejected 1');*@
+
+                $("#btnReject").text('please wait...');
+                $("#btnReject").attr("disabled", true);
+
+                var Data = JSON.stringify({
+                    Id: $('#Id').val(),
+                    RejectedReason: $('#Description').val(),
+                    IsAccepted: false,
+                    IsActive: false
+                })
+
+                ajaxRequest("POST", "/CustomerBooking/CustomerBookingAcceptReject", Data, "json").then(function (resultReject) {
+
+                    if (resultReject != "failed") {
+
+                        @* alert('Order Rejected 2');
+                        window.location.reload();*@
+                        window.location.href = "/CustomerBooking/Index"
+                    }
+                    else {
+                        alert('some error to reject order');
+                        window.location.reload();
+                    }
+                })
+            })
+
+            $('#btnUpdateDate').click(function () {
+
+
+                @* alert('Order Update 1');*@
+
+                $("#btnReject").text('please wait...');
+                $("#btnReject").attr("disabled", true);
+
+                var Data = JSON.stringify({
+                    Id: $('#Id').val(),
+                    UpdateReason: $('#UpdateReason').val(),
+                    DueDate: $('#DueDate').val(),
+                  
+                  
+                })
+
+                ajaxRequest("POST", "/CustomerBooking/CustomerBookingSetDueDate", Data, "json").then(function (resultdate) {
+
+                    if (resultdate != "failed") {
+
+                        @* alert('Order Rejected 2');
+                        window.location.reload();*@
+                        window.location.href = "/CustomerBooking/Index"
+                    }
+                    else {
+                        alert('some error to reject order');
+                        window.location.reload();
+                    }
+                })
+            })
+        });
+    </script>
+    
+    
+        }
+
+
+

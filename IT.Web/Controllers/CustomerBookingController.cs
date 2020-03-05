@@ -47,6 +47,89 @@ namespace IT.Web.Controllers
         }
 
         [HttpPost]
+        public ActionResult CustomerBookingReserved(CustomerBookingViewModel customerBookingViewModel)
+        {
+
+            try
+            {
+               
+
+                CustomerBookingReservedRemaining customerBookingReservedRemaining = new CustomerBookingReservedRemaining();
+                
+                var CustomerBookingList = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingReserved");
+
+             
+                if (CustomerBookingList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    customerBookingReservedRemaining = (new JavaScriptSerializer().Deserialize<CustomerBookingReservedRemaining>(CustomerBookingList.Data.ToString()));
+                }
+
+                return View(customerBookingReservedRemaining);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ActionResult BookingReserved()
+        {
+
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                CustomerBookingViewModel customerBookingViewModel = new CustomerBookingViewModel();
+                customerBookingViewModel.CompanyId = CompanyId;
+
+                CustomerBookingReservedRemaining customerBookingReservedRemaining = new CustomerBookingReservedRemaining();
+
+                var CustomerBookingList = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingReserved");
+
+
+                if (CustomerBookingList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    customerBookingReservedRemaining = (new JavaScriptSerializer().Deserialize<CustomerBookingReservedRemaining>(CustomerBookingList.Data.ToString()));
+                }
+
+                return View(customerBookingReservedRemaining);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ActionResult BookingRemaining()
+        {
+
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                CustomerBookingViewModel customerBookingViewModel = new CustomerBookingViewModel();
+                customerBookingViewModel.CompanyId = CompanyId;
+
+                CustomerBookingReservedRemaining customerBookingReservedRemaining = new CustomerBookingReservedRemaining();
+
+                var CustomerBookingList = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingReserved");
+
+
+                if (CustomerBookingList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    customerBookingReservedRemaining = (new JavaScriptSerializer().Deserialize<CustomerBookingReservedRemaining>(CustomerBookingList.Data.ToString()));
+                }
+
+                return View(customerBookingReservedRemaining);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
         public ActionResult CustomerBookingAdd(CustomerBookingViewModel customerBookingViewModel)
         {
             try
@@ -180,6 +263,108 @@ namespace IT.Web.Controllers
             catch (Exception ex)
             {
 
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Details(int Id)
+        {
+            try
+            {
+                customerBookingViewModel.Id = Id;
+                var customerResult = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingGetById");
+
+                if (customerResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    customerBookingViewModel = (new JavaScriptSerializer().Deserialize<CustomerBookingViewModel>(customerResult.Data.ToString()));
+                }
+
+                var updateDatetList = webServices.Post(customerBookingViewModel, "CustomerBooking/BookingUpdateReasonAllByBookingId");
+
+                if (updateDatetList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    customerBookingViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerBookingViewModel>>(updateDatetList.Data.ToString()));
+                }
+
+                // CompanyController companyController = new CompanyController();
+                // ProductController productController = new ProductController();
+                // ProductUnitController productUnitController = new ProductUnitController();
+
+                // ViewBag.Companies = companyController.Companies();
+                // ViewBag.Products = productController.Products();
+                // ViewBag.ProductUnits = productUnitController.ProductUnits();
+                ViewBag.customerBookingViewModels = customerBookingViewModels;
+                return View(customerBookingViewModel);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        
+
+        [HttpPost]
+        public ActionResult CustomerBookingSetDueDate(CustomerBookingViewModel customerBookingViewModel)
+        {
+            try
+            {
+                var CustomerResult = new ServiceResponseModel();
+                if (customerBookingViewModel.Id > 0)
+                {
+                    CustomerResult = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingSetDueDate");
+
+                    if (CustomerResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        var reuslt = (new JavaScriptSerializer().Deserialize<int>(CustomerResult.Data));
+
+                        return Json("suceess", JsonRequestBehavior.AllowGet);
+                    }
+
+                    return Json("suceess", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("Failed", JsonRequestBehavior.AllowGet);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CustomerBookingAcceptReject(CustomerBookingViewModel customerBookingViewModel)
+        {
+            try
+            {
+                var CustomerResult = new ServiceResponseModel();
+                if (customerBookingViewModel.Id > 0)
+                {
+                    CustomerResult = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingAcceptReject");
+
+                    if (CustomerResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        var reuslt = (new JavaScriptSerializer().Deserialize<int>(CustomerResult.Data));
+
+                        return Json("suceess", JsonRequestBehavior.AllowGet);
+                    }
+
+                    return Json("suceess", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("Failed", JsonRequestBehavior.AllowGet);
+
+                }
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }
