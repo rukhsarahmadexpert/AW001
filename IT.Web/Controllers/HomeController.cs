@@ -174,7 +174,6 @@ namespace IT.Web_New.Controllers
                      fuelPricesViewModels = (new JavaScriptSerializer().Deserialize<List<FuelPricesViewModel>>(resultFuel.Data.ToString()));
                 }
                 ViewBag.fuelPricesViewModel = fuelPricesViewModels[0];
-
                 return View();
             }
             catch (Exception)
