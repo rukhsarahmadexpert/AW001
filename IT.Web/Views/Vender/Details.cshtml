@@ -7,170 +7,167 @@
     countryViewModels = ViewBag.Countries as List<IT.Core.ViewModels.CountryViewModel>;
 }
 
-<main id="js-page-content" role="main" class="page-content">
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Vender </a></li>
+    <li class="breadcrumb-item active">Details </li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
 
-    <div class="subheader">
-        <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-edit'></i> Vender Detail
-        </h1>
-    </div>
-    <div class="row">
-        <div class="col-xl-12">
-            <div id="panel-1" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        <a href="/Vender/Edit/@Model.Id"><i class="fal fa-edit"></i> Edit<span class="fw-300"></span> Vender</a>
-                    </h2>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a href="/Vender/Edit/@Model.Id"><i class="fal fa-edit"></i> Edit<span class="fw-300"></span> Vender</a>
+                </h2>
 
-                </div>
-                <div class="panel-container show">
-                    <div class="panel-content">
-                      
-                        <form>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
 
-                            <div class="row mb-2">
+                    <form>
 
-                                <div class="col-md-4">
-                                    <div class="form-group mb-2">
-                                        <label class="form-label" for="simpleinput">Title</label>
-                                        <input type="text" value="@Model.Title" class="form-control" disabled> 
-                                    </div>
+                        <div class="row mb-2">
+
+                            <div class="col-md-4">
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="simpleinput">Title</label>
+                                    <input type="text" value="@Model.Title" class="form-control" disabled>
                                 </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Name</label>
-                                        <input type="text" value="@Model.Name"class="form-control" disabled>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Representative</label>
-                                        <input type="text" value="@Model.Representative" class="form-control" disabled>
-                                    </div>
-                                </div>
-
                             </div>
-                            <div class="row mb-2">
 
-                                <div class="col-md-4">
-                                    <div class="form-group mb-2">
-                                        <label class="form-label" for="simpleinput">Countries</label>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Name</label>
+                                    <input type="text" value="@Model.Name" class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Representative</label>
+                                    <input type="text" value="@Model.Representative" class="form-control" disabled>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mb-2">
+
+                            <div class="col-md-4">
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="simpleinput">Countries</label>
+                                    @foreach (var item in countryViewModels)
+                                    {
+                                        <input type="text" value="@item.CountryName" class="form-control" disabled>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="simpleinput">State</label>
+                                    <select id="State" name="State" class="select3 State" disabled>
+                                        @foreach (var item in countryViewModels.Where(x => x.Id == 3))
+                                        {
+                                            foreach (var item1 in item.stateViewModels)
+                                            {
+                                                <option value="@item1.Id">@item1.States</option>
+
+
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="simpleinput">City</label>
+                                    <select id="City" name="City" class="select3 City" disabled>
                                         @foreach (var item in countryViewModels)
                                         {
-                                            <input type="text" value="@item.CountryName" class="form-control" disabled>
-                                        }
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group mb-2">
-                                        <label class="form-label" for="simpleinput">State</label>
-                                        <select id="State" name="State" class="select3 State" disabled>
-                                            @foreach (var item in countryViewModels.Where(x => x.Id == 3))
+                                            foreach (var item1 in item.stateViewModels)
                                             {
-                                                foreach (var item1 in item.stateViewModels)
+                                                if (item1.cityViewModels != null && item1.cityViewModels.Count > 0)
                                                 {
-                                                    <option value="@item1.Id">@item1.States</option>
-
-
-                                                }
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group mb-2">
-                                        <label class="form-label" for="simpleinput">City</label>
-                                        <select id="City" name="City" class="select3 City" disabled>
-                                            @foreach (var item in countryViewModels)
-                                            {
-                                                foreach (var item1 in item.stateViewModels)
-                                                {
-                                                    if (item1.cityViewModels != null && item1.cityViewModels.Count > 0)
+                                                    foreach (var item2 in item1.cityViewModels)
                                                     {
-                                                        foreach (var item2 in item1.cityViewModels)
-                                                        {
 
-                                                            <option value="@item2.Id" @(item2.Id == Convert.ToInt32(Model.City) ? "selected='selected'" : "")>@item2.CityName</option>
-                                                        }
+                                                        <option value="@item2.Id" @(item2.Id == Convert.ToInt32(Model.City) ? "selected='selected'" : "")>@item2.CityName</option>
                                                     }
                                                 }
                                             }
-                                        </select>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <div class="row  mb-2">
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Address</label>
-                                        <input type="text" value="@Model.Address" class="form-control" disabled>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">LandLine</label>
-                                        <input type="text" value="@Model.LandLine" class="form-control" disabled>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Mobile</label>
-                                        <input type="text" value="@Model.Mobile" class="form-control" disabled>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <div class="row  mb-2">
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Email</label>
-                                        <input type="text" value="@Model.Email" class="form-control" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Website</label>
-                                        <input type="text" value="@Model.Website" class="form-control" disabled>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">TRN</label>
-                                        <input type="text" value="@Model.TRN" class="form-control" disabled>
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Remarks</label>
-                                        <textarea name="Remarks" id="Remarks" class="form-control" disabled>@Model.Remarks</textarea>
-                                    </div>
+                                        }
+                                    </select>
                                 </div>
                             </div>
-                          
-                        </form>
-                    </div>
+
+
+                        </div>
+
+                        <div class="row  mb-2">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Address</label>
+                                    <input type="text" value="@Model.Address" class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">LandLine</label>
+                                    <input type="text" value="@Model.LandLine" class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Mobile</label>
+                                    <input type="text" value="@Model.Mobile" class="form-control" disabled>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="row  mb-2">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Email</label>
+                                    <input type="text" value="@Model.Email" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Website</label>
+                                    <input type="text" value="@Model.Website" class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">TRN</label>
+                                    <input type="text" value="@Model.TRN" class="form-control" disabled>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Remarks</label>
+                                    <textarea name="Remarks" id="Remarks" class="form-control" disabled>@Model.Remarks</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</main>
-
+</div>

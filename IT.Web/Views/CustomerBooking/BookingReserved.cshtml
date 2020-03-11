@@ -1,0 +1,66 @@
+﻿@model IT.Core.ViewModels.CustomerBookingReservedRemaining
+@{
+    ViewBag.Title = "BookingReserved";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Reserved Booking</a></li>
+
+    <li class="breadcrumb-item active">List</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a class="btn btn-md btn-primary" href="/CustomerBooking/CustomerCreate">
+                        <i class="fal fa-plus-circle"></i> Request For New <span class="fw-300"><i>Booking</i></span>
+                    </a>
+                </h2>
+
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <h3>
+                        <a>
+                            Reserved <span class="fw-300"><i>Booking</i></span>
+                        </a>
+                    </h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-primary-600">
+                                <tr>
+                                    <th>Quantity</th>
+                                    <th>Price(AED)</th>
+                                    <th>VAT</th>
+                                    <th>Amount(AED)</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Reserved)
+                                {
+                                    <tr>
+                                        <td>@item.BookQuantity</td>
+                                        <td>@item.UnitPrice</td>
+                                        <td>@item.VAT</td>
+                                        <td>@item.TotalAmount</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+                        <!-- datatable end -->
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

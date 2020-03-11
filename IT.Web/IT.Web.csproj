@@ -192,6 +192,7 @@
     <Compile Include="Controllers\ReportCustomerController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\StorageController.cs" />
+    <Compile Include="Controllers\UploadDocumentsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Controllers\VehicleTypeController.cs" />
@@ -961,11 +962,22 @@
     <Content Include="Views\CustomerBooking\Customer.cshtml" />
     <Content Include="Views\CustomerBooking\AdminCreate.cshtml" />
     <Content Include="Views\CustomerBooking\CustomerBookingGetById.cshtml" />
+    <Content Include="Views\CustomerBooking\CustomerCreate.cshtml" />
+    <Content Include="Views\CustomerBooking\Edit.cshtml" />
+    <Content Include="Views\CustomerBooking\Details.cshtml" />
+    <Content Include="Views\CustomerBooking\CustomerBookingReserved.cshtml" />
+    <Content Include="Views\Shared\PartialView\Booking\BookingList.cshtml" />
+    <Content Include="Views\CustomerBooking\BookingReserved.cshtml" />
+    <Content Include="Views\CustomerBooking\BookingRemaining.cshtml" />
+    <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Shared\PartialView\UploadDocuments\UploadDocuments.cshtml" />
+    <Content Include="Views\CustomerBooking\CustomerDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\AWDepartment\" />
     <Folder Include="Views\CustomerQuotation\" />
+    <Folder Include="Views\UploadDocuments\" />
     <Folder Include="Views\VehicleType\" />
   </ItemGroup>
   <ItemGroup>

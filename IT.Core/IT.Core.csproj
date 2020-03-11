@@ -51,6 +51,7 @@
     <Compile Include="ViewModels\CompanyViewModel.cs" />
     <Compile Include="ViewModels\CompnayModel.cs" />
     <Compile Include="ViewModels\CountryViewModel.cs" />
+    <Compile Include="ViewModels\CustomerBookingReservedRemaining.cs" />
     <Compile Include="ViewModels\CustomerBookingViewModel.cs" />
     <Compile Include="ViewModels\CustomerGroupOrderDetailsViewModel.cs" />
     <Compile Include="ViewModels\CustomerNoteOrderViewModel.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="ViewModels\StorageViewListModel.cs" />
     <Compile Include="ViewModels\StorageViewModel.cs" />
     <Compile Include="ViewModels\TransferFromDriverViewModel.cs" />
+    <Compile Include="ViewModels\UploadDocumentsViewModel.cs" />
     <Compile Include="ViewModels\UserCompanyViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\VatModel.cs" />

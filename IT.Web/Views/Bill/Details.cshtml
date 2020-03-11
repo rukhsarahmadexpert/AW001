@@ -1,5 +1,10 @@
 ﻿
 @{
+
+    IT.Core.ViewModels.LPOInvoiceViewModel LPOInvoiceViewModel = new IT.Core.ViewModels.LPOInvoiceViewModel();
+
+    LPOInvoiceViewModel = ViewBag.lPOInvoiceViewModel as IT.Core.ViewModels.LPOInvoiceViewModel;
+
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
@@ -44,6 +49,19 @@
                                 </div>
 
                                 <p></p>
+
+                                <div class="row mt-3 mb-5">
+                                    <div class="col-md-2">
+
+                                        <form method="post" action="/Bill/UploadDocumentsAdd" enctype="multipart/form-data">
+                                            <input type="hidden" id="BillId" name="BillId" value="@LPOInvoiceViewModel.Id" />
+                                            @{
+                                                Html.RenderPartial("~/Views/Shared/PartialView/UploadDocuments/UploadDocuments.cshtml");
+                                            }
+                                        </form>
+                                    </div>
+                                </div>
+
                                 @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_FooterButtonPartialViewView.cshtml")
                             </div>
                         </div>

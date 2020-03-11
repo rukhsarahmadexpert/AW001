@@ -97,6 +97,14 @@
                                 <h3>My Google Maps Demo</h3>
                                 <!--The div element for the map -->
                                 <div id="map"></div>
+
+                                <form method="post" action="/CustomerOrder/UploadDocumentsAddAdmin" enctype="multipart/form-data">
+                                    <input type="hidden" id="OrderId" name="OrderId" value="@Model.Id" />
+                                    @{
+                                        Html.RenderPartial("~/Views/Shared/PartialView/UploadDocuments/UploadDocuments.cshtml");
+                                    }
+                                </form>
+
                             </div>
 
                             <div class="col-lg-12 py-2" style="overflow-x:auto;">

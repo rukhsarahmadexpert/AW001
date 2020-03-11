@@ -74,14 +74,11 @@
                 </div>
 
 
-
-
                 <div class="table-responsive-lg">
                     <table class="table m-0 data-table" id="SiteTarget">
                         <thead>
                             <tr>
                                 <th>Quantity</th>
-                                <th>Description</th>
                                 <th width="200px"> Product Unit </th>
                                 <th>Unit Price</th>
                                 <th>VAT %</th>
@@ -95,10 +92,6 @@
                             <tr>
                                 <td style="width:200px">
                                     <input type="text" class="form-control Quantity" name="BookQuantity" id="Quantity" placeholder="QTY" />
-                                </td>
-
-                                <td style="width:320px">
-                                    <input type="text" class="form-control Description" name="Description" id="Description" placeholder="Description" />
                                 </td>
 
                                 <td style="width:250px !important">
@@ -120,8 +113,8 @@
 
                                 <td>
                                     <div class="form-group mb-2">
-                                      
-                                        <input type="hidden" name="VAT" id="VAT" class="VAT" />
+
+                                       
                                         <select id="VAT1" name="VAT1" class="form-control VAT1" required>
 
                                             <option value="0">0</option>
@@ -140,6 +133,53 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="panel-container">
+                    <div class="panel-content">
+                        <div class="row">
+
+                            <div class="col-md-10"> 
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th style="width:100px"><b>VAT 5% </b></th>
+                                            <td><input class="form-control" type="text" id="VAT" name="VAT" value="0"  /></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th style="width:100px"><b>Gand Total</b> </th>
+                                            <td><input class="form-control" type="text" id="gtotal" name="name" value="0" /></td>
+                                        </tr>
+                                    </thead>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-container">
+                    <div class="panel-content">
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <div class="form-group mb-2">
+
+                                    <textarea class="form-control Description" name="Description" id="Description" placeholder="Description"></textarea>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <button type="submit" id="SaveRecord" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
@@ -190,16 +230,17 @@
            
 
             var tt = $('#TotalAmount').val()
-            var vat_value = ((5 * tt) / 100);
+           
 
             @*$('#VAT').val(parseFloat(vat_value) + parseFloat(tt));*@
 
-            $('#VAT').val(vat_value);
+            $('#VAT').val();
             $('#VAT1').change(function () {
                 var vt = $('#VAT1').val();
                 if (vt != 0) {
-
-                    $('#TotalAmount').val(parseFloat(vat_value) + parseFloat(tt));
+                    var vat_value = ((5 * tt) / 100);
+                    $('#VAT').val(vat_value);
+                    $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
                 }
                 else {
                     $('#TotalAmount').val(tt);

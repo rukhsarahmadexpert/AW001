@@ -263,7 +263,7 @@
                         </li>
                         <li class="open">
                             <a href="#" title="My Invoices" class=" " data-filter-tags="My Invoices">
-                                <i class="fal fa-shopping-bag"></i>
+                                <i class="fal fa-file-check"></i>
                                 <span class="nav-link-text" data-i18n="nav.application_intel">My Invoices</span>
                             </a>
                             <ul>
@@ -273,7 +273,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/CustomerPurchase/Index" title="Purchases" class=" " data-filter-tags="">
+                                    <a style="cursor:pointer" title="Purchases" class="text-primary" data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Purchases</span><span class="">List</span>
                                     </a>
                                 </li>
@@ -289,7 +289,7 @@
                             <ul>
 
                                 <li>
-                                    <a href="/OrderConfirmations/Index" title="Place New Order" class=" " data-filter-tags="">
+                                    <a href="/CustomerBooking/CustomerCreate" title="Place New Order" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Place New Order</span><span class="">Add</span>
                                     </a>
                                 </li>
@@ -299,15 +299,21 @@
                                         <span class="nav-link-text" data-i18n="">Order Confirmations</span><span class="">List</span>
                                     </a>
                                 </li>
+                                
+                                <li>
+                                    <a href="/CustomerBooking/Customer" title="Booked Quantities" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Booked Quantities</span><span class="">List</span>
+                                    </a>
+                                </li>
 
                                 <li>
-                                    <a href="/CustomerBooking/Customer" title="Reserved Quantities" class=" " data-filter-tags="">
+                                    <a href="/CustomerBooking/BookingReserved" title="Reserved Quantities" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Reserved Quantities</span><span class="">List</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="/OrderConfirmations/Index" title="Remaining Quantities" class=" " data-filter-tags="">
+                                    <a href="/CustomerBooking/BookingReserved" title="Remaining Quantities" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Remaining Quantities</span><span class="">List</span>
                                     </a>
                                 </li>

@@ -4,6 +4,10 @@
     LPOInvoiceViewModel = ViewBag.lPOInvoiceViewModel as IT.Core.ViewModels.LPOInvoiceViewModel;
 }
 
+
+        <input type="hidden" id="LPOIdFromBIll" value="@LPOInvoiceViewModel.LPOId" />
+
+
 <div class="pull-right">
 
    
@@ -12,4 +16,5 @@
     <button class="btn btn-warning" id="SendEmail"><i class="glyphicon glyphicon-envelope"></i> Send By Email</button>
 </div>
 
-<input type="hidden" id="LPOIdFromBIll" value="@LPOInvoiceViewModel.LPOId" />
+
+

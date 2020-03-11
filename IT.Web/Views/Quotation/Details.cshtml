@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "Aw Fuel - Quotation Details";
 
+    IT.Core.ViewModels.LPOInvoiceViewModel LPOInvoiceViewModel = new IT.Core.ViewModels.LPOInvoiceViewModel();
+
+    LPOInvoiceViewModel = ViewBag.lPOInvoiceViewModel as IT.Core.ViewModels.LPOInvoiceViewModel;
+
     IT.Core.ViewModels.UserCompanyViewModel userCompanyViewModel = new IT.Core.ViewModels.UserCompanyViewModel();
     userCompanyViewModel = Session["userCompanyViewModel"] as IT.Core.ViewModels.UserCompanyViewModel;
     if (userCompanyViewModel.Authority == "CustomerAdmin")
@@ -54,15 +58,33 @@
                                     @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_FooterTotalPartialView.cshtml")
                                 </div>
                                 <p></p>
+
+                                <div class="row mt-3 mb-5">
+                                    <div class="col-md-2">
+
+                                        <form method="post" action="/Quotation/UploadDocumentsAdd" enctype="multipart/form-data">
+                                            <input type="hidden" id="QuotationId" name="QuotationId" value="@LPOInvoiceViewModel.Id" />
+                                            @{
+                                                Html.RenderPartial("~/Views/Shared/PartialView/UploadDocuments/UploadDocuments.cshtml");
+                                            }
+                                        </form>
+                                    </div>
+                                </div>
+
                                 @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_FooterButtonPartialViewView.cshtml")
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 
 @section Scripts{
     <script>
@@ -74,7 +96,7 @@
         });
 
         $(document).ready(function () {
-                
+
         var Downloads =  @Html.Raw(Json.Encode(ViewBag.IsDownload));
 
             if (Downloads != null)
