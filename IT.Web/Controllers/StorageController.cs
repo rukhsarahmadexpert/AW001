@@ -25,12 +25,13 @@ namespace IT.Web_New.Controllers
             {
                 List<StorageViewModel> storageViewModels2 = new List<StorageViewModel>();
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.Id = 0;
-                pagingParameterModel.PageSize = 100;
-
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                { 
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    Id = 0,
+                    PageSize = 100,
+                 };
                 var StorageList = webServices.Post(pagingParameterModel, "Storage/All");
 
                 if (StorageList.StatusCode == System.Net.HttpStatusCode.Accepted)
