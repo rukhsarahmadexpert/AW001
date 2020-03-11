@@ -166,14 +166,14 @@ namespace IT.Web_New.Controllers
                 }
                 ViewBag.customerOrderStatistics = customerOrderStatistics;
 
-                FuelPricesViewModel fuelPricesViewModel = new FuelPricesViewModel();
+                List<FuelPricesViewModel> fuelPricesViewModels = new List<FuelPricesViewModel>();
 
-                var resultFuel = webServices.Post(fuelPricesViewModel, "FuelPrices/FuelPricesTopOne");
+                var resultFuel = webServices.Post(new FuelPricesViewModel(), "FuelPrices/FuelPricesTopOne");
                 if (resultFuel.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    fuelPricesViewModel = (new JavaScriptSerializer().Deserialize<FuelPricesViewModel>(resultFuel.Data.ToString()));
+                     fuelPricesViewModels = (new JavaScriptSerializer().Deserialize<List<FuelPricesViewModel>>(resultFuel.Data.ToString()));
                 }
-                ViewBag.fuelPricesViewModel = fuelPricesViewModel;
+                ViewBag.fuelPricesViewModel = fuelPricesViewModels[0];
 
                 return View();
             }
