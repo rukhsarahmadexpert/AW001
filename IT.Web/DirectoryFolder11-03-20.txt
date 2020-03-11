@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: Mar 11,2020 02:35:47 PMMar 11,2020 02:35:45 PMError Message:    at IT.Web_New.Controllers.UserController.Login(LoginViewModel loginViewModel) in D:\AWF\IT.Web\Controllers\UserController.cs:line 105
+  Exception Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.UserController Error Action Name: LoginUserId: 0CompanyId0
+--------------------------------*End*------------------------------------------
+
+
+
