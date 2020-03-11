@@ -20,8 +20,10 @@
                                 <div id="panel-1" class="panel">
                                     <div class="panel-hdr">
                                         <h2>
-                                           <a href="/Driver/Create"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Driver</i></span>
-                                        </h2></a>
+                                            <a class="btn btn-md btn-primary" href="/Driver/Create">
+                                                <i class="fal fa-plus-circle"></i>  Create New <span class="fw-300"><i>Driver</i></span>
+                                            </a>
+                                        </h2>
                                        
                                     </div>
                                     <div class="panel-container show">
@@ -55,7 +57,6 @@
                                                         <td>@item.LicenseExpiry</td>
                                                         <td>@item.Facebook</td>
                                                         <td>
-                                                        <td>
                                                             @if (@item.IsActive == true)
                                                             {
                                                                 <div class="switchToggle">
@@ -71,7 +72,6 @@
                                                                 </div>
 
                                                             }
-                                                        </td>
                                                         </td>
                                                         <td>
                                                             <a href="/Driver/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;

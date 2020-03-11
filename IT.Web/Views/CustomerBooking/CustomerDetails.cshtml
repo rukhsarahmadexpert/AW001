@@ -1,9 +1,8 @@
 ﻿@model IT.Core.ViewModels.CustomerBookingViewModel
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+    ViewBag.Title = "CustomerDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <ol class="breadcrumb page-breadcrumb">
     <li class="breadcrumb-item"><a href="javascript:void(0);">Customer Booking</a></li>
@@ -80,7 +79,7 @@
                                 </table>
                                 <input type="hidden" id="Id" value="@Model.Id" />
 
-                                <form method="post" action="/CustomerBooking/UploadDocumentsAddAdmin" enctype="multipart/form-data">
+                                <form method="post" action="/CustomerBooking/UploadDocumentsAdd" enctype="multipart/form-data">
                                     <input type="hidden" id="BookingId" name="BookingId" value="@Model.Id" />
                                     @{
                                         Html.RenderPartial("~/Views/Shared/PartialView/UploadDocuments/UploadDocuments.cshtml");
@@ -90,32 +89,32 @@
                             </div>
                             <div class="col-md-6">
 
-                                @if (Model.IsActive == true && Model.IsOpen == true && Model.IsAccepted == false)
-                                {
-                                    <button type="button" class="btn btn-danger mt-1 m-1" style="float:right" data-toggle="modal" data-target=".rejectOrderButton">Reject Order</button>
-                                    <button type="button" class="btn btn-primary mt-1 m-1" id="btnAccept" style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Accept Order</button>
+                                @*      @if (Model.IsActive == true && Model.IsOpen == true && Model.IsAccepted == false)
+        {
+            <button type="button" class="btn btn-danger mt-1 m-1" style="float:right" data-toggle="modal" data-target=".rejectOrderButton">Reject Order</button>
+            <button type="button" class="btn btn-primary mt-1 m-1" id="btnAccept" style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Accept Order</button>
 
-                                }
-                                else if (Model.IsActive == false && Model.IsOpen == false && Model.IsAccepted == true)
-                                {
+        }
+        else if (Model.IsActive == false && Model.IsOpen == false && Model.IsAccepted == true)
+        {
 
-                                    <button type="button" class="btn btn-primary mt-1 m-1" disabled style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Order Completed</button>
-                                }
-                                else if (Model.IsActive == false && Model.IsOpen == true && Model.IsAccepted == false)
-                                {
+            <button type="button" class="btn btn-primary mt-1 m-1" disabled style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Order Completed</button>
+        }
+        else if (Model.IsActive == false && Model.IsOpen == true && Model.IsAccepted == false)
+        {
 
-                                    <button type="button" d class="btn btn-danger mt-1 m-1" disabled style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Already Rejected</button>
-                                }
-                                else
-                                {
+            <button type="button" d class="btn btn-danger mt-1 m-1" disabled style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Already Rejected</button>
+        }
+        else
+        {
 
-                                    <button type="button" class="btn btn-danger mt-1 m-1" style="float:right" data-toggle="modal" data-target=".rejectOrderButton">Reject Order</button>
+            <button type="button" class="btn btn-danger mt-1 m-1" style="float:right" data-toggle="modal" data-target=".rejectOrderButton">Reject Order</button>
 
-                                }
+        }
 
-                                <button type="button" class="btn btn-warning mt-1 m-1" style="float:right" data-toggle="modal" data-target=".UpdateDate">Update Due Date</button>
-
-                                <div class="table-responsive mt-3" style="padding-top:30px !important">
+        <button type="button" class="btn btn-warning mt-1 m-1" style="float:right" data-toggle="modal" data-target=".UpdateDate">Update Due Date</button>
+                                *@
+                                <div class="table-responsive">
 
 
                                     <table class="table table-bordered table-hover m-0">
@@ -123,7 +122,7 @@
                                             <tr>
                                                 <th scope="row">Updated Date</th>
                                                 <th scope="row">Update Reason</th>
-                                               
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -174,13 +173,13 @@
                         </div>
                         <div class="form-group">
                             <textarea id="UpdateReason" name="UpdateReason" class="form-control" rows="5">@Model.UpdateReason</textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" id="btnUpdateDate" class="btn btn-warning">Update Date</button>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="btnUpdateDate" class="btn btn-warning">Update Date</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -217,7 +216,7 @@
 </div>
 
 @section scripts{
-    
+
     <script>
         $(document).ready(function () {
 
@@ -287,8 +286,8 @@
                     Id: $('#Id').val(),
                     UpdateReason: $('#UpdateReason').val(),
                     DueDate: $('#DueDate').val(),
-                  
-                  
+
+
                 })
 
                 ajaxRequest("POST", "/CustomerBooking/CustomerBookingSetDueDate", Data, "json").then(function (resultdate) {
@@ -307,9 +306,8 @@
             })
         });
     </script>
-    
-    
-        }
 
+
+}
 
 

@@ -1,5 +1,9 @@
 ﻿
 @{
+    IT.Core.ViewModels.LPOInvoiceViewModel LPOInvoiceViewModel = new IT.Core.ViewModels.LPOInvoiceViewModel();
+
+    LPOInvoiceViewModel = ViewBag.lPOInvoiceViewModel as IT.Core.ViewModels.LPOInvoiceViewModel;
+
     ViewBag.Title = "Aw fuel - Invoice Details";
     IT.Core.ViewModels.UserCompanyViewModel userCompanyViewModel = new IT.Core.ViewModels.UserCompanyViewModel();
     userCompanyViewModel = Session["userCompanyViewModel"] as IT.Core.ViewModels.UserCompanyViewModel;
@@ -53,6 +57,19 @@
                                     @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_FooterTotalPartialView.cshtml")
                                 </div>
                                 <p></p>
+
+                                <div class="row mt-3 mb-5">
+                                    <div class="col-md-2">
+
+                                        <form method="post" action="/Invoice/UploadDocumentsAdd" enctype="multipart/form-data">
+                                            <input type="hidden" id="InvoiceId" name="InvoiceId" value="@LPOInvoiceViewModel.Id" />
+                                            @{
+                                                Html.RenderPartial("~/Views/Shared/PartialView/UploadDocuments/UploadDocuments.cshtml");
+                                            }
+                                        </form>
+                                    </div>
+                                </div>
+
                                 @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_FooterButtonPartialViewView.cshtml")
                             </div>
                         </div>

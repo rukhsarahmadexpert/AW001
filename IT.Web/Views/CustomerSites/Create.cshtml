@@ -12,33 +12,30 @@
 }
 
 <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
-                            
-                            <li class="breadcrumb-item active">Customer site</li>
-                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
- </ol>
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Customer Site</a></li>
+    <li class="breadcrumb-item active">create</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
 
-<div class="subheader">
-    @if (Model.Id > 0)
-    {
-        <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-edit'></i> Edit Site
-        </h1>
-    }
-    else
-    {
-        <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-edit'></i> Create Site
-        </h1>
-    }
-</div>
+
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
-                    <h2>
-                        Site <span class="fw-300">Insert</span>
-                    </h2>                    
+
+                    @if (Model.Id > 0)
+                    {
+                        <h2>
+                            Site<span class="fw-300">Edit</span>
+                        </h2>
+                    }
+                    else
+                    {
+                        <h2>
+                            Site<span class="fw-300">Create</span>
+                        </h2>
+                    }
+
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
@@ -139,7 +136,7 @@
                                     else
                                     {
                                         <button type="submit" id="Save" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                            Driver
+                                            Customer Site 
                                             <span>submit</span>
                                         </button>
                                     }

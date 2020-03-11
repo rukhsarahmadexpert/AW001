@@ -7,16 +7,11 @@
 
 
 <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Vehicle</a></li> 
-                            <li class="breadcrumb-item active">Detail</li>
-                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+   <li class="breadcrumb-item"><a href="javascript:void(0);">Vehicle</a></li> 
+   <li class="breadcrumb-item active">Details</li>
+   <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 
-    <div class="subheader">
-        <h1 class="subheader-title">
-           Vehicle Detail
-        </h1>
-    </div>
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
@@ -30,93 +25,100 @@
                         <div class="panel-tag">
                             Vehicle
                         </div>
-                        <form id="form1" method="post" enctype="application/x-www-form-urlencoded">
+                      
                             <div class="row">
                                 <div class="col-md-6">
 
-                                    <table class="table table-bordered table-hover m-0">
-                                                    <thead class="thead-themed">
-                                                        <tr>
-                                                            <th>Vehicle </th>
-                                                            <th>Information</th>  
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
+                                    <table class="table table-bordered table-hover mb-5">
+                                        <thead class="thead-themed">
+                                            <tr>
+                                                <th>Vehicle </th>
+                                                <th>Information</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                                        <tr>
-                                                           <th>Trafic Plate Number </th>
-                                                            <th>@Model.TraficPlateNumber</th>
-                                                        </tr>
+                                            <tr>
+                                                <th>Trafic Plate Number </th>
+                                                <th>@Model.TraficPlateNumber</th>
+                                            </tr>
 
-                                                        <tr>
-                                                            <th>Vehicle Type Name</th>
-                                                            <td>@Model.VehicleTypeName</td>
-                                                        </tr>
+                                            <tr>
+                                                <th>Vehicle Type Name</th>
+                                                <td>@Model.VehicleTypeName</td>
+                                            </tr>
 
-                                                         <tr>
-                                                            <th>Place of Issue</th>
-                                                            <td>@Model.PlaceofIssue</td>
-                                                        </tr>
+                                            <tr>
+                                                <th>Place of Issue</th>
+                                                <td>@Model.PlaceofIssue</td>
+                                            </tr>
 
-                                                         <tr>
-                                                            <th>TC Number</th>
-                                                            <td>@Model.TCNumber</td>
-                                                        </tr>
+                                            <tr>
+                                                <th>TC Number</th>
+                                                <td>@Model.TCNumber</td>
+                                            </tr>
 
-                                                        <tr>
-                                                            <th>Model</th>
-                                                            <td>@Model.Model</td>
-                                                        </tr>
+                                            <tr>
+                                                <th>Model</th>
+                                                <td>@Model.Model</td>
+                                            </tr>
 
-                                                         <tr>
-                                                            <th>Color</th>
-                                                            <td>@Model.Color</td>
-                                                        </tr>
+                                            <tr>
+                                                <th>Color</th>
+                                                <td>@Model.Color</td>
+                                            </tr>
 
-                                                        <tr>
-                                                            <th>InsuranceExpiry</th>
-                                                            <td>@Model.InsuranceExpiry</td>
-                                                        </tr>
+                                            <tr>
+                                                <th>InsuranceExpiry</th>
+                                                <td>@Model.InsuranceExpiry</td>
+                                            </tr>
 
-                                                         <tr>
-                                                            <th>Mulkia Expiry</th>
-                                                            <td>@Model.MulkiaExpiry</td>
-                                                        </tr>
+                                            <tr>
+                                                <th>Mulkia Expiry</th>
+                                                <td>@Model.MulkiaExpiry</td>
+                                            </tr>
 
-                                                         <tr>
-                                                            <th>Mulkia Expiry Date</th>
-                                                            <td>@Model.MulkiaExpiryDate</td>
-                                                        </tr>
-
-
-                                                          <tr>
-                                                            <th>Insurance Expiry Date</th>
-                                                            <td>@Model.InsuranceExpiryDate</td>
-                                                        </tr>
-
-                                                        <tr>
-                                                            <th>Registered Region</th>
-                                                            <td>@Model.RegisteredRegion</td>
-                                                        </tr>
+                                            <tr>
+                                                <th>Mulkia Expiry Date</th>
+                                                <td>@Model.MulkiaExpiryDate</td>
+                                            </tr>
 
 
-                                                        <tr>
-                                                            <th>Brand</th>
-                                                            <td>@Model.Brand</td>
-                                                        </tr>
-                                                        
-                                                        <tr>
-                                                            <th colspan="2">Comments</th>
-                                                            </tr>
-                                                        <tr>
-                                                            <td colspan="2">@Model.Comments</td>
-                                                        </tr>
-                                                        
+                                            <tr>
+                                                <th>Insurance Expiry Date</th>
+                                                <td>@Model.InsuranceExpiryDate</td>
+                                            </tr>
 
-                                                    </tbody>
-                                                </table>                                   
+                                            <tr>
+                                                <th>Registered Region</th>
+                                                <td>@Model.RegisteredRegion</td>
+                                            </tr>
 
-                                 
+
+                                            <tr>
+                                                <th>Brand</th>
+                                                <td>@Model.Brand</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th colspan="2">Comments</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">@Model.Comments</td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                    <form method="post" action="/Vehicle/UploadDocumentsAdd" enctype="multipart/form-data">
+                                        <input type="hidden" id="VehicleId" name="VehicleId" value="@Model.Id" />
+                                        @{
+                                            Html.RenderPartial("~/Views/Shared/PartialView/UploadDocuments/UploadDocuments.cshtml");
+                                        }
+                                    </form>
+
+
                                 </div>
                                <div class="col-md-6">
                                  <!--   <h3 class="py-5">Driving License</h3> -->
@@ -196,7 +198,7 @@
 
                              
                             </div>
-                        </form>
+                       
                     </div>
                 </div>
             </div>
