@@ -28,6 +28,8 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult Index(int CompId = 0)
         {
+            VehicleViewModels = new List<VehicleViewModel>();
+
             if (CompId == 0)
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
@@ -58,9 +60,14 @@ namespace IT.Web_New.Controllers
                     }
                 }
 
-                if (Request.IsAjaxRequest())
+                if(VehicleViewModels.Count < 1 || VehicleViewModels == null)
                 {
                     VehicleViewModels.Insert(0, new VehicleViewModel() { Id = 0, TraficPlateNumber = "Select Vehicle" });
+                }
+
+                if (Request.IsAjaxRequest())
+                {
+                    
                     return Json(VehicleViewModels, JsonRequestBehavior.AllowGet);
                 }
 

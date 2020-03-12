@@ -18,6 +18,7 @@ namespace IT.Core.ViewModels
         public int EmployeeId { get; set; }
         public int CompanyId { get; set; }
         public int BookingId { get; set; }
+        public string FilesName { get; set; }
         public int OrderId { get; set; }
         public int VehicleId { get; set; }
         public int StorageId { get; set; }

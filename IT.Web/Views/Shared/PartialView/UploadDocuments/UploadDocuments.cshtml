@@ -1,13 +1,17 @@
 ﻿
-    <div class="form-group mb-2">
-        <label class="form-label">File Upload</label>
-        <div class="custom-file">
+<div class="form-group mb-2">
+    @*<label class="form-label" for="simpleinput">File Name</label>*@
+    <input type="text" id="FilesName" name="FilesName" class="form-control" placeholder="Enter File Name">
+</div>
 
-            <input type="file"  name="FileUrl" class="custom-file-input" id="FileUrl">
-            <label class="custom-file-label" for="customFile">Choose file</label>
-        </div>
+<div class="form-group mb-2">
+    @*<label class="form-label">File Upload</label>*@
+    <div class="custom-file">
+        <input type="file" name="FileUrl" class="custom-file-input" id="FileUrl">
+        <label class="custom-file-label" for="customFile">Choose file</label>
     </div>
-    <button type="submit" id="UploadSubmit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-        Upload
-        <span>Submit</span>
-    </button>
+</div>
+<button type="submit" id="UploadSubmit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+    Upload
+    <span>Submit</span>
+</button>
