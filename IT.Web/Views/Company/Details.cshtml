@@ -25,33 +25,36 @@
                 </h2>
             </div>
 
-            <div class="container-fluid">
-                <div class="row">
-                    <div id="admin-sidebar" class="col-md-2 p-x-0 p-y-3">
-                        <ul class="sidenav admin-sidenav list-unstyled">
-                            <li><a href="#">NavLink 1</a></li>
-                            <li><a href="#">NavLink 2</a></li>
-                            <li><a href="#">NavLink 3</a></li>
-                            <li><a href="#">NavLink 4</a></li>
-                            <li><a href="#">NavLink 5</a></li>
-                            <li><a href="#">NavLink 6</a></li>
-                        </ul>
-                    </div> <!-- /#admin-sidebar -->
-                    <div id="admin-main-control" class="col-md-10 p-x-3 p-y-1">
-                        <div class="content-title m-x-auto">
-                            <i class="fa fa-dashboard"></i> Dashboard
-                        </div>
-                        <p class="display-4">Dashboard-y Things</p>
-                        <p class="text-primary">This is where one might find all sorts of dashboard-y goodness...</p>
-                        <p class="text-success">Instead, you're seeing Lorem Gibson, which is cooler than Lorem Ipsum, but a little less cool than Lorem Jackson.</p>
-                        <p class="text-muted">Mostly, you'll find that I'm just finding excuses to use BS4's crazy cool classes...</p>
-                        <p class="text-danger">Don't be distracted by all of this filler. The cool stuff is in the sidebar nav!</p>
-                        <p>
-                            Military-grade dissident concrete knife RAF warehouse stimulate wonton soup sentient lights sub-orbital modem jeans. Ablative engine kanji sentient order-flow vehicle corporation plastic. Assassin Shibuya woman camera nano-network corrupted cartel boy. Tank-traps into youtube footage bicycle towards cyber-dissident. Futurity bridge modem skyscraper shanty town nodal point hotdog boat cartel A.I. DIY. Systema modem j-pop claymore mine singularity uplink tube systemic 3D-printed
-                        </p>
-                    </div> <!-- /#admin-main-control -->
-                </div> <!-- /.row -->
-            </div> <!-- /.container-fluid -->
+            @*
+          <div class="container-fluid">
+            <div class="row">
+                <div id="admin-sidebar" class="col-md-2 p-x-0 p-y-3">
+                    <ul class="sidenav admin-sidenav list-unstyled">
+                        <li><a href="#">NavLink 1</a></li>
+                        <li><a href="#">NavLink 2</a></li>
+                        <li><a href="#">NavLink 3</a></li>
+                        <li><a href="#">NavLink 4</a></li>
+                        <li><a href="#">NavLink 5</a></li>
+                        <li><a href="#">NavLink 6</a></li>
+                    </ul>
+                </div> <!-- /#admin-sidebar -->
+                <div id="admin-main-control" class="col-md-10 p-x-3 p-y-1">
+                    <div class="content-title m-x-auto">
+                        <i class="fa fa-dashboard"></i> Dashboard
+                    </div>
+                    <p class="display-4">Dashboard-y Things</p>
+                    <p class="text-primary">This is where one might find all sorts of dashboard-y goodness...</p>
+                    <p class="text-success">Instead, you're seeing Lorem Gibson, which is cooler than Lorem Ipsum, but a little less cool than Lorem Jackson.</p>
+                    <p class="text-muted">Mostly, you'll find that I'm just finding excuses to use BS4's crazy cool classes...</p>
+                    <p class="text-danger">Don't be distracted by all of this filler. The cool stuff is in the sidebar nav!</p>
+                    <p>
+                        Military-grade dissident concrete knife RAF warehouse stimulate wonton soup sentient lights sub-orbital modem jeans. Ablative engine kanji sentient order-flow vehicle corporation plastic. Assassin Shibuya woman camera nano-network corrupted cartel boy. Tank-traps into youtube footage bicycle towards cyber-dissident. Futurity bridge modem skyscraper shanty town nodal point hotdog boat cartel A.I. DIY. Systema modem j-pop claymore mine singularity uplink tube systemic 3D-printed
+                    </p>
+                </div> <!-- /#admin-main-control -->
+            </div> <!-- /.row -->
+        </div> <!-- /.container-fluid -->
+
+            *@
 
             <div class="panel-container show">
                 <div class="panel-content">
@@ -124,7 +127,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-3" >
                             <!--   <h3 class="py-5">Driving License</h3> -->
                             <div class="row">
                                 <div class="col-md-4">
@@ -180,6 +183,52 @@
 
                                 </div>
                             </div>
+
+                            <form method="post" action="/Company/UploadDocumentsAdd" enctype="multipart/form-data" class="mt-4">
+                                <input type="hidden" id="CompanyId" name="CompanyId" value="@Model.Id" />
+                                @{
+                                    Html.RenderPartial("~/Views/Shared/PartialView/UploadDocuments/UploadDocuments.cshtml");
+                                }
+                            </form>
+
+                            <table class="table table-bordered table-hover mt-5">
+                                <thead class="thead-themed">
+                                    <tr>
+                                        <th>File Name</th>
+                                        <th>Image</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if (Model.uploadDocumentsViewModels != null)
+                                    {
+                                        foreach (var item in Model.uploadDocumentsViewModels)
+                                        {
+                                                <tr>
+                                                    <td>@item.FilesName</td>
+                                                    <td>
+                                                      
+                                                        <a href="http://itmolen-001-site8.htempurl.com/ClientDocument/@item.FileUrl" target="_blank"> <img src="http://itmolen-001-site8.htempurl.com/ClientDocument/@item.FileUrl" style=" width:50px"></a>
+                                                   
+                                                        <a href="http://itmolen-001-site8.htempurl.com/ClientDocument/@item.FileUrl" download>
+                                                            Download
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                        }
+                                     }
+                                     else
+                                     {
+                                                <tr>
+                                                    <td colspan="2"> No Data </td>
+                                                </tr>
+                                     }
+                                </tbody>
+                                </table>
+
+
+
+
                         </div>
                     </div>
                 </div>
