@@ -195,7 +195,6 @@
                                 <thead class="thead-themed">
                                     <tr>
                                         <th>File Name</th>
-                                        <th>Image</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -205,14 +204,8 @@
                                         foreach (var item in Model.uploadDocumentsViewModels)
                                         {
                                                 <tr>
-                                                    <td>@item.FilesName</td>
                                                     <td>
-                                                      
-                                                        <a href="http://itmolen-001-site8.htempurl.com/ClientDocument/@item.FileUrl" target="_blank"> <img src="http://itmolen-001-site8.htempurl.com/ClientDocument/@item.FileUrl" style=" width:50px"></a>
-                                                   
-                                                        <a href="http://itmolen-001-site8.htempurl.com/ClientDocument/@item.FileUrl" download>
-                                                            Download
-                                                        </a>
+                                                        <a style="text-decoration: none;" href="http://itmolen-001-site8.htempurl.com/ClientDocument/@item.FileUrl" target="_blank" >@item.FilesName &nbsp; <span class="fal fa-external-link-alt"></span></a>
                                                     </td>
                                                 </tr>
                                         }

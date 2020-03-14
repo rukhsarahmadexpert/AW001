@@ -39,7 +39,7 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">Driver Name</th>
-                                                <td</td>
+                                                <td></td>
 
 
                                             </tr>
@@ -94,10 +94,38 @@
                                         }
                                     </form>
 
-                                   
+
+                                    <table class="table table-bordered table-hover mt-5">
+                                        <thead class="thead-themed">
+                                            <tr>
+                                                <th>File Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @if (Model.uploadDocumentsViewModels != null)
+                                            {
+                                                foreach (var item in Model.uploadDocumentsViewModels)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <a style="text-decoration: none;" href="http://itmolen-001-site8.htempurl.com/ClientDocument/@item.FileUrl" target="_blank">@item.FilesName &nbsp; <span class="fal fa-external-link-alt"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="2"> No Data </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
 
 
-                                    </div>
+
+                                </div>
                                 <div class="col-md-6">
                                  <!--   <h3 class="py-5">Driving License</h3> -->
 

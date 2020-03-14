@@ -55,5 +55,7 @@ namespace IT.Core.ViewModels
         public string[] LicienceList { get; set; }
 
         public List<int> LicenseTypes { get; set; }
+
+        public List<UploadDocumentsViewModel> uploadDocumentsViewModels { get; set; }
     }
 }

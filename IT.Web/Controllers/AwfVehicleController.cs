@@ -176,7 +176,7 @@ namespace IT.Web_New.Controllers
                 var result = webServices.Post(vehicleViewModel, "AWFVehicle/Edit", true);
                 if (result.Data != null)
                 {
-                    vehicleViewModel = (new JavaScriptSerializer()).Deserialize<List<VehicleViewModel>>(result.Data.ToString()).FirstOrDefault();
+                    vehicleViewModel = (new JavaScriptSerializer()).Deserialize<VehicleViewModel>(result.Data.ToString());
                 }
             }
 
@@ -200,7 +200,7 @@ namespace IT.Web_New.Controllers
 
                 if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    vehicleViewModel = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(Result.Data.ToString()).FirstOrDefault());
+                    vehicleViewModel = (new JavaScriptSerializer()).Deserialize<VehicleViewModel>(Result.Data.ToString());
                 }
 
                 VehicleTypeController vehicleTypeController = new VehicleTypeController();
