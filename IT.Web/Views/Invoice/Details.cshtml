@@ -59,7 +59,7 @@
                                 <p></p>
 
                                 <div class="row mt-3 mb-5">
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
 
                                         <form method="post" action="/Invoice/UploadDocumentsAdd" enctype="multipart/form-data">
                                             <input type="hidden" id="InvoiceId" name="InvoiceId" value="@LPOInvoiceViewModel.Id" />
@@ -67,6 +67,8 @@
                                                 Html.RenderPartial("~/Views/Shared/PartialView/UploadDocuments/UploadDocuments.cshtml");
                                             }
                                         </form>
+
+                                       
                                     </div>
                                 </div>
 

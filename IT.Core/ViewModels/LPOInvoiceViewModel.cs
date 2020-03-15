@@ -47,5 +47,6 @@ namespace IT.Core.ViewModels
         public string BillNumber { get; set; }
         public int UpdatedBy { get; set; }
         public List<LPOInvoiceDetails> lPOInvoiceDetailsList { get; set; }
+        public List<UploadDocumentsViewModel> uploadDocumentsViewModels { get; set; }
     }
 }

@@ -3,6 +3,11 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 
+    IT.Core.ViewModels.LPOInvoiceViewModel LPOInvoiceViewModel = new IT.Core.ViewModels.LPOInvoiceViewModel();
+    IT.Core.ViewModels.LpoRemainingQuantityViewModel lpoRemainingQuantityViewModel = new IT.Core.ViewModels.LpoRemainingQuantityViewModel();
+
+    LPOInvoiceViewModel = ViewBag.lPOInvoiceViewModel as IT.Core.ViewModels.LPOInvoiceViewModel;
+
     var Id = ViewBag.Id;
 }
 
@@ -45,11 +50,28 @@
                                     @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_MainTablePartialView.cshtml")
                                     @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_FooterTotalPartialView.cshtml")
                                 </div>
-                         
+
                                 <p></p>
 
+                                <div class="row mt-3 mb-5">
+                                    <div class="col-md-3">
+
+                                        <form method="post" action="/LPO/UploadDocumentsAdd" enctype="multipart/form-data">
+                                            <input type="hidden" id="LPOId" name="LPOId" value="@LPOInvoiceViewModel.Id" />
+                                            @{
+                                                Html.RenderPartial("~/Views/Shared/PartialView/UploadDocuments/UploadDocuments.cshtml");
+                                            }
+                                        </form>
+
+
+                                     
+
+
+                                    </div>
+                                </div>
+
                                 @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_FooterButtonPartialViewView.cshtml")
-                               
+
                             </div>
                         </div>
                     </div>

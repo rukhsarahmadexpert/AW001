@@ -1,4 +1,9 @@
-﻿
+﻿@{
+    IT.Core.ViewModels.LPOInvoiceViewModel LPOInvoiceViewModel = new IT.Core.ViewModels.LPOInvoiceViewModel();
+    IT.Core.ViewModels.LpoRemainingQuantityViewModel lpoRemainingQuantityViewModel = new IT.Core.ViewModels.LpoRemainingQuantityViewModel();
+
+    LPOInvoiceViewModel = ViewBag.lPOInvoiceViewModel as IT.Core.ViewModels.LPOInvoiceViewModel;
+}
 <div class="form-group mb-2">
     @*<label class="form-label" for="simpleinput">File Name</label>*@
     <input type="text" id="FilesName" name="FilesName" class="form-control" placeholder="Enter File Name">
@@ -15,3 +20,68 @@
     Upload
     <span>Submit</span>
 </button>
+
+@if (LPOInvoiceViewModel == null)
+    {
+
+
+        <table class="table table-bordered table-hover mt-5">
+            <thead class="thead-themed">
+                <tr>
+                    <th>File Name</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model.uploadDocumentsViewModels != null)
+                {
+                    foreach (var item in Model.uploadDocumentsViewModels)
+                    {
+                        <tr>
+                            <td>
+                                <a style="text-decoration: none;" href="http://awservices.somee.com/ClientDocument/@item.FileUrl" target="_blank">@item.FilesName &nbsp; <span class="fal fa-external-link-alt"></span></a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="2"> No Data </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+
+        <table class="table table-bordered table-hover mt-5">
+            <thead class="thead-themed">
+                <tr>
+                    <th>File Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (LPOInvoiceViewModel.uploadDocumentsViewModels != null)
+                {
+                    foreach (var item in LPOInvoiceViewModel.uploadDocumentsViewModels)
+                    {
+                        <tr>
+                            <td>
+                                <a style="text-decoration: none;" href="http://awservices.somee.com/ClientDocument/@item.FileUrl" target="_blank">@item.FilesName &nbsp; <span class="fal fa-external-link-alt"></span></a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="2"> No Data </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
