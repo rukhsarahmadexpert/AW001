@@ -46,5 +46,7 @@ namespace IT.Core.ViewModels
         public HttpPostedFileBase MulkiaBack1File { get; set; }
         public HttpPostedFileBase MulkiaFront2File { get; set; }
         public HttpPostedFileBase MulkiaBack2File { get; set; }
+
+        public List<UploadDocumentsViewModel> uploadDocumentsViewModels { get; set; }
     }
 }

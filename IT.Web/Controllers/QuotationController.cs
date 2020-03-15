@@ -855,6 +855,7 @@ namespace IT.Web_New.Controllers
                             content.Add(fileContent);
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
                             content.Add(new StringContent(uploadDocumentsViewModel.QuotationId.ToString()), "QuotationId");
+                            content.Add(new StringContent(uploadDocumentsViewModel.FilesName ?? ""), "FilesName");
                             var result = webServices.PostMultiPart(content, "UploadDocuments/UploadDocumentsAdd", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                             {

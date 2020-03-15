@@ -27,6 +27,7 @@ namespace IT.Web_New.Controllers
         [Autintication]
         public ActionResult Index()
         {
+            var fuelPricesViewModels = new List<FuelPricesViewModel>();
             try
             {
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
@@ -73,9 +74,9 @@ namespace IT.Web_New.Controllers
                     var resultFuel = webServices.Post(fuelPricesViewModel, "FuelPrices/FuelPricesTopOne");
                     if (resultFuel.StatusCode == System.Net.HttpStatusCode.Accepted)
                     {
-                        fuelPricesViewModel = (new JavaScriptSerializer().Deserialize<FuelPricesViewModel>(resultFuel.Data.ToString()));
+                        fuelPricesViewModels = (new JavaScriptSerializer().Deserialize<List<FuelPricesViewModel>>(resultFuel.Data.ToString()));
                     }
-                    ViewBag.fuelPricesViewModel = fuelPricesViewModel;
+                    ViewBag.fuelPricesViewModel = fuelPricesViewModels[0];
 
                     var RequestedData = customerOrderStatistics.RequestedBySevenDayed;
                     var userCompanyViewModel = new UserCompanyViewModel();

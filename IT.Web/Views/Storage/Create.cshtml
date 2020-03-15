@@ -316,7 +316,7 @@
         // end of insert data
 
         function loadOptionSelect(url, targetId, sourceId) {
-            ajaxRequest("POST", url, "", "json").then(function (result) {
+            ajaxRequest("GET", url, "", "json").then(function (result) {
                 //debugger;
                 if (result != "failed") {
                     $(targetId).empty();

@@ -166,9 +166,23 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int Id)
         {
-            return View();
+            try
+            {
+                var employeeResult = webServices.Post(new EmployeeViewModel(), "Employee/Edit/" + Id);
+
+                if (employeeResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    employeeViewModel = (new JavaScriptSerializer().Deserialize<EmployeeViewModel>(employeeResult.Data.ToString()));
+                }
+                return View(employeeViewModel);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
                
         [HttpPost]

@@ -50,5 +50,6 @@ namespace IT.Core.ViewModels
         public string Device { get; set; }
         public string UserName { get; set; }
         public bool IsCashCompany { get; set; }
+        public List<UploadDocumentsViewModel> uploadDocumentsViewModels { get; set; }
     }
 }

@@ -430,6 +430,8 @@ namespace IT.Web_New.Controllers
                             content.Add(fileContent);
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
                             content.Add(new StringContent(uploadDocumentsViewModel.DriverId.ToString()), "DriverId");
+
+                            content.Add(new StringContent(uploadDocumentsViewModel.FilesName ?? "UnKnown"), "FilesName");
                             var result = webServices.PostMultiPart(content, "UploadDocuments/UploadDocumentsAdd", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                             {

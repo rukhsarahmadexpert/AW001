@@ -555,8 +555,10 @@ namespace IT.Web_New.Controllers
                             fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("FileUrl") { FileName = file.FileName };
                             content.Add(fileContent);
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                            content.Add(new StringContent(uploadDocumentsViewModel.FilesName ?? ""), "FilesName");
                             content.Add(new StringContent(uploadDocumentsViewModel.DriverId.ToString()), "DriverId");
                             var result = webServices.PostMultiPart(content, "UploadDocuments/UploadDocumentsAdd", true);
+                           
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                             {
                                 return Redirect(nameof(Index));

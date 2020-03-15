@@ -34,5 +34,6 @@ namespace IT.Core.ViewModels
         public int ProjectId { get; set; }
         public HttpPostedFileBase PassportFrontFile { get; set; }
         public HttpPostedFileBase PassportBackFile { get; set; }
+        public List<UploadDocumentsViewModel> uploadDocumentsViewModels { get; set; }
     }
 }
