@@ -362,6 +362,8 @@ namespace IT.Web_New.Controllers
                             fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("FileUrl") { FileName = file.FileName };
                             content.Add(fileContent);
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                            string UserId = Session["UserId"].ToString();
+                            content.Add(new StringContent(UserId), "CreatedBy");
                             content.Add(new StringContent(uploadDocumentsViewModel.VehicleId.ToString()), "VehicleId");
                             content.Add(new StringContent(uploadDocumentsViewModel.FilesName ?? ""), "FilesName");
                             var result = webServices.PostMultiPart(content, "UploadDocuments/UploadDocumentsAdd", true);

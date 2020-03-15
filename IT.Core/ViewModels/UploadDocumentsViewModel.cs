@@ -15,6 +15,7 @@ namespace IT.Core.ViewModels
         public int QuotationId { get; set; }
         public int BillId { get; set; }
         public int DriverId { get; set; }
+        public int LPOId { get; set; }
         public int EmployeeId { get; set; }
         public int CompanyId { get; set; }
         public int BookingId { get; set; }

@@ -836,7 +836,7 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadDocumentsAdd(UploadDocumentsViewModel uploadDocumentsViewModel, HttpPostedFileBase FileUrl)
+        public ActionResult UploadDocumentsAdds(UploadDocumentsViewModel uploadDocumentsViewModel, HttpPostedFileBase FileUrl)
         {
             try
             {
@@ -854,8 +854,10 @@ namespace IT.Web_New.Controllers
                             fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("FileUrl") { FileName = file.FileName };
                             content.Add(fileContent);
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                            string UserId = Session["UserId"].ToString();
+                            content.Add(new StringContent(UserId), "CreatedBy");
                             content.Add(new StringContent(uploadDocumentsViewModel.QuotationId.ToString()), "QuotationId");
-                            content.Add(new StringContent(uploadDocumentsViewModel.FilesName ?? ""), "FilesName");
+                            content.Add(new StringContent(uploadDocumentsViewModel.FilesName ?? "Unknown"), "FilesName");
                             var result = webServices.PostMultiPart(content, "UploadDocuments/UploadDocumentsAdd", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                             {
