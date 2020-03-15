@@ -34,8 +34,9 @@ namespace IT.Web_New.Controllers
             Session.Clear();
 
             LoginViewModel loginViewModel = new LoginViewModel
-            { 
-                DeviceId = System.Net.Dns.GetHostName().ToString()
+            {
+                // DeviceId = System.Net.Dns.GetHostName().ToString()
+                DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString()
             };
             var result = webServices.Post(loginViewModel, "User/LogOut", false);           
             return Redirect(nameof(Login));           
@@ -66,7 +67,8 @@ namespace IT.Web_New.Controllers
             {
                 loginViewModel.Token = loginViewModel.Token ?? "token not availibe";
                 loginViewModel.Device = "web";
-                loginViewModel.DeviceId = System.Environment.MachineName.ToString();
+                loginViewModel.DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString();
+              //loginViewModel.DeviceId = System.Environment.MachineName.ToString();
                 if (ModelState.IsValid)
                 {
                     var result = webServices.Post(loginViewModel, "User/Login", false);

@@ -204,7 +204,8 @@ namespace IT.Web_New.Controllers
 
                 loginViewModel.Token = loginViewModel.Token ?? "token not availibe";
                 loginViewModel.Device = "web";
-                loginViewModel.DeviceId = System.Net.Dns.GetHostName().ToString();
+               // loginViewModel.DeviceId = System.Net.Dns.GetHostName().ToString();
+                loginViewModel.DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString(); 
                 loginViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 loginViewModel.Authority = userCompanyViewModel.Authority;
                 loginViewModel.UserName = userCompanyViewModel.UserName;

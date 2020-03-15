@@ -19,7 +19,7 @@ namespace IT.Web_New.Controllers
         WebServices webServices = new WebServices();
         List<CompnayModel> compnayModels = new List<CompnayModel>();
         List<CompanyViewModel> companyViewModels = new List<CompanyViewModel>();
-        CompanyViewModel companyViewModel = new CompanyViewModel();
+        readonly CompanyViewModel companyViewModel = new CompanyViewModel();
                 
         [HttpGet]
         public ActionResult Index()
