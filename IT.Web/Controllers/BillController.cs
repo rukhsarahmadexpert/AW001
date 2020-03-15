@@ -318,6 +318,17 @@ namespace IT.Web_New.Controllers
                     {
                         ViewBag.Success = TempData["Success"];
                     }
+
+                    SearchViewModel searchViewModel = new SearchViewModel();
+                    searchViewModel.Id = Id;
+
+                    var ResultRemainingQuanntity = webServices.Post(searchViewModel, "Bill/LPOGetRemainingDetails");
+
+                    LpoRemainingQuantityViewModel lpoRemainingQuantityViewModel = new LpoRemainingQuantityViewModel();
+                    lpoRemainingQuantityViewModel = (new JavaScriptSerializer().Deserialize<LpoRemainingQuantityViewModel>(ResultRemainingQuanntity.Data.ToString()));
+
+                    ViewBag.lpoRemainingQuantityViewModel = lpoRemainingQuantityViewModel;
+
                     ViewBag.RefrenceNumber = lPOInvoiceViewModel.RefrenceNumber;                   
                 }
                 return View();
