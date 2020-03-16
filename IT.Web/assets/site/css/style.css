@@ -21,7 +21,7 @@ html, body {
   min-height: 100%; }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Bai Jamjuree", sans-serif;
   background: #fff;
   font-weight: 300;
   font-size: .9375rem;
@@ -67,11 +67,12 @@ button:focus {
 /* Typography
 ================================================== */
 h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  letter-spacing: 1px;
-  font-family: "Dosis", sans-serif;
-  color: #333;
-  font-weight: 400; }
+    margin-top: 0;
+    letter-spacing: 1px;
+    font-family: "Bai Jamjuree", sans-serif;
+    color: #333;
+    font-weight: 500;
+}
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   font-weight: 300; }
@@ -672,7 +673,7 @@ Dropdown style
   .dropdown-menu > li > a {
     text-transform: capitalize;
     position: relative;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Bai Jamjuree", sans-serif;
     font-weight: 400;
     color: #757575;
     padding: 6px 20px;
@@ -1279,7 +1280,7 @@ Bootstrap collapsed
   background-color: #fff;
   border: 0px; }
   .card .card-header a {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Bai Jamjuree", sans-serif;
     font-weight: 400;
     display: block;
     position: relative;
