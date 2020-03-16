@@ -21,6 +21,7 @@ namespace IT.Web_New.Controllers
         List<EmployeeViewModel> employeeViewModels = new List<EmployeeViewModel>();
         EmployeeViewModel employeeViewModel = new EmployeeViewModel();
         int CompanyId = 0;
+        /**/
         [HttpGet]
         public ActionResult Index()
         {
