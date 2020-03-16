@@ -36,7 +36,8 @@ namespace IT.Web_New.Controllers
             LoginViewModel loginViewModel = new LoginViewModel
             {
                 // DeviceId = System.Net.Dns.GetHostName().ToString()
-                DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString()
+              //  DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString()
+                DeviceId = System.Web.HttpContext.Current.Server.MachineName
             };
             var result = webServices.Post(loginViewModel, "User/LogOut", false);           
             return Redirect(nameof(Login));           
@@ -67,8 +68,9 @@ namespace IT.Web_New.Controllers
             {
                 loginViewModel.Token = loginViewModel.Token ?? "token not availibe";
                 loginViewModel.Device = "web";
-                loginViewModel.DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString();
+              //loginViewModel.DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString();
               //loginViewModel.DeviceId = System.Environment.MachineName.ToString();
+                loginViewModel.DeviceId = System.Web.HttpContext.Current.Server.MachineName;
                 if (ModelState.IsValid)
                 {
                     var result = webServices.Post(loginViewModel, "User/Login", false);
@@ -111,7 +113,7 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
-            return View();
+            return View(new UserViewModel());
         }
 
         [HttpPost]
@@ -119,26 +121,38 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-
-                var result = webServices.Post(userViewModel, "User/Register", false);
-
-                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                if (ModelState.IsValid)
                 {
-                    userCompanyViewModel = (new JavaScriptSerializer()).Deserialize<UserCompanyViewModel>(result.Data.ToString());
+                    var result = webServices.Post(userViewModel, "User/Register", false);
 
-                    if (userCompanyViewModel.CompanyId > 0)
+                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                     {
-                        return RedirectToAction("Index", "Home");
+                        userCompanyViewModel = (new JavaScriptSerializer()).Deserialize<UserCompanyViewModel>(result.Data.ToString());
+
+                        if (userCompanyViewModel.CompanyId > 0)
+                        {
+                            Session["userCompanyViewModel"] = userCompanyViewModel;
+
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Create", "Company");
+                        }
                     }
-                    else
+                    else if (result.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        return RedirectToAction("Create", "Company");
+                        ModelState.AddModelError("UserName", "This email exist, choose another");
+                        return View(userViewModel);
                     }
+                }
+                else
+                {
+                    return View(userViewModel);
                 }
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
 

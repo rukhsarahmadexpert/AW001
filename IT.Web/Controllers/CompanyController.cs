@@ -117,7 +117,7 @@ namespace IT.Web_New.Controllers
                             fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
                             content.Add(fileContent);
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
-                            content.Add(new StringContent("Name"), "Name");
+                            content.Add(new StringContent(compnayModel.Name ?? "Unknown"), "Name");
                             content.Add(new StringContent("street Data"), "Street");
                             string UserId = Session["UserId"].ToString();
                             content.Add(new StringContent(UserId), "CreatedBy");
@@ -143,9 +143,20 @@ namespace IT.Web_New.Controllers
                             {
                                 var companyViewModel = new CompanyViewModel();
                                 companyViewModel = (new JavaScriptSerializer().Deserialize<CompanyViewModel>(result.Data.ToString()));
+                                
+                                UserCompanyViewModel userCompanyViewModel1 = new UserCompanyViewModel();
 
-
-                                Session["userCompanyViewModel"] = companyViewModel;
+                                userCompanyViewModel1.Authority = companyViewModel.Authority;
+                                userCompanyViewModel1.CompanyId = companyViewModel.Id;
+                                userCompanyViewModel1.UserId = companyViewModel.CreatedBy;
+                                userCompanyViewModel1.LogoUrl = companyViewModel.LogoUrl;
+                                userCompanyViewModel1.FirstName = companyViewModel.UserName;
+                                userCompanyViewModel1.CompanyName = companyViewModel.Name;
+                                userCompanyViewModel1.UserName = companyViewModel.UserName;
+                                userCompanyViewModel1.ImageUrl = companyViewModel.ImageUrl;
+                                userCompanyViewModel1.Authority = companyViewModel.Authority;
+                                
+                                Session["userCompanyViewModel"] = userCompanyViewModel1;
                                 Session["CompanyId"] = companyViewModel.Id;
                                 Session["UserId"] = companyViewModel.CreatedBy;
                                 ViewBag.Message = "Created";

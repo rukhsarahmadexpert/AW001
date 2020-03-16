@@ -1,4 +1,4 @@
-﻿
+﻿@model IT.Core.ViewModels.UserViewModel
 @{
     ViewBag.Title = "Registraion";
     Layout = null;
@@ -29,87 +29,81 @@
     <link rel="stylesheet" media="screen, print" href="~/assets/css/markdown.css">
     	<link rel="stylesheet" media="screen, print" href="~/assets/css/page-login.css">
 </head>
-    <body>
-        <div class="blankpage-form-field">
-            <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
-                <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
-                    <img class="align-center" src="~/assets/staticImages/logo-1.png" style="width:70px; align-content:center" alt="AW Fuel" aria-roledescription="logo">
-                   
-                   <span class="page-logo-text mr-1 " style="margin-left:100px" >  Sign Up</span>
-                    <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
-                </a>
-            </div>
-            <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
-                <form action="/User/Registration" method="post">
-                    <div class="form-group">
-                       <!-- <label class="form-label" for="username">First Name</label> -->
-                        <input type="text" id="FullName" name="FullName" class="form-control" placeholder="Enter your Full Name" >
-                       <!-- <span class="help-block">
-                            Your unique username to app
-                        </span>-->
-                    </div>
-                   
+<body>
+    <div class="blankpage-form-field">
+        <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
+            <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
+                <img class="align-center" src="~/assets/staticImages/logo-1.png" style="width:70px; align-content:center" alt="AW Fuel" aria-roledescription="logo">
 
-                     <div class="form-group">
-                       <!-- <label class="form-label" for="username">Email Address</label> -->
-                        <input type="email" id="UserName" name="UserName" class="form-control" placeholder="Enter your Email Address" >
-                       <!-- <span class="help-block">
-                            Your unique username to app
-                        </span>-->
-                    </div>
-                    <div class="form-group">
-                       <!-- <label class="form-label" for="password">Password</label> -->
-                        <input type="password" id="Password" name="Password" class="form-control" placeholder="Enter Your Password" >
-                        <!-- <span class="help-block">
-                            Your password
-                        </span> -->
-                    </div>
-
-                     <div class="form-group">
-                       <!-- <label class="form-label" for="password">Confirm Password</label> -->   
-                        <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control" placeholder="Confirm your Password" >
-                        <!-- <span class="help-block">
-                            Your password
-                        </span> -->
-                    </div>
-
-                    <div class="form-group">
-                                                    <!--<label class="form-label">Select (custom)</label>-->
-                                                    <select class="custom-select form-control">
-                                                        <option disabled="disabled">Create Role</option>
-                                                        <option value="1">Consumers / End Users</option>
-                                                        <option value="2">Traders / Resellers</option>
-                                                        <option value="3">Logistics</option>
-                                                    </select>
-                     </div>
-
-                    
-                   
-                    <button type="submit" class="btn btn-default float-right">Sign Up</button>
-
-                     <div class="form-group text-left">
-                        <div class="custom-control">
-                           
-                            Have Account  <a href="/User/Login">Sign In</a>
-                        </div>
-                    </div>
-                </form>
-            </div>
-           
+                <span class="page-logo-text mr-1 " style="margin-left:100px">  Sign Up</span>
+                <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
+            </a>
         </div>
+        <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
+            <form action="/User/Registration" method="post">
+                <div class="form-group">
+                    <!-- <label class="form-label" for="username">First Name</label> -->
+                    <input type="text" id="FullName" name="FullName" class="form-control" placeholder="Enter your Full Name">
+                    <!-- <span class="help-block">
+                 Your unique username to app
+             </span>-->
+                </div>
+                <div class="form-group">
+                    <!-- <label class="form-label" for="username">Email Address</label> -->
+                    <input type="email" id="UserName" name="UserName" class="form-control" placeholder="Enter your Email Address">
+                    <!-- <span class="help-block">
+                 Your unique username to app
+             </span>-->
+                </div>
+                <div class="form-group">
+                    <!-- <label class="form-label" for="password">Password</label> -->
+                    <input type="password" id="Password" name="Password" class="form-control" placeholder="Enter Your Password">
+                    <!-- <span class="help-block">
+                Your password
+            </span> -->
+                </div>
+
+                <div class="form-group">
+                    <!-- <label class="form-label" for="password">Confirm Password</label> -->
+                    <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control" placeholder="Confirm your Password">
+                    <!-- <span class="help-block">
+                Your password
+            </span> -->
+                </div>
+
+                <div class="form-group">
+                    <!--<label class="form-label">Select (custom)</label>-->
+                    <select class="custom-select form-control">
+                        <option disabled="disabled">Create Role</option>
+                        <option value="1">Consumers / End Users</option>
+                        <option value="2">Traders / Resellers</option>
+                        <option value="3">Logistics</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-default float-right">Sign Up</button>
+
+                <div class="form-group text-left">
+                    <div class="custom-control">
+                        Have Account  <a href="/User/Login">Sign In</a>
+                    </div>
+                </div>
+            </form>
+
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
 
 
-       
-       @* <video poster="~/assets/site/images/banner5.jpg" id="bgvid" playsinline autoplay muted loop>
-            *@
 
-        </video>
-  
-<script src="~/assets/js/vendors.bundle.js"></script>
-<script src="~/assets/js/app.bundle.js"></script>
-        <!-- Page related scripts -->
-    </body>
+    @* <video poster="~/assets/site/images/banner5.jpg" id="bgvid" playsinline autoplay muted loop>
+        </video>*@
+
+    <script src="~/assets/js/vendors.bundle.js"></script>
+    <script src="~/assets/js/app.bundle.js"></script>
+    <!-- Page related scripts -->
+</body>
 </html>
 
 

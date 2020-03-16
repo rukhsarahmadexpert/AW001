@@ -82,7 +82,10 @@ namespace IT.Web_New.Controllers
                     var userCompanyViewModel = new UserCompanyViewModel();
                     Session["RequestedData"] = RequestedData;
                     userCompanyViewModel = Session["userCompanyViewModel"] as UserCompanyViewModel;
-                    TempData["Title"] = userCompanyViewModel.CompanyName;
+                    if (userCompanyViewModel != null)
+                    {
+                        TempData["Title"] = userCompanyViewModel.CompanyName ?? "Unknown";
+                    }
 
                     return View();
                 }
@@ -129,14 +132,12 @@ namespace IT.Web_New.Controllers
         {
             return View();
         }
-
-
+        
         [Autintication]
         public ActionResult AdminHome()
         {
             try
             {
-
                 if (HttpContext.Cache["customerNotificationViewModels"] == null)
                 {
                     var result = webServices.Post(new CustomerNotificationViewModel(), "Advertisement/All");
@@ -204,8 +205,9 @@ namespace IT.Web_New.Controllers
 
                 loginViewModel.Token = loginViewModel.Token ?? "token not availibe";
                 loginViewModel.Device = "web";
-               // loginViewModel.DeviceId = System.Net.Dns.GetHostName().ToString();
-                loginViewModel.DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString(); 
+                // loginViewModel.DeviceId = System.Net.Dns.GetHostName().ToString();
+                loginViewModel.DeviceId = System.Web.HttpContext.Current.Server.MachineName;
+               // loginViewModel.DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString(); 
                 loginViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 loginViewModel.Authority = userCompanyViewModel.Authority;
                 loginViewModel.UserName = userCompanyViewModel.UserName;
