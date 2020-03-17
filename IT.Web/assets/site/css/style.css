@@ -634,7 +634,7 @@ Buttons
     padding-top: 1.3rem;
     padding-bottom: 1.3rem; }
   .navbar.navbar-default.navbar-transparent {
-    background-color: transparent;
+    background-color: #fff;
     box-shadow: none; }
     .navbar-transparent .navbar-brand img {
         position: absolute;
@@ -647,11 +647,14 @@ Buttons
       visibility: hidden; }
   .navbar-light.navbar-transparent .navbar-nav .active > .nav-link, .navbar-light.navbar-transparent .navbar-nav .nav-link.active, .navbar-light.navbar-transparent .navbar-nav .nav-link.show, .navbar-light.navbar-transparent .navbar-nav .show > .nav-link {
     color: #073a68; }
-  .navbar-light.navbar-transparent .navbar-nav .nav-link, .navbar-light.navbar-transparent .search-nav a {
-    color: rgba(255, 255, 255, 0.8); }
-  .navbar.navbar-default.navbar-transparent.shrink {
-    background-color: #fff;
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1); }
+    .navbar-light.navbar-transparent .navbar-nav .nav-link, .navbar-light.navbar-transparent .search-nav a {
+        /*color: rgba(255, 255, 255, 0.8); }*/
+        color: #073a68;
+       
+    }
+    .navbar.navbar-default.navbar-transparent.shrink {
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    }
     .navbar.navbar-default.navbar-transparent.shrink .navbar-brand img.logo-scroll {
       opacity: 1;
       visibility: visible; }
@@ -939,9 +942,10 @@ Cta and quotes css
 
 
 .cover_img {
-    background-image: url(../images/banner4.jpg);
+    /*background-image: url(../images/banner4.jpg);*/
     width: 101%;
     height: 500px;
+    background-color: #757575
 }
 
 .cta-bg {
@@ -1108,12 +1112,14 @@ h3.display-4 {
 
 /**home hero items**/
 .hero-video {
-  background: url(../images/banner4.jpg) no-repeat;
-  background-size: cover;
-  padding-top: 305px;
-  padding-bottom: 150px;
-  position: relative;
-  overflow: hidden; }
+    /* background: url(../images/banner4.jpg) no-repeat;*/
+    background-color: #696969;
+    background-size: cover;
+    padding-top: 305px;
+    padding-bottom: 150px;
+    position: relative;
+    overflow: hidden;
+}
   .hero-video h3 {
     color: #fff; }
   .hero-video p {
@@ -1230,7 +1236,7 @@ h3.display-4 {
 /*
 Features and service icon boxes
 */
-.features-section {
+    .features-section {
   padding-top: 90px;
   padding-bottom: 60px; }
 
@@ -1241,11 +1247,13 @@ Features and service icon boxes
   display: block; }
 
 .features-bg {
-  background: url(../images/banner7.jpg) no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  padding-top: 90px;
-  padding-bottom: 50px; }
+    /*background: url(../images/banner7.jpg) no-repeat;*/
+    background-color: #696969;
+    background-attachment: fixed;
+    background-size: cover;
+    padding-top: 90px;
+    padding-bottom: 50px;
+}
   .features-bg .center-title h2, .features-bg .center-title p {
     color: #fff; }
   .features-bg .center-title:after {
