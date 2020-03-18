@@ -16,6 +16,7 @@ namespace IT.Web_New.Controllers
     {
         List<CustomerNotificationViewModel> customerNotificationViewModels = new List<CustomerNotificationViewModel>();
         CustomerOrderStatistics customerOrderStatistics = new CustomerOrderStatistics();
+        AboutViewModel aboutViewModel = new AboutViewModel();
 
         WebServices webServices = new WebServices();
 
@@ -78,6 +79,16 @@ namespace IT.Web_New.Controllers
                     }
                     ViewBag.fuelPricesViewModel = fuelPricesViewModels[0];
 
+                    var result = webServices.Post(new AboutViewModel(), "AboutUs/Index");
+                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        if (result.Data != null)
+                        {
+                            aboutViewModel = (new JavaScriptSerializer().Deserialize<AboutViewModel>(result.Data.ToString()));
+                        }
+                        return View(aboutViewModel);
+                    }
+
                     var RequestedData = customerOrderStatistics.RequestedBySevenDayed;
                     var userCompanyViewModel = new UserCompanyViewModel();
                     Session["RequestedData"] = RequestedData;
@@ -98,6 +109,17 @@ namespace IT.Web_New.Controllers
 
         public ActionResult About()
         {
+
+            var result = webServices.Post(new AboutViewModel(), "AboutUs/Index");
+
+            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                if (result.Data != null)
+                {
+                    aboutViewModel = (new JavaScriptSerializer().Deserialize<AboutViewModel>(result.Data.ToString()));
+                }
+                return View(aboutViewModel);
+            }
             return View();
         }
 
