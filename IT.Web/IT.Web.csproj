@@ -553,6 +553,7 @@
     <Content Include="assets\site\images\mobile-app.png" />
     <Content Include="assets\site\images\mockup1.png" />
     <Content Include="assets\site\images\mockup2.png" />
+    <Content Include="assets\site\images\mockup3.png" />
     <Content Include="assets\site\images\p1.png" />
     <Content Include="assets\site\images\p2.png" />
     <Content Include="assets\site\images\p3.png" />
