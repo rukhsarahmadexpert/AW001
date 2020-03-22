@@ -83,6 +83,8 @@
     <Compile Include="ViewModels\LpoRemainingQuantityViewModel.cs" />
     <Compile Include="ViewModels\OrderTransferRequestsViewModel.cs" />
     <Compile Include="ViewModels\PagingParameterModel.cs" />
+    <Compile Include="ViewModels\PrivacyPolicyDetailsViewModel.cs" />
+    <Compile Include="ViewModels\PrivatePolicyViewModel.cs" />
     <Compile Include="ViewModels\ProductUnitViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\ReportsByDatesVehicleDetails.cs" />

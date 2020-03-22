@@ -1,7 +1,11 @@
-﻿@model IT.Core.ViewModels.SearchViewModel
+﻿
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutSite.cshtml";
+
+    IT.Core.ViewModels.ServiceViewModel serviceViewModel = new IT.Core.ViewModels.ServiceViewModel();
+    serviceViewModel = ViewBag.serviceViewModel as IT.Core.ViewModels.ServiceViewModel;
+
 }
 
 
@@ -113,15 +117,7 @@
                     <div class="content">
                         <h4>Trading Products</h4>
                         <p>
-                            Gasoil /Diesel 10PPM (ADNOC/BAPCO & OTHERS)
-                            <br />
-                            MGO ( Marine gas oil)
-                            <br />
-                            MDO (Marine Diesel Oil )
-                            <br />
-                            FUEL OIL
-                            <br />
-                            LUBRICANTS & GREASE
+                            @serviceViewModel.DescriptionOneBelow.Substring(0, 125)...
 
                             <br />
                             <a href="/Home/Products">Read More...</a>
@@ -134,11 +130,10 @@
             <div class="col-md-4">
                 <div class="feature-icon-left clearfix">
                    
-                    <div class="content">
+                    <div class="content">                               
                         <h4>Bulk Fuel Storage</h4>
                         <p>
-                            Abrahimi Wahid Fuel Trading LLC, our warehousing solutions and management services are important for our supply chain network. With over 2000 sq ft. 
-                            <br />
+                            @serviceViewModel.DescriptionOne.Substring(0, 130)...<br />
                             <a href="Home/BulkStorage">Read More...</a>
                         </p>
                     </div>
@@ -151,7 +146,7 @@
                     <div class="content">
                         <h4>Fuel Transportation</h4>
                         <p>
-                            Abrahimi Wahid Fuel Trading LLC is a trucking company dedicated to the safe transportation of liquid petroleum products in tanker trailers throughout the united arab emirates.<br />
+                            @serviceViewModel.DescriptionTwo.Substring(0, 130)...<br />
                             <a href="/Home/FuelTransportation">Read More...</a>
                         </p>
                     </div>
