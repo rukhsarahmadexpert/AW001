@@ -2,9 +2,12 @@
 @{
     ViewBag.Title = "Products";
     Layout = "~/Views/Shared/_LayoutSite.cshtml";
+
+    IT.Core.ViewModels.ServiceViewModel serviceViewModel = new IT.Core.ViewModels.ServiceViewModel();
+    serviceViewModel = ViewBag.serviceViewModel as IT.Core.ViewModels.ServiceViewModel;
 }
 
-<div class="dzsparallaxer auto-init" data-options='{   direction: "reverse"}' style="height: 450px;">
+<div class="dzsparallaxer auto-init" data-options='{   direction: "reverse"}' style="height: 300px;">
 
     <div class="divimage dzsparallaxer--target cover_img">
     </div>
@@ -22,18 +25,8 @@
         </div>
 
         <div class="col-md-7">
-            <h3>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            </h3>
             <p>
-                Abrahimi Wahid Fuel Trading LLC, our warehousing solutions and management services are important for our supply chain network. With over 2000 sq ft. of warehousing space utilizing Abrahimi Wahid Fuel Trading LLC a storage facility of over 200,000 ig at a time.
-            </p>
-            <p>
-                AW Fuel Trading is a brand of containerized bulk fuel storage tanks that serves the applications of multiple industries across the UAE such as Fuel Distribution, Power Generation, Logistics, and more.
-            </p>
-
-            <p>
-                We ensure your products are recieved, stored, and shipped according to your specifications and requirements. We bring value through understanding the needs of each industry and client individualy.
+                @serviceViewModel.DescriptionOneBelow
             </p>
         </div>
 
@@ -45,15 +38,15 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8">
-                <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h3>
+                <h3>@serviceViewModel.Excerpt</h3>
             </div>
             <div class="col-sm-4">
-                <a href="#" class="btn btn-rounded btn-white-border">Sign Up Free</a>
+                <a href="/User/Registration" class="btn btn-rounded btn-white-border">Sign Up Free</a>
             </div>
         </div>
     </div>
 </div>
-
+<!--
 <div class="container">
     <div class="space-90"></div>
     <div class="row align-items-center margin-b-50">
@@ -69,8 +62,4 @@
     </div>
 </div>
 
-<div class="space-50"></div>
-
-
-
-
+<div class="space-50"></div>-->

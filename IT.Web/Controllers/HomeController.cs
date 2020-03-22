@@ -17,11 +17,24 @@ namespace IT.Web_New.Controllers
         List<CustomerNotificationViewModel> customerNotificationViewModels = new List<CustomerNotificationViewModel>();
         CustomerOrderStatistics customerOrderStatistics = new CustomerOrderStatistics();
         AboutViewModel aboutViewModel = new AboutViewModel();
+        ServiceViewModel serviceViewModel = new ServiceViewModel();
+        PrivatePolicyViewModel privatePolicyViewModel = new PrivatePolicyViewModel();
+        
 
         WebServices webServices = new WebServices();
 
         public ActionResult Details()
         {
+            var result = webServices.Post(new ServiceViewModel(), "OurServices/All");
+
+            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                if (result.Data != null)
+                {
+                    serviceViewModel = (new JavaScriptSerializer().Deserialize<ServiceViewModel>(result.Data.ToString()));
+                }
+                ViewBag.serviceViewModel = serviceViewModel;
+            }
             return View();
         }
 
@@ -71,6 +84,7 @@ namespace IT.Web_New.Controllers
                     ViewBag.customerOrderStatistics = customerOrderStatistics;
 
                     FuelPricesViewModel fuelPricesViewModel = new FuelPricesViewModel();
+                   
 
                     var resultFuel = webServices.Post(fuelPricesViewModel, "FuelPrices/FuelPricesTopOne");
                     if (resultFuel.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -79,15 +93,8 @@ namespace IT.Web_New.Controllers
                     }
                     ViewBag.fuelPricesViewModel = fuelPricesViewModels[0];
 
-                    var result = webServices.Post(new AboutViewModel(), "AboutUs/Index");
-                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
-                    {
-                        if (result.Data != null)
-                        {
-                            aboutViewModel = (new JavaScriptSerializer().Deserialize<AboutViewModel>(result.Data.ToString()));
-                        }
-                        return View(aboutViewModel);
-                    }
+                    ViewBag.fuelPricesViewModels = fuelPricesViewModels;
+
 
                     var RequestedData = customerOrderStatistics.RequestedBySevenDayed;
                     var userCompanyViewModel = new UserCompanyViewModel();
@@ -125,16 +132,46 @@ namespace IT.Web_New.Controllers
 
         public ActionResult BulkStorage()
         {
+            var result = webServices.Post(new ServiceViewModel(), "OurServices/All");
+
+            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                if (result.Data != null)
+                {
+                    serviceViewModel = (new JavaScriptSerializer().Deserialize<ServiceViewModel>(result.Data.ToString()));
+                }
+                ViewBag.serviceViewModel = serviceViewModel;
+            }
             return View();
         }
 
         public ActionResult FuelTransportation()
         {
+            var result = webServices.Post(new ServiceViewModel(), "OurServices/All");
+
+            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                if (result.Data != null)
+                {
+                    serviceViewModel = (new JavaScriptSerializer().Deserialize<ServiceViewModel>(result.Data.ToString()));
+                }
+                ViewBag.serviceViewModel = serviceViewModel;
+            }
             return View();
         }
 
         public ActionResult Products()
         {
+            var result = webServices.Post(new ServiceViewModel(), "OurServices/All");
+
+            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                if (result.Data != null)
+                {
+                    serviceViewModel = (new JavaScriptSerializer().Deserialize<ServiceViewModel>(result.Data.ToString()));
+                }
+                ViewBag.serviceViewModel = serviceViewModel;
+            }
             return View();
         }
 
@@ -198,6 +235,7 @@ namespace IT.Web_New.Controllers
                      fuelPricesViewModels = (new JavaScriptSerializer().Deserialize<List<FuelPricesViewModel>>(resultFuel.Data.ToString()));
                 }
                 ViewBag.fuelPricesViewModel = fuelPricesViewModels[0];
+                ViewBag.fuelPricesViewModels = fuelPricesViewModels;
                 return View();
             }
             catch (Exception)
@@ -208,6 +246,17 @@ namespace IT.Web_New.Controllers
 
         public ActionResult Policy()
         {
+
+            var result = webServices.Post(new PrivatePolicyViewModel(), "PrivacyPolicy/Index");
+
+            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                if (result.Data != null)
+                {
+                    privatePolicyViewModel = (new JavaScriptSerializer().Deserialize<PrivatePolicyViewModel>(result.Data.ToString()));
+                }
+                ViewBag.privatePolicyViewModel = privatePolicyViewModel;
+            }
             return View();
         }
 

@@ -34,7 +34,7 @@
         $('#drpgoods', $newRow).val($("#drpgoods").val());
         $('.vat', $newRow).val($("#mainrowgood .vat").val());
         $('.Unit', $newRow).val($("#mainrowgood .Unit ").val());
-        $("#btnaddRow", $newRow).addClass('remove').val('x').removeClass('btn-success').addClass('btn-height-Remove');
+        $("#btnaddRow", $newRow).addClass('remove').removeClass('btn-success').addClass('btn-height-Remove');
         $("#drpgoods,#Quantity,#rate,#rowsubtotal,#rownettotal,#vat", $newRow).removeAttr('id');
 
         $('.tbodyGood tr:last').before($newRow);
