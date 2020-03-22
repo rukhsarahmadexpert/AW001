@@ -121,10 +121,8 @@ namespace IT.Web_New.Controllers
         public ActionResult DirectsaleOrderAdd(CustomerOrderListViewModel customerOrderListViewModel)
         {
             //return Json("success", JsonRequestBehavior.AllowGet);
-
             try
             {
-
                 customerOrderListViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
                 customerOrderListViewModel.CreatedDate = System.DateTime.Now;
 

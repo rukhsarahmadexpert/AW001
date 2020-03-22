@@ -79,16 +79,6 @@ namespace IT.Web_New.Controllers
                     }
                     ViewBag.fuelPricesViewModel = fuelPricesViewModels[0];
 
-                    var result = webServices.Post(new AboutViewModel(), "AboutUs/Index");
-                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
-                    {
-                        if (result.Data != null)
-                        {
-                            aboutViewModel = (new JavaScriptSerializer().Deserialize<AboutViewModel>(result.Data.ToString()));
-                        }
-                        return View(aboutViewModel);
-                    }
-
                     var RequestedData = customerOrderStatistics.RequestedBySevenDayed;
                     var userCompanyViewModel = new UserCompanyViewModel();
                     Session["RequestedData"] = RequestedData;

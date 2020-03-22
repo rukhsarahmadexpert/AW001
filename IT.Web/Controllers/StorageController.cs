@@ -49,15 +49,19 @@ namespace IT.Web_New.Controllers
                             {
                                 storageViewModelObj.Id = item.Id;
                                 storageViewModelObj.StockIn = item.StockIn;
-                                storageViewModelObj.From = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
-                                storageViewModelObj.Source = item.Source;
+                                storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
+                                if(item.Source == "client vehicle")
+                                {
+                                     storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumberClient;
+                                }
+                                storageViewModelObj.ToSource = item.Source;
                                 storageViewModelObj.UserName = item.UserName;
                             }
                             else
                             {
                                 storageViewModelObj.StockOut = item.StockOut;
-                                storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
-                                storageViewModelObj.ToSource = item.Source;
+                                storageViewModelObj.From = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
+                                storageViewModelObj.Source = item.Source;
 
                                 storageViewModels2.Add(storageViewModelObj);
                                 storageViewModelObj = new StorageViewModel();
