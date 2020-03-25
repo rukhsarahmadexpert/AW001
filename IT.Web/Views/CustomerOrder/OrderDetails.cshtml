@@ -202,7 +202,7 @@
     <div class="modal-dialog modal-dialog-right">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title h4">Assign Order To Driver</h5>
+                <h5 class="modal-title h4">Assign Order To Driver <button id="RefreshToLoadOnlineDriver"><i class="fal fa-recycle"></i></button></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><i class="fal fa-times"></i></span>
                 </button>
@@ -398,6 +398,9 @@
 
     <script>
         $(document).ready(function () {
+
+            $('#RefreshToLoadOnlineDriver').click(function () { LoadOnlineDriver(); });
+
 
             $('#CheckAll').click(function () {
 
