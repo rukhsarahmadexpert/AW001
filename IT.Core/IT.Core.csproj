@@ -64,6 +64,7 @@
     <Compile Include="ViewModels\CustomerOrderListViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderStatistics.cs" />
     <Compile Include="ViewModels\CustomerOrderViewModel.cs" />
+    <Compile Include="ViewModels\CustomerRemainingBookingViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\DataTablesParm.cs" />
     <Compile Include="ViewModels\DeleteRowViewModel.cs" />

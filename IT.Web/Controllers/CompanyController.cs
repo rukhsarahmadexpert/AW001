@@ -144,18 +144,18 @@ namespace IT.Web_New.Controllers
                                 var companyViewModel = new CompanyViewModel();
                                 companyViewModel = (new JavaScriptSerializer().Deserialize<CompanyViewModel>(result.Data.ToString()));
                                 
-                                UserCompanyViewModel userCompanyViewModel1 = new UserCompanyViewModel();
+                                UserCompanyViewModel userCompanyViewModel1 = new UserCompanyViewModel
+                                { 
+                                        Authority = companyViewModel.Authority,
+                                        CompanyId = companyViewModel.Id,
+                                        UserId = companyViewModel.CreatedBy,
+                                        LogoUrl = companyViewModel.LogoUrl,
+                                        FirstName = companyViewModel.UserName,
+                                        CompanyName = companyViewModel.Name,
+                                        UserName = companyViewModel.UserName,
+                                        ImageUrl = companyViewModel.ImageUrl                                        
+                                };
 
-                                userCompanyViewModel1.Authority = companyViewModel.Authority;
-                                userCompanyViewModel1.CompanyId = companyViewModel.Id;
-                                userCompanyViewModel1.UserId = companyViewModel.CreatedBy;
-                                userCompanyViewModel1.LogoUrl = companyViewModel.LogoUrl;
-                                userCompanyViewModel1.FirstName = companyViewModel.UserName;
-                                userCompanyViewModel1.CompanyName = companyViewModel.Name;
-                                userCompanyViewModel1.UserName = companyViewModel.UserName;
-                                userCompanyViewModel1.ImageUrl = companyViewModel.ImageUrl;
-                                userCompanyViewModel1.Authority = companyViewModel.Authority;
-                                
                                 Session["userCompanyViewModel"] = userCompanyViewModel1;
                                 Session["CompanyId"] = companyViewModel.Id;
                                 Session["UserId"] = companyViewModel.CreatedBy;
