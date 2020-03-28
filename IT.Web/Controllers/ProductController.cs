@@ -132,6 +132,28 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Details(int Id)
+        {
+            try
+            {
+                var productResult = webServices.Post(new ProductViewModel(), "Product/Edit/" + Id);
+
+                if (productResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    ProductViewModel = (new JavaScriptSerializer().Deserialize<ProductViewModel>(productResult.Data.ToString()));
+                }
+              
+                    return View(ProductViewModel);
+          
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         [NonAction]
         public List<ProductViewModel> Products()
         {
