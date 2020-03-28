@@ -79,10 +79,38 @@
 
                                                             }
                                                         </td>
+
                                                         <td>
-                                                            <a href="/Vehicle/Details/@item.Id"><i class="fal fa-eye"></i></a> &nbsp; &nbsp;
-                                                            <a href="/Vehicle/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                                            <i class="fal fa-trash-alt"></i>
+                                                            <div class="row">
+                                                                <div class="col-4">
+                                                                    <form action="/Vehicle/Details" method="post">
+                                                                        <input type="hidden" name="Id" value="@item.Id" />
+                                                                        <input type="hidden" name="CompId" value="@item.CompanyId" />
+
+                                                                        <button type="submit" class="btn btn-sm"><i class="fal fa-eye"></i></button>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <form action="/Vehicle/Edit" method="post">
+                                                                        <input type="hidden" name="Id" value="@item.Id" />
+                                                                        <input type="hidden" name="CompId" value="@item.CompanyId" />
+
+                                                                        <button type="submit" class="btn btn-sm"><i class="fal fa-edit"></i></button>
+                                                                    </form>
+                                                                </div>
+
+                                                                <div class="col-4">
+
+                                                                    <form>
+
+                                                                        <button type="submit" class="btn btn-sm"> <i class="fal fa-trash-alt"></i></button>
+                                                                    </form>
+                                                                   
+                                                                </div>
+
+                                                            </div>
+                                                           
+
                                                         </td>
                                                     </tr>
                                                         }

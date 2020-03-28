@@ -37,17 +37,23 @@
             </div>
         </div>*@
 
+<style>
+    .menu4 .panel-toolbar a {
+        display: none;
+    }
+</style>
 
 
 <div class="row">
 
     <div class="col-12">
-        <div id="panel-2" class="panel" >
+
+        <div id="panel-2" class="panel menu4">
             <div class="panel-hdr bg-primary-700 py-3" style="font-size: 12px !important;">
                 <h2>
                     Current Price: @Math.Round(fuelPricesViewModels[0].Price, 2)  <span class="fw-300"><i>AED / @fuelPricesViewModels[0].UnitName</i></span>
                 </h2>
-                <div class="panel-toolbar">
+                <div class="panel-toolbar ">
                     <button class="btn btn-sm btn-primary" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"><span class="fal fa-angle-down"></span></button>
                 </div>
             </div>

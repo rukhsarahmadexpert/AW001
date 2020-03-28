@@ -21,5 +21,7 @@ namespace IT.Core.ViewModels
         public int UpdatedBy { get; set; }
         public DateTime UpdatedDate { get; set; }
         public bool IsActive { get; set; }
+        public string VisionHeading { get; set; }
+        public string VisionDetails { get; set; }
     }
 }

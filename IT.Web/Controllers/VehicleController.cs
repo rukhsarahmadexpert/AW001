@@ -100,15 +100,26 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult Details(int id)
+        [HttpPost]
+        public ActionResult Details(int id, int CompId = 0)
         {
+            CompanyId = Convert.ToInt32(Session["CompanyId"]);
             try
             {
-                //VehicleViewModel vehicleViewModel = new VehicleViewModel();
-                CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                vehicleViewModel.CompanyId = CompanyId;
+                if (CompId == CompanyId) {
+
+                    CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                    ViewBag.LayoutName = "~/Views/Shared/_layout.cshtml";
+                    
+                }
+                else {
+                    //VehicleViewModel vehicleViewModel = new VehicleViewModel();
+
+                    CompanyId = CompId;
+                    ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
+                }
                 vehicleViewModel.Id = id;
+                vehicleViewModel.CompanyId = CompanyId;
 
                 var result = webServices.Post(vehicleViewModel, "Vehicle/Edit", true);
                 if (result.Data != null)
@@ -250,14 +261,29 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult Edit(int Id)
+        [HttpPost]
+        public ActionResult Edit(int id, int CompId = 0)
         {
+
+            CompanyId = Convert.ToInt32(Session["CompanyId"]);
             try
             {
 
-                vehicleViewModel.Id = Id;
-                vehicleViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                if (CompId == CompanyId)
+                {
+
+                    CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                    ViewBag.LayoutName = "~/Views/Shared/_Layout.cshtml";
+                }
+                else
+                {
+                    //VehicleViewModel vehicleViewModel = new VehicleViewModel();
+                    ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
+                    CompanyId = CompId;
+
+                }
+                vehicleViewModel.Id = id;
+                vehicleViewModel.CompanyId = CompanyId;
                 var Result = webServices.Post(vehicleViewModel, "Vehicle/Edit");
 
                 if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)

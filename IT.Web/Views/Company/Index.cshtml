@@ -17,6 +17,7 @@
 
 <div class="row">
     <div class="col-xl-12">
+
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
@@ -42,7 +43,6 @@
                                 <th>Phone</th>
                                 <th>TRN</th>
                                 <th>Owner</th>
-                                <th>IsActive</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -56,26 +56,6 @@
                                     <td>@item.Phone</td>
                                     <td>@item.TRN</td>
                                     <td>@item.OwnerRepresentaive</td>
-                                    <td>
-
-                                        @if (@item.IsActive == true)
-                                        {
-                                            <div class="switchToggle" id="check">
-                                                <input type="checkbox" class="IsActive" id="@item.Id" checked>
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="switchToggle" id="check1">
-                                                <input type="checkbox"  class="IsActive" id="@item.Id">
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
-
-                                        }
-
-                                       
-                                    </td>
                                     <td>
                                         <a href="/Company/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
                                         <a href="/Company/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
@@ -93,31 +73,4 @@
         </div>
     </div>
 </div>
-
-
-
-@section Scripts{
-    
-<script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
-<script>
-
-    
-    $(document).ready(function () {
-        $(".IsActive").change(function () {
-            if (this.checked) {
-                //Do stuff
-                var returnVal = confirm("Are you sure?");
-                $(this).prop("checked", returnVal);
-            }
-            else {
-                var returnVal = confirm("Are you sure?");
-                $(this).prop("", returnVal);
-            }
-        });
-
-        });
-    </script>
-
-
-}
 

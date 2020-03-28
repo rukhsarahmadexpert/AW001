@@ -92,8 +92,10 @@
                             <input type="text" id="rownettotal" readonly class="rownettotal  form-control Input-height" value="@Math.Round(item.SubTotal,1)" style="width:80px" />
                         </td>
                         <td>
-                            <input type="button" id="btnRemoveExistRow" value="x" class="btn-height-Remove BtnRemove" style="width:50px" />
-      
+                            @*
+        <a id="btnRemoveExistRow" class="BtnRemove" style="cursor:pointer"> <i style="font-size:32px" class="fal fa-times-circle text-danger"></i></a>
+                            *@
+                            <input type="button" id="btnRemoveExistRow" value="-" class="btn-height-Remove BtnRemove"  style="width:32px; border-radius:100%" />
                         </td>
                     </tr>
                 }
@@ -141,7 +143,11 @@
                     <input type="text" id="rownettotal" readonly class="rownettotal  form-control Input-height" value="0" style="width:80px" />
                 </td>
                 <td>
-                    <input type="button" id="btnaddRow" value="+" class="btn-height" style="width:50px" />
+                    @* <input type="button" id="btnaddRow" value="+" class="btn-height" style="width:50px" />
+
+        <a id="btnaddRow" style="cursor:pointer"> <i style="font-size:32px" class="fal fa-plus-circle text-success"></i></a>
+                    *@
+                    <input type="button" id="btnaddRow" value="+" class="btn-height" style="width:32px; border-radius:100%" />
                 </td>
             </tr>
         </tbody>

@@ -64,7 +64,7 @@ image-Size-Logo {
 
 .btn-height {
     height: 33px !important;
-    background-color: #4CAF50;
+    background-color: #5dad60;
     border: none;
     color: white;
     padding: 0px;
@@ -78,8 +78,8 @@ image-Size-Logo {
 }
 
 .btn-height-Remove {
-    height: 28px !important;
-    background-color: red;
+    height: 33px !important;
+    background-color: #ea4e4e;
     border: none;
     color: white;
     padding: 0px;

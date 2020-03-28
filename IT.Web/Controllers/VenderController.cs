@@ -45,6 +45,31 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult ChangeStatus(VenderViewModel venderViewModel)
+        {
+            try
+            {
+                var Result = new ServiceResponseModel();
+
+                venderViewModel.UpdatedBy = Convert.ToInt32(Session["UserId"]);
+                Result = webServices.Post(venderViewModel, "Vender/ChangeStatus");
+
+                if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    var reuslt = (new JavaScriptSerializer().Deserialize<int>(Result.Data));
+
+
+                }
+                return Json("success", JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return Json("Failed", JsonRequestBehavior.AllowGet);
+            }
+        }
+
         [HttpGet]
         public ActionResult Create()
         {
