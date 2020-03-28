@@ -606,10 +606,13 @@ namespace IT.Web_New.Controllers
         {
             try
             {
+                lPOInvoiceViewModel.FDate = lPOInvoiceViewModel.FromDate.ToString();
+                lPOInvoiceViewModel.DDate = lPOInvoiceViewModel.DueDate.ToString();
 
                 lPOInvoiceViewModel.UpdatedBy = Convert.ToInt32(Session["UserId"]);
                 lPOInvoiceViewModel.FromDate = Convert.ToDateTime(lPOInvoiceViewModel.FromDate);
                 lPOInvoiceViewModel.DueDate = Convert.ToDateTime(lPOInvoiceViewModel.DueDate);
+                
 
                 var result = webServices.Post(lPOInvoiceViewModel, "LPO/Update");
 

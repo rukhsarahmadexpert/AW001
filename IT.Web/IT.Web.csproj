@@ -222,9 +222,6 @@
     <Compile Include="Models\ReportsByDatesVehicleDetails.cs" />
     <Compile Include="Models\ReportsByDatesViewModel.cs" />
     <Compile Include="Models\VenderModel.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\CustomerReport\ReportGroupByVehicle3.cs">
       <AutoGen>True</AutoGen>
@@ -548,14 +545,20 @@
     <Content Include="assets\site\images\logo-1.png" />
     <Content Include="assets\site\images\logo-light-1.png" />
     <Content Include="assets\site\images\logo-light-2.png" />
+    <Content Include="assets\site\images\logo-light-3-4.svg" />
     <Content Include="assets\site\images\logo-light-3.png" />
     <Content Include="assets\site\images\logo-light.png" />
     <Content Include="assets\site\images\logo.png" />
     <Content Include="assets\site\images\mobile-app-1.png" />
     <Content Include="assets\site\images\mobile-app-2.png" />
+    <Content Include="assets\site\images\mobile-app-3.png" />
+    <Content Include="assets\site\images\mobile-app-4.png" />
+    <Content Include="assets\site\images\mobile-app-5.png" />
     <Content Include="assets\site\images\mobile-app.png" />
     <Content Include="assets\site\images\mockup1.png" />
     <Content Include="assets\site\images\mockup2.png" />
+    <Content Include="assets\site\images\mockup3.png" />
+    <Content Include="assets\site\images\mockup4.png" />
     <Content Include="assets\site\images\p1.png" />
     <Content Include="assets\site\images\p2.png" />
     <Content Include="assets\site\images\p3.png" />
@@ -981,6 +984,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="DirectoryFolder\" />
+    <Folder Include="obj\Debug\" />
     <Folder Include="Views\AWDepartment\" />
     <Folder Include="Views\CustomerQuotation\" />
     <Folder Include="Views\UploadDocuments\" />

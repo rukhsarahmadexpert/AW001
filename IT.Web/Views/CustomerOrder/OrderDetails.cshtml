@@ -35,108 +35,127 @@
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
-                 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <table class="table table-bordered table-hover m-0">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-bordered table-hover m-0">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Order Id</th>
+                                        <td>@Model.CustomerOrderId</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">@Model.latitude</th>
+                                        <td>@Model.longitude</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Requested Quantity</th>
+                                        <td>@Model.RequestedQuantity</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Deliverd Quantity</th>
+                                        <td>@Model.DeliverdQuantity</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Order Progress</th>
+                                        <td>@Model.OrderProgress</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">User Name</th>
+                                        <td>@Model.UserName</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Created Date</th>
+                                        <td>@Model.CreatedDate</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Contact</th>
+                                        <td>@Model.Contact</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2" scope="row">Notes</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">@Model.CustomerNote</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <input type="hidden" id="Id" value="@Model.Id" />
+                            @if (Model.OrderProgress == "Order Created")
+                            {
+                                <button type="button" class="btn btn-danger mt-1 m-1" style="float:right" data-toggle="modal" data-target=".rejectOrderButton">Reject Order</button>
+                                <button type="button" class="btn btn-primary mt-1 m-1" id="btnAccept" style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Accept Order</button>
+                            }
+                            else if (Model.OrderProgress == "Order Accepted")
+                            {
+                                <button type="button" onclick="AssignOrderToDriver()" class="btn btn-primary mt-1 m-1">Assign Order to Driver</button>
+                            }
+                            <a href="http://www.google.com/maps/place/@Model.latitude,@Model.longitude" target="_blank" class="btn btn-default mt-1 m-1" style="float:right" value="Accept Order"><i class="fal fa-map-marker"></i> Change Location</a>
+
+                        </div>
+                        <div class="col-md-6">
+                            <h3>My Google Maps Demo</h3>
+                            <!--The div element for the map -->
+                            <div id="map"></div>
+
+
+                            @if (Model.customerRemainingBookingViewModels != null && Model.customerRemainingBookingViewModels.Count > 0)
+                            {
+                                <table class="table table-hover" id="BookingTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Option</th>
+                                            <th>Booking Id</th>
+                                            <th>Book Quantity</th>
+                                            <th>Deliverd Quantity</th>
+                                            <th>Company Name</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">Order Id</th>
-                                            <td>@Model.CustomerOrderId</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">@Model.latitude</th>
-                                            <td>@Model.longitude</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Requested Quantity</th>
-                                            <td>@Model.RequestedQuantity</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Deliverd Quantity</th>
-                                            <td>@Model.DeliverdQuantity</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Order Progress</th>
-                                            <td>@Model.OrderProgress</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">User Name</th>
-                                            <td>@Model.UserName</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Created Date</th>
-                                            <td>@Model.CreatedDate</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Contact</th>
-                                            <td>@Model.Contact</td>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="2" scope="row">Notes</th>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">@Model.CustomerNote</td>
-                                        </tr>
+                                        @foreach (var item in Model.customerRemainingBookingViewModels)
+                                        {
+                                            <tr>
+                                                <td><Input type="radio" name="Booking" onclick="SetOrderId(@item.BookingId)"/></td>
+                                                <td>@item.BookingId</td>
+                                                <td>@item.BookQuantity</td>
+                                                <td>@item.DeliverdQuantity</td>
+                                                <td>@item.CompanyName</td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
-                                <input type="hidden" id="Id" value="@Model.Id" />
-                                @if (Model.OrderProgress == "Order Created")
-                                {
-                                    <button type="button" class="btn btn-danger mt-1 m-1" style="float:right" data-toggle="modal" data-target=".rejectOrderButton">Reject Order</button>
-                                    <button type="button" class="btn btn-primary mt-1 m-1" id="btnAccept" style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Accept Order</button>
-                                }
-                                else if (Model.OrderProgress == "Order Accepted")
-                                {
-                                    <button type="button" onclick="AssignOrderToDriver()" class="btn btn-primary mt-1 m-1">Assign Order to Driver</button>
-                                }
-                                <a href="http://www.google.com/maps/place/@Model.latitude,@Model.longitude" target="_blank" class="btn btn-default mt-1 m-1" style="float:right" value="Accept Order"><i class="fal fa-map-marker"></i> Change Location</a>
+                            }
+                        </div>
 
-                            </div>
-                            <div class="col-md-6">
-                                <h3>My Google Maps Demo</h3>
-                                <!--The div element for the map -->
-                                <div id="map"></div>
-
-                                <form method="post" action="/CustomerOrder/UploadDocumentsAddAdmin" enctype="multipart/form-data">
-                                    <input type="hidden" id="OrderId" name="OrderId" value="@Model.Id" />
-                                    @{
-                                        Html.RenderPartial("~/Views/Shared/PartialView/UploadDocuments/UploadDocuments.cshtml");
-                                    }
-                                </form>
-
-                            </div>
-
-                            <div class="col-lg-12 py-2" style="overflow-x:auto;">
-                                <!--Table small-->
-                                <div id="panel-7" class="panel">
-                                    <div class="frame-wrap">
-                                        <table class="table table-sm m-0" border="1" id="OrderDetails">
-                                            <thead class="bg-primary-500">
-                                                <tr>
-                                                    @if (Model.OrderProgress == "Order Accepted")
-                                                    {
-                                                    <th>                                                        
+                        <div class="col-lg-12 py-2" style="overflow-x:auto;">
+                            <!--Table small-->
+                            <div id="panel-7" class="panel">
+                                <div class="frame-wrap">
+                                    <table class="table table-sm m-0" border="1" id="OrderDetails">
+                                        <thead class="bg-primary-500">
+                                            <tr>
+                                                @if (Model.OrderProgress == "Order Accepted")
+                                                {
+                                                    <th>
                                                         <div class="custom-control custom-checkbox custom-control-inline">
                                                             <input type="checkbox" name="IsChecked" class="custom-control-input" id="CheckAll">
                                                             <label class="custom-control-label" for="CheckAll">All</label>
                                                         </div>
                                                     </th>
-                                                    }
-                                                    <th>Name</th>
-                                                    <th>Requested Quantity</th>
-                                                    <th>Deliverd Quantity</th>
-                                                    <th>Order Progress</th>
-                                                    <th>Trafic Plate Number</th>
-                                                    <th>Driver Name</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if (Model.customerGroupOrderDetailsViewModels != null && Model.customerGroupOrderDetailsViewModels.Count > 0)
+                                                }
+                                                <th>Name</th>
+                                                <th>Requested Quantity</th>
+                                                <th>Deliverd Quantity</th>
+                                                <th>Order Progress</th>
+                                                <th>Trafic Plate Number</th>
+                                                <th>Driver Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.customerGroupOrderDetailsViewModels != null && Model.customerGroupOrderDetailsViewModels.Count > 0)
+                                            {
+                                                foreach (var item in Model.customerGroupOrderDetailsViewModels)
                                                 {
-                                                    foreach (var item in Model.customerGroupOrderDetailsViewModels)
-                                                    {
-
                                                     <tr>
                                                         @if (item.CurrentStatus == "Accepted")
                                                         {
@@ -149,21 +168,27 @@
                                                             </td>
                                                         }
                                                         <td><input type="hidden" class="Id" value="@item.Id" />@Model.Name</td>
-                                                        <td><input type="hidden" class="ClientVehicleId" value="@item.VehicleId"/><input type="hidden" class="RequestedQuantity" value="@item.RequestedQuantity">@item.RequestedQuantity</td>
+                                                        <td><input type="hidden" class="ClientVehicleId" value="@item.VehicleId" /><input type="hidden" class="RequestedQuantity" value="@item.RequestedQuantity">@item.RequestedQuantity</td>
                                                         <td>@item.DeliverdQuantity</td>
                                                         <td>@item.CurrentStatus</td>
                                                         <td>@item.TraficPlateNumber</td>
                                                         <td>@item.Name</td>
                                                     </tr>
-                                                    }
                                                 }
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            }
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                   
+
+                    </div>
+                    <form method="post" action="/CustomerOrder/UploadDocumentsAddAdmin" enctype="multipart/form-data">
+                        <input type="hidden" id="OrderId" name="OrderId" value="@Model.Id" />
+                        @{
+                            Html.RenderPartial("~/Views/Shared/PartialView/UploadDocuments/UploadDocuments.cshtml");
+                        }
+                    </form>
                 </div>
             </div>
         </div>
@@ -171,11 +196,13 @@
 </div>
 
 
+<input type="hidden" value="0" id="BookingSelectdId" />
+
 <div class="modal fade " id="acceptModel" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-right">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title h4">Assign Order To Driver</h5>
+                <h5 class="modal-title h4">Assign Order To Driver <button id="RefreshToLoadOnlineDriver"><i class="fal fa-recycle"></i></button></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><i class="fal fa-times"></i></span>
                 </button>
@@ -217,7 +244,7 @@
                                             <th colspan="2">Other Information</th>
                                         </tr>
                                     </thead>
-                                    <tbody>                                        
+                                    <tbody>
                                         <tr>
                                             <td colspan="2">
                                                 <input type="text" id="DeliveryNoteNumber" required rows="1" cols="5" class="form-control" placeholder="Delivert Note Number" />
@@ -294,7 +321,7 @@
         // Initialize and add the map
         // function initMap() {
         // The location of Uluru
-        
+
 
         $(document).ready(function () {
             var uluru = { lat: @Model.latitude, lng: @Model.longitude };
@@ -325,7 +352,6 @@
                     Id: $('#Id').val(),
                     Status: true
                 })
-
                 ajaxRequest("POST", "/CustomerOrder/AcceptOrder", Data, "json").then(function (result) {
 
                     if (result != "failed") {
@@ -373,6 +399,9 @@
     <script>
         $(document).ready(function () {
 
+            $('#RefreshToLoadOnlineDriver').click(function () { LoadOnlineDriver(); });
+
+
             $('#CheckAll').click(function () {
 
                 if ($('#CheckAll').is(':checked') == true) {
@@ -389,7 +418,7 @@
 
 
             $('#OrderAssignToDriver').click(function () {
-              
+
                 if ($('#OnlineDriverSelectList').val() < 1) {
                     alert('Please select driver');
                     return true;
@@ -407,10 +436,20 @@
 
     <script>
         function AssignOrderToDriver()
-        {            
-            $('#acceptModel').modal('show');
+        {
+            if ($('#BookingSelectdId').val() == 0) {
+                alert('Please select booking first');
+            }
+            else {
+                $('#acceptModel').modal('show');
+            }
         }
-        
+
+        function SetOrderId(Id) {
+            $('#BookingSelectdId').val(Id);
+        }
+
+
         function CustomerOrderAssignToDriver(Url) {
 
             var list = [], orderItem, CurrentRow;
@@ -436,7 +475,8 @@
                 CustomerOrderId: $('#Id').val(),
                 RequestedQuantity: RequestedQuantity,
                 DriverId: $('#OnlineDriverSelectList').val(),
-                DeliveryNoteNumber: $('#DeliveryNoteNumber').val()
+                DeliveryNoteNumber: $('#DeliveryNoteNumber').val(),
+                BookingId: $('#BookingSelectdId').val()
             };
 
             for (var key in empObj) {
@@ -444,8 +484,8 @@
             }
 
             for (var i = 0; i < list.length; i++) {
-                    formData.append('customerOrderViewModels[' + i + '][Id]', list[i].Id),
-                    formData.append('customerOrderViewModels[' + i + '][VehicleId]', list[i].VehicleId)              
+                formData.append('customerOrderViewModels[' + i + '][Id]', list[i].Id),
+                    formData.append('customerOrderViewModels[' + i + '][VehicleId]', list[i].VehicleId)
             }
             if (list.length > 0) {
 
