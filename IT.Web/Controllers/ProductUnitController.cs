@@ -38,9 +38,24 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(int id)
+        public ActionResult Details(int Id)
         {
-            return View();
+            try
+            {
+                var productResult = webServices.Post(new ProductUnitViewModel(), "ProductUnit/Edit/" + Id);
+
+                if (productResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    ProductUnitViewModel = (new JavaScriptSerializer().Deserialize<ProductUnitViewModel>(productResult.Data.ToString()));
+                }
+
+                return View(ProductUnitViewModel);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         [HttpGet]
