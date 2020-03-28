@@ -981,6 +981,7 @@
     <Content Include="Views\Shared\PartialView\UploadDocuments\UploadDocuments.cshtml" />
     <Content Include="Views\CustomerBooking\CustomerDetails.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\ProductUnit\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
