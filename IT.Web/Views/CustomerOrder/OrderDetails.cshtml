@@ -181,7 +181,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <form method="post" action="/CustomerOrder/UploadDocumentsAddAdmin" enctype="multipart/form-data">
                         <input type="hidden" id="OrderId" name="OrderId" value="@Model.Id" />
@@ -217,14 +216,12 @@
                                 </select>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table table-bordered table-hover m-0">
                                     <thead class="thead-themed">
                                         <tr style="background:#6a7eb5; color:white">
                                             <th colspan="2">Driver Information</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -400,8 +397,7 @@
         $(document).ready(function () {
 
             $('#RefreshToLoadOnlineDriver').click(function () { LoadOnlineDriver(); });
-
-
+            
             $('#CheckAll').click(function () {
 
                 if ($('#CheckAll').is(':checked') == true) {
@@ -415,8 +411,7 @@
                     })
                 }
             });
-
-
+            
             $('#OrderAssignToDriver').click(function () {
 
                 if ($('#OnlineDriverSelectList').val() < 1) {
@@ -448,8 +443,7 @@
         function SetOrderId(Id) {
             $('#BookingSelectdId').val(Id);
         }
-
-
+        
         function CustomerOrderAssignToDriver(Url) {
 
             var list = [], orderItem, CurrentRow;
