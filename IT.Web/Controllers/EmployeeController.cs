@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -29,22 +30,15 @@ namespace IT.Web_New.Controllers
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                if (HttpContext.Cache["EmployeeDatas"] != null)
-                {
-
-                    employeeViewModels = HttpContext.Cache["EmployeeDatas"] as List<EmployeeViewModel>;
-                }
-                else
-                {
+                
                     var results = webServices.Post(new EmployeeViewModel(), "AWFEmployee/All/" + CompanyId);
                     if (results.StatusCode == System.Net.HttpStatusCode.Accepted)
                     {
                         employeeViewModels = (new JavaScriptSerializer()).Deserialize<List<EmployeeViewModel>>(results.Data.ToString());
 
-                        HttpContext.Cache["EmployeeDatas"] = employeeViewModels;
+                        
                     }
-                }
-
+               
                 return View(employeeViewModels);
 
 
@@ -54,6 +48,33 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
 
+        }
+
+        [HttpPost]
+        public ActionResult ChangeStatus(EmployeeViewModel employeeViewModel)
+        {
+            try
+            {
+                var Result = new ServiceResponseModel();
+
+                employeeViewModel.UpdatedBy = Convert.ToInt32(Session["UserId"]);
+                Result = webServices.Post(employeeViewModel, "AWFEmployee/ChangeStatus");
+
+                if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+
+                   
+                    return Json("success", JsonRequestBehavior.AllowGet);
+
+
+                }
+                return Json("success", JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return Json("Failed", JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpGet]

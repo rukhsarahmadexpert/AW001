@@ -212,12 +212,27 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult Details(int Id)
+        [HttpPost]
+        public ActionResult Details(int Id, int CompId = 0)
         {
             CompanyId = Convert.ToInt32(Session["CompanyId"]);
             try
             {
+                if (CompId == CompanyId)
+                {
+
+                   
+                    CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                    ViewBag.LayoutName = "~/Views/Shared/_layout.cshtml";
+
+                }
+                else
+                {
+                    //VehicleViewModel vehicleViewModel = new VehicleViewModel();
+                    CompanyId = CompId;
+                    ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
+
+                }
                 driverViewModel.Id = Id;
                 driverViewModel.CompanyId = CompanyId;
 
@@ -239,15 +254,28 @@ namespace IT.Web_New.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult Edit(int Id)
+        [HttpPost]
+        public ActionResult Edit(int Id, int CompId = 0)
         {
-
+            CompanyId = Convert.ToInt32(Session["CompanyId"]);
             try
             {
-                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                if (CompId == CompanyId)
+                {
+                    CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                    ViewBag.LayoutName = "~/Views/Shared/_layout.cshtml";
+                    
+                }
+                else
+                {
+                    //VehicleViewModel vehicleViewModel = new VehicleViewModel();
+                    CompanyId = CompId;
+                    ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
+
+                }
+                
                 driverViewModel.Id = Id;
-                driverViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                driverViewModel.CompanyId = CompanyId;
                 var result = webServices.Post(driverViewModel, "Driver/Edit/");
 
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)

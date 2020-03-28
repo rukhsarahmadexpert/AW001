@@ -26,13 +26,21 @@ namespace IT.Web_New.Controllers
         int CompanyId = 0;
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult Index(string OrderProgress = "all", string IsSend = "true")
+        public ActionResult Index(string OrderProgress = "all", string IsSend = "true", int CompId = 0)
         {
+            if (CompId == 0)
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                ViewBag.LayoutName = "~/Views/Shared/_Layout.cshtml";
+            }
+            else
+            {
+                CompanyId = CompId;
+                ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
+            }
             try
             {
-
-                CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
+              //  CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 PagingParameterModel pagingParameterModel = new PagingParameterModel
                 { 
                     pageNumber = 1,
