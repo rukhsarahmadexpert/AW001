@@ -60,11 +60,7 @@ namespace IT.Web_New.Controllers
                     }
                 }
 
-                if(VehicleViewModels.Count < 1 || VehicleViewModels == null)
-                {
-                    VehicleViewModels.Insert(0, new VehicleViewModel() { Id = 0, TraficPlateNumber = "Select Vehicle" });
-                }
-
+                
                 if (Request.IsAjaxRequest())
                 {
                     

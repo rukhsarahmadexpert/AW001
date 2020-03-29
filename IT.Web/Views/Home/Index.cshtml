@@ -28,34 +28,48 @@
 
     <div class="col-12">
 
-        <button id="btn2" class="btn bg-primary-700 btn-md">Click to contact AWFuel for support <span style="font-size:15px" class=" fal fa-eye"></span></button>
-        <a id="btn1" class="btn bg-primary-700 btn-md" href="tel:(555)123-4567">Call (555)123-4567</a>
+        @* <button id="btn2" class="btn bg-primary-700 btn-md">Click to contact AWFuel for support <span style="font-size:15px" class=" fal fa-eye"></span></button>
+        <a id="btn1" class="btn bg-primary-700 btn-md" href="tel:(555)123-4567">Call (555)123-4567</a>*@
+        <div class="p-4 bg-primary-700 overflow-hidden position-relative text-white mb-g">
+            <h4>
+                @fuelPricesViewModels[0].Month  Price: @Math.Round(fuelPricesViewModels[0].Price, 2)  AED - @fuelPricesViewModels[0].UnitName  &nbsp; / &nbsp;   @Math.Round(fuelPricesViewModels[1].Price, 2)  AED - @fuelPricesViewModels[1].UnitName &nbsp; | &nbsp;  <span style="font-weight:bold"> For Current Spot Prices & Special offers call:  <a style="color:#ffffff; text-decoration:underline !important" href="tel:+971557383866"> +971(0)55 73 83 866</a> </span>
+            </h4>
 
-        <div id="panel-2" class="panel menu4">
-            <div class="panel-hdr bg-primary-700 py-3" style="font-size: 12px !important;">
-                <h2>
-                    Current Price: @Math.Round(fuelPricesViewModels[0].Price, 2)  <span class="fw-300"><i>AED / @fuelPricesViewModels[0].UnitName</i></span>
-                </h2>
-                <div class="panel-toolbar ">
-                    <button class="btn btn-sm btn-primary" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"><span class="fal fa-angle-down"></span></button>
-                </div>
+        </div>
+       
+    </div>
+
+    <div class="col-sm-6 col-xl-6">
+        <div class="p-3 bg-primary-700 rounded overflow-hidden position-relative text-white mb-g">
+            <div class="">
+               
+                <a style="color:white !important" href="/CustomerBooking/CustomerCreate">
+                    <h3 class="display-4 d-block l-h-n m-0 fw-500">
+                        <span style="font-size:28px" class="fal fa-plus-circle"> </span>
+                        <span style="font-size:28px">Please Make New Booking</span>
+
+                    </h3>
+                </a>
             </div>
-            <div class="panel-container collapse " style="">
-                <div class="panel-content">
-
-                    @foreach (var item in fuelPricesViewModels)
-                    {
-                        <div class="panel-tag">
-                            <h2> @Math.Round(item.Price, 2) / @item.UnitName <span style="font-size:12px">@item.Month</span></h2>
-                        </div>
-                    }
+           
+        </div>
+    </div>
 
 
+    <div class="col-sm-6 col-xl-6">
+        <div class="p-3 bg-primary-700 rounded overflow-hidden position-relative text-white mb-g">
+            <div class="">
+                <a style="color:white !important" href="/CustomerOrder/Create">
+                    <h3 class="display-4 d-block l-h-n m-0 fw-500">
+                        <span style="font-size:28px" class="fal fa-plus-circle"> </span>
+                        <span style="font-size:28px">Request New Delivery</span>
 
-                </div>
+                    </h3>
+                </a>
             </div>
         </div>
     </div>
+
 
     <div class="col-sm-6 col-xl-3">
         <div class="p-3 bg-primary-300 rounded overflow-hidden position-relative text-white mb-g">

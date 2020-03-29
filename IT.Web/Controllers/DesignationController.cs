@@ -48,9 +48,27 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(int id)
+        public ActionResult Details(int Id)
         {
-            return View();
+            try
+            {
+                var result = webServices.Post(new DesignationViewModel(), "Designation/Edit/" + Id);
+
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (result.Data != "[]")
+                    {
+                        DesignationViewModel = (new JavaScriptSerializer()).Deserialize<List<DesignationViewModel>>(result.Data.ToString()).FirstOrDefault();
+                    }
+                    return View(DesignationViewModel);
+                }
+                return Json("Failed", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpGet]
