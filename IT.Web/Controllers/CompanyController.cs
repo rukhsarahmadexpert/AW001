@@ -186,7 +186,7 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                if (Request.Files.Count > 0)
+                if (Request.Files.Count > 0 && LogoUrl != null)
                 {
                     var file = LogoUrl;
 
@@ -194,14 +194,19 @@ namespace IT.Web_New.Controllers
                     {
                         using (var content = new MultipartFormDataContent())
                         {
-                            byte[] fileBytes = new byte[file.InputStream.Length + 1];
-                            file.InputStream.Read(fileBytes, 0, fileBytes.Length);
-                            var fileContent = new ByteArrayContent(fileBytes);
-                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
-                            content.Add(fileContent);
+                            if (LogoUrl != null)
+                            {
+                                byte[] fileBytes = new byte[file.InputStream.Length + 1];
+                                file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                                var fileContent = new ByteArrayContent(fileBytes);
+                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
+                                content.Add(fileContent);
+                            }
+
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
-                            content.Add(new StringContent("Name"), "Name");
-                            content.Add(new StringContent("street Data"), "Street");
+                            content.Add(new StringContent(compnayModel.Id.ToString()), "Id");
+                            content.Add(new StringContent(compnayModel.Name ?? ""), "Name");
+                            content.Add(new StringContent(compnayModel.Street ?? ""), "Street");
                             string UserId = Session["UserId"].ToString();
                             content.Add(new StringContent(UserId), "UpdatedBy");
                             content.Add(new StringContent(compnayModel.Postcode ?? ""), "Postcode");
@@ -213,12 +218,10 @@ namespace IT.Web_New.Controllers
                             content.Add(new StringContent(compnayModel.Phone ?? ""), "Phone");
                             content.Add(new StringContent(compnayModel.Email ?? ""), "Email");
                             content.Add(new StringContent(compnayModel.Web ?? ""), "Web");
-                            content.Add(new StringContent(compnayModel.TRN ?? ""), "TRN");
+                            content.Add(new StringContent(compnayModel.TRN ?? ""), "TRN");                            
                             content.Add(new StringContent(compnayModel.Remarks ?? ""), "Remarks");
                             content.Add(new StringContent(compnayModel.OwnerRepresentaive ?? ""), "OwnerRepresentaive");
                             content.Add(new StringContent("true"), "IsActive");
-
-
 
                             //  var result1 = client.PostAsync("http://localhost:64299/api/Company/Add", content).Result;
                             var result = webServices.PostMultiPart(content, "Company/Update", true);
@@ -236,8 +239,8 @@ namespace IT.Web_New.Controllers
                         }
                     }
                 }
+               
                 return RedirectToAction(nameof(Index));
-
             }
             catch (Exception ex)
             {
@@ -328,28 +331,41 @@ namespace IT.Web_New.Controllers
                     {
                         using (var content = new MultipartFormDataContent())
                         {
-                            byte[] fileBytes = new byte[file.InputStream.Length + 1];
-                            file.InputStream.Read(fileBytes, 0, fileBytes.Length);
-                            var fileContent = new ByteArrayContent(fileBytes);
-                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
-                            content.Add(fileContent);
+                            if (LogoUrl != null)
+                            {
+                                byte[] fileBytes = new byte[file.InputStream.Length + 1];
+                                file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                                var fileContent = new ByteArrayContent(fileBytes);
+                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
+                                content.Add(fileContent);
+                            }
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
-                            content.Add(new StringContent("Name"), "Name");
-                            content.Add(new StringContent("street Data"), "Street");
+                            content.Add(new StringContent(compnayModel.Name ?? ""),"Name");
+                            content.Add(new StringContent(compnayModel.Street ?? ""),"street");
                             content.Add(new StringContent(compnayModel.Postcode ?? ""), "Postcode");
                             content.Add(new StringContent(compnayModel.City ?? ""), "City");
                             content.Add(new StringContent(compnayModel.Street ?? ""), "State");
                             content.Add(new StringContent(compnayModel.Country ?? ""), "Country");
+                            content.Add(new StringContent(compnayModel.Email ?? ""), "Email");
+                            content.Add(new StringContent(compnayModel.Phone ?? ""), "Phone");
+                            content.Add(new StringContent(compnayModel.Cell ?? ""), "Cell");
+                            content.Add(new StringContent(compnayModel.OwnerRepresentaive ?? ""), "OwnerRepresentaive");
+                            content.Add(new StringContent(compnayModel.Remarks ?? ""), "Commentes");
+                            content.Add(new StringContent(compnayModel.TRN ?? ""), "TRN");
+                            content.Add(new StringContent(compnayModel.Address ?? ""), "Address");
                             content.Add(new StringContent("true"), "IsCashCompany");
                             //  var result1 = client.PostAsync("http://itmolen-001-site8.htempurl.com/api/Company/Add", content).Result;
                             var result = webServices.PostMultiPart(content, "Company/Add", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                             {
                                 ViewBag.Message = "Created";
+
+                                return RedirectToAction(nameof(Index));
                             }
                             else
                             {
                                 ViewBag.Message = "Failed";
+                                return View("CashCompany", compnayModel);
                             }
                         }
                     }
