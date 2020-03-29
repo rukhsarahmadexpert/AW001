@@ -35,7 +35,10 @@ namespace IT.Web_New.Controllers
                 var CompanyList = webServices.Post(pagingParameterModel, "Company/CompayAll");
                 if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
+                    if (CompanyList.Data != "[]" && CompanyList.Data != null)
+                    {
+                        compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
+                    }
                 }
                 return View(compnayModels);
             }
