@@ -36,7 +36,15 @@
     <!-- page related CSS below -->
     <link rel="stylesheet" media="screen, print" href="~/assets/css/formplugins/select2/select2.bundle.css">
 
+
     <style>
+
+        /* pannel tolbar*/
+        .panel-toolbar{
+            display:none
+        }
+
+
         .switchToggle input[type=checkbox] {
             height: 0;
             width: 0;
@@ -95,7 +103,7 @@
             color: #fff;
         }
 
-        .switchToggle input:checked + label:after, .switchToggle i  nput:checked + input + label:after {
+        .switchToggle input:checked + label:after, .switchToggle i nput:checked + input + label:after {
             left: calc(100% - 1px);
             transform: translateX(-100%);
         }
@@ -108,6 +116,40 @@
             margin: 5px 0 5px 0;
         }
     </style>
+
+    <style>
+        .select2-container--default .select2-selection--multiple:before {
+            content: ' ';
+            display: block;
+            position: absolute;
+            border-color: #888 transparent transparent transparent;
+            border-style: solid;
+            border-width: 5px 4px 0 4px;
+            height: 0;
+            right: 6px;
+            margin-left: -4px;
+            margin-top: -2px;
+            top: 50%;
+            width: 0;
+            cursor: pointer
+        }
+
+        .select2-container--open .select2-selection--multiple:before {
+            content: ' ';
+            display: block;
+            position: absolute;
+            border-color: transparent transparent #888 transparent;
+            border-width: 0 4px 5px 4px;
+            height: 0;
+            right: 6px;
+            margin-left: -4px;
+            margin-top: -2px;
+            top: 50%;
+            width: 0;
+            cursor: pointer
+        }
+    </style>
+
 </head>
 <body class="mod-bg-1 ">
     <!-- DOC: script to save and load page settings -->
@@ -204,7 +246,60 @@
 
                     <ul class="nav-menu" id="js-nav-menu">
 
+                        <li class="open">
+                            <a href="#" title="My Bookings" class=" " data-filter-tags="My Bookings">
+                                <i class="fal fa-shopping-bag"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">My Bookings</span>
+                            </a>
+                            <ul>
 
+                                <li>
+                                    <a href="/CustomerBooking/CustomerCreate" title="Place New Order" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Place New Order</span><span class="">Add</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/CustomerBooking/Customer" title="New Order Processing" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">New Order Processing</span><span class="">List</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/OrderConfirmations/Index" title="Order Confirmations" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Order Confirmations</span><span class="">List</span>
+                                    </a>
+                                </li>
+
+
+
+                                <li>
+                                    <a href="/CustomerBooking/BookingReserved" title="Reserved Quantities" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Reserved Quantities</span><span class="">List</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/CustomerBooking/BookingReserved" title="Remaining Quantities" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Remaining Quantities</span><span class="">List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="open">
+                            <a href="#" title="My Deliveries" class=" " data-filter-tags="My Deliveries">
+                                <i class="fal fa-reply"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Deliveries</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/CustomerOrder/Index" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">My Deliveries</span><span class="">List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
                         <li class="open">
                             <a href="#" title="Drivers Information" class=" " data-filter-tags="Drivers Information">
@@ -234,19 +329,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="open">
-                            <a href="#" title="My Deliveries" class=" " data-filter-tags="My Deliveries">
-                                <i class="fal fa-reply"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Deliveries</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="/CustomerOrder/Index" title="Build Notes" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">My Deliveries</span><span class="">List</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+
 
                         <li class="open">
                             <a href="#" title="Registered Sites" class=" " data-filter-tags="Registered Sites">
@@ -277,48 +360,11 @@
                                         <span class="nav-link-text" data-i18n="">Purchases</span><span class="">List</span>
                                     </a>
                                 </li>
-                              
+
                             </ul>
                         </li>
 
-                        <li class="open">
-                            <a href="#" title="My Bookings" class=" " data-filter-tags="My Bookings">
-                                <i class="fal fa-shopping-bag"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">My Bookings</span>
-                            </a>
-                            <ul>
 
-                                <li>
-                                    <a href="/CustomerBooking/CustomerCreate" title="Place New Order" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Place New Order</span><span class="">Add</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="/OrderConfirmations/Index" title="Order Confirmations" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Order Confirmations</span><span class="">List</span>
-                                    </a>
-                                </li>
-                                
-                                <li>
-                                    <a href="/CustomerBooking/Customer" title="Booked Quantities" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Booked Quantities</span><span class="">List</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="/CustomerBooking/BookingReserved" title="Reserved Quantities" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Reserved Quantities</span><span class="">List</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="/CustomerBooking/BookingReserved" title="Remaining Quantities" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Remaining Quantities</span><span class="">List</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
 
                         <li class="open">
                             <a href="#" title="Reports" class=" " data-filter-tags="Reports">
@@ -1923,6 +1969,9 @@
         });
 
       @*//  @if(Session["On"])*@
+
+
+
 
     </script>
     <script src="~/Scripts/firebass.app.js"></script>

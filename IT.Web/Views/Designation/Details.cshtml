@@ -1,0 +1,98 @@
+﻿
+@model IT.Core.ViewModels.DesignationViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Designation</a></li>
+
+    <li class="breadcrumb-item active">details</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a href="/Designation/Edit/@Model.Id"> <span class="fal fa-edit"></span> Designation <span class="fw-300"> Edit</span></a>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="panel-tag">
+                       Designation Details...
+                    </div>
+
+                   
+
+                        <div class="row">
+                         
+                            <div class="col-md-12">
+
+                                <div class="row">
+                                    <div class="col-md-6 p-2">
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="simpleinput">Designation </label>
+                                            <input type="text" id="Name" disabled name="Name" value="@Model.Designation" class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6 p-2">
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="simpleinput">Created By </label>
+                                            <input type="text" id="Name" name="Name" disabled value="@Model.CreatedBy" class="form-control">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-6 p-2">
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="simpleinput">Created date  </label>
+                                            <input type="text" id="Name" name="Name" disabled value="@Model.CreatedDate" class="form-control">
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-md-6 p-2">
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="simpleinput">Username  </label>
+                                            <input type="text" id="Name" name="Name" disabled value="@Model.UserName" class="form-control">
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+
+                            
+
+                            </div>
+
+                         
+
+
+                        </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

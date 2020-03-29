@@ -197,6 +197,47 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpGet]
+        public ActionResult CreateEstimates()
+        {
+            try
+            {
+                string SerailNO = "";
+
+                SerailNO = PoNumber();
+
+                var result = webServices.Post(new ProductViewModel(), "Product/All");
+                ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
+                ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
+                ViewBag.Product = ProductViewModel;
+
+                var results = webServices.Post(new ProductUnitViewModel(), "ProductUnit/All");
+                productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
+                productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                ViewBag.ProductUnit = productUnitViewModels;
+
+                var Res = webServices.Post(new CompanyViewModel(), "Company/CompayAll");
+                companyViewModels = (new JavaScriptSerializer()).Deserialize<List<CompanyViewModel>>(Res.Data.ToString());
+                companyViewModels.Insert(0, new CompanyViewModel() { Id = 0, Name = "Select Customer Name" });
+
+                ViewBag.Vender = companyViewModels;
+                ViewBag.PO = SerailNO;
+                ViewBag.titles = "Quotation";
+
+                LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel
+                {
+                    FromDate = System.DateTime.Now,
+                    DueDate = System.DateTime.Now,
+                };
+                return View(lPOInvoiceVModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        [HttpGet]
         public string PoNumber()
         {
             string SerailNO = "";

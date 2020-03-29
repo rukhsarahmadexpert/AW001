@@ -982,6 +982,8 @@
     <Content Include="Views\CustomerBooking\CustomerDetails.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\ProductUnit\Details.cshtml" />
+    <Content Include="Views\Designation\Details.cshtml" />
+    <Content Include="Views\Quotation\CreateEstimates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

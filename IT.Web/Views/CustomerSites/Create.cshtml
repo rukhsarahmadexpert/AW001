@@ -39,18 +39,7 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        @if (Model.Id > 0)
-                        {
-                            <div class="panel-tag">
-                                Please Edit Site from here...
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="panel-tag">
-                                Please add your Site from here...
-                            </div>
-                        }
+                        <div class="py-2"></div>
                         <form action="/CustomerSites/Create" method="post" enctype="application/x-www-form-urlencoded">
                             <div class="row">
                                 <div class="col-md-6">

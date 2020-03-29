@@ -1,8 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Aw Fuel - Quotation Create";
-    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+    ViewBag.Title = "CreateEstimates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <link href="~/Content/css/Common/LPOInvoiceTable.css" rel="stylesheet" />
 <link href="~/Content/css/Common/Common-LPO.css" rel="stylesheet" />
@@ -91,7 +92,7 @@
                 }
             });
         });
-        
+
         $('#SaveEmail').click(function () {
 
             localStorage.setItem("SendByEmail", "True");
@@ -227,4 +228,5 @@
 
     <script src="~/Scripts/Common-Scripts/LOP-Invoice.js"></script>
 }
+
 
