@@ -15,16 +15,14 @@
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
-         
+
             <div class="panel-container show">
                 <div class="panel-content">
                     <form action="/Company/Update" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-xl-2 p-2">
                                 <label class="newbtn">
-                                    
-                                    <img id="logoPreview" class="blah_cashCompany" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.LogoUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image" style="width:160px;">
-
+                                    <img id="logoPreview" class="blah_cashCompany" src="https://awservices.somee.com/ClientDocument/@Model.LogoUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image" style="width:160px;">
                                     <input id="LogoUrl" name="LogoUrl" class='pic' value="@Model.LogoUrl" onchange="readURL(this);" type="file">
                                 </label>
                             </div>
@@ -34,13 +32,13 @@
                                         <span class="input-group-text"><i class="fal fa-industry fs-xl"></i></span>
                                     </div>
                                     <input type="hidden" name="Id" value="@Model.Id" />
-                                    <input id="OwnerRepresentaive" name="OwnerRepresentaive" type="text" class="form-control" value="@Model.Name" aria-label="CompanyName" aria-describedby="addon-wrapping-left">
+                                    <input id="Name" name="Name" type="text" class="form-control" value="@Model.Name" aria-label="CompanyName" aria-describedby="addon-wrapping-left">
                                 </div>
                                 <div class="input-group flex-nowrap mt-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fal fa-envelope fs-xl"></i></span>
                                     </div>
-                                    <input id="Email" name="Email" type="email" class="form-control"value="@Model.Email" aria-label="Email" aria-describedby="addon-wrapping-left">
+                                    <input id="Email" name="Email" type="email" class="form-control" value="@Model.Email" aria-label="Email" aria-describedby="addon-wrapping-left">
                                 </div>
                                 <div class="input-group flex-nowrap mt-3">
                                     <div class="input-group-prepend">
