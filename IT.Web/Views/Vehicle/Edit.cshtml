@@ -68,8 +68,20 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Region</label>
-                                        <input type="text" id="RegisteredRegion" name="RegisteredRegion" value="@Model.RegisteredRegion" class="form-control" placeholder="Enter Region">
+                                        <label class="form-label" for="single-label">
+                                            Region
+                                        </label>
+                                        <select class="select2 form-control" name="RegisteredRegion" id="RegisteredRegion">
+
+                                            <option value="Abu Dhabi" @(Model.RegisteredRegion == "Abu Dhabi" ? "selected='selected'" : "")>Abu Dhabi</option>
+                                            <option value="Dubai" @(Model.RegisteredRegion == "Dubai" ? "selected='selected'" : "")>Dubai</option>
+                                            <option value="Ajman" @(Model.RegisteredRegion == "Ajman" ? "selected='selected'" : "")>Ajman</option>
+                                            <option value="Fujairah" @(Model.RegisteredRegion == "Fujairah" ? "selected='selected'" : "")>Fujairah</option>
+                                            <option value="Ras Al Khaimah" @(Model.RegisteredRegion == "Ras Al Khaimah" ? "selected='selected'" : "")>Ras Al Khaimah</option>
+                                            <option value="Sharjah" @(Model.RegisteredRegion == "Sharjah" ? "selected='selected'" : "")>Sharjah</option>
+                                            <option value="Umm Al Quwain" @(Model.RegisteredRegion == "Umm Al Quwain" ? "selected='selected'" : "")>Umm Al Quwain</option>
+                                      
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
@@ -139,7 +151,7 @@
                                     </div>
                                     <div class="row py-5">
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">
+                                            <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
                                                 Update 
                                                 <span>Vehicle</span>
                                             </button>

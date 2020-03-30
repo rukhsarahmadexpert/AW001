@@ -138,6 +138,9 @@ namespace IT.Web_New.Controllers
 
             VehicleTypeController vehicleTypeController = new VehicleTypeController();
             ViewBag.VehicleTypes = vehicleTypeController.VehicleTypes();
+
+           
+
             return View();
             //try
             //{
@@ -390,7 +393,7 @@ namespace IT.Web_New.Controllers
                         }
                     }
                 }
-                return RedirectToAction(nameof(Details), new { Id = vehicleViewModel.Id });
+                return Redirect(nameof(Index));
             }
             catch (Exception ex)
             {
