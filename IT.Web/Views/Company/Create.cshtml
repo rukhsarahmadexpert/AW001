@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "Company Registration";
     Layout = null;
+
+    List<IT.Core.ViewModels.CountryViewModel> countryViewModels = new List<IT.Core.ViewModels.CountryViewModel>();
+    countryViewModels = ViewBag.Countries as List<IT.Core.ViewModels.CountryViewModel>;
 }
 
 <!DOCTYPE html>
@@ -74,7 +77,7 @@
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-industry fs-xl"></i></span>
                                                           </div>
-                                                          <input id="Name" name="Name" type="text" class="form-control" placeholder="Compnay Name" aria-label="CompanyName" aria-describedby="addon-wrapping-left">
+                                                          <input id="Name" name="Name" required type="text" class="form-control" placeholder="Compnay Name" aria-label="CompanyName" aria-describedby="addon-wrapping-left">
                                                       </div>
                                                   </div>
 
@@ -100,7 +103,7 @@
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-envelope fs-xl"></i></span>
                                                           </div>
-                                                          <input id="Email" name="Email" type="email" class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="addon-wrapping-left">
+                                                          <input id="Email" name="Email" required type="email" class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="addon-wrapping-left">
                                                       </div>
                                                   </div>
 
@@ -109,7 +112,7 @@
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-phone fs-xl"></i></span>
                                                           </div>
-                                                          <input id="Phone" name="Phone" type="text" class="form-control" placeholder="Phone Number" aria-label="Phone" aria-describedby="addon-wrapping-left">
+                                                          <input id="Phone" name="Phone"  type="text" class="form-control" placeholder="Phone Number" aria-label="Phone" aria-describedby="addon-wrapping-left">
                                                       </div>
                                                   </div>
                                               </div>
@@ -120,7 +123,7 @@
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-mobile fs-xl"></i></span>
                                                           </div>
-                                                          <input id="Cell" name="Cell" type="text" class="form-control" placeholder="Mobile Number" aria-label="Mobile" aria-describedby="addon-wrapping-left">
+                                                          <input id="Cell" name="Cell" type="text" required class="form-control" placeholder="Mobile Number" aria-label="Mobile" aria-describedby="addon-wrapping-left">
                                                       </div>
                                                   </div>
 
@@ -135,30 +138,72 @@
                                               </div>
                                               <div class="row ">
                                                   <div class="col-xl-6 col-md-6 p-2">
-                                                      <div class="input-group flex-nowrap">
+
+                                                      <div class="input-group " form-group flex-nowrap">
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-flag fs-xl"></i></span>
                                                           </div>
-                                                          <input id="Country" name="Country" type="text" class="form-control" placeholder="Enter Your Country" aria-label="Country" aria-describedby="addon-wrapping-left">
+                                                          <select class="select2 form-control" name="Country" id="Country" required>
+                                                              <option value="" disabled selected hidden>Country</option>
+                                                              @if (countryViewModels != null)
+                                                              {
+                                                                  foreach (var item in countryViewModels)
+                                                                  {
+                                                                  <option value="@item.CountryName">@item.CountryName</option>
+                                                                  }
+                                                              }
+                                                          </select>
                                                       </div>
+
                                                   </div>
 
                                                   <div class="col-xl-6 col-md-6 p-2">
-                                                      <div class="input-group flex-nowrap">
+
+                                                      <div class="input-group " form-group flex-nowrap">
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-chess-rook fs-xl"></i></span>
                                                           </div>
-                                                          <input id="State" name="State" type="text" class="form-control" placeholder="State" aria-label="Your State" aria-describedby="addon-wrapping-left">
+                                                          <select class="select2 form-control" name="State" id="State" required>
+                                                              <option value="" disabled selected hidden>State</option>
+                                                              @foreach (var item in countryViewModels)
+                                                              {
+                                                                  if (item.stateViewModels != null)
+                                                                  {
+                                                                      foreach (var item1 in item.stateViewModels)
+                                                                      {
+                                                                      <option value="@item1.States">@item1.States</option>
+                                                                      }
+                                                                  }
+                                                              }
+                                                              </select>
                                                       </div>
+
                                                   </div>
                                               </div>
+
                                               <div class="row ">
                                                   <div class="col-xl-6 col-md-6 p-2">
-                                                      <div class="input-group flex-nowrap">
+
+                                                      <div class="input-group " form-group flex-nowrap">
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-building fs-xl"></i></span>
                                                           </div>
-                                                          <input id="City" name="City" type="text" class="form-control" placeholder="Enter Your City" aria-label="City" aria-describedby="addon-wrapping-left">
+                                                          <select class="select2 form-control" name="City" id="City" required>
+                                                              <option value="" disabled selected hidden>City</option>
+                                                              @foreach (var item in countryViewModels)
+                                                              {
+                                                                  foreach (var item1 in item.stateViewModels)
+                                                                  {
+                                                                      if(item1.cityViewModels != null)
+                                                                      {
+                                                                      foreach (var item3 in item1.cityViewModels)
+                                                                      {
+                                                                          <option value="@item3.CityName">@item3.CityName</option>
+                                                                          }
+                                                                      }
+                                                                  }
+                                                              }
+                                                          </select>
                                                       </div>
                                                   </div>
 
@@ -198,7 +243,7 @@
                                                   <div class="col-md-12">
                                                       <label class=newbtn>
                                                           <img id="MulkiaFront1Preview" class="blah" src="/assets/staticImages/icon1.png">
-                                                          <input id="LogoUrl" name="LogoUrl" class='pic' onchange="readURL(this);" type="file">
+                                                          <input id="LogoUrl" required name="LogoUrl" class='pic' onchange="readURL(this);" type="file">
                                                       </label>
                                                   </div>
 

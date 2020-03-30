@@ -85,6 +85,8 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult Create(CompnayModel compnayModel)
         {
+            CountryController countryController = new CountryController();
+            ViewBag.Countries = countryController.Countries();
             return View();
         }
 
