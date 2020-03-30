@@ -12,7 +12,6 @@ namespace IT.Core.ViewModels
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
         public string Street { get; set; }
         public string Postcode { get; set; }
         public string City { get; set; }
@@ -22,9 +21,11 @@ namespace IT.Core.ViewModels
         public string Address { get; set; }
         [Required]
         public string Phone { get; set; }
+        [Required]
         public string Cell { get; set; }
         public string Email { get; set; }
         public string Web { get; set; }
+        [Required(ErrorMessage ="Please select Logo")]
         public string LogoUrl { get; set; }
         public bool IsActive { get; set; }
         public string TRN { get; set; }

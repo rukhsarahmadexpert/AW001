@@ -28,19 +28,19 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-industry fs-xl"></i></span>
                                         </div>
-                                        <input id="Name" name="Name" type="text" class="form-control" placeholder="Compnay Name" aria-label="CompanyName" aria-describedby="addon-wrapping-left">
+                                        <input id="Name" name="Name" type="text" class="form-control" placeholder="Compnay Name" value="@Model.Name" aria-label="CompanyName" aria-describedby="addon-wrapping-left">
                                     </div>
                                     <div class="input-group flex-nowrap mt-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-envelope fs-xl"></i></span>
                                         </div>
-                                        <input id="Email" name="Email" type="email" class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="addon-wrapping-left">
+                                        <input id="Email" name="Email" type="email" value="@Model.Email" class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="addon-wrapping-left">
                                     </div>
                                     <div class="input-group flex-nowrap mt-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-mobile fs-xl"></i></span>
                                         </div>
-                                        <input id="Cell" name="Cell" type="text" class="form-control" placeholder="Mobile Number" aria-label="Mobile" aria-describedby="addon-wrapping-left">
+                                        <input id="Cell" name="Cell" type="text" class="form-control" value="@Model.Cell" placeholder="Mobile Number" aria-label="Mobile" aria-describedby="addon-wrapping-left">
                                     </div>
                                 </div>
                                 <div class="col-xl-5 p-2">
@@ -48,19 +48,20 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-user fs-xl"></i></span>
                                         </div>
-                                        <input id="Owner" name="Owner" type="text" class="form-control" placeholder="Owner / Representative" aria-label="Owner" aria-describedby="addon-wrapping-left">
+                                        <input id="Owner" name="Owner" type="text" class="form-control" value="@Model.OwnerRepresentaive" placeholder="Owner / Representative" aria-label="Owner" aria-describedby="addon-wrapping-left">
                                     </div>
                                     <div class="input-group flex-nowrap mt-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-phone fs-xl"></i></span>
                                         </div>
-                                        <input id="Phone" name="Phone" type="text" class="form-control" placeholder="Phone Number" aria-label="Phone" aria-describedby="addon-wrapping-left">
+                                        <input id="Phone" name="Phone" type="text" class="form-control" value="@Model.Phone" placeholder="Phone Number" aria-label="Phone" aria-describedby="addon-wrapping-left">
                                     </div>
                                     <div class="input-group flex-nowrap mt-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-credit-card fs-xl"></i></span>
                                         </div>
-                                        <input id="TRN" name="TRN" type="text" class="form-control" placeholder="Trn Number" aria-label="TrnNumber" aria-describedby="addon-wrapping-left">
+                                        <input id="TRN" name="TRN" type="text" class="form-control" value="@Model.TRN" placeholder="Trn Number" aria-label="TrnNumber" aria-describedby="addon-wrapping-left">
+                                    <input type="hidden" id="LogoUrl" />
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +71,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-building fs-xl"></i></span>
                                         </div>
-                                        <input id="City" name="City" type="text" class="form-control" placeholder="Enter Your City" aria-label="City" aria-describedby="addon-wrapping-left">
+                                        <input id="City" name="City" type="text" class="form-control" value="@Model.City" placeholder="Enter Your City" aria-label="City" aria-describedby="addon-wrapping-left">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 p-2">
@@ -78,7 +79,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-address-card fs-xl"></i></span>
                                         </div>
-                                        <input id="Address" name="Address" type="text" class="form-control" placeholder="Address" aria-label="Your Address" aria-describedby="addon-wrapping-left">
+                                        <input id="Address" name="Address" type="text" class="form-control" value="@Model.Address" placeholder="Address" aria-label="Your Address" aria-describedby="addon-wrapping-left">
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +89,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-globe fs-xl"></i></span>
                                         </div>
-                                        <input id="Web" name="Web" type="text" class="form-control" placeholder="Enter Website URL" aria-label="Web" aria-describedby="addon-wrapping-left">
+                                        <input id="Web" name="Web" type="text" class="form-control" value="@Model.Web" placeholder="Enter Website URL" aria-label="Web" aria-describedby="addon-wrapping-left">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 p-2">
@@ -96,7 +97,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-comment fs-xl"></i></span>
                                         </div>
-                                        <input id="Remarks" name="Remarks" type="text" class="form-control" placeholder="Remarks" aria-label="Your Address" aria-describedby="addon-wrapping-left">
+                                        <input id="Remarks" name="Remarks" type="text" class="form-control" value="@Model.Remarks" placeholder="Remarks" aria-label="Your Address" aria-describedby="addon-wrapping-left">
                                     </div>
                                 </div>
                             </div>
@@ -108,6 +109,8 @@
                                     </button>
                                 </div>
                             </div>
+
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         </form>
                     </div>
                 </div>
@@ -123,6 +126,7 @@
 
         $("#LogoUrl").change(function () {
             readURL(this, "logoPreview");
+            $('#LogoUrl').val('logo uploaded');
         });
 
     </script>

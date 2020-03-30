@@ -205,7 +205,7 @@ namespace IT.Web_New.Controllers
                     {
                         driverModel1.ContactNumber = directSaleViewModels[0].ContactNumber;
                         driverModel1.DriverId = directSaleViewModels[0].DriverId;
-                        driverModel1.Name = directSaleViewModels[0].Name;
+                        driverModel1.DriverName = directSaleViewModels[0].Name;
                     }
                     TempData["driverModel"] = driverModel1;
 
