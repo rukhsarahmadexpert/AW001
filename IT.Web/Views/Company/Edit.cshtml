@@ -93,6 +93,7 @@
                                         <span class="input-group-text"><i class="fal fa-globe fs-xl"></i></span>
                                     </div>
                                     <input id="Web" name="Web" type="text" class="form-control" value="@Model.Web" aria-label="Web" aria-describedby="addon-wrapping-left">
+                               <input type="hidden" name="LogoUrl" id="LogoUrl" value="@Model.LogoUrl" />
                                 </div>
                             </div>
                             <div class="col-xl-6 p-2">
@@ -115,13 +116,10 @@
                     </form>
                 </div>
             </div>
+            @Html.ValidationSummary(false,"", new { @class = "text-danger" })
         </div>
     </div>
 </div>
-
-
-
-
 
 @section Scripts{
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
@@ -129,6 +127,7 @@
 
         $("#LogoUrl").change(function () {
             readURL(this, "logoPreview");
+            $('#LogoUrl').val('LogoUrl');
         });
 
     </script>

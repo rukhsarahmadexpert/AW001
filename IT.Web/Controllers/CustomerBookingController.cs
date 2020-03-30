@@ -208,7 +208,10 @@ namespace IT.Web.Controllers
             ViewBag.Products = productController.Products();
             ViewBag.ProductUnits = productUnitController.ProductUnits();
 
-            return View();
+            CustomerBookingViewModel CustomerBookingViewModel = new CustomerBookingViewModel();
+            CustomerBookingViewModel.VAT = (decimal)0.00;
+            CustomerBookingViewModel.TotalAmount = (decimal)0.00;
+            return View(CustomerBookingViewModel);
         }
 
         [HttpPost]
@@ -216,19 +219,33 @@ namespace IT.Web.Controllers
         {
             try
             {
-                var CustomerResult = new ServiceResponseModel();
-                customerBookingViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
-                customerBookingViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                CustomerResult = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingAdd");
-
-                if (CustomerResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                if (!ModelState.IsValid)
                 {
-                    var reuslt = (new JavaScriptSerializer().Deserialize<int>(CustomerResult.Data));
+                    ProductController productController = new ProductController();
+                    ProductUnitController productUnitController = new ProductUnitController();
 
-                    return RedirectToAction(nameof(Customer));
+                    ViewBag.Products = productController.Products();
+                    ViewBag.ProductUnits = productUnitController.ProductUnits();
+
+                    return View("CustomerCreate", customerBookingViewModel);
                 }
+                else
+                {
+                    var CustomerResult = new ServiceResponseModel();
+                    customerBookingViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
+                    customerBookingViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                return View(customerBookingViewModel);
+                    CustomerResult = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingAdd");
+
+                    if (CustomerResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        var reuslt = (new JavaScriptSerializer().Deserialize<int>(CustomerResult.Data));
+
+                        return RedirectToAction(nameof(Customer));
+                    }
+
+                    return View(customerBookingViewModel);
+                }
             }
             catch (Exception ex)
             {
@@ -417,12 +434,10 @@ namespace IT.Web.Controllers
                 {
                     customerBookingViewModel = (new JavaScriptSerializer().Deserialize<CustomerBookingViewModel>(customerResult.Data.ToString()));
                 }
-
                
                 ProductController productController = new ProductController();
                 ProductUnitController productUnitController = new ProductUnitController();
 
-                
                 ViewBag.Products = productController.Products();
                 ViewBag.ProductUnits = productUnitController.ProductUnits();
 
@@ -441,26 +456,40 @@ namespace IT.Web.Controllers
         {
             try
             {
-                var CustomerResult = new ServiceResponseModel();
-                if (customerBookingViewModel.Id > 0)
+                if (!ModelState.IsValid)
                 {
-                    customerBookingViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
-                    customerBookingViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                    CustomerResult = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingUpdate");
+                    ProductController productController = new ProductController();
+                    ProductUnitController productUnitController = new ProductUnitController();
 
-                    if (CustomerResult.StatusCode == System.Net.HttpStatusCode.Accepted)
-                    {
-                        var reuslt = (new JavaScriptSerializer().Deserialize<int>(CustomerResult.Data));
+                    ViewBag.Products = productController.Products();
+                    ViewBag.ProductUnits = productUnitController.ProductUnits();
 
-                        return RedirectToAction(nameof(Customer));
-                    }
+                    return View("Edit", customerBookingViewModel);
 
-                    return View(customerBookingViewModel);
                 }
                 else
                 {
-                    return View(customerBookingViewModel);
+                    var CustomerResult = new ServiceResponseModel();
+                    if (customerBookingViewModel.Id > 0)
+                    {
+                        customerBookingViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
+                        customerBookingViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                        CustomerResult = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingUpdate");
 
+                        if (CustomerResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                        {
+                            var reuslt = (new JavaScriptSerializer().Deserialize<int>(CustomerResult.Data));
+
+                            return RedirectToAction(nameof(Customer));
+                        }
+
+                        return View(customerBookingViewModel);
+                    }
+                    else
+                    {
+                        return View(customerBookingViewModel);
+
+                    }
                 }
             }
             catch (Exception ex)

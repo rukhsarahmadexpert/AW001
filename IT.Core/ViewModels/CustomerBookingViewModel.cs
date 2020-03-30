@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,11 @@ namespace IT.Core.ViewModels
     {
         public int Id { get; set; }
         public int CompanyId { get; set; }
+        [Required(ErrorMessage = "Please add Quantity")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please add Quantity")]
         public int BookQuantity { get; set; }
+        [Required(ErrorMessage = "Please Add Price")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please add Price")]
         public decimal UnitPrice { get; set; }
         public bool IsAccepted { get; set; }
         public decimal VAT { get; set; }
@@ -23,7 +28,11 @@ namespace IT.Core.ViewModels
         public DateTime UpdatedDate { get; set; }
         public bool IsActive { get; set; }
         public bool IsOpen { get; set; }
+        [Required(ErrorMessage = "Please select Product")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please select Product")]
         public int ProductId { get; set; }
+        [Required(ErrorMessage = "Please Product Unit")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please Product Unit")]
         public int UnitId { get; set; }
         public string ProductName { get; set; }
         public string UnitName { get; set; }

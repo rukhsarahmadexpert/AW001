@@ -1,4 +1,4 @@
-﻿
+﻿@model IT.Core.ViewModels.CustomerBookingViewModel
 @{
     ViewBag.Title = "CustomerCreate";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -30,15 +30,9 @@
             <form action="/CustomerBooking/CustomerCreate" method="post" enctype="application/x-www-form-urlencoded">
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <div class="py-2">
-                           
+                        <div class="py-2">                           
                         </div>
-
-
                         <div class="row">
-
-                          
-
                             <div class="col-md-6">
 
                                 <div class="form-group mb-2">
@@ -46,7 +40,7 @@
                                     <select id="ProductId" name="ProductId" class="select2 ProductId" required>
                                         @foreach (var item in productViewModels)
                                         {
-                                            <option value="@item.Id">@item.Name</option>
+                                            <option value="@item.Id" @(item.Id == Model.ProductId ? "selected='selected'" : "")>@item.Name</option>
                                         }
                                     </select>
                                 </div>
@@ -71,13 +65,10 @@
                         </thead>
 
                         <tbody>
-
-
                             <tr>
                                 <td style="width:200px">
-                                    <input type="text" class="form-control Quantity" name="BookQuantity" id="Quantity" placeholder="QTY" />
+                                    <input type="text" class="form-control Quantity" value="@Model.BookQuantity" name="BookQuantity" id="Quantity" placeholder="QTY" />
                                 </td>
-
                                 <td style="width:250px !important">
                                     <div class="form-group mb-2">
 
@@ -85,35 +76,35 @@
                                             <option>Product Unit</option>
                                             @foreach (var item in productUnitViewModels)
                                             {
-                                                <option value="@item.Id">@item.Name</option>
+                                                <option value="@item.Id" @(item.Id == Model.UnitId ? "selected='selected'" : "")>@item.Name</option>
                                             }
                                         </select>
                                     </div>
                                 </td>
-
                                 <td>
-                                    <input type="text" name="UnitPrice" class="form-control UnitPrice" id="UnitPrice" placeholder="Unit Price" />
+                                    <input type="text" name="UnitPrice" value="@Math.Round(Model.UnitPrice,2)" class="form-control UnitPrice" id="UnitPrice" placeholder="Unit Price" />
                                 </td>
-
                                 <td>
                                     <div class="form-group mb-2">
-
-
                                         <select id="VAT1" name="VAT1" class="form-control VAT1" required>
-
-                                            <option value="0">0</option>
-                                            <option value="5">5</option>
-
+                                            @if (Model.VAT > 0)
+                                            {
+                                                <option value="0">0</option>
+                                                <option value="5" selected="selected">5</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="0" selected="selected">0</option>
+                                                <option value="5">5</option>
+                                            }
                                         </select>
                                     </div>
                                 </td>
-
                                 <td style="width:250px">
-                                    <input type="text" class="form-control TotalAmount" name="TotalAmount" id="TotalAmount" placeholder="Total Amount" />
+                                    <input type="text" class="form-control TotalAmount" value="@Math.Round(Model.TotalAmount,2)" readonly name="TotalAmount" id="TotalAmount" placeholder="Total Amount" />
 
                                 </td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -121,45 +112,33 @@
                 <div class="panel-container">
                     <div class="panel-content">
                         <div class="row">
-
                             <div class="col-md-9">
-
                                 <div class="form-group mb-2">
-
-                                    <textarea class="form-control Description" name="Description" rows="3" id="Description" placeholder="Description"></textarea>
+                                    <textarea class="form-control Description" name="Description" rows="3" id="Description" placeholder="Description">@Model.Description</textarea>
                                 </div>
                             </div>
 
                             <div class="col-md-3">
-
                                 <table>
                                     <thead>
                                         <tr>
                                             <th style="width:100px"><b>VAT 5%: </b></th>
                                             <td><input class="form-control" type="hidden" id="VAT" name="VAT" value="0.00" />
-                                                <p style="border:2px groove; padding:0px 8px 0px 8px" class="my-1" id="VAT2">0.00</p>
-                                            </td>
-                                            
-                                        </tr>
-
+                                                <p style="border:2px groove; padding:0px 8px 0px 8px" class="my-1" id="VAT2">@Model.VAT</p>
+                                            </td> 
                                         <tr>
                                             <th style="width:100px"><b>Gand Total:</b> </th>
                                             <td>
                                                 <input class="form-control" type="hidden" id="gtotal" name="name" value="0.00" />
-                                                <p style="border:2px groove; padding:0px 8px 0px 8px" class="my-1" id="gtotal2">0.00</p>
+                                                <p style="border:2px groove; padding:0px 8px 0px 8px" class="my-1" id="gtotal2">@Model.TotalAmount</p>
                                             </td>
                                         </tr>
                                     </thead>
                                 </table>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
-
-             
-
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <button type="submit" id="SaveRecord" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
@@ -170,17 +149,15 @@
                 </div>
             </form>
         </div>
-
     </div>
 
-
+    @Html.ValidationSummary(false,"", new { @class= "text-danger"})
 </div>
 
 @section scripts{
 
 
     <script>
-
 
         $(document).ready(function () {
 
@@ -227,8 +204,6 @@
                 else {
                     $('#TotalAmount').val(tt);
                 }
-
-
             });
 
         }
