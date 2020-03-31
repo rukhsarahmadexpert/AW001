@@ -1,5 +1,6 @@
 ﻿using IT.Core.ViewModels;
 using IT.Repository.WebServices;
+using IT.Web.MISC;
 using IT.Web_New.Controllers;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ using System.Web.Script.Serialization;
 
 namespace IT.Web.Controllers
 {
+    [ExceptionLog]
+    [Autintication]
     public class CustomerBookingController : Controller
     {
         WebServices webServices = new WebServices();
@@ -18,6 +21,8 @@ namespace IT.Web.Controllers
         CustomerBookingViewModel customerBookingViewModel = new CustomerBookingViewModel();
         int CompanyId;
         // GET: CustomerBooking
+
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -74,6 +79,7 @@ namespace IT.Web.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult BookingReserved()
         {
 
@@ -102,6 +108,7 @@ namespace IT.Web.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult BookingRemaining()
         {
 
@@ -186,6 +193,7 @@ namespace IT.Web.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult AdminCreate()
         {
             CompanyController companyController = new CompanyController();
@@ -199,6 +207,7 @@ namespace IT.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult CustomerCreate()
         {
            
@@ -498,6 +507,7 @@ namespace IT.Web.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Customer()
         {
             try

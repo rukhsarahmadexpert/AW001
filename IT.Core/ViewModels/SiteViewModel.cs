@@ -1,11 +1,15 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace IT.Core.ViewModels
 {
     public class SiteViewModel
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Please enter site Name")]
         public string SiteName { get; set; }
         public string ContactPersonName { get; set; }
+        [Required(ErrorMessage = "Please enter contact number")]
         public string ContactPhone { get; set; }
         public string SiteCell { get; set; }
         public string FaceBook { get; set; }

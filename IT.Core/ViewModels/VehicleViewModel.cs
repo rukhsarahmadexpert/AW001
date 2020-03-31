@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,12 +12,16 @@ namespace IT.Core.ViewModels
     public class VehicleViewModel
     {
         public int Id { get; set; }
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please select Vehicle Type")]
         public int VehicleType { get; set; }
         public string VehicleTypeName { get; set; }
+        [Required(ErrorMessage = "Please enter plate number")]
         public string TraficPlateNumber { get; set; }
         public string PlaceofIssue { get; set; }
         public string TCNumber { get; set; }
         public string Model { get; set; }
+        [Required(ErrorMessage = "Please select color")]
         public string Color { get; set; }
         public string MulkiaExpiry { get; set; }
         public string InsuranceExpiry { get; set; }

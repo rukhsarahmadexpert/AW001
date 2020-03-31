@@ -1,7 +1,7 @@
-﻿
+﻿@model IT.Core.ViewModels.VehicleViewModel
 @{
-                ViewBag.Title = "Create Vehicle";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+     ViewBag.Title = "Create Vehicle";
+     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <ol class="breadcrumb page-breadcrumb">
@@ -17,7 +17,6 @@
                     <h2>
                         Create <span class="fw-300">Vehicle</span>
                     </h2>
-
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
@@ -32,25 +31,25 @@
                                         <select class="select2 form-control" name="VehicleType" id="VehicleType">
                                             @foreach (var item in ViewBag.VehicleTypes)
                                             {
-                                                <option value="@item.Id">@item.VehicleType</option>
+                                                <option value="@item.Id" @(item.Id == Model.VehicleType ? "selected='selected'" : "")>@item.VehicleType</option>
                                             }
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Trafic Plate Number</label>
-                                        <input type="text" id="TraficPlateNumber" name="TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
+                                        <input type="text" id="TraficPlateNumber" value="@Model.TraficPlateNumber" name="TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Tc Number</label>
-                                        <input type="text" id="TCNumber" name="TCNumber" class="form-control" placeholder="Enter Tc Number">
+                                        <input type="text" id="TCNumber" name="TCNumber" value="@Model.TCNumber" class="form-control" placeholder="Enter Tc Number">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Model</label>
-                                        <input type="text" id="Model" name="Model" class="form-control" placeholder="Enter Model">
+                                        <input type="text" id="Model" name="Model" value="@Model.Model" class="form-control" placeholder="Enter Model">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Brand</label>
-                                        <input type="text" id="Brand" name="Brand" class="form-control" placeholder="Enter Brand">
+                                        <input type="text" id="Brand" name="Brand" value="@Model.Brand" class="form-control" placeholder="Enter Brand">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="single-label">
@@ -58,46 +57,44 @@
                                         </label>
                                         <select class=" form-control" id="Color" name="Color">
 
-                                            <option value="white">White</option>
-                                            <option value="black">Black</option>
-                                            <option value="red">Red</option>
-                                            <option value="green">Green</option>
-                                            <option value="blue">Blue</option>
-                                            <option value="gold">Gold</option>
-                                            <option value="other">Other</option>
+                                            <option value="white" @(Model.Color == "white" ? "selected='selected'" : "")>White</option>
+                                            <option value="black" @(Model.Color == "black" ? "selected='selected'" : "")>Black</option>
+                                            <option value="red" @(Model.Color == "red" ? "selected='selected'" : "")>Red</option>
+                                            <option value="green" @(Model.Color == "green" ? "selected='selected'" : "")>Green</option>
+                                            <option value="blue" @(Model.Color == "blue" ? "selected='selected'" : "")>Blue</option>
+                                            <option value="gold" @(Model.Color == "gold" ? "selected='selected'" : "")>Gold</option>
+                                            <option value="other" @(Model.Color == "other" ? "selected='selected'" : "")>Other</option>
 
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Mulkia Expiry</label>
-                                        <input type="date" id="MulkiaExpiry" name="MulkiaExpiry" class="form-control" placeholder="Enter Mulkia Expiry">
+                                        <input type="date" id="MulkiaExpiry" value="@Model.MulkiaExpiry" name="MulkiaExpiry" class="form-control" placeholder="Enter Mulkia Expiry">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Insurance Expiry</label>
-                                        <input type="date" id="InsuranceExpiry" name="InsuranceExpiry" class="form-control" placeholder="Enter Insurance Expiry">
+                                        <input type="date" id="InsuranceExpiry" value="@Model.InsuranceExpiry" name="InsuranceExpiry" class="form-control" placeholder="Enter Insurance Expiry">
                                     </div>
-
-                                 
 
                                     <div class="form-group">
                                         <label class="form-label" for="single-label">
                                             Region
                                         </label>
                                         <select class="select2 form-control" name="RegisteredRegion" id="RegisteredRegion">
-                                            <option value="Abu Dhabi">Abu Dhabi</option>
-                                            <option value="Dubai">Dubai</option>
-                                            <option value="Ajman">Ajman</option>
-                                            <option value="Fujairah">Fujairah</option>
-                                            <option value="Ras Al Khaimah">Ras Al Khaimah</option>
-                                            <option value="Sharjah">Sharjah</option>
-                                            <option value="Umm Al Quwain">Umm Al Quwain</option>
+                                            <option value="Abu Dhabi" @(Model.RegisteredRegion == "Abu Dhabi" ? "selected='selected'" : "")>Abu Dhabi</option>
+                                            <option value="Dubai" @(Model.RegisteredRegion == "Dubai" ? "selected='selected'" : "")>Dubai</option>
+                                            <option value="Ajman" @(Model.RegisteredRegion == "Ajman" ? "selected='selected'" : "")>Ajman</option>
+                                            <option value="Fujairah" @(Model.RegisteredRegion == "Fujairah" ? "selected='selected'" : "")>Fujairah</option>
+                                            <option value="Ras Al Khaimah" @(Model.RegisteredRegion == "Ras Al Khaimah" ? "selected='selected'" : "")>Ras Al Khaimah</option>
+                                            <option value="Sharjah" @(Model.RegisteredRegion == "Sharjah" ? "selected='selected'" : "")>Sharjah</option>
+                                            <option value="Umm Al Quwain" @(Model.RegisteredRegion == "Umm Al Quwain" ? "selected='selected'" : "")>Umm Al Quwain</option>
                                         </select>
                                     </div>
 
 
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Notes</label>
-                                        <textarea name="Comments" id="Comments" class="form-control"></textarea>
+                                        <textarea name="Comments" id="Comments" class="form-control">@Model.Comments</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -166,17 +163,17 @@
                                             </button>
                                         </div>
                                     </div>
+                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
                                 </div>
+                              
                             </div>
                         </form>
-                    </div>
-                </div>
+                    </div>                  
+                </div>              
             </div>
         </div>
     </div>
-
-
-
 
 @section Scripts{
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>

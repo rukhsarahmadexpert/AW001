@@ -28,11 +28,10 @@
                                         <label class="form-label" for="single-label">
                                             Select Vehicle Type
                                         </label>
-
-                                        <select class="select2 form-control" name="VehicleType" id="VehicleType">
-                                            @foreach (var item in ViewBag.VehicleTypes)
-                                            {
-
+                                        
+                                         <select class="select2 form-control" name="VehicleType" id="VehicleType">
+                                          @foreach (var item in ViewBag.VehicleTypes)
+                                          {                                              
                                                 <option value="@item.Id" @(item.Id == @Model.VehicleType ? "selected='selected'" : "")>@item.VehicleType</option>
                                             }
                                         </select>
@@ -40,7 +39,7 @@
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Trafic Plate Number</label>
                                         <input type="hidden" name="Id" id="Id" value="@Model.Id" />
-                                        <input type="text" id="TraficPlateNumber" name="TraficPlateNumber" value="@Model.TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
+                                        <input type="text" id="TraficPlateNumber" required name="TraficPlateNumber" value="@Model.TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Tc Number</label>
@@ -164,11 +163,12 @@
                                     <div class="row py-5">
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                                Update 
+                                                Update
                                                 <span>Vehicle</span>
                                             </button>
                                         </div>
                                     </div>
+                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </form>
