@@ -63,18 +63,7 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        @if (Model.Id > 0)
-                        {
-                            <div class="panel-tag">
-                                Please Edit Site from here...
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="panel-tag">
-                                Please add Site from here...
-                            </div>
-                        }
+                       
 
                         <form action="/Site/Create" method="post" enctype="application/x-www-form-urlencoded">
                             <div class="row">

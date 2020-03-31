@@ -12,24 +12,17 @@
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 
-<div class="subheader">
-    <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-edit'></i> Create Driver
-    </h1>
-</div>
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    Driver <span class="fw-300"></span>
+                    Driver <span class="fw-300">Create</span>
                 </h2> 
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
-                    <div class="panel-tag">
-                        Please add your Driver from here...
-                    </div>
+                   
                     <form id="form1" action="/AwfDriver/Create" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
@@ -73,8 +66,19 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-label" for="simpleinput">Nationality</label>
-                                    <input type="text" id="Nationality" name="Nationality" class="form-control" placeholder="Enter Nationality">
+                                    <label class="form-label" for="single-label">
+                                        Nationality
+                                    </label>
+                                    <select class="form-control" id="Nationality" name="Nationality">
+
+                                        <option value="Afghanistan">Afghanistan</option>
+                                        <option value="Pakistan">Pakistan</option>
+                                        <option value="India">India</option>
+                                        <option value="Bangladesh">Bangladesh</option>
+                                        <option value="Nipal">Nipal</option>
+                                        <option value="Other">Other</option>
+
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
@@ -87,7 +91,7 @@
 
                                 <div class="row">
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
 
                                         <div class="row">
                                             <div class="col-md-12">
@@ -102,7 +106,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label class="form-label" style="margin-top:20px"><b>Driving License</b> Front side</label>
@@ -116,7 +120,14 @@
                                         </div>
                                     </div>
 
-                                     <div class="col-md-4">
+                                     
+
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label class="form-label" style="margin-top:20px"><b>UAE ID</b> Front side</label>
@@ -130,12 +141,7 @@
                                         </div>
                                     </div>
 
-                                </div>
-
-
-                                <div class="row">
-
-                                     <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label class="form-label" style="margin-top:20px"><b>UAE ID</b> Back side</label>
@@ -148,8 +154,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                  
+                                </div>
 
-                                    <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label class="form-label" style="margin-top:20px"><b>Passport (Details page)</b> </label>
@@ -164,7 +173,7 @@
                                     </div>
 
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label class="form-label" style="margin-top:20px"><b>Passport (Details page)</b> </label>
@@ -180,7 +189,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label class="form-label" style="margin-top:20px"><b>Visa</b>  </label>
@@ -194,7 +203,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label class="form-label" style="margin-top:20px"><b>Driver Image</b>  </label>

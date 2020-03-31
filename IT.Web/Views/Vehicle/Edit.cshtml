@@ -28,14 +28,14 @@
                                         <label class="form-label" for="single-label">
                                             Select Vehicle Type
                                         </label>
-                                        
-                                         <select class="select2 form-control" name="VehicleType" id="VehicleType">
-                                          @foreach (var item in ViewBag.VehicleTypes)
-                                          {
-                                              
+
+                                        <select class="select2 form-control" name="VehicleType" id="VehicleType">
+                                            @foreach (var item in ViewBag.VehicleTypes)
+                                            {
+
                                                 <option value="@item.Id" @(item.Id == @Model.VehicleType ? "selected='selected'" : "")>@item.VehicleType</option>
-                                          }
-                                         </select>
+                                            }
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Trafic Plate Number</label>
@@ -52,11 +52,23 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Brand</label>
-                                        <input type="text" id="Brand" name="Brand" class="form-control" value="@Model.Brand"  placeholder="Enter Brand">
+                                        <input type="text" id="Brand" name="Brand" class="form-control" value="@Model.Brand" placeholder="Enter Brand">
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Color</label>
-                                        <input type="text" id="Color" name="Color" class="form-control" value="@Model.Color" placeholder="Enter Color">
+                                        <label class="form-label" for="single-label">
+                                            Color
+                                        </label>
+                                        <select class=" form-control" id="Color" name="Color">
+
+                                            <option value="white" @(Model.Color == "white" ? "selected" : "")>White</option>
+                                            <option value="black" @(Model.Color == "black" ? "selected" : "")>Black</option>
+                                            <option value="red" @(Model.Color == "red" ? "selected" : "")>Red</option>
+                                            <option value="green" @(Model.Color == "green" ? "selected" : "")>Green</option>
+                                            <option value="blue" @(Model.Color == "blue" ? "selected" : "")>Blue</option>
+                                            <option value="gold" @(Model.Color == "gold" ? "selected" : "")>Gold</option>
+                                            <option value="other" @(Model.Color == "other" ? "selected" : "")>Other</option>
+
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Mulkia Expiry</label>
@@ -80,7 +92,7 @@
                                             <option value="Ras Al Khaimah" @(Model.RegisteredRegion == "Ras Al Khaimah" ? "selected='selected'" : "")>Ras Al Khaimah</option>
                                             <option value="Sharjah" @(Model.RegisteredRegion == "Sharjah" ? "selected='selected'" : "")>Sharjah</option>
                                             <option value="Umm Al Quwain" @(Model.RegisteredRegion == "Umm Al Quwain" ? "selected='selected'" : "")>Umm Al Quwain</option>
-                                      
+
                                         </select>
                                     </div>
 
@@ -98,7 +110,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label class=newbtn>
-                                                        <img id="MulkiaFront1Preview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaFront1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                        <img id="MulkiaFront1Preview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.MulkiaFront1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
                                                         <input id="MulkiaFront1File" name="MulkiaFront1File" class='pic' onchange="readURL(this);" type="file">
                                                     </label>
                                                 </div>
@@ -112,7 +124,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label>
-                                                        <img id="MulkiaBack1Preview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaBack1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                        <img id="MulkiaBack1Preview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.MulkiaBack1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
                                                         <input id="MulkiaBack1File" name="MulkiaBack1File" class='pic' onchange="readURL(this);" type="file">
                                                     </label>
                                                 </div>
@@ -127,7 +139,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label class=newbtn>
-                                                         <img id="MulkiaFront2Preview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaFront2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                         <img id="MulkiaFront2Preview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.MulkiaFront2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
                                                        
                                                         <input id="MulkiaFront2File" name="MulkiaFront2File" class='pic' onchange="readURL(this);" type="file">
                                                     </label>
@@ -141,7 +153,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label class=newbtn>
-                                                        <img id="MulkiaBack2Preview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaBack2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                        <img id="MulkiaBack2Preview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.MulkiaBack2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
                                                         
                                                         <input id="MulkiaBack2File" name="MulkiaBack2File" class='pic' onchange="readURL(this);" type="file">
                                                     </label>
