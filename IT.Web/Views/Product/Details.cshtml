@@ -6,32 +6,20 @@
 
 <main id="js-page-content" role="main" class="page-content">
 
-    <div class="subheader">
-       
-            <h1 class="subheader-title">
-                <i class='subheader-icon fal fa-edit'></i>  Product Details
-            </h1>
-      
-    </div>
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        <a href="/Product/Edit/@Model.Id">
-                            Product <span class="fw-300">Edit</span>
+                        
+                            Product <span class="fw-300">details</span>
 
-                        </a>
                     </h2>
 
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
                       
-                            <div class="panel-tag">
-                                Product Details here....
-                            </div>
-                       
                        
                         <form action="/Product/Create" method="post">
                             <input type="hidden" value="@Model.Id" name="Id" id="Id" />
