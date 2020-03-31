@@ -336,6 +336,7 @@ namespace IT.Web.Controllers
             }
         }
 
+
         [HttpGet]
         public ActionResult Details(int Id)
         {
