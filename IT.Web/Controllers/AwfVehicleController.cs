@@ -178,7 +178,8 @@ namespace IT.Web_New.Controllers
                         }
                     }
                 }
-                return RedirectToAction(nameof(Details), new { vehicleViewModel.Id });
+                return Redirect(nameof(Index));
+                //return RedirectToAction(nameof(Details), new { vehicleViewModel.Id });
             }
             catch (Exception ex)
             {

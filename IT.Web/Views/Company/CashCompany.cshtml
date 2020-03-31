@@ -3,6 +3,9 @@
     ViewBag.Title = "AW Fuel - Cash Company";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 
+    List<IT.Core.ViewModels.CountryViewModel> countryViewModels = new List<IT.Core.ViewModels.CountryViewModel>();
+    countryViewModels = ViewBag.Countries as List<IT.Core.ViewModels.CountryViewModel>;
+
 }
 <main id="js-page-content" role="main" class="page-content">
     <div class="row">
@@ -17,24 +20,24 @@
                     <div class="panel-content">
                         <form action="/Company/CashCompanyCreate" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-xl-2 p-2">
+                                <div class="col-md-2 col-xl-2 p-2">
                                     <label class="newbtn">
-                                        <img id="logoPreview" class="blah_cashCompany" src="/assets/staticImages/icon1.png" style="width:160px;">
-                                        <input id="LogoUrl" name="LogoUrl" class='pic' onchange="readURL(this);" type="file">
+                                        <img id="logoPreview" class="blah_cashCompany" src="/assets/staticImages/icon1.png" style="width:140px;">
+                                        <input id="LogoUrl" name="LogoUrl" class='pic' onchange="readURL(this);" type="file" required>
                                     </label>
                                 </div>
-                                <div class="col-xl-5 p-2">
+                                <div class="col-md-5 col-xl-5 p-2">
                                     <div class="input-group flex-nowrap">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-industry fs-xl"></i></span>
                                         </div>
-                                        <input id="Name" name="Name" type="text" class="form-control" placeholder="Compnay Name" value="@Model.Name" aria-label="CompanyName" aria-describedby="addon-wrapping-left">
+                                        <input id="Name" name="Name" type="text" required class="form-control" placeholder="Compnay Name" value="@Model.Name" aria-label="CompanyName" aria-describedby="addon-wrapping-left">
                                     </div>
                                     <div class="input-group flex-nowrap mt-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-envelope fs-xl"></i></span>
                                         </div>
-                                        <input id="Email" name="Email" type="email" value="@Model.Email" class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="addon-wrapping-left">
+                                        <input id="Email" name="Email" type="email" value="@Model.Email" required class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="addon-wrapping-left">
                                     </div>
                                     <div class="input-group flex-nowrap mt-3">
                                         <div class="input-group-prepend">
@@ -43,12 +46,12 @@
                                         <input id="Cell" name="Cell" type="text" class="form-control" value="@Model.Cell" placeholder="Mobile Number" aria-label="Mobile" aria-describedby="addon-wrapping-left">
                                     </div>
                                 </div>
-                                <div class="col-xl-5 p-2">
+                                <div class="col-md-5 col-xl-5 p-2">
                                     <div class="input-group flex-nowrap">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-user fs-xl"></i></span>
                                         </div>
-                                        <input id="Owner" name="Owner" type="text" class="form-control" value="@Model.OwnerRepresentaive" placeholder="Owner / Representative" aria-label="Owner" aria-describedby="addon-wrapping-left">
+                                        <input id="Owner" name="Owner" type="text" class="form-control" value="@Model.OwnerRepresentaive" required placeholder="Owner / Representative" aria-label="Owner" aria-describedby="addon-wrapping-left">
                                     </div>
                                     <div class="input-group flex-nowrap mt-3">
                                         <div class="input-group-prepend">
@@ -66,15 +69,31 @@
                                 </div>
                             </div>
                             <div class="row ">
-                                <div class="col-xl-6 p-2">
-                                    <div class="input-group flex-nowrap">
+                                <div class="col-md-6 col-xl-6 p-2">
+
+                                    <div class="input-group " form-group flex-nowrap">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-building fs-xl"></i></span>
                                         </div>
-                                        <input id="City" name="City" type="text" class="form-control" value="@Model.City" placeholder="Enter Your City" aria-label="City" aria-describedby="addon-wrapping-left">
+                                        <select class=" form-control" name="City" id="City" required>
+                                            <option value="" disabled selected hidden>City</option>
+                                            @foreach (var item in countryViewModels)
+                                            {
+                                                foreach (var item1 in item.stateViewModels)
+                                                {
+                                                    if (item1.cityViewModels != null)
+                                                    {
+                                                        foreach (var item3 in item1.cityViewModels)
+                                                        {
+                                                            <option value="@item3.CityName" @(item3.CityName == Model.City ? "selected" : "")>@item3.CityName</option>
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-xl-6 p-2">
+                                <div class="col-md-6 col-xl-6 p-2">
                                     <div class="input-group flex-nowrap">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-address-card fs-xl"></i></span>
@@ -84,7 +103,7 @@
                                 </div>
                             </div>
                             <div class="row ">
-                                <div class="col-xl-6 p-2">
+                                <div class="col-md-6 col-xl-6 p-2">
                                     <div class="input-group flex-nowrap">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-globe fs-xl"></i></span>
@@ -92,7 +111,7 @@
                                         <input id="Web" name="Web" type="text" class="form-control" value="@Model.Web" placeholder="Enter Website URL" aria-label="Web" aria-describedby="addon-wrapping-left">
                                     </div>
                                 </div>
-                                <div class="col-xl-6 p-2">
+                                <div class="col-md-6 col-xl-6 p-2">
                                     <div class="input-group flex-nowrap">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-comment fs-xl"></i></span>
@@ -102,7 +121,7 @@
                                 </div>
                             </div>
                             <div class="row ">
-                                <div class="col-xl-12 p-2">
+                                <div class="col-md-12 col-xl-12 p-2">
                                     <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
                                         Company
                                         <span>Submit</span>
@@ -145,7 +164,7 @@
 
     .blah {
         max-width: 100%;
-        width: 300px;
+        width: 200px;
         height: auto;
         margin-top: 20px;
     }

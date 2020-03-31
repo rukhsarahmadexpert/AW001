@@ -87,7 +87,7 @@ namespace IT.Web_New.Controllers
         {
             CountryController countryController = new CountryController();
             ViewBag.Countries = countryController.Countries();
-            return View();
+            return View(new CompnayModel());
         }
 
         [HttpGet]
@@ -275,6 +275,10 @@ namespace IT.Web_New.Controllers
                         compnayModel = (new JavaScriptSerializer().Deserialize<CompnayModel>(companyData.Data.ToString()));
                     }
                 }
+
+                CountryController countryController = new CountryController();
+                ViewBag.Countries = countryController.Countries();
+
                 return View(compnayModel);
             }
             catch (Exception)
@@ -322,6 +326,8 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult CashCompany()
         {
+            CountryController countryController = new CountryController();
+            ViewBag.Countries = countryController.Countries();
             return View(new CompnayModel());
         }
 
