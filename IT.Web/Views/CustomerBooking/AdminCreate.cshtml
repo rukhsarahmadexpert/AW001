@@ -91,7 +91,7 @@
                                 </td>
 
                                 <td>
-                                    <input type="text" name="UnitPrice" class="form-control UnitPrice" id="UnitPrice" placeholder="Unit Price" value="@Model.UnitPrice"/>
+                                    <input type="text" name="UnitPrice" class="form-control UnitPrice" id="UnitPrice" placeholder="Unit Price" value="@Model.UnitPrice" />
                                 </td>
 
                                 <td>
@@ -124,32 +124,27 @@
                 <div class="panel-container">
                     <div class="panel-content">
                         <div class="row">
-                            <div class="col-md-10">
+                            <div class="col-md-9">
+                                <div class="form-group mb-2">
+                                    <textarea class="form-control Description" name="Description" rows="3" id="Description" placeholder="Description">@Model.Description</textarea>
+                                </div>
                             </div>
-                            <div class="col-md-2">
+
+                            <div class="col-md-3">
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th style="width:100px"><b>VAT 5% </b></th>
-                                            @if (Model.VAT == 0)
-                                             {
-                                                <td><input class="form-control" type="text" id="VAT" name="VAT" value="0.00" /></td>
-                                             }
-                                            else
-                                            {
-                                            <td><input class="form-control" type="text" id="VAT" name="VAT" value="@Model.VAT" /></td>
-                                            }
-                                        </tr>
+                                            <th style="width:100px"><b>VAT 5%: </b></th>
+                                            <td>
+                                                <input class="form-control" type="hidden" id="VAT" name="VAT" value="0.00" />
+                                                <p style="border:2px groove; padding:0px 15px 0px 15px; font-weight:bolder" class="my-1" id="VAT2">@Model.VAT</p>
+                                            </td>
                                         <tr>
-                                            <th style="width:100px"><b>Gand Total</b></th>
-                                            @if (Model.TotalAmount == 0)
-                                            {
-                                                <td><input class="form-control" type="text" id="gtotal" name="name" value="0.00" /></td>
-                                            }
-                                            else
-                                            {
-                                                <td><input class="form-control" type="text" id="gtotal" name="name" value="@Model.TotalAmount" /></td>
-                                            }
+                                            <th style="width:100px"><b>Gand Total:</b> </th>
+                                            <td>
+                                                <input class="form-control" type="hidden" id="gtotal" name="name" value="0.00" />
+                                                <p style="border:2px groove; padding:0px 15px 0px 15px; font-weight:bolder" class="my-1" id="gtotal2">@Model.TotalAmount</p>
+                                            </td>
                                         </tr>
                                     </thead>
                                 </table>
@@ -158,17 +153,7 @@
                     </div>
                 </div>
 
-                <div class="panel-container">
-                    <div class="panel-content">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group mb-2">
-                                    <textarea class="form-control Description" name="Description" id="Description" placeholder="Description">@Model.Description</textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              
                 <input type="hidden" value="IsAwfuelAdmin" name="IsAwfuelAdmin" />
                 <div class="row mt-3">
                     <div class="col-md-12">
@@ -186,52 +171,9 @@
 
 @section scripts{
 
-    <script>
-        $(document).ready(function () {
-
-            $('input[name=\'BookQuantity\']').on('change keyup click', function () {
-                                                        booking();
-                                                    });
-
-            $('#UnitPrice').on('change keyup click', function () {
-                                                        booking();
-                                                    });
-                                                });
-
-                                                function booking() {
-
-                                                    // $('#VAT1').empty();
-
-                                                    var price = $('#UnitPrice').val();
-
-                                                    var quantity = $('.Quantity').val();
-
-                                                    var total = $('#TotalAmount').val(price * quantity);
 
 
-
-            @*$('#VAT1').append('<option>gtgtgtgt</option>');*@
-
-            var tt = $('#TotalAmount').val();
-
-            @*$('#VAT').val(parseFloat(vat_value) + parseFloat(tt));*@
-
-            $('#VAT').val();
-            $('#VAT1').change(function () {
-                var vt = $('#VAT1').val();
-                if (vt != 0) {
-                    var vat_value = ((5 * tt) / 100);
-                    $('#VAT').val(vat_value);
-                    $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
-                }
-                else {
-                    $('#TotalAmount').val(tt);
-                }
-            });
-        }
-
-    </script>
+    <script src="~/Scripts/Common-Scripts/bookingVat.js"></script>
 
 
 }
-
