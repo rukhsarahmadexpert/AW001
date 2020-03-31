@@ -60,28 +60,33 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                var SiteResult = new ServiceResponseModel();
-                if (siteViewModel.Id < 1)
+                if (!ModelState.IsValid)
                 {
-                    siteViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
-                    siteViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                    SiteResult = webServices.Post(siteViewModel, "CustomerSites/Add");
+                    return View(siteViewModel);
                 }
                 else
                 {
-                    siteViewModel.UpdateBy = Convert.ToInt32(Session["UserId"]);
-                    siteViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                    SiteResult = webServices.Post(siteViewModel, "CustomerSites/Update");
+                    var SiteResult = new ServiceResponseModel();
+                    if (siteViewModel.Id < 1)
+                    {
+                        siteViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
+                        siteViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                        SiteResult = webServices.Post(siteViewModel, "CustomerSites/Add");
+                    }
+                    else
+                    {
+                        siteViewModel.UpdateBy = Convert.ToInt32(Session["UserId"]);
+                        siteViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                        SiteResult = webServices.Post(siteViewModel, "CustomerSites/Update");
+                    }
+                    if (SiteResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        var reuslt = (new JavaScriptSerializer().Deserialize<int>(SiteResult.Data));
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    return View(siteViewModels);
                 }
-
-                if (SiteResult.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {
-                    var reuslt = (new JavaScriptSerializer().Deserialize<int>(SiteResult.Data));
-
-                    return RedirectToAction(nameof(Index));
-                }
-
-                return View(siteViewModels);
             }
             catch (Exception ex)
             {

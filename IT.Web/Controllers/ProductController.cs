@@ -53,7 +53,6 @@ namespace IT.Web_New.Controllers
                 {
                     productUnitViewModels = (new JavaScriptSerializer().Deserialize<List<ProductUnitViewModel>>(producUnittList.Data.ToString()));
                 }
-
             }
             catch (Exception)
             {
@@ -71,25 +70,42 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                var productResult = new ServiceResponseModel();
-                if (productViewModel.Id < 1)
+                if (!ModelState.IsValid)
                 {
-                    productViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
-                    productResult = webServices.Post(productViewModel, "Product/Add");
+                    var producUnittList = webServices.Post(new ProductViewModel(), "ProductUnit/All");
+
+                    if (producUnittList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        productUnitViewModels = (new JavaScriptSerializer().Deserialize<List<ProductUnitViewModel>>(producUnittList.Data.ToString()));
+                    }
+
+                    productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Product Unit" });
+                    ViewBag.productUnitViewModels = productUnitViewModels;
+
+                    return View(productViewModel);
                 }
                 else
                 {
-                    productViewModel.UpdatedBy = Convert.ToInt32(Session["UserId"]);
-                    productResult = webServices.Post(productViewModel, "Product/Update");
-                }
+                    var productResult = new ServiceResponseModel();
+                    if (productViewModel.Id < 1)
+                    {
+                        productViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
+                        productResult = webServices.Post(productViewModel, "Product/Add");
+                    }
+                    else
+                    {
+                        productViewModel.UpdatedBy = Convert.ToInt32(Session["UserId"]);
+                        productResult = webServices.Post(productViewModel, "Product/Update");
+                    }
 
-                if (productResult.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {
-                    var reuslt = (new JavaScriptSerializer().Deserialize<int>(productResult.Data));
-                    return RedirectToAction(nameof(Index));
-                }
+                    if (productResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        var reuslt = (new JavaScriptSerializer().Deserialize<int>(productResult.Data));
+                        return RedirectToAction(nameof(Index));
+                    }
 
-                return View(productViewModels);
+                    return View(productViewModels);
+                }
             }
             catch (Exception ex)
             {

@@ -35,70 +35,56 @@
 
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Driver Name</label>
-                                    <input type="text" id="Name" name="Name" class="form-control" placeholder="Enter Driver Name">
+                                    <input type="text" id="Name" value="@Model.Name" required name="Name" class="form-control" placeholder="Enter Driver Name">
                                 </div>
-
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Contact Number</label>
-                                    <input type="text" id="Contact" name="Contact" class="form-control" placeholder="Contact Number">
+                                    <input type="text" id="Contact" value="@Model.Contact" name="Contact" class="form-control" placeholder="Contact Number">
                                 </div>
-
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email Eddress</label>
-                                    <input type="email" id="Email" name="Email" class="form-control" placeholder="Enter Email Address">
+                                    <input type="email" id="Email" value="@Model.Email" name="Email" class="form-control" placeholder="Enter Email Address">
                                 </div>
-
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Facebook ID</label>
-                                    <input type="text" id="Facebook" name="Facebook" class="form-control" placeholder="Enter facebook ID">
+                                    <input type="text" id="Facebook" value="@Model.Facebook" name="Facebook" class="form-control" placeholder="Enter facebook ID">
                                 </div>
-
                                 <div class="form-group">
                                     <label class="form-label" for="single-label">
                                         Select License Type
                                     </label>
                                     <select class="select2 form-control" id="LicienceList" name="LicienceList" multiple>
-
                                         <option value="1">heavy</option>
                                         <option value="2">Light</option>
                                         <option value="3">Bus</option>
-
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">License Expiry</label>
-                                    <input type="date" id="LicenseExpiry" name="LicenseExpiry" class="form-control" placeholder="Enter License Expiry">
+                                    <input type="date" id="LicenseExpiry" name="LicenseExpiry" value="@Model.LicenseExpiry" class="form-control" placeholder="Enter License Expiry">
                                 </div>
-
                                 <div class="form-group">
                                     <label class="form-label" for="single-label">
                                         Nationality
                                     </label>
                                     <select class="form-control" id="Nationality" name="Nationality">
-
-                                        <option value="Afghanistan">Afghanistan</option>
-                                        <option value="Pakistan">Pakistan</option>
-                                        <option value="India">India</option>
-                                        <option value="Bangladesh">Bangladesh</option>
-                                        <option value="Nipal">Nipal</option>
-                                        <option value="Other">Other</option>
-
+                                        <option value="Afghanistan" @(Model.Nationality == "Afghanistan" ? "selected='seleted'" : "")>Afghanistan</option>
+                                        <option value="Pakistan" @(Model.Nationality == "Pakistan" ? "selected='seleted'" : "")>Pakistan</option>
+                                        <option value="India" @(Model.Nationality == "India" ? "selected='seleted'" : "")>India</option>
+                                        <option value="Bangladesh" @(Model.Nationality == "Bangladesh" ? "selected='seleted'" : "")>Bangladesh</option>
+                                        <option value="Nipal" @(Model.Nationality == "Nipal" ? "selected='seleted'" : "")>Nipal</option>
+                                        <option value="Other" @(Model.Nationality == "Other" ? "selected='seleted'" : "")>Other</option>
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Notes</label>
-                                    <textarea class="form-control" id="Comments" name="Comments" placeholder="Notes"></textarea>
+                                    <textarea class="form-control" id="Comments" name="Comments" placeholder="Notes">@Model.Comments</textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <!--   <h3 class="py-5">Driving License</h3> -->
-
                                 <div class="row">
-
                                     <div class="col-md-6">
-
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label class="form-label" style="margin-top:20px"><b>Driving License</b> Front side</label>
@@ -111,7 +97,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -125,14 +110,8 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                 </div>
-
-
                                 <div class="row">
-
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -146,7 +125,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -160,10 +138,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="row">
@@ -178,8 +153,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -194,7 +167,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="row">
@@ -209,7 +181,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -223,25 +194,25 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                                 @* <input type="hidden" name="ClientDocs" id="ClientDocs" value="ClientDocs"/>
-                    <input type="hidden" name="CompanyId" id="CompanyId" value="1057" />
-                    <input type="hidden" name="CreatedBy" id="CreatedBy" value="2099" />*@
+            <input type="hidden" name="CompanyId" id="CompanyId" value="1057" />
+            <input type="hidden" name="CreatedBy" id="CreatedBy" value="2099" />*@
                                 <div class="row py-5">
                                 </div>
-
                             </div>
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
                             <div class="col-md-12 mt-2">
                                 <button type="submit" id="Save" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
                                     Driver
-
                                     <span>submit</span>
                                 </button>
                             </div>
-
-
                         </div>
+
+                      
+
                     </form>
                 </div>
             </div>

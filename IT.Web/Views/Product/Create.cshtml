@@ -56,14 +56,13 @@
                             <div class="row">
                                 <div class="col-md-12 pt-3">
                                     <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Product                         Name</label>
-                                        <input type="text" id="Name" name="Name" value="@Model.Name" class="form-control" placeholder="Product Name">
+                                        <label class="form-label" for="simpleinput">Product Name</label>
+                                        <input type="text" id="Name" required autocomplete="off" name="Name" value="@Model.Name" class="form-control" placeholder="Product Name">
                                     </div>
                                 </div>
 
                             </div>
                             <div class="row">
-
                                 <div class="col-md-6 pt-3">
                                     <div class="form-group">
                                         <label class="form-label" for="single-label">
@@ -80,8 +79,8 @@
 
                                 <div class="col-md-6 pt-3">
                                     <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Description</label>
-                                        <input type="text" id="UPrice" name="UPrice" value="@Model.UPrice" class="form-control" placeholder="Product Price">
+                                        <label class="form-label" for="simpleinput">Unit Price</label>
+                                        <input type="text" id="UPrice" name="UPrice" autocomplete="off" value="@Model.UPrice" class="form-control" placeholder="Product Price">
                                     </div>
                                 </div>
                                 <div class="col-md-12 pt-3">
@@ -111,6 +110,7 @@
                             </div>
                         </form>
                     </div>
+                    @Html.ValidationSummary(false, "", new { @class= "text-danger" })
                 </div>
             </div>
         </div>
