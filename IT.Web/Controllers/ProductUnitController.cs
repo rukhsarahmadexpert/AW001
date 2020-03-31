@@ -129,7 +129,7 @@ namespace IT.Web_New.Controllers
                 if (ProductUnitList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     productUnitViewModels = (new JavaScriptSerializer().Deserialize<List<ProductUnitViewModel>>(ProductUnitList.Data.ToString()));
-
+                    productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Please select Unit" });
                 }
                 return productUnitViewModels;
             }

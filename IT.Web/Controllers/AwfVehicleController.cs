@@ -87,7 +87,7 @@ namespace IT.Web_New.Controllers
         {
             VehicleTypeController vehicleTypeController = new VehicleTypeController();
             ViewBag.VehicleTypes = vehicleTypeController.VehicleTypes();
-            return View();
+            return View(new VehicleViewModel());
         }
 
         [HttpPost]
@@ -95,91 +95,101 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                if (Request.Files.Count > 0)
+                if (!ModelState.IsValid)
                 {
-                    HttpPostedFileBase[] httpPostedFileBase = new HttpPostedFileBase[4];
-                    if (vehicleViewModel.MulkiaFront1File != null)
-                    {
-                        httpPostedFileBase[0] = vehicleViewModel.MulkiaFront1File;
-                    }
-                    if (vehicleViewModel.MulkiaBack1File != null)
-                    {
-                        httpPostedFileBase[1] = vehicleViewModel.MulkiaBack1File;
-                    }
-                    if (vehicleViewModel.MulkiaFront2File != null)
-                    {
-                        httpPostedFileBase[2] = vehicleViewModel.MulkiaFront2File;
-                    }
-                    if (vehicleViewModel.MulkiaBack2File != null)
-                    {
-                        httpPostedFileBase[3] = vehicleViewModel.MulkiaBack2File;
-                    }
+                    VehicleTypeController vehicleTypeController = new VehicleTypeController();
+                    ViewBag.VehicleTypes = vehicleTypeController.VehicleTypes();
 
-                    var file = vehicleViewModel.MulkiaFront1File;
-
-                    using (HttpClient client = new HttpClient())
+                    return View(vehicleViewModel);
+                }
+                else
+                {
+                    if (Request.Files.Count > 0)
                     {
-                        using (var content = new MultipartFormDataContent())
+                        HttpPostedFileBase[] httpPostedFileBase = new HttpPostedFileBase[4];
+                        if (vehicleViewModel.MulkiaFront1File != null)
                         {
-                            if (httpPostedFileBase.ToList().Count > 0)
+                            httpPostedFileBase[0] = vehicleViewModel.MulkiaFront1File;
+                        }
+                        if (vehicleViewModel.MulkiaBack1File != null)
+                        {
+                            httpPostedFileBase[1] = vehicleViewModel.MulkiaBack1File;
+                        }
+                        if (vehicleViewModel.MulkiaFront2File != null)
+                        {
+                            httpPostedFileBase[2] = vehicleViewModel.MulkiaFront2File;
+                        }
+                        if (vehicleViewModel.MulkiaBack2File != null)
+                        {
+                            httpPostedFileBase[3] = vehicleViewModel.MulkiaBack2File;
+                        }
+
+                        var file = vehicleViewModel.MulkiaFront1File;
+
+                        using (HttpClient client = new HttpClient())
+                        {
+                            using (var content = new MultipartFormDataContent())
                             {
-                                for (int i = 0; i < 4; i++)
+                                if (httpPostedFileBase.ToList().Count > 0)
                                 {
-                                    if (httpPostedFileBase[i] != null)
+                                    for (int i = 0; i < 4; i++)
                                     {
-                                        file = httpPostedFileBase[i];
+                                        if (httpPostedFileBase[i] != null)
+                                        {
+                                            file = httpPostedFileBase[i];
 
-                                        byte[] fileBytes = new byte[file.InputStream.Length + 1];
-                                        file.InputStream.Read(fileBytes, 0, fileBytes.Length);
-                                        var fileContent = new ByteArrayContent(fileBytes);
+                                            byte[] fileBytes = new byte[file.InputStream.Length + 1];
+                                            file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                                            var fileContent = new ByteArrayContent(fileBytes);
 
-                                        if (i == 0)
-                                        {
-                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaFront1") { FileName = file.FileName };
+                                            if (i == 0)
+                                            {
+                                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaFront1") { FileName = file.FileName };
+                                            }
+                                            else if (i == 1)
+                                            {
+                                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaBack1") { FileName = file.FileName };
+                                            }
+                                            else if (i == 2)
+                                            {
+                                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaFront2") { FileName = file.FileName };
+                                            }
+                                            else if (i == 3)
+                                            {
+                                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaBack2") { FileName = file.FileName };
+                                            }
+                                            content.Add(fileContent);
                                         }
-                                        else if (i == 1)
-                                        {
-                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaBack1") { FileName = file.FileName };
-                                        }
-                                        else if (i == 2)
-                                        {
-                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaFront2") { FileName = file.FileName };
-                                        }
-                                        else if (i == 3)
-                                        {
-                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaBack2") { FileName = file.FileName };
-                                        }
-                                        content.Add(fileContent);
                                     }
                                 }
-                            }
 
-                            string UserId = Session["UserId"].ToString();
-                            content.Add(new StringContent(UserId), "CreatedBy");
-                            CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                            content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
-                            content.Add(new StringContent("ClientDocs"), "ClientDocs");
-                            content.Add(new StringContent(vehicleViewModel.VehicleType.ToString()), "VehicleType");
-                            content.Add(new StringContent(vehicleViewModel.TraficPlateNumber ?? ""), "TraficPlateNumber");
-                            content.Add(new StringContent(vehicleViewModel.TCNumber ?? ""), "TCNumber");
-                            content.Add(new StringContent(vehicleViewModel.Model ?? ""), "Model");
-                            content.Add(new StringContent(vehicleViewModel.Brand ?? ""), "Brand");
-                            content.Add(new StringContent(vehicleViewModel.Color ?? ""), "Color");
-                            content.Add(new StringContent(vehicleViewModel.MulkiaExpiry ?? ""), "MulkiaExpiry");
-                            content.Add(new StringContent(vehicleViewModel.InsuranceExpiry ?? ""), "InsuranceExpiry");
-                            content.Add(new StringContent(vehicleViewModel.RegisteredRegion ?? ""), "RegisteredRegion");
-                            content.Add(new StringContent(vehicleViewModel.Comments ?? ""), "Comments");
-                                                       
-                            var result = webServices.PostMultiPart(content, "AWFVehicle/Add", true);
-                            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
-                            {
-                                return Redirect(nameof(Index));
+                                string UserId = Session["UserId"].ToString();
+                                content.Add(new StringContent(UserId), "CreatedBy");
+                                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                                content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
+                                content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                                content.Add(new StringContent(vehicleViewModel.VehicleType.ToString()), "VehicleType");
+                                content.Add(new StringContent(vehicleViewModel.TraficPlateNumber ?? ""), "TraficPlateNumber");
+                                content.Add(new StringContent(vehicleViewModel.TCNumber ?? ""), "TCNumber");
+                                content.Add(new StringContent(vehicleViewModel.Model ?? ""), "Model");
+                                content.Add(new StringContent(vehicleViewModel.Brand ?? ""), "Brand");
+                                content.Add(new StringContent(vehicleViewModel.Color ?? ""), "Color");
+                                content.Add(new StringContent(vehicleViewModel.MulkiaExpiry ?? ""), "MulkiaExpiry");
+                                content.Add(new StringContent(vehicleViewModel.InsuranceExpiry ?? ""), "InsuranceExpiry");
+                                content.Add(new StringContent(vehicleViewModel.RegisteredRegion ?? ""), "RegisteredRegion");
+                                content.Add(new StringContent(vehicleViewModel.Comments ?? ""), "Comments");
+
+                                var result = webServices.PostMultiPart(content, "AWFVehicle/Add", true);
+                                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                                {
+                                    return Redirect(nameof(Index));
+                                }
                             }
                         }
                     }
+                    return Redirect(nameof(Index));
+                    //return RedirectToAction(nameof(Details), new { vehicleViewModel.Id });
                 }
-                return Redirect(nameof(Index));
-                //return RedirectToAction(nameof(Details), new { vehicleViewModel.Id });
             }
             catch (Exception ex)
             {
@@ -243,94 +253,103 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                if (Request.Files.Count > 0)
+                if (!ModelState.IsValid)
                 {
-                    HttpPostedFileBase[] httpPostedFileBase = new HttpPostedFileBase[4];
-                    if (vehicleViewModel.MulkiaFront1File != null)
+                    VehicleTypeController vehicleTypeController = new VehicleTypeController();
+                    ViewBag.VehicleTypes = vehicleTypeController.VehicleTypes();
+                    return View("Edit", vehicleViewModel);
+                }
+                else
+                {
+                    if (Request.Files.Count > 0)
                     {
-                        httpPostedFileBase[0] = vehicleViewModel.MulkiaFront1File;
-                    }
-                    if (vehicleViewModel.MulkiaBack1File != null)
-                    {
-                        httpPostedFileBase[1] = vehicleViewModel.MulkiaBack1File;
-                    }
-                    if (vehicleViewModel.MulkiaFront2File != null)
-                    {
-                        httpPostedFileBase[2] = vehicleViewModel.MulkiaFront2File;
-                    }
-                    if (vehicleViewModel.MulkiaBack2File != null)
-                    {
-                        httpPostedFileBase[3] = vehicleViewModel.MulkiaBack2File;
-                    }
-
-                    var file = vehicleViewModel.MulkiaFront1File;
-
-                    using (HttpClient client = new HttpClient())
-                    {
-                        using (var content = new MultipartFormDataContent())
+                        HttpPostedFileBase[] httpPostedFileBase = new HttpPostedFileBase[4];
+                        if (vehicleViewModel.MulkiaFront1File != null)
                         {
-                            if (httpPostedFileBase.ToList().Count > 0)
+                            httpPostedFileBase[0] = vehicleViewModel.MulkiaFront1File;
+                        }
+                        if (vehicleViewModel.MulkiaBack1File != null)
+                        {
+                            httpPostedFileBase[1] = vehicleViewModel.MulkiaBack1File;
+                        }
+                        if (vehicleViewModel.MulkiaFront2File != null)
+                        {
+                            httpPostedFileBase[2] = vehicleViewModel.MulkiaFront2File;
+                        }
+                        if (vehicleViewModel.MulkiaBack2File != null)
+                        {
+                            httpPostedFileBase[3] = vehicleViewModel.MulkiaBack2File;
+                        }
+
+                        var file = vehicleViewModel.MulkiaFront1File;
+
+                        using (HttpClient client = new HttpClient())
+                        {
+                            using (var content = new MultipartFormDataContent())
                             {
-                                for (int i = 0; i < 4; i++)
+                                if (httpPostedFileBase.ToList().Count > 0)
                                 {
-                                    if (httpPostedFileBase[i] != null)
+                                    for (int i = 0; i < 4; i++)
                                     {
-                                        file = httpPostedFileBase[i];
+                                        if (httpPostedFileBase[i] != null)
+                                        {
+                                            file = httpPostedFileBase[i];
 
-                                        byte[] fileBytes = new byte[file.InputStream.Length + 1];
-                                        file.InputStream.Read(fileBytes, 0, fileBytes.Length);
-                                        var fileContent = new ByteArrayContent(fileBytes);
+                                            byte[] fileBytes = new byte[file.InputStream.Length + 1];
+                                            file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                                            var fileContent = new ByteArrayContent(fileBytes);
 
-                                        if (i == 0)
-                                        {
-                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaFront1") { FileName = file.FileName };
+                                            if (i == 0)
+                                            {
+                                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaFront1") { FileName = file.FileName };
+                                            }
+                                            else if (i == 1)
+                                            {
+                                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaBack1") { FileName = file.FileName };
+                                            }
+                                            else if (i == 2)
+                                            {
+                                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaFront2") { FileName = file.FileName };
+                                            }
+                                            else if (i == 3)
+                                            {
+                                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaBack2") { FileName = file.FileName };
+                                            }
+                                            content.Add(fileContent);
                                         }
-                                        else if (i == 1)
-                                        {
-                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaBack1") { FileName = file.FileName };
-                                        }
-                                        else if (i == 2)
-                                        {
-                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaFront2") { FileName = file.FileName };
-                                        }
-                                        else if (i == 3)
-                                        {
-                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("MulkiaBack2") { FileName = file.FileName };
-                                        }
-                                        content.Add(fileContent);
                                     }
                                 }
+
+                                string UserId = Session["UserId"].ToString();
+                                content.Add(new StringContent(UserId), "UpdatBy");
+                                content.Add(new StringContent(vehicleViewModel.Id.ToString()), "Id");
+                                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                                content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
+                                content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                                content.Add(new StringContent(vehicleViewModel.VehicleType.ToString()), "VehicleType");
+                                content.Add(new StringContent(vehicleViewModel.TraficPlateNumber ?? ""), "TraficPlateNumber");
+                                content.Add(new StringContent(vehicleViewModel.TCNumber ?? ""), "TCNumber");
+                                content.Add(new StringContent(vehicleViewModel.Model ?? ""), "Model");
+                                content.Add(new StringContent(vehicleViewModel.Brand ?? ""), "Brand");
+                                content.Add(new StringContent(vehicleViewModel.Color ?? ""), "Color");
+                                content.Add(new StringContent(vehicleViewModel.MulkiaExpiry ?? ""), "MulkiaExpiry");
+                                content.Add(new StringContent(vehicleViewModel.InsuranceExpiry ?? ""), "InsuranceExpiry");
+                                content.Add(new StringContent(vehicleViewModel.RegisteredRegion ?? ""), "RegisteredRegion");
+                                content.Add(new StringContent(vehicleViewModel.Comments ?? ""), "Comments");
+
+
+
+                                var result = webServices.PostMultiPart(content, "AWFVehicle/update", true);
+                                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                                {
+                                    return Redirect(nameof(Index));
+                                }
+
                             }
-
-                            string UserId = Session["UserId"].ToString();
-                            content.Add(new StringContent(UserId), "UpdatBy");
-                            content.Add(new StringContent(vehicleViewModel.Id.ToString()), "Id");
-                            CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                            content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
-                            content.Add(new StringContent("ClientDocs"), "ClientDocs");
-                            content.Add(new StringContent(vehicleViewModel.VehicleType.ToString()), "VehicleType");
-                            content.Add(new StringContent(vehicleViewModel.TraficPlateNumber ?? ""), "TraficPlateNumber");
-                            content.Add(new StringContent(vehicleViewModel.TCNumber ?? ""), "TCNumber");
-                            content.Add(new StringContent(vehicleViewModel.Model ?? ""), "Model");
-                            content.Add(new StringContent(vehicleViewModel.Brand ?? ""), "Brand");
-                            content.Add(new StringContent(vehicleViewModel.Color ?? ""), "Color");
-                            content.Add(new StringContent(vehicleViewModel.MulkiaExpiry ?? ""), "MulkiaExpiry");
-                            content.Add(new StringContent(vehicleViewModel.InsuranceExpiry ?? ""), "InsuranceExpiry");
-                            content.Add(new StringContent(vehicleViewModel.RegisteredRegion ?? ""), "RegisteredRegion");
-                            content.Add(new StringContent(vehicleViewModel.Comments ?? ""), "Comments");
-
-
-
-                            var result = webServices.PostMultiPart(content, "AWFVehicle/update", true);
-                            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
-                            {
-                                return Redirect(nameof(Index));
-                            }
-
                         }
                     }
+                    return RedirectToAction(nameof(Details), new { vehicleViewModel.Id });
                 }
-                return RedirectToAction(nameof(Details), new { vehicleViewModel.Id });
             }
             catch (Exception ex)
             {

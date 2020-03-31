@@ -14,6 +14,7 @@ namespace IT.Core.ViewModels
         [Required(ErrorMessage = "Name is Required")]
         public string Name { get; set; }
         public string Contact { get; set; }
+        [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
         public string Facebook { get; set; }
         public string Comments { get; set; }

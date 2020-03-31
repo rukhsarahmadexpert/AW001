@@ -715,6 +715,7 @@
     <Content Include="assets\site\ionicons\fonts\ionicons28b5.eot" />
     <Content Include="assets\site\ionicons\fonts\ionicons28b5.ttf" />
     <Content Include="assets\site\ionicons\fonts\ionicons28b5.woff" />
+    <Content Include="Backup\DB_A415B5_AW_3_31_2020.bak" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Common-Scripts\LOP-Invoice.js" />

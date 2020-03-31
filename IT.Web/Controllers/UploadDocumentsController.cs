@@ -13,7 +13,7 @@ namespace IT.Web.Controllers
     {
 
         WebServices webServices = new WebServices();
-        UploadDocumentsViewModel uploadDocumentsViewModel = new UploadDocumentsViewModel();
+        readonly UploadDocumentsViewModel uploadDocumentsViewModel = new UploadDocumentsViewModel();
         // GET: UploadDocuments
         public ActionResult Index()
         {

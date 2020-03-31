@@ -41,6 +41,7 @@ namespace IT.Core.ViewModels
         public string bookingUpdateReason { get; set; }
         public string UpdateReason { get; set; }
         public string RejectedReason { get; set; }
+        public string IsAwfuelAdmin { get; set; }
         public List<UploadDocumentsViewModel> uploadDocumentsViewModels { get; set; }
 
     }

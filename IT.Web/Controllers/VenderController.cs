@@ -84,29 +84,40 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                var venderResult = new ServiceResponseModel();
-                if (venderViewModel.Id < 1)
+                if (!ModelState.IsValid)
                 {
-                    venderViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
-                    venderResult = webServices.Post(venderViewModel, "Vender/Add");
+                    CountryController countryController = new CountryController();
+                    ViewBag.Countries = countryController.Countries();
+
+                    return View(venderViewModel);
                 }
                 else
                 {
-                    venderViewModel.UpdatedBy = Convert.ToInt32(Session["UserId"]);
-                    venderResult = webServices.Post(venderViewModel, "Vender/Update");
-                }
-                if (venderResult.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {
-                    var reuslt = (new JavaScriptSerializer().Deserialize<int>(venderResult.Data));
-                    
-                    return RedirectToAction(nameof(Index));
-                }
-                if (Request.IsAjaxRequest())
-                {
-                    return Json(venderViewModels, JsonRequestBehavior.AllowGet);
-                }
 
-                return View(venderViewModel);
+                    var venderResult = new ServiceResponseModel();
+                    if (venderViewModel.Id < 1)
+                    {
+                        venderViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
+                        venderResult = webServices.Post(venderViewModel, "Vender/Add");
+                    }
+                    else
+                    {
+                        venderViewModel.UpdatedBy = Convert.ToInt32(Session["UserId"]);
+                        venderResult = webServices.Post(venderViewModel, "Vender/Update");
+                    }
+                    if (venderResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        var reuslt = (new JavaScriptSerializer().Deserialize<int>(venderResult.Data));
+
+                        return RedirectToAction(nameof(Index));
+                    }
+                    if (Request.IsAjaxRequest())
+                    {
+                        return Json(venderViewModels, JsonRequestBehavior.AllowGet);
+                    }
+
+                    return View(venderViewModel);
+                }
             }
             catch (Exception ex)
             {

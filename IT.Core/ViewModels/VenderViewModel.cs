@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace IT.Core.ViewModels
     public class VenderViewModel
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Please enter vender name")]
         public string Name { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
@@ -25,6 +27,7 @@ namespace IT.Core.ViewModels
         public DateTime UpdatedDate { get; set; }
         public bool IsActive { get; set; }
         public string UserName { get; set; }
+        [Required(ErrorMessage = "Please enter vender TRN Number")]
         public string TRN { get; set; }
         public string Representative { get; set; }
         public string Title { get; set; }

@@ -72,14 +72,12 @@
                                     </select>
                                 </div>
                             </td>
-
                             <td style="width:140px">
                                 <div class="form-group mb-2">
                                     <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
                                     <input type="text" id="Description" name="Description" class="form-control Description" placeholder="Description" />
                                 </div>
                             </td>
-
                             <td style="width:90px">
                                 <div class="form-group mb-2">
                                     <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
@@ -196,7 +194,6 @@
             $('#SaveRecord').click(function () {
 
                 InsertStorge("/Storage/Create/");
-                window.location.href = "/Storage/Index"
             });
         });
 
@@ -254,8 +251,6 @@
                             StockOut: StockOut,
                             Action: ActionVal,
                             ProductId: $(this).find('.ProductRow1').val(),
-
-
                         }
                     list.push(orderItem);
                     //IsValidationPass = true;
@@ -288,10 +283,16 @@
                     contentType: false,
                     processData: false,
                     success: function (result) {
-                        if (result != "Failed") {
-                            list = [];
 
+                        console.log(result);
+                        if (result == "NoData") {
+                            alert("Please fill the form to perform opration");
+                            return true;
+                        }
+                        else if (result != "Failed") {
+                            list = [];
                             alert("success");
+                            window.location.href = "/Storage/Index";
                             $.confirm({
                                 title: 'Success!',
                                 content: 'Opration successfully Completed',
@@ -353,9 +354,6 @@
                 }
             })
         }
-
-
     </script>
-
 }
 

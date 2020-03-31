@@ -204,7 +204,11 @@ namespace IT.Web.Controllers
             ViewBag.Products = productController.Products();
             ViewBag.ProductUnits = productUnitController.ProductUnits();
 
-            return View();
+            CustomerBookingViewModel CustomerBookingViewModel = new CustomerBookingViewModel();
+            CustomerBookingViewModel.VAT = (decimal)0.00;
+            CustomerBookingViewModel.TotalAmount = (decimal)0.00;
+
+            return View(CustomerBookingViewModel);
         }
 
         [HttpGet]
@@ -236,21 +240,60 @@ namespace IT.Web.Controllers
                     ViewBag.Products = productController.Products();
                     ViewBag.ProductUnits = productUnitController.ProductUnits();
 
-                    return View("CustomerCreate", customerBookingViewModel);
-                }
+                    if (customerBookingViewModel.IsAwfuelAdmin == "IsAwfuelAdmin")
+                    {
+                        if (customerBookingViewModel.CompanyId == 0)
+                        {
+                            ModelState.AddModelError("CompanyId", "Please select customer");
+                        }
+                        CompanyController companyController = new CompanyController();
+                        ViewBag.Companies = companyController.Companies();
+                        return View("AdminCreate", customerBookingViewModel);
+                    }
+                    else
+                    {
+                        return View("CustomerCreate", customerBookingViewModel);
+                    }
+                }                
                 else
                 {
+                    if (customerBookingViewModel.IsAwfuelAdmin == "IsAwfuelAdmin")
+                    {
+                        if (customerBookingViewModel.CompanyId == 0)
+                        {
+                            CompanyController companyController = new CompanyController();
+                            ProductController productController = new ProductController();
+                            ProductUnitController productUnitController = new ProductUnitController();
+
+                            ViewBag.Companies = companyController.Companies();
+                            ViewBag.Products = productController.Products();
+                            ViewBag.ProductUnits = productUnitController.ProductUnits();
+
+                            ModelState.AddModelError("CompanyId", "Please select customer");
+
+                            return View("AdminCreate", customerBookingViewModel);
+                        }
+                    }
                     var CustomerResult = new ServiceResponseModel();
                     customerBookingViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
-                    customerBookingViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
+                    if (customerBookingViewModel.IsAwfuelAdmin != "IsAwfuelAdmin")
+                    {
+                        customerBookingViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                    }
                     CustomerResult = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingAdd");
 
                     if (CustomerResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                     {
                         var reuslt = (new JavaScriptSerializer().Deserialize<int>(CustomerResult.Data));
 
-                        return RedirectToAction(nameof(Customer));
+                        if (customerBookingViewModel.IsAwfuelAdmin == "IsAwfuelAdmin")
+                        {
+                            return RedirectToAction(nameof(Index));
+                        }
+                        else
+                        {
+                            return RedirectToAction(nameof(Customer));
+                        }
                     }
 
                     return View(customerBookingViewModel);

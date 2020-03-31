@@ -92,24 +92,33 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                var value = DateTime.Now.ToFileTime().ToString();
-
-                List<StorageViewModel> storageViewModels1 = new List<StorageViewModel>();
-                storageViewModels1 = storageViewListModel.storageViewModels;
-
-                storageViewModels1[0].CreatedBy = Convert.ToInt32(Session["UserId"]);
-                storageViewModels1[1].CreatedBy = Convert.ToInt32(Session["UserId"]);
-                storageViewModels1[0].uniques = value;
-                storageViewModels1[1].uniques = value;
-                var result = webServices.Post(storageViewModels1, "Storage/StorageAdd");
-                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                if (storageViewListModel.storageViewModels[0].StockOut == 0 || storageViewListModel.storageViewModels[0].StockIn == 0)
                 {
-                    int k = (new JavaScriptSerializer()).Deserialize<int>(result.Data);
-                    return Json("success", JsonRequestBehavior.AllowGet);
+                    //return View(storageViewListModel.storageViewModels);
+
+                    return Json("NoData",JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    return Json("Failed", JsonRequestBehavior.AllowGet);
+                    var value = DateTime.Now.ToFileTime().ToString();
+
+                    List<StorageViewModel> storageViewModels1 = new List<StorageViewModel>();
+                    storageViewModels1 = storageViewListModel.storageViewModels;
+
+                    storageViewModels1[0].CreatedBy = Convert.ToInt32(Session["UserId"]);
+                    storageViewModels1[1].CreatedBy = Convert.ToInt32(Session["UserId"]);
+                    storageViewModels1[0].uniques = value;
+                    storageViewModels1[1].uniques = value;
+                    var result = webServices.Post(storageViewModels1, "Storage/StorageAdd");
+                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        int k = (new JavaScriptSerializer()).Deserialize<int>(result.Data);
+                        return Json("success", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json("Failed", JsonRequestBehavior.AllowGet);
+                    }
                 }
             }
             catch (Exception)

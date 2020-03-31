@@ -432,8 +432,8 @@ namespace IT.Web_New.Controllers
                 if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     companyViewModels = (new JavaScriptSerializer().Deserialize<List<CompanyViewModel>>(CompanyList.Data.ToString()));
-                   
                 }
+                companyViewModels.Insert(0, new CompanyViewModel() { Id = 0, Name = "Select Customer" });
                 return companyViewModels;
             }
             catch (Exception ex)
