@@ -1,14 +1,14 @@
 ﻿@model IT.Core.ViewModels.CustomerBookingViewModel
 @{
-                ViewBag.Title = "CustomerBookingGetById";
-                Layout = "~/Views/Shared/_layoutAdmin.cshtml";
-                List<IT.Core.ViewModels.CompanyViewModel> companyViewModels = new List<IT.Core.ViewModels.CompanyViewModel>();
-                List<IT.Core.ViewModels.ProductViewModel> productViewModels = new List<IT.Core.ViewModels.ProductViewModel>();
-                List<IT.Core.ViewModels.ProductUnitViewModel> productUnitViewModels = new List<IT.Core.ViewModels.ProductUnitViewModel>();
+    ViewBag.Title = "CustomerBookingGetById";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+    List<IT.Core.ViewModels.CompanyViewModel> companyViewModels = new List<IT.Core.ViewModels.CompanyViewModel>();
+    List<IT.Core.ViewModels.ProductViewModel> productViewModels = new List<IT.Core.ViewModels.ProductViewModel>();
+    List<IT.Core.ViewModels.ProductUnitViewModel> productUnitViewModels = new List<IT.Core.ViewModels.ProductUnitViewModel>();
 
-                companyViewModels = ViewBag.Companies as List<IT.Core.ViewModels.CompanyViewModel>;
-                productViewModels = ViewBag.Products as List<IT.Core.ViewModels.ProductViewModel>;
-                productUnitViewModels = ViewBag.ProductUnits as List<IT.Core.ViewModels.ProductUnitViewModel>;
+    companyViewModels = ViewBag.Companies as List<IT.Core.ViewModels.CompanyViewModel>;
+    productViewModels = ViewBag.Products as List<IT.Core.ViewModels.ProductViewModel>;
+    productUnitViewModels = ViewBag.ProductUnits as List<IT.Core.ViewModels.ProductUnitViewModel>;
 }
 
 <ol class="breadcrumb page-breadcrumb">
@@ -63,7 +63,7 @@
                                         {
 
                                             <option value="@item.Id" @(item.Id == Model.ProductId ? "selected='selected'" : "")>@item.Name</option>
-                                        
+
                                         }
                                     </select>
                                 </div>
@@ -139,49 +139,38 @@
                 <div class="panel-container">
                     <div class="panel-content">
                         <div class="row">
+                            <div class="col-md-9">
 
-                            <div class="col-md-10">
+                                <div class="form-group mb-2">
+                                    <textarea class="form-control Description" rows="3" name="Description" id="Description" placeholder="Description">@Model.Description</textarea>
+                                </div>
                             </div>
-
-                            <div class="col-md-2">
-
+                            <div class="col-md-3">
                                 <table>
                                     <thead>
                                         <tr>
                                             <th style="width:100px"><b>VAT 5% </b></th>
-                                            <td><input class="form-control" type="text" id="VAT"  name="VAT" value="@Model.VAT"  /></td>
+                                            <td>
+                                                <input class="form-control" type="hidden" id="VAT" name="VAT" value="@Model.VAT" />
+                                                <p style="border:2px groove; padding:0px 15px 0px 15px; font-weight:bolder" class="my-1" id="VAT2">@Math.Round(Model.VAT, 2) </p>
+                                            </td>
                                         </tr>
 
                                         <tr>
                                             <th style="width:100px"><b>Gand Total</b> </th>
-                                            <td><input class="form-control" type="text" id="gtotal" name="name" value="343" /></td>
+                                            <td>
+                                                <input class="form-control" type="hidden" id="gtotal" name="name" value="343" />
+                                                <p style="border:2px groove; padding:0px 15px 0px 15px; font-weight:bolder" class="my-1" id="gtotal2">@Math.Round(Model.TotalAmount, 2) </p>
+                                            </td>
                                         </tr>
                                     </thead>
                                 </table>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
 
-                <div class="panel-container">
-                    <div class="panel-content">
-                        <div class="row">
-
-                            <div class="col-md-6">
-
-                                <div class="form-group mb-2">
-
-                                    <textarea class="form-control Description" name="Description"  id="Description" placeholder="Description">@Model.Description</textarea>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
+              
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <button type="submit" id="SaveRecord" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
@@ -201,60 +190,8 @@
 @section scripts{
 
 
-    <script>
 
-
-        $(document).ready(function () {
-
-            $('input[name=\'BookQuantity\']').on('change keyup click', function () {
-                booking();
-            });
-
-            $('#UnitPrice').on('change keyup click', function () {
-                booking();
-            });
-
-        });
-
-        function booking() {
-
-           // $('#VAT1').empty();
-
-            var price = $('#UnitPrice').val();
-
-            var quantity = $('.Quantity').val();
-
-            var total = $('#TotalAmount').val(price * quantity);
-
-
-
-            @*$('#VAT1').append('<option>gtgtgtgt</option>');*@
-
-
-            var tt = $('#TotalAmount').val()
-
-
-            @*$('#VAT').val(parseFloat(vat_value) + parseFloat(tt));*@
-
-            $('#VAT').val();
-            $('#VAT1').change(function () {
-                var vt = $('#VAT1').val();
-                if (vt != 0) {
-                    var vat_value = ((5 * tt) / 100);
-                    $('#VAT').val(vat_value);
-                    $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
-                }
-                else {
-                    $('#TotalAmount').val(tt);
-                }
-
-
-            });
-
-        }
-
-
-    </script>
+    <script src="~/Scripts/Common-Scripts/bookingVat.js"></script>
 
 
 }
