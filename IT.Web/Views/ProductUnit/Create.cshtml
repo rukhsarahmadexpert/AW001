@@ -16,36 +16,28 @@
 @*<label></label>*@
 <main id="js-page-content" role="main" class="page-content">
 
-    <div class="subheader">
-        <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-edit'></i> Create Product Unit
-        </h1>
-    </div>
+  
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
-                    <h2>
-                        Product Unit <span class="fw-300"></span>
-                    </h2>
+                    @if (Model.Id > 0)
+                    {
+                        <h2>
+                            Product Unit <span class="fw-300">Edit</span>
+                        </h2>
+                    }
+                    else
+                    {
+                        <h2>
+                            Product Unit<span class="fw-300">Create</span>
+                        </h2>
 
-                </div>
+                    }
+
+                    </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-
-                        @if (Model.Id > 0)
-                        {
-                            <div class="panel-tag">
-                                Please Edit Product Unit from here...
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="panel-tag">
-                                Please Add Product Unit from here...
-                            </div>
-
-                        }
 
                         <form action="/ProductUnit/Create" method="post">
                             <input type="hidden" value="@Model.Id" name="Id" id="Id" />

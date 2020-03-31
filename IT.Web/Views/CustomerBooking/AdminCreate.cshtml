@@ -1,4 +1,4 @@
-﻿
+﻿@model IT.Core.ViewModels.CustomerBookingViewModel
 @{
     ViewBag.Title = "AdminCreate";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
@@ -18,11 +18,6 @@
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 
-<div class="subheader">
-    <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-edit'></i> Create Booking
-    </h1>
-</div>
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -114,7 +109,7 @@
                                 <td>
                                     <div class="form-group mb-2">
 
-                                       
+
                                         <select id="VAT1" name="VAT1" class="form-control VAT1" required>
 
                                             <option value="0">0</option>
@@ -138,7 +133,7 @@
                     <div class="panel-content">
                         <div class="row">
 
-                            <div class="col-md-10"> 
+                            <div class="col-md-10">
                             </div>
 
                             <div class="col-md-2">
@@ -147,7 +142,7 @@
                                     <thead>
                                         <tr>
                                             <th style="width:100px"><b>VAT 5% </b></th>
-                                            <td><input class="form-control" type="text" id="VAT" name="VAT" value="0"  /></td>
+                                            <td><input class="form-control" type="text" id="VAT" name="VAT" value="0" /></td>
                                         </tr>
 
                                         <tr>
@@ -192,18 +187,18 @@
         </div>
 
     </div>
-   
+
 
 </div>
 
 @section scripts{
-    
-    
+
+
     <script>
 
 
         $(document).ready(function () {
-           
+
             $('input[name=\'BookQuantity\']').on('change keyup click', function () {
                 booking();
             });
@@ -227,10 +222,10 @@
 
 
             @*$('#VAT1').append('<option>gtgtgtgt</option>');*@
-           
+
 
             var tt = $('#TotalAmount').val()
-           
+
 
             @*$('#VAT').val(parseFloat(vat_value) + parseFloat(tt));*@
 
@@ -253,7 +248,7 @@
 
 
     </script>
-    
-    
-    }
+
+
+}
 

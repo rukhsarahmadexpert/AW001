@@ -30,7 +30,7 @@
             <form action="/CustomerBooking/CustomerCreate" method="post" enctype="application/x-www-form-urlencoded">
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <div class="py-2">                           
+                        <div class="py-2">
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -123,9 +123,10 @@
                                     <thead>
                                         <tr>
                                             <th style="width:100px"><b>VAT 5%: </b></th>
-                                            <td><input class="form-control" type="hidden" id="VAT" name="VAT" value="0.00" />
+                                            <td>
+                                                <input class="form-control" type="hidden" id="VAT" name="VAT" value="0.00" />
                                                 <p style="border:2px groove; padding:0px 15px 0px 15px; font-weight:bolder" class="my-1" id="VAT2">@Model.VAT</p>
-                                            </td> 
+                                            </td>
                                         <tr>
                                             <th style="width:100px"><b>Gand Total:</b> </th>
                                             <td>
@@ -151,11 +152,10 @@
         </div>
     </div>
 
-    @Html.ValidationSummary(false,"", new { @class= "text-danger"})
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 </div>
 
 @section scripts{
-
 
     <script>
 
@@ -163,11 +163,16 @@
 
             $('input[name=\'BookQuantity\']').on('change keyup click', function () {
                 booking();
+                vat()
             });
 
             $('#UnitPrice').on('change keyup click', function () {
                 booking();
+
+                vat();
             });
+
+            vat();
 
         });
 
@@ -181,30 +186,87 @@
 
             var total = $('#TotalAmount').val(price * quantity);
 
+            $('#gtotal').val(price * quantity);
+            $('#gtotal2').text(price * quantity);
+        }
 
 
-            @*$('#VAT1').append('<option>gtgtgtgt</option>');*@
+        function vat() {
+
+
+            @* $('#VAT1').append('<option>gtgtgtgt</option>');*@
 
 
             var tt = $('#TotalAmount').val()
 
 
-            @*$('#VAT').val(parseFloat(vat_value) + parseFloat(tt));*@
+            @* $('#VAT').val(parseFloat(vat_value) + parseFloat(tt));*@
 
             $('#VAT').val();
-            $('#VAT1').change(function () {
-                var vt = $('#VAT1').val();
-                if (vt != 0) {
-                    var vat_value = ((5 * tt) / 100);
+            var vt = $('#VAT1').val();
+            if (vt != 0) {
+
+                var vat_value = ((5 * tt) / 100);
+                $('#VAT').val(vat_value);
+                $('#VAT2').text(vat_value);
+                $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
+                $('#gtotal2').text(parseFloat(vat_value) + parseFloat(tt));
+                $('#VAT1').change(function () {
+
+                    var vt2 = $('#VAT1').val();
+                    if (vt2 != 0) {
+                        var vat_value = 0;
+                        $('#VAT').val(vat_value);
+                        $('#VAT2').text(vat_value);
+                        $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
+                        $('#gtotal2').text(parseFloat(vat_value) + parseFloat(tt));
+                        $('#TotalAmount').val(tt);
+                    }
+                    else {
+
+                        var vat_value = ((5 * tt) / 100);
+                        $('#VAT').val(vat_value);
+                        $('#VAT2').text(vat_value);
+                        $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
+                        $('#gtotal2').text(parseFloat(vat_value) + parseFloat(tt));
+
+                    }
+
+                })
+            }
+            else {
+
+                   var vat_value = 0;
                     $('#VAT').val(vat_value);
                     $('#VAT2').text(vat_value);
                     $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
                     $('#gtotal2').text(parseFloat(vat_value) + parseFloat(tt));
-                }
-                else {
                     $('#TotalAmount').val(tt);
-                }
-            });
+                $('#VAT1').change(function () {
+
+                    var vt2 = $('#VAT1').val();
+                    if (vt2 == 0) {
+                        var vat_value = 0;
+                        $('#VAT').val(vat_value);
+                        $('#VAT2').text(vat_value);
+                        $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
+                        $('#gtotal2').text(parseFloat(vat_value) + parseFloat(tt));
+                        $('#TotalAmount').val(tt);
+                    }
+                    else {
+
+                        var vat_value = ((5 * tt) / 100);
+                        $('#VAT').val(vat_value);
+                        $('#VAT2').text(vat_value);
+                        $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
+                        $('#gtotal2').text(parseFloat(vat_value) + parseFloat(tt));
+
+                    }
+
+
+
+                })
+            }
 
         }
 

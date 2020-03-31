@@ -50,7 +50,7 @@
 
         @* <button id="btn2" class="btn bg-primary-700 btn-md">Click to contact AWFuel for support <span style="font-size:15px" class=" fal fa-eye"></span></button>
             <a id="btn1" class="btn bg-primary-700 btn-md" href="tel:(555)123-4567">Call (555)123-4567</a>*@
-        <div class="p-4 bg-primary-700 overflow-hidden position-relative text-white mb-g">
+        <div class="p-4 bg-primary-700 rounded overflow-hidden position-relative text-white mb-g">
             <h4>
                 @fuelPricesViewModels[0].Month  Price: @Math.Round(fuelPricesViewModels[0].Price, 2)  AED - @fuelPricesViewModels[0].UnitName  &nbsp; / &nbsp;   @Math.Round(fuelPricesViewModels[1].Price, 2)  AED - @fuelPricesViewModels[1].UnitName
 
@@ -62,7 +62,7 @@
 
 
     <div class="col-sm-6 col-xl-6">
-        <div class="p-3 bg-success-700 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-600 rounded overflow-hidden position-relative text-white mb-g">
             <a style="color:white" href="/CustomerBooking/AdminCreate">
                 <div class="">
 
@@ -72,22 +72,22 @@
                     </h3>
 
                 </div>
-                <i class="fal fa-hand-receiving position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n1" style="font-size:6rem"></i>
+                <i class="fal fa-hand-receiving position-absolute pos-right pos-bottom opacity-15" style="font-size:6rem"></i>
             </a>
       </div>
     </div>
     <div class="col-sm-6 col-xl-6">
-        <div class="p-3 bg-success-700 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-600 rounded overflow-hidden position-relative text-white mb-g">
             <a style="color:white"  href="#">
                 <div class="">
 
                     <h3 class="display-4 d-block l-h-n m-0 fw-500">
                         <span class="fal fa-plus-circle"></span>
-                        <small class="m-0 l-h-n">Request new order</small>
+                        <small class="m-0 l-h-n">Request new Delivery</small>
                     </h3>
 
                 </div>
-                <i class="fal fa-exchange position-absolute pos-right pos-bottom opacity-15  mb-n1 mr-n4" style="font-size: 6rem;"></i>
+                <i class="fal fa-exchange position-absolute pos-right pos-bottom opacity-15" style="font-size: 6rem;"></i>
             </a>
                 </div>
     </div>
@@ -95,47 +95,47 @@
 
 
     <div class="col-sm-6 col-xl-3">
-        <div class="p-3 bg-primary-300 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-400 rounded overflow-hidden position-relative text-white mb-g">
             <div class="">
                 <h3 class="display-4 d-block l-h-n m-0 fw-500">
                     @customerOrderStatistics.TotalDrivers
                     <small class="m-0 l-h-n">Driver</small>
                 </h3>
             </div>
-            <i class="fal fa-user position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n1" style="font-size:6rem"></i>
+            <i class="fal fa-user position-absolute pos-right pos-bottom opacity-15" style="font-size:6rem"></i>
         </div>
     </div>
     <div class="col-sm-6 col-xl-3">
-        <div class="p-3 bg-warning-400 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-400 rounded overflow-hidden position-relative text-white mb-g">
             <div class="">
                 <h3 class="display-4 d-block l-h-n m-0 fw-500">
                     @customerOrderStatistics.TotalVehicles
                     <small class="m-0 l-h-n">Vehicle</small>
                 </h3>
             </div>
-            <i class="fal fa-gem position-absolute pos-right pos-bottom opacity-15  mb-n1 mr-n4" style="font-size: 6rem;"></i>
+            <i class="fal fa-car position-absolute pos-right pos-bottom opacity-15" style="font-size: 6rem;"></i>
         </div>
     </div>
     <div class="col-sm-6 col-xl-3">
-        <div class="p-3 bg-success-200 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-200 rounded overflow-hidden position-relative text-white mb-g">
             <div class="">
                 <h3 class="display-4 d-block l-h-n m-0 fw-500">
                     @customerOrderStatistics.TotolRequestedQuantity
                     <small class="m-0 l-h-n">Today Requested Quantity</small>
                 </h3>
             </div>
-            <i class="fal fa-lightbulb position-absolute pos-right pos-bottom opacity-15 mb-n5 mr-n6" style="font-size: 8rem;"></i>
+            <i class="fal fa-map-marker position-absolute pos-right pos-bottom opacity-15 " style="font-size: 6rem;"></i>
         </div>
     </div>
     <div class="col-sm-6 col-xl-3">
-        <div class="p-3 bg-info-200 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-200 rounded overflow-hidden position-relative text-white mb-g">
             <div class="">
                 <h3 class="display-4 d-block l-h-n m-0 fw-500">
                     @customerOrderStatistics.TotalDeliverdQuantity
                     <small class="m-0 l-h-n">Today Deliverd Quantity</small>
                 </h3>
             </div>
-            <i class="fal fa-globe position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n4" style="font-size: 6rem;"></i>
+            <i class="fal fa-location-arrow position-absolute pos-right pos-bottom opacity-15" style="font-size: 6rem;"></i>
         </div>
     </div>
 </div>
