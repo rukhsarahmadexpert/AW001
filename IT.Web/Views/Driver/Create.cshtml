@@ -196,8 +196,8 @@
                                     </div>
                                 </div>
                                 @* <input type="hidden" name="ClientDocs" id="ClientDocs" value="ClientDocs"/>
-            <input type="hidden" name="CompanyId" id="CompanyId" value="1057" />
-            <input type="hidden" name="CreatedBy" id="CreatedBy" value="2099" />*@
+                                    <input type="hidden" name="CompanyId" id="CompanyId" value="1057" />
+                                    <input type="hidden" name="CreatedBy" id="CreatedBy" value="2099" />*@
                                 <div class="row py-5">
                                 </div>
                             </div>
@@ -211,7 +211,7 @@
                             </div>
                         </div>
 
-                      
+
 
                     </form>
                 </div>
@@ -259,9 +259,21 @@
         });
 
 
-       
+
 
     </script>
+
+  
+        <script>
+            $(document).ready(function () {
+                $("#DriverMenu").attr("aria-expanded", "true");
+                $('#DriverUl').css('display', 'block');
+                $('#DriverAddLi').addClass('active');
+            });
+
+        </script>
+
+  
 }
 
 

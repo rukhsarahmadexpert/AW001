@@ -113,7 +113,7 @@
                         </div>
                     </form>
                 </div>
-                @Html.ValidationSummary(false,"", new { @class="text-danger"})
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
@@ -167,6 +167,15 @@
             }
 
         })
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#RegisteredMenu").attr("aria-expanded", "true");
+            $('#RegisteredUl').css('display', 'block');
+            $('#RegisteredAddLi').addClass('active');
+        });
 
     </script>
 }

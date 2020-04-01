@@ -97,8 +97,7 @@
             $('#ReportType').change(function () {
 
                 var TypeVal = $(this).val();
-                if (TypeVal == "VehicleReport")
-                {
+                if (TypeVal == "VehicleReport") {
                     $('#ReportStatusVehicle').attr('disabled', false);
                     $('#ReportFormat').attr('disabled', false);
 
@@ -113,8 +112,7 @@
                         }
                     });
                 }
-                else if (TypeVal == "OrderReport")
-                {
+                else if (TypeVal == "OrderReport") {
                     $('#ReportStatusVehicle').attr('disabled', true);
                     $('#ReportFormat').attr('disabled', true);
                     $('#ReportStatus').empty();
@@ -127,15 +125,14 @@
                     $('#ReportStatus').attr('disabled', false);
                 }
                 else {
-                        $('#ReportStatus').empty();
-                        $('#wrappingSt').text('Status');
-                        $('#ReportStatus').attr('disabled', true);
-                     }
+                    $('#ReportStatus').empty();
+                    $('#wrappingSt').text('Status');
+                    $('#ReportStatus').attr('disabled', true);
+                }
             });
 
 
-            $('#ReportStatus').change(function ()
-            {
+            $('#ReportStatus').change(function () {
                 if ($('#ReportType').val() == 'VehicleReport') {
                     $('#ReportStatusVehicle').attr('disabled', false);
                     $('#ReportFormat').attr('disabled', false);
@@ -148,5 +145,15 @@
         });
 
     </script>
+
+        <script>
+            $(document).ready(function () {
+                $("#ReportMenu").attr("aria-expanded", "true");
+                $('#ReportUl').css('display', 'block');
+                $('#ReportLi').addClass('active');
+            });
+
+        </script>
+
 
 }

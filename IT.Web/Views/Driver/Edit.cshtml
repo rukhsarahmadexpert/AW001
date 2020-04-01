@@ -22,7 +22,7 @@
             <div class="panel-hdr">
                 <h2>
                     Driver <span class="fw-300"></span>
-                </h2> 
+                </h2>
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
@@ -233,8 +233,8 @@
 
                                 </div>
                                 @* <input type="hidden" name="ClientDocs" id="ClientDocs" value="ClientDocs"/>
-                    <input type="hidden" name="CompanyId" id="CompanyId" value="1057" />
-                    <input type="hidden" name="CreatedBy" id="CreatedBy" value="2099" />*@
+                                    <input type="hidden" name="CompanyId" id="CompanyId" value="1057" />
+                                    <input type="hidden" name="CreatedBy" id="CreatedBy" value="2099" />*@
                                 <div class="row py-5">
                                 </div>
 
@@ -258,43 +258,53 @@
 
 
 @section Scripts{
-<script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
-<script>
+    <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
+    <script>
 
-    $("#VisaCopyFile").change(function () {
-               readURL(this,"VisaCopyPreview");
-    });
+        $("#VisaCopyFile").change(function () {
+            readURL(this, "VisaCopyPreview");
+        });
 
 
-    $("#PassportBackFile").change(function () {
-               readURL(this,"PassportBackPreview");
-    });
+        $("#PassportBackFile").change(function () {
+            readURL(this, "PassportBackPreview");
+        });
 
-    $("#PassportCopyFile").change(function () {
-               readURL(this,"PassportCopyPreview");
-    });
+        $("#PassportCopyFile").change(function () {
+            readURL(this, "PassportCopyPreview");
+        });
 
-    $("#IDUAECopyBackFile").change(function () {
-               readURL(this,"IDUAECopyBackPreview");
-    });
+        $("#IDUAECopyBackFile").change(function () {
+            readURL(this, "IDUAECopyBackPreview");
+        });
 
-    $("#IDUAECopyFrontFile").change(function () {
-               readURL(this,"IDUAECopyFrontPreview");
-    });
+        $("#IDUAECopyFrontFile").change(function () {
+            readURL(this, "IDUAECopyFrontPreview");
+        });
 
-    $("#DrivingLicenseBackFile").change(function () {
-               readURL(this,"DrivingLicenseBackPreview");
-    });
+        $("#DrivingLicenseBackFile").change(function () {
+            readURL(this, "DrivingLicenseBackPreview");
+        });
 
-    $("#DrivingLicenseFrontFile").change(function () {
-               readURL(this,"DrivingLicenseFrontPreview");
-    });
+        $("#DrivingLicenseFrontFile").change(function () {
+            readURL(this, "DrivingLicenseFrontPreview");
+        });
 
-     $("#DriverImageUrlFile").change(function () {
-               readURL(this,"DriverImageUrlPreview");
-    });
+        $("#DriverImageUrlFile").change(function () {
+            readURL(this, "DriverImageUrlPreview");
+        });
 
-</script>
+    </script>
+
+
+        <script>
+            $(document).ready(function () {
+                $("#DriverMenu").attr("aria-expanded", "true");
+                $('#DriverUl').css('display', 'block');
+            });
+
+        </script>
+
 }
 
 
