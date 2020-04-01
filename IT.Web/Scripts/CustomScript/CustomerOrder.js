@@ -95,17 +95,21 @@ function CreateGroupOrder(Url)
 
     $('#CustomerOrderTable tbody tr').each(function ()
     {
-        CurrentRow: $(this).closest("tr");
-        TotalQuantity = parseInt(TotalQuantity) + parseInt($(this).find('.Quantity').val());
-        orderItem = {
-            Id: $(this).find('.Id').val(),
-            ProductId: $(this).find('.product').val(),
-            VehicleId: $(this).find('.vehicle').val(),
-            DriverId: $(this).find('.Driver').val(),
-            OrderQuantity: $(this).find('.Quantity').val(),
-            Comments: $(this).find('.Note').val(),            
+        var $CurrentRow  =  $(this).closest("tr");
+
+        if (IsRowValid($CurrentRow)) {
+
+            TotalQuantity = parseInt(TotalQuantity) + parseInt($(this).find('.Quantity').val());
+            orderItem = {
+                Id: $(this).find('.Id').val(),
+                ProductId: $(this).find('.product').val(),
+                VehicleId: $(this).find('.vehicle').val(),
+                DriverId: $(this).find('.Driver').val(),
+                OrderQuantity: $(this).find('.Quantity').val(),
+                Comments: $(this).find('.Note').val(),
+            }
+            list.push(orderItem);
         }
-        list.push(orderItem);
     });
 
     var empObj = {
@@ -249,4 +253,23 @@ function BulkDriverVehicleSet() {
     $('#vehicle').empty();
     $('#Driver').append('<option value="1" selected="selected">Bulk Driver</option>');
     $('#vehicle').append('<option value="1" selected="selected">Bulk Vehicle</option>');
+}
+
+function IsRowValid(CurrentRow) {
+
+   // console.log(CurrentRow);
+    IsValid = true;
+    if (CurrentRow.find('.product').val() < 1) {
+        IsValid = false;
+    }
+    else if (CurrentRow.find('.vehicle').val() < 1) {
+        IsValid = false;
+    }
+    else if (CurrentRow.find('.Driver').val() < 1) {
+        IsValid = false;
+    }
+    else if (CurrentRow.find('.Quantity').val() < 1) {
+        IsValid = false;
+    }
+    return IsValid;
 }
