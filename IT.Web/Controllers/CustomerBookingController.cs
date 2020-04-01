@@ -82,7 +82,6 @@ namespace IT.Web.Controllers
         [HttpGet]
         public ActionResult BookingReserved()
         {
-
             try
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
