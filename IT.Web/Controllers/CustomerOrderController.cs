@@ -403,6 +403,7 @@ namespace IT.Web_New.Controllers
                 driverVehicelViewModel = vehicleController.DriverVehicels(CompanyId);
 
                 ProductController productController = new ProductController();
+                CustomerSitesController customerSites = new CustomerSitesController();
 
                 driverVehicelViewModel.driverModels.Insert(0, new DriverModel() { DriverId = 0, DriverName = "Select Driver" });
                 driverVehicelViewModel.vehicleModels.Insert(0, new VehicleModel() { VehicelId = 0, TraficPlateNumber = "Select Vehicle" });
@@ -410,6 +411,7 @@ namespace IT.Web_New.Controllers
                 ViewBag.driverModels = driverVehicelViewModel.driverModels;
                 ViewBag.vehicleModels = driverVehicelViewModel.vehicleModels;
                 ViewBag.product = productController.Products();
+                ViewBag.Sites = customerSites.SitesAll(CompanyId);
 
                 return View("Create", customerOrderGroupViewModel);
             }

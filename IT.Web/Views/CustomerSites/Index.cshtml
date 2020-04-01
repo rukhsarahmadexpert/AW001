@@ -37,7 +37,7 @@
                                 <th>Address</th>
                                 <th>Created date</th>
                                 <th>Created by</th>
-                                <th>IsActive</th>
+                                @*<th>IsActive</th>*@
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -50,8 +50,8 @@
                                     <td>@item.ContactPhone</td>
                                     <td>@item.Address</td>
                                     <td>@item.CreatedDates</td>
-                                    <td>@item.CreatedBy</td>
-                                    <td>@item.IsActive</td>
+                                    <td>@item.UserName</td>
+                                    @*<td>@item.IsActive</td>*@
 
                                     <td>
                                         <a href="/CustomerSites/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
