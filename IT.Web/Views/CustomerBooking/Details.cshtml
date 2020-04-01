@@ -11,17 +11,13 @@
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 
-<div class="subheader">
-    <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-edit'></i>customer Booking Details
-    </h1>
-</div>
+
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    Details <span class="fw-300"></span>
+                    customer Booking <span class="fw-300">Details</span>
                 </h2>
             </div>
             <div class="panel-container show">
@@ -55,7 +51,7 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">Price</th>
-                                            <td>></td>
+                                            <td>@Math.Round(Model.TotalAmount, 2)</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">VAT</th>

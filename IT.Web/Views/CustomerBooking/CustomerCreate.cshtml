@@ -67,7 +67,14 @@
                         <tbody>
                             <tr>
                                 <td style="width:200px">
-                                    <input type="text" class="form-control Quantity" value="@Model.BookQuantity" name="BookQuantity" id="Quantity" placeholder="QTY" />
+                                    @if (Model.BookQuantity == 0)
+                                    {
+                                        <input type="text" class="form-control Quantity" name="BookQuantity" id="Quantity" placeholder="QTY" />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" class="form-control Quantity" value="@Model.BookQuantity" name="BookQuantity" id="Quantity" placeholder="QTY" />
+                                    }
                                 </td>
                                 <td style="width:250px !important">
                                     <div class="form-group mb-2">
@@ -82,7 +89,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="text" name="UnitPrice" value="@Math.Round(Model.UnitPrice,2)" class="form-control UnitPrice" id="UnitPrice" placeholder="Unit Price" />
+                                    <input type="text" name="UnitPrice" class="form-control UnitPrice" id="UnitPrice" placeholder="Unit Price" />
                                 </td>
                                 <td>
                                     <div class="form-group mb-2">
@@ -160,6 +167,17 @@
 
 
     <script src="~/Scripts/Common-Scripts/bookingVat.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("form").submit(function (event) { 
+
+                $("#SaveRecord").text('please wait...');
+                $("#SaveRecord").attr("disabled", true);
+
+            });
+        });
+    </script>
 
 
 }

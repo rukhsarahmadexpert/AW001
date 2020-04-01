@@ -29,9 +29,7 @@
             <form action="/CustomerBooking/CustomerCreate" method="post" enctype="application/x-www-form-urlencoded">
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <div class="panel-tag">
-                            Please Add Booking...
-                        </div>
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
@@ -153,7 +151,7 @@
                     </div>
                 </div>
 
-              
+
                 <input type="hidden" value="IsAwfuelAdmin" name="IsAwfuelAdmin" />
                 <div class="row mt-3">
                     <div class="col-md-12">
@@ -174,6 +172,18 @@
 
 
     <script src="~/Scripts/Common-Scripts/bookingVat.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("form").submit(function (event) {
+
+                $("#SaveRecord").text('please wait...');
+                $("#SaveRecord").attr("disabled", true);
+
+            });
+        });
+    </script>
 
 
 }
