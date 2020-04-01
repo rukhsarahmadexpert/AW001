@@ -42,7 +42,7 @@
 
     <div class="col-sm-6 col-xl-6">
         <div class="p-3 bg-primary-600 rounded overflow-hidden position-relative text-white mb-g">
-            <a style="color:white" href="/CustomerBooking/CustomerCreate">
+            <a style="color:white" href="/CustomerBooking/CustomerCreate" id="btnNewBookin">
                 <div class="">
 
                     <h3 class="display-4 d-block l-h-n m-0 fw-500">
@@ -228,13 +228,18 @@
     <script>
         $(document).ready(function () {
             $('.carousel').carousel();
-
+           
+            //$('#MyBookinMenu').attr('aria-expanded', true);
             $("#btn1").hide();
             $("#btn2").click(function () {
                 $("#btn1").show();
                 $("#btn2").hide();
             });
 
+            $('#btnNewBookin').click(function () {
+                $("#MyBookinMenu").attr("aria-expanded", "true");
+                $('#bookingUl').css('display', 'block');
+            });
 
         })
     </script>

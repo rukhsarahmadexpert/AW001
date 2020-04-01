@@ -18,7 +18,6 @@
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 
-
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -44,9 +43,7 @@
                                         }
                                     </select>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -67,7 +64,7 @@
                         <tbody>
                             <tr>
                                 <td style="width:200px">
-                                    <input type="text" class="form-control Quantity" value="@Model.BookQuantity" name="BookQuantity" id="Quantity" placeholder="QTY" />
+                                    <input type="text" class="form-control Quantity" onfocus="this.value=''" value="@Model.BookQuantity" name="BookQuantity" id="Quantity" placeholder="QTY" />
                                 </td>
                                 <td style="width:250px !important">
                                     <div class="form-group mb-2">
@@ -82,7 +79,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="text" name="UnitPrice" value="@Math.Round(Model.UnitPrice,2)" class="form-control UnitPrice" id="UnitPrice" placeholder="Unit Price" />
+                                    <input type="text" name="UnitPrice" value="@Math.Round(Model.UnitPrice,2)" onfocus="this.value=''" class="form-control UnitPrice" id="UnitPrice" placeholder="Unit Price" />
                                 </td>
                                 <td>
                                     <div class="form-group mb-2">
@@ -101,7 +98,7 @@
                                     </div>
                                 </td>
                                 <td style="width:250px">
-                                    <input type="text" class="form-control TotalAmount" value="@Math.Round(Model.TotalAmount,2)" readonly name="TotalAmount" id="TotalAmount" placeholder="Total Amount" />
+                                    <input type="text" class="form-control TotalAmount" value="@Math.Round(Model.TotalAmount,2)" onfocus="this.value=''" readonly name="TotalAmount" id="TotalAmount" placeholder="Total Amount" />
 
                                 </td>
                             </tr>
@@ -157,10 +154,15 @@
 
 @section scripts{
 
-
-
     <script src="~/Scripts/Common-Scripts/bookingVat.js"></script>
 
+    <script>
+        $(document).ready(function () {
+            $("#MyBookinMenu").attr("aria-expanded", "true");
+            $('#bookingUl').css('display', 'block');
+        });
+    </script>
+   
 
 }
 
