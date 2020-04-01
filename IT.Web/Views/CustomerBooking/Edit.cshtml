@@ -176,7 +176,17 @@
 @section scripts{
 
     <script src="~/Scripts/bookingVat.js"></script>
-   
+
+
+    <script>
+        $(document).ready(function () {
+            $("#MyBookinMenu").attr("aria-expanded", "true");
+            $('#bookingUl').css('display', 'block');
+            $('#MyBookingactive').addClass('active');
+        });
+
+    </script>
+
 
 }
 

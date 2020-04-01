@@ -5,259 +5,269 @@
 }
 
 <ol class="breadcrumb page-breadcrumb">
-  <li class="breadcrumb-item"><a href="javascript:void(0);">Driver</a></li> 
-  <li class="breadcrumb-item active">Details</li>
-   <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Driver</a></li>
+    <li class="breadcrumb-item active">Details</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 
-    <div class="row">
-        <div class="col-xl-12">
-            <div id="panel-1" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Driver <span class="fw-300">Details</span>
-                    </h2>                    
-                </div>
-                <div class="panel-container show">
-                    <div class="panel-content">
-                        <div class="py-2">
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-
-                                <table class="table table-bordered table-hover mb-5">
-                                    <thead class="thead-themed">
-                                        <tr>
-                                            <th>Driver</th>
-                                            <th>Information</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Driver Name</th>
-                                            <td></td>
-
-
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Contact Number</th>
-                                            <td>@Model.Contact</td>
-
-
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Email Address</th>
-                                            <td>@Model.Email</td>
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row">facebook</th>
-                                            <td>@Model.Facebook</td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <th scope="row">License Type</th>
-                                            <td>@Model.LicenseType</td>
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row">License Expiry</th>
-                                            <td>@Model.LicenseExpiry</td>
-                                        </tr>
-
-
-
-                                        <tr>
-                                            <th scope="row">Nationality</th>
-                                            <td>@Model.Nationality</td>
-                                        </tr>
-
-                                        <tr>
-                                            <th colspan="2" scope="row">Notes</th>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">@Model.Comments</td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-
-
-
-
-
-
-                            </div>
-                            <div class="col-md-6">
-                                <!--   <h3 class="py-5">Driving License</h3> -->
-
-                                <div class="row">
-
-                                    <div class="col-md-6">
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="form-label"><b>Driving License</b> Front side</label>
-                                            </div>
-                                            <div class="col-md-12">
-
-                                                <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.DrivingLicenseFront" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="form-label"><b>Driving License</b> Back side</label>
-                                            </div>
-                                            <div class="col-md-12">
-
-                                                <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.DrivingLicenseBack" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-
-                                <div class="row">
-
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="form-label" style="margin-top:20px"><b>UAE ID</b> Front side</label>
-                                            </div>
-                                            <div class="col-md-12">
-
-                                                <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.IDUAECopyFront" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="form-label" style="margin-top:20px"><b>UAE ID</b> Back side</label>
-                                            </div>
-                                            <div class="col-md-12">
-
-                                                <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.IDUAECopyBack" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="row">
-
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="form-label" style="margin-top:20px"><b>Passport (Details page)</b> </label>
-                                            </div>
-                                            <div class="col-md-12">
-
-                                                <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.PassportCopy" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="form-label" style="margin-top:20px"><b>Passport (Details page)</b> Front </label>
-                                            </div>
-                                            <div class="col-md-12">
-
-                                                <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.PassportBack" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="form-label" style="margin-top:20px"><b>Visa</b>  </label>
-                                            </div>
-                                            <div class="col-md-12">
-
-                                                <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.VisaCopy" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="form-label" style="margin-top:20px"><b>Driver Image</b>  </label>
-                                            </div>
-
-                                            <div class="col-md-12">
-
-                                                <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.DriverImageUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-
-
-                            <div id="response"></div>
-                        </div>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Driver <span class="fw-300">Details</span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="py-2">
 
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <table class="table table-bordered table-hover mb-5">
+                                <thead class="thead-themed">
+                                    <tr>
+                                        <th>Driver</th>
+                                        <th>Information</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Driver Name</th>
+                                        <td></td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Contact Number</th>
+                                        <td>@Model.Contact</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email Address</th>
+                                        <td>@Model.Email</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">facebook</th>
+                                        <td>@Model.Facebook</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <th scope="row">License Type</th>
+                                        <td>@Model.LicenseType</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">License Expiry</th>
+                                        <td>@Model.LicenseExpiry</td>
+                                    </tr>
+
+
+
+                                    <tr>
+                                        <th scope="row">Nationality</th>
+                                        <td>@Model.Nationality</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th colspan="2" scope="row">Notes</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">@Model.Comments</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+
+
+
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <!--   <h3 class="py-5">Driving License</h3> -->
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="form-label"><b>Driving License</b> Front side</label>
+                                        </div>
+                                        <div class="col-md-12">
+
+                                            <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.DrivingLicenseFront" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="form-label"><b>Driving License</b> Back side</label>
+                                        </div>
+                                        <div class="col-md-12">
+
+                                            <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.DrivingLicenseBack" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="form-label" style="margin-top:20px"><b>UAE ID</b> Front side</label>
+                                        </div>
+                                        <div class="col-md-12">
+
+                                            <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.IDUAECopyFront" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="form-label" style="margin-top:20px"><b>UAE ID</b> Back side</label>
+                                        </div>
+                                        <div class="col-md-12">
+
+                                            <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.IDUAECopyBack" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="form-label" style="margin-top:20px"><b>Passport (Details page)</b> </label>
+                                        </div>
+                                        <div class="col-md-12">
+
+                                            <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.PassportCopy" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="form-label" style="margin-top:20px"><b>Passport (Details page)</b> Front </label>
+                                        </div>
+                                        <div class="col-md-12">
+
+                                            <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.PassportBack" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="form-label" style="margin-top:20px"><b>Visa</b>  </label>
+                                        </div>
+                                        <div class="col-md-12">
+
+                                            <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.VisaCopy" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="form-label" style="margin-top:20px"><b>Driver Image</b>  </label>
+                                        </div>
+
+                                        <div class="col-md-12">
+
+                                            <img id="DrivingLicenseFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.DriverImageUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div id="response"></div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 
+@section scripts{
 
+    <script>
+        $(document).ready(function () {
+            $("#DriverMenu").attr("aria-expanded", "true");
+            $('#DriverUl').css('display', 'block');
+        });
+
+    </script>
+
+}
 
 
 <style>
 
 
-.pic{
-     display: none;
-       }
-       
- .newbtn{
-         cursor: pointer;
-      }
-      .blah{
-  max-width:100%;
-  width:100%;
-  height:100%;
-  max-height:160px;
-  margin-top:20px;
-}
+    .pic {
+        display: none;
+    }
 
+    .newbtn {
+        cursor: pointer;
+    }
+
+    .blah {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        max-height: 160px;
+        margin-top: 20px;
+    }
 </style>
 
-    
+
 
 
 

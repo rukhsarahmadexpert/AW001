@@ -3,117 +3,123 @@
     ViewBag.Title = "Drivers List";
     Layout = ViewBag.LayoutName;
 
-     List<IT.Core.ViewModels.DriverViewModel> driverViewModels = new List<IT.Core.ViewModels.DriverViewModel>();
+    List<IT.Core.ViewModels.DriverViewModel> driverViewModels = new List<IT.Core.ViewModels.DriverViewModel>();
     driverViewModels = Model as List<IT.Core.ViewModels.DriverViewModel>;
 
 }
 
-                        <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Drivers</a></li>
-                            
-                            <li class="breadcrumb-item active">List</li>
-                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-                        </ol>
-                      
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div id="panel-1" class="panel">
-                                    <div class="panel-hdr">
-                                        <h2>
-                                            <a class="btn btn-md btn-primary" href="/Driver/Create">
-                                                <i class="fal fa-plus-circle"></i>  Create New <span class="fw-300"><i>Driver</i></span>
-                                            </a>
-                                        </h2>
-                                       
-                                    </div>
-                                    <div class="panel-container show">
-                                        <div class="panel-content">
-                                    <!--      <div class="panel-tag">
-                                                <p>Drivers Base Information</p>
-                                               
-                                               
-                                            </div>-->  
-                                            <!-- datatable start -->
-                                            <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                                                <thead class="bg-primary-600">
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Conatct</th>
-                                                        <th>Email</th>
-                                                        <th>License Expiry</th>
-                                                        <th>Facebook</th>
-                                                        <th>IsActive</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>                                                    
-                                                    @foreach (var item in driverViewModels)
-                                                    {
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Drivers</a></li>
 
-                                                    <tr>
-                                                        <td>@item.Name</td>
-                                                        <td>@item.Contact</td>
-                                                        <td>@item.Email</td>
-                                                        <td>@item.LicenseExpiry</td>
-                                                        <td>@item.Facebook</td>
-                                                        <td>
-                                                            @if (@item.IsActive == true)
-                                                            {
-                                                                <div class="switchToggle">
-                                                                    <input type="checkbox" id="@item.Id" checked>
-                                                                    <label for="@item.Id">Toggle</label>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="switchToggle">
-                                                                    <input type="checkbox" id="@item.Id">
-                                                                    <label for="@item.Id">Toggle</label>
-                                                                </div>
+    <li class="breadcrumb-item active">List</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
 
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            <div class="row">
-                                                                <div class="col-4">
-                                                                    <form action="/Driver/Details" method="post">
-                                                                        <input type="hidden" name="Id" value="@item.Id" />
-                                                                        <input type="hidden" name="CompId" value="@item.CompanyId" />
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a class="btn btn-md btn-primary" href="/Driver/Create">
+                        <i class="fal fa-plus-circle"></i>  Create New <span class="fw-300"><i>Driver</i></span>
+                    </a>
+                </h2>
 
-                                                                        <button type="submit" class="btn btn-sm"><i class="fal fa-eye"></i></button>
-                                                                    </form>
-                                                                </div>
-                                                                <div class="col-4">
-                                                                    <form action="/Driver/Edit" method="post">
-                                                                        <input type="hidden" name="Id" value="@item.Id" />
-                                                                        <input type="hidden" name="CompId" value="@item.CompanyId" />
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <!--      <div class="panel-tag">
+                                <p>Drivers Base Information</p>
 
-                                                                        <button type="submit" class="btn btn-sm"><i class="fal fa-edit"></i></button>
-                                                                    </form>
-                                                                </div>
 
-                                                                <div class="col-4">
+                            </div>-->
+                    <!-- datatable start -->
+                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-primary-600">
+                            <tr>
+                                <th>Name</th>
+                                <th>Conatct</th>
+                                <th>Email</th>
+                                <th>License Expiry</th>
+                                <th>Facebook</th>
+                                <th>IsActive</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in driverViewModels)
+                            {
 
-                                                                    <form>
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Contact</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.LicenseExpiry</td>
+                                    <td>@item.Facebook</td>
+                                    <td>
+                                        @if (@item.IsActive == true)
+                                        {
+                                            <div class="switchToggle">
+                                                <input type="checkbox" id="@item.Id" checked>
+                                                <label for="@item.Id">Toggle</label>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="switchToggle">
+                                                <input type="checkbox" id="@item.Id">
+                                                <label for="@item.Id">Toggle</label>
+                                            </div>
 
-                                                                        <button type="submit" class="btn btn-sm"> <i class="fal fa-trash-alt"></i></button>
-                                                                    </form>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <form action="/Driver/Details" method="post">
+                                                    <input type="hidden" name="Id" value="@item.Id" />
+                                                    <input type="hidden" name="CompId" value="@item.CompanyId" />
 
-                                                                </div>
+                                                    <button type="submit" class="btn btn-sm"><i class="fal fa-eye"></i></button>
+                                                </form>
+                                            </div>
+                                            <div class="col-6">
+                                                <form action="/Driver/Edit" method="post">
+                                                    <input type="hidden" name="Id" value="@item.Id" />
+                                                    <input type="hidden" name="CompId" value="@item.CompanyId" />
 
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    }                                                    
-                                                    
-                                                </tbody>
-                                                
-                                            </table>
-                                            <!-- datatable end -->
+                                                    <button type="submit" class="btn btn-sm"><i class="fal fa-edit"></i></button>
+                                                </form>
+                                            </div>
+
+                                           
+
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                
+                                    </td>
+                                </tr>
+                            }
 
+                        </tbody>
+
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+
+    <script>
+        $(document).ready(function () {
+            $("#DriverMenu").attr("aria-expanded", "true");
+            $('#DriverUl').css('display', 'block');
+            $('#DriverLi').addClass('active');
+        });
+
+    </script>
+
+}

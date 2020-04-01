@@ -21,7 +21,7 @@
                         <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Quotation</i></span>
                     </a>
                 </h2>
-               
+
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
@@ -32,7 +32,7 @@
 
                     <table class="QuotationListTable table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
-                            
+
                             <tr>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Name)
@@ -59,7 +59,7 @@
                                     Action
                                 </th>
                             </tr>
-                           
+
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
@@ -103,5 +103,16 @@
 </div>
 
 
+@section scripts{
 
+    <script>
+        $(document).ready(function () {
+            $("#InvoiceMenu").attr("aria-expanded", "true");
+            $('#InvoiceUl').css('display', 'block');
+            $('#InvoiceLi').addClass('active');
+        });
+
+    </script>
+
+}
 

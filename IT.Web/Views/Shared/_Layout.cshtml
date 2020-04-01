@@ -256,24 +256,24 @@
                     <ul class="nav-menu" id="js-nav-menu">
 
                         <li class="open">
-                            <a href="#" title="My Bookings" class=" " data-filter-tags="My Bookings">
+                            <a href="#" title="My Bookings" class=" " data-filter-tags="My Bookings" >
                                 <i class="fal fa-shopping-bag"></i>
                                 <span class="nav-link-text" data-i18n="nav.application_intel" id="MyBookinMenu">My Bookings</span>
                             </a>
                             <ul id="bookingUl">
-                                <li>
-                                    <a href="/CustomerBooking/CustomerCreate" title="Place New Order" class=" " data-filter-tags="">
+                                <li class="AddBookingli">
+                                    <a href="/CustomerBooking/CustomerCreate" title="Place New Order"  data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Place New Order</span><span class="">Add</span>
                                     </a>
                                 </li>
 
-                                <li>
-                                    <a href="/CustomerBooking/Customer" title="New Order Processing" class=" " data-filter-tags="">
+                                <li  id="NewOrderProcessingli">
+                                    <a href="/CustomerBooking/Customer" title="New Order Processing" class="" data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">New Order Processing</span><span class="">List</span>
                                     </a>
                                 </li>
 
-                                <li>
+                                <li id="OrderConfirmationli">
                                     <a href="/OrderConfirmations/Index" title="Order Confirmations" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Order Confirmations</span><span class="">List</span>
                                     </a>
@@ -281,7 +281,7 @@
 
 
 
-                                <li>
+                                <li id="BookingReservedli">
                                     <a href="/CustomerBooking/BookingReserved" title="Reserved Quantities" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Reserved Quantities</span><span class="">List</span>
                                     </a>
@@ -298,10 +298,17 @@
                         <li class="open">
                             <a href="#" title="My Deliveries" class=" " data-filter-tags="My Deliveries">
                                 <i class="fal fa-reply"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Deliveries</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="DeliveryMenu">Deliveries</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="DeliveryUl">
+
+                                <li id="DeliveryAddLi">
+                                    <a href="/CustomerOrder/Create" title="Build Notes" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">My Delivery</span><span class="">Add</span>
+                                    </a>
+                                </li>
+
+                                <li id="DeliveryLi">
                                     <a href="/CustomerOrder/Index" title="Build Notes" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">My Deliveries</span><span class="">List</span>
                                     </a>
@@ -312,10 +319,15 @@
                         <li class="open">
                             <a href="#" title="Drivers Information" class=" " data-filter-tags="Drivers Information">
                                 <i class="fal fa-address-card"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Drivers Information</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="DriverMenu">Drivers Information</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="DriverUl">
+                                <li id="DriverAddLi">
+                                    <a href="/Driver/Create" title="Drivers" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Driver</span><span class="">Add</span>
+                                    </a>
+                                </li>
+                                <li id="DriverLi">
                                     <a href="/Driver/Index" title="Drivers" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Drivers</span><span class="">List</span>
                                     </a>
@@ -327,10 +339,17 @@
                         <li class="open">
                             <a href="#" title="Vehicle Information" class=" " data-filter-tags="Vehicle Information">
                                 <i class="fal fa-car"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Vehicle Information</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="VehicleMenu">Vehicle Information</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="VehicleUl">
+
+                                <li id="VehicleAddLi">
+                                    <a href="/Vehicle/Create" title="Vehicles" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Vehicle</span><span class="">Add</span>
+                                    </a>
+                                </li>
+
+                                <li id="VehicleLi">
                                     <a href="/Vehicle/Index" title="Vehicles" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Vehicles</span><span class="">List</span>
                                     </a>
@@ -342,10 +361,15 @@
                         <li class="open">
                             <a href="#" title="Registered Sites" class=" " data-filter-tags="Registered Sites">
                                 <i class="fal fa-registered"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Registered Sites</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="RegisteredMenu">Registered Sites</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="RegisteredUl">
+                                <li id="RegisteredAddLi">
+                                    <a href="/CustomerSites/Create" title="Site" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Site</span><span class="">Add</span>
+                                    </a>
+                                </li>
+                                <li id="RegisteredLi">
                                     <a href="/CustomerSites/Index" title="Sites" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Sites</span><span class="">List</span>
                                     </a>
@@ -355,10 +379,10 @@
                         <li class="open">
                             <a href="#" title="My Invoices" class=" " data-filter-tags="My Invoices">
                                 <i class="fal fa-file-check"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">My Invoices</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="InvoiceMenu">My Invoices</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="InvoiceUl">                 
+                                <li id="InvoiceLi">
                                     <a href="/Quotation/IndexCustomer" title="Reports" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">My Estimates</span><span class="">List</span>
                                     </a>
@@ -374,10 +398,10 @@
                         <li class="open">
                             <a href="#" title="Reports" class=" " data-filter-tags="Reports">
                                 <i class="fal fa-file"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Reports</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="ReportMenu">Reports</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="ReportUl">
+                                <li id="ReportLi">
                                     <a href="/ReportCustomer/Index" title="Reports" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Reports</span><span class="">List</span>
                                     </a>
