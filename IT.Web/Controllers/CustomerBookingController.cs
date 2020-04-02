@@ -85,9 +85,10 @@ namespace IT.Web.Controllers
             try
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                CustomerBookingViewModel customerBookingViewModel = new CustomerBookingViewModel();
-                customerBookingViewModel.CompanyId = CompanyId;
-
+                CustomerBookingViewModel customerBookingViewModel = new CustomerBookingViewModel
+                {
+                    CompanyId = CompanyId
+                };
                 CustomerBookingReservedRemaining customerBookingReservedRemaining = new CustomerBookingReservedRemaining();
 
                 var CustomerBookingList = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingReserved");
@@ -114,9 +115,10 @@ namespace IT.Web.Controllers
             try
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                CustomerBookingViewModel customerBookingViewModel = new CustomerBookingViewModel();
-                customerBookingViewModel.CompanyId = CompanyId;
-
+                CustomerBookingViewModel customerBookingViewModel = new CustomerBookingViewModel
+                {
+                    CompanyId = CompanyId
+                };
                 CustomerBookingReservedRemaining customerBookingReservedRemaining = new CustomerBookingReservedRemaining();
 
                 var CustomerBookingList = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingReserved");
@@ -203,10 +205,10 @@ namespace IT.Web.Controllers
             ViewBag.Products = productController.Products();
             ViewBag.ProductUnits = productUnitController.ProductUnits();
 
-            CustomerBookingViewModel CustomerBookingViewModel = new CustomerBookingViewModel();
-            CustomerBookingViewModel.VAT = (decimal)0.00;
-            CustomerBookingViewModel.TotalAmount = (decimal)0.00;
-
+            CustomerBookingViewModel CustomerBookingViewModel = new CustomerBookingViewModel { 
+            VAT = (decimal)0.00,
+            TotalAmount = (decimal)0.00,
+            };
             return View(CustomerBookingViewModel);
         }
 
@@ -220,9 +222,10 @@ namespace IT.Web.Controllers
             ViewBag.Products = productController.Products();
             ViewBag.ProductUnits = productUnitController.ProductUnits();
 
-            CustomerBookingViewModel CustomerBookingViewModel = new CustomerBookingViewModel();
-            CustomerBookingViewModel.VAT = (decimal)0.00;
-            CustomerBookingViewModel.TotalAmount = (decimal)0.00;
+            CustomerBookingViewModel CustomerBookingViewModel = new CustomerBookingViewModel { 
+            VAT = (decimal)0.00,
+            TotalAmount = (decimal)0.00
+            };
             return View(CustomerBookingViewModel);
         }
 

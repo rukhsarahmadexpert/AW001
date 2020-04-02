@@ -24,14 +24,15 @@
                     <table class="QuotationListTable table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
-                                <th>Quotation #</th>
                                 <th>Customer</th>
+                                <th>Product</th>
+                                <th>Unit</th>
+                                <th>Quantity</th>
                                 <th>Date</th>
                                 <th>Due Date</th>
                                 <th>Total</th>
                                 <th>VAT</th>
                                 <th>Grand Total</th>
-                                <th>Is Updated</th>
                                 <th>Oprater</th>
                                 <th>Action</th>
                             </tr>
@@ -79,14 +80,15 @@
                     })
                 },
                 "aoColumns": [
-                    { "mData": "PONumber" },
                     { "mData": "Name" },
+                    { "mData": "Product" },
+                    { "mData": "UnitName" },
+                    { "mData": "TotalQuantity" },
                     { "mData": "FDate" },
                     { "mData": "DDate" },
                     { "mData": "Total" },
                     { "mData": "VAT" },
                     { "mData": "GrandTotal" },
-                    { "mData": "IsUpdated" },
                     { "mData": "UserName" },
                     {
                         "mData": "Id",

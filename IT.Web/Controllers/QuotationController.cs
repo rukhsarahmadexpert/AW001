@@ -104,6 +104,9 @@ namespace IT.Web_New.Controllers
                    .Select(x => new LPOInvoiceViewModel
                    {
                        Id = x.Id,
+                       Product = x.Product,
+                       UnitName = x.UnitName,
+                       TotalQuantity = x.TotalQuantity,
                        Name = x.Name,
                        Total = x.Total,
                        VAT = x.VAT,
@@ -125,6 +128,9 @@ namespace IT.Web_New.Controllers
                         .Select(x => new LPOInvoiceViewModel
                         {
                             Id = x.Id,
+                            Product = x.Product,
+                            UnitName = x.UnitName,
+                            TotalQuantity = x.TotalQuantity,
                             Name = x.Name,
                             Total = x.Total,
                             VAT = x.VAT,
@@ -496,10 +502,9 @@ namespace IT.Web_New.Controllers
                     return Json("Failed", JsonRequestBehavior.AllowGet);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw ex;
             }
         }
 
