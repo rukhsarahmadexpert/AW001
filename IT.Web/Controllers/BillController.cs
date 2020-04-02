@@ -189,13 +189,10 @@ namespace IT.Web_New.Controllers
 
                 if (HttpContext.Cache["AWFuelBillData"] != null)
                 {
-
                     lPOInvoiceViewModels = HttpContext.Cache["AWFuelBillData"] as List<LPOInvoiceViewModel>;
                 }
-
                 else
                 {
-
                     var result = webServices.Post(new LPOInvoiceViewModel(), "Bill/All");
                     lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
 
@@ -218,6 +215,9 @@ namespace IT.Web_New.Controllers
                    .Select(x => new LPOInvoiceViewModel
                    {
                        Id = x.Id,
+                       Product = x.Product,
+                       UnitName = x.UnitName,
+                       TotalQuantity = x.TotalQuantity,
                        Name = x.Name,
                        Total = x.Total,
                        VAT = x.VAT,
@@ -235,11 +235,14 @@ namespace IT.Web_New.Controllers
                     totalCount = lPOInvoiceViewModels.Count();
 
                     lPOInvoiceViewModels = lPOInvoiceViewModels
-                                                       .Skip((pageNo - 1) * parm.iDisplayLength)
-                                                       .Take(parm.iDisplayLength)
+                                          .Skip((pageNo - 1) * parm.iDisplayLength)
+                                          .Take(parm.iDisplayLength)
                         .Select(x => new LPOInvoiceViewModel
                         {
                             Id = x.Id,
+                            Product = x.Product,
+                            UnitName = x.UnitName,
+                            TotalQuantity = x.TotalQuantity,
                             Name = x.Name,
                             Total = x.Total,
                             VAT = x.VAT,
@@ -266,7 +269,7 @@ namespace IT.Web_New.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
 
         }

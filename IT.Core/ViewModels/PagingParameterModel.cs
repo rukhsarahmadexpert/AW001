@@ -30,14 +30,5 @@ namespace IT.Core.ViewModels
             }
         }
 
-        public static implicit operator PagingParameterModel(List<PagingParameterModel> v)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetPageSize(int v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

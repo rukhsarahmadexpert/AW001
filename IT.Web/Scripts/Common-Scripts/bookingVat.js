@@ -1,105 +1,47 @@
 ﻿$(document).ready(function () {
-    $('input[name=\'BookQuantity\']').on('change keyup click', function () {
-        booking();
-        vat()
+    $('#Quantity').keyup(function () {       
+        VatCount();
     });
 
-    $('#UnitPrice').on('change keyup click', function () {
-        booking();
-
-        vat();
+    $('#UnitPrice').keyup(function () {       
+        VatCount();
     });
 
-    vat();
-
+    $('#VAT1').change(function () {       
+        VatCount();
+    });  
 });
 
-function booking() {
+function VatCount()
+{
+    var price = 0.00;
+    var quantity = 0;
+    var total = 0.00;
+    var VatAmount = 0.00;
+    var GrandTotal = 0.00;
 
-    // $('#VAT1').empty();
+   
+    $('#BookingTable1 tbody tr').each(function () {
+       // var currentRow = $(this).closest("tr");
+        if ($(this).find(".Quantity").val() > 0 && $(this).find(".UnitPrice").val())
+        {
+            price = $(this).find(".UnitPrice").val();          
+            quantity = $(this).find(".Quantity").val();
+            total = price * quantity;
+            if ($(this).find(".VAT1").val() > 0) {
+                VatAmount = ((5 * total) / 100);
+            }
+           
+            GrandTotal = VatAmount + total;
+        }
+    })
 
-    var price = $('#UnitPrice').val();
+    $('#gtotal').val(GrandTotal.toFixed(2));
+    $('#gtotal2').text(GrandTotal.toFixed(2));
+    $('#VAT').val(VatAmount.toFixed(2));
+    $('#VAT2').text(VatAmount.toFixed(2));
+    $('#TotalAmount').val(total.toFixed(2));
 
-    var quantity = $('.Quantity').val();
-
-    var total = $('#TotalAmount').val(price * quantity);
-
-    $('#gtotal').val(price * quantity);
-    $('#gtotal2').text(price * quantity);
 }
 
 
-function vat() {
-
-
-
-            var tt = $('#TotalAmount').val()
-
-
-    $('#VAT').val();
-    var vt = $('#VAT1').val();
-    if (vt != 0) {
-
-        var vat_value = ((5 * tt) / 100);
-        $('#VAT').val(vat_value);
-        $('#VAT2').text(vat_value);
-        $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
-        $('#gtotal2').text(parseFloat(vat_value) + parseFloat(tt));
-        $('#VAT1').change(function () {
-
-            var vt2 = $('#VAT1').val();
-            if (vt2 == 0) {
-                var vat_value = 0;
-                $('#VAT').val(vat_value);
-                $('#VAT2').text(vat_value);
-                $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
-                $('#gtotal2').text(parseFloat(vat_value) + parseFloat(tt));
-                $('#TotalAmount').val(tt);
-            }
-            else {
-
-                var vat_value = ((5 * tt) / 100);
-                $('#VAT').val(vat_value);
-                $('#VAT2').text(vat_value);
-                $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
-                $('#gtotal2').text(parseFloat(vat_value) + parseFloat(tt));
-
-            }
-
-        })
-    }
-    else {
-
-        var vat_value = 0;
-        $('#VAT').val(vat_value);
-        $('#VAT2').text(vat_value);
-        $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
-        $('#gtotal2').text(parseFloat(vat_value) + parseFloat(tt));
-        $('#TotalAmount').val(tt);
-        $('#VAT1').change(function () {
-
-            var vt2 = $('#VAT1').val();
-            if (vt2 == 0) {
-                var vat_value = 0;
-                $('#VAT').val(vat_value);
-                $('#VAT2').text(vat_value);
-                $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
-                $('#gtotal2').text(parseFloat(vat_value) + parseFloat(tt));
-                $('#TotalAmount').val(tt);
-            }
-            else {
-
-                var vat_value = ((5 * tt) / 100);
-                $('#VAT').val(vat_value);
-                $('#VAT2').text(vat_value);
-                $('#gtotal').val(parseFloat(vat_value) + parseFloat(tt));
-                $('#gtotal2').text(parseFloat(vat_value) + parseFloat(tt));
-
-            }
-
-
-
-        })
-    }
-
-}

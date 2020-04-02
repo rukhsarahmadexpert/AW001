@@ -20,18 +20,6 @@
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
                             <form action="/ReportCustomer/RepoOrdersByDates" method="post">
-                                <div class="input-group flex-nowrap">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="addon-wrapping">Start Date</span>
-                                    </div>
-                                    @Html.EditorFor(model => model.fDate, new { htmlAttributes = new { @class = "form-control FromDate Input-height", @style = "font-size:12px", name = "FromDate", id = "FromDate", @title = "From Date" } })
-                                </div>
-                                <div class="input-group flex-nowrap mt-2">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="addon-wrapping">End Date</span>
-                                    </div>
-                                    @Html.EditorFor(model => model.Tdate, new { htmlAttributes = new { @class = "form-control ToDate Input-height", @style = "font-size:12px", name = "ToDate", id = "ToDate", @title = "To Date" } })
-                                </div>
                                 <div class="input-group flex-nowrap mt-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="addon-wrapping">Report Type</span>
@@ -39,7 +27,7 @@
                                     <select class="form-control" id="ReportType" name="Flage">
                                         <option value="0">Select Report Type</option>
                                         <option value="VehicleReport">By Vehicles Refilling Report</option>
-                                        <option value="OrderReport">By Orders Refilling Report</option>
+                                        <option value="OrderReport">By Delivery Orders Report</option>
                                     </select>
                                 </div>
                                 <div class="input-group flex-nowrap mt-2">
@@ -48,6 +36,7 @@
                                     </div>
                                     <select class="form-control" id="ReportStatus" name="searchkey" disabled></select>
                                 </div>
+
                                 <div class="input-group flex-nowrap mt-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" name="Status" id="wrappingSt">Status</span>
@@ -58,6 +47,19 @@
                                         <option value="Deliverd">Deliverd</option>
                                         <option value="Rejected">Rejected</option>
                                     </select>
+                                </div>  
+
+                                <div class="input-group flex-nowrap mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="addon-wrapping">Start Date</span>
+                                    </div>
+                                    @Html.EditorFor(model => model.fDate, new { htmlAttributes = new { @class = "form-control FromDate Input-height", @style = "font-size:12px", name = "FromDate", id = "FromDate", @title = "From Date" } })
+                                </div>
+                                <div class="input-group flex-nowrap mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="addon-wrapping">End Date</span>
+                                    </div>
+                                    @Html.EditorFor(model => model.Tdate, new { htmlAttributes = new { @class = "form-control ToDate Input-height", @style = "font-size:12px", name = "ToDate", id = "ToDate", @title = "To Date" } })
                                 </div>
                                 <div class="input-group flex-nowrap mt-2">
                                     <div class="input-group-prepend">

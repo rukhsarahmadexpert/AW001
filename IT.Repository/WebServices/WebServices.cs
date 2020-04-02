@@ -58,10 +58,5 @@ namespace IT.Repository.WebServices
             }
             return serviceResponseModel;
         }
-
-        public object Get(PagingParameterModel pagingParameterModel, string v, int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
