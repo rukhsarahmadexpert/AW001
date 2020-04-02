@@ -219,7 +219,8 @@
             <aside class="page-sidebar">
                 <div class="page-logo">
                     <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
-                        <img src="~/assets/staticImages/logo-1.png" alt="Aw fuel" style="width:65px" aria-roledescription="logo">
+                        <img id="imgHorazontal" src="~/assets/img/logo-3.svg" alt="Aw fuel" style="width:220px" aria-roledescription="logo">
+                        <img id="imgVertical" src="~/assets/staticImages/logo-1.png" alt="Aw fuel" style="width:65px" aria-roledescription="logo">
                         <!--<span class="page-logo-text mr-1">Mena Energy</span>-->
                         <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
                         <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
@@ -269,15 +270,11 @@
                                 <span class="nav-link-text" data-i18n="nav.application_intel" id="MyBookinMenu">My Bookings</span>
                             </a>
                             <ul id="bookingUl">
-                                <li class="AddBookingli">
-                                    <a href="/CustomerBooking/CustomerCreate" title="Place New Order"  data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Place New Order</span><span class="">Add</span>
-                                    </a>
-                                </li>
+                               
 
                                 <li  id="NewOrderProcessingli">
-                                    <a href="/CustomerBooking/Customer" title="New Order Processing" class="" data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">New Order Processing</span><span class="">List</span>
+                                    <a href="/CustomerBooking/Customer" title="Place New Orders" class="" data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Place New Orders</span><span class="">List</span>
                                     </a>
                                 </li>
 
@@ -290,16 +287,11 @@
 
 
                                 <li id="BookingReservedli">
-                                    <a href="/CustomerBooking/BookingReserved" title="Reserved Quantities" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Reserved Quantities</span><span class="">List</span>
+                                    <a href="/CustomerBooking/BookingReserved" title="Reserved / Remaining Quantities" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Reserved / Remaining Quantities</span><span class="">List</span>
                                     </a>
                                 </li>
 
-                                <li>
-                                    <a href="/CustomerBooking/BookingReserved" title="Remaining Quantities" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Remaining Quantities</span><span class="">List</span>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
 
@@ -310,12 +302,7 @@
                             </a>
                             <ul id="DeliveryUl">
 
-                                <li id="DeliveryAddLi">
-                                    <a href="/CustomerOrder/Create" title="Build Notes" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">My Delivery</span><span class="">Add</span>
-                                    </a>
-                                </li>
-
+                               
                                 <li id="DeliveryLi">
                                     <a href="/CustomerOrder/Index" title="Build Notes" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">My Deliveries</span><span class="">List</span>
@@ -330,11 +317,7 @@
                                 <span class="nav-link-text" data-i18n="nav.application_intel" id="DriverMenu">Drivers Information</span>
                             </a>
                             <ul id="DriverUl">
-                                <li id="DriverAddLi">
-                                    <a href="/Driver/Create" title="Drivers" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Driver</span><span class="">Add</span>
-                                    </a>
-                                </li>
+                                
                                 <li id="DriverLi">
                                     <a href="/Driver/Index" title="Drivers" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Drivers</span><span class="">List</span>
@@ -351,12 +334,7 @@
                             </a>
                             <ul id="VehicleUl">
 
-                                <li id="VehicleAddLi">
-                                    <a href="/Vehicle/Create" title="Vehicles" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Vehicle</span><span class="">Add</span>
-                                    </a>
-                                </li>
-
+                              
                                 <li id="VehicleLi">
                                     <a href="/Vehicle/Index" title="Vehicles" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Vehicles</span><span class="">List</span>
@@ -372,11 +350,7 @@
                                 <span class="nav-link-text" data-i18n="nav.application_intel" id="RegisteredMenu">Registered Sites</span>
                             </a>
                             <ul id="RegisteredUl">
-                                <li id="RegisteredAddLi">
-                                    <a href="/CustomerSites/Create" title="Site" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Site</span><span class="">Add</span>
-                                    </a>
-                                </li>
+                               
                                 <li id="RegisteredLi">
                                     <a href="/CustomerSites/Index" title="Sites" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Sites</span><span class="">List</span>
@@ -385,9 +359,9 @@
                             </ul>
                         </li>
                         <li class="open">
-                            <a href="#" title="My Invoices" class=" " data-filter-tags="My Invoices">
+                            <a href="#" title="Finances" class=" " data-filter-tags="Finances">
                                 <i class="fal fa-file-check"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel" id="InvoiceMenu">My Invoices</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="InvoiceMenu">Finances</span>
                             </a>
                             <ul id="InvoiceUl">                 
                                 <li id="InvoiceLi">
@@ -396,8 +370,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a style="cursor:pointer" title="Purchases" class="text-primary" data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Purchases</span><span class="">List</span>
+                                    <a style="cursor:pointer" title="My Invoices" class="text-primary" data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">My Invoices</span><span class="">List</span>
                                     </a>
                                 </li>
                             </ul>
@@ -448,7 +422,10 @@
                         </a>
                         <ul>
                             <li>
-                                <a href="#" class="btn js-waves-off" data-action="toggle" data-class="nav-function-minify" title="Minify Navigation">
+                                <a href="#" class="btn js-waves-off" id="LogoSmall" data-action="toggle" data-class="nav-function-minify" title="Minify Navigation">
+                                    <i class="ni ni-minify-nav"></i>
+                                </a>
+                                <a href="#" class="btn js-waves-off" id="LogoLarge" data-action="toggle" data-class="nav-function-minify" title="Minify Navigation">
                                     <i class="ni ni-minify-nav"></i>
                                 </a>
                             </li>
@@ -481,20 +458,18 @@
                             </a>
                         </div>
                         <!-- app settings -->
-                        <div class="hidden-md-down">
-                            <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-settings">
-                                <i class="fal fa-cog"></i>
-                            </a>
-                        </div>
-                      
-                
+                        <!-- <div class="hidden-md-down">
+         <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-settings">
+             <i class="fal fa-cog"></i>
+         </a>
+     </div>-->
                         <!-- app user menu -->
                         <div>
                             <a href="#" data-toggle="dropdown" title="drlantern@gotbootstrap.com" class="header-icon d-flex align-items-center justify-content-center ml-2">
                                 <img src="http://awservices.somee.com/ClientDocument/@UserImage" class="profile-image rounded-circle" alt="User Image">
                                 <!-- you can also add username next to the avatar with the codes below:
-                                        <span class="ml-1 mr-1 text-truncate text-truncate-header hidden-xs-down">Me</span>
-                                        <i class="ni ni-chevron-down hidden-xs-down"></i> -->
+                    <span class="ml-1 mr-1 text-truncate text-truncate-header hidden-xs-down">Me</span>
+                    <i class="ni ni-chevron-down hidden-xs-down"></i> -->
                             </a>
                             <div class="dropdown-menu dropdown-menu-animated dropdown-lg">
                                 <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
@@ -510,11 +485,11 @@
                                 </div>
                                 <div class="dropdown-divider m-0"></div>
                                 @*   <a href="#" class="dropdown-item" data-action="app-reset">
-                                        <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
-                                    </a>*@
-                                <a href="#" class="dropdown-item" data-toggle="modal" data-target=".js-modal-settings">
-                                    <span data-i18n="drpdwn.settings">Settings</span>
-                                </a>
+            <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
+        </a>*@
+                                <!--<a href="#" class="dropdown-item" data-toggle="modal" data-target=".js-modal-settings">
+        <span data-i18n="drpdwn.settings">Settings</span>
+    </a>-->
                                 <div class="dropdown-divider m-0"></div>
                                 <a href="#" class="dropdown-item" data-action="app-fullscreen">
                                     <span data-i18n="drpdwn.fullscreen">Fullscreen</span>
@@ -1650,7 +1625,28 @@
       @*//  @if(Session["On"])*@
 
 
+        $(document).ready(function () {
 
+
+            $('#imgVertical').hide();
+            $('#LogoLarge').hide();
+            $('#LogoSmall').click(function () {
+
+                $('#imgVertical').show();
+                $('#imgHorazontal').hide();
+                $('#LogoLarge').show();
+                $('#LogoSmall').hide();
+            });
+
+            $('#LogoLarge').click(function () {
+
+                $('#imgVertical').hide();
+                $('#imgHorazontal').show();
+                $('#LogoLarge').hide();
+                $('#LogoSmall').show();
+            });
+
+        });
 
     </script>
     <script src="~/Scripts/firebass.app.js"></script>

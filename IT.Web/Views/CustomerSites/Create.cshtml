@@ -11,12 +11,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Customer Site</a></li>
-    <li class="breadcrumb-item active">create</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
-
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -97,14 +91,14 @@
                             <div class="col-md-12">
                                 @if (Model.Id > 0)
                                 {
-                                    <button type="submit" id="Save" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                    <button type="submit" id="Save" class="btn btn-primary btn-sm waves-effect waves-themed float-right">
                                         Update
                                         <span>submit</span>
                                     </button>
                                 }
                                 else
                                 {
-                                    <button type="submit" id="Save" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                    <button type="submit" id="Save" class="btn btn-primary btn-sm waves-effect waves-themed float-right">
                                         Customer Site
                                         <span>submit</span>
                                     </button>
