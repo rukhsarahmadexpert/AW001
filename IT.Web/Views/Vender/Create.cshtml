@@ -18,21 +18,6 @@
     countryViewModels = ViewBag.Countries as List<IT.Core.ViewModels.CountryViewModel>;
 }
 
-<ol class="breadcrumb page-breadcrumb">
-    @if (Model.Id > 0)
-    {
-        <li class="breadcrumb-item"><a href="javascript:void(0);">Vender </a></li>
-        <li class="breadcrumb-item active">Edit</li>
-        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-    }
-    else
-    {
-        <li class="breadcrumb-item"><a href="javascript:void(0);">Vender </a></li>
-        <li class="breadcrumb-item active">Create</li>
-        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-    }
-
-</ol>
 
 <div class="row">
     <div class="col-xl-12">
@@ -191,14 +176,14 @@
                             <div class="col-md-12">
                                 @if (Model.Id > 0)
                                 {
-                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                    <button type="submit" class="btn btn-primary btn-sm float-right waves-effect waves-themed">
                                         Update
                                         <span>Vender</span>
                                     </button>
                                 }
                                 else
                                 {
-                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                    <button type="submit" class="btn btn-primary btn-sm float-right waves-effect waves-themed">
                                         Submit
                                         <span>Vender</span>
                                     </button>

@@ -1,5 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
+@{ 
+    IT.Core.ViewModels.UserCompanyViewModel userCompanyViewModel = new IT.Core.ViewModels.UserCompanyViewModel();
+    userCompanyViewModel = Session["userCompanyViewModel"] as IT.Core.ViewModels.UserCompanyViewModel;
+
+    //var UserImage = userCompanyViewModel.ImageUrl ?? userCompanyViewModel.LogoUrl;
+    var UserImage = "158581250521-4.png";
+}
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -211,8 +218,9 @@
             <aside class="page-sidebar">
                 <div class="page-logo">
                     <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
-                        <img src="~/assets/staticImages/logo-1.png" alt="Aw Fuel" style="width:60px" aria-roledescription="logo">
-                        <!--<span class="page-logo-text mr-1">Aw Fuel </span>-->
+                        <img id="imgHorazontal" src="~/assets/img/logo-3.svg" alt="Aw fuel" style="width:220px" aria-roledescription="logo">
+                        <img id="imgVertical" src="~/assets/staticImages/logo-1.png" alt="Aw fuel" style="width:65px" aria-roledescription="logo">
+                        <!--<span class="page-logo-text mr-1">Mena Energy</span>-->
                         <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
                         <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
                     </a>
@@ -228,14 +236,19 @@
                         </div>
                     </div>
                     <div class="info-card">
-                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUSEhMVFRUXFxcXGBcXFxcYGBcXFxcYGBkYFRUYHiggGB0lGxUXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0lHyYtLS0tLy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tLSstLS0tLf/AABEIAOAA4QMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAAAgMEBQYBBwj/xABBEAABAwIDBQQIAwcDBAMAAAABAAIRAyEEEjEFQVFhgQYicZETMqGxwdHh8BRCUgcVI2JygpIzY/EWQ1OyosLi/8QAGgEBAAMBAQEAAAAAAAAAAAAAAAECBAMFBv/EACYRAAICAgICAgICAwAAAAAAAAABAhEDIRIxQVEEIhNhMqFSgZH/2gAMAwEAAhEDEQA/APSUIQtxnBCEIAQhCAEIQgBCEIAQhCAEIQgBCEICLtP/AEn+HjvCrOzhu7X7Ktscf4brxpfqFTdnnd8hW8A0CEIVQCEIQAhCEAIQhACEIQAhCEAIQhACEIQAhCEAIQhACEIQAhCEAIQhACEIQDGNJyHLE2idJkarP7Cc70sSBxEc46arR4j1erdf6gqDZbstZ92jXfYw4WHFSDRoQhQAQhCAEIQgBCEIAQhCAEIQgBCEISCEIQAhCEAJvEVgxpcdAFExu1qdM5S4ZuE6LMdru0DcjWtcDeSLbjvHVG6CRdVe0lIAHxkfLj9UihtwvIBIZxAuYMRlPG/SF5NjdqkkxMSfamG7eeDmzHSNeCryLcT3xgEb/Mldpm3mPIwvHMH29rtH+puiIB+CvsD+0BxDWZWNAABdBcTbWJEkq1kcWejoVRgcdUfTFQlhBFsoMg/lBuRe2n1Vs0oVOoQhAMYyMtwSJbYb+8FRYQD8QRkn1rGVeY490Q7L3hfhv+Cz9IgVzNQ6m410t7VINO02C6mcK4FogyNJ4wYunlBIIQhCAQhCAEIQhIIQhACEIQAhCEAIQhACg7XxnoqZdMHcTu+ZU5YX9om0nU3MbuiwOknejCIO0Nsw0wM0m8kST4wsbiauYSSQbmCZP0TWIx8Aybm88Ezg2GpoOvFc5So6xjfRFtMgymnUJ3LU4LYRJurmn2eZFwuTyo6/hZ5lWpHck0a0Eara7W7OFsltws7V2Qb2NlZZEyrxs0XZTtAaLm3lv6TYHwPEL1vZO0mVm52GAQBB1BBPwIXz5SplvddNtOR3r0PsDtV1KWF4giQHaOI3A/lMacV1i7OUonqKE3h6we3MJHIpxWOZXbcxIptaSM3e042P0WYGOIqekDRN7RaSFY9q6RztIJMjSbCN48fgqP0TuAjxKkGs7P40OaWugOBsNJEbvardZDs3THphmiQDljjG/pK16EghCFBAIQhACEIQkEIQgBCEIAQhCEAhCEJBebftTZNRn9I95XpKwH7UKX+m7i0jy/5UMldnl1fDZnarWdmsGAFR4SjJP30Wv2HgXNEkQs2V6NWFbLWnTjROhyUKa7lCzbNYy4Sor8I07gp5YkupohRnNp7Ja4aCVmsJiTTfEkZTHgQVv69GQV57WoOFZ0/rJvbf9Fowy3RnzR8nt+wMUatGnUiA5omDInQwN2mgVmqPsjhjTwrGg8TBFr3srxazAZXtM6asXsAPO6s9n7HommxzmSS0E3O+/FUe0qhc8mZkkj5LYUGQ1o4NA8gpBji30OIdH5HyPD/hbNpkSNCsx2ioxWB3Ob7Rb4K32FiM9IDe3un4ICxQhCgAhCEAIQhSSCEIUAEIQgOZkSo4cu5leilj0rspnMjMooWPSsH+0rvOoj+r4W9i1+OxXo6bn8Bbx3LFYugXM77iTJfe8GNFwy5FFpGrDhcouforuz+zgSXEWGnirbHY8UhpJ4BObPpZaYHVRdo4UuFtVkyPZrxx0UGM21inGWMAHCQoVPtRiWmHUTz+wl7Qw2IaAGPB1nut03et1UalgqmZt8xtMCIO/l5I3olJtmt2XtcVBpB4KdVxrW+sQFA2TgeIus/2urZKnoiDEAzMaqitnR6Rr6eKY7QgqC/ZQq4qiyPWJk8miT7lidm4d3rUavQ+4kH3r0nsOXVIqVBDqYczxLouOg9q0Yo/YzZpfVmzpUw0QFVdo8a+m1oZbNINp8ju1VpnWa7SY1peGT6uvifsLW9GBbKUOM/Qqc7ab/5/8j81FdHTibaqXQwL3iW0zHEwPeotss0iHiKpeRr1M+9L2fmFRlyO8381td4ClVMC9t3MIHEQ73FQqtSIgTO/RLY0b+VzMqXZe0C5gkXAjx5qW/GclZFCfmXMyhDFDekuxzRvQE/OjOqx+0G7iOq5T2m2Ln78FILTOjOqg7UadPvqmDtjwCgkvs64s3+/fBCCmXWZM1caxphzw08zCzW1+0Io0y4uv7ei81252gqOBcXxOjZ95V0c290j3GliWu9Vwd4EH3JzOF8/4Lb7xSAa9we0gCJBIvBDp13FWeF7c16be93x/O75CT5o36JV3TPYNqPBpkSNR71nBh5zueTwA3a6lUHZ/t02u4MrU20iSAHAkgk2AM3b7lq8fTgazPwWHOvumej8eVY3E41OWIUam+U9TcuDNEeiPWwTXXLUgYNrdwU51RQa+IAudFGjokSKDb2Vb2l2MKpDhrlg8wDIv1SML2jpOdlyvYRbvtIB8HaHzU5m1GOIYXDNqBN48FZUiGrM5g9gRAAykGZAueU8OS2OyMUKLchGpmVxgBEqHij3unzXTG2nZlzxXGi8qbWAnwWbe+SS7+ooc4mwlN1mHLBEXk2+S1J2Y6osdn1GAZqklxuLWbwHjzU6lijBj78FTDnPkpYpHLNo3XE+SlSaRWROdiSBIOnUqqxbxMjTf84S3O8FHxQhsQQd3MKNiLQrD4ksKcdtJxtKgson8xgcdU/Uos/IXG35gPYQVHImhZxruJXPxh4lMgO4KM4OzCNN6C6J5xkiEgYrgo7acnUBIq4fISM0nhEQi2WZLGKjVIrYzMmPSDeUlgbMhSAuhLlCpyFGT2xjnVQbAkA28RcDmsjhcG6sbmOC1tWi112nI7gU2zAFsuhszcg+3Sy1ONs8+GXitdmZxmy6tGC5sgmzx6vXh1XWYgHuPHd3cjxWtdVc0WZI3ySQeiqsds2nUEtHo3ctD4t+Shw9HWHyE/5FG6jUabNzcCN/Ahey5yKbASSQBPldeP4cZXtp1Zs4EHlImOi9Tdj2kwCCCBEcxYjzWTP4PQw1snUailBypMDiZMHd9hWlOoskka4M7iq4aJOiqquPL2w1tuKe2qwvhjd6hN2KWjvVXnwygeUe9Is6q5aIOJFVp9UlvK8eXRO7MxYDwXtyk2mDbhfgrCns9w9SsR/UAfdCi43D1RYw8H8w3HwPzV3+0TKDjtM0WHqpNdhJJj2/RRsBamC5T2Oblsx+a+838jouvx49mL5M+iA0Q43B5C8J9r3i4Avaf+QnqRcy7WW4RcG2spZYXX05cFpSdmS9CKIfUc0xcaADgl1CNIFjY773KcaIIA1/589Ckej5q1LyQm07QzUEtPs62+KQaLngRJt5KQWH75LjA5vqu1UNeiW7dsrxhnDSD4/RONp7spnlcKT+EDtT5AlNV8EGxfXiIVeNjkM0WEzDR1SiCNzR0CfZs9uhPPz6Jw7Pbw9qcRZAzSblo8lKfhWFwcQSTzjgdE8MEzh7Vw02iRrG5KonkRPwdA+rPCJF+nRO4zDRDSADAAsGmN0mL+KgbS7QYal3SId6pLQe6eZlOte94DoLgRIiLgi3FRN0F7HP3cP1t/y//KE3Dv0O++iFztltGJfiKx1aD4gH2rlOsRrTA8CQk1NrRqPomam1WHQgrfaPK4t+CxpPaLtMH9JNuh+CbrwbkZT97lT1seOHknaGNkaA8A73WTkOD7EbRwhcMzRMXtqoOH2g+noSW6xvbB0VvhtqsccpBpHdeW9eCTi9lBzi6S0ndaDzHFc5wUjRiyvHqQ/h9ukuaQeE/VavDbVaQDO6SvOa+zXNNneYj3JFLaD2d06/BY8mFnoYvkRfTPU8PiWudY3Ux7A4a6ryjDdoHNdedQtFgu1MxJ3Lk8VGmOZFvX2LU9KHtrEC1rx71cvGRsHfZZ7D7fa8EkgfdlHxnaAuy02DM4mByUcGyXlSRrsA3MQ0aNEnx3T1V0dLWPHMVjMNtP0LCMxLhd3dEk/3DkAFMZtaq4Sxj3NOhHowD5uHNaFGUFRilkjkdoX26xbmYfIyxqPa0uaTLWyC421sIjmnOz7S1gHpgWXDQW3EcTM8dVn9o7bZI9PSqOcCY7zABB5EkqHhtoMe5rKVNzCXBxJqiCWyRMylzNP4sK4py8b10/1/R6BlOuZvXXylK9CYkuaOh+azM4g/o61Z6eqlvo4hwDD6MZf5nGfzX7vOFG35MlF3Ub/us8lHcXg2qNP34KqdhKjWkuezdpJ+SRTpOIjO0OjNOV0AaCxPxXN3fb/6OCLxlQjWoJ5QuPrA6vafEj4Kobs58/6w3aMO+QdXckr91ug/xndKbfiFamOKLWnUbJJc0m1/vmnRjWA3c0+fyVMzZEgE1qtwD6tMf/VJfskAtHpKpmd7BukaNU2yaRK2z2nbSc1lNgcTqTukwIUynim05BMze8GOQMaKmwewi4Pea8GSGtcRmgD1gRfyUDbVM5MgqONRr9TUc4Fmpi99VFv/AEXaikQ9oy+jVouphji8uaXTqb5rSJVp2ex/oKXonODw0WJaPfOio34p8fxBO7UmAdZOui5QdSyl3q3AtOnxFlybdlJORpf+oqP/AJG+f0Qs9+7B/t+QXVTkc9lqzYmHb/22nxl3/sSuVMPRb/2W9GN+SmOdyCQXcl7lI8rk/ZVVaOGOtFvQAHzCr8TsOi4TSLqZ8cw8jf2q7r0mHdHgoFXCnVpnwUNItHJJeTJ7QwVVk52yB+dtx13jqndm7Xc0tZYiQLgG08Sr15PVUW0KDScwAB5fJcmmto0xyRmqkizx21sMSWBxB0nLLZ+Sg4zAh7cwgjcQZHQ/BUmIpTcdR8Qk4bEvYZY4j3dQubnemdlgSScHsKlFzTcSn6GSJMg6KwwldtU6AP4bj4K+2bsanUvF943j6Lhl+qvwaMUuT4vTM5gsG57gKYceZsBzJVjgMEyox2udpJaWmMwH5Y3TuOui0e28IaGEe6my0hriPytdaT7uqzey2tPfpuIdwNwT71b4/wBtlflPiqJlLFPtBmm4W1cDyM6FaHYNcjDHLGZpcRIMQBNzuG+6q6NIZ84Hdddw/KZ/MFYbPphhc0kxMOaDGZuo93tWnJDkjJhyKLZTYjZz3gueWOOX0kl4ADSYzwNxOnFNUtlPphxzMGXKXHMZGf1dBqZ0WugGTUv6tWqNLgfw6fSRbmOCsthYBlWoGVNT/GdzeYyz4AzH8wXI12Q6G02tZlqnvsLGPgE98g2neSk4XFAmofWDX5DyPqjXW5Gi1g7PUWOJc4kZs4F5neXHenqOwMMSIDiZLpnfGqfj8kcjLbTrBmRsXqHKIBN43wLDmqrDbSYajZY7vuNNoIIyutM8jIuvRR2fpENzy4tmDJGvIJut2Yw7oygtIeHSLyRuv0UcIjkYaltOckMcPSF1MEj1Xtmz775XcJteRTGR/fLmSYGV7bw7hMiPFbStsSgKrW5O64lxEn1hF/apI7O0M5dksbln5c1+9xm/FVkkibMPhtqf6QexzWuJY5xj+G4aBwnQ8RzUzbAdSLDEsJjP+l0GM38p4rZswFDM5vo6c6kZQSeBPt808MKxjSMoI1g36CdByVbXoWeSY2lncDUpkOaC18EE0ibtdAHeYZ9YXCawWBfdhbeId3pdG5zDEVG8RYr1ulhadQteaQa5hMSII3ddFE7RMaGsfHqvaZAFrx8VKXIi6POqGz3BpY+kYmYbmMnc4HhyNwUydiuytApvdxlroI5jcV67UeQyQJKgv2i4NzQBeDr7FVYFd2TbZ5r/ANOH/wALvJ6F6B+/P5T/AIn5oT8cP8kTwl6PPmV2n1Hg8jb3pTzxtz3KndQqH1qZB4t06hRMRXr0rgnL5j26L0LPHUbL8vI1803UpB122Kq8H2kae7UbHMaeSswQRmYZCm0w4uPZEquIs8TzULF4VpuLq2fUBs7TiotXDxcaKrQToz1TZ28Kvr7PI0WpdTTb8OCubxpneHyGjGuY5u6Oattl9o6lJwNnRx1jhO/qrGrgRwVbitjb2eS5vG0a454S/keg7J7XYPE0qlCsTRdUYWHP6lwdHbusaLBegfh6zqbtWnUaEahw5EXVNWpuaYcLp+jjLBr5IFgd7Rw5jkqxajpHTJFzV3ZscLicroPqPEjkTr7VYx32umLQeEjT75rNYatLG74MTyKuqNSac7x8Fpu0eelUjQYaHgDRuYuqHfI0jed58uCveyjpqucfWdJ3w0bgDpwHRZRgDmxkIIiO9ZxA4jT68pNv+zraAdVqUwxzTEnNxaYjXxXCenpGvHLVPtG12s7vDwStniYXNqN7wPJMNcRYE9FoW4li7BTWHqgl3JyqwZ0JPgJ6HepWFpOkHcPvRc3BJdkjePfFWn4kebforRU22HRUpH/cb7QQrhui4zRIg0hJNxMT00Ueu0OJBO4jnKllNMo94uPAAD3lcqLBhqgIibix8YUbbFLNTIt106qW6mJkQD7/ABTeKILTceavH0QxphPorEE5bRcTHFUrKxjQt1nmTw81P2A/NQaCZLQWn+0lvwVczDkNIcR798fBRk5KKL46sc/E8z99EJv8Of0jyQsfGZo+nsw/o3HVpHMFJfgzxJ5OGvIqdUwrTx6Ej3KBX2U8XpV3tPB3fb5GD7V7bPnUik2nsAOkssd7fkVR0MXVw7ovG8FbA1qrbVmiP1suP7hqFF2ngGVRfXc4fd1zcfKO8MlaltHMHjW1my2x3hKFQtPJZQF+HqxOntC09HECq2RqkZWRkx8droddBTLgu03bkpyscRKbLEorqEkLHYBtRsGx48Oay2KwjmOLXC49o4hbgUhut7vJQsbhRUH8w0+S5zhZpw53DT6Mrg8WWH+U6j4+K1mzMQC22hCy+PwZYbae48FYbAr+s08CQqQbTpmjNFTSmjZ4Kv3W33BaTscB+ILhvYZ8QRePBYKhiYMch7gtR2OxUYmnf1iW/wCQI98LtVozJ8cp6e6q0mSDbkUk1qf6T/iUjHVcgCiUMXLuSqo6NhJbXpNMhjp5D6rv7xaNGO8h80htdpfl3fFKqOaDG9TxQsrduVpa18RD2HylXQI5+1VPaVkUCeBafarbBOlgPEA+YXKbolHbc/akuaP0lSJ3Lq5c/wBEkM4Yfo9y76KPywpFUxHiPeu1BIRT30Cp2OYNVn6ah8nAO+KnlreAnooGFaG16gEDM1jvKQubRq5XjwXW6KonQOSFVfi0JyLcWY/06DUVFSrvPFT6NU7wVqPHJNSCq2tTyGCLHhp9CpdUTpqq7FYohpETy8FVkopO0+EloeNR7j9VWbIxZaYWgxbg+i6LjLIWRpGHLjLUrNmL7QcWattWU5mVXhqqlterpmdwJGZcDkgOSHPhLIolsemqzN4TdCpMqQHKxHRAr4b03dEZtLmPAqjNB9Cs5jxDmkgjxEjxEEFaTEUo7zVB20z0h9LJLo/9Rp5D2LlKPk14MiridwveYH/drfBaHBUTQqNdmBLXtkQ4RDt0jvCxEhZ3ZjwaYGsCFOZinmGue5wGgJmFdXoo2lJ2e17XPdHiq+hU4aqa3+LTpHi1rp8Wg/FMNwbgfVtKldGoacwi6DiDmBIm+o+Se/CPE9yR4hJo4J29nUkD3JYJHaRk4d3T3hSNivmkz+keyyZ2ww/h3Dg33JPZt80W9R5FZ59FkSMYQKjS5xDYNufLzT1SpuZfiZkjomdr0nOaAxsuzDpz9i7TqZT325TESND1XAsNuxBJE/lubxPODqrEqsqYgvOUsJgiDBG+0yrIlCSrqiKzDxa5vkQfmmduEDLO+RPkpG0fWYeDx/8AIEfFN7Xw5qMGW5B+BXd9FV2Uvd+yhK/dVb9J82oXD7ejpowza9bg3oWofiqn5pHSPaplKsx3qgHlKS/GBurSF6R4ZGZWPGUV2hwvY7ilO9E/TunlbzGhTD8zLOu39Q+PBVZZFZhhDqlI7rjwcNPasxUb3lf4qpGI/tAPmY9ipKx7x8SuEjbj0SsO9TWPVfSUlhVkUkia16U8phjk/TVjkcoOun2uuVHb7k8DdSmVY6HKHjqXddl3iRycL/BSggOhOxF8XZSYLEGQDPqiJ4G/xhT5uqosLXWHdacs9TE9FYsdKrB6NOVfaz2bsbjnVKNJsAhtNoJm4IECR0WlyLB/szD8jtMkCdZsXREc1vD4lcuTs0LpHCzmuejPH2JUXmT4blzJaJS2TQxisJna5hdYiNFGweznUWENfMSdIv58lZIIUdgrNlYh9ZmeQLkRcqa6i79XsPzVZ2YMNe3g73yPgrkoCKMM/wDWD/afmknCO3OaP7fqpb2zvhcLNOSAh1sC5wjOPHLv80n8LWGlRv8Ah9VYQhqiiTI/v1/E/wCCFe/udnBC6UvZW2f/2Q==" class="profile-image rounded-circle" alt="Rizwa afridi">
+                        <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem" class="profile-image rounded-circle" alt="User Info">
                         <div class="info-card-text">
                             <a href="#" class="d-flex align-items-center text-white">
                                 <span class="text-truncate text-truncate-sm d-inline-block">
-                                    Rizwan afridi
+                                    @userCompanyViewModel.FullName
+
+
                                 </span>
                             </a>
-                            <span class="d-inline-block text-truncate text-truncate-sm">Abu Dhabi</span>
+
+                            <span class="d-inline-block text-truncate text-truncate-sm">@userCompanyViewModel.Authority</span>
+                           
+
                         </div>
                         <img src="~/assets/img/card-backgrounds/cover-4-lg.png" class="cover" alt="cover">
                         <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
@@ -533,7 +546,10 @@
                         </a>
                         <ul>
                             <li>
-                                <a href="#" class="btn js-waves-off" data-action="toggle" data-class="nav-function-minify" title="Minify Navigation">
+                                <a href="#" class="btn js-waves-off" id="LogoSmall" data-action="toggle" data-class="nav-function-minify" title="Minify Navigation">
+                                    <i class="ni ni-minify-nav"></i>
+                                </a>
+                                <a href="#" class="btn js-waves-off" id="LogoLarge" data-action="toggle" data-class="nav-function-minify" title="Minify Navigation">
                                     <i class="ni ni-minify-nav"></i>
                                 </a>
                             </li>
@@ -566,396 +582,37 @@
                             </a>
                         </div>
                         <!-- app settings -->
-                        <div class="hidden-md-down">
+                        <!--<div class="hidden-md-down">
                             <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-settings">
                                 <i class="fal fa-cog"></i>
                             </a>
-                        </div>
-                        <!-- app shortcuts -->
-                        <div>
-                            <a href="#" class="header-icon" data-toggle="dropdown" title="My Apps">
-                                <i class="fal fa-cube"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-animated w-auto h-auto">
-                                <div class="dropdown-header bg-trans-gradient d-flex justify-content-center align-items-center rounded-top">
-                                    <h4 class="m-0 text-center color-white">
-                                        Quick Shortcut
-                                        <small class="mb-0 opacity-80">User Applications & Addons</small>
-                                    </h4>
-                                </div>
-                                <div class="custom-scroll h-100">
-                                    <ul class="app-list">
-                                        <li>
-                                            <a href="#" class="app-list-item hover-white">
-                                                <span class="icon-stack">
-                                                    <i class="base-2 icon-stack-3x color-primary-600"></i>
-                                                    <i class="base-3 icon-stack-2x color-primary-700"></i>
-                                                    <i class="ni ni-settings icon-stack-1x text-white fs-lg"></i>
-                                                </span>
-                                                <span class="app-list-name">
-                                                    Services
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="app-list-item hover-white">
-                                                <span class="icon-stack">
-                                                    <i class="base-2 icon-stack-3x color-primary-400"></i>
-                                                    <i class="base-10 text-white icon-stack-1x"></i>
-                                                    <i class="ni md-profile color-primary-800 icon-stack-2x"></i>
-                                                </span>
-                                                <span class="app-list-name">
-                                                    Account
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="app-list-item hover-white">
-                                                <span class="icon-stack">
-                                                    <i class="base-9 icon-stack-3x color-success-400"></i>
-                                                    <i class="base-2 icon-stack-2x color-success-500"></i>
-                                                    <i class="ni ni-shield icon-stack-1x text-white"></i>
-                                                </span>
-                                                <span class="app-list-name">
-                                                    Security
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="app-list-item hover-white">
-                                                <span class="icon-stack">
-                                                    <i class="base-18 icon-stack-3x color-info-700"></i>
-                                                    <span class="position-absolute pos-top pos-left pos-right color-white fs-md mt-2 fw-400">28</span>
-                                                </span>
-                                                <span class="app-list-name">
-                                                    Calendar
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="app-list-item hover-white">
-                                                <span class="icon-stack">
-                                                    <i class="base-7 icon-stack-3x color-info-500"></i>
-                                                    <i class="base-7 icon-stack-2x color-info-700"></i>
-                                                    <i class="ni ni-graph icon-stack-1x text-white"></i>
-                                                </span>
-                                                <span class="app-list-name">
-                                                    Stats
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="app-list-item hover-white">
-                                                <span class="icon-stack">
-                                                    <i class="base-4 icon-stack-3x color-danger-500"></i>
-                                                    <i class="base-4 icon-stack-1x color-danger-400"></i>
-                                                    <i class="ni ni-envelope icon-stack-1x text-white"></i>
-                                                </span>
-                                                <span class="app-list-name">
-                                                    Messages
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="app-list-item hover-white">
-                                                <span class="icon-stack">
-                                                    <i class="base-4 icon-stack-3x color-fusion-400"></i>
-                                                    <i class="base-5 icon-stack-2x color-fusion-200"></i>
-                                                    <i class="base-5 icon-stack-1x color-fusion-100"></i>
-                                                    <i class="fal fa-keyboard icon-stack-1x color-info-50"></i>
-                                                </span>
-                                                <span class="app-list-name">
-                                                    Notes
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="app-list-item hover-white">
-                                                <span class="icon-stack">
-                                                    <i class="base-16 icon-stack-3x color-fusion-500"></i>
-                                                    <i class="base-10 icon-stack-1x color-primary-50 opacity-30"></i>
-                                                    <i class="base-10 icon-stack-1x fs-xl color-primary-50 opacity-20"></i>
-                                                    <i class="fal fa-dot-circle icon-stack-1x text-white opacity-85"></i>
-                                                </span>
-                                                <span class="app-list-name">
-                                                    Photos
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="app-list-item hover-white">
-                                                <span class="icon-stack">
-                                                    <i class="base-19 icon-stack-3x color-primary-400"></i>
-                                                    <i class="base-7 icon-stack-2x color-primary-300"></i>
-                                                    <i class="base-7 icon-stack-1x fs-xxl color-primary-200"></i>
-                                                    <i class="base-7 icon-stack-1x color-primary-500"></i>
-                                                    <i class="fal fa-globe icon-stack-1x text-white opacity-85"></i>
-                                                </span>
-                                                <span class="app-list-name">
-                                                    Maps
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="app-list-item hover-white">
-                                                <span class="icon-stack">
-                                                    <i class="base-5 icon-stack-3x color-success-700 opacity-80"></i>
-                                                    <i class="base-12 icon-stack-2x color-success-700 opacity-30"></i>
-                                                    <i class="fal fa-comment-alt icon-stack-1x text-white"></i>
-                                                </span>
-                                                <span class="app-list-name">
-                                                    Chat
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="app-list-item hover-white">
-                                                <span class="icon-stack">
-                                                    <i class="base-5 icon-stack-3x color-warning-600"></i>
-                                                    <i class="base-7 icon-stack-2x color-warning-800 opacity-50"></i>
-                                                    <i class="fal fa-phone icon-stack-1x text-white"></i>
-                                                </span>
-                                                <span class="app-list-name">
-                                                    Phone
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="app-list-item hover-white">
-                                                <span class="icon-stack">
-                                                    <i class="base-6 icon-stack-3x color-danger-600"></i>
-                                                    <i class="fal fa-chart-line icon-stack-1x text-white"></i>
-                                                </span>
-                                                <span class="app-list-name">
-                                                    Projects
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li class="w-100">
-                                            <a href="#" class="btn btn-default mt-4 mb-2 pr-5 pl-5"> Add more apps </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- app message -->
-                        <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-messenger">
-                            <i class="fal fa-globe"></i>
-                            <span class="badge badge-icon">!</span>
-                        </a>
-                        <!-- app notification -->
-                        <div>
-                            <a href="#" class="header-icon" data-toggle="dropdown" title="notifications">
-                                <i class="fal fa-bell"></i>
-                                <span class="badge badge-icon">0</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-animated dropdown-xl">
-                                <div class="dropdown-header bg-trans-gradient d-flex justify-content-center align-items-center rounded-top mb-2">
-                                    <h4 class="m-0 text-center color-white">
-                                        11 New
-                                        <small class="mb-0 opacity-80">Notifications</small>
-                                    </h4>
-                                </div>
-                                <ul class="nav nav-tabs nav-tabs-clean" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link px-4 fs-md js-waves-on fw-500" data-toggle="tab" href="#tab-messages" data-i18n="drpdwn.messages">Messages</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link px-4 fs-md js-waves-on fw-500" data-toggle="tab" href="#tab-feeds" data-i18n="drpdwn.feeds">Feeds</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link px-4 fs-md js-waves-on fw-500" data-toggle="tab" href="#tab-events" data-i18n="drpdwn.events">Events</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content tab-notification">
-                                    <div class="tab-pane active p-3 text-center">
-                                        <h5 class="mt-4 pt-4 fw-500">
-                                            <span class="d-block fa-3x pb-4 text-muted">
-                                                <i class="ni ni-arrow-up text-gradient opacity-70"></i>
-                                            </span> Select a tab above to activate
-                                            <small class="mt-3 fs-b fw-400 text-muted">
-                                                This blank page message helps protect your privacy, or you can show the first message here automatically through
-                                                <a href="#">settings page</a>
-                                            </small>
-                                        </h5>
-                                    </div>
-                                    <div class="tab-pane" id="tab-messages" role="tabpanel">
-                                        <div class="custom-scroll h-100">
-                                            <ul class="notification">
-
-                                                <li>
-                                                    <a href="#" class="d-flex align-items-center">
-                                                        <span class="status status-danger mr-2">
-                                                            <span class="profile-image rounded-circle d-inline-block" style="background-image:url('~/assets/img/demo/avatars/avatar-j.png')"></span>
-                                                        </span>
-                                                        <span class="d-flex flex-column flex-1 ml-1">
-                                                            <span class="name">Rukhsar</span>
-                                                            <span class="msg-a fs-sm">Msed quia non numquam eius</span>
-                                                            <span class="fs-nano text-muted mt-1">one day ago</span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tab-feeds" role="tabpanel">
-                                        <div class="custom-scroll h-100">
-                                            <ul class="notification">
-
-                                                <li>
-                                                    <div class="d-flex align-items-center show-child-on-hover">
-                                                        <div class="d-flex flex-column flex-1">
-                                                            <span class="name">
-                                                                Adison Lee <span class="fw-300 d-inline">replied to your video  </span>
-                                                            </span>
-                                                            <span class="msg-a fs-sm mt-2">Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day...</span>
-                                                            <span class="fs-nano text-muted mt-1">10 minutes ago</span>
-                                                        </div>
-                                                        <div class="show-on-hover-parent position-absolute pos-right pos-bottom p-3">
-                                                            <a href="#" class="text-muted" title="delete"><i class="fal fa-trash-alt"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tab-events" role="tabpanel">
-                                        <div class="d-flex flex-column h-100">
-                                            <div class="h-auto">
-                                                <table class="table table-bordered table-calendar m-0 w-100 h-100 border-0">
-                                                    <tr>
-                                                        <th colspan="7" class="pt-3 pb-2 pl-3 pr-3 text-center">
-                                                            <div class="js-get-date h5 mb-2">[your date here]</div>
-                                                        </th>
-                                                    </tr>
-                                                    <tr class="text-center">
-                                                        <th>Sun</th>
-                                                        <th>Mon</th>
-                                                        <th>Tue</th>
-                                                        <th>Wed</th>
-                                                        <th>Thu</th>
-                                                        <th>Fri</th>
-                                                        <th>Sat</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted bg-faded">30</td>
-                                                        <td>1</td>
-                                                        <td>2</td>
-                                                        <td>3</td>
-                                                        <td>4</td>
-                                                        <td>5</td>
-                                                        <td><i class="fal fa-birthday-cake mt-1 ml-1 position-absolute pos-left pos-top text-primary"></i> 6</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>7</td>
-                                                        <td>8</td>
-                                                        <td>9</td>
-                                                        <td class="bg-primary-300 pattern-0">10</td>
-                                                        <td>11</td>
-                                                        <td>12</td>
-                                                        <td>13</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>14</td>
-                                                        <td>15</td>
-                                                        <td>16</td>
-                                                        <td>17</td>
-                                                        <td>18</td>
-                                                        <td>19</td>
-                                                        <td>20</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>21</td>
-                                                        <td>22</td>
-                                                        <td>23</td>
-                                                        <td>24</td>
-                                                        <td>25</td>
-                                                        <td>26</td>
-                                                        <td>27</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>28</td>
-                                                        <td>29</td>
-                                                        <td>30</td>
-                                                        <td>31</td>
-                                                        <td class="text-muted bg-faded">1</td>
-                                                        <td class="text-muted bg-faded">2</td>
-                                                        <td class="text-muted bg-faded">3</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="flex-1 custom-scroll">
-                                                <div class="p-2">
-                                                    <div class="d-flex align-items-center text-left mb-3">
-                                                        <div class="width-5 fw-300 text-primary l-h-n mr-1 align-self-start fs-xxl">
-                                                            15
-                                                        </div>
-                                                        <div class="flex-1">
-                                                            <div class="d-flex flex-column">
-                                                                <span class="l-h-n fs-md fw-500 opacity-70">
-                                                                    October 2020
-                                                                </span>
-                                                                <span class="l-h-n fs-nano fw-400 text-secondary">
-                                                                    Friday
-                                                                </span>
-                                                            </div>
-                                                            <div class="mt-3">
-                                                                <p>
-                                                                    <strong>2:30PM</strong> - Doctor's appointment
-                                                                </p>
-                                                                <p>
-                                                                    <strong>3:30PM</strong> - Report overview
-                                                                </p>
-                                                                <p>
-                                                                    <strong>4:30PM</strong> - Meeting with Donnah V.
-                                                                </p>
-                                                                <p>
-                                                                    <strong>5:30PM</strong> - Late Lunch
-                                                                </p>
-                                                                <p>
-                                                                    <strong>6:30PM</strong> - Report Compression
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="py-2 px-3 bg-faded d-block rounded-bottom text-right border-faded border-bottom-0 border-right-0 border-left-0">
-                                    <a href="#" class="fs-xs fw-500 ml-auto">view all notifications</a>
-                                </div>
-                            </div>
-                        </div>
+                        </div>-->
+                        
                         <!-- app user menu -->
                         <div>
                             <a href="#" data-toggle="dropdown" title="drlantern@gotbootstrap.com" class="header-icon d-flex align-items-center justify-content-center ml-2">
-                                <img src="data:image/jpeg;base64,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" class="profile-image rounded-circle" alt="Rizwan afridi">
+                                <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem" class="profile-image rounded-circle" alt="User Image">
                                 <!-- you can also add username next to the avatar with the codes below:
-                                        <span class="ml-1 mr-1 text-truncate text-truncate-header hidden-xs-down">Me</span>
-                                        <i class="ni ni-chevron-down hidden-xs-down"></i> -->
+        <span class="ml-1 mr-1 text-truncate text-truncate-header hidden-xs-down">Me</span>
+        <i class="ni ni-chevron-down hidden-xs-down"></i> -->
                             </a>
                             <div class="dropdown-menu dropdown-menu-animated dropdown-lg">
                                 <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
                                     <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
                                         <span class="mr-2">
-                                            <img src="data:image/jpeg;base64,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" class="rounded-circle profile-image" alt="Rizwan afridi">
+                                            <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem" class="rounded-circle profile-image" alt="user">
                                         </span>
                                         <div class="info-card-text">
-                                            <div class="fs-lg text-truncate text-truncate-lg">Rizwan afridi</div>
-                                            <span class="text-truncate text-truncate-md opacity-80">rizwan@itmolen.nl</span>
+                                            <div class="fs-lg text-truncate text-truncate-lg">@userCompanyViewModel.FullName</div>
+                                            <span class="text-truncate text-truncate-md opacity-80">@userCompanyViewModel.UserName</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="dropdown-divider m-0"></div>
                                 @*  <a href="#" class="dropdown-item" data-action="app-reset">
-                                        <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
-                                    </a>*@
-                                <a href="#" class="dropdown-item" data-toggle="modal" data-target=".js-modal-settings">
-                                    <span data-i18n="drpdwn.settings">Settings</span>
-                                </a>
+                <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
+            </a>*@
+
                                 <div class="dropdown-divider m-0"></div>
                                 <a href="#" class="dropdown-item" data-action="app-fullscreen">
                                     <span data-i18n="drpdwn.fullscreen">Fullscreen</span>
@@ -2248,6 +1905,31 @@
         /* initialize all charts */
         $(document).ready(function () {
             lineChart();
+
+        });
+
+
+
+        $(document).ready(function () {
+
+
+            $('#imgVertical').hide();
+            $('#LogoLarge').hide();
+            $('#LogoSmall').click(function () {
+
+                $('#imgVertical').show();
+                $('#imgHorazontal').hide();
+                $('#LogoLarge').show();
+                $('#LogoSmall').hide();
+            });
+
+            $('#LogoLarge').click(function () {
+
+                $('#imgVertical').hide();
+                $('#imgHorazontal').show();
+                $('#LogoLarge').hide();
+                $('#LogoSmall').show();
+            });
 
         });
 
