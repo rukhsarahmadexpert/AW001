@@ -46,6 +46,9 @@ namespace IT.Core.ViewModels
         public Decimal ReceivedAmount { get; set; }
         public string BillNumber { get; set; }
         public int UpdatedBy { get; set; }
+        public int TotalQuantity { get; set; }
+        public string Product { get; set; }
+        public string UnitName { get; set; }
         public List<LPOInvoiceDetails> lPOInvoiceDetailsList { get; set; }
         public List<UploadDocumentsViewModel> uploadDocumentsViewModels { get; set; }
     }

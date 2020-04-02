@@ -33,14 +33,21 @@
 
 <div class="row">
     <div class="col-md-4">
+        @if (LPOInvoiceViewModel.Heading == "Quotation" || LPOInvoiceViewModel.Heading == "Invoice")
+        {
+            <h5 class="font-weight-bold"><u>Customer Info:</u></h5>
+        }
+        else
+        {
         <h5 class="font-weight-bold"><u>Vender Info:</u></h5>
+        }
         <div class="form-group">
             <p style="margin-top:10px">
             </p>
-            <p><i class="glyphicon glyphicon-flag"></i>Representative: <span id="Company Name">@LPOInvoiceViewModel.Representative</span></p>
-            <p><i class="glyphicon glyphicon-user"> </i>Name: <span id="ContactPerson">@LPOInvoiceViewModel.Name</span></p>
+            <p><i class="glyphicon glyphicon-user"> </i>Company Name: <span id="ContactPerson">@LPOInvoiceViewModel.Name</span></p>
             <p><i class="glyphicon glyphicon-road"></i> Address: <span id="VenderAddress">@LPOInvoiceViewModel.Address</span></p>
             <p><i class="glyphicon glyphicon-earphone"></i>Land Line : <span id="VenderPhone">@LPOInvoiceViewModel.LandLine</span></p>
+            <p><i class="glyphicon glyphicon-earphone"></i>Mobile : <span id="VenderPhone">@LPOInvoiceViewModel.Mobile</span></p>
             <p><i class="glyphicon glyphicon-envelope"></i>Email :<span id="VenderEmail">@LPOInvoiceViewModel.Email</span></p>
             <p> <i class="glyphicon glyphicon-text-width"></i>TRN : <span id="VenderVAT">@LPOInvoiceViewModel.TRN</span></p>
         </div>
@@ -89,7 +96,7 @@
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-append">
-                    <span class="input-group-text" id="basic-addon2">From Date:</span>
+                    <span class="input-group-text" id="basic-addon2">Due Date:  </span>
                 </div>
                 @Html.EditorFor(model => LPOInvoiceViewModel.DueDate, new { htmlAttributes = new { @class = "form-control", id = "DueDate" } })
             </div>
