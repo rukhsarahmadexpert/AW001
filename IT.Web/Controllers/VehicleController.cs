@@ -76,6 +76,31 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult ChangeStatus(VehicleViewModel vehicleViewModel)
+        {
+            try
+            {
+                var Result = new ServiceResponseModel();
+
+                vehicleViewModel.UpdateBy = Convert.ToInt32(Session["UserId"]);
+                Result = webServices.Post(vehicleViewModel, "Vehicle/ChangeStatus");
+
+                if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    var reuslt = (new JavaScriptSerializer().Deserialize<int>(Result.Data));
+
+
+                }
+                return Json("success", JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return Json("Failed", JsonRequestBehavior.AllowGet);
+            }
+        }
+
         [HttpGet]
         public JsonResult GetAllVehicle()
         {

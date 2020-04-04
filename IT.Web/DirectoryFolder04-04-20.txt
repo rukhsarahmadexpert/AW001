@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: Apr 04,2020 10:36:27 AMApr 04,2020 10:36:23 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
+--------------------------------*End*------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: Apr 04,2020 10:37:59 AMApr 04,2020 10:37:55 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
+--------------------------------*End*------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: Apr 04,2020 10:38:15 AMApr 04,2020 10:38:11 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
+--------------------------------*End*------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: Apr 04,2020 10:39:23 AMApr 04,2020 10:39:19 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
+--------------------------------*End*------------------------------------------
+
+
+

@@ -44,53 +44,54 @@
                             @foreach (var item in driverViewModels)
                             {
 
-                                <tr>
-                                    <td>@item.Name</td>
-                                    <td>@item.Contact</td>
-                                    <td>@item.Email</td>
-                                    <td>@item.LicenseExpiry</td>
-                                    <td>@item.Facebook</td>
-                                    <td>
-                                        @if (@item.IsActive == true)
-                                        {
-                                            <div class="switchToggle">
-                                                <input type="checkbox" id="@item.Id" checked>
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="switchToggle">
-                                                <input type="checkbox" id="@item.Id">
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
-
-                                        }
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <form action="/Driver/Details" method="post">
-                                                    <input type="hidden" name="Id" value="@item.Id" />
-                                                    <input type="hidden" name="CompId" value="@item.CompanyId" />
-
-                                                    <button type="submit" class="btn btn-sm"><i class="fal fa-eye"></i></button>
-                                                </form>
-                                            </div>
-                                            <div class="col-6">
-                                                <form action="/Driver/Edit" method="post">
-                                                    <input type="hidden" name="Id" value="@item.Id" />
-                                                    <input type="hidden" name="CompId" value="@item.CompanyId" />
-
-                                                    <button type="submit" class="btn btn-sm"><i class="fal fa-edit"></i></button>
-                                                </form>
-                                            </div>
-
-                                           
-
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Contact</td>
+                                <td>@item.Email</td>
+                                <td>@item.LicenseExpiry</td>
+                                <td>@item.Facebook</td>
+                                <td>
+                                    @if (@item.IsActive == true)
+                                    {
+                                        <div class="switchToggle">
+                                            <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
+                                            <label for="@item.Id">Toggle</label>
                                         </div>
-                                    </td>
-                                </tr>
+                                    }
+                                    else
+                                    {
+                                        <div class="switchToggle">
+                                            <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
+                                            <label for="@item.Id">Toggle</label>
+                                        </div>
+
+                                    }
+                                    <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <form action="/Driver/Details" method="post">
+                                                <input type="hidden" name="Id" value="@item.Id" />
+                                                <input type="hidden" name="CompId" value="@item.CompanyId" />
+
+                                                <button type="submit" class="btn btn-sm"><i class="fal fa-eye"></i></button>
+                                            </form>
+                                        </div>
+                                        <div class="col-6">
+                                            <form action="/Driver/Edit" method="post">
+                                                <input type="hidden" name="Id" value="@item.Id" />
+                                                <input type="hidden" name="CompId" value="@item.CompanyId" />
+
+                                                <button type="submit" class="btn btn-sm"><i class="fal fa-edit"></i></button>
+                                            </form>
+                                        </div>
+
+
+
+                                    </div>
+                                </td>
+                            </tr>
                             }
 
                         </tbody>
@@ -106,6 +107,42 @@
 
 @section scripts{
 
+    <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $(".IsActive").click(function () {
+                if (confirm("Are you sure")) {
+
+                    var act = false;
+                    if (this.checked) {
+                        act = true;
+                    }
+
+                    var Data = JSON.stringify(
+                        {
+                            IsActive: act,
+                            Id: $(this).data("value"),
+                        })
+                    // alert(Data);
+                    ajaxRequest("POST", "/Driver/ChangeStatus", Data, "json").then(function (result) {
+                        if (result != "failed") {
+                            //console.log(result);
+                            window.location.reload();
+                        }
+                        else {
+                            alert('there is some problem');
+                        }
+                    })
+                }
+                else {
+                    return false;
+                }
+            });
+        });
+
+    </script>
 
     <script>
         $(document).ready(function () {
