@@ -4,24 +4,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Customer Booking</a></li>
-    <li class="breadcrumb-item active">Details</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
 
-<div class="subheader">
-    <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-edit'></i>customer Booking Details
-    </h1>
-</div>
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
-            <div class="panel-hdr">
+            <div class="panel-hdr" style="padding-right:15px">
                 <h2>
-                    Details <span class="fw-300"></span>
+                    Customer Booking <span class="fw-300">Details</span>
                 </h2>
+                <a style="float:right; padding-right:10px" class="btn btn-sm btn-primary" href="/CustomerBooking/Edit/@Model.Id">Edit</a>
             </div>
             <div class="panel-container show">
                 <div class="panel-content">

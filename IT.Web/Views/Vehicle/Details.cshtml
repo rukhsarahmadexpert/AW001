@@ -8,10 +8,18 @@
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
-            <div class="panel-hdr">
+            <div class="panel-hdr pr-3">
                 <h2>
                     Vehicle <span class="fw-300">Details</span>
                 </h2>
+
+                <form action="/Vehicle/Edit" method="post">
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <input type="hidden" name="CompId" value="@Model.CompanyId" />
+
+                    <button type="submit" class="float-right p-2 btn btn-sm btn-primary">Edit</button>
+                </form>
+
             </div>
             <div class="panel-container show">
                 <div class="panel-content">

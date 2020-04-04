@@ -558,11 +558,13 @@ Buttons
     font-weight: 400;
     font-size: .8rem; }
     .navbar .nav-item .nav-link.btn.btn-primary {
-      background-color: #073a68;
-      color: #fff !important; }
+        background-color: #073a68;
+        color: #fff !important;
+        border:#fff;
+    }
       .navbar .nav-item .nav-link.btn.btn-primary:hover, .navbar .nav-item .nav-link.btn.btn-primary:focus, .navbar .nav-item .nav-link.btn.btn-primary:active {
         background-color: #073a68;
-        border-color: #073a68;
+        border-color: #ffffff;
         color: #fff;
         box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.1); }
 

@@ -590,8 +590,8 @@
                         
                         <!-- app user menu -->
                         <div>
-                            <a href="#" data-toggle="dropdown" title="drlantern@gotbootstrap.com" class="header-icon d-flex align-items-center justify-content-center ml-2">
-                                <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem" class="profile-image rounded-circle" alt="User Image">
+                            <a style="cursor:pointer" data-toggle="dropdown" title="drlantern@gotbootstrap.com" class="header-icon d-flex align-items-center justify-content-center ml-2">
+                                <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:2.125rem; height:2.125rem" class="profile-image rounded-circle" alt="User Image">
                                 <!-- you can also add username next to the avatar with the codes below:
         <span class="ml-1 mr-1 text-truncate text-truncate-header hidden-xs-down">Me</span>
         <i class="ni ni-chevron-down hidden-xs-down"></i> -->
@@ -610,18 +610,28 @@
                                 </div>
                                 <div class="dropdown-divider m-0"></div>
                                 @*  <a href="#" class="dropdown-item" data-action="app-reset">
-                <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
-            </a>*@
+            <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
+        </a>*@
 
                                 <div class="dropdown-divider m-0"></div>
-                                <a href="#" class="dropdown-item" data-action="app-fullscreen">
-                                    <span data-i18n="drpdwn.fullscreen">Fullscreen</span>
-                                    <i class="float-right text-muted fw-n">F11</i>
+                                @*<a href="#" class="dropdown-item" data-action="app-fullscreen">
+            <span data-i18n="drpdwn.fullscreen">Fullscreen</span>
+            <i class="float-right text-muted fw-n">F11</i>
+        </a>*@
+
+                                <a href="#" class="dropdown-item">
+                                    <span>Account</span>
+                                    <i class="float-right text-muted fw-n">Setting</i>
                                 </a>
-                                <a href="#" class="dropdown-item" data-action="app-print">
-                                    <span data-i18n="drpdwn.print">Print</span>
-                                    <i class="float-right text-muted fw-n">Ctrl + P</i>
+
+                                <a href="#" class="dropdown-item">
+                                    <span>Company</span>
+                                    <i class="float-right text-muted fw-n">Edit</i>
                                 </a>
+                                @* <a href="#" class="dropdown-item" data-action="app-print">
+            <span data-i18n="drpdwn.print">Print</span>
+            <i class="float-right text-muted fw-n">Ctrl + P</i>
+        </a>*@
 
                                 <div class="dropdown-divider m-0"></div>
                                 <a class="dropdown-item fw-500 pt-3 pb-3" href="/User/LogOut">

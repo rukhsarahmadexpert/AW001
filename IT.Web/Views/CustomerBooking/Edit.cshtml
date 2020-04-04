@@ -16,23 +16,13 @@
     countryViewModels = ViewBag.Countries as List<IT.Core.ViewModels.CountryViewModel>;
 }
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);"> Booking</a></li>
-    <li class="breadcrumb-item active">Create</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
 
-<div class="subheader">
-    <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-edit'></i> Create Booking
-    </h1>
-</div>
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    <span class="fw-300"></span>
+                    Customer Booking<span class="fw-300">Edit</span>
                 </h2>
             </div>
             <form action="/CustomerBooking/Update" method="post" enctype="application/x-www-form-urlencoded">
