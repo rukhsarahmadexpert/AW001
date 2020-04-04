@@ -478,6 +478,9 @@
     <Content Include="assets\img\favicon\favicon-32x32.png" />
     <Content Include="assets\img\favicon\safari-pinned-tab.svg" />
     <Content Include="assets\img\loading.gif" />
+    <Content Include="assets\img\logo-1.svg" />
+    <Content Include="assets\img\logo-2.svg" />
+    <Content Include="assets\img\logo-3.svg" />
     <Content Include="assets\img\logo-minify.html" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\img\svg\pattern-1.svg" />
