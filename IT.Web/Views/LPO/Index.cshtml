@@ -31,11 +31,14 @@
                     <table id="#" class="table LPOTable table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
-                                <th>LPO #</th>
+
                                 <th>Vender</th>
-                                <th>Date</th>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>From Date</th>
                                 <th>Due Date</th>
-                                <th>Total</th>
+                                <th>Amount</th>
                                 <th>VAT</th>
                                 <th>Grand Total</th>
                                 <th>Is Updated</th>
@@ -83,9 +86,11 @@
                         success: fnCallback
                     })
                 },
-                "aoColumns": [
-                    { "mData": "PONumber" },
+                "aoColumns": [                    
                     { "mData": "Name" },
+                    { "mData": "Product" },
+                    { "mData": "TotalQuantity" },
+                    { "mData": "UnitName" },                    
                     { "mData": "FDate" },
                     { "mData": "DDate" },
                     { "mData": "Total" },

@@ -27,14 +27,16 @@
                     <table id="BillTable" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
-                                <th>Bill #</th>
-                                <th>Reference</th>
                                 <th>Vender</th>
-                                <th>Date</th>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Reference</th>
+                                <th>From Date</th>
                                 <th>Due Date</th>
-                                <th>Total</th>
+                                <th>Amount</th>
                                 <th>VAT</th>
-                                <th> Grand Amount</th>
+                                <th>Grand Amount</th>
                                 <th>Oprater</th>
                                 <th>Action</th>
                             </tr>
@@ -96,9 +98,11 @@
                     })
                 },
                 "aoColumns": [
-                    { "mData": "PONumber" },
-                    { "mData": "RefrenceNumber" },
                     { "mData": "Name" },
+                    { "mData": "Product" },
+                    { "mData": "TotalQuantity" },
+                    { "mData": "UnitName" },                    
+                    { "mData": "RefrenceNumber" },
                     { "mData": "FDate" },
                     { "mData": "DDate" },
                     { "mData": "Total" },

@@ -14,10 +14,6 @@ namespace IT.Core.ViewModels
         public string TraficPlateNumber { get; set; }       
         public int VehicleId { get; set; }
 
-        public static implicit operator DriverModel(List<DriverModel> v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 
