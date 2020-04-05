@@ -485,19 +485,26 @@
                                 </div>
                                 <div class="dropdown-divider m-0"></div>
                                 @*   <a href="#" class="dropdown-item" data-action="app-reset">
-                                        <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
-                                    </a>*@
+            <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
+        </a>*@
                                 <!--<a href="#" class="dropdown-item" data-toggle="modal" data-target=".js-modal-settings">
-                                    <span data-i18n="drpdwn.settings">Settings</span>
-                                </a>-->
+        <span data-i18n="drpdwn.settings">Settings</span>
+    </a>-->
                                 <div class="dropdown-divider m-0"></div>
-                                <a href="#" class="dropdown-item" data-action="app-fullscreen">
-                                    <span data-i18n="drpdwn.fullscreen">Fullscreen</span>
-                                    <i class="float-right text-muted fw-n">F11</i>
+
+                                <a href="#" class="dropdown-item">
+                                    <span>Password</span>
+                                    <i class="float-right text-muted fw-n">Change</i>
                                 </a>
-                                <a href="#" class="dropdown-item" data-action="app-print">
-                                    <span data-i18n="drpdwn.print">Print</span>
-                                    <i class="float-right text-muted fw-n">Ctrl + P</i>
+
+                                <a href="/User/UserInformation" class="dropdown-item">
+                                    <span>Profile</span>
+                                    <i class="float-right text-muted fw-n">Setting</i>
+                                </a>
+
+                                <a href="/Company/CompanyEdit/@userCompanyViewModel.CompanyId" class="dropdown-item">
+                                    <span>Company</span>
+                                    <i class="float-right text-muted fw-n">Setting</i>
                                 </a>
 
                                 <div class="dropdown-divider m-0"></div>
@@ -540,7 +547,7 @@
                     <div class="modal-dialog modal-dialog-top modal-transparent" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
-                                <ul class="app-list w-auto h-auto p-0 text-left">
+                                <ul class="app-list w-auto h-auto p-0 text-right">
                                     <li>
                                         <a href="/Home/Index" class="app-list-item text-white border-0 m-0">
                                             <div class="icon-stack">

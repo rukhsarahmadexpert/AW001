@@ -28,6 +28,33 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpGet]
+        public ActionResult UserInformation()
+        {
+            UserViewModel userViewModel = new UserViewModel();
+            try
+            {
+                userViewModel.UserName = Convert.ToString(Session["UserName"]);
+                var userList = webServices.Post(userViewModel, "User/UserInformationByUserName");
+
+                if (userList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(userList.Data.ToString()));
+
+                    return View(userViewModel);
+                }
+
+                return View(userViewModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+         
+        }
+
+
+
+        [HttpGet]
         public ActionResult Logout()
         {
             Session.Abandon();

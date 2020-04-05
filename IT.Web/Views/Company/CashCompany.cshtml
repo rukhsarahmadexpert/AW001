@@ -47,12 +47,25 @@
                                     </div>
                                 </div>
                                 <div class="col-md-5 col-xl-5 p-2">
-                                    <div class="input-group flex-nowrap">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fal fa-user fs-xl"></i></span>
+                                   
+                                        <div class="input-group " form-group flex-nowrap">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fal fa-user fs-xl"></i></span>
+                                            </div>
+                                            <select id="OwnerRepresentaive" name="OwnerRepresentaive" class="form-control">
+                                                @if (Model.OwnerRepresentaive == "Owner")
+                                                {
+                                                    <option value="Owner" selected="selected">Owner</option>
+                                                    <option value="Representative">Representative</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="Owner">Owner</option>
+                                                    <option value="Representative" selected="selected">Representative</option>
+                                                }
+                                            </select>
                                         </div>
-                                        <input id="Owner" name="Owner" type="text" class="form-control" value="@Model.OwnerRepresentaive" required placeholder="Owner / Representative" aria-label="Owner" aria-describedby="addon-wrapping-left">
-                                    </div>
+                                   
                                     <div class="input-group flex-nowrap mt-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-phone fs-xl"></i></span>
@@ -64,7 +77,7 @@
                                             <span class="input-group-text"><i class="fal fa-credit-card fs-xl"></i></span>
                                         </div>
                                         <input id="TRN" name="TRN" type="text" class="form-control" value="@Model.TRN" autocomplete="off" placeholder="Trn Number" aria-label="TrnNumber" aria-describedby="addon-wrapping-left">
-                                    <input type="hidden" id="LogoUrl" />
+                                        <input type="hidden" id="LogoUrl" />
                                     </div>
                                 </div>
                             </div>

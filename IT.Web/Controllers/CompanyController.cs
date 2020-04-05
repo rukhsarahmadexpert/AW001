@@ -183,6 +183,93 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpPost]
+        public ActionResult CustomerUpdate(CompnayModel compnayModel, HttpPostedFileBase LogoUrl)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View("Edit", compnayModel);
+                }
+                else
+                {
+                    //if (Request.Files.Count > 0 && LogoUrl != null)
+                    //{
+                        var file = LogoUrl;
+
+                        using (HttpClient client = new HttpClient())
+                        {
+                            using (var content = new MultipartFormDataContent())
+                            {
+                                if (LogoUrl != null)
+                                {
+                                    byte[] fileBytes = new byte[file.InputStream.Length + 1];
+                                    file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                                    var fileContent = new ByteArrayContent(fileBytes);
+                                    fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
+                                    content.Add(fileContent);
+                                }
+
+                                content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                                content.Add(new StringContent(compnayModel.Id.ToString()), "Id");
+                                content.Add(new StringContent(compnayModel.Name ?? ""), "Name");
+                                content.Add(new StringContent(compnayModel.Street ?? ""), "Street");
+                                string UserId = Session["UserId"].ToString();
+                                content.Add(new StringContent(UserId), "UpdatedBy");
+                                content.Add(new StringContent(compnayModel.Postcode ?? ""), "Postcode");
+                                content.Add(new StringContent(compnayModel.City ?? ""), "City");
+                                content.Add(new StringContent(compnayModel.Address ?? ""), "Address");
+                                content.Add(new StringContent(compnayModel.State ?? ""), "State");
+                                content.Add(new StringContent(compnayModel.Country ?? ""), "Country");
+                                content.Add(new StringContent(compnayModel.Cell ?? ""), "Cell");
+                                content.Add(new StringContent(compnayModel.Phone ?? ""), "Phone");
+                                content.Add(new StringContent(compnayModel.Email ?? ""), "Email");
+                                content.Add(new StringContent(compnayModel.Web ?? ""), "Web");
+                                content.Add(new StringContent(compnayModel.TRN ?? ""), "TRN");
+                                content.Add(new StringContent(compnayModel.Remarks ?? ""), "Remarks");
+                                content.Add(new StringContent(compnayModel.OwnerRepresentaive ?? ""), "OwnerRepresentaive");
+                                content.Add(new StringContent("true"), "IsActive");
+
+                                //  var result1 = client.PostAsync("http://localhost:64299/api/Company/Add", content).Result;
+                                var result = webServices.PostMultiPart(content, "Company/Update", true);
+                                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                                {
+                                    var companyViewModel = new CompanyViewModel();
+                                    companyViewModel = (new JavaScriptSerializer().Deserialize<CompanyViewModel>(result.Data.ToString()));
+
+
+                                var userCompanyViewModel2 = Session["userCompanyViewModel"] as UserCompanyViewModel;
+
+                                userCompanyViewModel2.LogoUrl = companyViewModel.LogoUrl;   
+                                userCompanyViewModel2.CompanyName = companyViewModel.Name;   
+                          
+
+
+                                Session["userCompanyViewModel"] = userCompanyViewModel2;
+                                Session["CompanyId"] = companyViewModel.Id;
+                                Session["UserId"] = companyViewModel.CreatedBy;
+
+                                //return RedirectToAction("/");
+                                return RedirectToAction("Index", "Home");
+                            }
+                                else
+                                {
+                                    ViewBag.Message = "Failed";
+                                }
+                            }
+                        }
+                    //}
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
         public ActionResult Update(CompnayModel compnayModel, HttpPostedFileBase LogoUrl)
         {
             try
@@ -258,6 +345,37 @@ namespace IT.Web_New.Controllers
 
         [HttpGet]
         public ActionResult Edit(int id)
+        {
+            try
+            {
+                CompnayModel compnayModel = new CompnayModel();
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                {
+                    Id = id
+                };
+                var companyData = webServices.Post(pagingParameterModel, "Company/CompanyById");
+                if (companyData.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (companyData.Data != "[]" && companyData.Data != null)
+                    {
+                        compnayModel = (new JavaScriptSerializer().Deserialize<CompnayModel>(companyData.Data.ToString()));
+                    }
+                }
+
+                CountryController countryController = new CountryController();
+                ViewBag.Countries = countryController.Countries();
+
+                return View(compnayModel);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpGet]
+        public ActionResult CompanyEdit(int id)
         {
             try
             {
