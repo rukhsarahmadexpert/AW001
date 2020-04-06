@@ -277,8 +277,10 @@ namespace IT.Web_New.Controllers
                 loginViewModel.Token = loginViewModel.Token ?? "token not availibe";
                 loginViewModel.Device = "web";
                 // loginViewModel.DeviceId = System.Net.Dns.GetHostName().ToString();
-                loginViewModel.DeviceId = System.Web.HttpContext.Current.Server.MachineName;
-               // loginViewModel.DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString(); 
+                //loginViewModel.DeviceId = System.Web.HttpContext.Current.Server.MachineName;
+                //loginViewModel.DeviceId = loginViewModel.DeviceId = Request.UserHostAddress;
+                //loginViewModel.DeviceId = loginViewModel.DeviceId = Request.UserHostAddress;
+                 loginViewModel.DeviceId = loginViewModel.DeviceId = Request.Browser.Id;
                 loginViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 loginViewModel.Authority = userCompanyViewModel.Authority;
                 loginViewModel.UserName = userCompanyViewModel.UserName;
@@ -291,6 +293,9 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
+
+
+
 
     }
 }

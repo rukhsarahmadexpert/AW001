@@ -212,6 +212,7 @@
     <Compile Include="MISC\OrderNumber.cs" />
     <Compile Include="MISC\POClass.cs" />
     <Compile Include="MISC\PurchaseNumber.cs" />
+    <Compile Include="Models\BookingConfirmationViewModel.cs" />
     <Compile Include="Models\CompnayModel.cs" />
     <Compile Include="Models\CustomerOrder.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
@@ -996,6 +997,8 @@
     <Content Include="Views\Designation\Details.cshtml" />
     <Content Include="Views\Quotation\CreateEstimates.cshtml" />
     <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\CustomerBooking\Confirmation.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

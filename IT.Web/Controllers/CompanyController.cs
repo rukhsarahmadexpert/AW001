@@ -338,6 +338,8 @@ namespace IT.Web_New.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    CountryController countryController = new CountryController();
+                    ViewBag.Countries = countryController.Countries();
                     return View("CashCompany", compnayModel);
                 }
                 else

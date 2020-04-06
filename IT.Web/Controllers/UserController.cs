@@ -36,8 +36,10 @@ namespace IT.Web_New.Controllers
             LoginViewModel loginViewModel = new LoginViewModel
             {
                 // DeviceId = System.Net.Dns.GetHostName().ToString()
-              //  DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString()
-                DeviceId = System.Web.HttpContext.Current.Server.MachineName
+                //  DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString()
+               // DeviceId = System.Web.HttpContext.Current.Server.MachineName;
+                //DeviceId = Request.UserHostAddress
+                DeviceId = Request.Browser.Id
             };
             var result = webServices.Post(loginViewModel, "User/LogOut", false);           
             return Redirect(nameof(Login));           
@@ -68,9 +70,11 @@ namespace IT.Web_New.Controllers
             {
                 loginViewModel.Token = loginViewModel.Token ?? "token not availibe";
                 loginViewModel.Device = "web";
-              //loginViewModel.DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString();
-              //loginViewModel.DeviceId = System.Environment.MachineName.ToString();
-                loginViewModel.DeviceId = System.Web.HttpContext.Current.Server.MachineName;
+                //loginViewModel.DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString();
+                //loginViewModel.DeviceId = System.Environment.MachineName.ToString();
+                // loginViewModel.DeviceId = System.Web.HttpContext.Current.Server.MachineName;
+                //loginViewModel.DeviceId = Request.UserHostAddress;
+                loginViewModel.DeviceId = Request.Browser.Id;
                 if (ModelState.IsValid)
                 {
                     var result = webServices.Post(loginViewModel, "User/Login", false);
@@ -159,9 +163,68 @@ namespace IT.Web_New.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Test()
         {
             return View();
+        }
+
+        [Autintication]
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            ChangePasswordViewModel changePasswordViewModel = new ChangePasswordViewModel();
+           
+            try
+            {
+                changePasswordViewModel.Id = Convert.ToInt32(Session["userId"]);
+                return View(changePasswordViewModel);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Autintication]
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordViewModel changePasswordViewModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(changePasswordViewModel);
+                }
+                else
+                {
+                    var result = webServices.Post(changePasswordViewModel, "User/ChangePassword", false);
+
+                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        if (result.Message == "Data Not Found")
+                        {
+                            ModelState.AddModelError("Error", "Email not found");
+                            return View(changePasswordViewModel);
+                        }
+
+                        var Result = (new JavaScriptSerializer()).Deserialize<string>(result.Data.ToString());
+                        return RedirectToAction("Index", "Home");                        
+                    }
+                    else if(result.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        ModelState.AddModelError("Error", "Email not found");
+                        return View(changePasswordViewModel);
+                    }
+                    
+                    return View(changePasswordViewModel);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
     }

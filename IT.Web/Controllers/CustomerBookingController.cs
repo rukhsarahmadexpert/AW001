@@ -1,9 +1,12 @@
-﻿using IT.Core.ViewModels;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using IT.Core.ViewModels;
 using IT.Repository.WebServices;
 using IT.Web.MISC;
+using IT.Web.Models;
 using IT.Web_New.Controllers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -663,5 +666,71 @@ namespace IT.Web.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Confirmation()
+        {
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                {
+                    pageNumber = 1,
+                    CompanyId = 0,
+                    PageSize = 10
+                };
+
+                var CustomerBookingList = webServices.Post(pagingParameterModel, "CustomerBooking/BookingConfirmationByCompany");
+
+                if (CustomerBookingList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    customerBookingViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerBookingViewModel>>(CustomerBookingList.Data.ToString()));
+                }
+
+                return View(customerBookingViewModels);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
+        [HttpGet]
+        public ActionResult ConfirmationLetter(int Id)
+        {
+            List <BookingConfirmationViewModel> bookingConfirmationViewModels = new List<BookingConfirmationViewModel>();
+            BookingConfirmationViewModel bookingConfirmationViewModel = new BookingConfirmationViewModel();
+            SearchViewModel searchViewModel = new SearchViewModel();
+            searchViewModel.Id = Id;
+            var results = webServices.Post(searchViewModel, "CustomerBooking/BookingConfirmationById");
+            if (results.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                bookingConfirmationViewModel = (new JavaScriptSerializer()).Deserialize<BookingConfirmationViewModel>(results.Data.ToString());
+            }
+
+            bookingConfirmationViewModels.Add(bookingConfirmationViewModel);
+
+            string pdfname = "";
+            ReportDocument Report = new ReportDocument();
+            Report.Load(Server.MapPath("~/Reports/OrderConfirmation/OrderConfirmation.rpt"));
+
+            Report.Database.Tables[0].SetDataSource(bookingConfirmationViewModels);
+            //Report.Database.Tables[1].SetDataSource(compnayModels);
+
+            Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stram.Seek(0, SeekOrigin.Begin);
+            
+            var root = Server.MapPath("/PDF/");
+            pdfname = String.Format("{0}.pdf", "Demo");
+            var path = Path.Combine(root, pdfname);
+            path = Path.GetFullPath(path);
+
+            //Report.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, path);
+            //  stram.Close();
+
+            stram.Seek(0, SeekOrigin.Begin);
+            return new FileStreamResult(stram, "application/pdf");
+        }
     }
 }

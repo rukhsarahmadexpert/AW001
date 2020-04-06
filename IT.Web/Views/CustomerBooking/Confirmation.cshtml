@@ -1,0 +1,71 @@
+﻿@model List<IT.Core.ViewModels.CustomerBookingViewModel>
+@{
+    /**/
+
+    ViewBag.Title = "Confirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<IT.Core.ViewModels.CustomerBookingViewModel> customerBookingViewModels = new List<IT.Core.ViewModels.CustomerBookingViewModel>();
+    customerBookingViewModels = Model as List<IT.Core.ViewModels.CustomerBookingViewModel>;
+}
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">My Bookings Confirmations</a></li>
+
+    <li class="breadcrumb-item active">List</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a class="btn btn-md btn-primary" href="/CustomerBooking/CustomerCreate">
+                        <i class="fal fa-plus-circle"></i> Create For New <span class="fw-300"><i>Booking</i></span>
+                    </a>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="py-2">
+                    </div>
+                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-primary-600">
+                            <tr>
+                                <th>Company Name</th>
+                                <th>Product Name</th>
+                                <th>Start Date</th>
+                                <th>Due Date</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>VAT</th>
+                                <th>Total Amount</th>                              
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in customerBookingViewModels)
+                            {
+                                <tr>
+                                    <td>@item.CompanyName</td>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.CreatedDate</td>
+                                    <td>@item.DueDate</td>
+                                    <td>@Math.Round(item.UnitPrice, 2)</td>
+                                    <td>@item.BookQuantity</td>
+                                    <td>@Math.Round(item.VAT, 2)</td>
+                                    <td>@Math.Round(item.TotalAmount, 2)</td>
+                                    
+                                    <td>
+                                        <a href="/CustomerBooking/ConfirmationLetter/@item.Id"><i class="fal fa-eye"></i> View Confirmation</a> &nbsp; &nbsp;
+                                     </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
