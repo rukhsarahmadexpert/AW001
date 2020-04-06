@@ -20,6 +20,8 @@ namespace IT.Core.ViewModels
         public string ConfirmPassword { get; set; }
         public string ImageUrl { get; set; }
         public string Gender { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DOB { get; set; }
         public int? CreatedBy { get; set; }
         public int? CompanyId { get; set; }

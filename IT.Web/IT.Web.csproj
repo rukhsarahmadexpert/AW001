@@ -999,6 +999,7 @@
     <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Company\CompanyEdit.cshtml" />
     <Content Include="Views\User\UserInformation.cshtml" />
+    <Content Include="Views\User\UserInformationEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

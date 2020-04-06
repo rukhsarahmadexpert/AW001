@@ -4,6 +4,7 @@ using IT.Web.MISC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -33,7 +34,8 @@ namespace IT.Web_New.Controllers
             UserViewModel userViewModel = new UserViewModel();
             try
             {
-                userViewModel.UserName = Convert.ToString(Session["UserName"]);
+                var usercCompany = Session["userCompanyViewModel"] as UserCompanyViewModel;
+                userViewModel.UserName = usercCompany.UserName;
                 var userList = webServices.Post(userViewModel, "User/UserInformationByUserName");
 
                 if (userList.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -50,6 +52,91 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
          
+        }
+
+        [HttpGet]
+        public ActionResult UserInformationEdit()
+        {
+            UserViewModel userViewModel = new UserViewModel();
+            try
+            {
+                var usercCompany = Session["userCompanyViewModel"] as UserCompanyViewModel;
+                userViewModel.UserName = usercCompany.UserName;
+                var userList = webServices.Post(userViewModel, "User/UserInformationByUserName");
+
+                if (userList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(userList.Data.ToString()));
+
+                    return View(userViewModel);
+                }
+
+                return View(userViewModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult UserInformationUpdate(UserViewModel userViewModel,  HttpPostedFileBase ImageUrl1)
+        {
+            try
+            {
+               
+                    //if (Request.Files.Count > 0 && LogoUrl != null)
+                    //{
+                    var file = ImageUrl1;
+
+                    using (HttpClient client = new HttpClient())
+                    {
+                        using (var content = new MultipartFormDataContent())
+                        {
+                            if (ImageUrl1 != null)
+                            {
+                                byte[] fileBytes = new byte[file.InputStream.Length + 1];
+                                file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                                var fileContent = new ByteArrayContent(fileBytes);
+                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("ImageUrl") { FileName = file.FileName };
+                                content.Add(fileContent);
+                            }
+                            else
+                        {
+                            content.Add(new StringContent(userViewModel.ImageUrl ?? ""), "ImageUrl");
+                        }
+                            content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                            content.Add(new StringContent(userViewModel.UserId.ToString()), "UserId");
+                            content.Add(new StringContent(userViewModel.FullName ?? ""), "FullName");
+                            content.Add(new StringContent(userViewModel.UserName ?? ""), "UserName");
+                            content.Add(new StringContent(userViewModel.Gender ?? ""), "Gender");
+                            content.Add(new StringContent(userViewModel.DOB.ToString() ?? System.DateTime.Now.ToString()), "DOB");
+
+
+                            
+                            var result = webServices.PostMultiPart(content, "User/UserInformationUpdate", true);
+                            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                            {
+
+                            userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(result.Data.ToString()));
+
+                                //return RedirectToAction("/");
+                                return RedirectToAction("Index", "Home");
+                            }
+                            else
+                            {
+                                ViewBag.Message = "Failed";
+                            }
+                        }
+                    }
+                
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
