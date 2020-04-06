@@ -181,6 +181,7 @@
     <Compile Include="Controllers\DirectSaleController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FuelPricesController.cs" />
     <Compile Include="Controllers\FuelTransferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -997,6 +998,9 @@
     <Content Include="Views\Designation\Details.cshtml" />
     <Content Include="Views\Quotation\CreateEstimates.cshtml" />
     <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\Company\CompanyEdit.cshtml" />
+    <Content Include="Views\User\UserInformation.cshtml" />
+    <Content Include="Views\User\UserInformationEdit.cshtml" />
     <Content Include="Views\CustomerBooking\Confirmation.cshtml" />
     <Content Include="Views\User\ChangePassword.cshtml" />
   </ItemGroup>
@@ -1006,6 +1010,8 @@
     <Folder Include="obj\Debug\" />
     <Folder Include="Views\AWDepartment\" />
     <Folder Include="Views\CustomerQuotation\" />
+    <Folder Include="Views\Error\" />
+    <Folder Include="Views\NotFound\" />
     <Folder Include="Views\UploadDocuments\" />
     <Folder Include="Views\VehicleType\" />
   </ItemGroup>

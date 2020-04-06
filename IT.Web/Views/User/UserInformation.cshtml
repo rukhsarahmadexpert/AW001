@@ -1,0 +1,112 @@
+﻿@model IT.Core.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "UserInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form action="/user/UserInformationUpdate" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="UserId" value="@Model.UserId" />
+    <div class="row">
+        <div class="col-lg-6 col-xl-3 order-lg-1 order-xl-1">
+            <!-- profile summary -->
+            <div class="card mb-g rounded-top">
+                <div class="row no-gutters row-grid">
+                    <div class="col-12">
+                        <div class="d-flex flex-column align-items-center justify-content-center p-4">
+                            <label class=newbtn>
+                                <img id="userImgPreview" class="blah" width="200px" style="border-radius:100%" src="http://awservices.somee.com/ClientDocument/@Model.ImageUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt="User Image">
+                               
+                            </label>
+                            <h5 class="mb-0 fw-700 text-center mt-3">
+                                @Model.FullName <br /><br />
+                                <a class="btn btn-sm btn-primary" href="/User/UserInformationEdit">Edit</a>
+                            </h5>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6 col-xl-3 order-lg-2 order-xl-3">
+            <!-- add : -->
+            <div class="card mb-2">
+                <div class="card-body">
+                    Full Name: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                        <div class="ml-3">
+                            <strong>
+                                @Model.FullName
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mb-2">
+                <div class="card-body">
+                    Email address: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                        <div class="ml-3">
+                            <strong>
+                                @Model.UserName
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mb-2">
+                <div class="card-body">
+                    Gender: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                        <div class="ml-3">
+                            <strong>
+                                @Model.Gender
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mb-2">
+                <div class="card-body">
+                    <div class="card-body">
+                        Date of birth: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                            <div class="ml-3">
+                                <strong>
+                                    @Model.DOB
+                                </strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+</form>
+
+@section Scripts{
+
+    <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            //$('#Save').click(function () {
+            //    PostApiRequest();
+            //})
+
+
+            $("#userImg").change(function () {
+                readURL(this, "userImgPreview");
+            });
+
+        });
+    </script>
+
+
+}

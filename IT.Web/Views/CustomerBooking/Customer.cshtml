@@ -1,13 +1,13 @@
 ﻿@model List<IT.Core.ViewModels.CustomerBookingViewModel>
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Customer";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
 
-                List<IT.Core.ViewModels.CustomerBookingViewModel> customerBookingViewModels = new List<IT.Core.ViewModels.CustomerBookingViewModel>();
-                customerBookingViewModels = Model as List<IT.Core.ViewModels.CustomerBookingViewModel>;
+    List<IT.Core.ViewModels.CustomerBookingViewModel> customerBookingViewModels = new List<IT.Core.ViewModels.CustomerBookingViewModel>();
+    customerBookingViewModels = Model as List<IT.Core.ViewModels.CustomerBookingViewModel>;
 }
 
 <div class="row">
@@ -43,11 +43,11 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="trData">
                             @foreach (var item in customerBookingViewModels)
                             {
 
-                                <tr>
+                                <tr >
                                     <td>@item.ProductName</td>
                                     <td>@item.CreatedDate</td>
                                     <td>@item.DueDate</td>
@@ -105,6 +105,15 @@
             $('#NewOrderProcessingli').addClass('active');
         });
 
+        $(document).ready(function () {
+            setInterval(function () {
+                $("#trData").load(" #trData tr ");
+            //alert('dd');
+            }, 3000);
+        });
     </script>
 
-}
+  
+    
+
+} 

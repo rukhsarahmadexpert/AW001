@@ -150,17 +150,29 @@
 
     </script>
 
+
+    <script>
+        $(document).ready(function () {
+            $("#DeliveryMenu").attr("aria-expanded", "true");
+            $('#DeliveryUl').css('display', 'block');
+            $('#DeliveryLi').addClass('active');
+        });
+
+    </script>
+
   
+
         <script>
             $(document).ready(function () {
-                $("#DeliveryMenu").attr("aria-expanded", "true");
-                $('#DeliveryUl').css('display', 'block');
-                $('#DeliveryLi').addClass('active');
+                setInterval(function () {
+                    $("#trData").load(" #trData tr ");
+                    //alert('dd');
+                }, 3000);
             });
-
         </script>
 
-   
+
+
 }
 
 
