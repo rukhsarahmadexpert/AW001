@@ -121,25 +121,23 @@ namespace IT.Web_New.Controllers
 
                             userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(result.Data.ToString()));
 
-                                //return RedirectToAction("/");
-                                return RedirectToAction("Index", "Home");
-                            }
+                            //return RedirectToAction("/");
+                            return RedirectToAction(nameof(UserInformation));
+                        }
                             else
                             {
                                 ViewBag.Message = "Failed";
                             }
                         }
                     }
-                
-                return RedirectToAction("Index", "Home");
+
+                return RedirectToAction(nameof(UserInformation));
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-
-
 
         [HttpGet]
         public ActionResult Logout()
@@ -288,10 +286,23 @@ namespace IT.Web_New.Controllers
         public ActionResult ChangePassword()
         {
             ChangePasswordViewModel changePasswordViewModel = new ChangePasswordViewModel();
-           
+            UserViewModel userViewModel = new UserViewModel();
             try
             {
                 changePasswordViewModel.Id = Convert.ToInt32(Session["userId"]);
+
+                var usercCompany = Session["userCompanyViewModel"] as UserCompanyViewModel;
+                userViewModel.UserName = usercCompany.UserName;
+                var userList = webServices.Post(userViewModel, "User/UserInformationByUserName");
+
+                if (userList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(userList.Data.ToString()));
+
+                }
+
+                ViewBag.userViewModel = userViewModel;
+
                 return View(changePasswordViewModel);
             }
             catch(Exception ex)
@@ -323,7 +334,7 @@ namespace IT.Web_New.Controllers
                         }
 
                         var Result = (new JavaScriptSerializer()).Deserialize<string>(result.Data.ToString());
-                        return RedirectToAction("Index", "Home");                        
+                        return RedirectToAction(nameof(UserInformation));
                     }
                     else if(result.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {

@@ -599,6 +599,7 @@
     <Content Include="assets\site\masterslider\style\loading-2.gif" />
     <Content Include="assets\site\masterslider\style\masterslider.css" />
     <Content Include="assets\site\masterslider\style\video-close-btn.png" />
+    <Content Include="assets\staticImages\banner.png" />
     <Content Include="assets\staticImages\company.png" />
     <Content Include="assets\staticImages\icon1.png" />
     <Content Include="assets\staticImages\logo-1.png" />
