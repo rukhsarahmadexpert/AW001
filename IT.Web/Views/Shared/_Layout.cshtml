@@ -229,12 +229,7 @@
                 <!-- BEGIN PRIMARY NAVIGATION -->
                 <nav id="js-primary-nav" class="primary-nav" role="navigation">
                     <div class="nav-filter">
-                        <div class="position-relative">
-                            <input type="text" id="nav_filter_input" placeholder="Filter menu" class="form-control" tabindex="0">
-                            <a href="#" onclick="return false;" class="btn-primary btn-search-close js-waves-off" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar">
-                                <i class="fal fa-chevron-up"></i>
-                            </a>
-                        </div>
+                       
                     </div>
                     <div class="info-card">
                         <img src="http://awservices.somee.com/ClientDocument/@UserImage" class="profile-image rounded-circle" alt="User Info">
@@ -257,9 +252,7 @@
                                 
                         </div>
                         <img src="~/assets/staticImages/banner.png" class="cover" alt="cover">
-                        <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
-                            <i class="fal fa-angle-down"></i>
-                        </a>
+                       
                     </div>
 
                     <ul class="nav-menu" id="js-nav-menu">
@@ -300,8 +293,6 @@
                                 <span class="nav-link-text" data-i18n="nav.application_intel" id="DeliveryMenu">Deliveries</span>
                             </a>
                             <ul id="DeliveryUl">
-
-
                                 <li id="DeliveryLi">
                                     <a href="/CustomerOrder/Index" title="Build Notes" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">My Deliveries</span><span class="">List</span>
@@ -316,13 +307,11 @@
                                 <span class="nav-link-text" data-i18n="nav.application_intel" id="DriverMenu">Drivers Information</span>
                             </a>
                             <ul id="DriverUl">
-
                                 <li id="DriverLi">
                                     <a href="/Driver/Index" title="Drivers" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Drivers</span><span class="">List</span>
                                     </a>
                                 </li>
-
                             </ul>
                         </li>
 
@@ -332,8 +321,6 @@
                                 <span class="nav-link-text" data-i18n="nav.application_intel" id="VehicleMenu">Vehicle Information</span>
                             </a>
                             <ul id="VehicleUl">
-
-
                                 <li id="VehicleLi">
                                     <a href="/Vehicle/Index" title="Vehicles" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Vehicles</span><span class="">List</span>
@@ -349,7 +336,6 @@
                                 <span class="nav-link-text" data-i18n="nav.application_intel" id="RegisteredMenu">Registered Sites</span>
                             </a>
                             <ul id="RegisteredUl">
-
                                 <li id="RegisteredLi">
                                     <a href="/CustomerSites/Index" title="Sites" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Sites</span><span class="">List</span>
@@ -441,21 +427,21 @@
                             <i class="ni ni-menu"></i>
                         </a>
                     </div>
-                    <div class="search">
-                        <form class="app-forms hidden-xs-down" role="search" action="https://smartadmin.lodev09.com/page_search.php" autocomplete="off">
+                   @* <div class="search">
+                        <form class="app-forms hidden-xs-down" role="search" action="#" autocomplete="off">
                             <input type="text" id="search-field" placeholder="Search for anything" class="form-control" tabindex="1">
                             <a href="#" onclick="return false;" class="btn-danger btn-search-close js-waves-off d-none" data-action="toggle" data-class="mobile-search-on">
                                 <i class="fal fa-times"></i>
                             </a>
                         </form>
-                    </div>
+                    </div>*@
                     <div class="ml-auto d-flex">
                         <!-- activate app search icon (mobile) -->
-                        <div class="hidden-sm-up">
+                      @*  <div class="hidden-sm-up">
                             <a href="#" class="header-icon" data-action="toggle" data-class="mobile-search-on" data-focus="search-field" title="Search">
                                 <i class="fal fa-search"></i>
                             </a>
-                        </div>
+                        </div>*@
                         <!-- app settings -->
                         <!-- <div class="hidden-md-down">
                             <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-settings">
@@ -501,7 +487,7 @@
                                     <i class="float-right text-muted fw-n">Setting</i>
                                 </a>
 
-                                <a href="/Company/CompanyEdit/@userCompanyViewModel.CompanyId" class="dropdown-item">
+                                <a href="/Company/CompanyInformation/@userCompanyViewModel.CompanyId" class="dropdown-item">
                                     <span>Company</span>
                                     <i class="float-right text-muted fw-n">Setting</i>
                                 </a>
@@ -559,7 +545,7 @@
                                             </span>
                                         </a>
                                     </li>
-                                    <li>
+                                    @*<li>
                                         <a href="" class="app-list-item text-white border-0 m-0">
                                             <div class="icon-stack">
                                                 <i class="base base-7 icon-stack-3x opacity-100 color-warning-500 "></i>
@@ -570,7 +556,7 @@
                                                 Notifications
                                             </span>
                                         </a>
-                                    </li>
+                                    </li>*@
 
                                 </ul>
                             </div>
@@ -594,7 +580,7 @@
         <a href="/User/LogOut" class="menu-item btn" data-toggle="tooltip" data-placement="left" title="Logout">
             <i class="fal fa-sign-out"></i>
         </a>
-        <a href="#" class="menu-item btn" data-action="app-fullscreen" data-toggle="tooltip" data-placement="left" title="Full Screen">
+        @*<a href="#" class="menu-item btn" data-action="app-fullscreen" data-toggle="tooltip" data-placement="left" title="Full Screen">
             <i class="fal fa-expand"></i>
         </a>
         <a href="#" class="menu-item btn" data-action="app-print" data-toggle="tooltip" data-placement="left" title="Print page">
@@ -602,7 +588,7 @@
         </a>
         <a href="#" class="menu-item btn" data-action="app-voice" data-toggle="tooltip" data-placement="left" title="Voice command">
             <i class="fal fa-microphone"></i>
-        </a>
+        </a>*@
     </nav>
     <!-- END Quick Menu -->
     <!-- BEGIN Messenger -->
