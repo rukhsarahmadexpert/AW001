@@ -352,5 +352,17 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult ForgotPassword()
+        {
+            try
+            {
+                return View(new LoginViewModel());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
