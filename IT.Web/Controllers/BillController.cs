@@ -26,6 +26,7 @@ namespace IT.Web_New.Controllers
         List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
         List<LPOInvoiceViewModel> lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
         
+
         [HttpGet]
         public ActionResult Index()
         {
