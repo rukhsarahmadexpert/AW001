@@ -229,7 +229,7 @@
                 <!-- BEGIN PRIMARY NAVIGATION -->
                 <nav id="js-primary-nav" class="primary-nav" role="navigation">
                     <div class="nav-filter">
-                       
+
                     </div>
                     <div class="info-card">
                         <img src="http://awservices.somee.com/ClientDocument/@UserImage" class="profile-image rounded-circle" alt="User Info">
@@ -249,10 +249,10 @@
                             {
                                 <span class="d-inline-block text-truncate text-truncate-sm">Customer User</span>
                             }
-                                
+
                         </div>
                         <img src="~/assets/staticImages/banner.png" class="cover" alt="cover">
-                       
+
                     </div>
 
                     <ul class="nav-menu" id="js-nav-menu">
@@ -427,21 +427,21 @@
                             <i class="ni ni-menu"></i>
                         </a>
                     </div>
-                   @* <div class="search">
-                        <form class="app-forms hidden-xs-down" role="search" action="#" autocomplete="off">
-                            <input type="text" id="search-field" placeholder="Search for anything" class="form-control" tabindex="1">
-                            <a href="#" onclick="return false;" class="btn-danger btn-search-close js-waves-off d-none" data-action="toggle" data-class="mobile-search-on">
-                                <i class="fal fa-times"></i>
-                            </a>
-                        </form>
-                    </div>*@
+                    @* <div class="search">
+                            <form class="app-forms hidden-xs-down" role="search" action="#" autocomplete="off">
+                                <input type="text" id="search-field" placeholder="Search for anything" class="form-control" tabindex="1">
+                                <a href="#" onclick="return false;" class="btn-danger btn-search-close js-waves-off d-none" data-action="toggle" data-class="mobile-search-on">
+                                    <i class="fal fa-times"></i>
+                                </a>
+                            </form>
+                        </div>*@
                     <div class="ml-auto d-flex">
                         <!-- activate app search icon (mobile) -->
-                      @*  <div class="hidden-sm-up">
-                            <a href="#" class="header-icon" data-action="toggle" data-class="mobile-search-on" data-focus="search-field" title="Search">
-                                <i class="fal fa-search"></i>
-                            </a>
-                        </div>*@
+                        @*  <div class="hidden-sm-up">
+                                <a href="#" class="header-icon" data-action="toggle" data-class="mobile-search-on" data-focus="search-field" title="Search">
+                                    <i class="fal fa-search"></i>
+                                </a>
+                            </div>*@
                         <!-- app settings -->
                         <!-- <div class="hidden-md-down">
                             <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-settings">
@@ -470,11 +470,11 @@
                                 </div>
                                 <div class="dropdown-divider m-0"></div>
                                 @*   <a href="#" class="dropdown-item" data-action="app-reset">
-            <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
-        </a>*@
+                                        <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
+                                    </a>*@
                                 <!--<a href="#" class="dropdown-item" data-toggle="modal" data-target=".js-modal-settings">
-        <span data-i18n="drpdwn.settings">Settings</span>
-    </a>-->
+                                    <span data-i18n="drpdwn.settings">Settings</span>
+                                </a>-->
                                 <div class="dropdown-divider m-0"></div>
 
                                 <a href="/User/ChangePassword" class="dropdown-item">
@@ -546,17 +546,17 @@
                                         </a>
                                     </li>
                                     @*<li>
-                                        <a href="" class="app-list-item text-white border-0 m-0">
-                                            <div class="icon-stack">
-                                                <i class="base base-7 icon-stack-3x opacity-100 color-warning-500 "></i>
-                                                <i class="base base-7 icon-stack-2x opacity-100 color-warning-500 "></i>
-                                                <i class="fal fa-bell icon-stack-1x text-white"></i>
-                                            </div>
-                                            <span class="app-list-name">
-                                                Notifications
-                                            </span>
-                                        </a>
-                                    </li>*@
+                                            <a href="" class="app-list-item text-white border-0 m-0">
+                                                <div class="icon-stack">
+                                                    <i class="base base-7 icon-stack-3x opacity-100 color-warning-500 "></i>
+                                                    <i class="base base-7 icon-stack-2x opacity-100 color-warning-500 "></i>
+                                                    <i class="fal fa-bell icon-stack-1x text-white"></i>
+                                                </div>
+                                                <span class="app-list-name">
+                                                    Notifications
+                                                </span>
+                                            </a>
+                                        </li>*@
 
                                 </ul>
                             </div>
@@ -569,7 +569,7 @@
     <!-- END Page Wrapper -->
     <!-- BEGIN Quick Menu -->
     <!-- to add more items, please make sure to change the variable '$menu-items: number;' in your _page-components-shortcut.scss -->
-    <nav class="shortcut-menu d-none d-sm-block">
+    <nav class="shortcut-menu d-none d-sm-block" style="margin-bottom:10px">
         <input type="checkbox" class="menu-open" name="menu-open" id="menu_open" />
         <label for="menu_open" class="menu-open-button ">
             <span class="app-shortcut-icon d-block"></span>
@@ -581,14 +581,14 @@
             <i class="fal fa-sign-out"></i>
         </a>
         @*<a href="#" class="menu-item btn" data-action="app-fullscreen" data-toggle="tooltip" data-placement="left" title="Full Screen">
-            <i class="fal fa-expand"></i>
-        </a>
-        <a href="#" class="menu-item btn" data-action="app-print" data-toggle="tooltip" data-placement="left" title="Print page">
-            <i class="fal fa-print"></i>
-        </a>
-        <a href="#" class="menu-item btn" data-action="app-voice" data-toggle="tooltip" data-placement="left" title="Voice command">
-            <i class="fal fa-microphone"></i>
-        </a>*@
+                <i class="fal fa-expand"></i>
+            </a>
+            <a href="#" class="menu-item btn" data-action="app-print" data-toggle="tooltip" data-placement="left" title="Print page">
+                <i class="fal fa-print"></i>
+            </a>
+            <a href="#" class="menu-item btn" data-action="app-voice" data-toggle="tooltip" data-placement="left" title="Voice command">
+                <i class="fal fa-microphone"></i>
+            </a>*@
     </nav>
     <!-- END Quick Menu -->
     <!-- BEGIN Messenger -->
@@ -1645,8 +1645,21 @@
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-messaging.js"></script>
     <script src="~/app.js"></script>
 
-    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-    <div class="elfsight-app-df3c0c79-e67c-425f-ac0f-233d2bfd6c9f"></div>
+    <!-- Getbutton.io widget -->
+    <script type="text/javascript">
+        (function () {
+            var options = {
+                whatsapp: "+971557383866", // WhatsApp number
+                call_to_action: "Contact Us", // Call to action
+                position: "right", // Position may be 'right' or 'left'
+            };
+            var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+            s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        })();
+    </script>
+    <!-- /Getbutton.io widget -->
 
 </body>
 </html>
