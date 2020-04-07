@@ -1004,6 +1004,9 @@
     <Content Include="Views\User\UserInformationEdit.cshtml" />
     <Content Include="Views\CustomerBooking\Confirmation.cshtml" />
     <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\User\ForgotPassword.cshtml" />
+    <Content Include="Views\User\PasswordRestCode.cshtml" />
+    <Content Include="Views\User\UpdateForGotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

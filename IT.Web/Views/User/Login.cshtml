@@ -24,8 +24,6 @@
     <!-- Place favicon.ico in the root directory -->
         <link rel="apple-touch-icon" sizes="180x180" href="~/assets/staticImages/logo-1.png">
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/staticImages/logo-1.png">
-   
-   
     <!-- Optional: page related CSS -->
     <!-- PHP docs -->
     <link rel="stylesheet" media="screen, print" href="~/assets/css/markdown.css">
@@ -55,6 +53,7 @@
                     <input type="password" id="Password" name="Password" class="form-control" placeholder="enter Your Password">
                     <span class="help-block">
                         @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
+                        <p class="text-success font-weight-bold">@ViewBag.success</p> 
                     </span>
                 </div>
                 <div class="form-group text-left">
@@ -68,7 +67,7 @@
                 <button type="submit" class="btn btn-default float-right mt-5">Sign In</button>
             </form>
             <div class="blankpage-footer text-center">
-                <a href="#"><strong>Recover Password</strong></a> | <a href="/User/Registration"><strong>Register Account</strong></a>
+                <a href="/User/forgotPassword"><strong>Recover Password</strong></a> | <a href="/User/Registration"><strong>Register Account</strong></a>
             </div>
         </div>
     </div>
