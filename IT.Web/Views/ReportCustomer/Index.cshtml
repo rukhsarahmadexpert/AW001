@@ -28,6 +28,7 @@
                                         <option value="0">Select Report Type</option>
                                         <option value="VehicleReport">By Vehicles Refilling Report</option>
                                         <option value="OrderReport">By Delivery Orders Report</option>
+                                        <option value="OrderReportBulk">By Bulk Orders Report</option>
                                     </select>
                                 </div>
                                 <div class="input-group flex-nowrap mt-2">
@@ -109,7 +110,7 @@
                         }
                     });
                 }
-                else if (TypeVal == "OrderReport") {
+                else if (TypeVal == "OrderReport" || TypeVal == "OrderReportBulk") {
                     $('#ReportStatusVehicle').attr('disabled', true);
                     $('#ReportFormat').attr('disabled', true);
                     $('#ReportStatus').empty();
@@ -143,7 +144,7 @@
 
     </script>
 
-        <script>
+    <script>
             $(document).ready(function () {
                 $("#ReportMenu").attr("aria-expanded", "true");
                 $('#ReportUl').css('display', 'block');
