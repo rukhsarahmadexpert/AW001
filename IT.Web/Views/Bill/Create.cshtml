@@ -7,7 +7,7 @@
 <link href="~/Content/css/Common/Common-LPO.css" rel="stylesheet" />
 
 <main id="js-page-content" role="main" class="page-content">
-    
+
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
@@ -199,6 +199,16 @@
 
             return IsValid;
         }
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            //alert();
+            $("#PurchaseMenu").attr("aria-expanded", "true");
+            $('#PurchaseUl').css('display', 'block');
+            $('#PurchaseBillLi').addClass('active');
+        });
 
     </script>
     <script src="~/Scripts/Common-Scripts/LOP-Invoice.js"></script>

@@ -39,7 +39,7 @@
 
             </div>
             <div class="panel-container show">
-                <div class="panel-content">                   
+                <div class="panel-content">
                     <form action="/Vender/Create" method="post">
                         <div class="row">
                             <div class="col-md-4">
@@ -170,7 +170,7 @@
                             </div>
                         </div>
 
-                        @Html.ValidationSummary(false,"",new { @class = "text-danger"})
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
                         <div class="row py-5">
                             <div class="col-md-12">
@@ -207,6 +207,18 @@
         });
 
     </script>
+
+    <script>
+        $(document).ready(function () {
+            //alert();
+            $("#VenderMenu").attr("aria-expanded", "true");
+            $('#VenderUl').css('display', 'block');
+            $('#VenderLi').addClass('active');
+        });
+
+    </script>
+
+
 }
 
 

@@ -1,6 +1,6 @@
 ﻿@model IT.Core.ViewModels.ProductViewModel
 @{
-    if(Model.Id > 0)
+    if (Model.Id > 0)
     {
         ViewBag.Title = "Aw Fuel - Edit Product";
     }
@@ -8,13 +8,13 @@
     {
         ViewBag.Title = "Aw Fuel - Create Product";
     }
-   
+
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
 <main id="js-page-content" role="main" class="page-content">
 
-   
+
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
@@ -26,7 +26,7 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                       
+
                         <form action="/Product/Create" method="post">
                             <input type="hidden" value="@Model.Id" name="Id" id="Id" />
                             <div class="row">
@@ -86,9 +86,21 @@
                             </div>
                         </form>
                     </div>
-                    @Html.ValidationSummary(false, "", new { @class= "text-danger" })
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
 </main>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //alert();
+            $("#ProductMenu").attr("aria-expanded", "true");
+            $('#ProductUl').css('display', 'block');
+            $('#ProductLi').addClass('active');
+        });
+
+    </script>
+
+}

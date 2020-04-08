@@ -11,16 +11,16 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        
-                            Product <span class="fw-300">details</span>
+
+                        Product <span class="fw-300">details</span>
 
                     </h2>
 
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                      
-                       
+
+
                         <form action="/Product/Create" method="post">
                             <input type="hidden" value="@Model.Id" name="Id" id="Id" />
                             <div class="row">
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                             </div>
-                          
+
                         </form>
                     </div>
                 </div>
@@ -63,3 +63,15 @@
     </div>
 </main>
 
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //alert();
+            $("#ProductMenu").attr("aria-expanded", "true");
+            $('#ProductUl').css('display', 'block');
+            $('#ProductLi').addClass('active');
+        });
+
+    </script>
+
+}

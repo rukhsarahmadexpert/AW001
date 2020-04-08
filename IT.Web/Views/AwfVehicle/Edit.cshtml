@@ -1,176 +1,170 @@
-﻿@model IT.Core.ViewModels.VehicleViewModel  
+﻿@model IT.Core.ViewModels.VehicleViewModel
 @{
     ViewBag.Title = "AW Fuel - Vehicle Edit";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Vehicle <span class="fw-300">Edit</span>
+                </h2>
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Vehicle</a></li>
-    <li class="breadcrumb-item active">Edit</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
-    <div class="row"> 
-        <div class="col-xl-12">
-            <div id="panel-1" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Vehicle <span class="fw-300">Edit</span>
-                    </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
 
-                </div>
-                <div class="panel-container show">
-                    <div class="panel-content">
-                       
-                        <form action="/AwfVehicle/Update" method="post" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label" for="single-label">
-                                            Select Vehicle Type
-                                        </label>
-                                        <select class="select2 form-control" name="VehicleType" id="VehicleType">
-                                            @foreach (var item in ViewBag.VehicleTypes)
-                                            {
-                                                <option value="@item.Id" @(item.Id == @Model.VehicleType ? "selected='selected'" : "")>@item.VehicleType</option>
-                                            }
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Trafic Plate Number</label>
-                                        <input type="hidden" name="Id" id="Id" value="@Model.Id" />
-                                        <input type="text" id="TraficPlateNumber" name="TraficPlateNumber" value="@Model.TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Tc Number</label>
-                                        <input type="text" id="TCNumber" name="TCNumber" value="@Model.TCNumber" class="form-control" placeholder="Enter Tc Number">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Model</label>
-                                        <input type="text" id="Model" name="Model" class="form-control" value="@Model.Model" placeholder="Enter Model">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Brand</label>
-                                        <input type="text" id="Brand" name="Brand" class="form-control" value="@Model.Brand" placeholder="Enter Brand">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="single-label">
-                                            Color
-                                        </label>
-                                        <select class=" form-control" id="Color" name="Color">
-                                            <option value="white" @(Model.Color == "white" ? "selected" : "")>White</option>
-                                            <option value="black" @(Model.Color == "black" ? "selected" : "")>Black</option>
-                                            <option value="red" @(Model.Color == "red" ? "selected" : "")>Red</option>
-                                            <option value="green" @(Model.Color == "green" ? "selected" : "")>Green</option>
-                                            <option value="blue" @(Model.Color == "blue" ? "selected" : "")>Blue</option>
-                                            <option value="gold" @(Model.Color == "gold" ? "selected" : "")>Gold</option>
-                                            <option value="other" @(Model.Color == "other" ? "selected" : "")>Other</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Mulkia Expiry</label>
-                                        <input type="text" id="MulkiaExpiry" name="MulkiaExpiry" class="form-control" value="@Model.MulkiaExpiry" placeholder="Enter Mulkia Expiry">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Insurance Expiry</label>
-                                        <input type="date" id="InsuranceExpiry" name="InsuranceExpiry" class="form-control" value="@Model.InsuranceExpiry" placeholder="Enter Insurance Expiry">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label" for="single-label">
-                                            Region
-                                        </label>
-                                        <select class="select2 form-control" name="RegisteredRegion" id="RegisteredRegion">
-
-                                            <option value="Abu Dhabi" @(Model.RegisteredRegion == "Abu Dhabi" ? "selected='selected'" : "")>Abu Dhabi</option>
-                                            <option value="Dubai" @(Model.RegisteredRegion == "Dubai" ? "selected='selected'" : "")>Dubai</option>
-                                            <option value="Ajman" @(Model.RegisteredRegion == "Ajman" ? "selected='selected'" : "")>Ajman</option>
-                                            <option value="Fujairah" @(Model.RegisteredRegion == "Fujairah" ? "selected='selected'" : "")>Fujairah</option>
-                                            <option value="Ras Al Khaimah" @(Model.RegisteredRegion == "Ras Al Khaimah" ? "selected='selected'" : "")>Ras Al Khaimah</option>
-                                            <option value="Sharjah" @(Model.RegisteredRegion == "Sharjah" ? "selected='selected'" : "")>Sharjah</option>
-                                            <option value="Umm Al Quwain" @(Model.RegisteredRegion == "Umm Al Quwain" ? "selected='selected'" : "")>Umm Al Quwain</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Notes</label>
-                                        <textarea name="Comments" id="Comments" class="form-control">@Model.Comments</textarea>
-                                    </div>
+                    <form action="/AwfVehicle/Update" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="single-label">
+                                        Select Vehicle Type
+                                    </label>
+                                    <select class="select2 form-control" name="VehicleType" id="VehicleType">
+                                        @foreach (var item in ViewBag.VehicleTypes)
+                                        {
+                                            <option value="@item.Id" @(item.Id == @Model.VehicleType ? "selected='selected'" : "")>@item.VehicleType</option>
+                                        }
+                                    </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 1</b> Front side</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class=newbtn>
-                                                        <img id="MulkiaFront1Preview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.MulkiaFront1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
-                                                        <input id="MulkiaFront1File" name="MulkiaFront1File" class='pic' onchange="readURL(this);" type="file">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Trafic Plate Number</label>
+                                    <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+                                    <input type="text" id="TraficPlateNumber" name="TraficPlateNumber" value="@Model.TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Tc Number</label>
+                                    <input type="text" id="TCNumber" name="TCNumber" value="@Model.TCNumber" class="form-control" placeholder="Enter Tc Number">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Model</label>
+                                    <input type="text" id="Model" name="Model" class="form-control" value="@Model.Model" placeholder="Enter Model">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Brand</label>
+                                    <input type="text" id="Brand" name="Brand" class="form-control" value="@Model.Brand" placeholder="Enter Brand">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="single-label">
+                                        Color
+                                    </label>
+                                    <select class=" form-control" id="Color" name="Color">
+                                        <option value="white" @(Model.Color == "white" ? "selected" : "")>White</option>
+                                        <option value="black" @(Model.Color == "black" ? "selected" : "")>Black</option>
+                                        <option value="red" @(Model.Color == "red" ? "selected" : "")>Red</option>
+                                        <option value="green" @(Model.Color == "green" ? "selected" : "")>Green</option>
+                                        <option value="blue" @(Model.Color == "blue" ? "selected" : "")>Blue</option>
+                                        <option value="gold" @(Model.Color == "gold" ? "selected" : "")>Gold</option>
+                                        <option value="other" @(Model.Color == "other" ? "selected" : "")>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Mulkia Expiry</label>
+                                    <input type="text" id="MulkiaExpiry" name="MulkiaExpiry" class="form-control" value="@Model.MulkiaExpiry" placeholder="Enter Mulkia Expiry">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Insurance Expiry</label>
+                                    <input type="date" id="InsuranceExpiry" name="InsuranceExpiry" class="form-control" value="@Model.InsuranceExpiry" placeholder="Enter Insurance Expiry">
+                                </div>
 
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 1</b> back side</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label>
-                                                        <img id="MulkiaBack1Preview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.MulkiaBack1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
-                                                        <input id="MulkiaBack1File" name="MulkiaBack1File" class='pic' onchange="readURL(this);" type="file">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 2</b> Front side</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class=newbtn>
-                                                        <img id="MulkiaFront2Preview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.MulkiaFront2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
-                                                        <input id="MulkiaFront2File" name="MulkiaFront2File" class='pic' onchange="readURL(this);" type="file">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 2</b> back side</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class=newbtn>
-                                                        <img id="MulkiaBack2Preview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.MulkiaBack2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
-                                                        <input id="MulkiaBack2File" name="MulkiaBack2File" class='pic' onchange="readURL(this);" type="file">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row py-5">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                                Update
-                                                <span>Vehicle</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label class="form-label" for="single-label">
+                                        Region
+                                    </label>
+                                    <select class="select2 form-control" name="RegisteredRegion" id="RegisteredRegion">
+
+                                        <option value="Abu Dhabi" @(Model.RegisteredRegion == "Abu Dhabi" ? "selected='selected'" : "")>Abu Dhabi</option>
+                                        <option value="Dubai" @(Model.RegisteredRegion == "Dubai" ? "selected='selected'" : "")>Dubai</option>
+                                        <option value="Ajman" @(Model.RegisteredRegion == "Ajman" ? "selected='selected'" : "")>Ajman</option>
+                                        <option value="Fujairah" @(Model.RegisteredRegion == "Fujairah" ? "selected='selected'" : "")>Fujairah</option>
+                                        <option value="Ras Al Khaimah" @(Model.RegisteredRegion == "Ras Al Khaimah" ? "selected='selected'" : "")>Ras Al Khaimah</option>
+                                        <option value="Sharjah" @(Model.RegisteredRegion == "Sharjah" ? "selected='selected'" : "")>Sharjah</option>
+                                        <option value="Umm Al Quwain" @(Model.RegisteredRegion == "Umm Al Quwain" ? "selected='selected'" : "")>Umm Al Quwain</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Notes</label>
+                                    <textarea name="Comments" id="Comments" class="form-control">@Model.Comments</textarea>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 1</b> Front side</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="MulkiaFront1Preview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.MulkiaFront1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                    <input id="MulkiaFront1File" name="MulkiaFront1File" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 1</b> back side</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label>
+                                                    <img id="MulkiaBack1Preview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.MulkiaBack1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                    <input id="MulkiaBack1File" name="MulkiaBack1File" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 2</b> Front side</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="MulkiaFront2Preview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.MulkiaFront2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                    <input id="MulkiaFront2File" name="MulkiaFront2File" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 2</b> back side</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="MulkiaBack2Preview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.MulkiaBack2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                    <input id="MulkiaBack2File" name="MulkiaBack2File" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row py-5">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                            Update
+                                            <span>Vehicle</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 
@@ -178,35 +172,45 @@
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
     <script>
 
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-        //$('#Save').click(function () {
-        //    PostApiRequest();
-        //})
-
-
-        $("#MulkiaFront1File").change(function () {
-        readURL(this,"MulkiaFront1Preview");
-    });
+            //$('#Save').click(function () {
+            //    PostApiRequest();
+            //})
 
 
-        $("#MulkiaBack1File").change(function () {
-        readURL(this, "MulkiaBack1Preview");
-    });
+            $("#MulkiaFront1File").change(function () {
+                readURL(this, "MulkiaFront1Preview");
+            });
 
 
-        $("#MulkiaFront2File").change(function () {
-        readURL(this, "MulkiaFront2Preview");
-    });
+            $("#MulkiaBack1File").change(function () {
+                readURL(this, "MulkiaBack1Preview");
+            });
 
 
-        $("#MulkiaBack2File ").change(function () {
-        readURL(this, "MulkiaBack2Preview");
-    });
-
-    })
+            $("#MulkiaFront2File").change(function () {
+                readURL(this, "MulkiaFront2Preview");
+            });
 
 
+            $("#MulkiaBack2File ").change(function () {
+                readURL(this, "MulkiaBack2Preview");
+            });
+
+        })
+
+
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            //alert();
+            $("#VehicleMenu").attr("aria-expanded", "true");
+            $('#VehicleUl').css('display', 'block');
+            $('#VehicleLi').addClass('active');
+        });
 
     </script>
 }

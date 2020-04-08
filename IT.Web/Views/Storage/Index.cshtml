@@ -7,11 +7,6 @@
     storageViewModels = Model as List<IT.Core.ViewModels.StorageViewModel>;
 }
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Storage</a></li>
-    <li class="breadcrumb-item active">List</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -68,3 +63,16 @@
     </div>
 </div>
 
+@section scripts{
+
+    <script>
+    $(document).ready(function () {
+        //alert();
+        $("#StorageMenu").attr("aria-expanded", "true");
+        $('#StorageUl').css('display', 'block');
+        $('#StorageLi').addClass('active');
+    });
+
+    </script>
+
+}

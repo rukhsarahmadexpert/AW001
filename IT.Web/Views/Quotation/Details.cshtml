@@ -1,21 +1,23 @@
 ﻿
 @{
-    ViewBag.Title = "Aw Fuel - Quotation Details";
+                /**/
 
-    IT.Core.ViewModels.LPOInvoiceViewModel LPOInvoiceViewModel = new IT.Core.ViewModels.LPOInvoiceViewModel();
+                ViewBag.Title = "Aw Fuel - Quotation Details";
 
-    LPOInvoiceViewModel = ViewBag.lPOInvoiceViewModel as IT.Core.ViewModels.LPOInvoiceViewModel;
+                IT.Core.ViewModels.LPOInvoiceViewModel LPOInvoiceViewModel = new IT.Core.ViewModels.LPOInvoiceViewModel();
 
-    IT.Core.ViewModels.UserCompanyViewModel userCompanyViewModel = new IT.Core.ViewModels.UserCompanyViewModel();
-    userCompanyViewModel = Session["userCompanyViewModel"] as IT.Core.ViewModels.UserCompanyViewModel;
-    if (userCompanyViewModel.Authority == "CustomerAdmin")
-    {
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-    else
-    {
-        Layout = "~/Views/Shared/_layoutAdmin.cshtml";
-    }
+                LPOInvoiceViewModel = ViewBag.lPOInvoiceViewModel as IT.Core.ViewModels.LPOInvoiceViewModel;
+
+                IT.Core.ViewModels.UserCompanyViewModel userCompanyViewModel = new IT.Core.ViewModels.UserCompanyViewModel();
+                userCompanyViewModel = Session["userCompanyViewModel"] as IT.Core.ViewModels.UserCompanyViewModel;
+                if (userCompanyViewModel.Authority == "CustomerAdmin")
+                {
+                    Layout = "~/Views/Shared/_Layout.cshtml";
+                }
+                else
+                {
+                    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+                }
 }
 
 <link href="~/Content/css/Common/LPOInvoiceTable.css" rel="stylesheet" />
@@ -28,11 +30,11 @@
             <div class="panel-hdr">
                 @if (Layout == "~/Views/Shared/_layoutAdmin.cshtml")
                 {
-                <h2>
-                    <a href="/Quotation/Create">
-                        <i class="fal fa-plus-circle"></i> Add New <span class="fw-300"><i> Quotation </i></span>
-                    </a>
-                </h2>
+                    <h2>
+                        <a href="/Quotation/Create">
+                            <i class="fal fa-plus-circle"></i> Add New <span class="fw-300"><i> Quotation </i></span>
+                        </a>
+                    </h2>
                 }
             </div>
             <div class="panel-container show">
@@ -70,9 +72,9 @@
 
                                     </div>
                                 </div>
-                                @if(Layout == "~/Views/Shared/_layoutAdmin.cshtml")
-                                {                
-                                @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_FooterButtonPartialViewView.cshtml")
+                                @if (Layout == "~/Views/Shared/_layoutAdmin.cshtml")
+                                {
+                                    @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_FooterButtonPartialViewView.cshtml")
                                 }
                             </div>
                         </div>
@@ -126,6 +128,16 @@
                     alert('Failed to Send email');
                 }
             });
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            //alert();
+            $("#SalesMenu").attr("aria-expanded", "true");
+            $('#SalesUl').css('display', 'block');
+            $('#QuotationLi').addClass('active');
         });
 
     </script>

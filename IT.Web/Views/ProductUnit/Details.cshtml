@@ -12,7 +12,7 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                         Product Unit <span class="fw-300">details</span>
+                        Product Unit <span class="fw-300">details</span>
                     </h2>
 
                 </div>
@@ -30,7 +30,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>
@@ -39,3 +39,15 @@
     </div>
 </main>
 
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //alert();
+            $("#ProductMenu").attr("aria-expanded", "true");
+            $('#ProductUl').css('display', 'block');
+            $('#ProductUnitLi').addClass('active');
+        });
+
+    </script>
+
+}

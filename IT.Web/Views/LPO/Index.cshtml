@@ -5,12 +5,6 @@
 }
 
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">LPO's</a></li>
-
-    <li class="breadcrumb-item active"> List</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
 
 <div class="row">
     <div class="col-xl-12">
@@ -27,7 +21,7 @@
                     <!--      <div class="panel-tag">
                         <p>Drivers Base Information</p>
                     </div>-->
-                    <!-- datatable start -->                    
+                    <!-- datatable start -->
                     <table id="#" class="table LPOTable table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
@@ -86,11 +80,11 @@
                         success: fnCallback
                     })
                 },
-                "aoColumns": [                    
+                "aoColumns": [
                     { "mData": "Name" },
                     { "mData": "Product" },
                     { "mData": "TotalQuantity" },
-                    { "mData": "UnitName" },                    
+                    { "mData": "UnitName" },
                     { "mData": "FDate" },
                     { "mData": "DDate" },
                     { "mData": "Total" },
@@ -124,6 +118,19 @@
             window.location.href = "/Bill-Create/" + Id;
         }
     </script>
+
+
+        <script>
+            $(document).ready(function () {
+                //alert();
+                $("#PurchaseMenu").attr("aria-expanded", "true");
+                $('#PurchaseUl').css('display', 'block');
+                $('#PurchaseLpoLi').addClass('active');
+            });
+
+        </script>
+
+   
 
 }
 

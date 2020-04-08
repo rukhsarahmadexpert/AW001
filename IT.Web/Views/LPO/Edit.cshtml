@@ -10,11 +10,6 @@
 <link href="~/Content/css/Common/Common-LPO.css" rel="stylesheet" />
 
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
-    <li class="breadcrumb-item active">LPO Edit</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -223,10 +218,10 @@
                         contentType: false,
                         processData: false,
                         success: function (result)
-                        {                           
+                        {
                             if (result != "Failed") {
-                                
-                                list = [];                              
+
+                                list = [];
                                 window.location.href = "/LPO/Details/" + result;
                             }
                             else {
@@ -264,7 +259,7 @@
                 RowTotal: parseFloat(currentRow.find('.RowSubTotal').val()),
             })
             ajaxRequest("POST", routeurl, data, "json").then(function (result) {
-                
+
                 if (result == "Success") {
                     //sucessUpdate();
                     window.location.reload();
@@ -273,6 +268,16 @@
 
         }
 
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            //alert();
+            $("#PurchaseMenu").attr("aria-expanded", "true");
+            $('#PurchaseUl').css('display', 'block');
+            $('#PurchaseLpoLi').addClass('active');
+        });
 
     </script>
 }

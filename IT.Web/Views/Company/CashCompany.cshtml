@@ -47,25 +47,25 @@
                                     </div>
                                 </div>
                                 <div class="col-md-5 col-xl-5 p-2">
-                                   
-                                        <div class="input-group " form-group flex-nowrap">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fal fa-user fs-xl"></i></span>
-                                            </div>
-                                            <select id="OwnerRepresentaive" name="OwnerRepresentaive" class="form-control">
-                                                @if (Model.OwnerRepresentaive == "Owner")
-                                                {
-                                                    <option value="Owner" selected="selected">Owner</option>
-                                                    <option value="Representative">Representative</option>
-                                                }
-                                                else
-                                                {
-                                                    <option value="Owner">Owner</option>
-                                                    <option value="Representative" selected="selected">Representative</option>
-                                                }
-                                            </select>
+
+                                    <div class="input-group " form-group flex-nowrap">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fal fa-user fs-xl"></i></span>
                                         </div>
-                                   
+                                        <select id="OwnerRepresentaive" name="OwnerRepresentaive" class="form-control">
+                                            @if (Model.OwnerRepresentaive == "Owner")
+                                            {
+                                                <option value="Owner" selected="selected">Owner</option>
+                                                <option value="Representative">Representative</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="Owner">Owner</option>
+                                                <option value="Representative" selected="selected">Representative</option>
+                                            }
+                                        </select>
+                                    </div>
+
                                     <div class="input-group flex-nowrap mt-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-phone fs-xl"></i></span>
@@ -161,6 +161,18 @@
         });
 
     </script>
+
+        <script>
+            $(document).ready(function () {
+                //alert();
+                $("#CompanyMenu").attr("aria-expanded", "true");
+                $('#CompanyUl').css('display', 'block');
+                $('#CompanyLi').addClass('active');
+            });
+
+        </script>
+
+
 }
 
 <style>

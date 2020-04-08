@@ -14,13 +14,6 @@
     </style>
 </head>
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Customer Order</a></li>
-    <li class="breadcrumb-item active">Details</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
-
-
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -111,7 +104,7 @@
                                         @foreach (var item in Model.customerRemainingBookingViewModels)
                                         {
                                             <tr>
-                                                <td><Input type="radio" name="Booking" onclick="SetOrderId(@item.BookingId)"/></td>
+                                                <td><Input type="radio" name="Booking" onclick="SetOrderId(@item.BookingId)" /></td>
                                                 <td>@item.BookingId</td>
                                                 <td>@item.BookQuantity</td>
                                                 <td>@item.DeliverdQuantity</td>
@@ -393,7 +386,7 @@
         $(document).ready(function () {
 
             $('#RefreshToLoadOnlineDriver').click(function () { LoadOnlineDriver(); });
-            
+
             $('#CheckAll').click(function () {
 
                 if ($('#CheckAll').is(':checked') == true) {
@@ -407,7 +400,7 @@
                     })
                 }
             });
-            
+
             $('#OrderAssignToDriver').click(function () {
 
                 if ($('#OnlineDriverSelectList').val() < 1) {
@@ -426,8 +419,7 @@
     </script>
 
     <script>
-        function AssignOrderToDriver()
-        {
+        function AssignOrderToDriver() {
             if ($('#BookingSelectdId').val() == 0) {
                 alert('Please select booking first');
             }
@@ -439,7 +431,7 @@
         function SetOrderId(Id) {
             $('#BookingSelectdId').val(Id);
         }
-        
+
         function CustomerOrderAssignToDriver(Url) {
 
             var list = [], orderItem, CurrentRow;
@@ -509,6 +501,17 @@
         }
 
     </script>
+
+        <script>
+            $(document).ready(function () {
+                //alert();
+                $("#CustomerOrderMenu").attr("aria-expanded", "true");
+                $('#CustomerOrderUl').css('display', 'block');
+                $('#CustomerOrderlLi').addClass('active');
+            });
+
+        </script>
+
 }
 
 

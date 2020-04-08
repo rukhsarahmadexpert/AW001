@@ -4,142 +4,139 @@
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
-<main id="js-page-content" role="main" class="page-content">
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Employee <span class="fw-300">Create </span>
+                </h2>
 
-    <div class="row">
-        <div class="col-xl-12">
-            <div id="panel-1" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Employee <span class="fw-300">Create </span>
-                    </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
 
-                </div>
-                <div class="panel-container show">
-                    <div class="panel-content">
-                       
-                        <form action="/Employee/Create" method="post" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-md-6">
+                    <form action="/Employee/Create" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6">
 
 
 
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">First Name</label>
-                                        <input type="text" id="Name" name="Name" class="form-control" placeholder="Please Enter Frist Name">
-                                    </div>
-                                   
-                                    <div class="form-group">
-                                        <label class="form-label" for="single-label">
-                                            Nationality
-                                        </label>
-                                        <select class="form-control" id="Nationality" name="Nationality">
-                                            <option value="Afghanistan">Afghanistan</option>
-                                            <option value="Pakistan">Pakistan</option>
-                                            <option value="India">India</option>
-                                            <option value="Bangladesh">Bangladesh</option>
-                                            <option value="Nipal">Nipal</option>
-                                            <option value="Other">Other</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Contact</label>
-                                        <input type="text" id="Contact" name="Contact" class="form-control" placeholder="Enter Contact">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Email</label>
-                                        <input type="Email" id="Email" name="Email" class="form-control" placeholder="Enter Email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Expiry Date</label>
-                                        <input type="date" id="expiryDate" name="expiryDate" class="form-control" placeholder="Enter Color">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Nation</label>
-                                        <input type="text" id="nation" name="nation" class="form-control" placeholder="Enter Nation">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label" for="single-label">
-                                            Select Designation
-                                        </label>
-
-                                        <select class="select2 form-control" name="Designation" id="Designation">
-                                            @foreach (var item in ViewBag.Designations)
-                                            {
-                                                <option value="@item.Id">@item.Designation</option>
-                                            
-                                            }
-                                        </select>
-                                    </div>
-
-
-
-
-
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">First Name</label>
+                                    <input type="text" id="Name" name="Name" class="form-control" placeholder="Please Enter Frist Name">
                                 </div>
-                                <div class="col-md-6">
 
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Basic Salary</label>
-                                        <input type="text" id="BasicSalary" name="BasicSalary" class="form-control" placeholder="Enter BasicSalary">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Facebook</label>
-                                        <input type="text" id="Facebook" name="Facebook" class="form-control" placeholder="Enter Facebook">
-                                    </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="single-label">
+                                        Nationality
+                                    </label>
+                                    <select class="form-control" id="Nationality" name="Nationality">
+                                        <option value="Afghanistan">Afghanistan</option>
+                                        <option value="Pakistan">Pakistan</option>
+                                        <option value="India">India</option>
+                                        <option value="Bangladesh">Bangladesh</option>
+                                        <option value="Nipal">Nipal</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Contact</label>
+                                    <input type="text" id="Contact" name="Contact" class="form-control" placeholder="Enter Contact">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Email</label>
+                                    <input type="Email" id="Email" name="Email" class="form-control" placeholder="Enter Email">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Expiry Date</label>
+                                    <input type="date" id="expiryDate" name="expiryDate" class="form-control" placeholder="Enter Color">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Nation</label>
+                                    <input type="text" id="nation" name="nation" class="form-control" placeholder="Enter Nation">
+                                </div>
 
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Notes</label>
-                                        <textarea name="Comments" id="Comments" class="form-control"></textarea>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label" style="margin-top:20px"><b>Passport</b> Front Side</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class=newbtn>
-                                                        <img id="PassportFrontPreview" class="blah" src="/assets/staticImages/icon1.png">
-                                                        <input id="PassportFrontFile" name="PassportFrontFile" class='pic' onchange="readURL(this);" type="file">
-                                                    </label>
-                                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="single-label">
+                                        Select Designation
+                                    </label>
+
+                                    <select class="select2 form-control" name="Designation" id="Designation">
+                                        @foreach (var item in ViewBag.Designations)
+                                        {
+                                            <option value="@item.Id">@item.Designation</option>
+
+                                        }
+                                    </select>
+                                </div>
+
+
+
+
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Basic Salary</label>
+                                    <input type="text" id="BasicSalary" name="BasicSalary" class="form-control" placeholder="Enter BasicSalary">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Facebook</label>
+                                    <input type="text" id="Facebook" name="Facebook" class="form-control" placeholder="Enter Facebook">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Notes</label>
+                                    <textarea name="Comments" id="Comments" class="form-control"></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>Passport</b> Front Side</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="PassportFrontPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                    <input id="PassportFrontFile" name="PassportFrontFile" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label" style="margin-top:20px"><b>Passport</b> back Side</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class=newbtn>
-                                                        <img id="PassportBackPreview" class="blah" src="/assets/staticImages/icon1.png">
-                                                        <input id="PassportBackFile" name="PassportBackFile" class='pic' onchange="readURL(this);" type="file">
-                                                    </label>
-                                                </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" style="margin-top:20px"><b>Passport</b> back Side</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class=newbtn>
+                                                    <img id="PassportBackPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                    <input id="PassportBackFile" name="PassportBackFile" class='pic' onchange="readURL(this);" type="file">
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="row py-5">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                                Submit
-                                                <span>Employee</span>
-                                            </button>
-                                        </div>
+                                <div class="row py-5">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                            Submit
+                                            <span>Employee</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</div>
 
 
 
@@ -165,13 +162,6 @@
 
 
     })
-
-
-
-
-
-
-
 
     //function PostApiRequest() {
     //    $.post("http://itmolen-001-site8.htempurl.com/api/Driver/Add", $("#form1").serialize(), function (msg) {
@@ -205,6 +195,16 @@
 
 
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#EmployeeMenu").attr("aria-expanded", "true");
+            $('#EmployeeUl').css('display', 'block');
+            $('#EmployeeLi').addClass('active');
+        });
+
+    </script>
+
 }
 <style>
 
