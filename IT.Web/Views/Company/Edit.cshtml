@@ -1,10 +1,12 @@
 ﻿@model IT.Core.ViewModels.CompnayModel
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+                /**/
 
-    List<IT.Core.ViewModels.CountryViewModel> countryViewModels = new List<IT.Core.ViewModels.CountryViewModel>();
-    countryViewModels = ViewBag.Countries as List<IT.Core.ViewModels.CountryViewModel>;
+                ViewBag.Title = "Edit";
+                Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+                List<IT.Core.ViewModels.CountryViewModel> countryViewModels = new List<IT.Core.ViewModels.CountryViewModel>();
+                countryViewModels = ViewBag.Countries as List<IT.Core.ViewModels.CountryViewModel>;
 }
 
 
@@ -115,7 +117,7 @@
                                         <span class="input-group-text"><i class="fal fa-globe fs-xl"></i></span>
                                     </div>
                                     <input id="Web" name="Web" type="text" class="form-control" value="@Model.Web" aria-label="Web" aria-describedby="addon-wrapping-left">
-                               <input type="hidden" name="LogoUrl" id="LogoUrl" value="@Model.LogoUrl" />
+                                    <input type="hidden" name="LogoUrl" id="LogoUrl" value="@Model.LogoUrl" />
                                 </div>
                             </div>
                             <div class="col-md-6 col-xl-6 p-2">
@@ -138,7 +140,7 @@
                     </form>
                 </div>
             </div>
-            @Html.ValidationSummary(false,"", new { @class = "text-danger" })
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         </div>
     </div>
 </div>
@@ -153,6 +155,17 @@
         });
 
     </script>
+
+        <script>
+            $(document).ready(function () {
+                //alert();
+                $("#CompanyMenu").attr("aria-expanded", "true");
+                $('#CompanyUl').css('display', 'block');
+                $('#CompanyLi').addClass('active');
+            });
+
+        </script>
+
 }
 
 <style>

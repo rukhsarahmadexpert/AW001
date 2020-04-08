@@ -227,14 +227,7 @@
                 </div>
                 <!-- BEGIN PRIMARY NAVIGATION -->
                 <nav id="js-primary-nav" class="primary-nav" role="navigation">
-                    <div class="nav-filter">
-                        <div class="position-relative">
-                            <input type="text" id="nav_filter_input" placeholder="Filter menu" class="form-control" tabindex="0">
-                            <a href="#" onclick="return false;" class="btn-primary btn-search-close js-waves-off" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar">
-                                <i class="fal fa-chevron-up"></i>
-                            </a>
-                        </div>
-                    </div>
+                   
                     <div class="info-card">
                         <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem" class="profile-image rounded-circle" alt="User Info">
                         <div class="info-card-text">
@@ -247,13 +240,10 @@
                             </a>
 
                             <span class="d-inline-block text-truncate text-truncate-sm">@userCompanyViewModel.Authority</span>
-                           
+
 
                         </div>
-                        <img src="~/assets/img/card-backgrounds/cover-4-lg.png" class="cover" alt="cover">
-                        <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
-                            <i class="fal fa-angle-down"></i>
-                        </a>
+                        <img src="~/assets/staticImages/banner.png" class="cover" alt="cover">
                     </div>
 
 
@@ -263,12 +253,12 @@
                         <li class="open">
                             <a href="#" title="Companies" class=" " data-filter-tags="Companies">
                                 <i class="fal fa-industry"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Companies</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="CompanyMenu">Companies</span>
                             </a>
-                            <ul>
-                                <li>
-                                    <a href="/Company/Index" title="Companies" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Companies</span><span class="">List</span>
+                            <ul id="CompanyUl" >
+                                <li id="CompanyLi">
+                                    <a href="/Company/Index" title="Companies" class="active" data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="" >Companies</span><span class="">List</span>
                                     </a>
                                 </li>
                             </ul>
@@ -278,11 +268,11 @@
                         <li class="open">
                             <a href="#" title="Venders" class=" " data-filter-tags="Venders">
                                 <i class="fal fa-address-book"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Venders</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="VenderMenu">Venders</span>
                             </a>
-                            <ul>
+                            <ul id="VenderUl">
 
-                                <li>
+                                <li id="VenderLi">
                                     <a href="/Vender/Index" title="Venders" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Venders</span><span class="">List</span>
                                     </a>
@@ -293,10 +283,10 @@
                         <li class="open">
                             <a href="#" title="Drivers" class="" data-filter-tags="Drivers">
                                 <i class="fal fa-address-card"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Drivers</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="DriverMenu">Drivers</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="DriverUl">
+                                <li id="DriverLi">
                                     <a href="/AwfDriver/Index" title="Drivers" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Drivers</span><span class="">List</span>
                                     </a>
@@ -309,10 +299,10 @@
                         <li class="open">
                             <a href="#" title="Vehicles" class="" data-filter-tags="Vehicles">
                                 <i class="fal fa-car"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Vehicles</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="VehicleMenu">Vehicles</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="VehicleUl">
+                                <li id="VehicleLi">
                                     <a href="/AwfVehicle/Index" title="Vehicles" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Vehicles</span><span class="">List</span>
                                     </a>
@@ -326,13 +316,17 @@
                         <li class="open">
                             <a href="#" title="Products" class=" " data-filter-tags="Products">
                                 <i class="fal fa-list"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Products</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="ProductMenu">Products</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="ProductUl">
+                                <li id="ProductUnitLi">
                                     <a href="/ProductUnit/Index" title="Product Units" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Product Units</span><span class="">List</span>
                                     </a>
+                                  
+                                </li>
+                                <li id="ProductLi">
+                                   
                                     <a href="/Product/Index" title="Products" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Products</span><span class="">List</span>
                                     </a>
@@ -343,15 +337,15 @@
                         <li class="open">
                             <a href="#" title="Sales" class=" " data-filter-tags="Sales">
                                 <i class="fal fa-chart-line"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Sales</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="SalesMenu">Sales</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="SalesUl">
+                                <li id="QuotationLi">
                                     <a href="/Quotation/Index" title="Quotations" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Quotations</span><span class="">List</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li id="SalesInvoiceLi">
                                     <a href="/Invoice/Index" title="Invoices" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Invoices</span><span class="">List</span>
                                     </a>
@@ -363,15 +357,15 @@
                         <li class="open">
                             <a href="#" title="Purchases" class=" " data-filter-tags="Purchases">
                                 <i class="fal fa-shopping-cart"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Purchases</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="PurchaseMenu">Purchases</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="PurchaseUl">
+                                <li id="PurchaseLpoLi">
                                     <a href="/LPO/Index" title="LPOs" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">LPOs</span><span class="">List</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li id="PurchaseBillLi">
                                     <a href="/Bill/Index" title="Bills" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Bills</span><span class="">Bill</span>
                                     </a>
@@ -384,10 +378,10 @@
                         <li class="open">
                             <a href="#" title="Customer Orders" class=" " data-filter-tags="Customer Orders">
                                 <i class="fal fa-exchange"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Customer Orders</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="CustomerOrderMenu">Customer Orders</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="CustomerOrderUl">
+                                <li id="CustomerOrderlLi" >
                                     <a href="/CustomerOrder/Admin" title="Customer Orders" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Customer Orders</span><span class="">List</span>
                                     </a>
@@ -398,10 +392,10 @@
                         <li class="open">
                             <a href="#" title="Storages" class=" " data-filter-tags="Storages">
                                 <i class="fal fa-database"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Storages</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="StorageMenu">Storages</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="StorageUl">
+                                <li id="StorageLi">
                                     <a href="/Storage/Index" title="Storages" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Storages</span><span class="">List</span>
                                     </a>
@@ -412,16 +406,16 @@
                         <li class="open">
                             <a href="#" title="Employees" class=" " data-filter-tags="Employees">
                                 <i class="fal fa-user"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel">Employees</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="EmployeeMenu">Employees</span>
                             </a>
-                            <ul>
-                                <li>
+                            <ul id="EmployeeUl">
+                                <li id="EmployeeLi">
                                     <a href="/Employee/Index" title="Employees" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Employees</span><span class="">List</span>
                                     </a>
                                 </li>
 
-                                <li>
+                                <li id="EmployeeDesignationLi">
                                     <a href="/Designation/Index" title="Designations" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Designations</span><span class="">List</span>
                                     </a>
@@ -566,21 +560,10 @@
                             <i class="ni ni-menu"></i>
                         </a>
                     </div>
-                    <div class="search">
-                        <form class="app-forms hidden-xs-down" role="search" action="https://smartadmin.lodev09.com/page_search.php" autocomplete="off">
-                            <input type="text" id="search-field" placeholder="Search for anything" class="form-control" tabindex="1">
-                            <a href="#" onclick="return false;" class="btn-danger btn-search-close js-waves-off d-none" data-action="toggle" data-class="mobile-search-on">
-                                <i class="fal fa-times"></i>
-                            </a>
-                        </form>
-                    </div>
+                   
                     <div class="ml-auto d-flex">
                         <!-- activate app search icon (mobile) -->
-                        <div class="hidden-sm-up">
-                            <a href="#" class="header-icon" data-action="toggle" data-class="mobile-search-on" data-focus="search-field" title="Search">
-                                <i class="fal fa-search"></i>
-                            </a>
-                        </div>
+                       
                         <!-- app settings -->
                         <!--<div class="hidden-md-down">
                             <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-settings">
@@ -722,16 +705,6 @@
         <a href="/User/LogOut" class="menu-item btn" data-toggle="tooltip" data-placement="left" title="Logout">
             <i class="fal fa-sign-out"></i>
         </a>
-        <a href="#" class="menu-item btn" data-action="app-fullscreen" data-toggle="tooltip" data-placement="left" title="Full Screen">
-            <i class="fal fa-expand"></i>
-        </a>
-        <a href="#" class="menu-item btn" data-action="app-print" data-toggle="tooltip" data-placement="left" title="Print page">
-            <i class="fal fa-print"></i>
-        </a>
-        <a href="#" class="menu-item btn" data-action="app-voice" data-toggle="tooltip" data-placement="left" title="Voice command">
-            <i class="fal fa-microphone"></i>
-        </a>
-
         <!-- <div style="margin-right:100px;color:white;padding:2px 10px 3px 10px; border-radius:5px; ">
          <a class="btn btn-sm btn-danger">
             <h2 style="margin-top:5px">make order</h2>

@@ -7,11 +7,7 @@
 
 <link href="~/Content/css/Common/LPOInvoiceTable.css" rel="stylesheet" />
 <link href="~/Content/css/Common/Common-LPO.css" rel="stylesheet" />
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
-    <li class="breadcrumb-item active">Bill</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
+
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -72,7 +68,8 @@
 <input hidden id="IsDownload" />
 @section Scripts{
     <script src="~/Scripts/Common-Scripts/LOP-Invoice.js"></script>
-    <script>$('#SaveEmail').click(function () {
+    <script>
+    $('#SaveEmail').click(function () {
 
             localStorage.setItem("SendByEmail", "True");
             if (ValidLPO()) {
@@ -189,7 +186,7 @@
                         success: function (result) {
                             if (result) {
                                 list = [];
-                               // sucessAdd();
+                                // sucessAdd();
                                 //response(result, btnName, Message, returnulr, F)
 
                                 var SendEmail = localStorage.getItem("SendByEmail");
@@ -251,5 +248,16 @@
                 }
             });
 
-        }</script>
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            //alert();
+            $("#PurchaseMenu").attr("aria-expanded", "true");
+            $('#PurchaseUl').css('display', 'block');
+            $('#PurchaseBillLi').addClass('active');
+        });
+
+    </script>
 }

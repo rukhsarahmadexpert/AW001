@@ -4,11 +4,6 @@
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Products</a></li>
-    <li class="breadcrumb-item active">List</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -43,7 +38,7 @@
                                     <td>@item.Id</td>
                                     <td>@item.Name</td>
                                     <td>@item.UnitName</td>
-                                    <td>@Math.Round(item.UPrice,2)</td>
+                                    <td>@Math.Round(item.UPrice, 2)</td>
                                     <td>@item.UserName</td>
                                     <td>
                                         <a href="/Product/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
@@ -61,3 +56,15 @@
     </div>
 </div>
 
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //alert();
+            $("#ProductMenu").attr("aria-expanded", "true");
+            $('#ProductUl').css('display', 'block');
+            $('#ProductLi').addClass('active');
+        });
+
+    </script>
+
+}

@@ -12,13 +12,6 @@
 
 }
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">AW Fuel</a></li>
-
-    <li class="breadcrumb-item active">Drivers</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
-
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -63,7 +56,7 @@
                                         @if (@item.IsActive == true)
                                         {
                                             <div class="switchToggle">
-                                                 <input type="checkbox"  class="IsActive" data-value="@item.Id"  id="@item.Id" checked>                                              
+                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
                                                 <label for="@item.Id">Toggle</label>
                                             </div>
                                         }
@@ -78,7 +71,7 @@
                                         <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
                                     </td>
                                     <td>
-                                        
+
                                         <a href="/AwfDriver/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
                                         <a href="/AwfDriver/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
                                         <i class="fal fa-trash-alt"></i>
@@ -101,45 +94,49 @@
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
     <script>
 
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
 
-            $(".IsActive").click(function ()
-            {
-                if (confirm("Are you sure"))
-                {
+            $(".IsActive").click(function () {
+                if (confirm("Are you sure")) {
 
                     var act = false;
-                    if (this.checked)
-                    {
+                    if (this.checked) {
                         act = true;
                     }
 
-                var Data = JSON.stringify(
-                    {
-                        IsActive: act,
-                        Id: $(this).data("value"),
-                    })
+                    var Data = JSON.stringify(
+                        {
+                            IsActive: act,
+                            Id: $(this).data("value"),
+                        })
                     // alert(Data);
-                    ajaxRequest("POST", "/AWFDriver/ChangeStatus", Data, "json").then(function (result)
-                    {
-                       if (result != "failed") {
+                    ajaxRequest("POST", "/AWFDriver/ChangeStatus", Data, "json").then(function (result) {
+                        if (result != "failed") {
                             //console.log(result);
-                             window.location.reload();
+                            window.location.reload();
                         }
                         else {
-                           alert('there is some problem');
-                       }
+                            alert('there is some problem');
+                        }
                     })
                 }
-                else
-                {
-                 return false;
+                else {
+                    return false;
                 }
             });
         });
 
     </script>
 
+ 
+        <script>
+            $(document).ready(function () {
+                //alert();
+                $("#DriverMenu").attr("aria-expanded", "true");
+                $('#DriverUl').css('display', 'block');
+                $('#DriverLi').addClass('active');
+            });
+
+        </script>
 
 }

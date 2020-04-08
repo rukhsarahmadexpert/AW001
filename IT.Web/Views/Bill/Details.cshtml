@@ -12,18 +12,14 @@
 <link href="~/Content/css/Common/LPOInvoiceTable.css" rel="stylesheet" />
 <link href="~/Content/css/Common/Common-LPO.css" rel="stylesheet" />
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
-    <li class="breadcrumb-item active">Bill</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
+
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
                     <a href="/Bill/Create">
-                        <i class="fal fa-plus-circle"></i>Add New <span class="fw-300"><i>Bill</i></span>
+                        <i class="fal fa-plus-circle"></i> Add New <span class="fw-300"><i>Bill</i></span>
                     </a>
                 </h2>
             </div>
@@ -91,7 +87,7 @@
             {
                 Id = @Html.Raw(Json.Encode(ViewBag.Id));
                 window.location.href = '/Bill/PrintBill/' + Id;
-            }            
+            }
         });
 
        $('#DownloadLPOInvoice').click(function () {
@@ -118,4 +114,16 @@
 
         });
     </script>
+
+
+    <script>
+        $(document).ready(function () {
+            //alert();
+            $("#PurchaseMenu").attr("aria-expanded", "true");
+            $('#PurchaseUl').css('display', 'block');
+            $('#PurchaseBillLi').addClass('active');
+        });
+
+    </script>
+
 }

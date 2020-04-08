@@ -86,7 +86,7 @@
                 }
             });
         });
-        
+
         $('#SaveEmail').click(function () {
 
             localStorage.setItem("SendByEmail", "True");
@@ -186,8 +186,7 @@
                                 //sucessAdd();
                                 //response(result, btnName, Message, returnulr, F)
                                 var SendEmail = localStorage.getItem("SendByEmail");
-                                if (SendEmail != null)
-                                {
+                                if (SendEmail != null) {
                                     localStorage.setItem("Id", result);
                                     window.location.href = "/Email";
                                 }
@@ -217,6 +216,16 @@
                 });
             }
         }
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            //alert();
+            $("#SalesMenu").attr("aria-expanded", "true");
+            $('#SalesUl').css('display', 'block');
+            $('#QuotationLi').addClass('active');
+        });
 
     </script>
 
