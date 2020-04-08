@@ -2,7 +2,7 @@
 
 @{
 
-    if(Model.Id > 0)
+    if (Model.Id > 0)
     {
         ViewBag.Title = "Aw Fuel - App Version Edit";
     }
@@ -15,39 +15,17 @@
 }
 
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">App version</a></li>
-    <li class="breadcrumb-item active">Create</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
-<div class="subheader">
-    @if(Model.Id > 0)
-    {
-    <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-edit'></i> Edit App version
-    </h1>
-    }
-    else
-    {
-    <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-edit'></i> Create App version
-    </h1>
-    }
-
-</div>
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    Driver <span class="fw-300"></span>
+                    App <span class="fw-300">Version</span>
                 </h2>
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
-                    <div class="panel-tag">
-                        Please add App version from here...
-                    </div>
+                   
                     <form action="/Web/AppVersionAdd" method="post" enctype="application/x-www-form-urlencoded">
                         <input type="hidden" value="@Model.Id" name="Id" />
                         <div class="row">
@@ -86,10 +64,10 @@
 
                                 @if (Model.Id > 0)
                                 {
-                                <button type="submit" id="Save" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                    App Version
-                                    <span>Update</span>
-                                </button>
+                                    <button type="submit" id="Save" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        App Version
+                                        <span>Update</span>
+                                    </button>
                                 }
                                 else
                                 {
@@ -98,7 +76,7 @@
                                         <span>submit</span>
                                     </button>
                                 }
-                                
+
                             </div>
                             <div id="response"></div>
                         </div>
@@ -108,3 +86,16 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#MasterMenu").attr("aria-expanded", "true");
+            $('#MasterUl').css('display', 'block');
+            $('#AppVersionLi').addClass('active');
+        });
+
+    </script>
+
+}

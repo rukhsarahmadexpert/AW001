@@ -7,98 +7,85 @@
     countryViewModels = ViewBag.Countries as List<IT.Core.ViewModels.CountryViewModel>;
 }
 
-<main id="js-page-content" role="main" class="page-content">
 
-    <div class="subheader">
-        @if (Model.Id > 0)
-        {
-            <h1 class="subheader-title">
-                <i class='subheader-icon fal fa-edit'></i> Edit State
-            </h1>
-        }
-        else
-        {
-            <h1 class="subheader-title">
-                <i class='subheader-icon fal fa-edit'></i> Create State
-            </h1>
-        }
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    State <span class="fw-300"></span>
+                </h2>
 
-    </div>
-    <div class="row">
-        <div class="col-xl-12">
-            <div id="panel-1" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        State <span class="fw-300"></span>
-                    </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    
+                    <form action="/Country/AddUpdateState" method="post">
 
-                </div>
-                <div class="panel-container show">
-                    <div class="panel-content">
-                        <div class="panel-tag">
-                            @if (Model.Id > 0)
-                            {
-                                <p>Please Update State from here...</p>
-                            }
-                            else
-                            {
-                                <p>Please add State from here...</p>
-                            }
+
+                        <div class="row">
+                            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label class="form-label" for="simpleinput">Countries</label>
+                                    <select id="CountryId" name="CountryId" class="select3 CountryId" required>
+                                        @foreach (var item in countryViewModels)
+                                        {
+
+                                            <option value="@item.Id" @(Model.CountryId == item.Id ? "selected='selected'" : "")>@item.CountryName</option>
+
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">State Name</label>
+                                    <input type="text" id="States" value="@Model.States" name="States" class="form-control" placeholder="States Name">
+                                </div>
+                            </div>
+
                         </div>
-                        <form action="/Country/AddUpdateState" method="post">
-                           
 
-                            <div class="row">
-                                <input type="hidden" id="Id" name="Id" value="@Model.Id" />
-                                <div class="col-md-12">
-                                    <div class="form-group mb-2">
-                                        <label class="form-label" for="simpleinput">Countries</label>
-                                        <select id="CountryId" name="CountryId" class="select3 CountryId" required>
-                                            @foreach (var item in countryViewModels)
-                                            {
-                                               
-                                                <option value="@item.Id" @(Model.CountryId == item.Id ? "selected='selected'" : "")>@item.CountryName</option>
-
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">State Name</label>
-                                        <input type="text" id="States" value="@Model.States" name="States" class="form-control" placeholder="States Name">
-                                    </div>
-                                </div>
+                        <div class="row py-5">
+                            <div class="col-md-12">
+                                @if (Model.Id > 0)
+                                {
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        Update
+                                        <span>State</span>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        Submit
+                                        <span>State</span>
+                                    </button>
+                                }
 
                             </div>
-
-                            <div class="row py-5">
-                                <div class="col-md-12">
-                                    @if (Model.Id > 0)
-                                    {
-                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                            Update
-                                            <span>State</span>
-                                        </button>
-                                    }
-                                    else
-                                    {
-                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                            Submit
-                                            <span>State</span>
-                                        </button>
-                                    }
-
-                                </div>
-                            </div>
+                        </div>
 
 
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</div>
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#MasterMenu").attr("aria-expanded", "true");
+            $('#MasterUl').css('display', 'block');
+            $('#StateLi').addClass('active');
+        });
+
+    </script>
+
+}
 

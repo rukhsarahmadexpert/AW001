@@ -1,6 +1,6 @@
 ﻿@model IT.Core.ViewModels.CountryViewModel
 @{
-    if(Model.Id >0)
+    if (Model.Id > 0)
     {
         ViewBag.Title = "AW Fuel - Edit Country";
     }
@@ -12,87 +12,71 @@
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
-<main id="js-page-content" role="main" class="page-content">
 
-    <div class="subheader">
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Country <span class="fw-300"></span>
+                </h2>
 
-        @if (@Model.Id > 0)
-        {
-            <h1 class="subheader-title">
-                <i class='subheader-icon fal fa-edit'></i> Edit Country
-            </h1>
-        }
-        else
-        {
-            <h1 class="subheader-title">
-                <i class='subheader-icon fal fa-edit'></i> Create Country
-            </h1>
-        }
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
 
-    </div>
-    <div class="row">
-        <div class="col-xl-12">
-            <div id="panel-1" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Country <span class="fw-300"></span>
-                    </h2>
 
-                </div>
-                <div class="panel-container show">
-                    <div class="panel-content">
-
-                        @if (@Model.Id > 0)
-                        {
-                            <div class="panel-tag">
-                                Please Edit Country from here...
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="panel-tag">
-                                Please add Country from here...
-                            </div>
-                        }
-
-                        <form action="/Country/Create" method="post">
-                            <input type="hidden" value="@Model.Id" name="Id" id="Id" />
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Name</label>
-                                        <input type="text" id="CountryName" name="CountryName" value="@Model.CountryName" class="form-control" placeholder="Country Name">
-                                    </div>
+                    <form action="/Country/Create" method="post">
+                        <input type="hidden" value="@Model.Id" name="Id" id="Id" />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Name</label>
+                                    <input type="text" id="CountryName" name="CountryName" value="@Model.CountryName" class="form-control" placeholder="Country Name">
                                 </div>
-
                             </div>
 
-                            <div class="row py-5">
-                                <div class="col-md-12">
-                                    @if (@Model.Id > 0)
-                                    {
+                        </div>
+
+                        <div class="row py-5">
+                            <div class="col-md-12">
+                                @if (@Model.Id > 0)
+                                {
                                     <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
                                         Update
                                         <span>Country</span>
                                     </button>
-                                    }
-                                    else
-                                    {
-                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                            Submit
-                                            <span>Country</span>
-                                        </button>
-                                    }
-                                    
-                                </div>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        Submit
+                                        <span>Country</span>
+                                    </button>
+                                }
+
                             </div>
+                        </div>
 
 
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</div>
 
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#MasterMenu").attr("aria-expanded", "true");
+            $('#MasterUl').css('display', 'block');
+            $('#CountryLi').addClass('active');
+        });
+
+    </script>
+
+
+}

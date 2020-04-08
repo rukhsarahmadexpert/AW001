@@ -1,7 +1,7 @@
 ﻿@model IT.Core.ViewModels.CustomerNotificationViewModel
 @{
 
-    if(Model.Id > 0)
+    if (Model.Id > 0)
     {
         ViewBag.Title = "Aw Fuel - Edit Advertisement";
     }
@@ -13,134 +13,114 @@
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
-<main id="js-page-content" role="main" class="page-content">
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Advertisement <span class="fw-300"></span>
+                </h2>
 
-    <div class="subheader">
-        @if (Model.Id > 0)
-        {
-            <h1 class="subheader-title">
-                <i class='subheader-icon fal fa-edit'></i> Edit Advertisement
-            </h1>
-        }
-        else
-        {
-            <h1 class="subheader-title">
-                <i class='subheader-icon fal fa-edit'></i> Create Advertisement
-            </h1>
-        }
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <form action="/CustomerNotification/Create" method="post" enctype="multipart/form-data">
+                        <input type="hidden" value="@Model.Id" name="Id" id="Id" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class=newbtn>
 
-    </div>
-    <div class="row">
-        <div class="col-xl-12">
-            <div id="panel-1" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Advertisement <span class="fw-300"></span>
-                    </h2>
-
-                </div>
-                <div class="panel-container show">
-                    <div class="panel-content">
-                        @if (Model.Id > 0)
-                        {
-                            <div class="panel-tag">
-                                Please Edit Advertisement from here...
+                                    <img id="AddPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.ImageUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt=" Image">
+                                    <input id="AddChange" name="ImageUrl" class='pic' value="@Model.Id" onchange="readURL(this);" type="file">
+                                </label>
                             </div>
-                        }
-                        else
-                        {
-                            <div class="panel-tag">
-                                Please add Advertisement from here...
-                            </div>
-                        }
+                            <div class="col-md-6">
 
-                        <form action="/CustomerNotification/Create" method="post" enctype="multipart/form-data">
-                            <input type="hidden" value="@Model.Id" name="Id" id="Id" />
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label class=newbtn>
-
-                                        <img id="AddPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.ImageUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt=" Image">
-                                        <input id="AddChange" name="ImageUrl" class='pic' value="@Model.Id" onchange="readURL(this);" type="file">
-                                    </label>
-                                </div>
-                                <div class="col-md-6">
-
-                                    <div class="row">
-                                        <div class="col-md-12 mt-3">
-                                            <div class="form-group">
-                                                <label class="form-label" for="simpleinput">Message Title</label>
-                                                <input type="text" id="MessageTitle" name="MessageTitle" value="@Model.MessageTitle" class="form-control" placeholder="Message Title">
-                                            </div>
+                                <div class="row">
+                                    <div class="col-md-12 mt-3">
+                                        <div class="form-group">
+                                            <label class="form-label" for="simpleinput">Message Title</label>
+                                            <input type="text" id="MessageTitle" name="MessageTitle" value="@Model.MessageTitle" class="form-control" placeholder="Message Title">
                                         </div>
+                                    </div>
 
-                                        <div class="col-md-12 mt-3">
-                                            <div class="form-group">
-                                                <label class="form-label" for="simpleinput">Description</label>
-                                                <textarea name="MessageDescription" rows="6" id="MessageDescription" class="form-control">@Model.MessageDescription</textarea>
-                                            </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="form-group">
+                                            <label class="form-label" for="simpleinput">Description</label>
+                                            <textarea name="MessageDescription" rows="6" id="MessageDescription" class="form-control">@Model.MessageDescription</textarea>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
 
-                            <div class="row py-5">
-                                <div class="col-md-12">
 
-                                    @if (Model.Id > 0)
-                                    {
-                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                            Update
-                                            <span>Advertisement</span>
-                                        </button>
-                                    }
-                                    else
-                                    {
-                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                            Submit
-                                            <span>Advertisement</span>
-                                        </button>
-                                    }
+                        </div>
 
-                                </div>
+                        <div class="row py-5">
+                            <div class="col-md-12">
+
+                                @if (Model.Id > 0)
+                                {
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        Update
+                                        <span>Advertisement</span>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        Submit
+                                        <span>Advertisement</span>
+                                    </button>
+                                }
+
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</div>
 
 @section Scripts{
-<script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
-<script>
+    <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
+    <script>
 
-    $("#AddChange").change(function () {
-               readURL(this,"AddPreview");
-    });
+        $("#AddChange").change(function () {
+            readURL(this, "AddPreview");
+        });
 
-</script>
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#MasterMenu").attr("aria-expanded", "true");
+            $('#MasterUl').css('display', 'block');
+            $('#AdvertisementLi').addClass('active');
+        });
+
+    </script>
+
 }
 
 <style>
 
 
-.pic{
-     display: none;
-       }
-       
- .newbtn{
-         cursor: pointer;
-      }
-      .blah{
-  max-width:100%;
-  width:300px;
-  height:auto;
-  margin-top:20px;
-}
+    .pic {
+        display: none;
+    }
 
+    .newbtn {
+        cursor: pointer;
+    }
+
+    .blah {
+        max-width: 100%;
+        width: 300px;
+        height: auto;
+        margin-top: 20px;
+    }
 </style>
 

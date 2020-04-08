@@ -7,11 +7,6 @@
     List<IT.Core.ViewModels.OrderTransferRequestsViewModel> orderTransferRequestsViewModels = new List<IT.Core.ViewModels.OrderTransferRequestsViewModel>();
     orderTransferRequestsViewModels = Model as List<IT.Core.ViewModels.OrderTransferRequestsViewModel>;
 }
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Order Transfer Requests</a></li>
-    <li class="breadcrumb-item active">All</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -220,7 +215,7 @@
     <script>
 
         $(document).ready(function () {
-            
+
             $('#OrderTransferToDriver').click(function () {
 
                 var Data = JSON.stringify({
@@ -283,6 +278,16 @@
 
     </script>
     <script src="~/Scripts/CustomScript/LoadOnlineDriverScript.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $("#MasterMenu").attr("aria-expanded", "true");
+                $('#MasterUl').css('display', 'block');
+                $('#OrderTransferRequestLi').addClass('active');
+            });
+
+        </script>
+
 }
 
 
