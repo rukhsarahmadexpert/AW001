@@ -1,0 +1,184 @@
+﻿@model IT.Core.ViewModels.CompnayModel
+@{
+    ViewBag.Title = "AdminCompanyInformation";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<form action="/user/UserInformationUpdate" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="UserId" value="@Model.UserId" />
+    <div class="row">
+        <div class="col-lg-6 col-xl-6 order-lg-1 order-xl-1">
+            <!-- profile summary -->
+            <div class="card mb-g rounded-top">
+                <div class="row no-gutters row-grid">
+                    <div class="col-12">
+                        <div class="d-flex flex-column align-items-center justify-content-center p-4">
+                            <label class=newbtn>
+                                <img id="userImgPreview" class="blah" width="200px" style="border-radius:5%" src="http://awservices.somee.com/ClientDocument/@Model.LogoUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt="User Image">
+
+                            </label>
+                            <h5 class="mb-0 fw-700 text-center mt-3">
+                                @Model.Name <br /><br />
+                                <a class="btn btn-sm btn-primary" href="/User/UserProfileEdit">Edit Profile</a>  <a class="btn btn-sm btn-primary" href="/Company/Edit/@Model.Id">Edit Company</a>
+                            </h5>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6 col-xl-6 order-lg-2 order-xl-3">
+            <!-- add : -->
+            <div class="card mb-1">
+                <div class="card-body">
+                    Company Name: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                        <div class="ml-3">
+                            <strong>
+                                @Model.Name
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mb-1">
+                <div class="card-body">
+                    Owner / Representative: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                        <div class="ml-3">
+                            <strong>
+                                @Model.OwnerRepresentaive
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mb-1">
+                <div class="card-body">
+                    Email address: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                        <div class="ml-3">
+                            <strong>
+                                @Model.Email
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mb-1">
+                <div class="card-body">
+                    Phone: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                        <div class="ml-3">
+                            <strong>
+                                @Model.Phone
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="card mb-1">
+                <div class="card-body">
+                    Mobile: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                        <div class="ml-3">
+                            <strong>
+                                @Model.Cell
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="card mb-1">
+                <div class="card-body">
+                    TRN Number: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                        <div class="ml-3">
+                            <strong>
+                                @Model.TRN
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mb-1">
+                <div class="card-body">
+                    Address: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                        <div class="ml-3">
+                            <strong>
+                                @Model.Address
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mb-1">
+                <div class="card-body">
+                    Website: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                        <div class="ml-3">
+                            <strong>
+                                @Model.Web
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mb-1">
+                <div class="card-body">
+                    Remarks: <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
+                        <div class="ml-3">
+                            <strong>
+                                @Model.Remarks
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+</form>
+
+
+
+
+
+@section Scripts{
+    <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
+    <script>
+
+        $("#LogoUrl").change(function () {
+            readURL(this, "logoPreview");
+            $('#LogoUrl').val('LogoUrl');
+        });
+
+    </script>
+}
+
+<style>
+
+
+    .pic {
+        display: none;
+    }
+
+    .newbtn {
+        cursor: pointer;
+    }
+
+    .blah {
+        max-width: 100%;
+        width: 300px;
+        height: auto;
+        margin-top: 20px;
+    }
+</style>
+

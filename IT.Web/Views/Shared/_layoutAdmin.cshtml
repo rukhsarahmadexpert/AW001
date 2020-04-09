@@ -1,11 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 @{ 
+
     IT.Core.ViewModels.UserCompanyViewModel userCompanyViewModel = new IT.Core.ViewModels.UserCompanyViewModel();
     userCompanyViewModel = Session["userCompanyViewModel"] as IT.Core.ViewModels.UserCompanyViewModel;
 
-    //var UserImage = userCompanyViewModel.ImageUrl ?? userCompanyViewModel.LogoUrl;
-    var UserImage = "158581250521-4.png";
+    var UserImage = userCompanyViewModel.LogoUrl ?? userCompanyViewModel.ImageUrl;
+    //var UserImage = "158581250521-4.png";
 }
 <head>
     <meta charset="utf-8" />
@@ -596,12 +597,17 @@
             <i class="float-right text-muted fw-n">F11</i>
         </a>*@
 
-                                <a href="#" class="dropdown-item">
-                                    <span>Account</span>
+                                <a href="/User/AdminUserInformation" class="dropdown-item">
+                                    <span>Profile</span>
                                     <i class="float-right text-muted fw-n">Setting</i>
                                 </a>
 
-                                <a href="#" class="dropdown-item">
+                                 <a href="/User/ChangeAdminPassword" class="dropdown-item">
+                                    <span>Password</span>
+                                    <i class="float-right text-muted fw-n">Change</i>
+                                </a>
+
+                                <a href="/Company/AdminCompanyInformation/@userCompanyViewModel.CompanyId" class="dropdown-item">
                                     <span>Company</span>
                                     <i class="float-right text-muted fw-n">Edit</i>
                                 </a>
@@ -663,7 +669,7 @@
                                             </span>
                                         </a>
                                     </li>
-                                    <li>
+                                    @*<li>
                                         <a href="#" class="app-list-item text-white border-0 m-0">
                                             <div class="icon-stack">
                                                 <i class="base base-7 icon-stack-3x opacity-100 color-warning-300 "></i>
@@ -674,9 +680,9 @@
                                                 Notification
                                             </span>
                                         </a>
-                                    </li>
+                                    </li>*@
 
-                                </ul>
+                                </ul>   
                             </div>
                         </div>
                     </div>

@@ -1009,6 +1009,10 @@
     <Content Include="Views\User\PasswordRestCode.cshtml" />
     <Content Include="Views\User\UpdateForGotPassword.cshtml" />
     <Content Include="Views\FuelPrices\Details.cshtml" />
+    <Content Include="Views\Company\AdminCompanyInformation.cshtml" />
+    <Content Include="Views\User\ChangeAdminPassword.cshtml" />
+    <Content Include="Views\User\AdminUserInformation.cshtml" />
+    <Content Include="Views\User\AdminUserInformationEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
