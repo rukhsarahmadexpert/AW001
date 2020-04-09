@@ -8,11 +8,7 @@
     countryViewModels = Model as List<IT.Core.ViewModels.CountryViewModel>;
 }
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Countries</a></li>
-    <li class="breadcrumb-item active">List</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
+
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -32,7 +28,7 @@
                     <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
-                              
+
                                 <th>Country Name </th>
                                 <th>Actions</th>
                             </tr>
@@ -41,11 +37,11 @@
                             @foreach (var item in countryViewModels)
                             {
                                 <tr>
-                                   
+
                                     <td>@item.CountryName</td>
-                                   
+
                                     <td>
-                                      
+
                                         <a href="/Country/Edit/@item.Id?Name=@item.CountryName"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
                                         <i class="fal fa-trash-alt">
                                     </td>
@@ -61,3 +57,18 @@
 </div>
 
 
+@section scripts{
+
+
+    <script>
+        $(document).ready(function () {
+            $("#MasterMenu").attr("aria-expanded", "true");
+            $('#MasterUl').css('display', 'block');
+            $('#CountryLi').addClass('active');
+        });
+
+    </script>
+
+
+
+}

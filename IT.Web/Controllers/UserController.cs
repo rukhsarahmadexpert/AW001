@@ -55,7 +55,60 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpGet]
+        public ActionResult AdminUserInformation()
+        {
+            UserViewModel userViewModel = new UserViewModel();
+            try
+            {
+                var usercCompany = Session["userCompanyViewModel"] as UserCompanyViewModel;
+                userViewModel.UserName = usercCompany.UserName;
+                var userList = webServices.Post(userViewModel, "User/UserInformationByUserName");
+
+                if (userList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(userList.Data.ToString()));
+
+                    return View(userViewModel);
+                }
+
+                return View(userViewModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        [HttpGet]
         public ActionResult UserInformationEdit()
+        {
+            UserViewModel userViewModel = new UserViewModel();
+            try
+            {
+                var usercCompany = Session["userCompanyViewModel"] as UserCompanyViewModel;
+                userViewModel.UserName = usercCompany.UserName;
+                var userList = webServices.Post(userViewModel, "User/UserInformationByUserName");
+
+                if (userList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(userList.Data.ToString()));
+
+                    return View(userViewModel);
+                }
+
+                return View(userViewModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+
+        [HttpGet]
+        public ActionResult AdminUserInformationEdit()
         {
             UserViewModel userViewModel = new UserViewModel();
             try
@@ -289,6 +342,36 @@ namespace IT.Web_New.Controllers
         [Autintication]
         [HttpGet]
         public ActionResult ChangePassword()
+        {
+            ChangePasswordViewModel changePasswordViewModel = new ChangePasswordViewModel();
+            UserViewModel userViewModel = new UserViewModel();
+            try
+            {
+                changePasswordViewModel.Id = Convert.ToInt32(Session["userId"]);
+
+                var usercCompany = Session["userCompanyViewModel"] as UserCompanyViewModel;
+                userViewModel.UserName = usercCompany.UserName;
+                var userList = webServices.Post(userViewModel, "User/UserInformationByUserName");
+
+                if (userList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(userList.Data.ToString()));
+
+                }
+
+                ViewBag.userViewModel = userViewModel;
+
+                return View(changePasswordViewModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Autintication]
+        [HttpGet]
+        public ActionResult ChangeAdminPassword()
         {
             ChangePasswordViewModel changePasswordViewModel = new ChangePasswordViewModel();
             UserViewModel userViewModel = new UserViewModel();

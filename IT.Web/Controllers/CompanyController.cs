@@ -445,6 +445,46 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult AdminCompanyInformation(int id)
+        {
+            UserViewModel userViewModel = new UserViewModel();
+            try
+            {
+                CompnayModel compnayModel = new CompnayModel();
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                {
+                    Id = id
+                };
+                var companyData = webServices.Post(pagingParameterModel, "Company/CompanyById");
+                if (companyData.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (companyData.Data != "[]" && companyData.Data != null)
+                    {
+                        compnayModel = (new JavaScriptSerializer().Deserialize<CompnayModel>(companyData.Data.ToString()));
+                    }
+                }
+                var usercCompany = Session["userCompanyViewModel"] as UserCompanyViewModel;
+                userViewModel.UserName = usercCompany.UserName;
+                var userList = webServices.Post(userViewModel, "User/UserInformationByUserName");
+
+                if (userList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(userList.Data.ToString()));
+
+                }
+
+                ViewBag.userViewModel = userViewModel;
+
+                return View(compnayModel);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {

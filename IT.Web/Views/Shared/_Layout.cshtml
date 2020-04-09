@@ -16,9 +16,10 @@
     <meta name="viewport" content="width=device-width" />
     <title>@TempData["Title"] </title>
     @* @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")*@
+       @Scripts.Render("~/bundles/modernizr")
+    *@
 
-    <title>Dashbaord - Aw Fuel Trading </title>
+    @*<title>Dashbaord - Aw Fuel Trading </title>*@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
@@ -450,7 +451,7 @@
                         </div>-->
                         <!-- app user menu -->
                         <div>
-                            <a href="#" data-toggle="dropdown" title="drlantern@gotbootstrap.com" class="header-icon d-flex align-items-center justify-content-center ml-2">
+                            <a href="#" data-toggle="dropdown" title="@userCompanyViewModel.UserName" class="header-icon d-flex align-items-center justify-content-center ml-2">
                                 <img src="http://awservices.somee.com/ClientDocument/@UserImage" class="profile-image rounded-circle" alt="User Image">
                                 <!-- you can also add username next to the avatar with the codes below:
                                 <span class="ml-1 mr-1 text-truncate text-truncate-header hidden-xs-down">Me</span>

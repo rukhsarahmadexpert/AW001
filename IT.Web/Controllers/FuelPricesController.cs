@@ -128,5 +128,42 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
+
+
+        [HttpGet]
+        public ActionResult Details(int Id)
+        {
+            try
+            {
+                FuelPricesViewModel.Id = Id;
+                var FuelResult = webServices.Post(FuelPricesViewModel, "FuelPrices/Edit");
+
+                if (FuelResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    FuelPricesViewModel = (new JavaScriptSerializer().Deserialize<FuelPricesViewModel>(FuelResult.Data.ToString()));
+                }
+                var producUnittList = webServices.Post(new ProductViewModel(), "ProductUnit/All");
+
+                if (producUnittList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    productUnitViewModels = (new JavaScriptSerializer().Deserialize<List<ProductUnitViewModel>>(producUnittList.Data.ToString()));
+                }
+
+                if (Request.IsAjaxRequest())
+                {
+                    return Json(FuelPricesViewModel, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    ViewBag.productUnitViewModels = productUnitViewModels;
+                    return View(FuelPricesViewModel);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

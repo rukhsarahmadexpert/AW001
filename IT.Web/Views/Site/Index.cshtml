@@ -7,12 +7,7 @@
     siteViewModels = Model as List<IT.Core.ViewModels.SiteViewModel>;
 
 }
-@*<label>hel</label>*@
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Site</a></li>
-    <li class="breadcrumb-item active">List</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
+
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -90,42 +85,45 @@
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
     <script>
 
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
 
-            $(".IsActive").click(function ()
-            {
-                if (confirm("Are you sure"))
-                {
+            $(".IsActive").click(function () {
+                if (confirm("Are you sure")) {
 
                     var act = false;
-                    if (this.checked)
-                    {
+                    if (this.checked) {
                         act = true;
                     }
 
-                var Data = JSON.stringify(
-                    {
-                        IsActive: act,
-                        Id: $(this).data("value"),
-                    })
+                    var Data = JSON.stringify(
+                        {
+                            IsActive: act,
+                            Id: $(this).data("value"),
+                        })
                     // alert(Data);
-                    ajaxRequest("POST", "/Site/ChangeStatus", Data, "json").then(function (result)
-                    {
-                       if (result != "failed") {
+                    ajaxRequest("POST", "/Site/ChangeStatus", Data, "json").then(function (result) {
+                        if (result != "failed") {
                             //console.log(result);
-                             window.location.reload();
+                            window.location.reload();
                         }
                         else {
-                           alert('there is some problem');
-                       }
+                            alert('there is some problem');
+                        }
                     })
                 }
-                else
-                {
-                 return false;
+                else {
+                    return false;
                 }
             });
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#MasterMenu").attr("aria-expanded", "true");
+            $('#MasterUl').css('display', 'block');
+            $('#SitesLi').addClass('active');
         });
 
     </script>

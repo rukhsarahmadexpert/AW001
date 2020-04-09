@@ -255,18 +255,14 @@ namespace IT.Web_New.Controllers
             {
                 if (CompId == CompanyId)
                 {
-
-                   
                     CompanyId = Convert.ToInt32(Session["CompanyId"]);
                     ViewBag.LayoutName = "~/Views/Shared/_layout.cshtml";
-
                 }
                 else
                 {
                     //VehicleViewModel vehicleViewModel = new VehicleViewModel();
                     CompanyId = CompId;
                     ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
-
                 }
                 driverViewModel.Id = Id;
                 driverViewModel.CompanyId = CompanyId;

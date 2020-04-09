@@ -7,11 +7,6 @@
     stateViewModels = Model as List<IT.Core.ViewModels.StateViewModel>;
 }
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">States</a></li>
-    <li class="breadcrumb-item active">List</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -51,7 +46,7 @@
 
                                             <button type="submit" class="btn btn-sm"><i class="fal fa-edit"></i></button>
                                         </form>
-                                       
+
                                     </td>
                                 </tr>
                             }
@@ -66,3 +61,15 @@
 
 
 
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#MasterMenu").attr("aria-expanded", "true");
+            $('#MasterUl').css('display', 'block');
+            $('#StateLi').addClass('active');
+        });
+
+    </script>
+
+}

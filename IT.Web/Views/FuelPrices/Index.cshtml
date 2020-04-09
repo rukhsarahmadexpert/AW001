@@ -8,11 +8,6 @@
 
 }
 
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Fuel Prices</a></li>
-    <li class="breadcrumb-item active">List</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -43,35 +38,35 @@
                         <tbody>
                             @foreach (var item in fuelPricesViewModels)
                             {
-                            <tr>
-                                <td>@item.Id</td>
-                                <td>@Math.Round(item.Price, 2)</td>
-                                <td>@item.UnitName</td>
-                                <td>@item.Month</td>
-                                <td>
-                                    @if (@item.IsActive == true)
-                                    {
-                                        <div class="switchToggle">
-                                            <input type="checkbox" id="@item.Id" checked>
-                                            <label for="@item.Id">Toggle</label>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="switchToggle">
-                                            <input type="checkbox" id="@item.Id">
-                                            <label for="@item.Id">Toggle</label>
-                                        </div>
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@Math.Round(item.Price, 2)</td>
+                                    <td>@item.UnitName</td>
+                                    <td>@item.Month</td>
+                                    <td>
+                                        @if (@item.IsActive == true)
+                                        {
+                                            <div class="switchToggle">
+                                                <input type="checkbox" id="@item.Id" checked>
+                                                <label for="@item.Id">Toggle</label>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="switchToggle">
+                                                <input type="checkbox" id="@item.Id">
+                                                <label for="@item.Id">Toggle</label>
+                                            </div>
 
-                                    }
-                                </td>
+                                        }
+                                    </td>
 
-                                <td>
-                                    <a href="/FuelPrices/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                    <a href="/FuelPrices/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                    <i class="fal fa-trash-alt"></i>
-                                </td>
-                            </tr>
+                                    <td>
+                                        <a href="/FuelPrices/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                        <a href="/FuelPrices/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                        <i class="fal fa-trash-alt"></i>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -82,3 +77,15 @@
     </div>
 </div>
 
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#MasterMenu").attr("aria-expanded", "true");
+            $('#MasterUl').css('display', 'block');
+            $('#FuelPricesLi').addClass('active');
+        });
+
+    </script>
+
+}
