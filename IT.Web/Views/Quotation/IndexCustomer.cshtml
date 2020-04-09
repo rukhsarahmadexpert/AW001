@@ -22,75 +22,76 @@
                         <p>Drivers Base Information</p>
                     </div>-->
                     <!-- datatable start -->
+                    <div class="table-responsive">
+                        <table class="QuotationListTable table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-primary-600">
 
-                    <table class="QuotationListTable table table-bordered table-hover table-striped w-100">
-                        <thead class="bg-primary-600">
-
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Product)
-                                </th>
-                                <th>
-                                    Quantity
-                                </th>
-                                <th>
-                                    Unit
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.FromDate)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.DueDate)
-                                </th>
-                                <th>
-                                    Amount
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.VAT)
-                                </th>
-                                <th>
-                                    Grand Total
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Product)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TotalQuantity)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.UnitName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FromDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DueDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Total)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.VAT)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Balance)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id })
-                                </td>
-                            </tr>
-                            }
-                        </tbody>
-                    </table>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Product)
+                                    </th>
+                                    <th>
+                                        Quantity
+                                    </th>
+                                    <th>
+                                        Unit
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FromDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DueDate)
+                                    </th>
+                                    <th>
+                                        Amount
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.VAT)
+                                    </th>
+                                    <th>
+                                        Grand Total
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Product)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TotalQuantity)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UnitName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FromDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DueDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Total)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.VAT)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Balance)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- datatable end -->
                 </div>
             </div>
@@ -104,7 +105,7 @@
         $(document).ready(function () {
             $("#InvoiceMenu").attr("aria-expanded", "true");
             $('#InvoiceUl').css('display', 'block');
-            $('#InvoiceLi').addClass('active');
+            $('#EstimatesLi').addClass('active');
         });
     </script>
 }

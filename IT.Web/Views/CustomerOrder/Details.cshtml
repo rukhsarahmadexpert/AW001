@@ -69,17 +69,6 @@
                             </div>
                             <div class="col-md-6">
 
-
-                                @if (Model.OrderProgress == "Order Created" && Model.IsSend == false)
-                                {
-                                    <form action="/CustomerOrder/CustomerOrderSend" method="post">
-                                        <input type="hidden" name="Id" value="@Model.Id" />
-                                        <div class="float-lg-right"><a class="btn btn-info" href="/CustomerOrder/Edit/@Model.Id">Edit</a> | <button type="submit" class="btn btn-primary">Send Order <span><i class="fal fa-arrow-alt-from-left"></i></span></button></div>
-
-                                    </form>
-                                }
-
-
                                 <form method="post" action="/CustomerOrder/UploadDocumentsAdd" enctype="multipart/form-data">
                                     <input type="hidden" id="OrderId" name="OrderId" value="@Model.Id" />
                                     @{
@@ -120,6 +109,20 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-12">
+
+
+                                @if (Model.OrderProgress == "Order Created" && Model.IsSend == false)
+                                {
+                                    <form action="/CustomerOrder/CustomerOrderSend" method="post">
+                                        <input type="hidden" name="Id" value="@Model.Id" />
+                                        <div class="float-lg-right"><a class="btn btn-info" href="/CustomerOrder/Edit/@Model.Id">Edit</a>  <button type="submit" class="btn btn-primary">Send Order <span><i class="fal fa-arrow-alt-from-left"></i></span></button></div>
+
+                                    </form>
+                                }
+                            </div>
+
                         </div>
                     </div>
                 </div>
