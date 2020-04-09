@@ -16,7 +16,7 @@
                             <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Quotation</i></span>
                         </a>
                     </h2>*@
-                <h4>My Quotation List</h4>
+                <h4>My Invoices List</h4>
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
@@ -30,25 +30,25 @@
 
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Product)
+                                       Product
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.TotalQuantity)
+                                       Total Quantity
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.VAT)
+                                        VAT
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.GrandTotal)
+                                       Grand Total
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.FromDate)
+                                        From Date
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.DueDate)
+                                       Due Date
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.UserName)
+                                        User Name
                                     </th>
                                     <th>
                                         Action
@@ -103,7 +103,7 @@
         $(document).ready(function () {
             $("#InvoiceMenu").attr("aria-expanded", "true");
             $('#InvoiceUl').css('display', 'block');
-            $('#EstimatesLi').addClass('active');
+            $('#InvoiceLi').addClass('active');
         });
     </script>
 }
