@@ -43,14 +43,14 @@
             <form action="/User/Login" method="post">
                 <div class="form-group">
                     <!-- <label class="form-label" for="username">Email Address</label>-->
-                    <input type="email" id="UserName" name="UserName" class="form-control" placeholder="Enter Your Email Address">
+                    <input type="email" id="UserName" name="UserName" class="form-control" placeholder="Your Email Address">
                     <span class="help-block">
                         @Html.ValidationMessageFor(Model => Model.UserName, "", new { @class = "text-danger" })
                     </span>
                 </div>
                 <div class="form-group">
                     <!--<label class="form-label" for="password">Password</label>-->
-                    <input type="password" id="Password" name="Password" class="form-control" placeholder="enter Your Password">
+                    <input type="password" id="Password" name="Password" class="form-control" placeholder="Your Password">
                     <span class="help-block">
                         @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
                         <p class="text-success font-weight-bold">@ViewBag.success</p> 

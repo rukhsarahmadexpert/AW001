@@ -676,8 +676,9 @@ namespace IT.Web.Controllers
                 PagingParameterModel pagingParameterModel = new PagingParameterModel
                 {
                     pageNumber = 1,
-                    CompanyId = 0,
-                    PageSize = 10
+                    CompanyId = CompanyId,
+                    PageSize = 10,
+                    
                 };
 
                 var CustomerBookingList = webServices.Post(pagingParameterModel, "CustomerBooking/BookingConfirmationByCompany");
