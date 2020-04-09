@@ -19,6 +19,7 @@ namespace IT.Web_New.Controllers
         readonly UserViewModel userViewModel = new UserViewModel();
         readonly List<UserViewModel> userViewModelList = new List<UserViewModel>();
         UserCompanyViewModel userCompanyViewModel = new UserCompanyViewModel();
+        int CompanyId = 0;
 
         [HttpGet]
         public ActionResult Index()
@@ -175,7 +176,16 @@ namespace IT.Web_New.Controllers
                             userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(result.Data.ToString()));
 
                             //return RedirectToAction("/");
-                            return RedirectToAction(nameof(UserInformation));
+                          CompanyId = Convert.ToInt32(Session["companyId"]);
+                            if(CompanyId == 2)
+                            {
+                                return RedirectToAction(nameof(AdminUserInformation));
+                            }
+                            else
+                            {
+                                return RedirectToAction(nameof(UserInformation));
+                            }
+                            
                         }
                         else
                         {
@@ -427,7 +437,16 @@ namespace IT.Web_New.Controllers
                     else if (result.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
                         ModelState.AddModelError("Error", "Email not found");
-                        return View(changePasswordViewModel);
+
+                        CompanyId = Convert.ToInt32(Session["companyId"]);
+                        if (CompanyId == 2)
+                        {
+                            return RedirectToAction(nameof(changePasswordViewModel));
+                        }
+                        else
+                        {
+                            return RedirectToAction(nameof(changePasswordViewModel));
+                        }
                     }
 
                     return View(changePasswordViewModel);
