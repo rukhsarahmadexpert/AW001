@@ -112,6 +112,13 @@ function CreateGroupOrder(Url)
         }
     });
 
+    var radioValue = $("input[name='defaultExampleRadios']:checked").val();
+    
+    var IsBulkTrue = false;
+    if (radioValue.trim() != "Order by Vehicle") {
+        IsBulkTrue = true;
+    }
+
     var empObj = {
         OrderId: $('#OrderId').val(),
         Id: $('#OrderId').val(),
@@ -121,6 +128,7 @@ function CreateGroupOrder(Url)
         Longitude: $('#Longitude').val(),
         LocationFullUrl: $('#LocationFullUrl').val(),
         SiteId: $('#Site').val(),
+        IsBulk: IsBulkTrue,
     };
 
     for (var key in empObj)
