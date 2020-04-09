@@ -52,7 +52,7 @@
                                     <select id="ProductRow1" name="Product" class="select3 Product" required>
                                         @foreach (var item in ViewBag.Products)
                                         {
-                                            <option value="@item.   Id" @(item.Id == storageViewModels[0].ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                            <option value="@item.Id" @(item.Id == storageViewModels[0].ProductId ? "selected='selected'" : "")>@item.Name</option>
                                         }
                                     </select>
                                 </div>
@@ -79,9 +79,16 @@
                                         }
                                         else if (storageViewModels[0].Source == "client vehicle")
                                         {
-                                            foreach (var item in ViewBag.Vehicle)
+                                            if (ViewBag.Vehicles != null)
                                             {
-                                                <option value="@item.Id" @(item.Id == storageViewModels[0].ClientVehicleId ? "selected='selected'" : "")>@item.TrafficPlateNumber</option>
+                                                foreach (var item in ViewBag.Vehicles)
+                                                {
+                                                    <option value="@item.Id" @(item.Id == storageViewModels[0].ClientVehicleId ? "selected='selected'" : "")>@item.TrafficPlateNumber</option>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <option value="0" >No Vehicles</option>
                                             }
                                         }
                                         else
@@ -138,9 +145,16 @@
                             <td>
                                 <div class="form-group mb-2">
                                     <select id="ProductRow2" name="Product" class="select3 Product" required>
-                                        @foreach (var item in ViewBag.Products)
+                                        @if (ViewBag.Products != null)
                                         {
-                                            <option value="@item.Id" @(item.Id == storageViewModels[1].ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                            foreach (var item in ViewBag.Products)
+                                            {
+                                                <option value="@item.Id" @(item.Id == storageViewModels[1].ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="0">No Product</option>
                                         }
                                     </select>
                                 </div>
@@ -157,32 +171,49 @@
                                     </select>
                                 </div>
                             </td>
-
-
                             <td>
-
-
                                 <div class="form-group mb-2">
                                     <select id="SiteVehicleRow2" name="Site2" class="select2 Site" required>
                                         @if (storageViewModels[1].Source == "site")
                                         {
-                                            foreach (var item in ViewBag.Sites)
+                                            if (ViewBag.Sites != null)
                                             {
+                                                foreach (var item in ViewBag.Sites)
+                                                {
                                                 <option value="@item.Id" @(item.Id == storageViewModels[1].SiteId ? "selected='selected'" : "")>@item.SiteName </option>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <option value="0">No Site</option>
                                             }
                                         }
                                         else if (storageViewModels[1].Source == "client vehicle")
                                         {
-                                            foreach (var item in ViewBag.Vehicles)
+                                            if (ViewBag.Vehicles != null)
                                             {
+                                                foreach (var item in ViewBag.Vehicles)
+                                                {
                                                 <option value="@item.Id" @(item.Id == storageViewModels[1].ClientVehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <option value="0">No Vehicles</option>
                                             }
                                         }
                                         else
                                         {
                                             foreach (var item in ViewBag.AdminVehicles)
                                             {
+                                                if (ViewBag.AdminVehicles != null)
+                                                {
                                                 <option value="@item.Id" @(item.Id == storageViewModels[1].VehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="0">No Vehicle</option>
+                                                }
                                             }
 
                                         }
@@ -205,10 +236,7 @@
                                     <input type="hidden" name="Id1" id="Id1" class="Id" value="@storageViewModels[1].Id" />
                                 </div>
                             </td>
-
                             <td>
-
-
                                 <div class="form-group mb-2">
                                     <select id="Action2" name="Action2" class="form-control Action" required>
                                         @* <option value="@storageViewModels[1].StockIn" @(storageViewModels[1].StockIn == 0 ? "" : "selected='selected'")>Stock In</option>
@@ -218,13 +246,7 @@
                                     </select>
                                 </div>
                             </td>
-
                         </tr>
-
-
-
-
-
                     </tbody>
                 </table>
             </div>

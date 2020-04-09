@@ -12,7 +12,7 @@ Log Written Date: 09-Apr-20 10:28:07 AM09-Apr-20 10:27:44 AMError Message:    at
 
 
 
-Log Written Date: Apr 09,2020 10:58:39 AMApr 09,2020 10:58:35 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+Log Written Date: 09-Apr-20 11:25:45 AM09-Apr-20 11:25:40 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
    at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
 --------------------------------*End*------------------------------------------
 
@@ -22,7 +22,7 @@ Log Written Date: Apr 09,2020 10:58:39 AMApr 09,2020 10:58:35 AMError Message:  
 
 
 
-Log Written Date: Apr 09,2020 10:58:55 AMApr 09,2020 10:58:51 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+Log Written Date: 09-Apr-20 11:26:01 AM09-Apr-20 11:25:57 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
    at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
 --------------------------------*End*------------------------------------------
 
@@ -32,7 +32,7 @@ Log Written Date: Apr 09,2020 10:58:55 AMApr 09,2020 10:58:51 AMError Message:  
 
 
 
-Log Written Date: Apr 09,2020 10:59:08 AMApr 09,2020 10:59:08 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+Log Written Date: 09-Apr-20 11:26:28 AM09-Apr-20 11:26:24 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
    at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
 --------------------------------*End*------------------------------------------
 
@@ -42,7 +42,7 @@ Log Written Date: Apr 09,2020 10:59:08 AMApr 09,2020 10:59:08 AMError Message:  
 
 
 
-Log Written Date: Apr 09,2020 10:59:12 AMApr 09,2020 10:59:08 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+Log Written Date: 09-Apr-20 11:26:46 AM09-Apr-20 11:26:42 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
    at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
 --------------------------------*End*------------------------------------------
 
