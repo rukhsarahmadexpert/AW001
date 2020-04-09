@@ -37,6 +37,7 @@ namespace IT.Core.ViewModels
         public string UserName { get; set; }
         public string CompanyName { get; set; }
         public int BookingId { get; set; }
+        public bool IsBulk { get; set; }
 
         public List<CustomerOrderViewModel> customerOrderViewModels { get; set; }
     

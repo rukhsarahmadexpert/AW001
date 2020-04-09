@@ -105,6 +105,57 @@ namespace IT.Web_New.Controllers
                     }
                 }
 
+                else if (searchViewModel.searchkey != null && searchViewModel.Flage == "OrderReportBulk")
+                {
+                    searchViewModel.Status = true;
+                    var result = webServices.Post(searchViewModel, "AWReports/RepoOrdersByDates", false);
+
+                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        string pdfname = "";
+                        ReportDocument Report = new ReportDocument();
+                        Report.Load(Server.MapPath("~/Reports/CustomerReport/ReportsByDatesVehicleDetails.rpt"));
+
+                        reportsByDatesViewModels = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.ReportsByDatesViewModel>>(result.Data.ToString());
+
+                        foreach (var item in reportsByDatesViewModels)
+                        {
+                            foreach (var innerItem in item.reportsByDatesVehicleDetails)
+                            {
+                                reportsByDatesVehicleDetails.Add(innerItem);
+                            }
+                        }
+
+                        Report.Database.Tables[0].SetDataSource(reportsByDatesVehicleDetails);
+
+                        Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                        stram.Seek(0, SeekOrigin.Begin);
+
+                        string FileName = "";
+
+                        if (reportsByDatesVehicleDetails.Count > 0)
+                        {
+                            FileName = reportsByDatesVehicleDetails[0].Id + " " + reportsByDatesVehicleDetails[0].CustomerOrderNumber;
+                        }
+                        else
+                        {
+                            FileName = "Data Not Found";
+                        }
+
+                        var root = Server.MapPath("/PDF/");
+                        pdfname = String.Format("{0}.pdf", FileName);
+                        var path = Path.Combine(root, pdfname);
+                        path = Path.GetFullPath(path);
+
+                        //Report.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, path);
+
+                        //  stram.Close();
+
+                        stram.Seek(0, SeekOrigin.Begin);
+                        return new FileStreamResult(stram, "application/pdf");
+                    }
+                }
+
                 else if (searchViewModel.searchkey != null && searchViewModel.Flage == "VehicleReport")
                 {
                     if (searchViewModel.GroupBy == "ByVehicle")
@@ -224,6 +275,7 @@ namespace IT.Web_New.Controllers
                     }
 
                 }
+
                 return View();
             }
             catch (Exception)

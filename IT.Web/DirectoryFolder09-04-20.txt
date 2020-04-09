@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 09-Apr-20 10:28:07 AM09-Apr-20 10:27:44 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.ReportCustomerController Error Action Name: RepoOrdersByDatesUserId: 4146CompanyId3
+--------------------------------*End*------------------------------------------
+
+
+
