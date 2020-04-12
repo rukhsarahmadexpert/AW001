@@ -274,15 +274,97 @@ namespace IT.Web_New.Controllers
                                 content.Add(new StringContent(vehicleViewModel.Comments == null ? "" : vehicleViewModel.Comments), "Comments");
 
                                 var result = webServices.PostMultiPart(content, "Vehicle/Add", true);
-                                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                                if (result.StatusCode == System.Net.HttpStatusCode.OK)
                                 {
-                                    return Redirect(nameof(Index));
+                                    if (result.Message != "\"TraficPlateNumber Already Availible\"")
+                                    {
+                                        return RedirectToAction(nameof(Details), new { Id = vehicleViewModel.Id });
+                                    }
+                                    else
+                                    {
+                                        VehicleTypeController vehicleTypeController = new VehicleTypeController();
+                                        ViewBag.VehicleTypes = vehicleTypeController.VehicleTypes();
+
+                                        ModelState.AddModelError("TraficPlateNumber", "Plate Number already exist chhose another");
+                                        return View(vehicleViewModel);
+                                    }
+                                }
+                                else
+                                {
+                                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                                    {
+                                        return RedirectToAction(nameof(Index));
+                                    }
+                                    else
+                                    {
+                                        VehicleTypeController vehicleTypeController = new VehicleTypeController();
+                                        ViewBag.VehicleTypes = vehicleTypeController.VehicleTypes();
+
+                                        return View(vehicleViewModel);
+                                    }
                                 }
 
                             }
                         }
                     }
-                    return RedirectToAction(nameof(Details), new { Id = vehicleViewModel.Id });
+                    else
+                    {
+                        using (HttpClient client = new HttpClient())
+                        {
+                            using (var content = new MultipartFormDataContent())
+                            {
+
+                                string UserId = Session["UserId"].ToString();
+                                content.Add(new StringContent(UserId), "CreatedBy");
+                                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                                content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
+                                content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                                content.Add(new StringContent(vehicleViewModel.VehicleType.ToString()), "VehicleType");
+                                content.Add(new StringContent(vehicleViewModel.TraficPlateNumber == null ? "" : vehicleViewModel.TraficPlateNumber), "TraficPlateNumber");
+                                content.Add(new StringContent(vehicleViewModel.TCNumber == null ? "" : vehicleViewModel.TCNumber), "TCNumber");
+                                content.Add(new StringContent(vehicleViewModel.Model == null ? "" : vehicleViewModel.Model), "Model");
+                                content.Add(new StringContent(vehicleViewModel.Brand == null ? "" : vehicleViewModel.Brand), "Brand");
+                                content.Add(new StringContent(vehicleViewModel.Color == null ? "" : vehicleViewModel.Color), "Color");
+                                content.Add(new StringContent(vehicleViewModel.MulkiaExpiry == null ? "" : vehicleViewModel.MulkiaExpiry), "MulkiaExpiry");
+                                content.Add(new StringContent(vehicleViewModel.InsuranceExpiry == null ? "" : vehicleViewModel.InsuranceExpiry), "InsuranceExpiry");
+                                content.Add(new StringContent(vehicleViewModel.RegisteredRegion == null ? "" : vehicleViewModel.RegisteredRegion), "RegisteredRegion");
+                                content.Add(new StringContent(vehicleViewModel.Comments == null ? "" : vehicleViewModel.Comments), "Comments");
+
+                                var result = webServices.PostMultiPart(content, "Vehicle/Add", true);
+                                if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                                {
+                                    if (result.Message != "\"TraficPlateNumber Already Availible\"")
+                                    {
+                                        return RedirectToAction(nameof(Details), new { Id = vehicleViewModel.Id });
+                                    }
+                                    else
+                                    {
+                                        VehicleTypeController vehicleTypeController = new VehicleTypeController();
+                                        ViewBag.VehicleTypes = vehicleTypeController.VehicleTypes();
+
+                                        ModelState.AddModelError("TraficPlateNumber", "Plate Number already exist chhose another");
+                                        return View(vehicleViewModel);
+                                    }
+                                }
+                                else
+                                {
+                                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                                    {
+                                        return RedirectToAction(nameof(Index));
+                                    }
+                                    else
+                                    {
+                                        VehicleTypeController vehicleTypeController = new VehicleTypeController();
+                                        ViewBag.VehicleTypes = vehicleTypeController.VehicleTypes();
+
+                                        return View(vehicleViewModel);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                   
                 }
             }
             catch (Exception ex)

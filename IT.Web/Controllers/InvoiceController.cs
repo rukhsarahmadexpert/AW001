@@ -45,8 +45,15 @@ namespace IT.Web_New.Controllers
                     CompanyId = Convert.ToInt32(Session["CompanyId"])
                 };
                 var result = webServices.Post(searchViewModel, "Invoice/AllByCustomer");
-                lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
 
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (result.Data != "[]")
+                    {
+
+                        lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
+                    }
+                }
                 return View(lPOInvoiceViewModels);
             }
             catch (Exception ex)

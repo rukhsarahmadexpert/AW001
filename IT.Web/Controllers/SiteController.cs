@@ -105,7 +105,13 @@ namespace IT.Web_New.Controllers
 
                 if (SiteResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    var reuslt = (new JavaScriptSerializer().Deserialize<int>(SiteResult.Data));
+                    var reuslt = (new JavaScriptSerializer().Deserialize<SiteViewModel>(SiteResult.Data));
+
+                    if(reuslt.SiteName == "Already site exist")
+                    {
+                        ModelState.AddModelError("SiteName","Site Name already exists");
+                        return View(siteViewModel);
+                    }
 
                     return RedirectToAction(nameof(Index));
                 }

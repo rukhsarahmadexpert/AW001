@@ -244,7 +244,11 @@ namespace IT.Web_New.Controllers
                                 {
                                     return Redirect(nameof(Index));
                                 }
-
+                                else if(result.StatusCode == System.Net.HttpStatusCode.OK)
+                                {
+                                    ModelState.AddModelError("Email", "Email aready exist please choose another");
+                                    return View(driverViewModel);
+                                }
                             }
                         }
                     }

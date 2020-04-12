@@ -73,35 +73,25 @@
                                     <label class="form-label" for="simpleinput">Site Cell</label>
                                     <input type="text" id="SiteCell" name="SiteCell" value="@Model.SiteCell" class="form-control" placeholder="Enter Site Cell">
                                 </div>
-
                             </div>
-
-
-
                             <div class="col-md-6">
 
                                 <div class="form-group mb-2">
                                     <label class="form-label" for="simpleinput">FaceBook</label>
                                     <input type="text" id="FaceBook" name="FaceBook" value="@Model.FaceBook" class="form-control" placeholder="Enter FaceBook">
                                 </div>
-
                             </div>
-
                             <div class="col-md-6">
-
                                 <div class="form-group mb-2">
                                     <label class="form-label" for="simpleinput">Site Email</label>
                                     <input type="text" id="SiteEmail" name="SiteEmail" value="@Model.SiteEmail" class="form-control" placeholder="Enter Site Email">
                                 </div>
-
                             </div>
-
                             <div class="col-md-6">
 
                                 <div class="form-group mb-2">
                                     <label class="form-label" for="simpleinput">Address</label>
                                     <input type="text" id="Address" name="Address" value="@Model.Address" class="form-control" placeholder="Enter Address">
-
                                     <input type="hidden" id="Lattitue" name="Lattitue">
                                     <input type="hidden" id="Longitude" name="longitude">
                                     <input type="hidden" id="PickingPoint" name="PickingPoint">
@@ -125,10 +115,8 @@
                                         <span>submit</span>
                                     </button>
                                 }
-
                             </div>
-
-
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         </div>
                     </form>
                 </div>

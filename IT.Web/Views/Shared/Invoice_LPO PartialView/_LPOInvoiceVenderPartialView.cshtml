@@ -8,9 +8,16 @@
                 <span class="input-group-text" id="basic-addon2">Vender:</span>
             </div>
             <select data-placeholder="Vender" class="chosen form-control" name="Vender" id="Venders" title="select Vender">
-                @foreach (var Vender in ViewBag.Vender)
+                @if (ViewBag.Vender != null)
                 {
-                    <option value="@Vender.Id">@Vender.Name</option>
+                    foreach (var Vender in ViewBag.Vender)
+                    {
+                        <option value="@Vender.Id">@Vender.Name</option>
+                    }
+                }
+                else
+                {
+                    <option value="0">Select Vender</option>
                 }
             </select>
         </div>

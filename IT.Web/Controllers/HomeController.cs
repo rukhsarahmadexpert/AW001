@@ -83,8 +83,7 @@ namespace IT.Web_New.Controllers
                     }
                     ViewBag.customerOrderStatistics = customerOrderStatistics;
 
-                    FuelPricesViewModel fuelPricesViewModel = new FuelPricesViewModel();
-                   
+                    FuelPricesViewModel fuelPricesViewModel = new FuelPricesViewModel();                   
 
                     var resultFuel = webServices.Post(fuelPricesViewModel, "FuelPrices/FuelPricesTopOne");
                     if (resultFuel.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -92,14 +91,13 @@ namespace IT.Web_New.Controllers
                         fuelPricesViewModels = (new JavaScriptSerializer().Deserialize<List<FuelPricesViewModel>>(resultFuel.Data.ToString()));
                     }
                     ViewBag.fuelPricesViewModel = fuelPricesViewModels[0];
-
                     ViewBag.fuelPricesViewModels = fuelPricesViewModels;
-
 
                     var RequestedData = customerOrderStatistics.RequestedBySevenDayed;
                     var userCompanyViewModel = new UserCompanyViewModel();
                     Session["RequestedData"] = RequestedData;
                     userCompanyViewModel = Session["userCompanyViewModel"] as UserCompanyViewModel;
+
                     if (userCompanyViewModel != null)
                     {
                         TempData["Title"] = userCompanyViewModel.CompanyName ?? "Unknown";

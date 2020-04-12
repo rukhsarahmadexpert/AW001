@@ -106,8 +106,7 @@ namespace IT.Web_New.Controllers
             }
 
         }
-
-
+        
         [HttpGet]
         public ActionResult AdminUserInformationEdit()
         {
@@ -139,7 +138,6 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-
                 //if (Request.Files.Count > 0 && LogoUrl != null)
                 //{
                 var file = ImageUrl1;
@@ -254,7 +252,7 @@ namespace IT.Web_New.Controllers
                 //loginViewModel.DeviceId = System.Environment.MachineName.ToString();
                 // loginViewModel.DeviceId = System.Web.HttpContext.Current.Server.MachineName;
                 //loginViewModel.DeviceId = Request.UserHostAddress;
-                loginViewModel.DeviceId = Request.Browser.Id;
+                loginViewModel.DeviceId = loginViewModel.Token;
                 if (ModelState.IsValid)
                 {
                     var result = webServices.Post(loginViewModel, "User/Login", false);

@@ -38,17 +38,14 @@
         <div class="page-inner">
 
             <div class="page-content-wrapper">
-
                 <!-- BEGIN Page Content -->
                 <!-- the #js-page-content id is needed for some plugins to initialize -->
                 <main id="js-page-content" role="main" class="page-content">
-
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="subheader">
                                 <h1>
                                     <a class="btn-primary" href="/User/LogOut" style="padding:10px; border-radius:5px">
-
                                         <i style="color:white" class='subheader-icon fal fa-power-off'></i> Sign out
                                     </a>
                                 </h1>
@@ -62,10 +59,8 @@
                                   </div>
                                   <div class="panel-container show">
                                       <div class="panel-content">
-
                                           <form action="/Company/Create" method="post" enctype="multipart/form-data">
                                               <div class="row">
-
                                                   <div class="col-md-6 col-xl-6 p-2">
                                                       <div class="input-group flex-nowrap">
                                                           <div class="input-group-prepend">
@@ -104,7 +99,7 @@
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-envelope fs-xl"></i></span>
                                                           </div>
-                                                          <input id="Email" name="Email" required type="email" class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="addon-wrapping-left">
+                                                          <input id="Email" name="Email" type="email" class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="addon-wrapping-left">
                                                       </div>
                                                   </div>
 
@@ -113,7 +108,7 @@
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-phone fs-xl"></i></span>
                                                           </div>
-                                                          <input id="Phone" name="Phone"  type="text" class="form-control" placeholder="Phone Number" aria-label="Phone" aria-describedby="addon-wrapping-left">
+                                                          <input id="Phone" name="Phone" type="text" class="form-control" placeholder="Phone Number" aria-label="Phone" aria-describedby="addon-wrapping-left">
                                                       </div>
                                                   </div>
                                               </div>
@@ -124,7 +119,7 @@
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-mobile fs-xl"></i></span>
                                                           </div>
-                                                          <input id="Cell" name="Cell" type="text" required class="form-control" placeholder="Mobile Number" aria-label="Mobile" aria-describedby="addon-wrapping-left">
+                                                          <input id="Cell" name="Cell" type="text" class="form-control" placeholder="Mobile Number" aria-label="Mobile" aria-describedby="addon-wrapping-left">
                                                       </div>
                                                   </div>
 
@@ -139,7 +134,6 @@
                                               </div>
                                               <div class="row ">
                                                   <div class="col-xl-6 col-md-6 p-2">
-
                                                       <div class="input-group " form-group flex-nowrap">
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-flag fs-xl"></i></span>
@@ -159,7 +153,6 @@
                                                   </div>
 
                                                   <div class="col-xl-6 col-md-6 p-2">
-
                                                       <div class="input-group " form-group flex-nowrap">
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-chess-rook fs-xl"></i></span>
@@ -178,7 +171,6 @@
                                                               }
                                                               </select>
                                                       </div>
-
                                                   </div>
                                               </div>
 
@@ -197,9 +189,9 @@
                                                                   {
                                                                       if(item1.cityViewModels != null)
                                                                       {
-                                                                      foreach (var item3 in item1.cityViewModels)
-                                                                      {
-                                                                          <option value="@item3.CityName">@item3.CityName</option>
+                                                                          foreach (var item3 in item1.cityViewModels)
+                                                                          {
+                                                                              <option value="@item3.CityName">@item3.CityName</option>
                                                                           }
                                                                       }
                                                                   }
@@ -239,17 +231,16 @@
                                                 </div>
                                             </div>
 
-
-                                              <div class="row ">
-                                                  <div class="col-md-12">
-                                                      <label class=newbtn>
-                                                          <img id="MulkiaFront1Preview" class="blah" src="/assets/staticImages/icon1.png">
-                                                          <input id="LogoUrl" required name="LogoUrl" class='pic' onchange="readURL(this);" type="file">
-                                                      </label>
-                                                  </div>
+                                            <div class="row ">
+                                                <div class="col-md-12">
+                                                    <label class=newbtn>
+                                                        <img id="MulkiaFront1Preview" class="blah" src="/assets/staticImages/icon1.png">
+                                                        <input id="LogoUrl" required name="LogoUrl" class='pic' onchange="readURL(this);" type="file">
+                                                    </label>
+                                                </div>
+                                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
                                                 <div class="col-xl-12 p-2">
-
                                                     <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
                                                         Company
                                                         <span>Submit</span>
@@ -258,7 +249,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                    @Html.ValidationSummary(false,"", new { @class = "text-danger"})
+                                  
                                 </div>
                             </div>
                         </div>

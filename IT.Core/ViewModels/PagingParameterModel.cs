@@ -22,7 +22,6 @@ namespace IT.Core.ViewModels
 
         public int PageSize
         {
-
             get { return _pageSize; }
             set
             {

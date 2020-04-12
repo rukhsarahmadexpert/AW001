@@ -59,76 +59,92 @@ namespace IT.Web_New.Controllers
                 //else
                 //{
                 var result = webServices.Post(new VehicleViewModel(), "LPO/All");
-                lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
-
-                HttpContext.Cache["LPOData"] = lPOInvoiceViewModels;
-                //  }
-                if (parm.sSearch != null)
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    totalCount = lPOInvoiceViewModels.Where(x => x.Name.ToLower().Contains(parm.sSearch.ToLower()) ||
-                               x.GrandTotal.ToString().Contains(parm.sSearch) ||
-                               x.UserName.ToLower().Contains(parm.sSearch.ToLower()) ||
-                               x.PONumber.ToString().Contains(parm.sSearch)).Count();
+                    if (result.Data != "[]")
+                    {
+                        lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
+                    }
+                    HttpContext.Cache["LPOData"] = lPOInvoiceViewModels;
+                    //  }
+                    if (parm.sSearch != null)
+                    {
+                        totalCount = lPOInvoiceViewModels.Where(x => x.Name.ToLower().Contains(parm.sSearch.ToLower()) ||
+                                   x.GrandTotal.ToString().Contains(parm.sSearch) ||
+                                   x.UserName.ToLower().Contains(parm.sSearch.ToLower()) ||
+                                   x.PONumber.ToString().Contains(parm.sSearch)).Count();
 
-                    lPOInvoiceViewModels = lPOInvoiceViewModels.ToList()
-                        .Where(x => x.Name.ToLower().Contains(parm.sSearch.ToLower()) ||
-                               x.GrandTotal.ToString().Contains(parm.sSearch) ||
-                               x.UserName.ToLower().Contains(parm.sSearch.ToLower()) ||
-                               x.PONumber.ToString().Contains(parm.sSearch))
-                               .Skip((pageNo - 1) * parm.iDisplayLength)
-                               .Take(parm.iDisplayLength)
-                   .Select(x => new LPOInvoiceViewModel
-                   {
-                       Id = x.Id,
-                       Product = x.Product,
-                       UnitName = x.UnitName,
-                       TotalQuantity = x.TotalQuantity,
-                       Name = x.Name,
-                       Total = x.Total,
-                       VAT = x.VAT,
-                       GrandTotal = x.GrandTotal,
-                       UserName = x.UserName,
-                       PONumber = x.PONumber,
-                       FDate = x.FDate,
-                       DDate = x.DDate,
-                       IsUpdated = x.IsUpdated
-                   }).ToList();
+                        lPOInvoiceViewModels = lPOInvoiceViewModels.ToList()
+                            .Where(x => x.Name.ToLower().Contains(parm.sSearch.ToLower()) ||
+                                   x.GrandTotal.ToString().Contains(parm.sSearch) ||
+                                   x.UserName.ToLower().Contains(parm.sSearch.ToLower()) ||
+                                   x.PONumber.ToString().Contains(parm.sSearch))
+                                   .Skip((pageNo - 1) * parm.iDisplayLength)
+                                   .Take(parm.iDisplayLength)
+                       .Select(x => new LPOInvoiceViewModel
+                       {
+                           Id = x.Id,
+                           Product = x.Product,
+                           UnitName = x.UnitName,
+                           TotalQuantity = x.TotalQuantity,
+                           Name = x.Name,
+                           Total = x.Total,
+                           VAT = x.VAT,
+                           GrandTotal = x.GrandTotal,
+                           UserName = x.UserName,
+                           PONumber = x.PONumber,
+                           FDate = x.FDate,
+                           DDate = x.DDate,
+                           IsUpdated = x.IsUpdated
+                       }).ToList();
+                    }
+                    else
+                    {
+                        totalCount = lPOInvoiceViewModels.Count();
+
+                        lPOInvoiceViewModels = lPOInvoiceViewModels
+                                                           .Skip((pageNo - 1) * parm.iDisplayLength)
+                                                           .Take(parm.iDisplayLength)
+                            .Select(x => new LPOInvoiceViewModel
+                            {
+                                Id = x.Id,
+                                Product = x.Product,
+                                UnitName = x.UnitName,
+                                TotalQuantity = x.TotalQuantity,
+                                Name = x.Name,
+                                Total = x.Total,
+                                VAT = x.VAT,
+                                GrandTotal = x.GrandTotal,
+                                UserName = x.UserName,
+                                PONumber = x.PONumber,
+                                FDate = x.FDate,
+                                DDate = x.DDate,
+                                IsUpdated = x.IsUpdated
+
+                            }).ToList();
+                    }
+                    return Json(
+                        new
+                        {
+                            aaData = lPOInvoiceViewModels,
+                            parm.sEcho,
+                            iTotalDisplayRecords = totalCount,
+                            data = lPOInvoiceViewModels,
+                            iTotalRecords = totalCount,
+                        }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    totalCount = lPOInvoiceViewModels.Count();
-
-                    lPOInvoiceViewModels = lPOInvoiceViewModels
-                                                       .Skip((pageNo - 1) * parm.iDisplayLength)
-                                                       .Take(parm.iDisplayLength)
-                        .Select(x => new LPOInvoiceViewModel
+                    return Json(
+                        new
                         {
-                            Id = x.Id,
-                            Product = x.Product,
-                            UnitName = x.UnitName,
-                            TotalQuantity = x.TotalQuantity,
-                            Name = x.Name,
-                            Total = x.Total,
-                            VAT = x.VAT,
-                            GrandTotal = x.GrandTotal,
-                            UserName = x.UserName,
-                            PONumber = x.PONumber,
-                            FDate = x.FDate,
-                            DDate = x.DDate,
-                            IsUpdated = x.IsUpdated
-
-                        }).ToList();
+                            aaData = lPOInvoiceViewModels,
+                            parm.sEcho,
+                            iTotalDisplayRecords = 0,
+                            data = lPOInvoiceViewModels,
+                            iTotalRecords = 0,
+                        }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(
-                    new
-                    {
-                        aaData = lPOInvoiceViewModels,
-                        parm.sEcho,
-                        iTotalDisplayRecords = totalCount,
-                        data = lPOInvoiceViewModels,
-                        iTotalRecords = totalCount,
-                    }, JsonRequestBehavior.AllowGet);
-
             }
             catch (Exception ex)
             {
@@ -158,68 +174,98 @@ namespace IT.Web_New.Controllers
 
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 var result = webServices.Post(new VehicleViewModel(), "LPO/AllConverted");
-                lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
 
-                if (parm.sSearch != null)
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    totalCount = lPOInvoiceViewModels.Where(x => x.Name.ToLower().Contains(parm.sSearch.ToLower()) ||
-                               x.GrandTotal.ToString().Contains(parm.sSearch) ||
-                               x.UserName.ToLower().Contains(parm.sSearch.ToLower()) ||
-                               x.PONumber.ToString().Contains(parm.sSearch)).Count();
+                    if (result.Data != "[]")
+                    {
+                        lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
 
-                    lPOInvoiceViewModels = lPOInvoiceViewModels.ToList()
-                        .Where(x => x.Name.ToLower().Contains(parm.sSearch.ToLower()) ||
-                               x.GrandTotal.ToString().Contains(parm.sSearch) ||
-                               x.UserName.ToLower().Contains(parm.sSearch.ToLower()) ||
-                               x.PONumber.ToString().Contains(parm.sSearch))
-                               .Skip((pageNo - 1) * parm.iDisplayLength)
-                               .Take(parm.iDisplayLength)
-                   .Select(x => new LPOInvoiceViewModel
-                   {
-                       Id = x.Id,
-                       Name = x.Name,
-                       Total = x.Total,
-                       VAT = x.VAT,
-                       GrandTotal = x.GrandTotal,
-                       UserName = x.UserName,
-                       PONumber = x.PONumber,
-                       FDate = x.FDate,
-                       DDate = x.DDate,
-                       IsUpdated = x.IsUpdated
-                   }).ToList();
+                        if (parm.sSearch != null)
+                        {
+                            totalCount = lPOInvoiceViewModels.Where(x => x.Name.ToLower().Contains(parm.sSearch.ToLower()) ||
+                                       x.GrandTotal.ToString().Contains(parm.sSearch) ||
+                                       x.UserName.ToLower().Contains(parm.sSearch.ToLower()) ||
+                                       x.PONumber.ToString().Contains(parm.sSearch)).Count();
+
+                            lPOInvoiceViewModels = lPOInvoiceViewModels.ToList()
+                                .Where(x => x.Name.ToLower().Contains(parm.sSearch.ToLower()) ||
+                                       x.GrandTotal.ToString().Contains(parm.sSearch) ||
+                                       x.UserName.ToLower().Contains(parm.sSearch.ToLower()) ||
+                                       x.PONumber.ToString().Contains(parm.sSearch))
+                                       .Skip((pageNo - 1) * parm.iDisplayLength)
+                                       .Take(parm.iDisplayLength)
+                           .Select(x => new LPOInvoiceViewModel
+                           {
+                               Id = x.Id,
+                               Name = x.Name,
+                               Total = x.Total,
+                               VAT = x.VAT,
+                               GrandTotal = x.GrandTotal,
+                               UserName = x.UserName,
+                               PONumber = x.PONumber,
+                               FDate = x.FDate,
+                               DDate = x.DDate,
+                               IsUpdated = x.IsUpdated
+                           }).ToList();
+                        }
+                        else
+                        {
+                            totalCount = lPOInvoiceViewModels.Count();
+
+                            lPOInvoiceViewModels = lPOInvoiceViewModels
+                                                               .Skip((pageNo - 1) * parm.iDisplayLength)
+                                                               .Take(parm.iDisplayLength)
+                                .Select(x => new LPOInvoiceViewModel
+                                {
+                                    Id = x.Id,
+                                    Name = x.Name,
+                                    Total = x.Total,
+                                    VAT = x.VAT,
+                                    GrandTotal = x.GrandTotal,
+                                    UserName = x.UserName,
+                                    PONumber = x.PONumber,
+                                    FDate = x.FDate,
+                                    DDate = x.DDate,
+                                    IsUpdated = x.IsUpdated
+
+                                }).ToList();
+                        }
+                        return Json(
+                            new
+                            {
+                                aaData = lPOInvoiceViewModels,
+                                parm.sEcho,
+                                iTotalDisplayRecords = 0,
+                                data = lPOInvoiceViewModels,
+                                iTotalRecords = 0,
+                            }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(
+                            new
+                            {
+                                aaData = lPOInvoiceViewModels,
+                                parm.sEcho,
+                                iTotalDisplayRecords = totalCount,
+                                data = lPOInvoiceViewModels,
+                                iTotalRecords = totalCount,
+                            }, JsonRequestBehavior.AllowGet);
+                    }
                 }
                 else
                 {
-                    totalCount = lPOInvoiceViewModels.Count();
-
-                    lPOInvoiceViewModels = lPOInvoiceViewModels
-                                                       .Skip((pageNo - 1) * parm.iDisplayLength)
-                                                       .Take(parm.iDisplayLength)
-                        .Select(x => new LPOInvoiceViewModel
+                    return Json(
+                        new
                         {
-                            Id = x.Id,
-                            Name = x.Name,
-                            Total = x.Total,
-                            VAT = x.VAT,
-                            GrandTotal = x.GrandTotal,
-                            UserName = x.UserName,
-                            PONumber = x.PONumber,
-                            FDate = x.FDate,
-                            DDate = x.DDate,
-                            IsUpdated = x.IsUpdated
-
-                        }).ToList();
+                            aaData = lPOInvoiceViewModels,
+                            parm.sEcho,
+                            iTotalDisplayRecords = totalCount,
+                            data = lPOInvoiceViewModels,
+                            iTotalRecords = totalCount,
+                        }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(
-                    new
-                    {
-                        aaData = lPOInvoiceViewModels,
-                        parm.sEcho,
-                        iTotalDisplayRecords = totalCount,
-                        data = lPOInvoiceViewModels,
-                        iTotalRecords = totalCount,
-                    }, JsonRequestBehavior.AllowGet);
-
             }
             catch (Exception ex)
             {
@@ -301,7 +347,7 @@ namespace IT.Web_New.Controllers
                 ViewBag.PO = SerailNO;
 
                 LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel
-                { 
+                {
                     FromDate = System.DateTime.Now,
                     DueDate = System.DateTime.Now,
                 };
@@ -510,7 +556,7 @@ namespace IT.Web_New.Controllers
 
 
                 List<VatModel> model = new List<VatModel>
-                { 
+                {
                     new VatModel() { Id = 0, VAT = 0 },
                     new VatModel() { Id = 5, VAT = 5 },
                 };
@@ -618,7 +664,7 @@ namespace IT.Web_New.Controllers
                 lPOInvoiceViewModel.UpdatedBy = Convert.ToInt32(Session["UserId"]);
                 lPOInvoiceViewModel.FromDate = Convert.ToDateTime(lPOInvoiceViewModel.FromDate);
                 lPOInvoiceViewModel.DueDate = Convert.ToDateTime(lPOInvoiceViewModel.DueDate);
-                
+
 
                 var result = webServices.Post(lPOInvoiceViewModel, "LPO/Update");
 
@@ -656,7 +702,7 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
-               
+
         public FileResult Download(string FileName)
         {
             string PAth = Server.MapPath("~/PDF/" + FileName);
@@ -746,18 +792,18 @@ namespace IT.Web_New.Controllers
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
                 LPOInvoiceModel lPOInvoiceModel = new LPOInvoiceModel
-                { 
+                {
                     Id = Id,
                     detailId = CompanyId,
                 };
-            var LPOInvoice = webServices.Post(lPOInvoiceModel, "LPO/EditReport/" + Id);
+                var LPOInvoice = webServices.Post(lPOInvoiceModel, "LPO/EditReport/" + Id);
 
                 var LPOInvoiceModel = new IT.Web.Models.LPOInvoiceModel();
                 if (LPOInvoice.Data != "[]")
                 {
                     LPOInvoiceModel = (new JavaScriptSerializer()).Deserialize<IT.Web.Models.LPOInvoiceModel>(LPOInvoice.Data.ToString());
                 }
-                                
+
                 lPOInvoiceModels.Insert(0, LPOInvoiceModel);
                 compnayModels = LPOInvoiceModel.compnays;
                 lPOInvoiceDetails = LPOInvoiceModel.lPOInvoiceDetailsList;
@@ -769,7 +815,7 @@ namespace IT.Web_New.Controllers
                 Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
 
                 Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + LPOInvoiceModel.compnays[0].LogoUrl);
-                
+
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
 
@@ -814,10 +860,10 @@ namespace IT.Web_New.Controllers
 
 
             SearchViewModel searchViewModel = new SearchViewModel
-            { 
-            FromDate = "2020-01-29",
-            ToDate = "2020-01-30",
-            CompanyId = CompanyId,
+            {
+                FromDate = "2020-01-29",
+                ToDate = "2020-01-30",
+                CompanyId = CompanyId,
             };
             string pdfname = "";
             try
@@ -827,8 +873,8 @@ namespace IT.Web_New.Controllers
 
                 List<IT.Web.Models.CompnayModel> compnayModels = new List<Web.Models.CompnayModel>();
                 List<IT.Web.Models.LPOInvoiceModel> lPOInvoiceModels = new List<Web.Models.LPOInvoiceModel>();
-                
-              
+
+
 
                 var LPOInvoice = webServices.Post(searchViewModel, "LPO/LPOAllLByDateRange");
 
@@ -839,7 +885,7 @@ namespace IT.Web_New.Controllers
                 }
 
                 compnayModels = lPOInvoiceModels[0].compnays;
-                                
+
                 Report.Database.Tables[0].SetDataSource(compnayModels);
                 Report.Database.Tables[1].SetDataSource(lPOInvoiceModels);
 

@@ -22,8 +22,9 @@
                             <div class="row">
                                 <div class="col-md-2 col-xl-2 p-2">
                                     <label class="newbtn">
+                                        @*<input type="file" name="LogoUrl" id="logoPreview" onchange="readURL(this);" />*@
                                         <img id="logoPreview" class="blah_cashCompany" src="/assets/staticImages/icon1.png" style="width:140px;">
-                                        <input id="LogoUrl" name="LogoUrl" class='pic' onchange="readURL(this);" type="file" required>
+                                        <input id="LogoUrl" name="LogoUrl" class='pic' onchange="readURL(this);" type="file" >
                                     </label>
                                 </div>
                                 <div class="col-md-5 col-xl-5 p-2">
@@ -150,7 +151,6 @@
     </div>
 </main>
 
-
 @section Scripts{
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
     <script>
@@ -171,13 +171,9 @@
             });
 
         </script>
-
-
 }
 
 <style>
-
-
     .pic {
         display: none;
     }

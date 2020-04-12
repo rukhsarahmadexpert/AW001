@@ -11,7 +11,7 @@ using System.Web.Script.Serialization;
 
 namespace IT.Web_New.Controllers
 {
-      
+
     [Autintication]
     [ExceptionLog]
     public class CompanyController : Controller
@@ -20,33 +20,88 @@ namespace IT.Web_New.Controllers
         List<CompnayModel> compnayModels = new List<CompnayModel>();
         List<CompanyViewModel> companyViewModels = new List<CompanyViewModel>();
         readonly CompanyViewModel companyViewModel = new CompanyViewModel();
-                
+
         [HttpGet]
         public ActionResult Index()
         {
             try
             {
-                PagingParameterModel pagingParameterModel = new PagingParameterModel
-                {
-                    pageNumber = 1,
-                    _pageSize = 1,
-                    PageSize = 100,
-                };
-                var CompanyList = webServices.Post(pagingParameterModel, "Company/CompayAll");
-                if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {
-                    if (CompanyList.Data != "[]" && CompanyList.Data != null)
-                    {
-                        compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
-                    }
-                }
-                return View(compnayModels);
+                return View();
+
+                //PagingParameterModel pagingParameterModel = new PagingParameterModel
+                //{
+                //    pageNumber = 1,
+                //    _pageSize = 1,
+                //    PageSize = 100,
+                //};
+                //var CompanyList = webServices.Post(pagingParameterModel, "Company/CompayAll");
+                //if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                //{
+                //    if (CompanyList.Data != "[]" && CompanyList.Data != null)
+                //    {
+                //        compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
+                //    }
+                //}
+                //return View(compnayModels);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
 
+        [HttpPost]
+        public ActionResult CompanyAll()
+        {
+            try
+            {
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                var sortColumn = Request.Form.GetValues("columns[" +
+                Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                string search = Request.Form.GetValues("search[value]")[0];
+                //int skip = start != null ? Convert.ToInt32(start) : 0;
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                if (Convert.ToInt32(start) == 0)
+                {
+                    pagingParameterModel.pageNumber = 1;
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                }
+                else
+                {
+                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                }
+
+                var CompanyList = webServices.Post(pagingParameterModel, "Company/CompayAll");
+                if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    int TotalRow = 0;
+                    if (CompanyList.Data != "[]" && CompanyList.Data != null)
+                    {
+                        compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
+                        TotalRow = 11;
+
+                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = compnayModels }, JsonRequestBehavior.AllowGet);
+
+
+                        //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
+                    }
+                }
+                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = compnayModels }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [HttpGet]
@@ -95,85 +150,88 @@ namespace IT.Web_New.Controllers
         {
             return View(new CompnayModel());
         }
-                       
+
         [HttpPost]
         public ActionResult Create(CompnayModel compnayModel, HttpPostedFileBase LogoUrl)
         {
             try
             {
+
                 if (!ModelState.IsValid)
                 {
                     return View("Create", compnayModel);
                 }
                 else
                 {
-                    if (Request.Files.Count > 0)
+                    using (HttpClient client = new HttpClient())
                     {
-                        var file = LogoUrl;
-
-                        using (HttpClient client = new HttpClient())
+                        using (var content = new MultipartFormDataContent())
                         {
-                            using (var content = new MultipartFormDataContent())
+                            if (LogoUrl != null)
                             {
-                                byte[] fileBytes = new byte[file.InputStream.Length + 1];
-                                file.InputStream.Read(fileBytes, 0, fileBytes.Length);
-                                var fileContent = new ByteArrayContent(fileBytes);
-                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
-                                content.Add(fileContent);
-                                content.Add(new StringContent("ClientDocs"), "ClientDocs");
-                                content.Add(new StringContent(compnayModel.Name ?? "Unknown"), "Name");
-                                content.Add(new StringContent("street Data"), "Street");
-                                string UserId = Session["UserId"].ToString();
-                                content.Add(new StringContent(UserId), "CreatedBy");
-                                content.Add(new StringContent(compnayModel.Postcode ?? ""), "Postcode");
-                                content.Add(new StringContent(compnayModel.City ?? ""), "City");
-                                content.Add(new StringContent(compnayModel.Address ?? ""), "Address");
-                                content.Add(new StringContent(compnayModel.State ?? ""), "State");
-                                content.Add(new StringContent(compnayModel.Country ?? ""), "Country");
-                                content.Add(new StringContent(compnayModel.Cell ?? ""), "Cell");
-                                content.Add(new StringContent(compnayModel.Phone ?? ""), "Phone");
-                                content.Add(new StringContent(compnayModel.Email ?? ""), "Email");
-                                content.Add(new StringContent(compnayModel.Web ?? ""), "Web");
-                                content.Add(new StringContent(compnayModel.TRN ?? ""), "TRN");
-                                content.Add(new StringContent(compnayModel.Remarks ?? ""), "Remarks");
-                                content.Add(new StringContent(compnayModel.OwnerRepresentaive ?? ""), "OwnerRepresentaive");
-                                content.Add(new StringContent("true"), "IsActive");
-
-
-
-                                //  var result1 = client.PostAsync("http://localhost:64299/api/Company/Add", content).Result;
-                                var result = webServices.PostMultiPart(content, "Company/Add", true);
-                                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                                if (Request.Files.Count > 0)
                                 {
-                                    var companyViewModel = new CompanyViewModel();
-                                    companyViewModel = (new JavaScriptSerializer().Deserialize<CompanyViewModel>(result.Data.ToString()));
+                                    var file = LogoUrl;
 
-                                    UserCompanyViewModel userCompanyViewModel1 = new UserCompanyViewModel
-                                    {
-                                        Authority = companyViewModel.Authority,
-                                        CompanyId = companyViewModel.Id,
-                                        UserId = companyViewModel.CreatedBy,
-                                        LogoUrl = companyViewModel.LogoUrl,
-                                        FirstName = companyViewModel.UserName,
-                                        CompanyName = companyViewModel.Name,
-                                        UserName = companyViewModel.UserName,
-                                        ImageUrl = companyViewModel.ImageUrl
-                                    };
+                                    byte[] fileBytes = new byte[file.InputStream.Length + 1];
+                                    file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                                    var fileContent = new ByteArrayContent(fileBytes);
+                                    fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
+                                    content.Add(fileContent);
 
-                                    Session["userCompanyViewModel"] = userCompanyViewModel1;
-                                    Session["CompanyId"] = companyViewModel.Id;
-                                    Session["UserId"] = companyViewModel.CreatedBy;
-                                    ViewBag.Message = "Created";
-                                    return RedirectToAction("Index", "Home");
+                                    content.Add(new StringContent("ClientDocs"), "ClientDocs");
                                 }
-                                else
+                            }
+                            content.Add(new StringContent(compnayModel.Name ?? "Unknown"), "Name");
+                            content.Add(new StringContent("street Data"), "Street");
+                            string UserId = Session["UserId"].ToString();
+                            content.Add(new StringContent(UserId), "CreatedBy");
+                            content.Add(new StringContent(compnayModel.Postcode ?? ""), "Postcode");
+                            content.Add(new StringContent(compnayModel.City ?? ""), "City");
+                            content.Add(new StringContent(compnayModel.Address ?? ""), "Address");
+                            content.Add(new StringContent(compnayModel.State ?? ""), "State");
+                            content.Add(new StringContent(compnayModel.Country ?? ""), "Country");
+                            content.Add(new StringContent(compnayModel.Cell ?? ""), "Cell");
+                            content.Add(new StringContent(compnayModel.Phone ?? ""), "Phone");
+                            content.Add(new StringContent(compnayModel.Email ?? ""), "Email");
+                            content.Add(new StringContent(compnayModel.Web ?? ""), "Web");
+                            content.Add(new StringContent(compnayModel.TRN ?? ""), "TRN");
+                            content.Add(new StringContent(compnayModel.Remarks ?? ""), "Remarks");
+                            content.Add(new StringContent(compnayModel.OwnerRepresentaive ?? ""), "OwnerRepresentaive");
+                            content.Add(new StringContent("true"), "IsActive");
+
+                            //  var result1 = client.PostAsync("http://localhost:64299/api/Company/Add", content).Result;
+                            var result = webServices.PostMultiPart(content, "Company/Add", true);
+                            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                            {
+                                var companyViewModel = new CompanyViewModel();
+                                companyViewModel = (new JavaScriptSerializer().Deserialize<CompanyViewModel>(result.Data.ToString()));
+
+                                UserCompanyViewModel userCompanyViewModel1 = new UserCompanyViewModel
                                 {
-                                    ViewBag.Message = "Failed";
-                                }
+                                    Authority = companyViewModel.Authority,
+                                    CompanyId = companyViewModel.Id,
+                                    UserId = companyViewModel.CreatedBy,
+                                    LogoUrl = companyViewModel.LogoUrl,
+                                    FirstName = companyViewModel.UserName,
+                                    CompanyName = companyViewModel.Name,
+                                    UserName = companyViewModel.UserName,
+                                    ImageUrl = companyViewModel.ImageUrl
+                                };
+
+                                Session["userCompanyViewModel"] = userCompanyViewModel1;
+                                Session["CompanyId"] = companyViewModel.Id;
+                                Session["UserId"] = companyViewModel.CreatedBy;
+                                ViewBag.Message = "Created";
+                                return RedirectToAction("Index", "Home");
+                            }
+                            else
+                            {
+                                ViewBag.Message = "Failed";
+                                return View(compnayModel);
                             }
                         }
                     }
-                    return RedirectToAction("Index", "Home");
                 }
             }
             catch (Exception ex)
@@ -195,54 +253,54 @@ namespace IT.Web_New.Controllers
                 {
                     //if (Request.Files.Count > 0 && LogoUrl != null)
                     //{
-                        var file = LogoUrl;
+                    var file = LogoUrl;
 
-                        using (HttpClient client = new HttpClient())
+                    using (HttpClient client = new HttpClient())
+                    {
+                        using (var content = new MultipartFormDataContent())
                         {
-                            using (var content = new MultipartFormDataContent())
+                            if (LogoUrl != null)
                             {
-                                if (LogoUrl != null)
-                                {
-                                    byte[] fileBytes = new byte[file.InputStream.Length + 1];
-                                    file.InputStream.Read(fileBytes, 0, fileBytes.Length);
-                                    var fileContent = new ByteArrayContent(fileBytes);
-                                    fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
-                                    content.Add(fileContent);
-                                }
+                                byte[] fileBytes = new byte[file.InputStream.Length + 1];
+                                file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                                var fileContent = new ByteArrayContent(fileBytes);
+                                fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
+                                content.Add(fileContent);
+                            }
 
-                                content.Add(new StringContent("ClientDocs"), "ClientDocs");
-                                content.Add(new StringContent(compnayModel.Id.ToString()), "Id");
-                                content.Add(new StringContent(compnayModel.Name ?? ""), "Name");
-                                content.Add(new StringContent(compnayModel.Street ?? ""), "Street");
-                                string UserId = Session["UserId"].ToString();
-                                content.Add(new StringContent(UserId), "UpdatedBy");
-                                content.Add(new StringContent(compnayModel.Postcode ?? ""), "Postcode");
-                                content.Add(new StringContent(compnayModel.City ?? ""), "City");
-                                content.Add(new StringContent(compnayModel.Address ?? ""), "Address");
-                                content.Add(new StringContent(compnayModel.State ?? ""), "State");
-                                content.Add(new StringContent(compnayModel.Country ?? ""), "Country");
-                                content.Add(new StringContent(compnayModel.Cell ?? ""), "Cell");
-                                content.Add(new StringContent(compnayModel.Phone ?? ""), "Phone");
-                                content.Add(new StringContent(compnayModel.Email ?? ""), "Email");
-                                content.Add(new StringContent(compnayModel.Web ?? ""), "Web");
-                                content.Add(new StringContent(compnayModel.TRN ?? ""), "TRN");
-                                content.Add(new StringContent(compnayModel.Remarks ?? ""), "Remarks");
-                                content.Add(new StringContent(compnayModel.OwnerRepresentaive ?? ""), "OwnerRepresentaive");
-                                content.Add(new StringContent("true"), "IsActive");
+                            content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                            content.Add(new StringContent(compnayModel.Id.ToString()), "Id");
+                            content.Add(new StringContent(compnayModel.Name ?? ""), "Name");
+                            content.Add(new StringContent(compnayModel.Street ?? ""), "Street");
+                            string UserId = Session["UserId"].ToString();
+                            content.Add(new StringContent(UserId), "UpdatedBy");
+                            content.Add(new StringContent(compnayModel.Postcode ?? ""), "Postcode");
+                            content.Add(new StringContent(compnayModel.City ?? ""), "City");
+                            content.Add(new StringContent(compnayModel.Address ?? ""), "Address");
+                            content.Add(new StringContent(compnayModel.State ?? ""), "State");
+                            content.Add(new StringContent(compnayModel.Country ?? ""), "Country");
+                            content.Add(new StringContent(compnayModel.Cell ?? ""), "Cell");
+                            content.Add(new StringContent(compnayModel.Phone ?? ""), "Phone");
+                            content.Add(new StringContent(compnayModel.Email ?? ""), "Email");
+                            content.Add(new StringContent(compnayModel.Web ?? ""), "Web");
+                            content.Add(new StringContent(compnayModel.TRN ?? ""), "TRN");
+                            content.Add(new StringContent(compnayModel.Remarks ?? ""), "Remarks");
+                            content.Add(new StringContent(compnayModel.OwnerRepresentaive ?? ""), "OwnerRepresentaive");
+                            content.Add(new StringContent("true"), "IsActive");
 
-                                //  var result1 = client.PostAsync("http://localhost:64299/api/Company/Add", content).Result;
-                                var result = webServices.PostMultiPart(content, "Company/Update", true);
-                                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
-                                {
-                                    var companyViewModel = new CompanyViewModel();
-                                    companyViewModel = (new JavaScriptSerializer().Deserialize<CompanyViewModel>(result.Data.ToString()));
+                            //  var result1 = client.PostAsync("http://localhost:64299/api/Company/Add", content).Result;
+                            var result = webServices.PostMultiPart(content, "Company/Update", true);
+                            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                            {
+                                var companyViewModel = new CompanyViewModel();
+                                companyViewModel = (new JavaScriptSerializer().Deserialize<CompanyViewModel>(result.Data.ToString()));
 
 
                                 var userCompanyViewModel2 = Session["userCompanyViewModel"] as UserCompanyViewModel;
 
-                                userCompanyViewModel2.LogoUrl = companyViewModel.LogoUrl;   
-                                userCompanyViewModel2.CompanyName = companyViewModel.Name;   
-                          
+                                userCompanyViewModel2.LogoUrl = companyViewModel.LogoUrl;
+                                userCompanyViewModel2.CompanyName = companyViewModel.Name;
+
 
 
                                 Session["userCompanyViewModel"] = userCompanyViewModel2;
@@ -252,12 +310,12 @@ namespace IT.Web_New.Controllers
                                 //return RedirectToAction("/");
                                 return RedirectToAction("Index", "Home");
                             }
-                                else
-                                {
-                                    ViewBag.Message = "Failed";
-                                }
+                            else
+                            {
+                                ViewBag.Message = "Failed";
                             }
                         }
+                    }
                     //}
                 }
 
@@ -334,7 +392,7 @@ namespace IT.Web_New.Controllers
                         }
                     }
                 }
-               
+
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -534,6 +592,7 @@ namespace IT.Web_New.Controllers
         {
             try
             {
+                
                 if (!ModelState.IsValid)
                 {
                     CountryController countryController = new CountryController();
@@ -542,56 +601,57 @@ namespace IT.Web_New.Controllers
                 }
                 else
                 {
-                    if (Request.Files.Count > 0)
-                    {
-                        var file = LogoUrl;
 
-                        using (HttpClient client = new HttpClient())
+                    using (HttpClient client = new HttpClient())
+                    {
+                        using (var content = new MultipartFormDataContent())
                         {
-                            using (var content = new MultipartFormDataContent())
+                            if (Request.Files.Count > 0)
                             {
                                 if (LogoUrl != null)
                                 {
+                                    var file = LogoUrl;
                                     byte[] fileBytes = new byte[file.InputStream.Length + 1];
                                     file.InputStream.Read(fileBytes, 0, fileBytes.Length);
                                     var fileContent = new ByteArrayContent(fileBytes);
                                     fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
                                     content.Add(fileContent);
                                 }
-                                content.Add(new StringContent("ClientDocs"), "ClientDocs");
-                                content.Add(new StringContent(compnayModel.Name ?? ""), "Name");
-                                content.Add(new StringContent(compnayModel.Street ?? ""), "street");
-                                content.Add(new StringContent(compnayModel.Postcode ?? ""), "Postcode");
-                                content.Add(new StringContent(compnayModel.City ?? ""), "City");
-                                content.Add(new StringContent(compnayModel.Street ?? ""), "State");
-                                content.Add(new StringContent(compnayModel.Country ?? ""), "Country");
-                                content.Add(new StringContent(compnayModel.Email ?? ""), "Email");
-                                content.Add(new StringContent(compnayModel.Phone ?? ""), "Phone");
-                                content.Add(new StringContent(compnayModel.Cell ?? ""), "Cell");
-                                content.Add(new StringContent(compnayModel.OwnerRepresentaive ?? ""), "OwnerRepresentaive");
-                                content.Add(new StringContent(compnayModel.Remarks ?? ""), "Commentes");
-                                content.Add(new StringContent(compnayModel.TRN ?? ""), "TRN");
-                                content.Add(new StringContent(compnayModel.Address ?? ""), "Address");
-                                content.Add(new StringContent("true"), "IsCashCompany");
-                                //  var result1 = client.PostAsync("http://itmolen-001-site8.htempurl.com/api/Company/Add", content).Result;
-                                var result = webServices.PostMultiPart(content, "Company/Add", true);
-                                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
-                                {
-                                    ViewBag.Message = "Created";
-
-                                    return RedirectToAction(nameof(Index));
-                                }
-                                else
-                                {
-                                    ViewBag.Message = "Failed";
-                                    return View("CashCompany", compnayModel);
-                                }
+                            }
+                            content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                            content.Add(new StringContent(compnayModel.Name ?? ""), "Name");
+                            content.Add(new StringContent(compnayModel.Street ?? ""), "street");
+                            content.Add(new StringContent(compnayModel.Postcode ?? ""), "Postcode");
+                            content.Add(new StringContent(compnayModel.City ?? ""), "City");
+                            content.Add(new StringContent(compnayModel.Street ?? ""), "State");
+                            content.Add(new StringContent(compnayModel.Country ?? ""), "Country");
+                            content.Add(new StringContent(compnayModel.Email ?? ""), "Email");
+                            content.Add(new StringContent(compnayModel.Phone ?? ""), "Phone");
+                            content.Add(new StringContent(compnayModel.Cell ?? ""), "Cell");
+                            content.Add(new StringContent(compnayModel.OwnerRepresentaive ?? ""), "OwnerRepresentaive");
+                            content.Add(new StringContent(compnayModel.Remarks ?? ""), "Commentes");
+                            content.Add(new StringContent(compnayModel.TRN ?? ""), "TRN");
+                            content.Add(new StringContent(compnayModel.Address ?? ""), "Address");
+                            content.Add(new StringContent("true"), "IsCashCompany");
+                            //  var result1 = client.PostAsync("http://itmolen-001-site8.htempurl.com/api/Company/Add", content).Result;
+                            var result = webServices.PostMultiPart(content, "Company/Add", true);
+                            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                            {
+                                ViewBag.Message = "Created";
+                                return RedirectToAction(nameof(Index));
+                            }
+                            else
+                            {
+                                ViewBag.Message = "Failed";
+                                CountryController countryController = new CountryController();
+                                ViewBag.Countries = countryController.Countries();
+                                return View("CashCompany", compnayModel);
                             }
                         }
                     }
                 }
-                return View();
             }
+
             catch (Exception ex)
             {
                 throw ex;
@@ -621,13 +681,13 @@ namespace IT.Web_New.Controllers
                 throw;
             }
         }
-        
+
         [NonAction]
         public List<CompanyViewModel> Companies()
         {
             try
             {
-               
+
                 var CompanyList = webServices.Post(new CompanyViewModel(), "Company/CompayAll");
                 if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {

@@ -43,6 +43,13 @@
                     <form action="/Vender/Create" method="post">
                         <div class="row">
                             <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Company Name</label>
+                                    <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+                                    <input type="text" id="Name" value="@Model.Name" autocomplete="off" name="Name" class="form-control" placeholder="vender Name">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group mb-2">
                                     <label class="form-label" for="simpleinput">Title</label>
                                     <select id="Title" name="Title" class="Title form-control" required>
@@ -53,15 +60,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="form-label" for="simpleinput">Name</label>
-                                    <input type="hidden" name="Id" id="Id" value="@Model.Id" />
-                                    <input type="text" id="Name" value="@Model.Name" autocomplete="off" name="Name" class="form-control" placeholder="vender Name">
-                                </div>
-                            </div>
-
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Representative</label>

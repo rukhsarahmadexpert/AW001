@@ -37,8 +37,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in storageViewModels)
+                            @if (storageViewModels != null && storageViewModels.Count > 0)
                             {
+                                foreach (var item in storageViewModels)
+                                {
                                 <tr>
                                     <td style="background-color:orangered; color:white">@item.Source</td>
                                     <td style="background-color:orangered; color:white">@item.From</td>
@@ -53,6 +55,7 @@
                                         <i class="fal fa-trash-alt"> </i>
                                     </td>
                                 </tr>
+                                }
                             }
                         </tbody>
                     </table>

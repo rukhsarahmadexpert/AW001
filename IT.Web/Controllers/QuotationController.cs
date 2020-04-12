@@ -43,14 +43,16 @@ namespace IT.Web_New.Controllers
                     CompanyId = CompanyId,
                     PageSize = 100,
                 };
-                var SiteList = webServices.Post(new LPOInvoiceViewModel(), "Quotation/All");
+                var QuotationList = webServices.Post(new LPOInvoiceViewModel(), "Quotation/All");
 
-                if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                if (QuotationList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    lPOInvoiceViewModels = (new JavaScriptSerializer().Deserialize<List<LPOInvoiceViewModel>>(SiteList.Data.ToString()));
+                    if (QuotationList.Data != "[]")
+                    {
+                        lPOInvoiceViewModels = (new JavaScriptSerializer().Deserialize<List<LPOInvoiceViewModel>>(QuotationList.Data.ToString()));
+                    }
                 }
                 return View(lPOInvoiceViewModels);
-
             }
             catch (Exception ex)
             {

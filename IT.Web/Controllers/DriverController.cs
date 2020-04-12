@@ -88,8 +88,7 @@ namespace IT.Web_New.Controllers
                 return Json("Failed", JsonRequestBehavior.AllowGet);
             }
         }
-
-
+        
         [HttpGet]
         public ActionResult Create()
         {
@@ -230,9 +229,29 @@ namespace IT.Web_New.Controllers
                                 content.Add(new StringContent(driverViewModel.Comments ?? ""), "Comments");
 
                                 var result = webServices.PostMultiPart(content, "Driver/Add", true);
-                                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                                if (result.StatusCode == System.Net.HttpStatusCode.OK)
                                 {
-                                    return Redirect(nameof(Index));
+                                    if(result.Message == "\"Email Already Availible\"")
+                                      {
+                                        ModelState.AddModelError("Email", "Email already availible choose another");
+                                        return View(driverViewModel);
+                                      }
+                                    else
+                                    {
+                                        return Redirect(nameof(Index));
+                                    }
+                                    
+                                }
+                                else
+                                {
+                                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                                    {
+                                        return Redirect(nameof(Index));
+                                    }
+                                    else
+                                    {
+                                        return View(driverViewModel);
+                                    }
                                 }
 
                             }

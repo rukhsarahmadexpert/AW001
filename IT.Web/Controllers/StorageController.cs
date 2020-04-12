@@ -37,38 +37,40 @@ namespace IT.Web_New.Controllers
 
                 if (StorageList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    storageViewModels = (new JavaScriptSerializer().Deserialize<List<StorageViewModel>>(StorageList.Data.ToString()));
-
-                    if (storageViewModels.Count > 0)
+                    if (StorageList.Data != "[]")
                     {
-                        StorageViewModel storageViewModelObj = new StorageViewModel();
+                        storageViewModels = (new JavaScriptSerializer().Deserialize<List<StorageViewModel>>(StorageList.Data.ToString()));
 
-                        foreach (var item in storageViewModels)
+                        if (storageViewModels.Count > 0)
                         {
-                            if (item.Action == true)
-                            {
-                                storageViewModelObj.Id = item.Id;
-                                storageViewModelObj.StockIn = item.StockIn;
-                                storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
-                                if(item.Source == "client vehicle")
-                                {
-                                     storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumberClient;
-                                }
-                                storageViewModelObj.ToSource = item.Source;
-                                storageViewModelObj.UserName = item.UserName;
-                            }
-                            else
-                            {
-                                storageViewModelObj.StockOut = item.StockOut;
-                                storageViewModelObj.From = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
-                                storageViewModelObj.Source = item.Source;
+                            StorageViewModel storageViewModelObj = new StorageViewModel();
 
-                                storageViewModels2.Add(storageViewModelObj);
-                                storageViewModelObj = new StorageViewModel();
+                            foreach (var item in storageViewModels)
+                            {
+                                if (item.Action == true)
+                                {
+                                    storageViewModelObj.Id = item.Id;
+                                    storageViewModelObj.StockIn = item.StockIn;
+                                    storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
+                                    if (item.Source == "client vehicle")
+                                    {
+                                        storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumberClient;
+                                    }
+                                    storageViewModelObj.ToSource = item.Source;
+                                    storageViewModelObj.UserName = item.UserName;
+                                }
+                                else
+                                {
+                                    storageViewModelObj.StockOut = item.StockOut;
+                                    storageViewModelObj.From = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
+                                    storageViewModelObj.Source = item.Source;
+
+                                    storageViewModels2.Add(storageViewModelObj);
+                                    storageViewModelObj = new StorageViewModel();
+                                }
                             }
                         }
                     }
-
                     return View(storageViewModels2);
                 }
                 return View(storageViewModels);
@@ -95,7 +97,6 @@ namespace IT.Web_New.Controllers
                 if (storageViewListModel.storageViewModels[0].StockOut == 0 || storageViewListModel.storageViewModels[0].StockIn == 0)
                 {
                     //return View(storageViewListModel.storageViewModels);
-
                     return Json("NoData",JsonRequestBehavior.AllowGet);
                 }
                 else
