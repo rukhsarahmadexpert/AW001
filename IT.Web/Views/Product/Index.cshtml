@@ -28,6 +28,7 @@
                                 <th>Unit</th>
                                 <th>Unit Price</th>
                                 <th>User Name</th>
+                                <th>Is Active</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -41,9 +42,27 @@
                                     <td>@Math.Round(item.UPrice, 2)</td>
                                     <td>@item.UserName</td>
                                     <td>
+                                        @if (@item.IsActive == true)
+                                        {
+                                            <div class="switchToggle">
+                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
+                                                <label for="@item.Id">Toggle</label>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="switchToggle">
+                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
+                                                <label for="@item.Id">Toggle</label>
+                                            </div>
+
+                                        }
+                                        <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
+                                    </td>
+                                    <td>
                                         <a href="/Product/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
                                         <a href="/Product/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                        <i class="fal fa-trash-alt"></i>
+
                                     </td>
                                 </tr>
                             }
@@ -63,6 +82,43 @@
             $("#ProductMenu").attr("aria-expanded", "true");
             $('#ProductUl').css('display', 'block');
             $('#ProductLi').addClass('active');
+        });
+
+    </script>
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $(".IsActive").click(function () {
+                if (confirm("Are you sure")) {
+
+                    var act = false;
+                    if (this.checked) {
+                        act = true;
+                    }
+
+                    var Data = JSON.stringify(
+                        {
+                            IsActive: act,
+                            Id: $(this).data("value"),
+                        })
+                    // alert(Data);
+                    ajaxRequest("POST", "/Product/ChangeStatus", Data, "json").then(function (result) {
+                        if (result != "failed") {
+                            //console.log(result);
+                            window.location.reload();
+                        }
+                        else {
+                            alert('there is some problem');
+                        }
+                    })
+                }
+                else {
+                    return false;
+                }
+            });
         });
 
     </script>

@@ -45,10 +45,18 @@
                                             Select Unit
                                         </label>
                                         <select class="select2 form-control" name="Unit" id="Unit">
-                                            @foreach (var item in ViewBag.productUnitViewModels)
+                                            @if (ViewBag.productUnitViewModels != null)
                                             {
-                                                <option value="@item.Id" @(item.Id == Model.Unit ? "selected='selected'" : "")>@item.Name</option>
+                                                foreach (var item in ViewBag.productUnitViewModels)
+                                                {
+                                                    <option value="@item.Id" @(item.Id == Model.Unit ? "selected='selected'" : "")>@item.Name</option>
+                                                }
                                             }
+                                            else
+                                            {
+                                                <option>Product Unit</option>
+                                            }
+
                                         </select>
                                     </div>
                                 </div>
@@ -56,7 +64,15 @@
                                 <div class="col-md-6 pt-3">
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Unit Price</label>
-                                        <input type="text" id="UPrice" name="UPrice" autocomplete="off" value="@Model.UPrice" class="form-control" placeholder="Product Price">
+                                        @if (@Model.UPrice == 0)
+                                        {
+                                            <input type="text" id="UPrice" name="UPrice" autocomplete="off" class="form-control" placeholder="0.00">
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="UPrice" name="UPrice" autocomplete="off" value="@Math.Round(@Model.UPrice, 2)" class="form-control" placeholder="0.00">
+                                        }
+
                                     </div>
                                 </div>
                                 <div class="col-md-12 pt-3">

@@ -232,27 +232,28 @@
                     <div class="nav-filter">
 
                     </div>
-                    <div class="info-card">
-                        <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem" class="profile-image rounded-circle" alt="User Info">
-                        <div class="info-card-text">
-                            <a href="#" class="d-flex align-items-center text-white">
-                                <span class="text-truncate text-truncate-sm d-inline-block">
-                                    @userCompanyViewModel.FullName
-                                </span>
-                            </a>
-                            @if (@userCompanyViewModel.Authority == "CustomerAdmin")
-                            {
-                                <span class="d-inline-block text-truncate text-truncate-sm">Customer Admin</span>
-                            }
-                            else
-                            {
-                                <span class="d-inline-block text-truncate text-truncate-sm">Customer User</span>
-                            }
-
+                    <a href="/Home/Index">
+                        <div class="info-card">
+                            <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem" class="profile-image rounded-circle" alt="User Info">
+                            <div class="info-card-text">
+                                <a href="/Home/Index" class="d-flex align-items-center text-white">
+                                    <span class="text-truncate text-truncate-sm d-inline-block">
+                                        @userCompanyViewModel.FullName
+                                    </span>
+                                </a>
+                                @if (@userCompanyViewModel.Authority == "CustomerAdmin")
+                                {
+                                    <span class="d-inline-block text-truncate text-truncate-sm">Customer Admin</span>
+                                }
+                                else
+                                {
+                                    <span class="d-inline-block text-truncate text-truncate-sm">Customer User</span>
+                                }
+                            </div>
+                            <img src="~/assets/staticImages/banner.png" class="cover" alt="cover">
                         </div>
-                        <img src="~/assets/staticImages/banner.png" class="cover" alt="cover">
-
-                    </div>
+                       
+                    </a>
 
                     <ul class="nav-menu" id="js-nav-menu">
 

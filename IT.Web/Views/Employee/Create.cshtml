@@ -63,10 +63,18 @@
                                     </label>
 
                                     <select class="select2 form-control" name="Designation" id="Designation">
-                                        @foreach (var item in ViewBag.Designations)
-                                        {
-                                            <option value="@item.Id">@item.Designation</option>
 
+                                        @if (ViewBag.Designations != null)
+                                        {
+                                            foreach (var item in ViewBag.Designations)
+                                            {
+                                                <option value="@item.Id">@item.Designation</option>
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option >Select Designation</option>
                                         }
                                     </select>
                                 </div>
@@ -80,7 +88,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Basic Salary</label>
-                                    <input type="text" id="BasicSalary" name="BasicSalary" class="form-control" placeholder="Enter BasicSalary">
+                                    <input type="text" id="BasicSalary" name="BasicSalary" class="form-control" placeholder="Enter Basic Salary">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Facebook</label>

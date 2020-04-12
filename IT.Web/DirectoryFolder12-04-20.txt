@@ -18,3 +18,13 @@ Log Written Date: 12-Apr-20 10:23:00 AM12-Apr-20 10:22:56 AMError Message:    at
 
 
 
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: Apr 12,2020 12:24:32 PMApr 12,2020 12:24:28 PMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
+--------------------------------*End*------------------------------------------
+
+
+
