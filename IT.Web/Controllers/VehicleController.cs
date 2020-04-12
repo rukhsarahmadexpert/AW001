@@ -63,7 +63,20 @@ namespace IT.Web_New.Controllers
                 
                 if (Request.IsAjaxRequest())
                 {
-                    vehicleViewModels.Insert(0, new VehicleViewModel() { Id = 0, TraficPlateNumber = "Select Vehicle" });
+                    if(vehicleViewModels == null || vehicleViewModels.Count < 1)
+                    {
+                        VehicleViewModel vehicleViewModel = new VehicleViewModel {
+                            Id = 0,
+                            TraficPlateNumber = "Select Vehicle"
+
+                        };
+
+                        VehicleViewModels.Add(vehicleViewModel);
+                    }
+                    else
+                    {
+                        VehicleViewModels.Insert(0, new VehicleViewModel() { Id = 0, TraficPlateNumber = "Select Vehicle" });
+                    }
                     return Json(VehicleViewModels, JsonRequestBehavior.AllowGet);
                 }
 
