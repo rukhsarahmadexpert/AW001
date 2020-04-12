@@ -41,7 +41,7 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="trData">
                             @foreach (var item in customerBookingViewModels)
                             {
 
@@ -96,18 +96,28 @@
 </div>
 
 @section scripts{
-    
-<script>
-            $(document).ready(function () {
-                $("#CustomerBookingMenu").attr("aria-expanded", "true");
-                $('#CustomerBookingUl').css('display', 'block');
-                $('#CustomerBookingLi').addClass('active');
-            });
 
-</script>
-    
-    
-    }
+    <script>
+        $(document).ready(function () {
+            $("#CustomerBookingMenu").attr("aria-expanded", "true");
+            $('#CustomerBookingUl').css('display', 'block');
+            $('#CustomerBookingLi').addClass('active');
+        });
+
+    </script>
+    <script>
+
+        $(document).ready(function () {
+            setInterval(function () {
+                $("#trData").load(" #trData tr");
+                //alert('dd');
+            }, 10000);
+        });
+
+    </script>
+
+
+}
 
 
 

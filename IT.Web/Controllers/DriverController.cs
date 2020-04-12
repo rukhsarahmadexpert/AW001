@@ -460,6 +460,7 @@ namespace IT.Web_New.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Details), new { driverViewModel.Id });
+                //return RedirectToAction(nameof(Details), new { driverViewModel.Id });
             }
             catch (Exception ex)
             {

@@ -47,18 +47,19 @@
                                         @if (@item.IsActive == true)
                                         {
                                             <div class="switchToggle">
-                                                <input type="checkbox" id="@item.Id" checked>
+                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
                                                 <label for="@item.Id">Toggle</label>
                                             </div>
                                         }
                                         else
                                         {
                                             <div class="switchToggle">
-                                                <input type="checkbox" id="@item.Id">
+                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
                                                 <label for="@item.Id">Toggle</label>
                                             </div>
 
                                         }
+                                        <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
                                     </td>
 
                                     <td>
@@ -78,6 +79,43 @@
 </div>
 
 @section scripts{
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $(".IsActive").click(function () {
+                if (confirm("Are you sure")) {
+
+                    var act = false;
+                    if (this.checked) {
+                        act = true;
+                    }
+
+                    var Data = JSON.stringify(
+                        {
+                            IsActive: act,
+                            Id: $(this).data("value"),
+                        })
+                    // alert(Data);
+                    ajaxRequest("POST", "/FuelPrices/ChangeStatus", Data, "json").then(function (result) {
+                        if (result != "failed") {
+                            //console.log(result);
+                            window.location.reload();
+                        }
+                        else {
+                            alert('there is some problem');
+                        }
+                    })
+                }
+                else {
+                    return false;
+                }
+            });
+        });
+
+    </script>
 
     <script>
         $(document).ready(function () {

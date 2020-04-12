@@ -39,7 +39,33 @@ namespace IT.Web.Controllers
             }
         }
 
-        
+
+        [HttpPost]
+        public ActionResult ChangeStatus(FuelPricesViewModel fuelPricesViewModel)
+        {
+            try
+            {
+                var Result = new ServiceResponseModel();
+
+                fuelPricesViewModel.UpdatedBy = Convert.ToInt32(Session["UserId"]);
+                Result = webServices.Post(fuelPricesViewModel, "FuelPrices/FuelPriceUpdateStatus");
+
+                if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    var reuslt = (new JavaScriptSerializer().Deserialize<int>(Result.Data));
+
+
+                }
+                return Json("success", JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return Json("Failed", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
         public ActionResult Create()
         {
             

@@ -145,7 +145,7 @@
                                                               <span class="input-group-text"><i class="fal fa-flag fs-xl"></i></span>
                                                           </div>
                                                           <select class="select2 form-control" name="Country" id="Country" required>
-                                                              <option value="" disabled selected hidden>Country</option>
+                                                              @*<option value="" disabled selected hidden>Country</option>*@
                                                               @if (countryViewModels != null)
                                                               {
                                                                   foreach (var item in countryViewModels)
@@ -165,7 +165,7 @@
                                                               <span class="input-group-text"><i class="fal fa-chess-rook fs-xl"></i></span>
                                                           </div>
                                                           <select class="select2 form-control" name="State" id="State" required>
-                                                              <option value="" disabled selected hidden>State</option>
+                                                              @*<option value="" disabled selected hidden>State</option>*@
                                                               @foreach (var item in countryViewModels)
                                                               {
                                                                   if (item.stateViewModels != null)

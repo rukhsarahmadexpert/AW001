@@ -122,21 +122,14 @@
    
 <div class="row">
     <div class="col-lg-9 col-md-8">
-        <div id="panel-1" class="panel">
+        <div id="panel-5" class="panel">
             <div class="panel-hdr">
-                <h2>
-                    Requested Order
-                </h2>
+                <h2>Requested Order</h2>
             </div>
             <div class="panel-container show">
-                <div class="panel-content bg-subtlelight-fade">
-                    <div id="js-checkbox-toggles" class="d-flex mb-3">
-                        <div class="custom-control custom-switch mr-2">
-                            <input type="checkbox" class="custom-control-input" name="gra-0" id="gra-0" checked="checked">
-                            <label class="custom-control-label" for="gra-0">Requested Order History</label>
-                        </div>
-                    </div>
-                    <div id="flot-toggles" class="w-100 mt-4" style="height: 300px"></div>
+                <div class="panel-content">
+                    <h5>Requested Order History</h5>
+                    <div id="flotBar1" style="width: 100%; height: 160px;"></div>
                 </div>
             </div>
         </div>
@@ -187,63 +180,66 @@
             </div>
         </div>
     </div>
-    <!-- <div class="col-lg-12">
-         <div id="panel-2" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
-             <div class="panel-hdr">
-                 <h2>
-                     Requested <span class="fw-300"><i>Order</i></span>
-                 </h2>
-             </div>
-             <div class="panel-container show">
-                 <div class="panel-content poisition-relative">
-                     <div class="p-1 position-absolute pos-right pos-top mt-3 mr-3 z-index-cloud d-flex align-items-center justify-content-center">
-                         <div class="border-faded border-top-0 border-left-0 border-bottom-0 py-2 pr-4 mr-3 hidden-sm-down">
-                             <div class="text-right fw-500 l-h-n d-flex flex-column">
-                                 <div class="h3 m-0 d-flex align-items-center justify-content-end">
-                                     <div class='icon-stack mr-2'>
-                                         <i class="base base-7 icon-stack-3x opacity-100 color-success-600"></i>
-                                         <i class="base base-7 icon-stack-2x opacity-100 color-success-500"></i>
-                                         <i class="fal fa-arrow-up icon-stack-1x opacity-100 color-white"></i>
+   
+
+
+        <!-- <div class="col-lg-12">
+             <div id="panel-2" class="panel panel-locked" data-panel-sortable data-panel-collapsed data-panel-close>
+                 <div class="panel-hdr">
+                     <h2>
+                         Requested <span class="fw-300"><i>Order</i></span>
+                     </h2>
+                 </div>
+                 <div class="panel-container show">
+                     <div class="panel-content poisition-relative">
+                         <div class="p-1 position-absolute pos-right pos-top mt-3 mr-3 z-index-cloud d-flex align-items-center justify-content-center">
+                             <div class="border-faded border-top-0 border-left-0 border-bottom-0 py-2 pr-4 mr-3 hidden-sm-down">
+                                 <div class="text-right fw-500 l-h-n d-flex flex-column">
+                                     <div class="h3 m-0 d-flex align-items-center justify-content-end">
+                                         <div class='icon-stack mr-2'>
+                                             <i class="base base-7 icon-stack-3x opacity-100 color-success-600"></i>
+                                             <i class="base base-7 icon-stack-2x opacity-100 color-success-500"></i>
+                                             <i class="fal fa-arrow-up icon-stack-1x opacity-100 color-white"></i>
+                                         </div>
+                                         AED @Math.Round(fuelPricesViewModel.Price, 2) / GALLON
                                      </div>
-                                     AED @Math.Round(fuelPricesViewModel.Price, 2) / GALLON
+                                     <span class="m-0 fs-xs text-muted">Requested and Deliverd order comperison</span>
                                  </div>
-                                 <span class="m-0 fs-xs text-muted">Requested and Deliverd order comperison</span>
+                             </div>
+                             <div class="js-easy-pie-chart color-info-400 position-relative d-inline-flex align-items-center justify-content-center" data-percent="35" data-piesize="95" data-linewidth="10" data-scalelength="5">
+                                 <div class="js-easy-pie-chart color-success-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="65" data-piesize="60" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
+                                     <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-500 fs-xl text-dark">78%</div>
+                                 </div>
                              </div>
                          </div>
-                         <div class="js-easy-pie-chart color-info-400 position-relative d-inline-flex align-items-center justify-content-center" data-percent="35" data-piesize="95" data-linewidth="10" data-scalelength="5">
-                             <div class="js-easy-pie-chart color-success-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="65" data-piesize="60" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
-                                 <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-500 fs-xl text-dark">78%</div>
-                             </div>
-                         </div>
+                         <div id="flot-area" style="width:100%; height:300px;"></div>
                      </div>
-                     <div id="flot-area" style="width:100%; height:300px;"></div>
                  </div>
              </div>
-         </div>
-     </div>-->
-</div>
+         </div>-->
+    </div>
 
-@section Scripts{
+    @section Scripts{
 
-    <script>
-        $(document).ready(function () {
-            $('.carousel').carousel();
-           
-            //$('#MyBookinMenu').attr('aria-expanded', true);
-            $("#btn1").hide();
-            $("#btn2").click(function () {
-                $("#btn1").show();
-                $("#btn2").hide();
-            });
+        <script>
+            $(document).ready(function () {
+                $('.carousel').carousel();
 
-            $('#btnNewBookin').click(function () {
-                $("#MyBookinMenu").attr("aria-expanded", "true");
-                $('#bookingUl').css('display', 'block');
-            });
+                //$('#MyBookinMenu').attr('aria-expanded', true);
+                $("#btn1").hide();
+                $("#btn2").click(function () {
+                    $("#btn1").show();
+                    $("#btn2").hide();
+                });
 
-        })
-    </script>
-    <script src="~/Scripts/CustomScript/TokenScript.js"></script>
+                $('#btnNewBookin').click(function () {
+                    $("#MyBookinMenu").attr("aria-expanded", "true");
+                    $('#bookingUl').css('display', 'block');
+                });
 
-}
+            })
+        </script>
+        <script src="~/Scripts/CustomScript/TokenScript.js"></script>
+
+    }
 

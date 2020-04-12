@@ -248,7 +248,7 @@ namespace IT.Web_New.Controllers
                             }
                         }
                     }
-                    return RedirectToAction(nameof(Details), new { driverViewModel.Id });
+                    return Redirect(nameof(Create));
                 }
             }
             catch (Exception ex)

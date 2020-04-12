@@ -36,7 +36,7 @@ namespace IT.Web.Controllers
                 {
                     pageNumber = 1,
                     CompanyId = 0,
-                    PageSize = 10
+                    PageSize = 50
                 };
 
                 var CustomerBookingList = webServices.Post(pagingParameterModel, "CustomerBooking/All");
