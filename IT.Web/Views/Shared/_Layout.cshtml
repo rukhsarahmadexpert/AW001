@@ -233,7 +233,7 @@
 
                     </div>
                     <div class="info-card">
-                        <img src="http://awservices.somee.com/ClientDocument/@UserImage" class="profile-image rounded-circle" alt="User Info">
+                        <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem" class="profile-image rounded-circle" alt="User Info">
                         <div class="info-card-text">
                             <a href="#" class="d-flex align-items-center text-white">
                                 <span class="text-truncate text-truncate-sm d-inline-block">
@@ -451,8 +451,8 @@
                         </div>-->
                         <!-- app user menu -->
                         <div>
-                            <a href="#" data-toggle="dropdown" title="@userCompanyViewModel.UserName" class="header-icon d-flex align-items-center justify-content-center ml-2">
-                                <img src="http://awservices.somee.com/ClientDocument/@UserImage" class="profile-image rounded-circle" alt="User Image">
+                            <a style="cursor:pointer" data-toggle="dropdown" title="@userCompanyViewModel.UserName" class="header-icon d-flex align-items-center justify-content-center ml-2">
+                                <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:2.125rem; height:2.125rem" class="profile-image rounded-circle" alt="User Image">
                                 <!-- you can also add username next to the avatar with the codes below:
                                 <span class="ml-1 mr-1 text-truncate text-truncate-header hidden-xs-down">Me</span>
                                 <i class="ni ni-chevron-down hidden-xs-down"></i> -->
@@ -461,7 +461,7 @@
                                 <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
                                     <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
                                         <span class="mr-2">
-                                            <img src="http://awservices.somee.com/ClientDocument/@UserImage" class="rounded-circle profile-image" alt="user">
+                                            <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem" class="rounded-circle profile-image" alt="user">
                                         </span>
                                         <div class="info-card-text">
                                             <div class="fs-lg text-truncate text-truncate-lg">@userCompanyViewModel.FullName</div>
@@ -1661,6 +1661,94 @@
         })();
     </script>
     <!-- /Getbutton.io widget -->
+
+    <script>
+        $(document).ready(function () {
+            
+
+
+            $.plot('#flotBar1', [
+                
+                {
+                    data: [
+                        [1, 5],
+                        [2, 10],
+                        [3, 1],
+                        [4, 2],
+                        [5, 2],
+                        [6, 5],
+                        [7, 8],
+                        [8, 12],
+                        [9, 10],
+                        [10, 11],
+                        [11, 3]
+                    ],
+                    bars:
+                    {
+                        show: true,
+                        lineWidth: 0,
+                        fillColor: myapp_get_color.success_500,
+                        barWidth: .3,
+                        align: 'left',
+                    }
+                }],
+                {
+                    grid:
+                    {
+                        hoverable: true,
+                        clickable: true,
+                        borderColor: '#ddd',
+                        borderWidth: 0,
+                        labelMargin: 5,
+                        backgroundColor: '#fff'
+                    },
+                    yaxis:
+                    {
+                        min: 0,
+                        max: 25,
+                        color: '#eee',
+                        font:
+                        {
+                            size: 10,
+                            color: '#999'
+                        }
+                    },
+                    xaxis:
+                    {
+                        mode: 'categories',
+                        tickColor: '#F0F0F0',
+                        ticks: [
+                            [0, '3am'],
+                            [1, '4am'],
+                            [2, '5am'],
+                            [3, '6am'],
+                            [4, '7am'],
+                            [5, '8am'],
+                            [6, '9am'],
+                            [7, '10am'],
+                            [8, '11am'],
+                            [9, '12nn'],
+                            [10, '1pm'],
+                            [11, '2pm'],
+                            [12, '3pm'],
+                            [13, '4pm'],
+                            [14, '5pm']
+                        ],
+                        font:
+                        {
+                            color: '#999',
+                            size: 9
+                        }
+                    }
+                });
+
+
+         
+        });
+
+    </script>
+
+
 
 </body>
 </html>

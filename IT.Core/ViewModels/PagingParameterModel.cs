@@ -13,7 +13,7 @@ namespace IT.Core.ViewModels
         public int Id { get; set; }
         public int pageNumber { get; set; } = 1;
 
-        public int _pageSize { get; set; } = 10;
+        public int _pageSize { get; set; } = 50;
 
         public int CompanyId { get; set; }
         public string OrderProgress { get; set; }
