@@ -43,6 +43,7 @@ namespace IT.Web_New.Controllers
                 }
                 if (Request.IsAjaxRequest())
                 {
+                    siteViewModels.Insert(0, new SiteViewModel() { Id = 0, SiteName = "Select Site" });
                     return Json(siteViewModels, JsonRequestBehavior.AllowGet);
                 }
                 return View(siteViewModels);
