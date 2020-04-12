@@ -228,24 +228,20 @@
                 </div>
                 <!-- BEGIN PRIMARY NAVIGATION -->
                 <nav id="js-primary-nav" class="primary-nav" role="navigation">
-                   
+                    <a href="/Home/AdminHome">
                     <div class="info-card">
                         <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem" class="profile-image rounded-circle" alt="User Info">
                         <div class="info-card-text">
-                            <a href="#" class="d-flex align-items-center text-white">
+                            <a href="/Home/AdminHome" class="d-flex align-items-center text-white">
                                 <span class="text-truncate text-truncate-sm d-inline-block">
                                     @userCompanyViewModel.FullName
-
-
                                 </span>
                             </a>
-
                             <span class="d-inline-block text-truncate text-truncate-sm">@userCompanyViewModel.Authority</span>
-
-
                         </div>
                         <img src="~/assets/staticImages/banner.png" class="cover" alt="cover">
                     </div>
+                    </a>
 
 
 
@@ -267,15 +263,15 @@
 
 
                         <li class="open">
-                            <a href="#" title="Venders" class=" " data-filter-tags="Venders">
+                            <a href="#" title="Venders" class=" " data-filter-tags="Vendors">
                                 <i class="fal fa-address-book"></i>
-                                <span class="nav-link-text" data-i18n="nav.application_intel" id="VenderMenu">Venders</span>
+                                <span class="nav-link-text" data-i18n="nav.application_intel" id="VenderMenu">Vendors</span>
                             </a>
                             <ul id="VenderUl">
 
                                 <li id="VenderLi">
                                     <a href="/Vender/Index" title="Venders" class=" " data-filter-tags="">
-                                        <span class="nav-link-text" data-i18n="">Venders</span><span class="">List</span>
+                                        <span class="nav-link-text" data-i18n="">Vendors</span><span class="">List</span>
                                     </a>
                                 </li>
                             </ul>
@@ -674,7 +670,7 @@
                     <div class="modal-dialog modal-dialog-top modal-transparent" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
-                                <ul class="app-list w-auto h-auto p-0 text-left">
+                                <ul class="app-list w-auto h-auto p-0 text-right">
                                     <li>
                                         <a href="/Home/AdminHome" class="app-list-item text-white border-0 m-0">
                                             <div class="icon-stack">
