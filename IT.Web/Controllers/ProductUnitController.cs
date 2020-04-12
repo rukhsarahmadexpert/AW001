@@ -128,9 +128,17 @@ namespace IT.Web_New.Controllers
                 var ProductUnitList = webServices.Post(new ProductUnitViewModel(), "ProductUnit/All");
                 if (ProductUnitList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    productUnitViewModels = (new JavaScriptSerializer().Deserialize<List<ProductUnitViewModel>>(ProductUnitList.Data.ToString()));
-                    productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Please select Unit" });
+                    if (ProductUnitList.Data != "[]")
+                    {
+                        productUnitViewModels = (new JavaScriptSerializer().Deserialize<List<ProductUnitViewModel>>(ProductUnitList.Data.ToString()));
+                        productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Please select Unit" });
+                    }
+                    else
+                    {
+                        productUnitViewModels.Add(new ProductUnitViewModel() { Id = 0, Name = "Please select Unit" });
+                    }
                 }
+
                 return productUnitViewModels;
             }
             catch (Exception ex)

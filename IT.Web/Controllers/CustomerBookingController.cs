@@ -58,11 +58,8 @@ namespace IT.Web.Controllers
         [HttpPost]
         public ActionResult CustomerBookingReserved(CustomerBookingViewModel customerBookingViewModel)
         {
-
             try
             {
-               
-
                 CustomerBookingReservedRemaining customerBookingReservedRemaining = new CustomerBookingReservedRemaining();
                 
                 var CustomerBookingList = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingReserved");
@@ -152,8 +149,10 @@ namespace IT.Web.Controllers
               
                 if (CustomerResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    var reuslt = (new JavaScriptSerializer().Deserialize<int>(CustomerResult.Data));
-
+                    if (CustomerResult.Data != "[]")
+                    {
+                        var reuslt = (new JavaScriptSerializer().Deserialize<int>(CustomerResult.Data));
+                    }
                     return RedirectToAction(nameof(Index));
                 }
 

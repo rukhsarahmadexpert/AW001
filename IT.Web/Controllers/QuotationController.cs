@@ -173,19 +173,48 @@ namespace IT.Web_New.Controllers
                 SerailNO = PoNumber();
 
                 var result = webServices.Post(new ProductViewModel(), "Product/All");
-                ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
-                ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
+                if(result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if(result.Data != "[]")
+                    {
+                        ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
+                        ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
+                    }
+                    else
+                    {
+                        ProductViewModel.Add(new ProductViewModel() { Id = 0, Name = "Select Item" });
+                     }
+                }
                 ViewBag.Product = ProductViewModel;
 
                 var results = webServices.Post(new ProductUnitViewModel(), "ProductUnit/All");
-                productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
-                productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                if (results.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (results.Data != "[]")
+                    {
+                        productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
+                        productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                    }
+                    else
+                    {
+                        productUnitViewModels.Add(new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                    }
+                }
                 ViewBag.ProductUnit = productUnitViewModels;
 
-                var Res = webServices.Post(new CompanyViewModel(), "Company/CompayAll");
-                companyViewModels = (new JavaScriptSerializer()).Deserialize<List<CompanyViewModel>>(Res.Data.ToString());
-                companyViewModels.Insert(0, new CompanyViewModel() { Id = 0, Name = "Select Customer Name" });
-
+                var Res = webServices.Post(new CompanyViewModel(), "Company/CompayAllWithOutPagination");
+                if (Res.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (Res.Data != "[]")
+                    {
+                        companyViewModels = (new JavaScriptSerializer()).Deserialize<List<CompanyViewModel>>(Res.Data.ToString());
+                        companyViewModels.Insert(0, new CompanyViewModel() { Id = 0, Name = "Select Customer Name" });
+                    }
+                    else
+                    {
+                        companyViewModels.Add(new CompanyViewModel() { Id = 0, Name = "Select Customer Name" });
+                    }
+                }
                 ViewBag.Vender = companyViewModels;
                 ViewBag.PO = SerailNO;
                 ViewBag.titles = "Quotation";

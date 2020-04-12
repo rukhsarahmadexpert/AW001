@@ -328,19 +328,44 @@ namespace IT.Web_New.Controllers
                 }
 
                 var result = webServices.Post(new ProductViewModel(), "Product/All");
-                ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
-                ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (result.Data != "[]")
+                    {
+                        ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
+                        ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
+                    }
+                    else
+                    {
+                        ProductViewModel.Add(new ProductViewModel() { Id = 0, Name = "Select Item" });
+                    }
+                }
                 ViewBag.Product = ProductViewModel;
 
                 var results = webServices.Post(new ProductUnitViewModel(), "ProductUnit/All");
-                productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
-                productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                if (results.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (results.Data != "[]")
+                    {
+                        productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
+                        productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                    }
+                    else
+                    {
+                        productUnitViewModels.Add(new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                    }
+                }
                 ViewBag.ProductUnit = productUnitViewModels;
 
                 var Res = webServices.Post(new DriverViewModel(), "Vender/All");
-                venderViewModels = (new JavaScriptSerializer()).Deserialize<List<VenderViewModel>>(Res.Data.ToString());
-                venderViewModels.Insert(0, new VenderViewModel() { Id = 0, Name = "Select Vender" });
-
+                if (Res.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (Res.Data != "[]")
+                    {
+                        venderViewModels = (new JavaScriptSerializer()).Deserialize<List<VenderViewModel>>(Res.Data.ToString());
+                        venderViewModels.Insert(0, new VenderViewModel() { Id = 0, Name = "Select Vender" });
+                    }
+                }
                 ViewBag.Vender = venderViewModels;
 
                 ViewBag.titles = "LPO";
@@ -405,10 +430,15 @@ namespace IT.Web_New.Controllers
             {
                 List<IT.Web.Models.LPOInvoiceModel> lPOInvoiceModels = new List<Web.Models.LPOInvoiceModel>();
                 var LPOInvoice = webServices.Post(new IT.Web.Models.LPOInvoiceModel(), "LPO/EditReport/" + Id);
-                lPOInvoiceModels = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.LPOInvoiceModel>>(LPOInvoice.Data.ToString());
-
+                if (LPOInvoice.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (LPOInvoice.Data != "[]")
+                    {
+                        lPOInvoiceModels = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.LPOInvoiceModel>>(LPOInvoice.Data.ToString());
+                    }
+                }
                 string FileName;
-                if (lPOInvoiceModels.Count > 0)
+                if (lPOInvoiceModels != null && lPOInvoiceModels.Count > 0)
                 {
                     FileName = Id + "-" + lPOInvoiceModels[0].PONumber + ".pdf";
                 }
@@ -496,32 +526,34 @@ namespace IT.Web_New.Controllers
             {
                 var Result = webServices.Post(new LPOInvoiceViewModel(), "LPO/Edit/" + Id);
 
-                if (Result.Data != "[]")
+                if(Result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    lPOInvoiceViewModel = (new JavaScriptSerializer().Deserialize<LPOInvoiceViewModel>(Result.Data.ToString()));
-
-                    lPOInvoiceViewModel.FromDate = lPOInvoiceViewModel.FromDate.AddDays(1);
-                    lPOInvoiceViewModel.DueDate = lPOInvoiceViewModel.DueDate.AddDays(1);
-                    ViewBag.lPOInvoiceViewModel = lPOInvoiceViewModel;
-
-                    lPOInvoiceViewModel.Heading = "LPO";
-                    lPOInvoiceDetails = lPOInvoiceViewModel.lPOInvoiceDetailsList;
-
-                    ViewBag.lPOInvoiceDetails = lPOInvoiceDetails;
-
-                    if (TempData["Success"] == null)
+                    if (Result.Data != "[]")
                     {
-                        if (TempData["Download"] != null)
+                        lPOInvoiceViewModel = (new JavaScriptSerializer().Deserialize<LPOInvoiceViewModel>(Result.Data.ToString()));
+
+                        lPOInvoiceViewModel.FromDate = lPOInvoiceViewModel.FromDate.AddDays(1);
+                        lPOInvoiceViewModel.DueDate = lPOInvoiceViewModel.DueDate.AddDays(1);
+                        ViewBag.lPOInvoiceViewModel = lPOInvoiceViewModel;
+
+                        lPOInvoiceViewModel.Heading = "LPO";
+                        lPOInvoiceDetails = lPOInvoiceViewModel.lPOInvoiceDetailsList;
+
+                        ViewBag.lPOInvoiceDetails = lPOInvoiceDetails;
+
+                        if (TempData["Success"] == null)
                         {
-                            ViewBag.IsDownload = TempData["Download"].ToString();
-                            ViewBag.Id = Id;
+                            if (TempData["Download"] != null)
+                            {
+                                ViewBag.IsDownload = TempData["Download"].ToString();
+                                ViewBag.Id = Id;
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.Success = TempData["Success"];
                         }
                     }
-                    else
-                    {
-                        ViewBag.Success = TempData["Success"];
-                    }
-
                     return View();
                 }
                 else
@@ -545,16 +577,27 @@ namespace IT.Web_New.Controllers
                 var Result = webServices.Post(new LPOInvoiceViewModel(), "LPO/Edit/" + Id);
 
                 var result = webServices.Post(new ProductViewModel(), "Product/All");
-                ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
-                ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (result.Data != "[]")
+                    {
+                        ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
+                        ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
+                    }
+                }
                 ViewBag.Product = ProductViewModel;
 
                 var results = webServices.Post(new ProductUnitViewModel(), "ProductUnit/All");
-                productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
-                productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                if (results.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (results.Data != "[]")
+                    {
+                        productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
+                        productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                    }
+                }
                 ViewBag.ProductUnit = productUnitViewModels;
-
-
+                
                 List<VatModel> model = new List<VatModel>
                 {
                     new VatModel() { Id = 0, VAT = 0 },
@@ -606,29 +649,28 @@ namespace IT.Web_New.Controllers
                 lPOInvoiceViewModel.lPOInvoiceDetailsList = new List<LPOInvoiceDetails>();
 
                 var LPOData = webServices.Post(new LPOInvoiceViewModel(), "LPO/Edit/" + deleteRowViewModel.Id);
-                lPOInvoiceViewModel = (new JavaScriptSerializer()).Deserialize<LPOInvoiceViewModel>(LPOData.Data.ToString());
-
-                lPOInvoiceViewModel.Total = lPOInvoiceViewModel.Total - deleteRowViewModel.RowTotal;
-                lPOInvoiceViewModel.GrandTotal = lPOInvoiceViewModel.GrandTotal - ResultVAT;
-                lPOInvoiceViewModel.GrandTotal = lPOInvoiceViewModel.GrandTotal - deleteRowViewModel.RowTotal;
-                lPOInvoiceViewModel.VAT = lPOInvoiceViewModel.VAT - ResultVAT;
-                lPOInvoiceViewModel.detailId = deleteRowViewModel.detailId;
-
-                var result = webServices.Post(lPOInvoiceViewModel, "LPO/DeleteDeatlsRow");
-
-                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                if (LPOData.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
+                    lPOInvoiceViewModel = (new JavaScriptSerializer()).Deserialize<LPOInvoiceViewModel>(LPOData.Data.ToString());
 
-                    return Json("Success", JsonRequestBehavior.AllowGet);
+                    lPOInvoiceViewModel.Total = lPOInvoiceViewModel.Total - deleteRowViewModel.RowTotal;
+                    lPOInvoiceViewModel.GrandTotal = lPOInvoiceViewModel.GrandTotal - ResultVAT;
+                    lPOInvoiceViewModel.GrandTotal = lPOInvoiceViewModel.GrandTotal - deleteRowViewModel.RowTotal;
+                    lPOInvoiceViewModel.VAT = lPOInvoiceViewModel.VAT - ResultVAT;
+                    lPOInvoiceViewModel.detailId = deleteRowViewModel.detailId;
 
+                    var result = webServices.Post(lPOInvoiceViewModel, "LPO/DeleteDeatlsRow");
 
-                    //var deletequtation = webServices.Post(lPOInvoiceViewModel, "LPO/DeleteDeatlsRow");
-                    //if (deletequtation.IsSuccess == true)
-                    //{
-                    //    return Json("Success", JsonRequestBehavior.AllowGet);
-                    //}
-                    //return new JsonResult { Data = new { Status = "Success" } };
-
+                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        return Json("Success", JsonRequestBehavior.AllowGet);
+                        //var deletequtation = webServices.Post(lPOInvoiceViewModel, "LPO/DeleteDeatlsRow");
+                        //if (deletequtation.IsSuccess == true)
+                        //{
+                        //    return Json("Success", JsonRequestBehavior.AllowGet);
+                        //}
+                        //return new JsonResult { Data = new { Status = "Success" } };
+                    }
                 }
                 return new JsonResult { Data = new { Status = "Fail" } };
             }
@@ -664,8 +706,7 @@ namespace IT.Web_New.Controllers
                 lPOInvoiceViewModel.UpdatedBy = Convert.ToInt32(Session["UserId"]);
                 lPOInvoiceViewModel.FromDate = Convert.ToDateTime(lPOInvoiceViewModel.FromDate);
                 lPOInvoiceViewModel.DueDate = Convert.ToDateTime(lPOInvoiceViewModel.DueDate);
-
-
+                
                 var result = webServices.Post(lPOInvoiceViewModel, "LPO/Update");
 
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -857,7 +898,6 @@ namespace IT.Web_New.Controllers
         public ActionResult LPOAllLByDateRange()
         {
             int CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
 
             SearchViewModel searchViewModel = new SearchViewModel
             {

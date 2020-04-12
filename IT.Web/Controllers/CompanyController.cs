@@ -688,12 +688,19 @@ namespace IT.Web_New.Controllers
             try
             {
 
-                var CompanyList = webServices.Post(new CompanyViewModel(), "Company/CompayAll");
+                var CompanyList = webServices.Post(new PagingParameterModel(), "Company/CompayAllWithOutPagination");
                 if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    companyViewModels = (new JavaScriptSerializer().Deserialize<List<CompanyViewModel>>(CompanyList.Data.ToString()));
+                    if (CompanyList.Data != "[]")
+                    {
+                        companyViewModels = (new JavaScriptSerializer().Deserialize<List<CompanyViewModel>>(CompanyList.Data.ToString()));
+                        companyViewModels.Insert(0,new CompanyViewModel() { Id = 0, Name = "Select Customer" });
+                    }
+                    else
+                    {
+                        companyViewModels.Add(new CompanyViewModel() { Id = 0, Name = "Select Customer" });
+                    }
                 }
-                companyViewModels.Insert(0, new CompanyViewModel() { Id = 0, Name = "Select Customer" });
                 return companyViewModels;
             }
             catch (Exception ex)

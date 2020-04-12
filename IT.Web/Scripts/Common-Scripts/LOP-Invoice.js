@@ -231,7 +231,7 @@ function ValidLPO() {
     if ($('#Venders').val() == 0) {
 
         $('#Venders').css('border-color', '1px solid #BDC7BC');
-        alert('Please select Vender');
+        alert('Please select contact');
 
         IsValid = false;
     }

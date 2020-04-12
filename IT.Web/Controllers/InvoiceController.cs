@@ -175,24 +175,54 @@ namespace IT.Web_New.Controllers
                 SerailNO = "INV-001";
 
                 var result = webServices.Post(new ProductViewModel(), "Product/All");
-                ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
-                ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (result.Data != "[]")
+                    {
+                        ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
+                        ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
+                    }
+                    else
+                    {
+                        ProductViewModel.Add(new ProductViewModel() { Id = 0, Name = "Select Item" });
+                    }
+                }
+               
                 ViewBag.Product = ProductViewModel;
 
                 var results = webServices.Post(new ProductUnitViewModel(), "ProductUnit/All");
-                productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
-                productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                if (results.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (results.Data != "[]")
+                    {
+                        productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
+                        productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+
+                    }
+                    else
+                    {
+                        productUnitViewModels.Add(new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                    }
+                }
+                
                 ViewBag.ProductUnit = productUnitViewModels;
 
                 var Res = webServices.Post(new CompanyViewModel(), "Company/CompayAllWithOutPagination");
-                companyViewModels = (new JavaScriptSerializer()).Deserialize<List<CompanyViewModel>>(Res.Data.ToString());
-                companyViewModels.Insert(0, new CompanyViewModel() { Id = 0, Name = "Select Customer Name" });
+                if (Res.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (Res.Data != "[]")
+                    {
+                        companyViewModels = (new JavaScriptSerializer()).Deserialize<List<CompanyViewModel>>(Res.Data.ToString());
+                        companyViewModels.Insert(0, new CompanyViewModel() { Id = 0, Name = "Select Customer Name" });
+                    }
+                    else
+                    {
+                        companyViewModels.Add(new CompanyViewModel() { Id = 0, Name = "Select Customer Name" });
+                    }
+                }
 
                 ViewBag.Vender = companyViewModels;
-
-
                 ViewBag.PO = SerailNO;
-
                 ViewBag.titles = "Invoice";
 
                 LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel
@@ -206,7 +236,6 @@ namespace IT.Web_New.Controllers
             {
                 throw ex;
             }
-
         }
 
         [HttpPost]
@@ -520,7 +549,6 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-
                 var result = webServices.Post(lPOInvoiceViewModel, "Invoice/Add");
 
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -565,7 +593,6 @@ namespace IT.Web_New.Controllers
             string pdfname = "";
             try
             {
-
                 ReportDocument Report = new ReportDocument();
                 Report.Load(Server.MapPath("~/Reports/LPO-Invoice/LPOInvoice.rpt"));
 
@@ -678,7 +705,6 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-
                 lPOInvoiceViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
                 var result = webServices.Post(lPOInvoiceViewModel, "Invoice/AddFromQuotation");
                 int Res = (new JavaScriptSerializer()).Deserialize<int>(result.Data);

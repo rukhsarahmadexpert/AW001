@@ -5,7 +5,14 @@
     <div class="col-md-4">
         <div class="input-group mb-3">
             <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">Vender:</span>
+                @if (ViewBag.titles == "Quotation" || ViewBag.titles == "Invoice")
+                {
+                    <span class="input-group-text" id="basic-addon2">Customer:</span>
+                }
+                else
+                {
+                    <span class="input-group-text" id="basic-addon2">Vendor:</span>
+                }
             </div>
             <select data-placeholder="Vender" class="chosen form-control" name="Vender" id="Venders" title="select Vender">
                 @if (ViewBag.Vender != null)
@@ -25,17 +32,36 @@
             <p style="margin-top:10px">
             </p>
             <p><i class="fal fa-user"></i> Contact Person :<span id="ContactPerson"></span></p>
-            <p><i class="fal fa-map"></i> Address :  <span id="VenderAddress">Al garhoud afnan center, Duabi, UAE</span></p>
-            <p><i class="fal fa-mobile"> Phone : </i> <span id="VenderPhone">+92 45 65465465</span></p>
-            <p><i class="fal fa-envelope"> Email : </i> <span id="VenderEmail">vender@yahoo.com</span></p>
-            <p> <i class="fal fa-text-width"> TRN : </i> <span id="VenderVAT">100002115552122</span></p>
+            <p><i class="fal fa-map"></i> Address :  <span id="VenderAddress"></span></p>
+            <p><i class="fal fa-mobile"> Phone : </i> <span id="VenderPhone"></span></p>
+            <p><i class="fal fa-envelope"> Email : </i> <span id="VenderEmail"></span></p>
+            <p> <i class="fal fa-text-width"> TRN : </i> <span id="VenderVAT"></span></p>
         </div>
     </div>
     <div class="col-md-4"></div>
     <div class="col-md-4">
         <div class="input-group mb-3">
             <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2"  style="width:100px">PO Number:</span>
+                @if (ViewBag.titles == "Quotation")
+                {
+                    <span class="input-group-text" id="basic-addon2" style="width:110px">Qoute Number:</span>
+                }
+                else if (ViewBag.titles == "Invoice")
+                {
+                    <span class="input-group-text" id="basic-addon2" style="width:110px">Invoice Number:</span>
+                }
+                else if (ViewBag.titles == "Bill")
+                {
+                    <span class="input-group-text" id="basic-addon2" style="width:110px">Bill Number:</span>
+                }
+                else if(ViewBag.titles == "LPO")
+                {
+                    <span class="input-group-text" id="basic-addon2" style="width:110px">LPO Number:</span>
+                }
+                else
+                {
+                    <span class="input-group-text" id="basic-addon2" style="width:110px">PO Number:</span>
+                }
             </div>
             <input type="text" class="form-control" id="PONo" name="PONo" placeholder="PO Number" value="@ViewBag.PO">
         </div>
