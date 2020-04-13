@@ -784,6 +784,9 @@ namespace IT.Web_New.Controllers
                 Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
                 Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
 
+                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + LPOInvoiceModel.compnays[0].LogoUrl);
+                Report.SetParameterValue("Heading", "LPO");
+
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
 
@@ -853,7 +856,8 @@ namespace IT.Web_New.Controllers
                 Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
                 Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
 
-                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + LPOInvoiceModel.compnays[0].LogoUrl);
+                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + lPOInvoiceModel.compnays[0].LogoUrl);
+                Report.SetParameterValue("Heading", "LPO");
 
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
@@ -1008,6 +1012,5 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
-
     }
 }

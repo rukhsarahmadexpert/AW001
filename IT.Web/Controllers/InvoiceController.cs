@@ -471,6 +471,9 @@ namespace IT.Web_New.Controllers
                 Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
                 Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
 
+                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + lPOInvoiceModel.compnays[0].LogoUrl);
+                Report.SetParameterValue("Heading", "Invoice");
+
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
 
@@ -625,6 +628,9 @@ namespace IT.Web_New.Controllers
                 Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
                 Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
 
+                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + lPOInvoiceModel.compnays[0].LogoUrl);
+                Report.SetParameterValue("Heading", "Invoice");
+
                 string companyName;
                 if (lPOInvoiceModels.Count > 0)
                 {
@@ -646,9 +652,7 @@ namespace IT.Web_New.Controllers
                 byte[] fileBytes = System.IO.File.ReadAllBytes(path);
                 string fileName = companyName + ".PDF";
                 //return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
-
-                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + lPOInvoiceModel.compnays[0].LogoUrl);
-
+                              
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
 

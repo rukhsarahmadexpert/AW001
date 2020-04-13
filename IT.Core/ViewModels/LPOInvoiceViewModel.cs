@@ -50,6 +50,7 @@ namespace IT.Core.ViewModels
         public string Product { get; set; }
         public string UnitName { get; set; }
         public bool IsForCustomer { get; set; }
+        public bool IsFromLpo { get; set; }
         public int CompanyId { get; set; }
         public List<LPOInvoiceDetails> lPOInvoiceDetailsList { get; set; }
         public List<UploadDocumentsViewModel> uploadDocumentsViewModels { get; set; }
