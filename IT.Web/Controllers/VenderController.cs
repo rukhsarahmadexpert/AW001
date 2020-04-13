@@ -186,5 +186,37 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
+
+        [NonAction]
+        public List<VenderViewModel> Venders()
+        {
+            var venderViewModels1 = new List<VenderViewModel>();
+
+            var Res = webServices.Post(new DriverViewModel(), "Vender/All");
+            if (Res.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                if (Res.Data != "[]")
+                {
+                    venderViewModels1 = (new JavaScriptSerializer()).Deserialize<List<VenderViewModel>>(Res.Data.ToString());
+                    venderViewModels1.Insert(0, new VenderViewModel() { Id = 0, Name = "Select Vender" });
+                }
+            }
+            return venderViewModels1;
+        }
+
+
+        [HttpPost]
+        public ActionResult VenderList()
+        {
+            try
+            {
+                var vendersResult = Venders();
+                return Json(vendersResult, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json("Falied", JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }
