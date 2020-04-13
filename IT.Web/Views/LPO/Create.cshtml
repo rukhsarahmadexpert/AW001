@@ -80,6 +80,47 @@
                     });
                 }
             });
+
+
+            $('#LpoType').change(function ()
+            {
+
+                var value = $(this).val();
+
+                if (value == 0) {
+                    return true;
+                }
+                else if (value == "ForAdmin")
+                {
+                    ajaxRequest("POST", "/Vender/VenderList", "", "json").then(function (result) {
+                        if (result != "Failed") {
+                            console.log(result);
+
+                            $('#Venders').empty();
+                            $(".Venderlbl").text("Vendor");
+                            $.each(result, function (item, valu) {
+                                $('#Venders').append("<option value=" + valu.Id + ">" + valu.Name + "</option>")
+                            });
+                        }
+                    })
+                }
+                else
+                {
+                        ajaxRequest("POST", "/Company/GetClientCompanyList", "", "json").then(function (result)
+                            {
+                                if (result != "Failed")
+                                {
+                                    console.log(result);
+
+                                    $('#Venders').empty();
+                                    $(".Venderlbl").text("Customer");
+                                    $.each(result, function (item, valu) {
+                                        $('#Venders').append("<option value=" + valu.Id + ">" + valu.Name+"</option>")
+                                    });
+                                }
+                        })
+                     }
+            });
         })
 
         $('#SaveEmail').click(function () {
@@ -90,7 +131,6 @@
             }
         })
 
-
         $('#SaveDraft').click(function () {
             if (ValidLPO()) {
                 localStorage.clear();
@@ -98,15 +138,12 @@
             }
         });
 
-
         $('#SaveDownload').click(function () {
             if (ValidLPO()) {
                 localStorage.clear();
                 CreateLPOInvoice("SaveDwnload");
             }
         });
-
-        //function CreateLPOInvoice(url, btnName, Message, returnulr) {
 
         function CreateLPOInvoice(Url) {
             if (1 == 1) {
@@ -133,11 +170,27 @@
                     }
                 });
 
-
                 if (list.length == 0) {
                     $('#SubTotal').text('');
                     $('#TotalVAT').text('');
                     $('#gtotal').text('');
+                }
+
+                var vender = 0;
+                var IsCustomerLpo = false;
+                var Customer = 0;
+                var LPOType = $('#LpoType').val();
+
+                if (LPOType == "ForCustomer") {
+                    vender = 5;
+                    IsCustomerLpo = true;
+                    Customer = $('#Venders').val();
+
+                }
+                else {
+                    vender = $('#Venders').val();
+                    IsCustomerLpo = false;
+                    Customer = 0;
                 }
 
                 var empObj = {
@@ -150,7 +203,10 @@
                     GrandTotal: $('#gtotal').text(),
                     TermCondition: $('#TermCondition').val(),
                     CustomerNote: $('#CustomerNote').val(),
-                    VenderId: $('#Venders').val(),
+                    VenderId: vender,
+                    IsForCustomer: IsCustomerLpo,
+                    CustomerId: Customer,
+                    CompanyId: Customer
                 };
 
                 for (var key in empObj) {

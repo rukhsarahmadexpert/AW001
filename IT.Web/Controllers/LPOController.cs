@@ -285,7 +285,7 @@ namespace IT.Web_New.Controllers
                 var LPONoResult = webServices.Post(new SingleStringValueResult(), "LPO/LPOGetPONumber");
                 if (LPONoResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    if (LPONoResult.Data != "[]")
+                    if (LPONoResult.Data != "\"\"")
                     {
                         string LPNo = (new JavaScriptSerializer()).Deserialize<string>(LPONoResult.Data);
 
@@ -357,15 +357,9 @@ namespace IT.Web_New.Controllers
                 }
                 ViewBag.ProductUnit = productUnitViewModels;
 
-                var Res = webServices.Post(new DriverViewModel(), "Vender/All");
-                if (Res.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {
-                    if (Res.Data != "[]")
-                    {
-                        venderViewModels = (new JavaScriptSerializer()).Deserialize<List<VenderViewModel>>(Res.Data.ToString());
-                        venderViewModels.Insert(0, new VenderViewModel() { Id = 0, Name = "Select Vender" });
-                    }
-                }
+                VenderController venderController = new VenderController();
+
+                venderViewModels = venderController.Venders();
                 ViewBag.Vender = venderViewModels;
 
                 ViewBag.titles = "LPO";
@@ -390,6 +384,10 @@ namespace IT.Web_New.Controllers
             try
             {
                 lPOInvoiceViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
+                if(lPOInvoiceViewModel.CompanyId == 0)
+                {
+                    lPOInvoiceViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                }
 
                 lPOInvoiceViewModel.FromDate = Convert.ToDateTime(lPOInvoiceViewModel.FromDate);
                 lPOInvoiceViewModel.DueDate = Convert.ToDateTime(lPOInvoiceViewModel.DueDate);

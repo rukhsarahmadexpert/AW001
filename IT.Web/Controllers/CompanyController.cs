@@ -87,7 +87,7 @@ namespace IT.Web_New.Controllers
                     if (CompanyList.Data != "[]" && CompanyList.Data != null)
                     {
                         compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
-                        TotalRow = 11;
+                        TotalRow = compnayModels.Count;
 
                         return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = compnayModels }, JsonRequestBehavior.AllowGet);
 
@@ -294,15 +294,12 @@ namespace IT.Web_New.Controllers
                             {
                                 var companyViewModel = new CompanyViewModel();
                                 companyViewModel = (new JavaScriptSerializer().Deserialize<CompanyViewModel>(result.Data.ToString()));
-
-
+                                
                                 var userCompanyViewModel2 = Session["userCompanyViewModel"] as UserCompanyViewModel;
 
                                 userCompanyViewModel2.LogoUrl = companyViewModel.LogoUrl;
                                 userCompanyViewModel2.CompanyName = companyViewModel.Name;
-
-
-
+                                
                                 Session["userCompanyViewModel"] = userCompanyViewModel2;
                                 Session["CompanyId"] = companyViewModel.Id;
                                 Session["UserId"] = companyViewModel.CreatedBy;
@@ -749,6 +746,21 @@ namespace IT.Web_New.Controllers
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult GetClientCompanyList()
+        {
+            try
+            {
+                var companyList = Companies();
+                return Json(companyList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json("Failed", JsonRequestBehavior.AllowGet);
             }
         }
 
