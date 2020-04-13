@@ -5,13 +5,10 @@
 }
 
 <!DOCTYPE html>
-
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-<html lang="en">
 <head>
     <meta charset="utf-8">
-   
-    <meta name="description" content="Aw fuel trading">
+    <title>Registration</title>
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
     <!-- Call App Mode on ios devices -->
@@ -22,72 +19,151 @@
     <link rel="stylesheet" media="screen, print" href="~/assets/css/vendors.bundle.css">
     <link rel="stylesheet" media="screen, print" href="~/assets/css/app.bundle.css">
     <!-- Place favicon.ico in the root directory -->
-        <link rel="apple-touch-icon" sizes="180x180" href="~/assets/staticImages/logo-1.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/staticImages/logo-1.png">
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/staticImages/logo-1.png">
+    <meta name="hostname" content="awfuel.com">
+    <meta name="app-url" content="awfuel.com">
+    <meta name="environment" content="dev">
     <!-- Optional: page related CSS -->
     <!-- PHP docs -->
     <link rel="stylesheet" media="screen, print" href="~/assets/css/markdown.css">
-    	<link rel="stylesheet" media="screen, print" href="~/assets/css/page-login.css">
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/fa-brands.css">
 </head>
 <body>
-    <div class="blankpage-form-field">
-        <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
-            <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
-                <img class="align-center" src="~/assets/img/logo-3.svg" style="width:200px; align-content:center; margin-left:5px" alt="AW Fuel" aria-roledescription="logo">
-
-                <span class="page-logo-text mr-1 " style="margin-left:30px">  Sign In</span>
-                <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
-            </a>
-        </div>
-        <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
-            <form action="/User/Login" method="post">
-                <div class="form-group">
-                    <!-- <label class="form-label" for="username">Email Address</label>-->
-                    <input type="email" id="UserName" name="UserName" class="form-control" placeholder="Your Email Address">
-                    <span class="help-block">
-                        @Html.ValidationMessageFor(Model => Model.UserName, "", new { @class = "text-danger" })
-                    </span>
-                </div>
-                <div class="form-group">
-                    <!--<label class="form-label" for="password">Password</label>-->
-                    <input type="password" id="Password" name="Password" class="form-control" placeholder="Your Password">
-                    <span class="help-block">
-                        @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
-                        <p class="text-success font-weight-bold">@ViewBag.success</p> 
-                    </span>
-                </div>
-                <div class="form-group text-left">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="rememberme">
-                        <label class="custom-control-label" for="rememberme"> Remember me</label>
+    <div class="page-wrapper">
+        <div class="page-inner bg-brand-gradient">
+            <div class="page-content-wrapper bg-transparent m-0">
+                <div class="height-10 w-100 shadow-lg px-4 bg-brand-gradient" style="background-color:white !important">
+                    <div class="d-flex align-items-center container p-0">
+                        <div class="page-logo width-mobile-auto m-0 align-items-center justify-content-center p-0 bg-transparent bg-img-none shadow-0 height-9">
+                            <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
+                                <img src="~/assets/img/logo-3.svg" alt="" style="width:200px" aria-roledescription="logo">
+                            </a>
+                        </div>
+                        <a href="/User/Registration" style="color:black !important" class="btn-link btn btn-sm btn-outline-primary text-white ml-auto">
+                            Sign Up
+                        </a>
                     </div>
                 </div>
-                <input type="hidden" name="Token" id="Token" />
+                <div class="flex-1" style="background: url(~/assets/img/svg/pattern-1.svg) no-repeat center bottom fixed; background-size: cover;">
+                    <div class="container py-4 py-lg-5 my-lg-5 px-4 px-sm-0">
+                        <div class="row">
+                            <div class="col  col-md-6 col-lg-6 col-xl-6 hidden-sm-down">
+                                <h2 class="fs-xxl fw-500 mt-4 text-white">
+                                    User Login
+                                    <small id="txt" class="h3 fw-300 mt-3 mb-5 text-white opacity-60">
 
-                <button type="submit" class="btn btn-default float-right mt-5">Sign In</button>
-            </form>
-            <div class="blankpage-footer text-center">
-                <a href="/User/forgotPassword"><strong>Recover Password</strong></a> | <a href="/User/Registration"><strong>Register New Account</strong></a>
+                                    </small>
+                                </h2>
+
+                                <div class="d-sm-flex flex-column align-items-center justify-content-center d-md-block">
+                                    <div class="px-0 py-1 mt-5 text-white fs-nano opacity-50">
+                                        Find us on social media
+                                    </div>
+                                    <div class="d-flex flex-row opacity-70">
+                                        <a href="https://www.facebook.com/awfueltrading/" class="mr-2 fs-xxl text-white">
+                                            <i class="fab fa-facebook-square"></i>
+                                        </a>
+                                        <a href="#" class="mr-2 fs-xxl text-white">
+                                            <i class="fab fa-twitter-square"></i>
+                                        </a>
+                                        <a href="#" class="mr-2 fs-xxl text-white">
+                                            <i class="fab fa-google-plus-square"></i>
+                                        </a>
+                                        <a href="#" class="mr-2 fs-xxl text-white">
+                                            <i class="fab fa-linkedin"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 ml-auto">
+                                <h1 class="text-white fw-300 mb-3 d-sm-block d-md-none">
+                                    Secure login
+                                </h1>
+                                <div class="card p-4 rounded-plus bg-faded">
+                                    <form action="/User/Login" method="post">
+
+
+
+                                        <div class="row py-2">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="FullName">Email address</label>
+                                                    <input type="email" id="UserName" name="UserName" class="form-control form-control-sm" placeholder="Your Email Address">
+                                                    <div class="help-block">
+                                                        @Html.ValidationMessageFor(Model => Model.UserName, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row py-2">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="username">Password </label>
+                                                    <input type="password" id="Password" name="Password" class="form-control form-control-sm" placeholder="Your Password">
+                                                    <span class="help-block">
+                                                        @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
+                                                        <p class="text-success font-weight-bold">@ViewBag.success</p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="row py-2">
+                                            <div class="col-12">
+                                                <div class="form-group text-left">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="rememberme">
+                                                        <label class="custom-control-label" for="rememberme"> Remember me </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row no-gutters">
+                                            <div class="col-lg-8 pr-lg-1 my-2">
+                                                <div class="blankpage-footer text-left">
+                                                    <a href="/User/forgotPassword"><strong>Recover Password</strong></a> | <a href="/User/Registration"><strong>Register New Account</strong></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 pl-lg-1 my-2">
+                                                <input type="hidden" name="Token" id="Token" />
+                                                <button type="submit" class="btn btn-primary btn-block btn-sm">Login</button>
+                                            </div>
+                                        </div>
+
+                                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    @*<video poster="~/assets/site/images/banner5.jpg" id="bgvid" playsinline autoplay muted loop></video>*@
-
 
     <script src="~/assets/js/vendors.bundle.js"></script>
     <script src="~/assets/js/app.bundle.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#txt').text('We offer quality diesel and branded Oil & lubricants with efficient distribution and transportation across the United Arab Emirates and other related services.');
+            
+
+        });
+
+    </script>
+
     <script src="~/Scripts/firebass.app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-messaging.js"></script>
-    <script src="~/app.js"></script>
 
-    @*<script>
-            $(document).load(function () {
-                $('#Token').val(localStorage.getItem("BrowserToken"));
-            })
-        </script>*@
-    <!-- Page related scripts -->
 </body>
 </html>
-
-

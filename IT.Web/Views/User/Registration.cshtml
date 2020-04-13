@@ -39,7 +39,7 @@
                                 <img src="~/assets/img/logo-3.svg" alt="" style="width:200px" aria-roledescription="logo">
                             </a>
                         </div>
-                        <a href="/User/Login"  style="color:black !important" class="btn-link btn btn-sm btn-outline-primary text-white ml-auto">
+                        <a href="/User/Login" style="color:black !important" class="btn-link btn btn-sm btn-outline-primary text-white ml-auto">
                             Sign In
                         </a>
                     </div>
@@ -51,10 +51,10 @@
                                 <h2 class="fs-xxl fw-500 mt-4 text-white">
                                     User Registration
                                     <small id="txt" class="h3 fw-300 mt-3 mb-5 text-white opacity-60">
-                                       
+
                                     </small>
                                 </h2>
-                                
+
                                 <div class="d-sm-flex flex-column align-items-center justify-content-center d-md-block">
                                     <div class="px-0 py-1 mt-5 text-white fs-nano opacity-50">
                                         Find us on social media
@@ -109,7 +109,7 @@
                                                     <label class="form-label" for="password">Password</label>
                                                     <input type="password" id="Password" name="Password" class="form-control form-control-sm" placeholder="Enter Your Password">
                                                     @*<div class="invalid-feedback">Sorry, you missed this one.</div>
-                    <div class="help-block">Your password</div>*@
+                                                        <div class="help-block">Your password</div>*@
                                                 </div>
                                             </div>
                                             <div class="col-6">
@@ -117,7 +117,7 @@
                                                     <label class="form-label" for="password">Confrim Password</label>
                                                     <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control form-control-sm" placeholder="Confirm your Password">
                                                     @*<div class="invalid-feedback">Sorry, you missed this one.</div>
-                    <div class="help-block">Your password</div>*@
+                                                        <div class="help-block">Your password</div>*@
                                                 </div>
                                             </div>
 
@@ -136,27 +136,18 @@
                                             </div>
                                         </div>
 
-                                        <div class="row py-2">
-                                            <div class="col-12">
-                                                <div class="form-group text-left">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="rememberme">
-                                                        <label class="custom-control-label" for="rememberme"> Remember me </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                       
 
                                         <div class="row no-gutters">
                                             <div class="col-lg-6 pr-lg-1 my-2">
                                                 <div class="form-group text-left my-3">
-                                                    
-                                                        Already Registered  Please |   <a style="text-decoration:underline !important; font-weight:bolder" href="/User/Login">Sign In</a>
-                                                  
+
+                                                    Already Registered  Please |   <a style="text-decoration:underline !important; font-weight:bolder" href="/User/Login">Sign In</a>
+
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 pl-lg-1 my-2">
-                                                <button  type="submit" class="btn btn-primary btn-block btn-sm">Register</button>
+                                                <button type="submit" class="btn btn-primary btn-block btn-sm">Register</button>
                                             </div>
                                         </div>
 
@@ -166,33 +157,33 @@
                                 </div>
                             </div>
                         </div>
-                     
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-  
+
 
     <script src="~/assets/js/vendors.bundle.js"></script>
     <script src="~/assets/js/app.bundle.js"></script>
     <script>
 
         $(document).ready(function () {
-            $('#txt').text('People who buy the product offered for their own use, in turn becoming the consumer of the specified product.');
+            $('#txt').text('Our main focus is the local market, For endusers and to encourage new industries, transport companies, traders, enginnering fabricators and stockist in the region with greatest demand.');
             $('#UserRoles').change(function () {
 
                 if ($('#UserRoles').val() == 1) {
 
-                    $('#txt').text('People who buy the product offered for their own use, in turn becoming the consumer of the specified product.');
+                    $('#txt').text('Our main focus is the local market, For endusers and to encourage new industries, transport companies, traders, enginnering fabricators and stockist in the region with greatest demand.');
                 }
                 else if ($('#UserRoles').val() == 2) {
 
-                    $('#txt').text('A reseller is a company or individual (merchant) that purchases Product with the intention of selling them rather than consuming or using them.');
+                    $('#txt').html('Our Diesel Trading company is an apparent leader in terms of diesel supply in the UAE, all over the (Abu Dhabi, Dubai, Sharjah, Ajman, Ras al khaimah, and umm al quwain). <br> We provide fuel related solutions for all kinds of energy requirements from marines, road transportation, contruction, tranpsort companies etc...');
                 }
                 else if ($('#UserRoles').val() == 3) {
 
-                    $('#txt').text('Logistics is the process of planning and executing the efficient transportation and storage of oil from the point of origin to the point of consumption');
+                    $('#txt').html('We offer quality diesel and branded Oil & lubricants with efficient distribution and transportation across the United Arab Emirates and other related services.<br> Our “never say no” policy means we are always seeking innovative and category-defining transportation options, designed for the realities of customers today, and their needs tomorrow. <br> Whatever your logistics requirements, Aw Fuel has the solution.');
                 }
 
             });
@@ -200,6 +191,9 @@
         });
 
     </script>
-   
+
+    <script src="~/Scripts/firebass.app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-messaging.js"></script>
+
 </body>
 </html>
