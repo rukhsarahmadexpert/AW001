@@ -3,14 +3,10 @@
     ViewBag.Title = "Registraion";
     Layout = null;
 }
-
 <!DOCTYPE html>
-
-<html lang="en">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
-    <title>Aw Fuel  - Registration</title>
+    <title>Registration</title>
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
@@ -24,90 +20,186 @@
     <!-- Place favicon.ico in the root directory -->
     <link rel="apple-touch-icon" sizes="180x180" href="~/assets/staticImages/logo-1.png">
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/staticImages/logo-1.png">
+    <meta name="hostname" content="awfuel.com">
+    <meta name="app-url" content="awfuel.com">
+    <meta name="environment" content="dev">
     <!-- Optional: page related CSS -->
     <!-- PHP docs -->
     <link rel="stylesheet" media="screen, print" href="~/assets/css/markdown.css">
-    	<link rel="stylesheet" media="screen, print" href="~/assets/css/page-login.css">
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/fa-brands.css">
 </head>
 <body>
-    <div class="blankpage-form-field">
-        <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
-            <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
-                <img class="align-center" src="~/assets/img/logo-3.svg" style="width:200px; align-content:center; margin-left:5px" alt="AW Fuel" aria-roledescription="logo">
-
-
-                <span class="page-logo-text mr-1 " style="margin-left:30px">  Sign Up</span>
-                <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
-            </a>
-        </div>
-        <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
-            <form action="/User/Registration" method="post">
-                <div class="form-group">
-                    <!-- <label class="form-label" for="username">First Name</label> -->
-                    <input type="text" id="FullName" name="FullName" class="form-control" placeholder="Enter your Full Name">
-                    <!-- <span class="help-block">
-                Your unique username to app
-            </span>-->
+    <div class="page-wrapper">
+        <div class="page-inner bg-brand-gradient">
+            <div class="page-content-wrapper bg-transparent m-0">
+                <div class="height-10 w-100 shadow-lg px-4 bg-brand-gradient" style="background-color:white !important">
+                    <div class="d-flex align-items-center container p-0">
+                        <div class="page-logo width-mobile-auto m-0 align-items-center justify-content-center p-0 bg-transparent bg-img-none shadow-0 height-9">
+                            <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
+                                <img src="~/assets/img/logo-3.svg" alt="" style="width:200px" aria-roledescription="logo">
+                            </a>
+                        </div>
+                        <a href="/User/Login"  style="color:black !important" class="btn-link btn btn-sm btn-outline-primary text-white ml-auto">
+                            Sign In
+                        </a>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <!-- <label class="form-label" for="username">Email Address</label> -->
-                    <input type="email" id="UserName" name="UserName" class="form-control" placeholder="Enter your Email Address">
-                    <!-- <span class="help-block">
-                Your unique username to app
-            </span>-->
-                </div>
-                <div class="form-group">
-                    <!-- <label class="form-label" for="password">Password</label> -->
-                    <input type="password" id="Password" name="Password" class="form-control" placeholder="Enter Your Password">
-                    <!-- <span class="help-block">
-                Your password
-            </span> -->
-                </div>
+                <div class="flex-1" style="background: url(~/assets/img/svg/pattern-1.svg) no-repeat center bottom fixed; background-size: cover;">
+                    <div class="container py-4 py-lg-5 my-lg-5 px-4 px-sm-0">
+                        <div class="row">
+                            <div class="col  col-md-5 col-lg-5 col-xl-5 hidden-sm-down">
+                                <h2 class="fs-xxl fw-500 mt-4 text-white">
+                                    User Registration
+                                    <small id="txt" class="h3 fw-300 mt-3 mb-5 text-white opacity-60">
+                                       
+                                    </small>
+                                </h2>
+                                
+                                <div class="d-sm-flex flex-column align-items-center justify-content-center d-md-block">
+                                    <div class="px-0 py-1 mt-5 text-white fs-nano opacity-50">
+                                        Find us on social media
+                                    </div>
+                                    <div class="d-flex flex-row opacity-70">
+                                        <a href="https://www.facebook.com/awfueltrading/" class="mr-2 fs-xxl text-white">
+                                            <i class="fab fa-facebook-square"></i>
+                                        </a>
+                                        <a href="#" class="mr-2 fs-xxl text-white">
+                                            <i class="fab fa-twitter-square"></i>
+                                        </a>
+                                        <a href="#" class="mr-2 fs-xxl text-white">
+                                            <i class="fab fa-google-plus-square"></i>
+                                        </a>
+                                        <a href="#" class="mr-2 fs-xxl text-white">
+                                            <i class="fab fa-linkedin"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 ml-auto">
+                                <h1 class="text-white fw-300 mb-3 d-sm-block d-md-none">
+                                    Secure login
+                                </h1>
+                                <div class="card p-4 rounded-plus bg-faded">
+                                    <form action="/User/Registration" method="post">
 
-                <div class="form-group">
-                    <!-- <label class="form-label" for="password">Confirm Password</label> -->
-                    <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control" placeholder="Confirm your Password">
-                    <!-- <span class="help-block">
-                Your password
-            </span> -->
-                </div>
-
-                <div class="form-group">
-                    <!--<label class="form-label">Select (custom)</label>-->
-                    <select class="custom-select form-control">
-                        <option disabled="disabled">Create Role</option>
-                        <option value="1">Consumers / End Users</option>
-                        <option value="2">Traders / Resellers</option>
-                        <option value="3">Logistics</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-default float-right">Sign Up</button>
 
 
+                                        <div class="row py-2">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="FullName">You Full Name</label>
+                                                    <input type="text" id="FullName" name="FullName" class="form-control form-control-sm" placeholder="Enter your Full Name">
+                                                </div>
+                                            </div>
+                                        </div>
 
-            </form>
+                                        <div class="row py-2">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="username">Email address</label>
+                                                    <input type="email" id="UserName" name="UserName" class="form-control form-control-sm" placeholder="Enter your Email Address" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-            <div class="form-group text-left my-3">
-                <div class="custom-control">
-                    Already Registered  Please |   <a style="text-decoration:underline !important; font-weight:bolder" href="/User/Login">Sign In</a>
+                                        <div class="row py-2">
+
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="password">Password</label>
+                                                    <input type="password" id="Password" name="Password" class="form-control form-control-sm" placeholder="Enter Your Password">
+                                                    @*<div class="invalid-feedback">Sorry, you missed this one.</div>
+                    <div class="help-block">Your password</div>*@
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="password">Confrim Password</label>
+                                                    <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control form-control-sm" placeholder="Confirm your Password">
+                                                    @*<div class="invalid-feedback">Sorry, you missed this one.</div>
+                    <div class="help-block">Your password</div>*@
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row py-2">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <!--<label class="form-label">Select (custom)</label>-->
+                                                    <select class="custom-select form-control" id="UserRoles">
+                                                        <option value="1">Consumers / End Users</option>
+                                                        <option value="2">Traders / Resellers</option>
+                                                        <option value="3">Logistics</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row py-2">
+                                            <div class="col-12">
+                                                <div class="form-group text-left">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="rememberme">
+                                                        <label class="custom-control-label" for="rememberme"> Remember me </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row no-gutters">
+                                            <div class="col-lg-6 pr-lg-1 my-2">
+                                                <div class="form-group text-left my-3">
+                                                    
+                                                        Already Registered  Please |   <a style="text-decoration:underline !important; font-weight:bolder" href="/User/Login">Sign In</a>
+                                                  
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 pl-lg-1 my-2">
+                                                <button  type="submit" class="btn btn-primary btn-block btn-sm">Register</button>
+                                            </div>
+                                        </div>
+
+                                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                     
+                    </div>
                 </div>
             </div>
-
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         </div>
     </div>
-
-
-
-
-    @* <video poster="~/assets/site/images/banner5.jpg" id="bgvid" playsinline autoplay muted loop>
-        </video>*@
+  
 
     <script src="~/assets/js/vendors.bundle.js"></script>
     <script src="~/assets/js/app.bundle.js"></script>
-    <!-- Page related scripts -->
+    <script>
+
+        $(document).ready(function () {
+            $('#txt').text('People who buy the product offered for their own use, in turn becoming the consumer of the specified product.');
+            $('#UserRoles').change(function () {
+
+                if ($('#UserRoles').val() == 1) {
+
+                    $('#txt').text('People who buy the product offered for their own use, in turn becoming the consumer of the specified product.');
+                }
+                else if ($('#UserRoles').val() == 2) {
+
+                    $('#txt').text('A reseller is a company or individual (merchant) that purchases Product with the intention of selling them rather than consuming or using them.');
+                }
+                else if ($('#UserRoles').val() == 3) {
+
+                    $('#txt').text('Logistics is the process of planning and executing the efficient transportation and storage of oil from the point of origin to the point of consumption');
+                }
+
+            });
+
+        });
+
+    </script>
+   
 </body>
 </html>
-
-
