@@ -73,6 +73,11 @@
                                             <i class="fab fa-linkedin"></i>
                                         </a>
                                     </div>
+
+                                    <div class="app-buttons py-5">
+                                        <a href="https://apps.apple.com/us/app/awfuel/id1483312238" target="_blank"><img src="~/assets/site/images/app-store.png" alt=""></a>
+                                        <a href="https://play.google.com/store/apps/details?id=com.itmolen.awfuel" target="_blank"><img src="~/assets/site/images/play-store.png" alt=""></a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 ml-auto">
@@ -81,8 +86,6 @@
                                 </h1>
                                 <div class="card p-4 rounded-plus bg-faded">
                                     <form action="/User/Registration" method="post">
-
-
 
                                         <div class="row py-2">
                                             <div class="col-12">
@@ -103,7 +106,6 @@
                                         </div>
 
                                         <div class="row py-2">
-
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label class="form-label" for="password">Password</label>
@@ -120,7 +122,6 @@
                                                         <div class="help-block">Your password</div>*@
                                                 </div>
                                             </div>
-
                                         </div>
 
                                         <div class="row py-2">
@@ -136,28 +137,21 @@
                                             </div>
                                         </div>
 
-                                       
-
                                         <div class="row no-gutters">
                                             <div class="col-lg-6 pr-lg-1 my-2">
                                                 <div class="form-group text-left my-3">
-
                                                     Already Registered  Please |   <a style="text-decoration:underline !important; font-weight:bolder" href="/User/Login">Sign In</a>
-
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 pl-lg-1 my-2">
                                                 <button type="submit" class="btn btn-primary btn-block btn-sm">Register</button>
                                             </div>
                                         </div>
-
                                         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-
                                     </form>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
