@@ -452,6 +452,11 @@ namespace IT.Web_New.Controllers
                 CountryController countryController = new CountryController();
                 ViewBag.Countries = countryController.Countries();
 
+                if(Request.IsAjaxRequest())
+                {
+                    return Json(compnayModel, JsonRequestBehavior.AllowGet);
+                }
+
                 return View(compnayModel);
             }
             catch (Exception)

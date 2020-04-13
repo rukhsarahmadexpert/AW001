@@ -64,10 +64,22 @@
                 var Id = 0;
                 Id = $(this).val();
 
-                if (Id > 0) {
-                    ajaxRequest("GET", "/Vender/Edit/" + Id, "json").then(function (result) {
-                        if (result != "Failed") {
+                var url = "";
 
+                var LPOType = $('#LpoType').val();
+                if (LPOType == 0) {
+                    alert('Please select LPO Type');
+                }
+                else if (LPOType == "ForAdmin") {
+                    url = "/Vender/Edit/" + Id;
+                }
+                else {
+                    url = "/Company/CompanyEdit/" + Id;
+                }
+
+                if (Id > 0) {
+                    ajaxRequest("GET", url,"", "json").then(function (result) {
+                        if (result != "Failed") {
                             $('#VenderAddress').text(result.Address);
                             $('#VenderPhone').text(result.LandLine);
                             $('#VenderEmail').text(result.Email);
