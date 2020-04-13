@@ -20,7 +20,6 @@
                         <i class="fal fa-plus-circle"></i>  Create New <span class="fw-300"><i>Bill</i></span>
                     </a>
                 </h2>
-
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
@@ -77,6 +76,9 @@
             }
         });
 
+        $('#CreateBillDirect').click(function () {
+            window.location.href = "/Bill/Create/0";
+        });
 
         $(document).ready(function () {
             BindDataTable();

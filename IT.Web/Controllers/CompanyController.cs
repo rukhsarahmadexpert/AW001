@@ -753,8 +753,7 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
-
-
+        
         [HttpPost]
         public ActionResult GetClientCompanyList()
         {

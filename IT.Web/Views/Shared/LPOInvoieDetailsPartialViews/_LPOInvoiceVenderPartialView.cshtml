@@ -6,6 +6,9 @@
 
     LPOInvoiceViewModel = ViewBag.lPOInvoiceViewModel as IT.Core.ViewModels.LPOInvoiceViewModel;
 
+    List<IT.Core.ViewModels.VenderViewModel> venderViewModels = new List<IT.Core.ViewModels.VenderViewModel>();
+    venderViewModels = ViewBag.Vender as List<IT.Core.ViewModels.VenderViewModel>;
+    
    // lpoRemainingQuantityViewModel = 
 
     var DueDate = "";
@@ -39,23 +42,39 @@
         }
         else
         {
-        <h5 class="font-weight-bold"><u>Vender Info:</u></h5>
+            <h5 class="font-weight-bold"><u>Vender Info:</u></h5>
         }
-        <div class="form-group">
-            <p style="margin-top:10px">
-            </p>
-            <p><i class="glyphicon glyphicon-user"> </i>Company Name: <span id="ContactPerson">@LPOInvoiceViewModel.Name</span></p>
-            <p><i class="glyphicon glyphicon-road"></i> Address: <span id="VenderAddress">@LPOInvoiceViewModel.Address</span></p>
-            <p><i class="glyphicon glyphicon-earphone"></i>Land Line : <span id="VenderPhone">@LPOInvoiceViewModel.LandLine</span></p>
-            <p><i class="glyphicon glyphicon-earphone"></i>Mobile : <span id="VenderPhone">@LPOInvoiceViewModel.Mobile</span></p>
-            <p><i class="glyphicon glyphicon-envelope"></i>Email :<span id="VenderEmail">@LPOInvoiceViewModel.Email</span></p>
-            <p> <i class="glyphicon glyphicon-text-width"></i>TRN : <span id="VenderVAT">@LPOInvoiceViewModel.TRN</span></p>
-        </div>
+        @if (lpoRemainingQuantityViewModel.LPOQuantity == 0)
+        {
+            <select class="form-control" id="VenderId">
+                @foreach (var item in venderViewModels)
+                {
+                    <option value="@item.Id" @(item.Id == LPOInvoiceViewModel.UpdatedBy ? "selected='selected'" : "")>@item.Name</option>
+                }
+            </select>
+         }
+        
+            <div class="form-group">
+                <p style="margin-top:10px">
+                </p>
+                @if (lpoRemainingQuantityViewModel.LPOQuantity != 0)
+                {
+                    <p><i class="glyphicon glyphicon-user"> </i>Company Name: <span id="ContactPerson">@LPOInvoiceViewModel.Name</span></p>
+                }
+                <p><i class="glyphicon glyphicon-road"></i> Address: <span id="VenderAddress">@LPOInvoiceViewModel.Address</span></p>
+                <p><i class="glyphicon glyphicon-earphone"></i>Land Line : <span id="VenderPhone">@LPOInvoiceViewModel.LandLine</span></p>
+                <p><i class="glyphicon glyphicon-earphone"></i>Mobile : <span id="VenderCell">@LPOInvoiceViewModel.Mobile</span></p>
+                <p><i class="glyphicon glyphicon-envelope"></i>Email :<span id="VenderEmail">@LPOInvoiceViewModel.Email</span></p>
+                <p> <i class="glyphicon glyphicon-text-width"></i>TRN : <span id="VenderVAT">@LPOInvoiceViewModel.TRN</span></p>
+            </div>
+        
     </div>
 
     <div class="col-md-4">
-        @if(LPOInvoiceViewModel.Heading == "BILL")
+        @if (LPOInvoiceViewModel.Heading == "BILL")
         {
+            if (lpoRemainingQuantityViewModel.LPOQuantity != 0)
+            {
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -82,6 +101,7 @@
                     </tr>
                 </tbody>
             </table>
+            }
         }
 
     </div>
@@ -114,7 +134,7 @@
                     <div class="input-group-append">
                         <span class="input-group-text" id="basic-addon2">Ref NO# ::</span>
                     </div>
-                    <label class="form-control" id="RefrenceNumber">@LPOInvoiceViewModel.RefrenceNumber</label>
+                    <input type="text" class="form-control" id="RefrenceNumber" value="@LPOInvoiceViewModel.RefrenceNumber"/>
                 </div>
             }
             @if (LPOInvoiceViewModel.Heading == "BILL")
@@ -123,7 +143,7 @@
                     <div class="input-group-append">
                         <span class="input-group-text" id="basic-addon2">Invoice NO# :</span>
                     </div>
-                    <input type="text" id="BillNumbers" class="form-control" placeholder="Invoice Number" value="@LPOInvoiceViewModel.BillNumber" />
+                    <input type="text" id="BillNumbers" class="form-control" placeholder="Refrence Number" value="@LPOInvoiceViewModel.BillNumber" />
                 </div>              
             }
         </div>

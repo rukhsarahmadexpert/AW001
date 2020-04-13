@@ -914,11 +914,6 @@
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Invoice\Edit.cshtml" />
     <Content Include="Views\Invoice\Index.cshtml" />
-    <Content Include="Views\LPO\Create.cshtml" />
-    <Content Include="Views\LPO\Details.cshtml" />
-    <Content Include="Views\LPO\Edit.cshtml" />
-    <Content Include="Views\LPO\Index.cshtml" />
-    <Content Include="Views\LPO\LPOConverted.cshtml" />
     <Content Include="Views\ProductUnit\Create.cshtml" />
     <Content Include="Views\ProductUnit\Index.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />

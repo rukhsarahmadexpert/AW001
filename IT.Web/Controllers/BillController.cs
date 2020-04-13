@@ -51,26 +51,25 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                var Result = webServices.Post(new LPOInvoiceViewModel(), "LPO/Edit/" + Id);
+                LpoRemainingQuantityViewModel lpoRemainingQuantityViewModel = new LpoRemainingQuantityViewModel();
 
-                if (Result.Data != "[]")
+                if (Id > 0)
                 {
-                    lPOInvoiceViewModel = (new JavaScriptSerializer().Deserialize<LPOInvoiceViewModel>(Result.Data.ToString()));
-                    ViewBag.lPOInvoiceViewModel = lPOInvoiceViewModel;
+                    var Result = webServices.Post(new LPOInvoiceViewModel(), "LPO/Edit/" + Id);
 
-                    SearchViewModel searchViewModel = new SearchViewModel
+                    if (Result.Data != "[]")
                     {
-                        Id = Id
-                    };
-                    var ResultRemainingQuanntity = webServices.Post(searchViewModel, "Bill/LPOGetRemainingDetails");
+                        lPOInvoiceViewModel = (new JavaScriptSerializer().Deserialize<LPOInvoiceViewModel>(Result.Data.ToString()));
+                        ViewBag.lPOInvoiceViewModel = lPOInvoiceViewModel;
 
-                    LpoRemainingQuantityViewModel lpoRemainingQuantityViewModel = new LpoRemainingQuantityViewModel();
-                    lpoRemainingQuantityViewModel = (new JavaScriptSerializer().Deserialize<LpoRemainingQuantityViewModel>(ResultRemainingQuanntity.Data.ToString()));
+                        SearchViewModel searchViewModel = new SearchViewModel
+                        {
+                            Id = Id
+                        };
+                        var ResultRemainingQuanntity = webServices.Post(searchViewModel, "Bill/LPOGetRemainingDetails");
 
-                    ViewBag.lPOInvoiceViewModel = lPOInvoiceViewModel;
-                    ViewBag.lpoRemainingQuantityViewModel = lpoRemainingQuantityViewModel;
-
-                    lPOInvoiceViewModel.Heading = "BILL";
+                        lpoRemainingQuantityViewModel = (new JavaScriptSerializer().Deserialize<LpoRemainingQuantityViewModel>(ResultRemainingQuanntity.Data.ToString()));
+                    }
 
                     // lPOInvoiceDetails = lPOInvoiceViewModel.lPOInvoiceDetailsList;
                     ViewBag.lPOInvoiceDetails = lPOInvoiceDetails;
@@ -89,46 +88,78 @@ namespace IT.Web_New.Controllers
                     {
                         ViewBag.Success = TempData["Success"];
                     }
+                }
+                lPOInvoiceViewModel.Heading = "BILL";
+                ViewBag.lPOInvoiceViewModel = lPOInvoiceViewModel;
+                ViewBag.lpoRemainingQuantityViewModel = lpoRemainingQuantityViewModel;
+                lPOInvoiceViewModel.RefrenceNumber = lPOInvoiceViewModel.PONumber;
+                BillPONumber billPONumber = new BillPONumber();
 
-                    lPOInvoiceViewModel.RefrenceNumber = lPOInvoiceViewModel.PONumber;
-                    BillPONumber billPONumber = new BillPONumber();
+                lPOInvoiceViewModel.PONumber = "Bill-001";
 
-                    lPOInvoiceViewModel.PONumber = "Bill-001";
+                LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel
+                {
+                    FromDate = System.DateTime.Now,
+                    DueDate = System.DateTime.Now,
+                };
 
-                    LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel
+                var result = webServices.Post(new ProductViewModel(), "Product/All");
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (result.Data != "[]")
                     {
-                        FromDate = System.DateTime.Now,
-                        DueDate = System.DateTime.Now,
-                    };
-                    var result = webServices.Post(new ProductViewModel(), "Product/All");
-                    ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
-                    ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
-                    ViewBag.Product = ProductViewModel;
+                        ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
+                        ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
+                    }
+                    else
+                    {
+                        ProductViewModel.Add(new ProductViewModel() { Id = 0, Name = "Select Item" });
+                    }
+                }
 
-                    var results = webServices.Post(new ProductUnitViewModel(), "ProductUnit/All");
-                    productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
-                    productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
-                    ViewBag.ProductUnit = productUnitViewModels;
+                ViewBag.Product = ProductViewModel;
 
-                    var Res = webServices.Post(new DriverViewModel(), "Vender/All");
-                    venderViewModels = (new JavaScriptSerializer()).Deserialize<List<VenderViewModel>>(Res.Data.ToString());
-                    venderViewModels.Insert(0, new VenderViewModel() { Id = 0, Name = "Select Vender" });
+                var results = webServices.Post(new ProductUnitViewModel(), "ProductUnit/All");
+                if (results.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (results.Data != "[]")
+                    {
+                        productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
+                        productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                    }
+                    else
+                    {
+                        productUnitViewModels.Add(new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                    }
+                }
+                ViewBag.ProductUnit = productUnitViewModels;
 
-                    ViewBag.Vender = venderViewModels;
+                var Res = webServices.Post(new DriverViewModel(), "Vender/All");
+                if (Res.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (Res.StatusCode == System.Net.HttpStatusCode.Accepted)
+                        if (Res.Data != "[]")
+                        {
+                            venderViewModels = (new JavaScriptSerializer()).Deserialize<List<VenderViewModel>>(Res.Data.ToString());
+                            venderViewModels.Insert(0, new VenderViewModel() { Id = 0, Name = "Select Vender" });
+                        }
+                        else
+                        {
+                            venderViewModels.Add(new VenderViewModel() { Id = 0, Name = "Select Vender" });
+                        }
+                }
 
-                    List<VatModel> model = new List<VatModel>
+                ViewBag.Vender = venderViewModels;
+
+                List<VatModel> model = new List<VatModel>
                     {
                         new VatModel() { Id = 0, VAT = 0 },
                         new VatModel() { Id = 5, VAT = 5 }
                     };
-                    ViewBag.VatDrop = model;
+                ViewBag.VatDrop = model;
 
-                    return View(lPOInvoiceVModel);
-                }
-                else
-                {
-                    return View();
-                }
+                return View(lPOInvoiceVModel);
+
             }
             catch (Exception ex)
             {
@@ -141,6 +172,7 @@ namespace IT.Web_New.Controllers
         {
             try
             {
+                lPOInvoiceViewModel.VenderId = "3";
                 // return Json("Success",JsonRequestBehavior.AllowGet);
 
                 lPOInvoiceViewModel.FromDate = Convert.ToDateTime(lPOInvoiceViewModel.FromDate);
@@ -186,7 +218,7 @@ namespace IT.Web_New.Controllers
                 }
 
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                               
+
                 var result = webServices.Post(new LPOInvoiceViewModel(), "Bill/All");
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -345,16 +377,36 @@ namespace IT.Web_New.Controllers
                         ViewBag.Success = TempData["Success"];
                     }
 
-                    SearchViewModel searchViewModel = new SearchViewModel();
-                    searchViewModel.Id = Id;
-
-                    var ResultRemainingQuanntity = webServices.Post(searchViewModel, "Bill/LPOGetRemainingDetails");
-
+                    SearchViewModel searchViewModel = new SearchViewModel
+                    {
+                        Id = Id
+                    };       
                     LpoRemainingQuantityViewModel lpoRemainingQuantityViewModel = new LpoRemainingQuantityViewModel();
-                    lpoRemainingQuantityViewModel = (new JavaScriptSerializer().Deserialize<LpoRemainingQuantityViewModel>(ResultRemainingQuanntity.Data.ToString()));
+
+                    if (lPOInvoiceViewModel.IsFromLpo == true)
+                    {
+                        var ResultRemainingQuanntity = webServices.Post(searchViewModel, "Bill/LPOGetRemainingDetails");
+                        lpoRemainingQuantityViewModel = (new JavaScriptSerializer().Deserialize<LpoRemainingQuantityViewModel>(ResultRemainingQuanntity.Data.ToString()));
+                    }
+
+                    var Res = webServices.Post(new DriverViewModel(), "Vender/All");
+                    if (Res.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        if (Res.StatusCode == System.Net.HttpStatusCode.Accepted)
+                            if (Res.Data != "[]")
+                            {
+                                venderViewModels = (new JavaScriptSerializer()).Deserialize<List<VenderViewModel>>(Res.Data.ToString());
+                                venderViewModels.Insert(0, new VenderViewModel() { Id = 0, Name = "Select Vender" });
+                            }
+                            else
+                            {
+                                venderViewModels.Add(new VenderViewModel() { Id = 0, Name = "Select Vender" });
+                            }
+                    }
+
+                    ViewBag.Vender = venderViewModels;
 
                     ViewBag.lpoRemainingQuantityViewModel = lpoRemainingQuantityViewModel;
-
                     ViewBag.RefrenceNumber = lPOInvoiceViewModel.RefrenceNumber;
                 }
                 return View();
@@ -407,12 +459,11 @@ namespace IT.Web_New.Controllers
                 productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
                 productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
                 ViewBag.ProductUnit = productUnitViewModels;
-
-
+                
                 List<VatModel> model = new List<VatModel>
                 {
-                new VatModel() { Id = 0, VAT = 0 },
-                new VatModel() { Id = 5, VAT = 5 },
+                    new VatModel() { Id = 0, VAT = 0 },
+                    new VatModel() { Id = 5, VAT = 5 },
                 };
                 ViewBag.VatDrop = model;
 
@@ -437,8 +488,9 @@ namespace IT.Web_New.Controllers
                         ViewBag.Success = TempData["Success"];
                     }
 
-                    SearchViewModel searchViewModel = new SearchViewModel();
-                    searchViewModel.Id = Id;
+                    SearchViewModel searchViewModel = new SearchViewModel {
+                        Id = Id
+                    };
 
                     var ResultRemainingQuanntity = webServices.Post(searchViewModel, "Bill/LPOGetRemainingDetails");
 
@@ -573,6 +625,9 @@ namespace IT.Web_New.Controllers
                 Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
                 Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
 
+                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + lPOInvoiceModel.compnays[0].LogoUrl);
+                Report.SetParameterValue("Heading", "Bill");
+
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
 
@@ -614,6 +669,7 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult PrintBill(int Id)
         {
+            
             string pdfname = "";
             try
             {
@@ -648,10 +704,13 @@ namespace IT.Web_New.Controllers
                 Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
                 Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
 
+                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + lPOInvoiceModel.compnays[0].LogoUrl);
+                Report.SetParameterValue("Heading", "Bill");
+                
                 string companyName;
                 if (lPOInvoiceModels.Count > 0)
                 {
-                    companyName = Id + "-" + lPOInvoiceModels[0].PONumber;
+                    companyName = Id + lPOInvoiceModels[0].PONumber;
                 }
                 else
                 {
@@ -670,8 +729,7 @@ namespace IT.Web_New.Controllers
                 string fileName = companyName + ".PDF";
                 //return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
 
-                Report.SetParameterValue("ImageUrl", "http://itmolen-001-site8.htempurl.com/ClientDocument/" + lPOInvoiceModel.compnays[0].LogoUrl);
-
+                
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
 

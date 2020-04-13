@@ -48,9 +48,35 @@
         </div>
     </div>
 </main>
+<input type="hidden" class="Venders"/>
 <input type="hidden" id="SendByEmail" />
 @section Scripts{
     <script>
+
+        $(document).ready(function () {
+
+            $('#VenderId').change(function () {
+
+                var Id = $(this).val();
+                if (Id > 0) {
+                    $('.Venders').val(Id);
+                    ajaxRequest("GET", "/Vender/Edit/" + Id, "", "json").then(function (result) {
+                        if (result != "Falied") {
+                            console.log(result);
+                            $('#VenderAddress').text(result.Address);
+                            $('#VenderPhone').text(result.LandLine);
+                            $('#VenderCell').text(result.Mobile);
+                            $('#VenderEmail').text(result.Email);
+                            $('#VenderVAT').text(result.TRN);
+                        }
+                    })
+                }
+                else {
+                    return true;
+                }
+            })
+
+        })
 
         $('#BillSave').click(function () {
 
@@ -61,8 +87,7 @@
                 }
             }
         });
-
-
+        
         function CreateLPOInvoice(Url) {
             if (1 == 1) {
 
@@ -106,7 +131,7 @@
                     GrandTotal: $('#gtotal').text(),
                     TermCondition: $('#TermCondition').val(),
                     CustomerNote: $('#CustomerNote').val(),
-                    VenderId: $('#Venders').val(),
+                    VenderId: $('.Venders').val(),
                 };
                 for (var key in empObj) {
                     formData.append(key, empObj[key]);
@@ -174,7 +199,7 @@
 
             var IsValid = true;
 
-            if ($('#RefrenceNumber').text().trim() == "") {
+            if ($('#RefrenceNumber').val().trim() == "") {
                 $('#RefrenceNumber').css('border-color', 'Red');
                 IsValid = false;
             }
@@ -211,5 +236,6 @@
         });
 
     </script>
+
     <script src="~/Scripts/Common-Scripts/LOP-Invoice.js"></script>
 }
