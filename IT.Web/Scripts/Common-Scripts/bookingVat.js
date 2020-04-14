@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $('#Quantity').keyup(function () {       
+    $('#Quantity').keyup(function () {  
         VatCount();
     });
 
@@ -20,11 +20,11 @@ function VatCount()
     var VatAmount = 0.00;
     var GrandTotal = 0.00;
 
-   
     $('#BookingTable1 tbody tr').each(function () {
        // var currentRow = $(this).closest("tr");
-        if ($(this).find(".Quantity").val() > 0 && $(this).find(".UnitPrice").val())
+        if ($(this).find(".Quantity").val() > 0 && $(this).find(".UnitPrice").val() > 0)
         {
+            
             price = $(this).find(".UnitPrice").val();          
             quantity = $(this).find(".Quantity").val();
             total = price * quantity;

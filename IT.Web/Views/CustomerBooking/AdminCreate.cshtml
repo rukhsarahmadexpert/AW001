@@ -54,7 +54,7 @@
 
 
                 <div class="table-responsive-lg">
-                    <table class="table m-0 data-table" id="SiteTarget">
+                    <table class="table m-0 data-table" id="BookingTable1">
                         <thead>
                             <tr>
                                 <th>Quantity</th>
@@ -67,7 +67,7 @@
                         <tbody>
                             <tr>
                                 <td style="width:200px">
-                                    <input type="text" class="form-control Quantity" onfocus="this.value=''" name="BookQuantity" id="Quantity" placeholder="QTY" value="@Model.BookQuantity" />
+                                    <input type="text" class="form-control Quantity"  onfocus="this.value=''" name="BookQuantity" id="Quantity" placeholder="QTY" value="@Model.BookQuantity" />
                                 </td>
                                 <td style="width:250px !important">
                                     <div class="form-group mb-2">
@@ -83,13 +83,11 @@
                                 </td>
 
                                 <td>
-                                    <input type="text" name="UnitPrice" class="form-control UnitPrice" onfocus="this.value=''" id="UnitPrice" placeholder="Unit Price" value="@Model.UnitPrice" />
+                                    <input type="text" name="UnitPrice"  onfocus="this.value=''" class="form-control UnitPrice"  id="UnitPrice" placeholder="Unit Price" value="@Model.UnitPrice" />
                                 </td>
 
                                 <td>
                                     <div class="form-group mb-2">
-
-
                                         <select id="VAT1" name="VAT1" class="form-control VAT1" required>
                                             @if (Model.VAT < 1)
                                             {
@@ -162,8 +160,6 @@
 </div>
 
 @section scripts{
-
-
 
     <script src="~/Scripts/Common-Scripts/bookingVat.js"></script>
 

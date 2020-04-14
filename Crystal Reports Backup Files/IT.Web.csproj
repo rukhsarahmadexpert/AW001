@@ -47,28 +47,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <HintPath>..\packages\CrystalDecisions.CrystalReports.Engine.1.0.0\lib\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.Engine.13.0.3500\lib\net20\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="CrystalDecisions.ReportAppServer.ClientDoc, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <HintPath>..\packages\CrystalReports.ReportAppServer.ClientDoc.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.ClientDoc.dll</HintPath>
+      <HintPath>..\packages\CrystalReports.ReportAppServer.ClientDoc.13.0.3500\lib\net20\CrystalDecisions.ReportAppServer.ClientDoc.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
     <Reference Include="CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <HintPath>..\packages\CrystalReports.ReportAppServer.DataSetConversion.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.DataSetConversion.dll</HintPath>
+      <HintPath>..\packages\CrystalReports.ReportAppServer.DataSetConversion.13.0.3500\lib\net20\CrystalDecisions.ReportAppServer.DataSetConversion.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <HintPath>..\packages\CrystalReports.ReportSource.13.0.3501\lib\net20\CrystalDecisions.ReportSource.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalDecisions.ReportSource.1.0.0\lib\CrystalDecisions.ReportSource.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <HintPath>..\packages\CrystalReports.Shared.13.0.3501\lib\net20\CrystalDecisions.Shared.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <HintPath>..\packages\CrystalReports.Web.13.0.3501\lib\net20\CrystalDecisions.Web.dll</HintPath>
+      <HintPath>..\packages\CrystalReports.Shared.13.0.3500\lib\net20\CrystalDecisions.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
@@ -177,6 +173,7 @@
     <Compile Include="Controllers\BillController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\CustomerBookingController.cs" />
     <Compile Include="Controllers\CustomerNotificationController.cs" />
     <Compile Include="Controllers\CustomerOrderController.cs" />
     <Compile Include="Controllers\CustomerSitesController.cs" />
@@ -184,6 +181,8 @@
     <Compile Include="Controllers\DirectSaleController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FuelPricesController.cs" />
     <Compile Include="Controllers\FuelTransferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
@@ -194,6 +193,7 @@
     <Compile Include="Controllers\ReportCustomerController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\StorageController.cs" />
+    <Compile Include="Controllers\UploadDocumentsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Controllers\VehicleTypeController.cs" />
@@ -206,12 +206,14 @@
     <Compile Include="MISC\BillPONumber.cs" />
     <Compile Include="MISC\CommonFile.cs" />
     <Compile Include="MISC\CustomerExpenseNumber.cs" />
+    <Compile Include="MISC\ExceptionLog.cs" />
     <Compile Include="MISC\ExpenseNumber.cs" />
     <Compile Include="MISC\HashPassword.cs" />
     <Compile Include="MISC\InvoicePNNumber.cs" />
     <Compile Include="MISC\OrderNumber.cs" />
     <Compile Include="MISC\POClass.cs" />
     <Compile Include="MISC\PurchaseNumber.cs" />
+    <Compile Include="Models\BookingConfirmationViewModel.cs" />
     <Compile Include="Models\CompnayModel.cs" />
     <Compile Include="Models\CustomerOrder.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
@@ -241,14 +243,27 @@
       <DependentUpon>LPOInvoice.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\LPO-Invoice\LPOInvoiceList.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LPOInvoiceList.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\LPO-Invoice\LPOReport4.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LPOReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\OrderConfirmation\OrderConfirmation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderConfirmation.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.js" />
     <Content Include="assets\css\app.bundle.css" />
     <Content Include="assets\css\datagrid\datatables\datatables.bundle.css" />
     <Content Include="assets\css\fa-brands.css" />
@@ -465,6 +480,9 @@
     <Content Include="assets\img\favicon\favicon-32x32.png" />
     <Content Include="assets\img\favicon\safari-pinned-tab.svg" />
     <Content Include="assets\img\loading.gif" />
+    <Content Include="assets\img\logo-1.svg" />
+    <Content Include="assets\img\logo-2.svg" />
+    <Content Include="assets\img\logo-3.svg" />
     <Content Include="assets\img\logo-minify.html" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\img\svg\pattern-1.svg" />
@@ -514,6 +532,74 @@
     <Content Include="assets\js\vendors.bundle.js" />
     <Content Include="assets\media\video\cc.mp4" />
     <Content Include="assets\media\video\cc.webm" />
+    <Content Include="assets\site\css\plugins\bundle.css" />
+    <Content Include="assets\site\css\style.css" />
+    <Content Include="assets\site\fonts\ionicons28b5-2.html" />
+    <Content Include="assets\site\fonts\ionicons28b5-3.html" />
+    <Content Include="assets\site\fonts\ionicons28b5-4.html" />
+    <Content Include="assets\site\fonts\ionicons28b5.html" />
+    <Content Include="assets\site\images\app-store.png" />
+    <Content Include="assets\site\images\banner1.jpg" />
+    <Content Include="assets\site\images\banner2.jpg" />
+    <Content Include="assets\site\images\banner3.jpg" />
+    <Content Include="assets\site\images\banner4.jpg" />
+    <Content Include="assets\site\images\bg1.jpg" />
+    <Content Include="assets\site\images\bg2.jpg" />
+    <Content Include="assets\site\images\favicon.png" />
+    <Content Include="assets\site\images\img1.jpg" />
+    <Content Include="assets\site\images\img2.jpg" />
+    <Content Include="assets\site\images\img3.jpg" />
+    <Content Include="assets\site\images\img4.jpg" />
+    <Content Include="assets\site\images\img5.jpg" />
+    <Content Include="assets\site\images\img6.jpg" />
+    <Content Include="assets\site\images\iphone.png" />
+    <Content Include="assets\site\images\logo-1.png" />
+    <Content Include="assets\site\images\logo-light-1.png" />
+    <Content Include="assets\site\images\logo-light-2.png" />
+    <Content Include="assets\site\images\logo-light-3-4.svg" />
+    <Content Include="assets\site\images\logo-light-3.png" />
+    <Content Include="assets\site\images\logo-light.png" />
+    <Content Include="assets\site\images\logo.png" />
+    <Content Include="assets\site\images\mobile-app-1.png" />
+    <Content Include="assets\site\images\mobile-app-2.png" />
+    <Content Include="assets\site\images\mobile-app-3.png" />
+    <Content Include="assets\site\images\mobile-app-4.png" />
+    <Content Include="assets\site\images\mobile-app-5.png" />
+    <Content Include="assets\site\images\mobile-app.png" />
+    <Content Include="assets\site\images\mockup1.png" />
+    <Content Include="assets\site\images\mockup2.png" />
+    <Content Include="assets\site\images\mockup3.png" />
+    <Content Include="assets\site\images\mockup4.png" />
+    <Content Include="assets\site\images\p1.png" />
+    <Content Include="assets\site\images\p2.png" />
+    <Content Include="assets\site\images\p3.png" />
+    <Content Include="assets\site\images\p4.png" />
+    <Content Include="assets\site\images\p5.png" />
+    <Content Include="assets\site\images\p6.png" />
+    <Content Include="assets\site\images\play-store.png" />
+    <Content Include="assets\site\images\shot-sm1.png" />
+    <Content Include="assets\site\images\shot-sm2.png" />
+    <Content Include="assets\site\images\shot1.png" />
+    <Content Include="assets\site\images\shot2.png" />
+    <Content Include="assets\site\images\shot3.png" />
+    <Content Include="assets\site\images\Untitled-1.png" />
+    <Content Include="assets\site\images\video-fallback.jpg" />
+    <Content Include="assets\site\ionicons\fonts\ionicons28b5.svg" />
+    <Content Include="assets\site\js\contact.js" />
+    <Content Include="assets\site\js\jquery.gmaps.min.js" />
+    <Content Include="assets\site\js\plugins\plugins.js" />
+    <Content Include="assets\site\js\template-custom.js" />
+    <Content Include="assets\site\masterslider\masterslider.min.js" />
+    <Content Include="assets\site\masterslider\skins\default\light-skin-1-retina.png" />
+    <Content Include="assets\site\masterslider\skins\default\light-skin-1.png" />
+    <Content Include="assets\site\masterslider\skins\default\style.css" />
+    <Content Include="assets\site\masterslider\style\blank.gif" />
+    <Content Include="assets\site\masterslider\style\grab.png" />
+    <Content Include="assets\site\masterslider\style\grabbing.png" />
+    <Content Include="assets\site\masterslider\style\loading-2.gif" />
+    <Content Include="assets\site\masterslider\style\masterslider.css" />
+    <Content Include="assets\site\masterslider\style\video-close-btn.png" />
+    <Content Include="assets\staticImages\banner.png" />
     <Content Include="assets\staticImages\company.png" />
     <Content Include="assets\staticImages\icon1.png" />
     <Content Include="assets\staticImages\logo-1.png" />
@@ -528,6 +614,8 @@
     <Content Include="assets\webfonts\webfonts\nextgen-icons-2.html" />
     <Content Include="assets\webfonts\webfonts\nextgen-icons-3.html" />
     <Content Include="assets\webfonts\webfonts\nextgen-icons.html" />
+    <Content Include="bin\IT.Web.dll" />
+    <Content Include="bin\IT.Web.pdb" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -577,9 +665,12 @@
     <Content Include="Content\css\wave\button.css" />
     <Content Include="Content\css\wave\waves.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="firebase-messaging-sw.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="logo-1.png" />
+    <Content Include="Scripts\Common-Scripts\bookingVat.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -624,13 +715,21 @@
     <Content Include="PDF\5-INV-001.pdf" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\CustomScript\TokenScript.js" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\firebass.app.js" />
     <Content Include="Scripts\index.js.flow" />
+    <Content Include="manifest.json" />
+    <Content Include="assets\site\ionicons\fonts\ionicons28b5.eot" />
+    <Content Include="assets\site\ionicons\fonts\ionicons28b5.ttf" />
+    <Content Include="assets\site\ionicons\fonts\ionicons28b5.woff" />
+    <Content Include="Backup\DB_A415B5_AW_3_31_2020.bak" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Common-Scripts\LOP-Invoice.js" />
     <Content Include="Scripts\CustomScript\common-script.js" />
@@ -740,7 +839,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
@@ -816,11 +914,6 @@
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Invoice\Edit.cshtml" />
     <Content Include="Views\Invoice\Index.cshtml" />
-    <Content Include="Views\LPO\Create.cshtml" />
-    <Content Include="Views\LPO\Details.cshtml" />
-    <Content Include="Views\LPO\Edit.cshtml" />
-    <Content Include="Views\LPO\Index.cshtml" />
-    <Content Include="Views\LPO\LPOConverted.cshtml" />
     <Content Include="Views\ProductUnit\Create.cshtml" />
     <Content Include="Views\ProductUnit\Index.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
@@ -862,11 +955,69 @@
     <Content Include="Views\Vender\Index.cshtml" />
     <Content Include="Views\Web\AppVersionAdd.cshtml" />
     <Content Include="Views\Web\Index.cshtml" />
+    <Content Include="Views\Home\AdminHome.cshtml" />
+    <Content Include="Views\Home\CustomerHomes.cshtml" />
+    <Content Include="Views\Home\Policy.cshtml" />
+    <Content Include="Views\Employee\Create.cshtml" />
+    <Content Include="Views\Bill\Edit.cshtml" />
+    <Content Include="Views\Vender\Details.cshtml" />
+    <Content Include="Views\CustomerNotification\Details.cshtml" />
+    <Content Include="Views\Quotation\IndexCustomer.cshtml" />
+    <Content Include="Views\Invoice\CustomerIndex.cshtml" />
+    <Content Include="Views\Bill\BillAllByLpoId.cshtml" />
+    <Content Include="Views\FuelPrices\Index.cshtml" />
+    <Content Include="Views\FuelPrices\Create.cshtml" />
+    <Content Include="Views\Shared\_LayoutSite.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\BulkStorage.cshtml" />
+    <Content Include="Views\Home\FuelTransportation.cshtml" />
+    <Content Include="Views\Home\Products.cshtml" />
+    <Content Include="Views\Home\Training.cshtml" />
+    <Content Include="Views\User\Test.cshtml" />
+    <Content Include="Views\CustomerBooking\Index.cshtml" />
+    <Content Include="Views\CustomerBooking\Customer.cshtml" />
+    <Content Include="Views\CustomerBooking\AdminCreate.cshtml" />
+    <Content Include="Views\CustomerBooking\CustomerBookingGetById.cshtml" />
+    <Content Include="Views\CustomerBooking\CustomerCreate.cshtml" />
+    <Content Include="Views\CustomerBooking\Edit.cshtml" />
+    <Content Include="Views\CustomerBooking\Details.cshtml" />
+    <Content Include="Views\CustomerBooking\CustomerBookingReserved.cshtml" />
+    <Content Include="Views\Shared\PartialView\Booking\BookingList.cshtml" />
+    <Content Include="Views\CustomerBooking\BookingReserved.cshtml" />
+    <Content Include="Views\CustomerBooking\BookingRemaining.cshtml" />
+    <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Shared\PartialView\UploadDocuments\UploadDocuments.cshtml" />
+    <Content Include="Views\CustomerBooking\CustomerDetails.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\ProductUnit\Details.cshtml" />
+    <Content Include="Views\Designation\Details.cshtml" />
+    <Content Include="Views\Quotation\CreateEstimates.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\Company\CompanyEdit.cshtml" />
+    <Content Include="Views\User\UserInformation.cshtml" />
+    <Content Include="Views\User\UserInformationEdit.cshtml" />
+    <Content Include="Views\CustomerBooking\Confirmation.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\Company\CompanyInformation.cshtml" />
+    <Content Include="Views\User\ForgotPassword.cshtml" />
+    <Content Include="Views\User\PasswordRestCode.cshtml" />
+    <Content Include="Views\User\UpdateForGotPassword.cshtml" />
+    <Content Include="Views\FuelPrices\Details.cshtml" />
+    <Content Include="Views\Company\AdminCompanyInformation.cshtml" />
+    <Content Include="Views\User\ChangeAdminPassword.cshtml" />
+    <Content Include="Views\User\AdminUserInformation.cshtml" />
+    <Content Include="Views\User\AdminUserInformationEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DirectoryFolder\" />
+    <Folder Include="obj\Debug\" />
     <Folder Include="Views\AWDepartment\" />
     <Folder Include="Views\CustomerQuotation\" />
+    <Folder Include="Views\Error\" />
+    <Folder Include="Views\NotFound\" />
+    <Folder Include="Views\UploadDocuments\" />
     <Folder Include="Views\VehicleType\" />
   </ItemGroup>
   <ItemGroup>
@@ -905,9 +1056,17 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>LPOInvoice3.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LPO-Invoice\LPOInvoiceList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>LPOInvoiceList.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\LPO-Invoice\LPOReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>LPOReport4.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OrderConfirmation\OrderConfirmation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrderConfirmation.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -936,7 +1095,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64287</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64287/</IISUrl>
+          <IISUrl>http://localhost:64288/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

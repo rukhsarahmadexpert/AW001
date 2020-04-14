@@ -47,9 +47,12 @@
         @if (lpoRemainingQuantityViewModel.LPOQuantity == 0)
         {
             <select class="form-control" id="VenderId">
-                @foreach (var item in venderViewModels)
+                @if(venderViewModels != null)
                 {
-                    <option value="@item.Id" @(item.Id == LPOInvoiceViewModel.UpdatedBy ? "selected='selected'" : "")>@item.Name</option>
+                    foreach (var item in venderViewModels)
+                    {
+                        <option value="@item.Id" @(item.Id == LPOInvoiceViewModel.UpdatedBy ? "selected='selected'" : "")>@item.Name</option>
+                    }
                 }
             </select>
          }
