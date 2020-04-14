@@ -373,7 +373,7 @@ namespace IT.Web_New.Controllers
                                 content.Add(new StringContent("true"), "IsActive");
 
                                 //  var result1 = client.PostAsync("http://localhost:64299/api/Company/Add", content).Result;
-                                var result = webServices.PostMultiPart(content, "Company/Update", true);
+                                var result = webServices.PostMultiPart(content, "AWFCompany/Update", true);
                                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                                 {
                                     var companyViewModel = new CompanyViewModel();
@@ -513,11 +513,13 @@ namespace IT.Web_New.Controllers
             {
                 CompnayModel compnayModel = new CompnayModel();
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                SearchViewModel searchViewModel = new SearchViewModel
                 {
+
                     Id = id
-                };
-                var companyData = webServices.Post(pagingParameterModel, "Company/CompanyById");
+            };
+                
+                var companyData = webServices.Post(searchViewModel, "AWFCompany/Edit");
                 if (companyData.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     if (companyData.Data != "[]" && companyData.Data != null)
