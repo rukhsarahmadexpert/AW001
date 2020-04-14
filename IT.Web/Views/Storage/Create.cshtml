@@ -162,7 +162,6 @@
                     loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow1", "#SourceRow1");
                 }
             });
-
             $('#SourceRow2').change(function () {
                 var val = $(this).val();
                 if (val == 0) {
@@ -270,7 +269,6 @@
                     contentType: false,
                     processData: false,
                     success: function (result) {
-
                         console.log(result);
                         if (result == "NoData") {
                             alert("Please fill the form to perform opration");
