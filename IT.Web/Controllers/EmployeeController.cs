@@ -88,7 +88,7 @@ namespace IT.Web_New.Controllers
 
             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
-                if (result.Data != "[]")
+                if (result.Data != null)
                 {
                     employeeViewModel = (new JavaScriptSerializer().Deserialize<EmployeeViewModel>(result.Data.ToString()));
                 }
@@ -276,16 +276,18 @@ namespace IT.Web_New.Controllers
                  employeeViewModel = new EmployeeViewModel();
                 var employeeResult = webServices.Post(new EmployeeViewModel(), "AWFEmployee/Edit/" + Id);
 
+                DesignationController designationController = new DesignationController();
+                ViewBag.Designations = designationController.Designations();
+
                 if (employeeResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     if(employeeResult.Data !=null)
                     {
-                    employeeViewModel = (new JavaScriptSerializer().Deserialize<EmployeeViewModel>(employeeResult.Data.ToString()));
+                         employeeViewModel = (new JavaScriptSerializer().Deserialize<EmployeeViewModel>(employeeResult.Data.ToString()));
                     }
                 }
-                DesignationController designationController = new DesignationController();
-                ViewBag.Designations = designationController.Designations();
                 return View(employeeViewModel);
+                
             }
             catch (Exception ex)
             {
