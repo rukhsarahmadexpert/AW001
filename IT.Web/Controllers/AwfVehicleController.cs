@@ -47,7 +47,7 @@ namespace IT.Web_New.Controllers
                 }
                 if (Request.IsAjaxRequest())
                 {
-                    if (vehicleViewModels == null || vehicleViewModels.Count < 1)
+                    if (VehicleViewModels == null || VehicleViewModels.Count < 1)
                     {
                         VehicleViewModel vehicleViewModel = new VehicleViewModel
                         {
@@ -206,7 +206,6 @@ namespace IT.Web_New.Controllers
 
                                     return View(vehicleViewModel);
                                 }
-
                                 else
                                 {
                                     return RedirectToAction(nameof(Index));

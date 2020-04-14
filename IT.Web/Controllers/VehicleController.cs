@@ -59,11 +59,9 @@ namespace IT.Web_New.Controllers
                         VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
                     }
                 }
-
-                
                 if (Request.IsAjaxRequest())
                 {
-                    if(vehicleViewModels == null || vehicleViewModels.Count < 1)
+                    if(VehicleViewModels == null || VehicleViewModels.Count < 1)
                     {
                         VehicleViewModel vehicleViewModel = new VehicleViewModel {
                             Id = 0,

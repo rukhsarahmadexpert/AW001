@@ -98,7 +98,7 @@
                 { "data": "OwnerRepresentaive", "name": "OwnerRepresentaive", "autoWidth": true },              
                 {
                     render: function (data, type, row) {
-                        return '<div class="pull-right"><button  class="btn btn-info btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>'
+                        return '<div class="pull-right"><button  class="btn btn-info btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button> | <button  class="btn btn-info btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-pencil"></i></button>'
                     }
                 }
             ]
@@ -109,6 +109,10 @@
     function Edit(Id) {
 
         window.location.href = "/Company/Edit/"+Id;
+    }
+
+    function Details(Id) {
+        window.location.href = "/Company/Details/" + Id;
     }
 
 </script>

@@ -988,7 +988,6 @@
     <Content Include="Views\ProductUnit\Details.cshtml" />
     <Content Include="Views\Designation\Details.cshtml" />
     <Content Include="Views\Quotation\CreateEstimates.cshtml" />
-    <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Company\CompanyEdit.cshtml" />
     <Content Include="Views\User\UserInformation.cshtml" />
     <Content Include="Views\User\UserInformationEdit.cshtml" />
@@ -1009,6 +1008,7 @@
     <Content Include="Views\LPO\Index.cshtml" />
     <Content Include="Views\LPO\LPOConverted.cshtml" />
     <Content Include="Views\Company\AdminCompanyEdit.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
