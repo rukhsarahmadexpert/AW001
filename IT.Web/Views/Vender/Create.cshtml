@@ -4,11 +4,11 @@
 
     if (Model.Id > 0)
     {
-        ViewBag.Title = "AW Fuel - Edit Vender";
+        ViewBag.Title = "AW Fuel - Edit Vendor";
     }
     else
     {
-        ViewBag.Title = "AW Fuel - Create Vender";
+        ViewBag.Title = "AW Fuel - Create Vendor";
     }
 
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
@@ -26,13 +26,13 @@
                 @if (Model.Id > 0)
                 {
                     <h2>
-                        Vender <span class="fw-300">Edit</span>
+                        Vendor <span class="fw-300">Edit</span>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        Vender <span class="fw-300">Create</span>
+                        Vendor <span class="fw-300">Create</span>
                     </h2>
                 }
 
@@ -46,7 +46,7 @@
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Company Name</label>
                                     <input type="hidden" name="Id" id="Id" value="@Model.Id" />
-                                    <input type="text" id="Name" value="@Model.Name" autocomplete="off" name="Name" class="form-control" placeholder="vender Name">
+                                    <input type="text" id="Name" value="@Model.Name" autocomplete="off" name="Name" class="form-control" placeholder="Company Name">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -176,14 +176,14 @@
                                 {
                                     <button type="submit" class="btn btn-primary btn-sm float-right waves-effect waves-themed">
                                         Update
-                                        <span>Vender</span>
+                                        <span>Vendor</span>
                                     </button>
                                 }
                                 else
                                 {
                                     <button type="submit" class="btn btn-primary btn-sm float-right waves-effect waves-themed">
                                         Submit
-                                        <span>Vender</span>
+                                        <span>Vendor</span>
                                     </button>
                                 }
                             </div>
