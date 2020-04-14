@@ -273,11 +273,15 @@ namespace IT.Web_New.Controllers
         {
             try
             {
+                 employeeViewModel = new EmployeeViewModel();
                 var employeeResult = webServices.Post(new EmployeeViewModel(), "AWFEmployee/Edit/" + Id);
 
                 if (employeeResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
+                    if(employeeResult.Data !=null)
+                    {
                     employeeViewModel = (new JavaScriptSerializer().Deserialize<EmployeeViewModel>(employeeResult.Data.ToString()));
+                    }
                 }
                 DesignationController designationController = new DesignationController();
                 ViewBag.Designations = designationController.Designations();

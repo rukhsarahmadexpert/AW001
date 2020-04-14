@@ -53,7 +53,6 @@ namespace IT.Web_New.Controllers
                         {
                             Id = 0,
                             TraficPlateNumber = "Select vehicle"
-
                         };
 
                         VehicleViewModels.Add(vehicleViewModel);
