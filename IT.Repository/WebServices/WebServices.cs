@@ -12,7 +12,7 @@ namespace IT.Repository.WebServices
     public class WebServices
     {
         HttpClient httpClient;
-         //readonly string baseURL = "http://localhost:64299/api/"; //ConfigurationManager.AppSettings["BaseURL"].ToString();
+       //readonly string baseURL = "http://localhost:64299/api/"; //ConfigurationManager.AppSettings["BaseURL"].ToString();
        //string baseURL = "http://itmolen-001-site8.htempurl.com/api/";
        readonly string baseURL = "http://awservices.somee.com/api/";
 
