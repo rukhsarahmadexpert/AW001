@@ -409,7 +409,7 @@ namespace IT.Web_New.Controllers
                 {
                     Id = id
                 };
-                var companyData = webServices.Post(pagingParameterModel, "Company/CompanyById");
+                var companyData = webServices.Post(pagingParameterModel, "AWFCompany/Edit");
                 if (companyData.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     if (companyData.Data != "[]" && companyData.Data != null)
