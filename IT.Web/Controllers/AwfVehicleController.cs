@@ -206,6 +206,7 @@ namespace IT.Web_New.Controllers
 
                                     return View(vehicleViewModel);
                                 }
+
                                 else
                                 {
                                     return RedirectToAction(nameof(Index));
