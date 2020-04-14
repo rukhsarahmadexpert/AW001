@@ -335,9 +335,8 @@ namespace IT.Web_New.Controllers
                 }
                 else
                 {
-                    if (Request.Files.Count > 0 && LogoUrl != null)
-                    {
-                        var file = LogoUrl;
+                    
+                       
 
                         using (HttpClient client = new HttpClient())
                         {
@@ -345,14 +344,20 @@ namespace IT.Web_New.Controllers
                             {
                                 if (LogoUrl != null)
                                 {
+                                    var file = LogoUrl;
                                     byte[] fileBytes = new byte[file.InputStream.Length + 1];
                                     file.InputStream.Read(fileBytes, 0, fileBytes.Length);
                                     var fileContent = new ByteArrayContent(fileBytes);
                                     fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
                                     content.Add(fileContent);
+                                    content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                                }
+                                else
+                                {
+                                content.Add(new StringContent(compnayModel.LogoUrl ?? ""), "LogoUrl");
                                 }
 
-                                content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                              
                                 content.Add(new StringContent(compnayModel.Id.ToString()), "Id");
                                 content.Add(new StringContent(compnayModel.Name ?? ""), "Name");
                                 content.Add(new StringContent(compnayModel.Street ?? ""), "Street");
@@ -393,13 +398,15 @@ namespace IT.Web_New.Controllers
                                 else
                                 {
                                     ViewBag.Message = "Failed";
+
+                                    return View("Edit", companyViewModel);
                                 }
                             }
-                        }
+                        
                     }
                 }
 
-                return RedirectToAction(nameof(Index));
+               
             }
             catch (Exception ex)
             {
