@@ -62,11 +62,15 @@
 
 
                                     <select class="select2 form-control" name="Designation" id="Designation">
-                                        @foreach (var item in ViewBag.Designations)
+                                        @if (ViewBag.Designations != null)
                                         {
-                                            <option value="@item.Id" @(item.Id == Model.Designation ? "selected" : "")>@item.Designation</option>
+                                            foreach (var item in ViewBag.Designations)
+                                            {
+                                                <option value="@item.Id" @(item.Id == Model.Designation ? "selected" : "")>@item.Designation</option>
 
+                                            }
                                         }
+
                                     </select>
                                 </div>
 
