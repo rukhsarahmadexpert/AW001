@@ -379,7 +379,16 @@ namespace IT.Web_New.Controllers
                                     var companyViewModel = new CompanyViewModel();
                                     companyViewModel = (new JavaScriptSerializer().Deserialize<CompanyViewModel>(result.Data.ToString()));
 
-                                    return RedirectToAction(nameof(Index));
+                                    var userCompanyViewModel2 = Session["userCompanyViewModel"] as UserCompanyViewModel;
+
+                                    userCompanyViewModel2.LogoUrl = companyViewModel.LogoUrl;
+                                    userCompanyViewModel2.CompanyName = companyViewModel.Name;
+
+                                    Session["userCompanyViewModel"] = userCompanyViewModel2;
+                                    Session["CompanyId"] = companyViewModel.Id;
+                                    Session["UserId"] = companyViewModel.CreatedBy;
+
+                                    return RedirectToAction(nameof(AdminCompanyInformation), new { companyViewModel.Id });
                                 }
                                 else
                                 {
