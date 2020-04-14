@@ -306,11 +306,11 @@
                 //debugger;
                 if (result != "failed") {
                     $(targetId).empty();
-                    $.each(result, function (value, item) {
+                    $.each(result, function (value, item) {                        
                         if ($(sourceId).val() == "site") {
                             $(targetId).append('<option value="' + item.Id + '">' + item.SiteName + '</option>');
                         } else if ($(sourceId).val() == "admin vehicle") {
-                            $(targetId).html('<option value="' + item.Id + '">' + item.TraficPlateNumber + '</option>');
+                            $(targetId).append('<option value="' + item.Id + '">' + item.TraficPlateNumber + '</option>');
                         }
                         else {
                             $(targetId).append('<option value="' + item.Id + '">' + item.TraficPlateNumber + '</option>');
