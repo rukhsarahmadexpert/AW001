@@ -230,7 +230,7 @@
                 <nav id="js-primary-nav" class="primary-nav" role="navigation">
                     <a href="/Home/AdminHome">
                     <div class="info-card">
-                        <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem" class="profile-image rounded-circle" alt="User Info">
+                        <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem; background-color:white" class="profile-image rounded-circle" alt="User Info">
                         <div class="info-card-text">
                             <a href="/Home/AdminHome" class="d-flex align-items-center text-white">
                                 <span class="text-truncate text-truncate-sm d-inline-block">
@@ -238,7 +238,7 @@
                                 </span>
                             </a>
                             @*<span class="d-inline-block text-truncate text-truncate-sm">@userCompanyViewModel.Authority <br /> @userCompanyViewModel.CompanyName</span>*@
-                            <span class="d-inline-block">@userCompanyViewModel.Authority <br /><span style="font-size:14px">  @userCompanyViewModel.CompanyName </span></span>
+                            <span style="font-size:10px" class="d-inline-block"><i>@userCompanyViewModel.Authority</i> <br /><span style="font-size:14px">  @userCompanyViewModel.CompanyName </span></span>
                         </div>
 
                         <img src="~/assets/staticImages/banner.png" class="cover" alt="cover">
