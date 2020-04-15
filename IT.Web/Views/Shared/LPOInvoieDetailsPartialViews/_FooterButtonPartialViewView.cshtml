@@ -2,19 +2,24 @@
     IT.Core.ViewModels.LPOInvoiceViewModel LPOInvoiceViewModel = new IT.Core.ViewModels.LPOInvoiceViewModel();
 
     LPOInvoiceViewModel = ViewBag.lPOInvoiceViewModel as IT.Core.ViewModels.LPOInvoiceViewModel;
+
+    IT.Core.ViewModels.UserCompanyViewModel userCompanyViewModel = new IT.Core.ViewModels.UserCompanyViewModel();
+    userCompanyViewModel = Session["userCompanyViewModel"] as IT.Core.ViewModels.UserCompanyViewModel;
+
 }
 
-
-        <input type="hidden" id="LPOIdFromBIll" value="@LPOInvoiceViewModel.LPOId" />
-
-
-<div class="pull-right">
-
-   
-    <button class="btn btn-success" id="LPOEdit"><i class="glyphicon glyphicon-pencil"></i> Edit</button>    
-    <button class="btn btn-info" id="DownloadLPOInvoice"><i class="glyphicon glyphicon-save"></i> Download</button>
-    <button class="btn btn-warning" id="SendEmail"><i class="glyphicon glyphicon-envelope"></i> Send By Email</button>
-</div>
+ <input type="hidden" id="LPOIdFromBIll" value="@LPOInvoiceViewModel.LPOId" />
+ <div class="pull-right">
+     @if (userCompanyViewModel != null)
+     {
+         if (userCompanyViewModel.Authority != "CustomerAdmin")
+         {
+             <button class="btn btn-success" id="LPOEdit"><i class="glyphicon glyphicon-pencil"></i> Edit</button>
+             <button class="btn btn-info" id="DownloadLPOInvoice"><i class="glyphicon glyphicon-save"></i> Download</button>
+             <button class="btn btn-warning" id="SendEmail"><i class="glyphicon glyphicon-envelope"></i> Send By Email</button>
+         }
+     }
+ </div>
 
 
 
