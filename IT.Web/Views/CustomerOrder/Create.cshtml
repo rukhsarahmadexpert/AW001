@@ -40,10 +40,18 @@
                                     <span class="input-group-text font-weight-bold" id="basic-addon1"> Sites</span>
                                 </div>
                                 <select class="form-control" id="Site">
-                                    @foreach (var item in siteViewModels)
+                                    @if (siteViewModels != null)
                                     {
-                                        <option value="@item.Id">@item.SiteName</option>
+                                        @foreach (var item in siteViewModels)
+                                        {
+                                            <option value="@item.Id">@item.SiteName</option>
+                                        }
                                     }
+                                    else
+                                    {
+                                        <option value="0">Site</option>
+                                    }
+
                                 </select>
                                 <div class="input-group-append">
                                     <span class="input-group-text font-weight-bold" id="basic-addon2"><a href="/CustomerSites/Create"><span><i class="fal fa-plus-circle"></i></span> New Site</a></span>
