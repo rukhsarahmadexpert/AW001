@@ -103,7 +103,10 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View(new DriverViewModel());
+            DriverViewModel driverViewModel = new DriverViewModel();
+            driverViewModel.LicenseExpiry = System.DateTime.Now.ToString("yyyy-MM-dd");
+
+            return View(driverViewModel);
         }
 
         [HttpPost]
@@ -274,6 +277,7 @@ namespace IT.Web_New.Controllers
                 if (addResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     driverViewModel = (new JavaScriptSerializer().Deserialize<DriverViewModel>(addResult.Data.ToString()));
+                    driverViewModel.LicenseExpiry = driverViewModel.LicenseExpiry ?? System.DateTime.Now.ToString("yyyy-MM-dd");
                 }
 
                 return View(driverViewModel);

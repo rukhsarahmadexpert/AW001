@@ -26,7 +26,6 @@
                                     <label class="form-label" for="simpleinput">First Name</label>
                                     <input type="text" id="Name" name="Name" value="@employeeViewModel.Name" class="form-control" placeholder="Please Enter Frist Name">
                                 </div>
-
                                 <div class="form-group">
                                     <label class="form-label" for="single-label">
                                         Nationality
@@ -49,10 +48,6 @@
                                     <input type="Email" id="Email" name="Email" value="@employeeViewModel.Email" class="form-control" placeholder="Enter Email">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label" for="simpleinput">Expiry Date</label>
-                                    <input type="date" id="expiryDate" name="expiryDate" value="@employeeViewModel.ExpiryDate" class="form-control" placeholder="Enter Color">
-                                </div>
-                                <div class="form-group">
                                     <label class="form-label" for="simpleinput">Nation</label>
                                     <input type="text" id="nation" name="nation" value="@employeeViewModel.Nation" class="form-control" placeholder="Enter Nation">
                                 </div>
@@ -61,19 +56,14 @@
                                     <label class="form-label" for="single-label">
                                         Select Designation
                                     </label>
-
-
                                     <select class="select2 form-control" name="Designation" id="Designation">
                                         @if (ViewBag.Designations != null)
                                         {
-
                                             foreach (var item in ViewBag.Designations)
                                             {
                                                 <option value="@item.Id" @(item.Id == employeeViewModel.Designation ? "selected" : "")>@item.Designation</option>
-
                                             }
                                             <option value="NEW">Add new type</option>
-
                                         }
                                     </select>
                                 </div>
@@ -100,7 +90,6 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <label class=newbtn>
-
                                                     <img id="PassportFrontPreview" class="blah" src="http://awservices.somee.com/ClientDocument/@Model.PassportFront" onerror="this.src='/assets/staticImages/icon1.png';" alt="Passport Front">
                                                     <input id="PassportFrontFile" name="PassportFrontFile" class='pic' onchange="readURL(this);" type="file">
                                                 </label>

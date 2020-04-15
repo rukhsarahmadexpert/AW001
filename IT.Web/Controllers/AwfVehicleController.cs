@@ -100,7 +100,12 @@ namespace IT.Web_New.Controllers
         {
             VehicleTypeController vehicleTypeController = new VehicleTypeController();
             ViewBag.VehicleTypes = vehicleTypeController.VehicleTypes();
-            return View(new VehicleViewModel());
+
+            VehicleViewModel vehicle = new VehicleViewModel();
+            vehicle.InsuranceExpiry = System.DateTime.Now.ToString("yyyy-MM-dd");
+            vehicle.MulkiaExpiry = System.DateTime.Now.ToString("yyyy-MM-dd");
+
+            return View(vehicle);
         }
 
         [HttpPost]
@@ -197,7 +202,7 @@ namespace IT.Web_New.Controllers
                             var result = webServices.PostMultiPart(content, "AWFVehicle/Add", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                             {
-                                if (result.Data != "TraficPlateNumber Already Availible")
+                                if (result.Data == "TraficPlateNumber Already Availible")
                                 {
                                     VehicleTypeController vehicleTypeController = new VehicleTypeController();
                                     ViewBag.VehicleTypes = vehicleTypeController.VehicleTypes();
@@ -274,6 +279,8 @@ namespace IT.Web_New.Controllers
                 if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     vehicleViewModel = (new JavaScriptSerializer()).Deserialize<VehicleViewModel>(Result.Data.ToString());
+                    vehicleViewModel.InsuranceExpiry = vehicleViewModel.InsuranceExpiry ?? System.DateTime.Now.ToString("yyyy-MM-dd");
+                    vehicleViewModel.InsuranceExpiry = vehicleViewModel.MulkiaExpiry ?? System.DateTime.Now.ToString("yyyy-MM-dd");
                 }
 
                 VehicleTypeController vehicleTypeController = new VehicleTypeController();

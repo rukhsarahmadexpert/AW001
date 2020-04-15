@@ -20,9 +20,7 @@
                             </label>
                             <h5 class="mb-0 fw-700 text-center mt-3">
                                 @Model.FullName <br /><br />
-
                             </h5>
-
                         </div>
                     </div>
 
@@ -69,8 +67,8 @@
 
                     <div class="form-group">
                         <label class="form-label" for="simpleinput">Date Of Birth</label>
-                        @Html.EditorFor(Model => Model.DOB, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
+                        <input type="date" id="DOB" name="DOB" value="2013-01-08" class="form-control">
+                     </div>
                 </div>
             </div>
 

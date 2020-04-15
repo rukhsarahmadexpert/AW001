@@ -120,10 +120,8 @@ namespace IT.Web_New.Controllers
                 if (userList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(userList.Data.ToString()));
-
                     return View(userViewModel);
                 }
-
                 return View(userViewModel);
             }
             catch (Exception ex)

@@ -175,7 +175,11 @@ namespace IT.Web_New.Controllers
             VehicleTypeController vehicleTypeController = new VehicleTypeController();
             ViewBag.VehicleTypes = vehicleTypeController.VehicleTypes();
 
-            return View(new VehicleViewModel());
+            VehicleViewModel vehicle = new VehicleViewModel();
+            vehicle.InsuranceExpiryDate = System.DateTime.Now;
+            vehicle.MulkiaExpiryDate = System.DateTime.Now;
+
+            return View(vehicle);
             //try
             //{
             //    var result = webServices.Post(new VehicleViewModel(), "VehicleType/GetAll");

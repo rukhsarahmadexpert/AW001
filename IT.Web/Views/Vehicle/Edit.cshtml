@@ -11,7 +11,6 @@
                 <h2>
                     Edit <span class="fw-300">Vehicle</span>
                 </h2>
-
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
@@ -23,7 +22,6 @@
                                     <label class="form-label" for="single-label">
                                         Select Vehicle Type
                                     </label>
-
                                     <select class="select2 form-control" name="VehicleType" id="VehicleType">
                                         @foreach (var item in ViewBag.VehicleTypes)
                                         {
@@ -53,7 +51,6 @@
                                         Color
                                     </label>
                                     <select class=" form-control" id="Color" name="Color">
-
                                         <option value="white" @(Model.Color == "white" ? "selected" : "")>White</option>
                                         <option value="black" @(Model.Color == "black" ? "selected" : "")>Black</option>
                                         <option value="red" @(Model.Color == "red" ? "selected" : "")>Red</option>
