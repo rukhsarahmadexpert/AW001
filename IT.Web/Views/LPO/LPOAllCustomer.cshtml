@@ -1,70 +1,85 @@
 ﻿@model List<IT.Core.ViewModels.LPOInvoiceViewModel>
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>LPO All Customer</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-               Created Date
-            </th>
-            <th>
-                Due Date
-            </th>
-            <th>
-            Total
-            </th>
-            <th>
-               VAT
-            </th>
-            <th>
-                Grand Total
-            </th>
-            <th>
-                Operater
-            </th>
-            <th>
-                Action
-            </th>           
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FromDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DueDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VAT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GrandTotal)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h4>My Estimates List</h4>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="table-responsive">
+                        <table class="QuotationListTable table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-primary-600">
+                                <tr>
+                                    <th>
+                                        Created Date
+                                    </th>
+                                    <th>
+                                        Due Date
+                                    </th>
+                                    <th>
+                                        Total
+                                    </th>
+                                    <th>
+                                        VAT
+                                    </th>
+                                    <th>
+                                        Grand Total
+                                    </th>
+                                    <th>
+                                        Operater
+                                    </th>    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FromDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DueDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Total)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.VAT)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.GrandTotal)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Details", "Details", new { id = item.Id }) 
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#InvoiceMenu").attr("aria-expanded", "true");
+            $('#InvoiceUl').css('display', 'block');
+            $('#LPOFinancesLi').addClass('active');
+        });
+    </script>
+}
+
+

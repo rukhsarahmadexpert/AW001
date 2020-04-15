@@ -2,30 +2,19 @@
 
 @{
     ViewBag.Title = "AW Fuel - Custmer List";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
-                @*<h2>
-                        <a href="/Quotation/CreateEstimates" class="btn btn-md btn-primary" style="color:white">
-                            <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Quotation</i></span>
-                        </a>
-                    </h2>*@
                 <h4>My Estimates List</h4>
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
-                    <!--      <div class="panel-tag">
-                        <p>Drivers Base Information</p>
-                    </div>-->
-                    <!-- datatable start -->
                     <div class="table-responsive">
                         <table class="QuotationListTable table table-bordered table-hover table-striped w-100">
                             <thead class="bg-primary-600">
-
                                 <tr>
                                     <th>
                                         @Html.DisplayNameFor(model => model.Product)
