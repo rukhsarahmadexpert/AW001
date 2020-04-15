@@ -60,7 +60,7 @@
                                     }
                                     else
                                     {
-                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        <button type="submit" id="SaveRecord" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
                                             Submit
                                             <span>Product Unit</span>
                                         </button>
@@ -82,7 +82,16 @@
             $("#ProductMenu").attr("aria-expanded", "true");
             $('#ProductUl').css('display', 'block');
             $('#ProductUnitLi').addClass('active');
+
+            $("form").submit(function (event) {
+
+                $("#SaveRecord").text('please wait...');
+                $("#SaveRecord").attr("disabled", true);
+
+            });
         });
+
+
 
     </script>
 
