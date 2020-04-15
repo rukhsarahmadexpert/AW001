@@ -228,7 +228,7 @@
                 </div>
                 <!-- BEGIN PRIMARY NAVIGATION -->
                 <nav id="js-primary-nav" class="primary-nav" role="navigation">
-                    <a href="/Home/AdminHome">
+                    <a href="/Company/AdminCompanyInformation/@userCompanyViewModel.CompanyId">
                         <div class="info-card">
                             @if (UserImage == null)
                             {
@@ -245,7 +245,7 @@
                                     </span>
                                 </a>
                                 @*<span class="d-inline-block text-truncate text-truncate-sm">@userCompanyViewModel.Authority <br /> @userCompanyViewModel.CompanyName</span>*@
-                                <span style="font-size:10px" class="d-inline-block"><i>@userCompanyViewModel.Authority</i> <br /><span style="font-size:14px">  @userCompanyViewModel.CompanyName </span></span>
+                                <span style="font-size:10px" class="d-inline-block"><i>@userCompanyViewModel.Authority</i> <br /> <a class="text-white" href="/Home/AdminHome"><span style="font-size:14px">  @userCompanyViewModel.CompanyName  </span> </a></span>
                             </div>
 
                             <img src="~/assets/staticImages/banner.png" class="cover" alt="cover">
