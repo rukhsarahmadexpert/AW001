@@ -1009,6 +1009,7 @@
     <Content Include="Views\LPO\LPOConverted.cshtml" />
     <Content Include="Views\Company\AdminCompanyEdit.cshtml" />
     <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\LPO\LPOAllCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -818,6 +818,36 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpGet]
+        public ActionResult LPOAllCustomer()
+        {
+            try
+            {
+                lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
+
+                SearchViewModel searchViewModel = new SearchViewModel();
+                searchViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                var result = webServices.Post(searchViewModel, "LPO/LPOAllCustomer");
+
+                if(result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (result.Data != "[]")
+                    {
+                       lPOInvoiceViewModels= (new JavaScriptSerializer().Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString()));
+                    }
+                }
+                return View(lPOInvoiceViewModels);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
+        [HttpGet]
         public ActionResult PrintLPO(int Id)
         {
             string pdfname = "";
