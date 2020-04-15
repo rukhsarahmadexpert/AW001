@@ -21,27 +21,59 @@
                     <form action="/Storage/Create" method="post" enctype="application/x-www-form-urlencoded"></form>
                 </div>
             </div>
+
+            
+
             <div class="table-responsive-lg">
+
+                <div class="row p-2">
+
+                    <div class="col-6">
+                        <div class="form-group mb-2">
+                            <label class="form-label" for="ProductRow1">Product</label>
+                            <select id="ProductRow1" name="ProductRow1" class="select3 ProductRow1" required>
+                                <option value="0" selected>Please Select Product</option>
+                            </select>
+                        </div>
+
+                    </div> 
+                    
+                    <div class="col-6">
+                        <div class="form-group mb-2">
+                            <label class="form-label" for="Quantity">Quantity</label>
+                            <input type="text" id="Quantity" name="Quantity" class="form-control Quantity" placeholder="Please enter quantity" />
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-12">
+                        <div class="form-group mb-2">
+                             <label class="form-label" for="simpleinput">Description</label>
+                            <textarea id="Description" name="Description" class="form-control Description" placeholder="Description"></textarea>
+                        </div>
+                    </div>  
+                </div>
+
                 <table class="table m-0 data-table" id="SiteTarget">
                     <thead>
                         <tr>
-                            <th>Product</th>
+                            <th>#</th>
                             <th>Source</th>
                             <th>Site / Vehicle</th>
                             <th style="width:140px">Description</th>
-                            <th style="width:90px">Quantity</th>
                             <th>Site Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+
                             <td>
-                                <div class="form-group mb-2">
-                                    <select id="ProductRow1" name="ProductRow1" class="select3 ProductRow1" required>
-                                        <option value="0" selected>Products</option>
-                                    </select>
-                                </div>
+                               <h3>TO:</h3>
                             </td>
+
                             <td>
                                 <div class="form-group mb-2">
                                     <select id="SourceRow1" name="Source" class="select3 Source" required>
@@ -59,18 +91,7 @@
                                     </select>
                                 </div>
                             </td>
-                            <td style="width:140px">
-                                <div class="form-group mb-2">
-                                    <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
-                                    <input type="text" id="Description" name="Description" class="form-control Description" placeholder="Description" />
-                                </div>
-                            </td>
-                            <td style="width:90px">
-                                <div class="form-group mb-2">
-                                    <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
-                                    <input type="text" id="Quantity" name="Quantity" class="form-control Quantity" placeholder="" />
-                                </div>
-                            </td>
+                           
                             <td>
                                 <div class="form-group mb-2">
                                     <select id="Action" name="Action" class="form-control Action" required>
@@ -81,11 +102,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="form-group mb-2">
-                                    <select id="ProductRow2" name="ProductRow2" class="select3 ProductRow1" required>
-                                        <option value="0" selected>Products</option>
-                                    </select>
-                                </div>
+                                <h3>FROM:</h3>
                             </td>
                             <td>
                                 <div class="form-group mb-2">
@@ -102,18 +119,6 @@
                                     <select id="SiteVehicleRow2" name="Site" class="select2 Site" required>
                                         <option value="">Select Option</option>
                                     </select>
-                                </div>
-                            </td>
-                            <td style="width:140px">
-                                <div class="form-group mb-2">
-                                    <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
-                                    <input type="text" id="Description" name="Description" class="form-control Description" placeholder="Description" />
-                                </div>
-                            </td>
-                            <td style="width:90px">
-                                <div class="form-group mb-2">
-                                    <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
-                                    <input type="text" id="Quantity" name="Quantity" class="form-control Quantity" />
                                 </div>
                             </td>
                             <td>
@@ -214,12 +219,12 @@
                 var StockOut = 0.0;
                 var ActionVal = false;
                 if ($(this).find('.Action').val() == true) {
-                    StockIn = parseFloat($(this).find('#Quantity').val());
+                    StockIn = parseFloat($('#Quantity').val());
                     StockOut = 0.0;
                     ActionVal = true;
                 }
                 else {
-                    StockOut = parseFloat($(this).find('#Quantity').val());
+                    StockOut = parseFloat($('#Quantity').val());
                     StockIn = 0.0;
                     ActionVal = false;
                 }
@@ -236,7 +241,7 @@
                             StockIn: StockIn,
                             StockOut: StockOut,
                             Action: ActionVal,
-                            ProductId: $(this).find('.ProductRow1').val(),
+                            ProductId: $('#ProductRow1').val(),
                         }
                     list.push(orderItem);
                     //IsValidationPass = true;
