@@ -77,6 +77,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+
         [HttpGet]
         public ActionResult Details(int Id)
         {

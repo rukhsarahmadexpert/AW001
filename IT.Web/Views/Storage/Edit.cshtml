@@ -8,11 +8,6 @@
 }
 
 
-<div class="subheader">
-    <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-edit'></i> Edit Storage
-    </h1>
-</div>
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -23,22 +18,54 @@
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
-                    <div class="panel-tag">
-                        Please Edit your Site from here...
-                    </div>
+                  
                     <form action="/Storage/Update" method="post" enctype="application/x-www-form-urlencoded"></form>
                 </div>
             </div>
             <div class="table-responsive-lg">
 
+                <div class="row p-2">
+
+                    <div class="col-6">
+                        <div class="form-group mb-2">
+                            <select id="ProductRow1" name="Product" class="select3 Product" required>
+                                @if (ViewBag.Products != null)
+                                {
+                                    foreach (var item in ViewBag.Products)
+                                    {
+                                        <option value="@item.Id" @(item.Id == storageViewModels[0].ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group mb-2">
+                            <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
+                            <input type="text" id="Quantity" name="Quantity" value="@storageViewModels[0].StockIn" class="form-control Quantity" placeholder="" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-12">
+                        <div class="form-group mb-2">
+                            <label class="form-label" for="simpleinput">Description</label>
+                            <textarea id="Description" name="Description" class="form-control Description" placeholder="Description">@storageViewModels[0].Decription</textarea>
+                        </div>
+                    </div>
+                </div>
+
                 <table class="table m-0 data-table" id="SiteTarget">
                     <thead>
                         <tr>
-                            <th>Product</th>
+
+                            <th>#</th>
                             <th>Source</th>
                             <th>Site / Vehicle</th>
-                            <th style="width:140px">Description</th>
-                            <th style="width:90px">Quantity</th>
                             <th>Site Action</th>
                         </tr>
                     </thead>
@@ -48,14 +75,7 @@
 
                         <tr>
                             <td>
-                                <div class="form-group mb-2">
-                                    <select id="ProductRow1" name="Product" class="select3 Product" required>
-                                        @foreach (var item in ViewBag.Products)
-                                        {
-                                            <option value="@item.Id" @(item.Id == storageViewModels[0].ProductId ? "selected='selected'" : "")>@item.Name</option>
-                                        }
-                                    </select>
-                                </div>
+                                TO:
                             </td>
                             <td>
                                 <div class="form-group mb-2">
@@ -88,7 +108,7 @@
                                             }
                                             else
                                             {
-                                                <option value="0" >No Vehicles</option>
+                                                <option value="0">No Vehicles</option>
                                             }
                                         }
                                         else
@@ -100,23 +120,10 @@
 
                                         }
                                     </select>
-                                </div>
-                            </td>
-
-                            <td style="width:140px">
-                                <div class="form-group mb-2">
-                                    <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
-                                    <input type="text" id="Description" value="@storageViewModels[0].Decription" name="Description" class="form-control Description" placeholder="Description" />
-                                </div>
-                            </td>
-
-                            <td style="width:90px">
-                                <div class="form-group mb-2">
-                                    <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
-                                    <input type="text" id="Quantity" name="Quantity" value="@storageViewModels[0].StockIn" class="form-control Quantity" placeholder="" />
                                     <input type="hidden" name="Id1" id="Id1" class="Id" value="@storageViewModels[0].Id" />
                                 </div>
                             </td>
+
 
                             <td>
                                 <div class="form-group mb-2">
@@ -125,15 +132,15 @@
 
                                         <option value="1" selected="selected">Stock In</option>
                                         @*  @if(@storageViewModels[0].StockIn == 0)
-                                            {
-                                              <option value="@storageViewModels[0].StockIn">Stock In</option>
-                                              <option value="@storageViewModels[0].StockOut" selected="selected">Stock Out</option>
-                                            }
-                                            else
-                                              {
-                                                <option value="@storageViewModels[0].StockIn" selected="selected">Stock In</option>
-                                                <option value="@storageViewModels[0].StockOut">Stock Out</option>
-                                              }*@
+                                {
+                                  <option value="@storageViewModels[0].StockIn">Stock In</option>
+                                  <option value="@storageViewModels[0].StockOut" selected="selected">Stock Out</option>
+                                }
+                                else
+                                  {
+                                    <option value="@storageViewModels[0].StockIn" selected="selected">Stock In</option>
+                                    <option value="@storageViewModels[0].StockOut">Stock Out</option>
+                                  }*@
 
                                     </select>
                                 </div>
@@ -143,23 +150,8 @@
 
                         <tr>
                             <td>
-                                <div class="form-group mb-2">
-                                    <select id="ProductRow2" name="Product" class="select3 Product" required>
-                                        @if (ViewBag.Products != null)
-                                        {
-                                            foreach (var item in ViewBag.Products)
-                                            {
-                                                <option value="@item.Id" @(item.Id == storageViewModels[1].ProductId ? "selected='selected'" : "")>@item.Name</option>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <option value="0">No Product</option>
-                                        }
-                                    </select>
-                                </div>
+                                FROM:
                             </td>
-
                             <td>
 
                                 <div class="form-group mb-2">
@@ -180,7 +172,7 @@
                                             {
                                                 foreach (var item in ViewBag.Sites)
                                                 {
-                                                <option value="@item.Id" @(item.Id == storageViewModels[1].SiteId ? "selected='selected'" : "")>@item.SiteName </option>
+                                                    <option value="@item.Id" @(item.Id == storageViewModels[1].SiteId ? "selected='selected'" : "")>@item.SiteName </option>
                                                 }
                                             }
                                             else
@@ -194,7 +186,7 @@
                                             {
                                                 foreach (var item in ViewBag.Vehicles)
                                                 {
-                                                <option value="@item.Id" @(item.Id == storageViewModels[1].ClientVehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
+                                                    <option value="@item.Id" @(item.Id == storageViewModels[1].ClientVehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
                                                 }
                                             }
                                             else
@@ -208,7 +200,7 @@
                                             {
                                                 if (ViewBag.AdminVehicles != null)
                                                 {
-                                                <option value="@item.Id" @(item.Id == storageViewModels[1].VehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
+                                                    <option value="@item.Id" @(item.Id == storageViewModels[1].VehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
                                                 }
                                                 else
                                                 {
@@ -218,29 +210,15 @@
 
                                         }
                                     </select>
-                                </div>
-                            </td>
-
-                            <td style="width:140px">
-                                <div class="form-group mb-2">
-                                    <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
-                                    <input type="text" id="Description" value="@storageViewModels[1].Decription" name="Description" class="form-control Description" placeholder="Description" />
-                                </div>
-                            </td>
-
-                            <td style="width:90px">
-                                <div class="form-group mb-2">
-                                    <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
-                                    <input type="text" id="Quantity" name="Quantity" value="@storageViewModels[1].StockOut" class="form-control Quantity" placeholder="" />
-
                                     <input type="hidden" name="Id1" id="Id1" class="Id" value="@storageViewModels[1].Id" />
                                 </div>
                             </td>
+
                             <td>
                                 <div class="form-group mb-2">
                                     <select id="Action2" name="Action2" class="form-control Action" required>
                                         @* <option value="@storageViewModels[1].StockIn" @(storageViewModels[1].StockIn == 0 ? "" : "selected='selected'")>Stock In</option>
-                                            <option value="@storageViewModels[1].StockOut" @(storageViewModels[1].StockOut == 0 ? "" : "selected='selected'")>Stock Out</option>
+                                <option value="@storageViewModels[1].StockOut" @(storageViewModels[1].StockOut == 0 ? "" : "selected='selected'")>Stock Out</option>
                                         *@
                                         <option value="0" selected>Stock Out</option>
                                     </select>
@@ -302,7 +280,7 @@
             });
 
             $('#UpdateRecord').click(function () {
-                alert("hello")
+                //alert("hello")
                 InsertStorge("/Storage/Update/");
                 window.location.href = "/Storage/Index"
             });
@@ -331,21 +309,21 @@
 
                 }
                 else {
-                    VehicleId = 0;
+                    VehicleId = $(this).find('.Site').val();
                     SiteId = 0;
-                    ClientVehicleId = $(this).find('.Site').val();
+                    ClientVehicleId = 0;
                 }
 
                 var StockIn = 0.0;
                 var StockOut = 0.0;
                 var ActionVal = false;
                 if ($(this).find('.Action').val() == true) {
-                    StockIn = parseFloat($(this).find('.Quantity').val());
+                    StockIn = parseFloat($('#Quantity').val());
                     StockOut = 0.0;
                     ActionVal = true;
                 }
                 else {
-                    StockOut = parseFloat($(this).find('.Quantity').val());
+                    StockOut = parseFloat($('#Quantity').val());
                     StockIn = 0.0;
                     ActionVal = false;
                 }
@@ -358,11 +336,11 @@
                             SiteId: SiteId,
                             VehicleId: VehicleId,
                             ClientVehicleId: ClientVehicleId,
-                            Decription: $(this).find('.Description').val(),
+                            Decription: $('#Description').val(),
                             StockIn: StockIn,
                             StockOut: StockOut,
                             Action: ActionVal,
-                            ProductId: $(this).find('.Product').val(),
+                            ProductId: $('#ProductRow1').val(),
                             Id: $(this).find('.Id').val(),
 
                         }
