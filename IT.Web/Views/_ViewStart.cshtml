@@ -1,3 +1,20 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    IT.Core.ViewModels.UserCompanyViewModel userCompanyViewModel = new IT.Core.ViewModels.UserCompanyViewModel();
+    userCompanyViewModel = Session["userCompanyViewModel"] as IT.Core.ViewModels.UserCompanyViewModel;
+
+    if (userCompanyViewModel != null)
+    {
+        if (userCompanyViewModel.Authority == "CustomerAdmin")
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+        }
+    }
+    else
+    {
+        Layout = null;
+    }
 }

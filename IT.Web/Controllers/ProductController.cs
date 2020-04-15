@@ -41,8 +41,7 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
-
-
+        
         [HttpPost]
         public ActionResult ChangeStatus(ProductViewModel productViewModel)
         {

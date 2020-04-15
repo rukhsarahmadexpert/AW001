@@ -117,13 +117,17 @@ namespace IT.Web_New.Controllers
                         {
                             if(result.Data != "[]")
                             {
-                                int k = (new JavaScriptSerializer()).Deserialize<int>(result.Data);
+                                var storage  = (new JavaScriptSerializer()).Deserialize<StorageViewModel>(result.Data);
+                                return Json("success", JsonRequestBehavior.AllowGet);
+                            }    
+                            else
+                            {
+                                return Json("NoData", JsonRequestBehavior.AllowGet);
                             }                            
-                            return Json("success", JsonRequestBehavior.AllowGet);
                         }
                         else
                         {
-                            return Json("Failed", JsonRequestBehavior.AllowGet);
+                            return Json("NoData", JsonRequestBehavior.AllowGet);
                         }
                     }                    
                 }
