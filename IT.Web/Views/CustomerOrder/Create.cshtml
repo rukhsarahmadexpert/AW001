@@ -97,26 +97,50 @@
                                             <td>
                                                 <input type="hidden" class="Id" value="@Modelitem.Id" />
                                                 <select class="form-control product" id="product">
-                                                    @foreach (var item in ViewBag.product)
+                                                    @if (ViewBag.product != null)
                                                     {
-                                                        <option value="@item.Id" @(item.Id == Modelitem.ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                                        foreach (var item in ViewBag.product)
+                                                        {
+                                                            <option value="@item.Id" @(item.Id == Modelitem.ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                                        }
                                                     }
+                                                    else
+                                                    {
+                                                        <option value="0">Product Name</option>
+                                                    }
+
                                                 </select>
                                             </td>
                                             <td>
                                                 <select class="form-control Driver" id="Driver">
-                                                    @foreach (var item in driverModels)
+                                                    @if (driverModels != null)
                                                     {
-                                                        <option value="@item.DriverId" @(item.DriverId == Modelitem.DriverId ? "selected='selected'" : "")>@item.DriverName</option>
+
+                                                        foreach (var item in driverModels)
+                                                        {
+                                                            <option value="@item.DriverId" @(item.DriverId == Modelitem.DriverId ? "selected='selected'" : "")>@item.DriverName</option>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="0">Driver Name</option>
                                                     }
                                                 </select>
                                             </td>
                                             <td>
                                                 <select class="form-control vehicle" id="vehicle">
-                                                    @foreach (var item in vehicleModels)
+                                                    @if (vehicleModels != null)
                                                     {
-                                                        <option value="@item.VehicelId" @(item.VehicelId == Modelitem.VehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
+                                                        foreach (var item in vehicleModels)
+                                                        {
+                                                            <option value="@item.VehicelId" @(item.VehicelId == Modelitem.VehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
+                                                        }
                                                     }
+                                                    else
+                                                    {
+                                                            <option value="0">Trafic Plate Number</option>
+                                                    }
+
                                                 </select>
                                             </td>
                                             <td>
@@ -135,26 +159,52 @@
                                 <tr id="MainRow">
                                     <td>
                                         <select class="form-control product" id="product">
-                                            @foreach (var item in ViewBag.product)
+                                            @if (ViewBag.product != null)
                                             {
-                                                <option value="@item.Id">@item.Name</option>
+
+                                                foreach (var item in ViewBag.product)
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
                                             }
+                                            else
+                                            {
+                                                <option value="0">Product Name</option>
+                                            }
+
                                         </select>
                                     </td>
                                     <td>
                                         <select class="form-control Driver" id="Driver">
-                                            @foreach (var item in driverModels)
+                                            @if (driverModels != null)
                                             {
-                                                <option value="@item.DriverId">@item.DriverName</option>
+
+                                                foreach (var item in driverModels)
+                                                {
+                                                    <option value="@item.DriverId">@item.DriverName</option>
+                                                }
                                             }
+                                            else
+                                            {
+                                                <option value="0">Driver Name</option>
+                                            }
+
                                         </select>
                                     </td>
                                     <td>
                                         <select class="form-control vehicle" id="vehicle">
-                                            @foreach (var item in vehicleModels)
+                                            @if (vehicleModels != null)
                                             {
-                                                <option value="@item.VehicelId">@item.TraficPlateNumber</option>
+                                                foreach (var item in vehicleModels)
+                                                {
+                                                    <option value="@item.VehicelId">@item.TraficPlateNumber</option>
+                                                }
                                             }
+                                            else
+                                            {
+                                                <option value="0">Traffic Plate Number</option>
+                                            }
+
                                         </select>
                                     </td>
                                     <td>
@@ -221,9 +271,9 @@
 
     <script>
         $(document).ready(function () {
-            $("#DeliveryMenu").attr("aria-expanded", "true");
-            $('#DeliveryUl').css('display', 'block');
-            $('#DeliveryAddLi').addClass('active');
+            $("#CustomerDeliveryMenu").attr("aria-expanded", "true");
+            $('#CustomerDeliveryUl').css('display', 'block');
+            $('#CustomerDeliveryAddLi').addClass('active');
         });
 
     </script>
