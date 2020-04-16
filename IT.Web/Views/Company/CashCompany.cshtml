@@ -86,23 +86,27 @@
                                 <div class="col-md-6 col-xl-6 p-2">
 
                                     <div class="input-group " form-group flex-nowrap">
-                                        <div class="input-group-prepend">
+                                        @*<div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fal fa-building fs-xl"></i></span>
-                                        </div>
-                                        <select class=" form-control" name="City" id="City">
+                                        </div>*@
+                                        <select class="select2 form-control" name="City" id="City">
                                             <option value="" disabled selected hidden>City</option>
-                                            @foreach (var item in countryViewModels)
+                                            <option id="op" value="NEW">+ Add new city</option>
+                                            @if (countryViewModels != null)
                                             {
-                                                foreach (var item1 in item.stateViewModels)
-                                                {
-                                                    if (item1.cityViewModels != null)
+                                                    foreach (var item in countryViewModels)
                                                     {
-                                                        foreach (var item3 in item1.cityViewModels)
+                                                        foreach (var item1 in item.stateViewModels)
                                                         {
-                                                            <option value="@item3.CityName" @(item3.CityName == Model.City ? "selected" : "")>@item3.CityName</option>
+                                                            if (item1.cityViewModels != null)
+                                                            {
+                                                                foreach (var item3 in item1.cityViewModels)
+                                                                {
+                                                                    <option value="@item3.CityName" @(item3.CityName == Model.City ? "selected" : "")>@item3.CityName</option>
+                                                                }
+                                                            }
                                                         }
                                                     }
-                                                }
                                             }
                                         </select>
                                     </div>
@@ -136,7 +140,7 @@
                             </div>
                             <div class="row ">
                                 <div class="col-md-12 col-xl-12 p-2">
-                                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-themed float-right">
+                                    <button type="submit" id="SaveRecord" class="btn btn-primary btn-sm waves-effect waves-themed float-right">
                                         Company
                                         <span>Submit</span>
                                     </button>
@@ -158,6 +162,28 @@
         $("#LogoUrl").change(function () {
             readURL(this, "logoPreview");
             $('#LogoUrl').val('logo uploaded');
+        });
+
+        $("form").submit(function (event) {
+            $("#SaveRecord").text('please wait...');
+            $("#SaveRecord").attr("disabled", true);
+        });
+
+        $(function () {
+            $(".select2")
+                .select2({
+                    placeholder: 'Select type',
+                    width: '50%',
+                    minimumResultsForSearch: Infinity
+                })
+                .on('select2:close', function () {
+                    var el = $(this);
+                    if (el.val() === "NEW") {
+                        //window.open('http://www.google.com');
+                        window.location.href = '/Country/AddUpdateCity';
+                        //$("a").attr("href", "ssss/sss")
+                    }
+                });
         });
 
     </script>

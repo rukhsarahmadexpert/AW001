@@ -23,9 +23,12 @@
                                             Select Vehicle Type
                                         </label>
                                         <select class="select2 form-control" name="VehicleType" id="VehicleType">
-                                            @foreach (var item in ViewBag.VehicleTypes)
+                                            @if (ViewBag.VehicleTypes != null)
                                             {
+                                                foreach (var item in ViewBag.VehicleTypes)
+                                                {
                                                 <option value="@item.Id" @(Model.VehicleType == item.Id ? "selected='selected'" : "")>@item.VehicleType</option>
+                                                }
                                             }
                                         </select>
                                     </div>
