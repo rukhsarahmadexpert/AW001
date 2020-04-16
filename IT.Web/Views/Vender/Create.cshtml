@@ -74,23 +74,33 @@
                                 <div class="form-group mb-2">
                                     <label class="form-label" for="simpleinput">Countries</label>
                                     <select id="Country" name="Country" class="select3 Country" required>
-                                        @foreach (var item in countryViewModels)
+                                        @if (countryViewModels != null)
                                         {
-                                            <option value="@item.Id">@item.CountryName</option>
+                                            foreach (var item in countryViewModels)
+                                            {
+                                                <option value="@item.Id">@item.CountryName</option>
+                                            }
                                         }
-                                    </select>
+                                        </select>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group mb-2">
                                     <label class="form-label" for="simpleinput">State</label>
-                                    <select id="State" name="State" class="select3 State" required>
-                                        @foreach (var item in countryViewModels.Where(x => x.Id == 3))
-                                        {
-                                            foreach (var item1 in item.stateViewModels)
+                                    <select id="State" name="State" class="select2 State">
+                                        <option value="" disabled selected hidden>Select State</option>
+                                        <option id="op1" value="NEW1">+ Add new State</option>
+                                        @if (countryViewModels != null) {
+                                            foreach (var item in countryViewModels.Where(x => x.Id == 3))
                                             {
-                                                <option value="@item1.Id">@item1.States</option>
+                                                if (item.stateViewModels != null)
+                                                {
+                                                    foreach (var item1 in item.stateViewModels)
+                                                    {
+                                                    <option value="@item1.Id">@item1.States</option>
+                                                    }
+                                                }
                                             }
                                         }
                                     </select>
@@ -99,17 +109,25 @@
                             <div class="col-md-4">
                                 <div class="form-group mb-2">
                                     <label class="form-label" for="simpleinput">City</label>
-                                    <select id="City" name="City" class="select3 City" required>
-                                        @foreach (var item in countryViewModels)
+                                    <select id="City" name="City" class="select2 City" >
+                                        <option value="" disabled selected hidden>Select City</option>
+                                        <option id="op" value="NEW">+ Add new city</option>
+                                        @if (countryViewModels != null)
                                         {
-                                            foreach (var item1 in item.stateViewModels)
+                                            foreach (var item in countryViewModels)
                                             {
-                                                if (item1.cityViewModels != null && item1.cityViewModels.Count > 0)
-                                                {
-                                                    foreach (var item2 in item1.cityViewModels)
-                                                    {
-                                                        <option value="@item2.Id" @(item2.Id == Convert.ToInt32(Model.City) ? "selected='selected'" : "")>@item2.CityName</option>
-                                                    }
+                                                if (item.stateViewModels != null)
+                                                { 
+                                                        foreach (var item1 in item.stateViewModels)
+                                                        {
+                                                            if (item1.cityViewModels != null && item1.cityViewModels.Count > 0)
+                                                            {
+                                                                foreach (var item2 in item1.cityViewModels)
+                                                                {
+                                                                    <option value="@item2.Id" @(item2.Id == Convert.ToInt32(Model.City) ? "selected='selected'" : "")>@item2.CityName</option>
+                                                                }
+                                                             }
+                                                        }
                                                 }
                                             }
                                         }
@@ -181,7 +199,7 @@
                                 }
                                 else
                                 {
-                                    <button type="submit" class="btn btn-primary btn-sm float-right waves-effect waves-themed">
+                                    <button type="submit" id="SaveRecord" class="btn btn-primary btn-sm float-right waves-effect waves-themed">
                                         Submit
                                         <span>Vendor</span>
                                     </button>
@@ -212,7 +230,36 @@
             $("#VenderMenu").attr("aria-expanded", "true");
             $('#VenderUl').css('display', 'block');
             $('#VenderLi').addClass('active');
+
+            $("form").submit(function (event) {
+                $("#SaveRecord").text('please wait...');
+                $("#SaveRecord").attr("disabled", true);
+            });
         });
+
+        $(function () {
+            $(".select2")
+                .select2({
+                    placeholder: 'Select type',
+                    width: '50%',
+                    minimumResultsForSearch: Infinity
+                })
+                .on('select2:close', function () {
+                    var el = $(this);
+                    if (el.val() === "NEW") {
+                        //window.open('http://www.google.com');
+                        window.location.href = '/Country/AddUpdateCity';
+                        //$("a").attr("href", "ssss/sss")
+                    }
+                    else if (el.val() === "NEW1") {
+                        //window.open('http://www.google.com');
+                        window.location.href = '/Country/AddUpdateState';
+                        //$("a").attr("href", "ssss/sss")
+                    }
+                });
+        });
+
+        
 
     </script>
 

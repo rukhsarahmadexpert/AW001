@@ -45,12 +45,15 @@
                                             Select Unit
                                         </label>
                                         <select class="select2 form-control" name="Unit" id="Unit">
+
+                                             <option id="op" value="NEW">+ Add new Unit</option>
                                             @if (ViewBag.productUnitViewModels != null)
                                             {
                                                 foreach (var item in ViewBag.productUnitViewModels)
                                                 {
                                                     <option value="@item.Id" @(item.Id == Model.Unit ? "selected='selected'" : "")>@item.Name</option>
                                                 }
+                                                <option id="op" value="NEW">+ Add new Unit</option>
                                             }
                                             else
                                             {
@@ -93,7 +96,7 @@
                                     }
                                     else
                                     {
-                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        <button type="submit" id="SaveRecord" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
                                             Submit
                                             <span>Product</span>
                                         </button>
@@ -115,6 +118,31 @@
             $("#ProductMenu").attr("aria-expanded", "true");
             $('#ProductUl').css('display', 'block');
             $('#ProductLi').addClass('active');
+
+            $("form").submit(function (event) {
+
+                $("#SaveRecord").text('please wait...');
+                $("#SaveRecord").attr("disabled", true);
+
+            });
+        });
+
+
+        $(function () {
+            $(".select2")
+                .select2({
+                    placeholder: 'Select type',
+                    width: '50%',
+                    minimumResultsForSearch: Infinity
+                })
+                .on('select2:close', function () {
+                    var el = $(this);
+                    if (el.val() === "NEW") {
+                        //window.open('http://www.google.com');
+                        window.location.href = '/ProductUnit/Create';
+                        //$("a").attr("href", "ssss/sss")
+                    }
+                });
         });
 
     </script>

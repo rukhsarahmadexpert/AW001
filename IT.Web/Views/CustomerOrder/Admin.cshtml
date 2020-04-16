@@ -2,13 +2,11 @@
 @model List<IT.Core.ViewModels.CustomerNoteOrderViewModel>
 
 @{
-
     ViewBag.Title = "AW Fuel - Admin Customer List";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 
     List<IT.Core.ViewModels.CustomerNoteOrderViewModel> customerNoteOrderViewModel = new List<IT.Core.ViewModels.CustomerNoteOrderViewModel>();
     customerNoteOrderViewModel = Model as List<IT.Core.ViewModels.CustomerNoteOrderViewModel>;
-
 }
 
 <style>
@@ -93,7 +91,7 @@
                             <th>Delivery Note Number</th>
                             <th>Order Quantity</th>
                             <th>Deliver Quantity</th>
-                            <th>OrderProgress</th>
+                            <th>Order Progress</th>
                             <th>UserName</th>
                             <th>Actions</th>
                         </tr>
@@ -107,7 +105,32 @@
                                 <td>@item.DeliveryNoteNumber</td>
                                 <td>@item.OrderQuantity</td>
                                 <td>@item.DeliverdQuantity</td>
-                                <td>@item.OrderProgress</td>
+                                <td>
+                                    @if (item.OrderProgress == "Order Accepted")
+                                    {
+                                        <span class="badge badge-success">Order Accepted</span>
+                                    }
+                                    else if (item.OrderProgress == "Order Created")
+                                    {
+                                        <span class="badge badge-primary">Order Created</span>
+                                    }
+                                    else if (item.OrderProgress == "Order Assigned")
+                                    {
+                                        <span class="badge badge-warning">Order Assigned</span>
+                                    }
+                                    else if (item.OrderProgress == "Order Rejected")
+                                    {
+                                        <span class="badge badge-danger">Order Rejected</span>
+                                    }
+                                    else if (item.OrderProgress == "Order Running")
+                                    {
+                                        <span class="badge badge-dark">Order Running</span>
+                                    }
+                                    else if (item.OrderProgress == "Order Deliverd")
+                                    {
+                                        <span class="badge badge-info">Order Deliverd</span>
+                                    }
+                                </td>
                                 <td>@item.UserName</td>
                                 <td>
                                     <form action="/CustomerOrder/OrderDetails" method="post">
