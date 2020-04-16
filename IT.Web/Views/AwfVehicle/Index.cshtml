@@ -50,8 +50,8 @@
                                     <td>@item.PlaceofIssue</td>
                                     <td>@item.TCNumber</td>
                                     <td>@item.Model</td>
-                                    <td>@item.MulkiaExpiry</td>
-                                    <td>@item.InsuranceExpiry</td>
+                                    <td>@Convert.ToDateTime(item.MulkiaExpiry ?? System.DateTime.Now.ToString()).ToString("dd-MMM-yyyy")</td>
+                                    <td>@Convert.ToDateTime(item.InsuranceExpiry ?? System.DateTime.Now.ToString()).ToString("dd-MMM-yyyy") </td>
                                     <td>
                                         @if (@item.IsActive == true)
                                         {

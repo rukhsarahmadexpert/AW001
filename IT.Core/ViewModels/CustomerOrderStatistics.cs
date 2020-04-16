@@ -12,6 +12,9 @@ namespace IT.Core.ViewModels
         public int TotalDrivers { get; set; }
         public int TotalVehicles { get; set; }
         public int TotalDeliverdQuantity { get; set; }
+        public int VirtualTotalQuantity { get; set; }
+        public int BookedTotalQuantity { get; set; }
+        public int CustomerConfirmBooking { get; set; }
 
         public List<CustomerOrderDateViewModel> RequestedBySevenDayed { get; set; }
         public List<CustomerOrderDateViewModel> DeliverdBySevenDayed { get; set; }

@@ -21,8 +21,9 @@
             <th>Delivery Note Number</th>
             <th>Order Quantity</th>
             <th>Deliver Quantity</th>
-            <th>OrderProgress</th>
             <th>UserName</th>
+            <th>Is Sent</th>
+            <th>Order Progress</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -30,26 +31,62 @@
         @foreach (var item in customerNoteOrderViewModel)
         {
 
-            <tr>
-                <td>@item.CustomerOrderNumber</td>
-                <td>@item.DeliveryNoteNumber</td>
-                <td>@item.OrderQuantity</td>
-                <td>@item.DeliverdQuantity</td>
-                <td>@item.OrderProgress</td>
-                <td>@item.UserName</td>
-                <td>
-                    <a href="/CustomerOrder/Details/@item.OrderId" ><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+        <tr>
+            <td>@item.CustomerOrderNumber</td>
+            <td>@item.DeliveryNoteNumber</td>
+            <td>@item.OrderQuantity</td>
+            <td>@item.DeliverdQuantity</td>
+            <td>@item.UserName</td>
+            <td>
+                @if (item.IsSend == true)
+                {
+                    <span class="badge badge-success">Order Sended</span>
+                }
+                else
+                {
+                    <span class="badge badge-warning">Not Sended</span>
+                }
+            </td>
+            <td>
+                @if (item.OrderProgress == "Order Accepted")
+                {
+                    <span class="badge badge-success">Order Accepted</span>
+                }
+                else if (item.OrderProgress == "Order Created")
+                {
+                    <span class="badge badge-primary">Order Created</span>
+                }
+                else if (item.OrderProgress == "Order Assigned")
+                {
+                    <span class="badge badge-warning">Order Assigned</span>
+                }
+                else if (item.OrderProgress == "Order Rejected")
+                {
+                    <span class="badge badge-danger">Order Rejected</span>
+                }
+                else if (item.OrderProgress == "Order Running")
+                {
+                    <span class="badge badge-dark">Order Running</span>
+                }
+                else if (item.OrderProgress == "Order Deliverd")
+                {
+                    <span class="badge badge-info">Order Deliverd</span>
+                }
+            </td>
 
-                    @if (item.OrderProgress != "Created" || item.OrderProgress != "Order Created")
-                    {
-                        <a><i class="fal fa-edit"></i></a>
-                    }
-                    else
-                    {
-                        <a href="/CustomerOrder/Edit/@item.OrderId"><i class="fal fa-edit"></i></a>
-                    }
-                </td>
-            </tr>
+            <td>
+                <a href="/CustomerOrder/Details/@item.OrderId"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+
+                @if (item.OrderProgress != "Created" || item.OrderProgress != "Order Created")
+                {
+                    <a><i class="fal fa-edit"></i></a>
+                }
+                else
+                {
+                    <a href="/CustomerOrder/Edit/@item.OrderId"><i class="fal fa-edit"></i></a>
+                }
+            </td>
+        </tr>
         }
 
     </tbody>
