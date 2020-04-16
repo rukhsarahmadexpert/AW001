@@ -9,7 +9,6 @@
 
 
 <main id="js-page-content" role="main" class="page-content">
-
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
@@ -53,6 +52,7 @@
 </main>
 
 <input type="hidden" id="SendByEmail" />
+<input type="hidden" id="Flage" value="No"/>
 
 
 @section Scripts{
@@ -141,7 +141,8 @@
         $('#SaveDownload').click(function () {
             if (ValidLPO()) {
                 localStorage.clear();
-                CreateLPOInvoice("SaveDwnload");
+                $('#Flage').val("Download");
+                CreateLPOInvoice("/LPO/Create");
             }
         });
 
@@ -238,15 +239,22 @@
                                 //sucessAdd();
                                 //response(result, btnName, Message, returnulr, F)
 
-                                var SendEmail = localStorage.getItem("SendByEmail");
-
-                                if (SendEmail != null) {
-
-                                    localStorage.setItem("Id", result);
-                                    window.location.href = "/Email";
+                                if ($('#Flage').val() == "Download") {
+                                    localStorage.setItem("Download", "Download");
+                                    window.location.href = "/LPO/Details/" + result;
                                 }
                                 else {
-                                    window.location.href = "/LPO/Details/" + result;
+
+                                    var SendEmail = localStorage.getItem("SendByEmail");
+
+                                    if (SendEmail != null) {
+
+                                        localStorage.setItem("Id", result);
+                                        window.location.href = "/Email";
+                                    }
+                                    else {
+                                        window.location.href = "/LPO/Details/" + result;
+                                    }
                                 }
                             }
                             else {

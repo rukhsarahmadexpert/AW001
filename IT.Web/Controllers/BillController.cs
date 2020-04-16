@@ -172,7 +172,7 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                lPOInvoiceViewModel.VenderId = "3";
+               
                 // return Json("Success",JsonRequestBehavior.AllowGet);
 
                 lPOInvoiceViewModel.FromDate = Convert.ToDateTime(lPOInvoiceViewModel.FromDate);

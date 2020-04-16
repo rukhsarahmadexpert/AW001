@@ -47,6 +47,7 @@
     </div>
 </div>
 <input type="hidden" id="SendByEmail" />
+<input type="hidden" id="Flage" value="No"/>
 
 
 @section Scripts{
@@ -95,7 +96,8 @@
         $('#SaveDownload').click(function () {
             if (ValidLPO()) {
                 localStorage.clear();
-                CreateLPOInvoice("SaveDwnloadInvoice");
+                $('#Flage').val("Download");
+                CreateLPOInvoice("/Invoice/Create");
             }
         });
 
@@ -125,14 +127,12 @@
                         }
                     }
                 });
-
-
+                
                 if (list.length == 0) {
                     $('#SubTotal').text('');
                     $('#TotalVAT').text('');
                     $('#gtotal').text('');
                 }
-
                 var empObj = {
                     PONumber: $('#PONo').val(),
                     RefrenceNumber: $('#RefrenceNo').val(),
@@ -175,15 +175,22 @@
                                 //sucessAdd();
                                 //response(result, btnName, Message, returnulr, F)
 
-                                var SendEmail = localStorage.getItem("SendByEmail");
-
-                                if (SendEmail != null) {
-
-                                    localStorage.setItem("Id", result);
-                                    window.location.href = "/Email";
+                                if ($('#Flage').val() == "Download") {
+                                    localStorage.setItem("Download", "Download");
+                                    window.location.href = "/Invoice/Details/" + result;
                                 }
                                 else {
-                                    window.location.href = "/Invoice/Details/" + result;
+
+                                    var SendEmail = localStorage.getItem("SendByEmail");
+
+                                    if (SendEmail != null) {
+
+                                        localStorage.setItem("Id", result);
+                                        window.location.href = "/Email";
+                                    }
+                                    else {
+                                        window.location.href = "/Invoice/Details/" + result;
+                                    }
                                 }
                             }
                             else {
