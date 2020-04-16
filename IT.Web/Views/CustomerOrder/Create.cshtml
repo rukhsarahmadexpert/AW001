@@ -1,6 +1,5 @@
 ﻿@model IT.Core.ViewModels.CustomerOrderGroupViewModel
 @{
-   
 
     List<IT.Core.ViewModels.DriverModel> driverModels = new List<IT.Core.ViewModels.DriverModel>();
     List<IT.Core.ViewModels.VehicleModel> vehicleModels = new List<IT.Core.ViewModels.VehicleModel>();
@@ -9,6 +8,7 @@
     driverModels = ViewBag.driverModels as List<IT.Core.ViewModels.DriverModel>;
     vehicleModels = ViewBag.vehicleModels as List<IT.Core.ViewModels.VehicleModel>;
     siteViewModels = ViewBag.Sites as List<IT.Core.ViewModels.SiteViewModel>;
+
 }
 
 <div class="row">
@@ -42,7 +42,7 @@
                                 <select class="form-control" id="Site">
                                     @if (siteViewModels != null)
                                     {
-                                        @foreach (var item in siteViewModels)
+                                        foreach (var item in siteViewModels)
                                         {
                                             <option value="@item.Id">@item.SiteName</option>
                                         }

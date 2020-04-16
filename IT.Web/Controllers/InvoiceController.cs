@@ -298,6 +298,11 @@ namespace IT.Web_New.Controllers
                         lPOInvoiceDetails = (new JavaScriptSerializer().Deserialize<List<LPOInvoiceDetails>>(Results.Data.ToString()));
                         ViewBag.lPOInvoiceDetails = lPOInvoiceDetails;
 
+                        VenderController venderController = new VenderController();
+
+                        var venders = venderController.Venders();
+                        ViewBag.Vender = venders;
+
                         if (TempData["Success"] == null)
                         {
                             if (TempData["Download"] != null)
@@ -622,6 +627,8 @@ namespace IT.Web_New.Controllers
                 compnayModels = lPOInvoiceModel.compnays;
                 lPOInvoiceDetails = lPOInvoiceModel.lPOInvoiceDetailsList;
                 venderModels = lPOInvoiceModel.venders;
+
+                venderModels[0].UserName = "Customer Info:";
 
                 Report.Database.Tables[0].SetDataSource(compnayModels);
                 Report.Database.Tables[1].SetDataSource(venderModels);

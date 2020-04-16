@@ -8,8 +8,8 @@
 
     List<IT.Core.ViewModels.VenderViewModel> venderViewModels = new List<IT.Core.ViewModels.VenderViewModel>();
     venderViewModels = ViewBag.Vender as List<IT.Core.ViewModels.VenderViewModel>;
-    
-   // lpoRemainingQuantityViewModel = 
+
+    // lpoRemainingQuantityViewModel = 
 
     var DueDate = "";
     var FromDate = "";
@@ -17,11 +17,13 @@
     {
         DueDate = LPOInvoiceViewModel.DDate;
         FromDate = LPOInvoiceViewModel.FDate;
+        LPOInvoiceViewModel.FromDate = Convert.ToDateTime(FromDate);
+        LPOInvoiceViewModel.DueDate = Convert.ToDateTime(DueDate);
     }
     else
     {
-        DueDate = "03/19/2019";
-        FromDate = "03/19/2019";
+        DueDate = System.DateTime.Now.ToString("yyyy-MM-dd");
+        FromDate = System.DateTime.Now.ToString("yyyy-MM-dd");
     }
 
     if(LPOInvoiceViewModel.Heading == "BILL")
@@ -115,14 +117,15 @@
                 <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2">From Date:</span>
                 </div>
-                @Html.EditorFor(model => LPOInvoiceViewModel.FromDate, new { htmlAttributes = new { @class = "form-control", name = "FromDate", id = "FromDate" } })
-            </div>
+                <input type="date" id="FromDate" value="@FromDate" name="FromDate" class="form-control" placeholder="From Date">
+
+              </div>
             <div class="input-group mb-3">
                 <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2">Due Date:  </span>
                 </div>
-                @Html.EditorFor(model => LPOInvoiceViewModel.DueDate, new { htmlAttributes = new { @class = "form-control", id = "DueDate" } })
-            </div>
+                <input type="date" id="DueDate" value="@DueDate" name="DueDate" class="form-control" placeholder="Due Date">
+              </div>
             <div class="input-group mb-1">
                 <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2">No:</span>

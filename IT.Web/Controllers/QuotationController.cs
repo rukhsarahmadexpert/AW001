@@ -343,10 +343,14 @@ namespace IT.Web_New.Controllers
                     {
                         int Res = (new JavaScriptSerializer()).Deserialize<int>(result.Data);
 
+                        //if(lPOInvoiceViewModel.Flage == "Download")
+                        //{
+                        //    return PrintQuotation(Res);
+                        //}
+
                         HttpContext.Cache.Remove("QuotationData");
                         TempData["Id"] = Res;
-
-
+                        
                         return Json(Res, JsonRequestBehavior.AllowGet);
                     }
                     else
@@ -742,6 +746,8 @@ namespace IT.Web_New.Controllers
                 venderModels = lPOInvoiceModel.venders;
                 compnayModels = lPOInvoiceModel.compnays;
                 lPOInvoiceDetails = lPOInvoiceModel.lPOInvoiceDetailsList;
+
+                venderModels[0].UserName = "Customer Info:";
 
                 Report.Database.Tables[0].SetDataSource(compnayModels);
                 Report.Database.Tables[1].SetDataSource(venderModels);

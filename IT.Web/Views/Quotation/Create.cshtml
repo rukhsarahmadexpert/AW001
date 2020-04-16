@@ -42,22 +42,18 @@
                                     </div>
                                     <p></p>
                                     @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_LPO_InvoiceButtonPartialView.cshtml")
-                                </div>
+                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>   
 </main>
 
 <input type="hidden" id="SendByEmail" />
-
-
-<input type="hidden" id="SendByEmail" />
-
+<input type="hidden" id="Flage" value="No" />
 
 @section Scripts{
 
@@ -105,7 +101,8 @@
         $('#SaveDownload').click(function () {
             if (ValidLPO()) {
                 localStorage.clear();
-                CreateLPOInvoice("QuotationSaveDwnload");
+                $('#Flage').val("Download");
+                CreateLPOInvoice("/Quotation/Create");
             }
         });
 
@@ -154,6 +151,7 @@
                     TermCondition: $('#TermCondition').val(),
                     CustomerNote: $('#CustomerNote').val(),
                     CustomerId: $('#Venders').val(),
+                    Flage: $('#Flage').val()
                 };
 
                 for (var key in empObj) {
@@ -183,15 +181,21 @@
                         success: function (result) {
                             if (result != "Failed") {
                                 list = [];
-                                //sucessAdd();
-                                //response(result, btnName, Message, returnulr, F)
-                                var SendEmail = localStorage.getItem("SendByEmail");
-                                if (SendEmail != null) {
-                                    localStorage.setItem("Id", result);
-                                    window.location.href = "/Email";
+                                if ($('#Flage').val() == "Download") {
+                                    localStorage.setItem("Download", "Download");
+                                    window.location.href = "/Quotation/Details/" + result;
                                 }
                                 else {
-                                    window.location.href = "/Quotation/Details/" + result;
+                                    //sucessAdd();
+                                    //response(result, btnName, Message, returnulr, F)
+                                    var SendEmail = localStorage.getItem("SendByEmail");
+                                    if (SendEmail != null) {
+                                        localStorage.setItem("Id", result);
+                                        window.location.href = "/Email";
+                                    }
+                                    else {
+                                        window.location.href = "/Quotation/Details/" + result;
+                                    }
                                 }
                             }
                             else {
@@ -211,7 +215,7 @@
             else {
                 swal({
                     title: 'Graag uw invoer controleren!',
-                    text: 'Graag contact slecteren',
+                    text: 'Please select Customer',
                     type: 'warning'
                 });
             }

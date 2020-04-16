@@ -38,9 +38,16 @@
                 <td>@item.OrderProgress</td>
                 <td>@item.UserName</td>
                 <td>
-                    <a href="/CustomerOrder/Details/@item.OrderId"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                    <a href="/CustomerOrder/Edit/@item.OrderId"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                    <a href="/CustomerOrder/Details/@item.OrderId" ><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
 
+                    @if (item.OrderProgress != "Created" || item.OrderProgress != "Order Created")
+                    {
+                        <a><i class="fal fa-edit"></i></a>
+                    }
+                    else
+                    {
+                        <a href="/CustomerOrder/Edit/@item.OrderId"><i class="fal fa-edit"></i></a>
+                    }
                 </td>
             </tr>
         }

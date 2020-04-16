@@ -3,6 +3,9 @@
     ViewBag.Title = "Details";
 
     var Id = ViewBag.Id;
+
+    IT.Core.ViewModels.UserCompanyViewModel userCompanyViewModel = new IT.Core.ViewModels.UserCompanyViewModel();
+    userCompanyViewModel = Session["userCompanyViewModel"] as IT.Core.ViewModels.UserCompanyViewModel;
 }
 
 <link href="~/Content/css/Common/LPOInvoiceTable.css" rel="stylesheet" />
@@ -18,9 +21,15 @@
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    <a href="/LPO/Create">
-                        <i class="fal fa-plus-circle"></i>Add New <span class="fw-300"><i>LPO</i></span>
-                    </a>
+                    @if (userCompanyViewModel != null)
+                    {
+                        if (userCompanyViewModel.Authority != "CustomerAdmin")
+                        {
+                            <a href="/LPO/Create">
+                                <i class="fal fa-plus-circle"></i>Add New <span class="fw-300"><i>LPO</i></span>
+                            </a>
+                        }
+                    }
                 </h2>
             </div>
             <div class="panel-container show">
@@ -67,13 +76,12 @@
 
         $(document).ready(function () {
 
-        var Downloads =  @Html.Raw(Json.Encode(ViewBag.IsDownload));
+        var Downloads = localStorage.getItem("Download");
 
-        if (Downloads != null) {
-
-            Id = @Html.Raw(Json.Encode(ViewBag.Id));
+        if (Downloads == "Download") {
+            Id =  $('#LPOId').val();
             window.location.href = '/LPO/printLPO/' + Id;
-        }
+            }
         });
 
        $('#DownloadLPOInvoice').click(function () {

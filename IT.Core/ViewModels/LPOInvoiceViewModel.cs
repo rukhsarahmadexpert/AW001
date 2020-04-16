@@ -52,6 +52,7 @@ namespace IT.Core.ViewModels
         public bool IsForCustomer { get; set; }
         public bool IsFromLpo { get; set; }
         public int CompanyId { get; set; }
+        public string Flage { get; set; }
         public List<LPOInvoiceDetails> lPOInvoiceDetailsList { get; set; }
         public List<UploadDocumentsViewModel> uploadDocumentsViewModels { get; set; }
     }

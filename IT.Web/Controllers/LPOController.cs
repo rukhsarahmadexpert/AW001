@@ -537,6 +537,10 @@ namespace IT.Web_New.Controllers
                         lPOInvoiceViewModel.Heading = "LPO";
                         lPOInvoiceDetails = lPOInvoiceViewModel.lPOInvoiceDetailsList;
 
+                        VenderController venderController = new VenderController();
+                        var venders = venderController.Venders();
+                        ViewBag.Vender = venders;
+
                         ViewBag.lPOInvoiceDetails = lPOInvoiceDetails;
 
                         if (TempData["Success"] == null)
@@ -880,6 +884,8 @@ namespace IT.Web_New.Controllers
                 compnayModels = LPOInvoiceModel.compnays;
                 lPOInvoiceDetails = LPOInvoiceModel.lPOInvoiceDetailsList;
                 venderModels = LPOInvoiceModel.venders;
+
+                venderModels[0].UserName = "Vender Info";
 
                 Report.Database.Tables[0].SetDataSource(compnayModels);
                 Report.Database.Tables[1].SetDataSource(venderModels);

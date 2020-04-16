@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
 
-                                @*@Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_FooterButtonPartialViewView.cshtml")*@
+                                @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_FooterButtonPartialViewView.cshtml")
                             </div>
                         </div>
                     </div>
@@ -81,19 +81,15 @@
 @section Scripts{
     <script>
 
-        
-
-
         $(document).ready(function () {
 
-        var Downloads =  @Html.Raw(Json.Encode(ViewBag.IsDownload));
+            var Downloads = localStorage.getItem("Download");
 
-        if (Downloads != null) {
-
-            Id = @Html.Raw(Json.Encode(ViewBag.Id));
-            window.location.href = '/Invoice/PrintInvoice/' + Id;
-
-        }
+            if (Downloads == "Download") {
+                localStorage.setItem("Download","");
+                var Id = $('#LPOId').val();
+                window.location.href = '/Invoice/PrintInvoice/' + Id;
+            }
         });
 
        $('#DownloadLPOInvoice').click(function () {
@@ -126,7 +122,7 @@
             $('#SalesUl').css('display', 'block');
             $('#SalesInvoiceLi').addClass('active');
         });
-
+            
     </script>
 
 }
