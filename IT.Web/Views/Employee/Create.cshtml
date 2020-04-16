@@ -56,7 +56,8 @@
                                     </label>
 
                                     <select class="select2 form-control" name="Designation" id="Designation">
-
+                                        <option value="" disabled selected hidden>Select Designation</option>
+                                        <option value="NewDesignation">+ Add new designation</option>
                                         @if (ViewBag.Designations != null)
                                         {
                                             foreach (var item in ViewBag.Designations)
@@ -67,15 +68,10 @@
                                         }
                                         else
                                         {
-                                            <option >Select Designation</option>
+                                            <option>Select Designation</option>
                                         }
                                     </select>
                                 </div>
-
-
-
-
-
                             </div>
                             <div class="col-md-6">
 
@@ -145,24 +141,33 @@
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
     <script>
 
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-        //$('#Save').click(function () {
-        //    PostApiRequest();
-        //})
+            $("#PassportFrontFile").change(function () {
+                readURL(this,"PassportFrontPreview");
+            });
 
-
-        $("#PassportFrontFile").change(function () {
-            readURL(this,"PassportFrontPreview");
-    });
-
-
-        $("#PassportBackFile").change(function () {
-            readURL(this, "PassportBackPreview");
-    });
+            $("#PassportBackFile").change(function () {
+                readURL(this, "PassportBackPreview");
+            });
+        })
 
 
-    })
+        $(function () {
+            $(".select2")
+                .select2({
+                    width: '50%',
+                    minimumResultsForSearch: Infinity
+                })
+                .on('select2:close', function () {
+                    var el = $(this);
+                    if (el.val() === "NewDesignation") {
+                        //window.open('http://www.google.com');
+                        window.location.href = '/Designation/Create';
+                        //$("a").attr("href", "ssss/sss")
+                    }
+                });
+        });
 
     //function PostApiRequest() {
     //    $.post("http://itmolen-001-site8.htempurl.com/api/Driver/Add", $("#form1").serialize(), function (msg) {
