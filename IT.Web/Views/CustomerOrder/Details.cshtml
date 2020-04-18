@@ -3,7 +3,6 @@
     /**/
 
     ViewBag.Title = "Customer Order Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 
 
 }
@@ -25,7 +24,7 @@
             <div class="panel-container show">
                 <div class="panel-content">
                     <div>
-                        <div class="row">
+                        <div class="row" id="refreshDIV">
                             <div class="col-md-6">
                                 <table class="table table-bordered table-hover m-0">
                                     <tbody>
@@ -180,7 +179,36 @@
         $(document).ready(function () {
             $("#CustomerDeliveryMenu").attr("aria-expanded", "true");
             $('#CustomerDeliveryUl').css('display', 'block');
+
+           
+            
         });
 
+        //$(document).ready(function () {
+        //    setInterval(function () {
+        //        $("#refreshDIV").load("/CustomerOrder/Details");
+        //        //alert('dd');
+        //    }, 10000);
+        //});
+
+        //$(document).ready(function () {
+        //    var seconds = 5000; // time in milliseconds
+        //    var reload = function () {
+        //        $.ajax({
+        //            url: '/CustomerOrder/Details',
+        //            cache: false,
+        //            success: function (data) {
+        //                $('#refreshDIV').html(data);
+        //                setTimeout(function () {
+        //                    reload();
+        //                }, seconds);
+        //            }
+        //        });
+        //    };
+        //    reload();
+        //});
+
     </script>
+
+
 }
