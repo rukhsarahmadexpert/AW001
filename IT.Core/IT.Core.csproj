@@ -100,6 +100,7 @@
     <Compile Include="ViewModels\StorageViewListModel.cs" />
     <Compile Include="ViewModels\StorageViewModel.cs" />
     <Compile Include="ViewModels\TransferFromDriverViewModel.cs" />
+    <Compile Include="ViewModels\UpdateReasonDescriptionViewModel.cs" />
     <Compile Include="ViewModels\UploadDocumentsViewModel.cs" />
     <Compile Include="ViewModels\UserCompanyViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />

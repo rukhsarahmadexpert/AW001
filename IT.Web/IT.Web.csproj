@@ -1010,6 +1010,8 @@
     <Content Include="Views\Company\AdminCompanyEdit.cshtml" />
     <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\LPO\LPOAllCustomer.cshtml" />
+    <Content Include="Views\Shared\UpdateReason\_ReasonPartialView.cshtml" />
+    <Content Include="Views\Shared\UpdateReason\_UpdateReasonListView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -52,7 +52,6 @@ namespace IT.Web_New.Controllers
                 }
                 else
                 {
-
                     if (HttpContext.Cache["customerNotificationViewModels"] == null)
                     {
                         var result = webServices.Post(new CustomerNotificationViewModel(), "Advertisement/All");

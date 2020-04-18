@@ -13,8 +13,6 @@
 }
 
 <main id="js-page-content" role="main" class="page-content">
-
-
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
@@ -22,11 +20,9 @@
                     <h2>
                         Product <span class="fw-300">Create</span>
                     </h2>
-
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-
                         <form action="/Product/Create" method="post">
                             <input type="hidden" value="@Model.Id" name="Id" id="Id" />
                             <div class="row">
@@ -36,7 +32,6 @@
                                         <input type="text" id="Name" required autocomplete="off" name="Name" value="@Model.Name" class="form-control" placeholder="Product Name">
                                     </div>
                                 </div>
-
                             </div>
                             <div class="row">
                                 <div class="col-md-6 pt-3">
@@ -45,8 +40,7 @@
                                             Select Unit
                                         </label>
                                         <select class="select2 form-control" name="Unit" id="Unit">
-
-                                             <option id="op" value="NEW">+ Add new Unit</option>
+                                            <option id="op" value="NEW">+ Add new Unit</option>
                                             @if (ViewBag.productUnitViewModels != null)
                                             {
                                                 foreach (var item in ViewBag.productUnitViewModels)
@@ -59,7 +53,6 @@
                                             {
                                                 <option>Product Unit</option>
                                             }
-
                                         </select>
                                     </div>
                                 </div>
@@ -67,7 +60,7 @@
                                 <div class="col-md-6 pt-3">
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Unit Price</label>
-                                        @if (@Model.UPrice == 0)
+                                        @if (Model.UPrice == 0)
                                         {
                                             <input type="text" id="UPrice" name="UPrice" autocomplete="off" class="form-control" placeholder="0.00">
                                         }
@@ -78,12 +71,16 @@
 
                                     </div>
                                 </div>
-                                <div class="col-md-12 pt-3">
+                                <div class="col-md-12 pt-3 mb-2">
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Description</label>
                                         <textarea name="Description" id="Description" class="form-control">@Model.Description</textarea>
                                     </div>
                                 </div>
+                                @if (Model.Id > 0)
+                                {
+                                    @Html.Partial("~/Views/Shared/UpdateReason/_ReasonPartialView.cshtml")
+                                }
                             </div>
                             <div class="row py-5">
                                 <div class="col-md-12">

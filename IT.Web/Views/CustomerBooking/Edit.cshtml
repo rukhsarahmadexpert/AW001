@@ -4,8 +4,7 @@
 
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-
+    
     List<IT.Core.ViewModels.ProductViewModel> productViewModels = new List<IT.Core.ViewModels.ProductViewModel>();
     List<IT.Core.ViewModels.ProductUnitViewModel> productUnitViewModels = new List<IT.Core.ViewModels.ProductUnitViewModel>();
 
@@ -30,18 +29,14 @@
                     <div class="panel-content">
                         <div class="py-2"></div>
                         <input type="hidden" name="Id" value="@Model.Id" />
-
                         <div class="row">
-
                             <div class="col-md-6">
-
                                 <div class="form-group mb-2">
                                     <label>Product Name</label>
                                     <select id="ProductId" name="ProductId" class="select2 ProductId" required>
                                         @foreach (var item in productViewModels)
                                         {
                                             <option value="@item.Id" @(item.Id == Model.ProductId ? "selected='selected'" : "")>@item.Name</option>
-
                                         }
                                     </select>
                                 </div>
@@ -49,7 +44,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <div class="table-responsive-lg">
                     <table class="table m-0 data-table" id="SiteTarget">
@@ -74,7 +68,6 @@
                                             <option>Product Unit</option>
                                             @foreach (var item in productUnitViewModels)
                                             {
-
                                                 <option value="@item.Id" @(item.Id == Model.UnitId ? "selected='selected'" : "")>@item.Name</option>
                                             }
                                         </select>
@@ -105,10 +98,8 @@
 
                                 <td style="width:250px">
                                     <input type="text" class="form-control TotalAmount" name="TotalAmount" value="@Math.Round(Model.TotalAmount,2)" id="TotalAmount" placeholder="Total Amount" />
-
-                                </td>
+                              </td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -117,7 +108,6 @@
                     <div class="panel-content">
                         <div class="row">
                             <div class="col-md-9">
-
                                 <div class="form-group mb-2">
                                     <textarea class="form-control Description" rows="3" name="Description" id="Description" placeholder="Description">@Model.Description</textarea>
                                 </div>
@@ -132,7 +122,6 @@
                                                 <p style="border:2px groove; padding:0px 15px 0px 15px; font-weight:bolder" class="my-1" id="VAT2">@Math.Round(Model.VAT, 2) </p>
                                             </td>
                                         </tr>
-
                                         <tr>
                                             <th style="width:100px"><b>Gand Total</b> </th>
                                             <td>
@@ -144,10 +133,11 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="row">
+                            @Html.Partial("~/Views/Shared/UpdateReason/_ReasonPartialView.cshtml")
+                        </div>
                     </div>
                 </div>
-
-
 
                 <div class="row mt-3">
                     <div class="col-md-12">
