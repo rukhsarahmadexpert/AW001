@@ -53,7 +53,6 @@
                                             {
                                                 <option>Product Unit</option>
                                             }
-
                                         </select>
                                     </div>
                                 </div>
@@ -61,7 +60,7 @@
                                 <div class="col-md-6 pt-3">
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Unit Price</label>
-                                        @if (@Model.UPrice == 0)
+                                        @if (Model.UPrice == 0)
                                         {
                                             <input type="text" id="UPrice" name="UPrice" autocomplete="off" class="form-control" placeholder="0.00">
                                         }
@@ -81,28 +80,27 @@
                                 @if (Model.Id > 0)
                                 {
                                     @Html.Partial("~/Views/Shared/UpdateReason/_ReasonPartialView.cshtml")
-                               
-                                 }
-                                    </div>
-                                    <div class="row py-5">
-                                        <div class="col-md-12">
-                                            @if (Model.Id > 0)
-                                            {
-                                                <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                                    Update
-                                                    <span>Product</span>
-                                                </button>
-                                            }
-                                            else
-                                            {
-                                                <button type="submit" id="SaveRecord" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                                    Submit
-                                                    <span>Product</span>
-                                                </button>
-                                            }
-                                        </div>
-                                    </div>
-</form>
+                                }
+                            </div>
+                            <div class="row py-5">
+                                <div class="col-md-12">
+                                    @if (Model.Id > 0)
+                                    {
+                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                            Update
+                                            <span>Product</span>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" id="SaveRecord" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                            Submit
+                                            <span>Product</span>
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                 </div>
