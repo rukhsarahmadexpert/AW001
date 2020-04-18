@@ -19,11 +19,20 @@ namespace IT.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        protected void Application_BeginRequest()
+        //protected void Application_BeginRequest()
+        //{
+        //    if (FormsAuthentication.RequireSSL && !Request.IsSecureConnection)
+        //    {
+        //        Response.Redirect(Request.Url.AbsoluteUri.Replace("http://", "https://"));
+        //    }
+        //}
+
+        protected void Application_BeginRequest(Object sender, EventArgs e)
         {
-            if (FormsAuthentication.RequireSSL && !Request.IsSecureConnection)
+            if (HttpContext.Current.Request.IsSecureConnection.Equals(false) && HttpContext.Current.Request.IsLocal.Equals(false))
             {
-                Response.Redirect(Request.Url.AbsoluteUri.Replace("http://", "https://"));
+                Response.Redirect("https://" + Request.ServerVariables["HTTP_HOST"]
+                + HttpContext.Current.Request.RawUrl);
             }
         }
     }
