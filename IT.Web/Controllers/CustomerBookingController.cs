@@ -61,10 +61,10 @@ namespace IT.Web.Controllers
             try
             {
                 CustomerBookingReservedRemaining customerBookingReservedRemaining = new CustomerBookingReservedRemaining();
-                
+
                 var CustomerBookingList = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingReserved");
 
-             
+
                 if (CustomerBookingList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     customerBookingReservedRemaining = (new JavaScriptSerializer().Deserialize<CustomerBookingReservedRemaining>(CustomerBookingList.Data.ToString()));
@@ -146,7 +146,7 @@ namespace IT.Web.Controllers
                 var CustomerResult = new ServiceResponseModel();
                 customerBookingViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
                 CustomerResult = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingAdd");
-              
+
                 if (CustomerResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     if (CustomerResult.Data != "[]")
@@ -207,9 +207,10 @@ namespace IT.Web.Controllers
             ViewBag.Products = productController.Products();
             ViewBag.ProductUnits = productUnitController.ProductUnits();
 
-            CustomerBookingViewModel CustomerBookingViewModel = new CustomerBookingViewModel { 
-            VAT = (decimal)0.00,
-            TotalAmount = (decimal)0.00,
+            CustomerBookingViewModel CustomerBookingViewModel = new CustomerBookingViewModel
+            {
+                VAT = (decimal)0.00,
+                TotalAmount = (decimal)0.00,
             };
             return View(CustomerBookingViewModel);
         }
@@ -217,16 +218,17 @@ namespace IT.Web.Controllers
         [HttpGet]
         public ActionResult CustomerCreate()
         {
-           
+
             ProductController productController = new ProductController();
             ProductUnitController productUnitController = new ProductUnitController();
 
             ViewBag.Products = productController.Products();
             ViewBag.ProductUnits = productUnitController.ProductUnits();
 
-            CustomerBookingViewModel CustomerBookingViewModel = new CustomerBookingViewModel { 
-            VAT = (decimal)0.00,
-            TotalAmount = (decimal)0.00
+            CustomerBookingViewModel CustomerBookingViewModel = new CustomerBookingViewModel
+            {
+                VAT = (decimal)0.00,
+                TotalAmount = (decimal)0.00
             };
             return View(CustomerBookingViewModel);
         }
@@ -258,7 +260,7 @@ namespace IT.Web.Controllers
                     {
                         return View("CustomerCreate", customerBookingViewModel);
                     }
-                }                
+                }
                 else
                 {
                     if (customerBookingViewModel.IsAwfuelAdmin == "IsAwfuelAdmin")
@@ -331,7 +333,7 @@ namespace IT.Web.Controllers
                 ViewBag.ProductUnits = productUnitController.ProductUnits();
 
                 return View(customerBookingViewModel);
-            
+
             }
             catch (Exception ex)
             {
@@ -339,7 +341,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-        
+
         [HttpGet]
         public ActionResult Details(int Id)
         {
@@ -353,21 +355,9 @@ namespace IT.Web.Controllers
                     customerBookingViewModel = (new JavaScriptSerializer().Deserialize<CustomerBookingViewModel>(customerResult.Data.ToString()));
                 }
 
-                var updateDatetList = webServices.Post(customerBookingViewModel, "CustomerBooking/BookingUpdateReasonAllByBookingId");
-
-                if (updateDatetList.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {
-                    customerBookingViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerBookingViewModel>>(updateDatetList.Data.ToString()));
-                }
-
-                // CompanyController companyController = new CompanyController();
-                // ProductController productController = new ProductController();
-                // ProductUnitController productUnitController = new ProductUnitController();
-
-                // ViewBag.Companies = companyController.Companies();
-                // ViewBag.Products = productController.Products();
-                // ViewBag.ProductUnits = productUnitController.ProductUnits();
                 ViewBag.customerBookingViewModels = customerBookingViewModels;
+                ViewBag.UpdateReasonList = customerBookingViewModel.updateReasonDescriptionViewModels;
+
                 return View(customerBookingViewModel);
 
             }
@@ -490,13 +480,13 @@ namespace IT.Web.Controllers
                 {
                     customerBookingViewModel = (new JavaScriptSerializer().Deserialize<CustomerBookingViewModel>(customerResult.Data.ToString()));
                 }
-               
+
                 ProductController productController = new ProductController();
                 ProductUnitController productUnitController = new ProductUnitController();
 
                 ViewBag.Products = productController.Products();
                 ViewBag.ProductUnits = productUnitController.ProductUnits();
-
+                
                 return View(customerBookingViewModel);
 
             }
@@ -528,9 +518,31 @@ namespace IT.Web.Controllers
                     var CustomerResult = new ServiceResponseModel();
                     if (customerBookingViewModel.Id > 0)
                     {
-                        customerBookingViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
-                        customerBookingViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                        CustomerResult = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingUpdate");
+                        CustomerBookingViewModel customerBookingViewModel1 = new CustomerBookingViewModel
+                        {
+
+                            Id = customerBookingViewModel.Id,
+                            BookQuantity = customerBookingViewModel.BookQuantity,
+                            UnitPrice = customerBookingViewModel.UnitPrice,
+                            VAT = customerBookingViewModel.VAT,
+                            TotalAmount = customerBookingViewModel.TotalAmount,
+                            Description = customerBookingViewModel.Description,
+                            UpdateBy = Convert.ToInt32(Session["UserId"]),
+                            ProductId = customerBookingViewModel.ProductId,
+                            UnitId = customerBookingViewModel.UnitId,
+                        };
+                        UpdateReasonDescriptionViewModel updateReasonDescriptionViewModel1 = new UpdateReasonDescriptionViewModel
+                        {
+
+                            Id = customerBookingViewModel.Id,
+                            Flag = "Booking",
+                            ReasonDescription = customerBookingViewModel.ReasonDescription,
+                            CreatedBy = customerBookingViewModel1.UpdateBy,
+                        };
+
+                        customerBookingViewModel1.UpdateReasonDescriptionViewModel = updateReasonDescriptionViewModel1;
+
+                        CustomerResult = webServices.Post(customerBookingViewModel1, "CustomerBooking/CustomerBookingUpdate");
 
                         if (CustomerResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                         {
@@ -677,7 +689,7 @@ namespace IT.Web.Controllers
                     pageNumber = 1,
                     CompanyId = CompanyId,
                     PageSize = 10,
-                    
+
                 };
 
                 var CustomerBookingList = webServices.Post(pagingParameterModel, "CustomerBooking/BookingConfirmationByCompany");
@@ -695,14 +707,16 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-        
+
         [HttpGet]
         public ActionResult ConfirmationLetter(int Id)
         {
-            List <BookingConfirmationViewModel> bookingConfirmationViewModels = new List<BookingConfirmationViewModel>();
+            List<BookingConfirmationViewModel> bookingConfirmationViewModels = new List<BookingConfirmationViewModel>();
             BookingConfirmationViewModel bookingConfirmationViewModel = new BookingConfirmationViewModel();
-            SearchViewModel searchViewModel = new SearchViewModel();
-            searchViewModel.Id = Id;
+            SearchViewModel searchViewModel = new SearchViewModel
+            {
+                Id = Id
+            };
             var results = webServices.Post(searchViewModel, "CustomerBooking/BookingConfirmationById");
             if (results.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
@@ -720,7 +734,7 @@ namespace IT.Web.Controllers
 
             Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stram.Seek(0, SeekOrigin.Begin);
-            
+
             var root = Server.MapPath("/PDF/");
             pdfname = String.Format("{0}.pdf", "Demo");
             var path = Path.Combine(root, pdfname);

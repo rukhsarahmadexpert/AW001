@@ -1,0 +1,32 @@
+﻿@{ 
+    var ListUpdated = new List<IT.Core.ViewModels.UpdateReasonDescriptionViewModel>();
+    ListUpdated = ViewBag.UpdateReasonList as List<IT.Core.ViewModels.UpdateReasonDescriptionViewModel>;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @if (ListUpdated != null && ListUpdated.Count > 0)
+        {
+            <h3><u>Update Details</u></h3>
+            <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Updated Date</th>
+                    <th>Reason</th>
+                    <th>Updated By</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ListUpdated)
+                {
+                <tr>
+                    <td>@item.CreatedDate.ToString("dd-MMM-yyyy")</td>
+                    <td>@item.ReasonDescription</td>
+                    <td>@item.UserName</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
