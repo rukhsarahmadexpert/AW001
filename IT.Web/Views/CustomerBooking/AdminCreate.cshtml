@@ -29,9 +29,12 @@
                                 <div class="form-group mb-2">
                                     <label>Company Name</label>
                                     <select id="CompanyId" name="CompanyId" class="select3 Company" required>
-                                        @foreach (var item in companyViewModels)
+                                        @if (companyViewModels != null)
                                         {
+                                            foreach (var item in companyViewModels)
+                                            {
                                             <option value="@item.Id" @(item.Id == Model.CompanyId ? "selected='selected'" : "")>@item.Name</option>
+                                            }
                                         }
                                     </select>
                                 </div>
@@ -40,10 +43,15 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
                                     <label>Product Name</label>
-                                    <select id="ProductId" name="ProductId" class="select3 ProductId" required>
-                                        @foreach (var item in productViewModels)
+                                    <select id="ProductId" name="ProductId" class="select2 ProductId" required>
+                                        <option value="" disabled selected hidden>Select Product</option>
+                                        <option value="NewProduct">+ Add new product</option>
+                                        @if (productViewModels != null)
                                         {
-                                            <option value="@item.Id" @(item.Id == Model.ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                            foreach (var item in productViewModels)
+                                            {
+                                                <option value="@item.Id" @(item.Id == Model.ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                            }
                                         }
                                     </select>
                                 </div>
@@ -72,12 +80,17 @@
                                 <td style="width:250px !important">
                                     <div class="form-group mb-2">
 
-                                        <select id="UnitId" name="UnitId" class="select3 UnitId" required>
-                                            <option>Product Unit</option>
-                                            @foreach (var item in productUnitViewModels)
+                                        <select id="UnitId" name="UnitId" class="select2 UnitId" required>
+                                           
+                                            <option value="NewProductUnit">+ Add new Unit</option>
+                                            @if (productUnitViewModels != null)
                                             {
-                                                <option value="@item.Id" @(item.Id == Model.UnitId ? "selected='selected'" : "")>@item.Name</option>
+                                                foreach (var item in productUnitViewModels)
+                                                {
+                                                    <option value="@item.Id" @(item.Id == Model.UnitId ? "selected='selected'" : "")>@item.Name</option>
+                                                }
                                             }
+
                                         </select>
                                     </div>
                                 </td>
@@ -172,6 +185,27 @@
                 $("#SaveRecord").attr("disabled", true);
 
             });
+        });
+
+        $(function () {
+            $(".select2")
+                .select2({
+                    width: '50%',
+                    minimumResultsForSearch: Infinity
+                })
+                .on('select2:close', function () {
+                    var el = $(this);
+                    if (el.val() === "NewProduct") {
+                        //window.open('http://www.google.com');
+                        window.location.href = '/Product/Create';
+                        //$("a").attr("href", "ssss/sss")
+                    }
+                    else if (el.val() === "NewProductUnit") {
+                        //window.open('http://www.google.com');
+                        window.location.href = '/ProductUnit/Create';
+                        //$("a").attr("href", "ssss/sss")
+                    }
+                });
         });
     </script>
 

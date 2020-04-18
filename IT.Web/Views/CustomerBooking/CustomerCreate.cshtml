@@ -3,10 +3,8 @@
     ViewBag.Title = "CustomerCreate";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-
     List<IT.Core.ViewModels.ProductViewModel> productViewModels = new List<IT.Core.ViewModels.ProductViewModel>();
     List<IT.Core.ViewModels.ProductUnitViewModel> productUnitViewModels = new List<IT.Core.ViewModels.ProductUnitViewModel>();
-
 
     productViewModels = ViewBag.Products as List<IT.Core.ViewModels.ProductViewModel>;
     productUnitViewModels = ViewBag.ProductUnits as List<IT.Core.ViewModels.ProductUnitViewModel>;
@@ -33,6 +31,7 @@
                                 <div class="form-group mb-2">
                                     <label>Product Name</label>
                                     <select id="ProductId" name="ProductId" class="select2 ProductId" required>
+                                        <option value="NewProduct">+ Create New Product</option>
                                         @foreach (var item in productViewModels)
                                         {
                                             <option value="@item.Id" @(item.Id == Model.ProductId ? "selected='selected'" : "")>@item.Name</option>
@@ -66,6 +65,7 @@
                                     <div class="form-group mb-2">
 
                                         <select id="UnitId" name="UnitId" class="form-control UnitId" required>
+                                            <option value="ProductUnit">+ Create Unit</option>
                                             @foreach (var item in productUnitViewModels)
                                             {
                                                 <option value="@item.Id" @(item.Id == Model.UnitId ? "selected='selected'" : "")>@item.Name</option>
@@ -132,7 +132,7 @@
                                                 @if (Model.TotalAmount == 0)
                                                 {
                                                     <p style="border:2px groove; padding:0px 15px 0px 15px; font-weight:bolder" class="my-1" id="gtotal2">0.00</p>
-                                                  }
+                                                }
                                                 else
                                                 {
                                                     <p style="border:2px groove; padding:0px 15px 0px 15px; font-weight:bolder" class="my-1" id="gtotal2">@Math.Round(Model.TotalAmount, 2)</p>
@@ -143,6 +143,7 @@
                                 </table>
                             </div>
                         </div>
+                      
 
                         <div class="row mt-3">
                             <div class="col-md-12">
@@ -187,7 +188,33 @@
             $('.CustomerAddBookingli').addClass('active');
         });
 
+        $(function () {
+            $(".select2")
+                .select2({
+                    width: '50%',
+                    minimumResultsForSearch: Infinity
+                })
+                .on('select2:close', function () {
+                    var el = $(this);
+                    if (el.val() === "NewProduct") {
+                        //window.open('http://www.google.com');
+                        window.location.href = '/Product/Create';
+                        //$("a").attr("href", "ssss/sss")
+                    }
+                });
+        });
     </script>
+
+    <script type="text/javascript">
+        $('#UnitId').on('change', function(){
+            if ($(this).val() == "ProductUnit"){
+             window.location.href = '/ProductUnit/Create';
+            }
+            // and so on
+        })
+      </script>
+
+
    
 
 }

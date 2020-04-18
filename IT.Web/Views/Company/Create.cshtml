@@ -136,7 +136,7 @@
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-flag fs-xl"></i></span>
                                                           </div>
-                                                          <select class="select2 form-control" name="Country" id="Country" required>
+                                                          <select class="select2 form-control" name="Country" id="Country" >
                                                               @*<option value="" disabled selected hidden>Country</option>*@
                                                               @if (countryViewModels != null)
                                                               {
@@ -155,17 +155,20 @@
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-chess-rook fs-xl"></i></span>
                                                           </div>
-                                                          <select class="select2 form-control" name="State" id="State" required>
+                                                          <select class="select2 form-control" name="State" id="State" >
                                                               @*<option value="" disabled selected hidden>State</option>*@
-                                                              @foreach (var item in countryViewModels)
-                                                              {
-                                                                  if (item.stateViewModels != null)
-                                                                  {
-                                                                      foreach (var item1 in item.stateViewModels)
+                                                              @if(countryViewModels != null)
+                                                              { 
+                                                                      foreach (var item in countryViewModels)
                                                                       {
-                                                                      <option value="@item1.States">@item1.States</option>
+                                                                          if (item.stateViewModels != null)
+                                                                          {
+                                                                              foreach (var item1 in item.stateViewModels)
+                                                                              {
+                                                                              <option value="@item1.States">@item1.States</option>
+                                                                              }
+                                                                          }
                                                                       }
-                                                                  }
                                                               }
                                                               </select>
                                                       </div>
@@ -179,21 +182,28 @@
                                                           <div class="input-group-prepend">
                                                               <span class="input-group-text"><i class="fal fa-building fs-xl"></i></span>
                                                           </div>
-                                                          <select class="select2 form-control" name="City" id="City" required>
+                                                          <select class="select2 form-control" name="City" id="City">
                                                               <option value="" disabled selected hidden>City</option>
-                                                              @foreach (var item in countryViewModels)
+                                                              @if (countryViewModels != null)
                                                               {
-                                                                  foreach (var item1 in item.stateViewModels)
+                                                                  foreach (var item in countryViewModels)
                                                                   {
-                                                                      if(item1.cityViewModels != null)
-                                                                      {
-                                                                          foreach (var item3 in item1.cityViewModels)
+                                                                      if (item.stateViewModels != null)
+                                                                      {                                                                        
+                                                                          foreach (var item1 in item.stateViewModels)
                                                                           {
-                                                                              <option value="@item3.CityName">@item3.CityName</option>
+                                                                              if (item1.cityViewModels != null)
+                                                                              {
+                                                                                  foreach (var item3 in item1.cityViewModels)
+                                                                                  {
+                                                                                      <option value="@item3.CityName">@item3.CityName</option>
+                                                                                  }
+                                                                              }
                                                                           }
                                                                       }
                                                                   }
                                                               }
+
                                                           </select>
                                                       </div>
                                                   </div>

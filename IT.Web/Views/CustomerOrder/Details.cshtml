@@ -95,13 +95,38 @@
                                             <tbody>
                                                 @foreach (var item in Model.customerGroupOrderDetailsViewModels)
                                                 {
-                                                    <tr>
-                                                        <td>@item.Name</td>
-                                                        <td>@item.TraficPlateNumber</td>
-                                                        <td>@item.RequestedQuantity</td>
-                                                        <td>@item.CurrentStatus</td>
-                                                        <td>@item.Comments</td>
-                                                    </tr>
+                                                <tr>
+                                                    <td>@item.Name</td>
+                                                    <td>@item.TraficPlateNumber</td>
+                                                    <td>@item.RequestedQuantity</td>
+                                                    <td>
+                                                        @if (item.CurrentStatus == "Accepted")
+                                                        {
+                                                            <span class="badge badge-success">Accepted</span>
+                                                        }
+                                                        else if (item.CurrentStatus == "Created")
+                                                        {
+                                                            <span class="badge badge-primary">Created</span>
+                                                        }
+                                                        else if (item.CurrentStatus == "Assigned")
+                                                        {
+                                                            <span class="badge badge-warning">Assigned</span>
+                                                        }
+                                                        else if (item.CurrentStatus == "Rejected")
+                                                        {
+                                                            <span class="badge badge-danger">Rejected</span>
+                                                        }
+                                                        else if (item.CurrentStatus == "Running")
+                                                        {
+                                                            <span class="badge badge-dark">Running</span>
+                                                        }
+                                                        else if (item.CurrentStatus == "Deliverd")
+                                                        {
+                                                            <span class="badge badge-info">Deliverd</span>
+                                                        }
+                                                    </td>
+                                                    <td>@item.Comments</td>
+                                                </tr>
                                                 }
                                             </tbody>
                                         </table>

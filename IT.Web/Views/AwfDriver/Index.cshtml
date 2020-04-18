@@ -4,7 +4,6 @@
 @model List<IT.Core.ViewModels.DriverViewModel>
 @{
     ViewBag.Title = "AW Fuel - Drivers List";
-    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 
 
     List<IT.Core.ViewModels.DriverViewModel> driverViewModels = new List<IT.Core.ViewModels.DriverViewModel>();
@@ -46,37 +45,38 @@
                         <tbody>
                             @foreach (var item in driverViewModels)
                             {
-                                <tr>
-                                    <td>@item.Name</td>
-                                    <td>@item.Contact</td>
-                                    <td>@item.Email</td>
-                                    <td>@item.DrivingLicenseExpiryDate</td>
-                                    <td>@item.Facebook</td>
-                                    <td>
-                                        @if (@item.IsActive == true)
-                                        {
-                                            <div class="switchToggle">
-                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="switchToggle">
-                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Contact</td>
+                                <td>@item.Email</td>
+                                <td>@Convert.ToDateTime(item.DrivingLicenseExpiryDate ?? System.DateTime.Now.ToString()).ToString("dd-MMM-yyyy")</td>
+                               
+                                <td>@item.Facebook</td>
+                                <td>
+                                    @if (@item.IsActive == true)
+                                    {
+                                        <div class="switchToggle">
+                                            <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
+                                            <label for="@item.Id">Toggle</label>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="switchToggle">
+                                            <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
+                                            <label for="@item.Id">Toggle</label>
+                                        </div>
 
-                                        }
-                                        <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
-                                    </td>
-                                    <td>
+                                    }
+                                    <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
+                                </td>
+                                <td>
 
-                                        <a href="/AwfDriver/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                        <a href="/AwfDriver/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                       
-                                    </td>
-                                </tr>
+                                    <a href="/AwfDriver/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                    <a href="/AwfDriver/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+
+                                </td>
+                            </tr>
                             }
 
                         </tbody>

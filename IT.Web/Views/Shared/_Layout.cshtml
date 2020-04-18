@@ -232,7 +232,7 @@
                     <div class="nav-filter">
 
                     </div>
-                    <a href="/Company/AdminCompanyInformation/@userCompanyViewModel.CompanyId">
+                    <a href="/Company/CompanyInformation/@userCompanyViewModel.CompanyId">
                         <div class="info-card">
                             @if (UserImage == null)
                             {
@@ -243,7 +243,7 @@
                                 <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:3.125rem; height:3.125rem; background-color:white" class="profile-image rounded-circle" alt="User Info">
                             }
                             <div class="info-card-text">
-                                <a href="/Company/AdminCompanyInformation/@userCompanyViewModel.CompanyId" class="d-flex align-items-center text-white">
+                                <a href="/Company/CompanyInformation/@userCompanyViewModel.CompanyId" class="d-flex align-items-center text-white">
                                     <span class="text-truncate text-truncate-sm d-inline-block">
                                         @if (@userCompanyViewModel.FullName != null)
                                         {
@@ -257,11 +257,11 @@
                                 </a>
                                 @if (@userCompanyViewModel.Authority == "CustomerAdmin")
                                 {
-                                    <span style="font-size:10px" class="d-inline-block"><i>Customer Admin</i>  <br /> <a class="text-white" href="/Home/AdminHome"><span style="font-size:14px">  @userCompanyViewModel.CompanyName  </span> </a></span>
+                                    <span style="font-size:10px" class="d-inline-block"><i>Customer Admin</i>  <br /> <a class="text-white" href="/Home/index"><span style="font-size:14px">  @userCompanyViewModel.CompanyName  </span> </a></span>
                                 }
                                 else
                                 {
-                                    <span style="font-size:10px" class="d-inline-block"><i>Customer Admin</i> <br /> <a class="text-white" href="/Home/AdminHome"><span style="font-size:14px">  @userCompanyViewModel.CompanyName  </span> </a></span>
+                                    <span style="font-size:10px" class="d-inline-block"><i>Customer Admin</i> <br /> <a class="text-white" href="/Home/index"><span style="font-size:14px">  @userCompanyViewModel.CompanyName  </span> </a></span>
                                 }
                             </div>
                             <img src="~/assets/staticImages/banner.png" class="cover" alt="cover">
@@ -382,7 +382,7 @@
                                 </li>
 
                                 <li id="OrderFinancesLi">
-                                    <a href="/CustomerBooking/Confirmation" title="LPOs" class=" " data-filter-tags="">
+                                    <a href="/CustomerBooking/Confirmation" title="Order Cofirmations" class=" " data-filter-tags="">
                                         <span class="nav-link-text" data-i18n="">Order Cofirmations</span><span class="">List</span>
                                     </a>
                                 </li>
