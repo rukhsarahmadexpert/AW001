@@ -201,6 +201,7 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
+            var tokenId = Session["Token"] ?? "token not availibe";
             Session.Abandon();
             Session.Clear();
 
@@ -210,10 +211,26 @@ namespace IT.Web_New.Controllers
                 //  DeviceId = System.Environment.GetEnvironmentVariable("COMPUTERNAME").ToString()
                 // DeviceId = System.Web.HttpContext.Current.Server.MachineName;
                 //DeviceId = Request.UserHostAddress
-                DeviceId = Request.Browser.Id
+                
+                DeviceId = tokenId.ToString().Substring(0, 10)
             };
             var result = webServices.Post(loginViewModel, "User/LogOut", false);
-            return Redirect(nameof(Login));
+
+            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    return Json(tokenId, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Redirect(nameof(Login));
+                }
+            }
+            else
+            {
+                return Redirect(nameof(Login));
+            }
         }
 
         [HttpGet]
@@ -250,7 +267,8 @@ namespace IT.Web_New.Controllers
                 //loginViewModel.DeviceId = System.Environment.MachineName.ToString();
                 // loginViewModel.DeviceId = System.Web.HttpContext.Current.Server.MachineName;
                 //loginViewModel.DeviceId = Request.UserHostAddress;
-                loginViewModel.DeviceId = loginViewModel.Token;
+                loginViewModel.DeviceId = loginViewModel.Token.Substring(0,10);
+                Session["Token"] = loginViewModel.Token;
                 if (ModelState.IsValid)
                 {
                     var result = webServices.Post(loginViewModel, "User/Login", false);
