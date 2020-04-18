@@ -537,7 +537,7 @@
                                 </a>
 
                                 <div class="dropdown-divider m-0"></div>
-                                <a class="dropdown-item fw-500 pt-3 pb-3" href="/User/LogOut">
+                                <a class="dropdown-item fw-500 pt-3 pb-3 logoutSession">
                                     <span data-i18n="drpdwn.page-logout">Logout</span>
                                     <span class="float-right fw-n">&commat;@userCompanyViewModel.FullName</span>
                                 </a>
@@ -621,7 +621,7 @@
         <a href="#" class="menu-item btn" data-toggle="tooltip" data-placement="left" title="Scroll Top">
             <i class="fal fa-arrow-up"></i>
         </a>
-        <a href="/User/LogOut" class="menu-item btn" data-toggle="tooltip" data-placement="left" title="Logout">
+        <a class="menu-item btn logoutSession" data-toggle="tooltip" data-placement="left" title="Logout">
             <i class="fal fa-sign-out"></i>
         </a>
         @*<a href="#" class="menu-item btn" data-action="app-fullscreen" data-toggle="tooltip" data-placement="left" title="Full Screen">
@@ -1260,8 +1260,6 @@
                     ]
                 });
 
-
-
         });
 
 
@@ -1391,6 +1389,9 @@
     <script src="~/assets/js/statistics/easypiechart/easypiechart.bundle.js"></script>
     <script src="~/assets/js/datagrid/datatables/datatables.bundle.js"></script>
     <script src="~/Scripts/CustomScript/common-script.js"></script>
+    <script src="~/Scripts/CustomScript/TokenScript.js"></script>
+    <script src="~/Scripts/CustomScript/DeleteFireBaseToken.js"></script>
+
     <script>
         /* defined datas */
         var dataTargetProfit = [
@@ -1688,7 +1689,7 @@
     <script src="~/Scripts/firebass.app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-messaging.js"></script>
     <script src="~/app.js"></script>
-
+  
     <!-- Getbutton.io widget -->
     <script type="text/javascript">
         (function () {

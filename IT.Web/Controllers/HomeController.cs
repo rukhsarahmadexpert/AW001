@@ -277,11 +277,13 @@ namespace IT.Web_New.Controllers
                 //loginViewModel.DeviceId = System.Web.HttpContext.Current.Server.MachineName;
                 //loginViewModel.DeviceId = loginViewModel.DeviceId = Request.UserHostAddress;
                 //loginViewModel.DeviceId = loginViewModel.DeviceId = Request.UserHostAddress;
-                 loginViewModel.DeviceId = loginViewModel.DeviceId = Request.Browser.Id;
+                loginViewModel.DeviceId = loginViewModel.Token.Substring(0, 10);
                 loginViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 loginViewModel.Authority = userCompanyViewModel.Authority;
                 loginViewModel.UserName = userCompanyViewModel.UserName;
 
+                Session["Token"] = loginViewModel.Token.ToString();
+                
                 var result = webServices.Post(loginViewModel, "User/UpdateToken", false);
                 return Json("Success",JsonRequestBehavior.AllowGet);
             }
@@ -290,9 +292,6 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
-
-
-
 
     }
 }

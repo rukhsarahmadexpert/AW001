@@ -12,6 +12,7 @@
 firebase.initializeApp(firebaseConfig);
 //firebase.analytics();
 const messaging = firebase.messaging();
+
 messaging.requestPermission().then(function () {
     //console.log('have permission');
 
@@ -36,7 +37,6 @@ messaging.requestPermission().then(function () {
     .catch(function (err) {
         console.log('Error Occured' + err);
     })
-
 
 function getRegisterToken() {
     messaging.getToken().then((currentToken) => {
@@ -75,7 +75,6 @@ messaging.onMessage((payload) => {
 
 });
 
-
 function isTokenSentToServer() {
     return window.localStorage.getItem('sentToServer') === '1';
 }
@@ -92,7 +91,7 @@ function sendTokenToServer(currentToken) {
 
 }
 
-
 function setTokenSentToServer(sent) {
     window.localStorage.setItem('sentToServer', sent ? '1' : '0');
 }
+

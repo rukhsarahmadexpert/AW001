@@ -35,3 +35,5 @@ self.addEventListener('notificationclick', function (event) {
         clients.openWindow("https://www.awfuel.com")
     );
 });
+
+
