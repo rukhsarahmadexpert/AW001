@@ -20,9 +20,8 @@ namespace IT.Web_New.Controllers
         ServiceViewModel serviceViewModel = new ServiceViewModel();
         PrivatePolicyViewModel privatePolicyViewModel = new PrivatePolicyViewModel();
         
-
         WebServices webServices = new WebServices();
-
+                
         public ActionResult Details()
         {
             var result = webServices.Post(new ServiceViewModel(), "OurServices/All");
@@ -127,6 +126,7 @@ namespace IT.Web_New.Controllers
             return View();
         }
 
+        [Autintication]
         public ActionResult BulkStorage()
         {
             var result = webServices.Post(new ServiceViewModel(), "OurServices/All");
@@ -141,7 +141,7 @@ namespace IT.Web_New.Controllers
             }
             return View();
         }
-
+              
         public ActionResult FuelTransportation()
         {
             var result = webServices.Post(new ServiceViewModel(), "OurServices/All");
@@ -156,7 +156,7 @@ namespace IT.Web_New.Controllers
             }
             return View();
         }
-
+               
         public ActionResult Products()
         {
             var result = webServices.Post(new ServiceViewModel(), "OurServices/All");

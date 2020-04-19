@@ -1,12 +1,10 @@
 ﻿@model IT.Core.ViewModels.CompnayModel
 @{
     ViewBag.Title = "CompanyInformation";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
+  
     IT.Core.ViewModels.UserViewModel userViewModel = new IT.Core.ViewModels.UserViewModel();
     userViewModel = ViewBag.userViewModel as IT.Core.ViewModels.UserViewModel;
 }
-
 
 
 <form action="/user/UserInformationUpdate" method="post" enctype="multipart/form-data">

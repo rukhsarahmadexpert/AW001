@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
-    $('.logoutSession').click(function () {
-        alert();
+    $('.logoutSession').click(function () {       
         ajaxRequest("Get", "/User/Logout", "", "json").then(function (result) {
             if (result != "Failed") {                
                 deleteToken();

@@ -1,8 +1,7 @@
 ﻿@model IT.Core.ViewModels.VenderViewModel
 @{
     ViewBag.Title = "Aw Fuel - Vendor Detail";
-    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
-
+ 
     List<IT.Core.ViewModels.CountryViewModel> countryViewModels = new List<IT.Core.ViewModels.CountryViewModel>();
     countryViewModels = ViewBag.Countries as List<IT.Core.ViewModels.CountryViewModel>;
 }

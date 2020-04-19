@@ -1,7 +1,6 @@
 ﻿@model IT.Core.ViewModels.CustomerBookingViewModel
 @{
     ViewBag.Title = "CustomerBookingGetById";
-    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
     List<IT.Core.ViewModels.CompanyViewModel> companyViewModels = new List<IT.Core.ViewModels.CompanyViewModel>();
     List<IT.Core.ViewModels.ProductViewModel> productViewModels = new List<IT.Core.ViewModels.ProductViewModel>();
     List<IT.Core.ViewModels.ProductUnitViewModel> productUnitViewModels = new List<IT.Core.ViewModels.ProductUnitViewModel>();
@@ -10,8 +9,6 @@
     productViewModels = ViewBag.Products as List<IT.Core.ViewModels.ProductViewModel>;
     productUnitViewModels = ViewBag.ProductUnits as List<IT.Core.ViewModels.ProductUnitViewModel>;
 }
-
-
 
 <div class="row">
     <div class="col-xl-12">
