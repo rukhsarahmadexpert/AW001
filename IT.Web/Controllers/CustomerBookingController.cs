@@ -363,7 +363,6 @@ namespace IT.Web.Controllers
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }

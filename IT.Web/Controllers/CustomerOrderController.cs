@@ -118,13 +118,17 @@ namespace IT.Web_New.Controllers
                 var CustomerOrderList = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderById/" + Id, false);
 
                 if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
-
                 {
                     if (CustomerOrderList.Data != "[]" || CustomerOrderList.Data != "No Data Exist on This Id")
                     {
                         customerOrderGroupViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderGroupViewModel>(CustomerOrderList.Data.ToString()));
                     }
                 }
+                if (Request.IsAjaxRequest())
+                {
+                    return Json(customerOrderGroupViewModel, JsonRequestBehavior.AllowGet);
+                }
+
                 return View(customerOrderGroupViewModel);
             }
             catch (Exception ex)
