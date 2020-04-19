@@ -1,9 +1,7 @@
 ﻿@model IT.Core.ViewModels.CityViewModel
 @{
     ViewBag.Title = "Aw Fuel - Add Update City";
-    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
-
-
+   
     List<IT.Core.ViewModels.StateViewModel> stateViewModels = new List<IT.Core.ViewModels.StateViewModel>();
     stateViewModels = ViewBag.States as List<IT.Core.ViewModels.StateViewModel>;
 }
