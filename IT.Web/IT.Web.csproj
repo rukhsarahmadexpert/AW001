@@ -208,6 +208,7 @@
     <Compile Include="MISC\OrderNumber.cs" />
     <Compile Include="MISC\POClass.cs" />
     <Compile Include="MISC\PurchaseNumber.cs" />
+    <Compile Include="MISC\TlsAttribute.cs" />
     <Compile Include="Models\BookingConfirmationViewModel.cs" />
     <Compile Include="Models\CompnayModel.cs" />
     <Compile Include="Models\CustomerOrder.cs" />
