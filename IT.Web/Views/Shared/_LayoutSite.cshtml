@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@{
+    IT.Core.ViewModels.UserCompanyViewModel userCompanyViewModel = new IT.Core.ViewModels.UserCompanyViewModel();
+    var UserImage = "";
+    if (Session["userCompanyViewModel"] != null)
+    {
+        userCompanyViewModel = Session["userCompanyViewModel"] as IT.Core.ViewModels.UserCompanyViewModel;
+        UserImage = userCompanyViewModel.ImageUrl ?? userCompanyViewModel.LogoUrl;
+    }
+
+
+
+
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,9 +26,9 @@
     <!--main css file-->
     <link href="~/assets/site/css/style.css" rel="stylesheet">
     <!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
-        <link rel="icon" href="~/assets/site/images/favicon.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="~/assets/site/images/favicon.png" type="image/png" sizes="16x16">
 
-    </head>
+</head>
 <body>
     <div id="preloader">
         <div id="preloader-inner"></div>
@@ -93,9 +107,48 @@
                         </a>
 
                     </li>-->
+                    @if (userCompanyViewModel.CompanyId > 0)
+                    {
 
-                    <li class="nav-item"><a href="/User/Registration" class="btn btn-rounded btn-primary nav-link">Become a customer</a></li>
-                    <li class="nav-item"><a href="/User/Login" class="btn btn-rounded btn-primary nav-link">Sign In</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                @if (UserImage == null)
+                                {
+                                    <img src="http://awservices.somee.com/ClientDocument/1586859948awflogo-2.png" style="width:2.125rem; height:2.125rem; background-color:white" class="profile-image rounded-circle" alt="User Info">
+                                }
+                                else
+                                {
+                                    <img src="http://awservices.somee.com/ClientDocument/@UserImage" style="width:2.125rem; height:2.125rem; background-color:white; " class="profile-image rounded-circle" alt="User Info" />
+                                }
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                @if (userCompanyViewModel.Authority == "Admin")
+                                {
+                                    <li><a class="dropdown-item" href="/Home/AdminHome"><b>Dashboard</b></a></li>
+                                    <li><a class="dropdown-item" href="/Company/AdminCompanyInformation/@userCompanyViewModel.CompanyId">Company Setting</a></li>
+                                }
+                                else
+                                {
+                                    <li><a class="dropdown-item" href="/Home/index"><b>Dashboard</b></a></li>
+                                    <li><a class="dropdown-item" href="/Company/CompanyInformation/@userCompanyViewModel.CompanyId">Company Setting</a></li>
+                                }
+
+                                <li><a class="dropdown-item" href="/User/AdminUserInformation">Profile Setting</a></li>
+                                <li><a class="dropdown-item" href="/User/ChangeAdminPassword">Reset Password</a></li>
+                                <li><a class="dropdown-item" href="/User/Logout">Logout</a></li>
+
+                            </ul>
+                        </li>
+
+
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a href="/User/Registration" class="btn btn-rounded btn-primary nav-link">Become a customer</a></li>
+                        <li class="nav-item"><a href="/User/Login" class="btn btn-rounded btn-primary nav-link">Sign In</a></li>
+                    }
+
                 </ul>
             </div>
             <!-- Start search Navigation -->
@@ -161,8 +214,12 @@
         <div class="space-20"></div>
     </footer>
     <!-- jQuery plugins-->
+
     <script src="~/assets/site/js/plugins/plugins.js"></script>
     <script src="~/assets/site/js/template-custom.js" type="text/javascript"></script>
+    
+   
+    
 
 
     <!-- Getbutton.io widget -->
@@ -171,7 +228,7 @@
             var options = {
                 whatsapp: "+971557383866", // WhatsApp number
                 //company_logo_url: "http://awfuel.com/assets/site/images/logo-light-3-4.svg", // URL of company logo (png, jpg, gif)
-               // greeting_message: "Hillo, How can i help you with...", // Text of greeting message
+                // greeting_message: "Hillo, How can i help you with...", // Text of greeting message
                 call_to_action: "Contact Us", // Call to action
                 position: "right", // Position may be 'right' or 'left'
             };
