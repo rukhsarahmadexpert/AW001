@@ -13,7 +13,7 @@
         </h1>
     </div>*@
 
-<div class="row">
+<div class="row" id="refreshDIV">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
@@ -24,7 +24,7 @@
             <div class="panel-container show">
                 <div class="panel-content">
                     <div>
-                        <div class="row" id="refreshDIV">
+                        <div class="row" >
                             <div class="col-md-6">
                                 <table class="table table-bordered table-hover m-0">
                                     <tbody>
@@ -178,11 +178,10 @@
     <script>
         $(document).ready(function () {
             $("#CustomerDeliveryMenu").attr("aria-expanded", "true");
-            $('#CustomerDeliveryUl').css('display', 'block');
-
-           
-            
+            $('#CustomerDeliveryUl').css('display', 'block');   
         });
+
+
 
         //$(document).ready(function () {
         //    setInterval(function () {
