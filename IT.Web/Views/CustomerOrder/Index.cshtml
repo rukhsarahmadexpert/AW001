@@ -126,6 +126,12 @@
 
         function PostAjax(OrderStatus) {
 
+            
+            var Ods = localStorage.getItem("OrderStatus");
+            if (Ods != null || Ods != '') {
+                OrderStatus = Ods;
+            }
+
             var data = {
                 OrderProgress: OrderStatus
             }
@@ -135,7 +141,9 @@
                 data: data,
                 dataType: 'json',
                 success: function (result) {
+                    localStorage.setItem("OrderStatus", OrderStatus);
                     console.log(result);
+                    //ajax.reload();
                 },
                 error: function (ex) {
                     console.log('error');
