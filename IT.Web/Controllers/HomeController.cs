@@ -10,8 +10,7 @@ using System.Web.Script.Serialization;
 
 namespace IT.Web_New.Controllers
 {
-    [ExceptionLog]
-    [TlsAttribute]
+    [ExceptionLog]   
     public class HomeController : Controller
     {
         List<CustomerNotificationViewModel> customerNotificationViewModels = new List<CustomerNotificationViewModel>();
@@ -125,8 +124,7 @@ namespace IT.Web_New.Controllers
             }
             return View();
         }
-
-        [Autintication]
+               
         public ActionResult BulkStorage()
         {
             var result = webServices.Post(new ServiceViewModel(), "OurServices/All");

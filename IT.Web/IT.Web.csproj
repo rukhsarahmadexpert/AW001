@@ -208,7 +208,6 @@
     <Compile Include="MISC\OrderNumber.cs" />
     <Compile Include="MISC\POClass.cs" />
     <Compile Include="MISC\PurchaseNumber.cs" />
-    <Compile Include="MISC\TlsAttribute.cs" />
     <Compile Include="Models\BookingConfirmationViewModel.cs" />
     <Compile Include="Models\CompnayModel.cs" />
     <Compile Include="Models\CustomerOrder.cs" />
@@ -726,6 +725,7 @@
     <Content Include="assets\site\ionicons\fonts\ionicons28b5.ttf" />
     <Content Include="assets\site\ionicons\fonts\ionicons28b5.woff" />
     <Content Include="Backup\DB_A415B5_AW_3_31_2020.bak" />
+    <Content Include="Backup\DB_A415B5_AW_4_19_2020.bak" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Common-Scripts\LOP-Invoice.js" />
