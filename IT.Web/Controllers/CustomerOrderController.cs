@@ -218,7 +218,6 @@ namespace IT.Web_New.Controllers
                 {
                     customerOrderGroupViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderGroupViewModel>(customerOrderGroup.Data.ToString()));
                 }
-
                 //if(customerOrderGroupViewModel.OrderProgress == "Order Accepted")
                 //{
                 //    return View("AssignToDriver",customerOrderGroupViewModel);

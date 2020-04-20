@@ -23,7 +23,6 @@
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
-
                     <div class="row">
                         <div class="col-md-6">
                             <table class="table table-bordered table-hover m-0">
@@ -85,14 +84,11 @@
                             <h3>My Google Maps Demo</h3>
                             <!--The div element for the map -->
                             <div id="map"></div>
-
-
                             @if (Model.customerRemainingBookingViewModels != null && Model.customerRemainingBookingViewModels.Count > 0)
                             {
                                 <table class="table table-hover" id="BookingTable">
                                     <thead>
                                         <tr>
-                                            <th>Option</th>
                                             <th>Booking Id</th>
                                             <th>Book Quantity</th>
                                             <th>Deliverd Quantity</th>
@@ -103,7 +99,6 @@
                                         @foreach (var item in Model.customerRemainingBookingViewModels)
                                         {
                                             <tr>
-                                                <td><Input type="radio" name="Booking" onclick="SetOrderId(@item.BookingId)" /></td>
                                                 <td>@item.BookingId</td>
                                                 <td>@item.BookQuantity</td>
                                                 <td>@item.DeliverdQuantity</td>
@@ -321,11 +316,9 @@
     <!--Load the API from the specified URL
     * The async attribute allows the browser to render the page while the API loads
     * The key parameter will contain your own API key (which is not needed for this tutorial)
-    * The callback parameter executes the initMap() function
-    -->
+    * The callback parameter executes the initMap() function-->
 
     <script>
-
         $(document).ready(function () {
 
             $('#btnAccept').click(function () {
@@ -502,7 +495,7 @@
 
     </script>
 
-        <script>
+    <script>
             $(document).ready(function () {
                 //alert();
                 $("#CustomerOrderMenu").attr("aria-expanded", "true");

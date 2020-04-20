@@ -252,8 +252,23 @@ namespace IT.Web_New.Controllers
             {
                 ViewBag.success = TempData["SuccessPWD"];
             }
+            if (Session["UserId"] == null && Session["CompanyId"] == null)
+            {
+                return View(new LoginViewModel());
+            }
+            else
+            {
+                userCompanyViewModel = Session["userCompanyViewModel"] as UserCompanyViewModel;
 
-            return View(new LoginViewModel());
+                if (userCompanyViewModel.Authority == "Admin")
+                {
+                    return RedirectToAction("AdminHome", "Home");
+                }
+                else 
+                {
+                    return RedirectToAction("Index", "Home");
+                }                
+            }
         }
 
         [HttpPost]

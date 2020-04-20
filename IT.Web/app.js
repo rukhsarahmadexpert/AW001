@@ -69,6 +69,7 @@ messaging.onMessage((payload) => {
         body: payload.data.Messages,
         icon: 'logo-1.png',
         image: payload.data.image,
+        click_action: 'http://awfuel.com/'
     };
 
     var myNotification = new Notification(title, options);
