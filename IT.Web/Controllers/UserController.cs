@@ -384,6 +384,7 @@ namespace IT.Web_New.Controllers
                 }
 
                 ViewBag.userViewModel = userViewModel;
+                changePasswordViewModel.Email = userViewModel.UserName;
 
                 return View(changePasswordViewModel);
             }
