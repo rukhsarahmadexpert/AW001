@@ -37,77 +37,89 @@
 
     <div class="col-sm-6 col-xl-6">
         <div class="p-3 bg-primary-600 rounded overflow-hidden position-relative text-white mb-g">
-            <a style="color:white" href="/CustomerBooking/CustomerCreate" id="btnNewBookin">
+            
                 <div class="">
                     <h3 class="display-4 d-block l-h-n m-0 fw-500">
-                        <span class="fal fa-plus-circle"></span>
-                        <small class="m-0 l-h-n">Please make new booking</small>
+                        <a style="color:white" href="/CustomerBooking/CustomerCreate" id="btnNewBookin">
+                            <span class="fal fa-plus-circle"></span>
+                        </a>
+                            <small class="m-0 l-h-n">Please make new booking</small>
                     </h3>
                 </div>
-                <i class="fal fa-hand-receiving position-absolute pos-right pos-bottom opacity-15" style="font-size:6rem"></i>
-            </a>
+                <a style="color:white" href="/CustomerBooking/Customer">
+                    <i class="fal fa-list  position-absolute pos-right pos-top" style="font-size:2.5rem; margin-top:30px; margin-right:15px"></i>
+                </a>
+           
         </div>
     </div>
     <div class="col-sm-6 col-xl-6">
         <div class="p-3 bg-primary-600 rounded overflow-hidden position-relative text-white mb-g">
-            <a style="color:white" href="/CustomerOrder/Create">
+            
                 <div class="">
                     <h3 class="display-4 d-block l-h-n m-0 fw-500">
-                        <span class="fal fa-plus-circle"></span>
-                        <small class="m-0 l-h-n">Request new Delivery</small>
+                        <a style="color:white" href="/CustomerOrder/Create">
+                            <span class="fal fa-plus-circle"></span>
+                        </a>
+                            <small class="m-0 l-h-n">Request new Delivery</small>
                     </h3>
                 </div>
-                <i class="fal fa-exchange position-absolute pos-right pos-bottom opacity-15" style="font-size: 6rem;"></i>
-            </a>
+                <a style="color:white" href="/CustomerOrder/Index">
+                    <i class="fal fa-list  position-absolute pos-right pos-top" style="font-size:2.5rem; margin-top:30px; margin-right:15px"></i>
+                </a>
+            
         </div>
     </div>
     <div class="col-sm-6 col-xl-6">
-        <div class="p-3 bg-primary-400 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-600 rounded overflow-hidden position-relative text-white mb-g">
             <div class="">
                 <h3 class="display-4 d-block l-h-n m-0 fw-500">
                     @customerOrderStatistics.TotalDrivers
                     <small class="m-0 l-h-n">Driver</small>
                 </h3>
             </div>
-            <i class="fal fa-user position-absolute pos-right pos-bottom opacity-15" style="font-size:6rem"></i>
+            <a style="color:white" href="/Driver/Index">
+                <i class="fal fa-list  position-absolute pos-right pos-top" style="font-size:2.5rem; margin-top:30px; margin-right:15px"></i>
+            </a>
         </div>
     </div>
     <div class="col-sm-6 col-xl-6">
-        <div class="p-3 bg-primary-400 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-600 rounded overflow-hidden position-relative text-white mb-g">
             <div class="">
                 <h3 class="display-4 d-block l-h-n m-0 fw-500">
                     @customerOrderStatistics.TotalVehicles
                     <small class="m-0 l-h-n">Vehicle</small>
                 </h3>
             </div>
-            <i class="fal fa-car position-absolute pos-right pos-bottom opacity-15" style="font-size: 6rem;"></i>
+            <a style="color:white" href="/Vehicle/Index">
+                <i class="fal fa-list  position-absolute pos-right pos-top" style="font-size:2.5rem; margin-top:30px; margin-right:15px"></i>
+            </a>
         </div>
     </div>
     <div class="col-sm-6 col-xl-6">
-        <div class="p-3 bg-primary-200 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-600 rounded overflow-hidden position-relative text-white mb-g">
             <div class="">
                 <h3 class="display-4 d-block l-h-n m-0 fw-500">
                     @customerOrderStatistics.TotolRequestedQuantity
                     <small class="m-0 l-h-n">Today's Accepted Requested & Sent Quantity</small>
                 </h3>
             </div>
-            <i class="fal fa-map-marker position-absolute pos-right pos-bottom opacity-15" style="font-size: 6rem;"></i>
+            <i class="fal fa-map-marker position-absolute pos-right pos-top opacity-90 " style="font-size: 3rem; margin-top:30px; margin-right:15px"></i>
         </div>
     </div>
     <div class="col-sm-6 col-xl-6">
-        <div class="p-3 bg-primary-200 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-600 rounded overflow-hidden position-relative text-white mb-g">
             <div class="">
                 <h3 class="display-4 d-block l-h-n m-0 fw-500">
                     @customerOrderStatistics.TotalDeliverdQuantity
                     <small class="m-0 l-h-n">Today's Deliverd Quantity</small>
                 </h3>
             </div>
-            <i class="fal fa-location-arrow position-absolute pos-right pos-bottom opacity-15" style="font-size: 6rem;"></i>
+            <i class="fal fa-location-arrow position-absolute pos-right pos-top opacity-90 " style="font-size: 3rem; margin-top:30px; margin-right:15px"></i>
         </div>
     </div>
 
     <div class="col-sm-4 col-xl-4">
-        <div class="p-3 bg-primary-200 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-600 rounded overflow-hidden position-relative text-white mb-g">
             <div class="">
                 <h3 class="display-4 d-block l-h-n m-0 fw-500">
                     @customerOrderStatistics.VirtualTotalQuantity
@@ -119,7 +131,7 @@
     </div>
 
     <div class="col-sm-4 col-xl-4">
-        <div class="p-3 bg-primary-200 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-600 rounded overflow-hidden position-relative text-white mb-g">
             <div class="">
                 <h3 class="display-4 d-block l-h-n m-0 fw-500">
                     @customerOrderStatistics.BookedTotalQuantity
@@ -131,7 +143,7 @@
     </div>
 
     <div class="col-sm-4 col-xl-4">
-        <div class="p-3 bg-primary-200 rounded overflow-hidden position-relative text-white mb-g">
+        <div class="p-3 bg-primary-600 rounded overflow-hidden position-relative text-white mb-g">
             <div class="">
                 <h3 class="display-4 d-block l-h-n m-0 fw-500">
                     @customerOrderStatistics.CustomerConfirmBooking

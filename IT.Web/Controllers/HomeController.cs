@@ -17,6 +17,7 @@ namespace IT.Web_New.Controllers
         CustomerOrderStatistics customerOrderStatistics = new CustomerOrderStatistics();
         AboutViewModel aboutViewModel = new AboutViewModel();
         ServiceViewModel serviceViewModel = new ServiceViewModel();
+        StorageDetailsViewModel storageDetailsViewModels = new StorageDetailsViewModel();
         PrivatePolicyViewModel privatePolicyViewModel = new PrivatePolicyViewModel();
         
         WebServices webServices = new WebServices();
@@ -218,16 +219,46 @@ namespace IT.Web_New.Controllers
                 var resultCustomerStatistics = webServices.Post(searchViewModel, "CustomerOrder/AdminStatistics");
                 if (resultCustomerStatistics.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    customerOrderStatistics = (new JavaScriptSerializer().Deserialize<CustomerOrderStatistics>(resultCustomerStatistics.Data.ToString()));
+                    if (resultCustomerStatistics.Data != null)
+                    {
+                        customerOrderStatistics = (new JavaScriptSerializer().Deserialize<CustomerOrderStatistics>(resultCustomerStatistics.Data.ToString()));
+                    }
+                        
                 }
                 ViewBag.customerOrderStatistics = customerOrderStatistics;
 
-                List<FuelPricesViewModel> fuelPricesViewModels = new List<FuelPricesViewModel>();
+                //Storage details
+                List<StorageDetailsViewModel> storageDetailsViewModels = new List<StorageDetailsViewModel>();
+                var resultStorage = webServices.Post(new StorageDetailsViewModel(), "Storage/StorageAllDetails");
+                if (resultStorage.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (resultStorage.Data != null)
+                    {
+                        storageDetailsViewModels = (new JavaScriptSerializer().Deserialize<List<StorageDetailsViewModel>>(resultStorage.Data.ToString()));
+                    }       
+                }
+                ViewBag.storageDetailsViewModels = storageDetailsViewModels;
 
+                //Booking details
+                List<BookingDetailsViewModel> bookingDetailsViewModels = new List<BookingDetailsViewModel>();
+                var resultBooking = webServices.Post(new BookingDetailsViewModel(), "CustomerBooking/BookingAllDetails");
+                if (resultBooking.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (resultStorage.Data != null)
+                    {
+                        bookingDetailsViewModels = (new JavaScriptSerializer().Deserialize<List<BookingDetailsViewModel>>(resultBooking.Data.ToString()));
+                    }
+                }
+                ViewBag.bookingDetailsViewModels = bookingDetailsViewModels;
+
+                List<FuelPricesViewModel> fuelPricesViewModels = new List<FuelPricesViewModel>();
                 var resultFuel = webServices.Post(new FuelPricesViewModel(), "FuelPrices/FuelPricesTopOne");
                 if (resultFuel.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                     fuelPricesViewModels = (new JavaScriptSerializer().Deserialize<List<FuelPricesViewModel>>(resultFuel.Data.ToString()));
+                    if (resultFuel.Data != null)
+                    {
+                        fuelPricesViewModels = (new JavaScriptSerializer().Deserialize<List<FuelPricesViewModel>>(resultFuel.Data.ToString()));
+                    }
                 }
                 ViewBag.fuelPricesViewModel = fuelPricesViewModels[0];
                 ViewBag.fuelPricesViewModels = fuelPricesViewModels;
