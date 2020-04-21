@@ -72,7 +72,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fal fa-credit-card fs-xl"></i></span>
                                     </div>
-                                    <input id="TRN" name="TRN" type="text" class="form-control" value="@Model.TRN" aria-label="TrnNumber" aria-describedby="addon-wrapping-left">
+                                    <input id="TRN" name="TRN" type="text" class="form-control" value="@Model.TRN" aria-label="TrnNumber" aria-describedby="addon-wrapping-left" placeholder="TRN">
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fal fa-building fs-xl"></i></span>
                                     </div>
-                                    <select class=" form-control" name="City" id="City" required>
+                                    <select class=" form-control" name="City" id="City">
                                         <option value="" disabled selected hidden>City</option>
                                         @foreach (var item in countryViewModels)
                                         {
