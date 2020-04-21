@@ -12,9 +12,9 @@ namespace IT.Repository.WebServices
     public class WebServices
     {
         HttpClient httpClient;
-       //readonly string baseURL = "http://localhost:64299/api/"; //ConfigurationManager.AppSettings["BaseURL"].ToString();
+       readonly string baseURL = "http://localhost:64299/api/"; //ConfigurationManager.AppSettings["BaseURL"].ToString();
        //string baseURL = "http://itmolen-001-site8.htempurl.com/api/";
-       readonly string baseURL = "http://awservices.somee.com/api/";
+       //readonly string baseURL = "http://awservices.somee.com/api/";
 
         ServiceResponseModel serviceResponseModel;
         public WebServices()
@@ -31,8 +31,7 @@ namespace IT.Repository.WebServices
         public ServiceResponseModel Post(object input, string service, bool IsMultiPart = false)
         {
             string inputJson = (new JavaScriptSerializer()).Serialize(input);
-
-
+            
             HttpContent inputContent = new StringContent(inputJson, Encoding.UTF8, "application/json");
             HttpResponseMessage response = httpClient.PostAsync(baseURL + service, inputContent).Result;
             if (response.IsSuccessStatusCode)

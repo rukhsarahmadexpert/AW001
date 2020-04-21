@@ -52,7 +52,7 @@ namespace IT.Web_New.Controllers
                                     storageViewModelObj.Id = item.Id;
                                     storageViewModelObj.StockIn = item.StockIn;
                                     storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
-                                    if (item.Source == "client vehicle")
+                                    if (item.Source == "Client Vehicle")
                                     {
                                         storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumberClient;
                                     }

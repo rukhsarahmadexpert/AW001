@@ -5,7 +5,7 @@
     IT.Core.ViewModels.UserCompanyViewModel userCompanyViewModel = new IT.Core.ViewModels.UserCompanyViewModel();
     userCompanyViewModel = Session["userCompanyViewModel"] as IT.Core.ViewModels.UserCompanyViewModel;
 
-    var UserImage = userCompanyViewModel.ImageUrl ?? userCompanyViewModel.LogoUrl;
+    var UserImage = userCompanyViewModel.ImageUrl ?? userCompanyViewModel.LogoUrl ?? "158581250521-4.png";
     //var UserImage = "158581250521-4.png";
 }
 <head>
@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width" />
 
     @* @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")*@
+       @Scripts.Render("~/bundles/modernizr")*@
 
     <title>Dashbaord - AW Fuel Trading </title>
     <meta name="description" content="">
@@ -42,7 +42,6 @@
     <link rel="stylesheet" media="screen, print" href="~/assets/css/notifications/sweetalert2/sweetalert2.bundle.css">
 
     <style>
-
         .page-logo {
             background-color: white !important;
         }

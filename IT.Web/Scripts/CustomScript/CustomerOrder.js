@@ -119,6 +119,8 @@ function CreateGroupOrder(Url)
         IsBulkTrue = true;
     }
 
+    alert($('#Lattitue').val());
+
     var empObj = {
         OrderId: $('#OrderId').val(),
         Id: $('#OrderId').val(),
@@ -224,7 +226,6 @@ $(document).ready(function ()
         });
         getInfoWindow.open(map, marker);
     }
-
 })
 
 $('#defaultCheckedRadio').change(function ()

@@ -85,7 +85,6 @@ namespace IT.Web_New.Controllers
 
             try
             {
-
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
                 var DriverInfo = webServices.Post(new DriverViewModel(), "AWFDriver/DriverAllOnline/" + CompanyId);
@@ -97,19 +96,15 @@ namespace IT.Web_New.Controllers
 
                     return Json(SingleDriver, JsonRequestBehavior.AllowGet);
 
-
                 }
 
                 return Json("failed", JsonRequestBehavior.AllowGet);
-
-
             }
             catch (Exception)
             {
                 return Json("failed", JsonRequestBehavior.AllowGet);
 
             }
-
         }
 
         [HttpPost]
