@@ -18,17 +18,10 @@
                         <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Vehicle</i></span>
                     </a>
                 </h2>
-
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
-                    <!--      <div class="panel-tag">
-                                <p>Drivers Base Information</p>
-
-
-                            </div>-->
-                    <!-- datatable start -->
-                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
                                 <th>Name</th>
@@ -40,69 +33,10 @@
                                 <th>Insurance Expiry</th>
                                 <th>IsActive</th>
                                 <th>Actions</th>
+
                             </tr>
                         </thead>
-                        <tbody>
-                            @if (VehicleViewModels != null && VehicleViewModels.Count > 0)
-                            {
-                                foreach (var item in VehicleViewModels)
-                                {
-                                    <tr>
-                                        <td>@item.VehicleTypeName</td>
-                                        <td>@item.TraficPlateNumber</td>
-                                        <td>@item.PlaceofIssue</td>
-                                        <td>@item.TCNumber</td>
-                                        <td>@item.Model</td>
-                                        <td>@item.MulkiaExpiry</td>
-                                        <td>@item.InsuranceExpiry</td>
-                                        <td>
-                                            @if (@item.IsActive == true)
-                                            {
-                                                <div class="switchToggle">
-                                                    <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
-                                                    <label for="@item.Id">Toggle</label>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="switchToggle">
-                                                    <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
-                                                    <label for="@item.Id">Toggle</label>
-                                                </div>
-
-                                            }
-                                            <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
-                                        </td>
-
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <form action="/Vehicle/Details" method="post">
-                                                        <input type="hidden" name="Id" value="@item.Id" />
-                                                        <input type="hidden" name="CompId" value="@item.CompanyId" />
-
-                                                        <button type="submit" class="btn btn-sm"><i class="fal fa-eye"></i></button>
-                                                    </form>
-                                                </div>
-                                                <div class="col-6">
-                                                    <form action="/Vehicle/Edit" method="post">
-                                                        <input type="hidden" name="Id" value="@item.Id" />
-                                                        <input type="hidden" name="CompId" value="@item.CompanyId" />
-
-                                                        <button type="submit" class="btn btn-sm"><i class="fal fa-edit"></i></button>
-                                                    </form>
-                                                </div>
-
-
-
-                                            </div>
-
-
-                                        </td>
-                                    </tr>
-                                }
-                            }
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                     <!-- datatable end -->
                 </div>
@@ -111,45 +45,16 @@
     </div>
 </div>
 
+<form id="VehicleForm" method="post" @*action="/Vehicle/Edit/"*@>
+    <input type="hidden" id="Id" value="0" name="id" />
+    <input type="hidden" id="CompanyId" value="0" name="CompId" />
+</form>
+
+
 @section scripts{
 
 
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
-    <script>
-
-        $(document).ready(function () {
-
-            $(".IsActive").click(function () {
-                if (confirm("Are you sure")) {
-
-                    var act = false;
-                    if (this.checked) {
-                        act = true;
-                    }
-
-                    var Data = JSON.stringify(
-                        {
-                            IsActive: act,
-                            Id: $(this).data("value"),
-                        })
-                    // alert(Data);
-                    ajaxRequest("POST", "/Vehicle/ChangeStatus", Data, "json").then(function (result) {
-                        if (result != "failed") {
-                            //console.log(result);
-                            window.location.reload();
-                        }
-                        else {
-                            alert('there is some problem');
-                        }
-                    })
-                }
-                else {
-                    return false;
-                }
-            });
-        });
-
-    </script>
 
     <script>
         $(document).ready(function () {
@@ -158,6 +63,86 @@
             $('#CustomerVehicleLi').addClass('active');
         });
 
-    </script>
+        $(function () {
+            $("#dt-basic-example1").DataTable({
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Vehicle/All",
+                    "type": "POST",
+                    "datatype": "json"
+                },
 
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "VehicleTypeName", "VehicleTypeName": "Name", "autoWidth": true },
+                    { "data": "TraficPlateNumber", "name": "TraficPlateNumber", "autoWidth": true },
+                    { "data": "PlaceofIssue", "name": "PlaceofIssue", "autoWidth": true },
+                    { "data": "TCNumber", "name": "TCNumber", "autoWidth": true },
+                    { "data": "Model", "name": "Model", "autoWidth": true },
+                    { "data": "MulkiaExpiry", "name": "MulkiaExpiry", "autoWidth": true },
+                    { "data": "InsuranceExpiry", "name": "InsuranceExpiry", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            if (row.IsActive == true) {
+                                return '<div class="switchToggle"><input onclick="ChangeStatus('+row.Id+','+false+');" IsActive type="checkbox" data-value="' + row.Id + '" id="' + row.Id + '" checked><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+                            else {
+                                return '<div class="switchToggle"><input type="checkbox" onclick="ChangeStatus(' + row.Id +','+true+');" class="IsActive" data-value="' + row.Id + '" id="' + row.Id + '"><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+
+                        }
+                    },
+                    {
+                        render: function (data, type, row) {
+                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>'
+                        }
+                    }
+                ]
+            });
+        });
+
+        function Edit(Id) {
+            $('#Id').val(Id);
+            $('#VehicleForm').attr('action', "/Vehicle/Edit").submit();
+        }
+
+        function Details(Id) {
+            $('#Id').val(Id);
+            $('#VehicleForm').attr('action', "/Vehicle/Details").submit();
+        }
+
+    </script>
+    <script>
+
+        function ChangeStatus(Id,value) {
+            if (confirm("Are you sure")) {
+
+                var act = value;
+               
+                var Data = JSON.stringify(
+                    {
+                        IsActive: act,
+                        Id: Id,
+                    })
+                // alert(Data);
+                ajaxRequest("POST", "/Vehicle/ChangeStatus", Data, "json").then(function (result) {
+                    if (result != "failed") {
+                        $("#dt-basic-example1").DataTable().ajax().reload();
+                    }
+                    else {
+                        alert('there is some problem');
+                    }
+                })
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
 }

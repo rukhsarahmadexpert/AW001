@@ -28,8 +28,6 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult Index(int CompId = 0)
         {
-            VehicleViewModels = new List<VehicleViewModel>();
-
             if (CompId == 0)
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
@@ -40,35 +38,36 @@ namespace IT.Web_New.Controllers
                 CompanyId = CompId;
                 ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
             }
-            try
+            if (Request.IsAjaxRequest())
             {
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = 1055;
-                pagingParameterModel.PageSize = 100;
-                pagingParameterModel.CompanyId = CompanyId;
-
-                var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
-
-                if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                VehicleViewModels = new List<VehicleViewModel>();
+                                
+                try
                 {
-                    if (VehicleList.Data != "[]" && VehicleList.Data != null)
+                    PagingParameterModel pagingParameterModel = new PagingParameterModel
                     {
-                        VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
+                        pageNumber = 1,
+                        _pageSize = 1,
+                        CompanyId = CompanyId,
+                        PageSize = 1000,
+                    };
+                    
+                    var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
+
+                    if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        if (VehicleList.Data != "[]" && VehicleList.Data != null)
+                        {
+                            VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
+                        }
                     }
-                }
-                if (Request.IsAjaxRequest())
-                {
-                    if(VehicleViewModels == null || VehicleViewModels.Count < 1)
+
+                    if (VehicleViewModels == null || VehicleViewModels.Count < 1)
                     {
-                        VehicleViewModel vehicleViewModel = new VehicleViewModel {
-                            Id = 0,
+                        VehicleViewModel vehicleViewModel = new VehicleViewModel
+                        {                            Id = 0,
                             TraficPlateNumber = "Select Vehicle"
-
                         };
-
                         VehicleViewModels.Add(vehicleViewModel);
                     }
                     else
@@ -76,17 +75,82 @@ namespace IT.Web_New.Controllers
                         VehicleViewModels.Insert(0, new VehicleViewModel() { Id = 0, TraficPlateNumber = "Select Vehicle" });
                     }
                     return Json(VehicleViewModels, JsonRequestBehavior.AllowGet);
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult All(int CompId = 0)
+        {
+            try
+            {
+                ViewBag.LayoutName = "~/Views/Shared/_Layout.cshtml";
+                int CompanyId = Convert.ToInt32(Session["CompanyId"]); ;
+                if (CompId > 0)
+                {
+                    ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
+                    CompanyId = CompId;
+                }
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                var sortColumn = Request.Form.GetValues("columns[" +
+                Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                string search = Request.Form.GetValues("search[value]")[0];
+                //int skip = start != null ? Convert.ToInt32(start) : 0;
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                if (Convert.ToInt32(start) == 0)
+                {
+                    pagingParameterModel.pageNumber = 1;
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                    pagingParameterModel.CompanyId = CompanyId;
+                }
+                else
+                {
+                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.CompanyId = CompanyId;
                 }
 
-                return View(VehicleViewModels);
+                var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
+
+                if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    int TotalRow = 0;
+                    if (VehicleList.Data != "[]" && VehicleList.Data != null)
+                    {
+                        VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
+
+                        TotalRow = VehicleViewModels.Count;
+
+                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
+                        //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
+                    }
+                }
+                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
-
         }
-
+        
         [HttpPost]
         public ActionResult ChangeStatus(VehicleViewModel vehicleViewModel)
         {
@@ -138,7 +202,7 @@ namespace IT.Web_New.Controllers
             CompanyId = Convert.ToInt32(Session["CompanyId"]);
             try
             {
-                if (CompId == CompanyId) {
+                if (CompId < 1) {
 
                     CompanyId = Convert.ToInt32(Session["CompanyId"]);
                     ViewBag.LayoutName = "~/Views/Shared/_layout.cshtml";
@@ -396,7 +460,7 @@ namespace IT.Web_New.Controllers
             try
             {
 
-                if (CompId == CompanyId)
+                if (CompId < 1)
                 {
 
                     CompanyId = Convert.ToInt32(Session["CompanyId"]);
@@ -423,7 +487,6 @@ namespace IT.Web_New.Controllers
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
