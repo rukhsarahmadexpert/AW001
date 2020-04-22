@@ -1,14 +1,7 @@
-﻿@model List<IT.Core.ViewModels.DriverViewModel>
-@{
+﻿@{
     ViewBag.Title = "Drivers List";
     Layout = ViewBag.LayoutName;
-
-    List<IT.Core.ViewModels.DriverViewModel> driverViewModels = new List<IT.Core.ViewModels.DriverViewModel>();
-    driverViewModels = Model as List<IT.Core.ViewModels.DriverViewModel>;
-
 }
-
-
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -22,13 +15,7 @@
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
-                    <!--      <div class="panel-tag">
-                                <p>Drivers Base Information</p>
-
-
-                            </div>-->
-                    <!-- datatable start -->
-                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
                                 <th>Name</th>
@@ -40,62 +27,7 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach (var item in driverViewModels)
-                            {
-
-                            <tr>
-                                <td>@item.Name</td>
-                                <td>@item.Contact</td>
-                                <td>@item.Email</td>
-                                <td>@item.LicenseExpiry</td>
-                                <td>@item.Facebook</td>
-                                <td>
-                                    @if (@item.IsActive == true)
-                                    {
-                                        <div class="switchToggle">
-                                            <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
-                                            <label for="@item.Id">Toggle</label>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="switchToggle">
-                                            <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
-                                            <label for="@item.Id">Toggle</label>
-                                        </div>
-
-                                    }
-                                    <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <form action="/Driver/Details" method="post">
-                                                <input type="hidden" name="Id" value="@item.Id" />
-                                                <input type="hidden" name="CompId" value="@item.CompanyId" />
-
-                                                <button type="submit" class="btn btn-sm"><i class="fal fa-eye"></i></button>
-                                            </form>
-                                        </div>
-                                        <div class="col-6">
-                                            <form action="/Driver/Edit" method="post">
-                                                <input type="hidden" name="Id" value="@item.Id" />
-                                                <input type="hidden" name="CompId" value="@item.CompanyId" />
-
-                                                <button type="submit" class="btn btn-sm"><i class="fal fa-edit"></i></button>
-                                            </form>
-                                        </div>
-
-
-
-                                    </div>
-                                </td>
-                            </tr>
-                            }
-
-                        </tbody>
-
+                        <tbody></tbody>
                     </table>
                     <!-- datatable end -->
                 </div>
@@ -140,7 +72,73 @@
                     return false;
                 }
             });
+
+            $("#dt-basic-example1").DataTable({
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Driver/All",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "Name", "Name": "Name", "autoWidth": true },
+                    { "data": "Contact", "name": "Contact", "autoWidth": true },
+                    { "data": "Email", "name": "Email", "autoWidth": true },
+                    { "data": "LicenseExpiry", "name": "LicenseExpiry", "autoWidth": true },
+                    { "data": "Facebook", "name": "Facebook", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            if (row.IsActive == true) {
+                                return '<div class="switchToggle"><input onclick="ChangeStatus(' + row.Id + ',' + false + ');" IsActive type="checkbox" data-value="' + row.Id + '" id="' + row.Id + '" checked><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+                            else {
+                                return '<div class="switchToggle"><input type="checkbox" onclick="ChangeStatus(' + row.Id + ',' + true + ');" class="IsActive" data-value="' + row.Id + '" id="' + row.Id + '"><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+                        }
+                    },
+                    {
+                        render: function (data, type, row) {
+                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>'
+                        }
+                    }
+                ]
+            });
+
         });
+
+        function ChangeStatus(Id, value) {
+
+            if (confirm("Are you sure")) {
+
+                var act = value;
+
+                var Data = JSON.stringify(
+                    {
+                        IsActive: act,
+                        Id: Id,
+                    })
+                // alert(Data);
+                ajaxRequest("POST", "/Driver/ChangeStatus", Data, "json").then(function (result) {
+                    if (result != "failed") {
+                        $('#dt-basic-example1').DataTable().ajax.reload();
+                    }
+                    else {
+                        alert('there is some problem');
+                    }
+                })
+            }
+            else {
+                $('#dt-basic-example1').DataTable().ajax.reload();
+            }
+        }
 
     </script>
 

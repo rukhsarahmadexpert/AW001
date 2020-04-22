@@ -33,30 +33,85 @@ namespace IT.Web_New.Controllers
                 CompanyId = CompId;
                 ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
             }
+            if (Request.IsAjaxRequest())
+            {
+                try
+                {
+                    PagingParameterModel pagingParameterModel = new PagingParameterModel
+                    {
+                        pageNumber = 1,
+                        _pageSize = 1000,
+                        PageSize = 1000,
+                        CompanyId = CompanyId,
+                    };
+                    var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
+
+                    if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));                                              
+                    }
+                    return Json(driverViewModels, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult All(int CompId = 0)
+        {
             try
             {
-                PagingParameterModel pagingParameterModel = new PagingParameterModel
-                { 
-                    pageNumber = 1,
-                    _pageSize = 1,                   
-                    PageSize = 100,
-                    CompanyId = CompanyId,
-                };
-                var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                var sortColumn = Request.Form.GetValues("columns[" +
+                Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                string search = Request.Form.GetValues("search[value]")[0];
+                if (CompId > 0)
+                {
+                    CompanyId = CompId;
+                }
+                else
+                {
+                    CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                }
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+                pagingParameterModel.CompanyId = CompanyId;
 
+                if (Convert.ToInt32(start) == 0)
+                {
+                    pagingParameterModel.pageNumber = 1;
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                }
+                else
+                {
+                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                }
+
+                var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
+                int TotalRow = 0;
                 if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
-
-                    if (Request.IsAjaxRequest())
+                    if (DriverList.Data != "[]")
                     {
-                        return Json(driverViewModels, JsonRequestBehavior.AllowGet);
+                        driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
+                        TotalRow = driverViewModels.Count;
                     }
-
-                    return View(driverViewModels);
+                    return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = driverViewModels }, JsonRequestBehavior.AllowGet);
                 }
-                
-                return View(driverViewModels);
+                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = driverViewModels }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
