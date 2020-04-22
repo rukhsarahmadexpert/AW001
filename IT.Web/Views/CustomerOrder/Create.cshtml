@@ -19,7 +19,7 @@
                     Delivery Order<span class="fw-300"> Create / Update </span>
                 </h2>
                 <div class="custom-control custom-radio mr-2">
-                    <input type="radio" class="custom-control-input" id="defaultCheckedRadio" value="Order by Vehicle"  name="defaultExampleRadios" checked="">
+                    <input type="radio" class="custom-control-input" id="defaultCheckedRadio" value="Order by Vehicle" name="defaultExampleRadios" checked="">
                     <label class="custom-control-label" id="lbl1" for="defaultCheckedRadio">Order by Vehicle</label>
                 </div>
                 <div class="custom-control custom-radio " style="padding-right:5px">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="panel-container show" style="padding-bottom:10px">
-                <div class="panel-content" >
+                <div class="panel-content">
                     <div class="py-2">
                     </div>
                     <input type="hidden" name="OrderId" id="OrderId" value="@Model.Id" />
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-md-6">
                             @*Note: if need in current location then don't change location! <i class="fal fa-arrow-right"></i>
-                            <button class="float-right btn btn-info"><i class="fal fa-map-marker"></i> Deliver to Custom Location</button>*@
+                                <button class="float-right btn btn-info"><i class="fal fa-map-marker"></i> Deliver to Custom Location</button>*@
                         </div>
                     </div>
                     <div class="row" id="TransportaionOption" style="display:none">
@@ -138,7 +138,7 @@
                                                     }
                                                     else
                                                     {
-                                                            <option value="0">Trafic Plate Number</option>
+                                                        <option value="0">Trafic Plate Number</option>
                                                     }
 
                                                 </select>
@@ -159,6 +159,7 @@
                                 <tr id="MainRow">
                                     <td>
                                         <select class="form-control product" id="product">
+
                                             @if (ViewBag.product != null)
                                             {
 
@@ -166,6 +167,7 @@
                                                 {
                                                     <option value="@item.Id">@item.Name</option>
                                                 }
+                                                <option value="CreateProduct">+ Create new </option>
                                             }
                                             else
                                             {
@@ -176,6 +178,8 @@
                                     </td>
                                     <td>
                                         <select class="form-control Driver" id="Driver">
+
+
                                             @if (driverModels != null)
                                             {
 
@@ -183,6 +187,7 @@
                                                 {
                                                     <option value="@item.DriverId">@item.DriverName</option>
                                                 }
+                                                <option value="CreateDriver">+ Create new driver</option>
                                             }
                                             else
                                             {
@@ -193,12 +198,15 @@
                                     </td>
                                     <td>
                                         <select class="form-control vehicle" id="vehicle">
+
                                             @if (vehicleModels != null)
                                             {
                                                 foreach (var item in vehicleModels)
                                                 {
                                                     <option value="@item.VehicelId">@item.TraficPlateNumber</option>
                                                 }
+
+                                                <option value="CreateVehicle">+ Create new vehicle</option>
                                             }
                                             else
                                             {
@@ -280,6 +288,28 @@
             $('#CustomerDeliveryAddLi').addClass('active');
         });
 
+    </script>
+
+    <script type="text/javascript">
+        $('#vehicle').on('change', function () {
+            if ($(this).val() == "CreateVehicle") {
+                window.location.href = '/Vehicle/Create';
+            }
+        })
+
+        $('#Driver').on('change', function () {
+            if ($(this).val() == "CreateDriver") {
+                window.location.href = '/Driver/Create';
+            }
+            // and so on
+        })
+
+        $('#product').on('change', function () {
+            if ($(this).val() == "CreateProduct") {
+                window.location.href = '/Prodcut/Create';
+            }
+            // and so on
+        })
     </script>
 
 }
