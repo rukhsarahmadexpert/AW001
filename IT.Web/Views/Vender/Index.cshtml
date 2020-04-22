@@ -1,9 +1,5 @@
-﻿@model  List<IT.Core.ViewModels.VenderViewModel>
-@{
+﻿@{
     ViewBag.Title = "Aw fuel - Venders List";
-  
-    List<IT.Core.ViewModels.VenderViewModel> venderViewModels = new List<IT.Core.ViewModels.VenderViewModel>();
-    venderViewModels = Model as List<IT.Core.ViewModels.VenderViewModel>;
 }
 
 <div class="row">
@@ -18,7 +14,7 @@
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
-                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
                                 <th>Name</th>
@@ -30,41 +26,7 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach (var item in venderViewModels)
-                            {
-                                <tr>
-                                    <td class="Name">@item.Name</td>
-                                    <td class="Email">@item.Email</td>
-                                    <td class="Representative">@item.Representative</td>
-                                    <td class="TRN">@item.TRN</td>
-                                    <td class="Mobile">@item.Mobile</td>
-                                    <td>
-                                        @if (@item.IsActive == true)
-                                        {
-                                            <div class="switchToggle">
-                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="switchToggle">
-                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
-
-                                        }
-                                        <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
-                                    </td>
-                                    <td>
-                                        <a href="/Vender/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                        <a href="/Vender/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                       
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
+                        
                     </table>
                     <!-- datatable end -->
                 </div>
@@ -78,7 +40,6 @@
 
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
     <script>
-
         $(document).ready(function () {
 
             $(".IsActive").click(function () {
@@ -109,18 +70,83 @@
                     return false;
                 }
             });
-        });
 
-    </script>
+            //alert();
+            $("#VenderMenu").attr("aria-expanded", "true");
+            $('#VenderUl').css('display', 'block');
+            $('#VenderLi').addClass('active');
 
-        <script>
-            $(document).ready(function () {
-                //alert();
-                $("#VenderMenu").attr("aria-expanded", "true");
-                $('#VenderUl').css('display', 'block');
-                $('#VenderLi').addClass('active');
+
+            var table = $("#dt-basic-example1").DataTable({
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Vender/All",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "Name", "Name": "Name", "autoWidth": true },
+                    { "data": "Email", "name": "Email", "autoWidth": true },
+                    { "data": "Representative", "name": "Representative", "autoWidth": true },
+                    { "data": "TRN", "name": "TRN", "autoWidth": true },
+                    { "data": "Mobile", "name": "Mobile", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            if (row.IsActive == true) {
+                                return '<div class="switchToggle"><input onclick="ChangeStatus(' + row.Id + ',' + false + ');" IsActive type="checkbox" data-value="' + row.Id + '" id="' + row.Id + '" checked><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+                            else {
+                                return '<div class="switchToggle"><input type="checkbox" onclick="ChangeStatus(' + row.Id + ',' + true + ');" class="IsActive" data-value="' + row.Id + '" id="' + row.Id + '"><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+                        }
+                    },
+                    {
+                        render: function (data, type, row) {
+                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>'
+                        }
+                    }
+                ]
             });
 
-        </script>
+        });
 
+        //$(function () {
+           
+        //});
+
+        function ChangeStatus(Id, value) {
+                       
+            if (confirm("Are you sure")) {
+
+                var act = value;
+
+                var Data = JSON.stringify(
+                    {
+                        IsActive: act,
+                        Id: Id,
+                    })
+                // alert(Data);
+                ajaxRequest("POST", "/Vender/ChangeStatus", Data, "json").then(function (result) {
+                    if (result != "failed") {
+                        $('#dt-basic-example1').DataTable().ajax.reload();
+                    }
+                    else {
+                        alert('there is some problem');
+                    }
+                })
+            }
+            else {
+                $('#dt-basic-example1').DataTable().ajax.reload();
+            }
+        }
+
+    </script>
 }
