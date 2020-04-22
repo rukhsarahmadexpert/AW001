@@ -44,40 +44,40 @@
                         </thead>
                         <tbody>
                             @*@foreach (var item in driverViewModels)
-                            {
-                            <tr>
-                                <td>@item.Name</td>
-                                <td>@item.Contact</td>
-                                <td>@item.Email</td>
-                                <td>@Convert.ToDateTime(item.DrivingLicenseExpiryDate ?? System.DateTime.Now.ToString()).ToString("dd-MMM-yyyy")</td>
-                               
-                                <td>@item.Facebook</td>
-                                <td>
-                                    @if (@item.IsActive == true)
-                                    {
-                                        <div class="switchToggle">
-                                            <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
-                                            <label for="@item.Id">Toggle</label>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="switchToggle">
-                                            <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
-                                            <label for="@item.Id">Toggle</label>
-                                        </div>
+                                {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Contact</td>
+                                    <td>@item.Email</td>
+                                    <td>@Convert.ToDateTime(item.DrivingLicenseExpiryDate ?? System.DateTime.Now.ToString()).ToString("dd-MMM-yyyy")</td>
 
-                                    }
-                                    <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
-                                </td>
-                                <td>
+                                    <td>@item.Facebook</td>
+                                    <td>
+                                        @if (@item.IsActive == true)
+                                        {
+                                            <div class="switchToggle">
+                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
+                                                <label for="@item.Id">Toggle</label>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="switchToggle">
+                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
+                                                <label for="@item.Id">Toggle</label>
+                                            </div>
 
-                                    <a href="/AwfDriver/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                    <a href="/AwfDriver/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                        }
+                                        <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
+                                    </td>
+                                    <td>
 
-                                </td>
-                            </tr>
-                            }*@
+                                        <a href="/AwfDriver/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                        <a href="/AwfDriver/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+
+                                    </td>
+                                </tr>
+                                }*@
 
                         </tbody>
                     </table>
@@ -92,84 +92,98 @@
 @section Scripts{
 
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
+
+
+
     <script>
-
         $(document).ready(function () {
+            //alert();
+            $("#DriverMenu").attr("aria-expanded", "true");
+            $('#DriverUl').css('display', 'block');
+            $('#DriverLi').addClass('active');
+        });
 
-            $(".IsActive").click(function () {
-                if (confirm("Are you sure")) {
 
-                    var act = false;
-                    if (this.checked) {
-                        act = true;
+        $(function () {
+            $("#dt-basic-example1").DataTable({
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/AwfDriver/All",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "Name", "name": "Name", "autoWidth": true },
+                    { "data": "Contact", "name": "Contact", "autoWidth": true },
+                    { "data": "Email", "name": "Email", "autoWidth": true },
+                    { "data": "DrivingLicenseExpiryDate", "name": "DrivingLicenseExpiryDate", "autoWidth": true },
+                    { "data": "Facebook", "name": "Facebook", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            if (row.IsActive == true) {
+                                return '<div class="switchToggle"><input onclick="ChangeStatus(' + row.Id + ',' + false + ');" IsActive type="checkbox" data-value="' + row.Id + '" id="' + row.Id + '" checked><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+                            else {
+                                return '<div class="switchToggle"><input type="checkbox" onclick="ChangeStatus(' + row.Id + ',' + true + ');" class="IsActive" data-value="' + row.Id + '" id="' + row.Id + '"><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+
+                        }
+                    },
+                    {
+                        render: function (data, type, row) {
+                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>'
+                        }
                     }
-
-                    var Data = JSON.stringify(
-                        {
-                            IsActive: act,
-                            Id: $(this).data("value"),
-                        })
-                    // alert(Data);
-                    ajaxRequest("POST", "/AWFDriver/ChangeStatus", Data, "json").then(function (result) {
-                        if (result != "failed") {
-                            //console.log(result);
-                            window.location.reload();
-                        }
-                        else {
-                            alert('there is some problem');
-                        }
-                    })
-                }
-                else {
-                    return false;
-                }
+                ]
             });
         });
 
+   
+    function Edit(Id) {
+    $('#Id').val(Id);
+    $('#VehicleForm').attr('action', "/Vehicle/Edit").submit();
+    }
+
+    function Details(Id) {
+    $('#Id').val(Id);
+    $('#VehicleForm').attr('action', "/Vehicle/Details").submit();
+    }
+
+    function ChangeStatus(Id, value) {
+
+    var answer = confirm("Are you sure");
+    if (answer) {
+
+    var act = value;
+
+    var Data = JSON.stringify(
+    {
+    IsActive: act,
+    Id: Id,
+    })
+    // alert(Data);
+    ajaxRequest("POST", "/Vehicle/ChangeStatus", Data, "json").then(function (result) {
+    if (result != "failed") {
+    $("#dt-basic-example1").ajax.reload();
+    }
+    else {
+    $("#dt-basic-example1").ajax.reload();
+    }
+    })
+    }
+    else {
+    alert();
+    $("#dt-basic-example1").ajax().reload();
+    }
+    }
     </script>
-
- 
-        <script>
-            $(document).ready(function () {
-                //alert();
-                $("#DriverMenu").attr("aria-expanded", "true");
-                $('#DriverUl').css('display', 'block');
-                $('#DriverLi').addClass('active');
-            });
-
-
-            $(function () {
-                $("#dt-basic-example1").DataTable({
-                    "paging": true,
-                    "responsive": true,
-                    "processing": true,
-                    "searching": true,
-                    "serverSide": true, // for process server side
-                    "filter": false, // this is for disable filter (search box)
-                    "orderMulti": false, // for disable multiple column at once
-                    "ajax": {
-                        "url": "/AwfDriver/All",
-                        "type": "POST",
-                        "datatype": "json"
-                    },
-
-                    "columns": [
-                        //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
-                        { "data": "Name", "name": "Name", "autoWidth": true },
-                        { "data": "Contact", "name": "Contact", "autoWidth": true },
-                        { "data": "Email", "name": "Email", "autoWidth": true },
-                        { "data": "DrivingLicenseExpiryDate", "name": "DrivingLicenseExpiryDate", "autoWidth": true },
-                        { "data": "Facebook", "name": "Facebook", "autoWidth": true },
-                        { "data": "IsActive", "name": "IsActive", "autoWidth": true },
-                        {
-                            render: function (data, type, row) {
-                                return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>'
-                            }
-                        }
-                    ]
-                });
-            });
-
-        </script>
 
 }
