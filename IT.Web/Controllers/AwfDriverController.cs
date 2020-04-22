@@ -26,26 +26,84 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                //CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel
-                {
-                    pageNumber = 1,
-                    CompanyId = CompanyId,
-                    PageSize = 100,
-                };
-                var DriverList = webServices.Post(pagingParameterModel, "AWFDriver/All");
+                //PagingParameterModel pagingParameterModel = new PagingParameterModel
+                //{
+                //    pageNumber = 1,
+                //    CompanyId = CompanyId,
+                //    PageSize = 100,
+                //};
+                //var DriverList = webServices.Post(pagingParameterModel, "AWFDriver/All");
 
-                if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {
-                    driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
-                }
+                //if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                //{
+                //    driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
+                //}
 
-                return View(driverViewModels);
+                //return View(driverViewModels);
+                return View();
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult All()
+        {
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                var sortColumn = Request.Form.GetValues("columns[" +
+                Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                string search = Request.Form.GetValues("search[value]")[0];
+                //int skip = start != null ? Convert.ToInt32(start) : 0;
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                if (Convert.ToInt32(start) == 0)
+                {
+                    pagingParameterModel.pageNumber = 1;
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                    pagingParameterModel.CompanyId = CompanyId;
+                }
+                else
+                {
+                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.CompanyId = CompanyId;
+                }
+
+                var DriverList = webServices.Post(pagingParameterModel, "AWFDriver/All");
+
+                if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    int TotalRow = 0;
+                    if (DriverList.Data != "[]" && DriverList.Data != null)
+                    {
+                        driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
+
+                        TotalRow = driverViewModels.Count;
+
+                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = driverViewModels }, JsonRequestBehavior.AllowGet);
+                        //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
+                    }
+                }
+                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = driverViewModels }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
 

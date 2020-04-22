@@ -30,7 +30,7 @@
 
                             </div>-->
                     <!-- datatable start -->
-                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
                                 <th>Name</th>
@@ -43,7 +43,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in driverViewModels)
+                            @*@foreach (var item in driverViewModels)
                             {
                             <tr>
                                 <td>@item.Name</td>
@@ -77,7 +77,7 @@
 
                                 </td>
                             </tr>
-                            }
+                            }*@
 
                         </tbody>
                     </table>
@@ -135,6 +135,39 @@
                 $("#DriverMenu").attr("aria-expanded", "true");
                 $('#DriverUl').css('display', 'block');
                 $('#DriverLi').addClass('active');
+            });
+
+
+            $(function () {
+                $("#dt-basic-example1").DataTable({
+                    "paging": true,
+                    "responsive": true,
+                    "processing": true,
+                    "searching": true,
+                    "serverSide": true, // for process server side
+                    "filter": false, // this is for disable filter (search box)
+                    "orderMulti": false, // for disable multiple column at once
+                    "ajax": {
+                        "url": "/AwfDriver/All",
+                        "type": "POST",
+                        "datatype": "json"
+                    },
+
+                    "columns": [
+                        //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                        { "data": "Name", "name": "Name", "autoWidth": true },
+                        { "data": "Contact", "name": "Contact", "autoWidth": true },
+                        { "data": "Email", "name": "Email", "autoWidth": true },
+                        { "data": "DrivingLicenseExpiryDate", "name": "DrivingLicenseExpiryDate", "autoWidth": true },
+                        { "data": "Facebook", "name": "Facebook", "autoWidth": true },
+                        { "data": "IsActive", "name": "IsActive", "autoWidth": true },
+                        {
+                            render: function (data, type, row) {
+                                return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>'
+                            }
+                        }
+                    ]
+                });
             });
 
         </script>

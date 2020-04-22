@@ -139,7 +139,6 @@ namespace IT.Web_New.Controllers
                 //if (Request.Files.Count > 0 && LogoUrl != null)
                 //{
                 var file = ImageUrl1;
-
                 using (HttpClient client = new HttpClient())
                 {
                     using (var content = new MultipartFormDataContent())
@@ -163,14 +162,10 @@ namespace IT.Web_New.Controllers
                         content.Add(new StringContent(userViewModel.Gender ?? ""), "Gender");
                         content.Add(new StringContent(userViewModel.DOB.ToString() ?? System.DateTime.Now.ToString()), "DOB");
 
-
-
                         var result = webServices.PostMultiPart(content, "User/UserInformationUpdate", true);
                         if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                         {
-
                             userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(result.Data.ToString()));
-
                             //return RedirectToAction("/");
                           CompanyId = Convert.ToInt32(Session["companyId"]);
                             if(CompanyId == 2)
@@ -181,14 +176,13 @@ namespace IT.Web_New.Controllers
                             {
                                 return RedirectToAction(nameof(UserInformation));
                             }
-                            
                         }
                         else
                         {
                             ViewBag.Message = "Failed";
                         }
                     }
-                }
+                } 
 
                 return RedirectToAction(nameof(UserInformation));
             }
