@@ -18,14 +18,11 @@
                         <i class="fal fa-plus-circle"></i>  Create New <span class="fw-300"><i>Driver</i></span>
                     </a>
                 </h2>
-
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
                     <!--      <div class="panel-tag">
                                 <p>Drivers Base Information</p>
-
-
                             </div>-->
                     <!-- datatable start -->
                     <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
@@ -64,7 +61,6 @@
                                             <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
                                             <label for="@item.Id">Toggle</label>
                                         </div>
-
                                     }
                                     <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
                                 </td>
@@ -74,7 +70,6 @@
                                             <form action="/Driver/Details" method="post">
                                                 <input type="hidden" name="Id" value="@item.Id" />
                                                 <input type="hidden" name="CompId" value="@item.CompanyId" />
-
                                                 <button type="submit" class="btn btn-sm"><i class="fal fa-eye"></i></button>
                                             </form>
                                         </div>
@@ -82,13 +77,9 @@
                                             <form action="/Driver/Edit" method="post">
                                                 <input type="hidden" name="Id" value="@item.Id" />
                                                 <input type="hidden" name="CompId" value="@item.CompanyId" />
-
                                                 <button type="submit" class="btn btn-sm"><i class="fal fa-edit"></i></button>
                                             </form>
                                         </div>
-
-
-
                                     </div>
                                 </td>
                             </tr>
@@ -113,25 +104,23 @@
         $(document).ready(function () {
 
             $(".IsActive").click(function () {
-                if (confirm("Are you sure")) {
-
+                if (confirm("Are you sure"))
+                {
                     var act = false;
                     if (this.checked) {
                         act = true;
                     }
-
                     var Data = JSON.stringify(
                         {
                             IsActive: act,
                             Id: $(this).data("value"),
                         })
-                    // alert(Data);
                     ajaxRequest("POST", "/Driver/ChangeStatus", Data, "json").then(function (result) {
                         if (result != "failed") {
-                            //console.log(result);
                             window.location.reload();
                         }
-                        else {
+                        else
+                        {
                             alert('there is some problem');
                         }
                     })
