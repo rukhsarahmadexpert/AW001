@@ -18,32 +18,63 @@ namespace IT.Web_New.Controllers
         VenderViewModel venderViewModel = new VenderViewModel();
         List<VenderViewModel> venderViewModels = new List<VenderViewModel>();
         int CompanyId;
+
         [HttpGet]
         public ActionResult Index()
         {
-            try
-            {              
-                CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                PagingParameterModel pagingParameterModel = new PagingParameterModel
-                {
-                    pageNumber = 1,
-                    CompanyId = CompanyId,
-                    PageSize = 100,
-                };
+            return View();            
+        }
 
-                var DriverList = webServices.Post(pagingParameterModel, "Vender/All");
-                if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
+        [HttpPost]
+        public ActionResult All()
+        {
+            try
+            {
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                var sortColumn = Request.Form.GetValues("columns[" +
+                Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                string search = Request.Form.GetValues("search[value]")[0]; 
+
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+                pagingParameterModel.CompanyId = CompanyId;
+
+                if (Convert.ToInt32(start) == 0)
                 {
-                    venderViewModels = (new JavaScriptSerializer().Deserialize<List<VenderViewModel>>(DriverList.Data.ToString()));
+                    pagingParameterModel.pageNumber = 1;
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;                   
+                }
+                else
+                {
+                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
                 }
 
-                return View(venderViewModels);
+                var DriverList = webServices.Post(pagingParameterModel, "Vender/All");
+                int TotalRow = 0;
+                if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (DriverList.Data != "[]")
+                    {
+                        venderViewModels = (new JavaScriptSerializer().Deserialize<List<VenderViewModel>>(DriverList.Data.ToString()));
+                        TotalRow = venderViewModels.Count;
+                    }
+                    return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = venderViewModels }, JsonRequestBehavior.AllowGet);
+                }                
+                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = venderViewModels }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
 
         [HttpPost]
         public ActionResult ChangeStatus(VenderViewModel venderViewModel)

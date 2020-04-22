@@ -45,15 +45,13 @@
     </div>
 </div>
 
-<form id="VehicleForm" method="post" @*action="/Vehicle/Edit/"*@>
+<form id="VehicleForm" method="post" style="display:none">
     <input type="hidden" id="Id" value="0" name="id" />
     <input type="hidden" id="CompanyId" value="0" name="CompId" />
 </form>
 
-
 @section scripts{
-
-
+    
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
 
     <script>
@@ -61,9 +59,7 @@
             $("#CustomerVehicleMenu").attr("aria-expanded", "true");
             $('#CustomerVehicleUl').css('display', 'block');
             $('#CustomerVehicleLi').addClass('active');
-        });
 
-        $(function () {
             $("#dt-basic-example1").DataTable({
                 "paging": true,
                 "responsive": true,
@@ -90,10 +86,10 @@
                     {
                         render: function (data, type, row) {
                             if (row.IsActive == true) {
-                                return '<div class="switchToggle"><input onclick="ChangeStatus('+row.Id+','+false+');" IsActive type="checkbox" data-value="' + row.Id + '" id="' + row.Id + '" checked><label for="' + row.Id + '">Toggle</label></div>'
+                                return '<div class="switchToggle"><input onclick="ChangeStatus(' + row.Id + ',' + false + ');" IsActive type="checkbox" data-value="' + row.Id + '" id="' + row.Id + '" checked><label for="' + row.Id + '">Toggle</label></div>'
                             }
                             else {
-                                return '<div class="switchToggle"><input type="checkbox" onclick="ChangeStatus(' + row.Id +','+true+');" class="IsActive" data-value="' + row.Id + '" id="' + row.Id + '"><label for="' + row.Id + '">Toggle</label></div>'
+                                return '<div class="switchToggle"><input type="checkbox" onclick="ChangeStatus(' + row.Id + ',' + true + ');" class="IsActive" data-value="' + row.Id + '" id="' + row.Id + '"><label for="' + row.Id + '">Toggle</label></div>'
                             }
 
                         }
@@ -105,8 +101,9 @@
                     }
                 ]
             });
-        });
 
+        });
+        
         function Edit(Id) {
             $('#Id').val(Id);
             $('#VehicleForm').attr('action', "/Vehicle/Edit").submit();
@@ -117,11 +114,11 @@
             $('#VehicleForm').attr('action', "/Vehicle/Details").submit();
         }
 
-    </script>
-    <script>
-
-        function ChangeStatus(Id,value) {
-            if (confirm("Are you sure")) {
+        function ChangeStatus(Id, value) {
+            
+            var answer = confirm("Are you sure");
+            alert(answer);
+            if (answer) {
 
                 var act = value;
                
@@ -133,15 +130,16 @@
                 // alert(Data);
                 ajaxRequest("POST", "/Vehicle/ChangeStatus", Data, "json").then(function (result) {
                     if (result != "failed") {
-                        $("#dt-basic-example1").DataTable().ajax().reload();
+                        $("#dt-basic-example1").ajax.reload();
                     }
                     else {
-                        alert('there is some problem');
+                        $("#dt-basic-example1").ajax.reload();
                     }
                 })
             }
             else {
-                return false;
+                alert();
+                $("#dt-basic-example1").ajax().reload();
             }
         }
     </script>
