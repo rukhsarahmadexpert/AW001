@@ -27,50 +27,66 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult All()
+        {
             try
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                var sortColumn = Request.Form.GetValues("columns[" +
+                Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                string search = Request.Form.GetValues("search[value]")[0];
+                //int skip = start != null ? Convert.ToInt32(start) : 0;
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                if (Convert.ToInt32(start) == 0)
                 {
-                    pageNumber = 1,
-                    _pageSize = 1,
-                    CompanyId = CompanyId,
-                    PageSize = 100,
-                };
+                    pagingParameterModel.pageNumber = 1;
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                    pagingParameterModel.CompanyId = CompanyId;
+                }
+                else
+                {
+                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.CompanyId = CompanyId;
+                }
 
                 var VehicleList = webServices.Post(pagingParameterModel, "AWFVehicle/All");
-
+                                
                 if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
-                }
-                if (Request.IsAjaxRequest())
-                {
-                    if (VehicleViewModels == null || VehicleViewModels.Count < 1)
+                    int TotalRow = 0;
+                    if (VehicleList.Data != "[]" && VehicleList.Data != null)
                     {
-                        VehicleViewModel vehicleViewModel = new VehicleViewModel
-                        {
-                            Id = 0,
-                            TraficPlateNumber = "Select vehicle"
-                        };
+                        VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
 
-                        VehicleViewModels.Add(vehicleViewModel);
+                        TotalRow = VehicleViewModels.Count;
+
+                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
+                        //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                     }
-                    else
-                    {
-                        VehicleViewModels.Insert(0, new VehicleViewModel() { Id = 0, TraficPlateNumber = "Select Vehicle" });
-                    }
-                    return Json(VehicleViewModels, JsonRequestBehavior.AllowGet);
                 }
+                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
 
-                return View(VehicleViewModels);
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
+
 
         [HttpPost]
         public ActionResult ChangeStatus(VehicleViewModel vehicleViewModel)

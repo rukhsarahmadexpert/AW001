@@ -1,12 +1,7 @@
 ﻿
 @using System.Web.Mvc.Html
-@model List<IT.Core.ViewModels.VehicleViewModel>
 @{
     ViewBag.Title = "AW Fuel - Vehicles List";
- 
-
-    List<IT.Core.ViewModels.VehicleViewModel> VehicleViewModels = new List<IT.Core.ViewModels.VehicleViewModel>();
-    VehicleViewModels = Model as List<IT.Core.ViewModels.VehicleViewModel>;
 }
 
 <div class="row">
@@ -26,7 +21,7 @@
                                 <p>Drivers Base Information</p>
                             </div>-->
                     <!-- datatable start -->
-                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
                                 <th>Name</th>
@@ -41,45 +36,7 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            @foreach (var item in VehicleViewModels)
-                            {
-                                <tr>
-                                    <td>@item.VehicleTypeName</td>
-                                    <td>@item.TraficPlateNumber</td>
-                                    <td>@item.PlaceofIssue</td>
-                                    <td>@item.TCNumber</td>
-                                    <td>@item.Model</td>
-                                    <td>@Convert.ToDateTime(item.MulkiaExpiry ?? System.DateTime.Now.ToString()).ToString("dd-MMM-yyyy")</td>
-                                    <td>@Convert.ToDateTime(item.InsuranceExpiry ?? System.DateTime.Now.ToString()).ToString("dd-MMM-yyyy") </td>
-                                    <td>
-                                        @if (@item.IsActive == true)
-                                        {
-                                            <div class="switchToggle">
-                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="switchToggle">
-                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
-
-                                        }
-                                        <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
-                                    </td>
-                                    <td>
-                                        <a href="/AwfVehicle/Details/@item.Id"><i class="fal fa-eye"></i></a> &nbsp; &nbsp;
-                                        <a href="/AwfVehicle/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                       
-                                    </td>
-                                </tr>
-                            }
-
                         </tbody>
-
                     </table>
                     <!-- datatable end -->
                 </div>
@@ -135,6 +92,41 @@
             $('#VehicleUl').css('display', 'block');
             $('#VehicleLi').addClass('active');
         });
+
+        $(function () {
+            $("#dt-basic-example1").DataTable({
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/AwfVehicle/All",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "VehicleTypeName", "VehicleTypeName": "Name", "autoWidth": true },
+                    { "data": "TraficPlateNumber", "name": "TraficPlateNumber", "autoWidth": true },
+                    { "data": "PlaceofIssue", "name": "PlaceofIssue", "autoWidth": true },
+                    { "data": "TCNumber", "name": "TCNumber", "autoWidth": true },
+                    { "data": "Model", "name": "Model", "autoWidth": true },
+                    { "data": "MulkiaExpiry", "name": "MulkiaExpiry", "autoWidth": true },
+                    { "data": "InsuranceExpiry", "name": "InsuranceExpiry", "autoWidth": true },
+                    { "data": "IsActive", "name": "IsActive", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>'
+                        }
+                    }
+                ]
+            });
+        });
+
 
     </script>
 

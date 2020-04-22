@@ -654,7 +654,6 @@ namespace IT.Web_New.Controllers
         public string NotificationCode { get; set; }
         public int Quantity { get; set; }
         public string Title { get; set; }
-        public string Message { get; set; }
-    
+        public string Message { get; set; }    
     }
 }
