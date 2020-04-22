@@ -207,11 +207,15 @@ namespace IT.Web_New.Controllers
                                 var companyViewModel = new CompanyViewModel();
                                 companyViewModel = (new JavaScriptSerializer().Deserialize<CompanyViewModel>(result.Data.ToString()));
 
+                                var userCompanyViewModel = new UserCompanyViewModel();
+                                 userCompanyViewModel = Session["userCompanyViewModel"] as UserCompanyViewModel;
+
                                 UserCompanyViewModel userCompanyViewModel1 = new UserCompanyViewModel
                                 {
                                     Authority = companyViewModel.Authority,
                                     CompanyId = companyViewModel.Id,
                                     UserId = companyViewModel.CreatedBy,
+                                    FullName = userCompanyViewModel.FullName,
                                     LogoUrl = companyViewModel.LogoUrl,
                                     FirstName = companyViewModel.UserName,
                                     CompanyName = companyViewModel.Name,
