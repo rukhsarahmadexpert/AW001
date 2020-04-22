@@ -100,7 +100,7 @@
                     },
                     {
                         render: function (data, type, row) {
-                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>'
+                            return '<a  style="cursor:pointer; font-size:18px" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil text-primary"></i></a> &nbsp; &nbsp; <a style="cursor:pointer; font-size:18px"  data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye text-primary"></i></a>'
                         }
                     }
                 ]
