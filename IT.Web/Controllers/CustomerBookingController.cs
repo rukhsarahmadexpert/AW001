@@ -99,12 +99,6 @@ namespace IT.Web.Controllers
                     {
                         customerBookingViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerBookingViewModel>>(BookingList.Data.ToString()));
 
-                        if (search != null && search != "")
-                        {
-                            customerBookingViewModels = customerBookingViewModels.Where(x => x.CompanyName.ToLower().Contains(search.ToLower()) ).ToList();
-                        }
-                        
-
                         TotalRow = customerBookingViewModels.Count;
 
                         return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = customerBookingViewModels }, JsonRequestBehavior.AllowGet);
