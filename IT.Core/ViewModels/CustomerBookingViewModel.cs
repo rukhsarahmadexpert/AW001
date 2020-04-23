@@ -23,6 +23,7 @@ namespace IT.Core.ViewModels
         public string Description { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string CreatedDates { get; set; }
         public DateTime DueDate { get; set; }
         public int UpdateBy { get; set; }
         public DateTime UpdatedDate { get; set; }

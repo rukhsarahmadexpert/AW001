@@ -16,6 +16,7 @@ namespace IT.Core.ViewModels
         public int _pageSize { get; set; } = 50;
 
         public int CompanyId { get; set; }
+        public string SerachKey { get; set; }
         public string OrderProgress { get; set; }
         public bool IsSend { get; set; }
         public int DriverId { get; set; }

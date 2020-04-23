@@ -25,7 +25,7 @@
 
                     </div>
 
-                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
                                 <th>Company Name</th>
@@ -37,11 +37,11 @@
                                 <th>VAT</th>
                                 <th>Total Amount</th>
                                 <th>Order Status</th>
-                                <th>Actions</th>
+                                <th width="100px">Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="trData">
-                            @foreach (var item in customerBookingViewModels)
+                        <tbody>
+                            @*@foreach (var item in customerBookingViewModels)
                             {
 
                                 <tr>
@@ -82,7 +82,7 @@
 
                                     </td>
                                 </tr>
-                            }
+                            }*@
 
                         </tbody>
 
@@ -100,8 +100,8 @@
     <script>
 
         $(document).ready(function () {
-
             $("#dt-basic-example1").DataTable({
+              
                 "paging": true,
                 "responsive": true,
                 "processing": true,
@@ -110,49 +110,65 @@
                 "filter": false, // this is for disable filter (search box)
                 "orderMulti": false, // for disable multiple column at once
                 "ajax": {
-                    "url": "/Driver/All",
+                    "url": "/CustomerBooking/All",
                     "type": "POST",
                     "datatype": "json"
                 },
-
                 "columns": [
                     //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
-                    { "data": "Name", "Name": "Name", "autoWidth": true },
-                    { "data": "Contact", "name": "Contact", "autoWidth": true },
-                    { "data": "Email", "name": "Email", "autoWidth": true },
-                    { "data": "LicenseExpiry", "LicenseExpiry": "LicenseExpiry", "autoWidth": true },
-                    { "data": "Facebook", "name": "Facebook", "autoWidth": true },
+                    { "data": "CompanyName", "name": "CompanyName", "autoWidth": true },
+                    { "data": "ProductName", "name": "ProductName", "autoWidth": true },
                     {
-                        render: function (data, type, row) {
-                            if (row.IsActive == true) {
-                                return '<div class="switchToggle"><input onclick="ChangeStatus(' + row.Id + ',' + false + ');" IsActive type="checkbox" data-value="' + row.Id + '" id="' + row.Id + '" checked><label for="' + row.Id + '">Toggle</label></div>'
-                            }
-                            else {
-                                return '<div class="switchToggle"><input type="checkbox" onclick="ChangeStatus(' + row.Id + ',' + true + ');" class="IsActive" data-value="' + row.Id + '" id="' + row.Id + '"><label for="' + row.Id + '">Toggle</label></div>'
-                            }
-                        }
+                        "data": "CreatedDate", "type": "date ",
+
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var date = value;
+                            var nowDate = new Date(parseInt(date.substr(6)));
+                            return (nowDate.getDate() + "-" + nowDate.getMonth() + "-" + nowDate.getFullYear());
+
+                        }, "autoWidth": true
+                    },
+                    {
+                        "data": "DueDate", "type": "date ",
+
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var date = value;
+                            var nowDate = new Date(parseInt(date.substr(6)));
+                            return (nowDate.getDate() + "-" + nowDate.getMonth() + "-" + nowDate.getFullYear());
+
+                        }, "autoWidth": true
+                    },
+                    { "data": "UnitPrice", "name":"UnitPrice", "autoWidth": true },
+                    { "data": "BookQuantity", "name": "BookQuantity", "autoWidth": true },
+                    { "data": "VAT", "name": "VAT", "autoWidth": true },
+                    { "data": "TotalAmount", "name": "TotalAmount", "autoWidth": true },
+                    {
+                         render: function (data, type, row) {
+                             if (row.IsActive == true && row.IsOpen == true && row.IsAccepted == false) {
+                                 return '<span class="badge badge-primary">pending</span>';
+                             }
+                             else if (row.IsActive == true && row.IsOpen == true && row.IsAccepted == true){
+                                 return '<span class="badge badge-success">Accepted</span>';
+                             }
+                             else if (row.IsActive == false && row.IsOpen == true && row.IsAccepted == false){
+                                 return '<span class="badge badge-danger">Rejected</span>';
+                             }
+                             else if (row.IsActive == false && row.IsOpen == false && row.IsAccepted == true){
+                                 return '<span class="badge badge-Secondary">Completed</span>';
+                             }
+                         }
                     },
                     {
                         render: function (data, type, row) {
-                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>'
+                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>';
                         }
                     }
                 ]
             });
 
         });
-
-        function Edit(Id) {
-            $('#Id').val(Id);
-            $('#DriverForm').attr('action', "/Driver/Edit").submit();
-        }
-
-        function Details(Id) {
-            $('#Id').val(Id);
-            $('#DriverForm').attr('action', "/Driver/Details").submit();
-        }
-
-        
     </script>
 
     <script>
@@ -163,7 +179,7 @@
         });
 
     </script>
-    <script>
+    @*<script>
 
         $(document).ready(function () {
             setInterval(function () {
@@ -172,7 +188,7 @@
             }, 10000);
         });
 
-    </script>
+    </script>*@
 
 
 }
