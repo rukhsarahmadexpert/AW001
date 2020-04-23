@@ -22,7 +22,7 @@
                                 <p>Drivers Base Information</p>
                             </div>-->
                     <!-- datatable start -->
-                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
                                 <th>Site Name</th>
@@ -32,45 +32,11 @@
                                 <th>Created date</th>
                                 <th>Created by</th>
                                 <th>IsActive</th>
-                                <th>Actions</th>
+                                <th width="100px">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in siteViewModels)
-                            {
-                                <tr>
-                                    <td>@item.SiteName</td>
-                                    <td>@item.ContactPersonName</td>
-                                    <td>@item.ContactPhone</td>
-                                    <td>@item.Address</td>
-                                    <td>@item.CreatedDates</td>
-                                    <td>@item.UserName @item.IsActive</td>
-                                    <td>
-                                        @if (@item.IsActive == true)
-                                        {
-                                            <div class="switchToggle">
-                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id" checked>
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="switchToggle">
-                                                <input type="checkbox" class="IsActive" data-value="@item.Id" id="@item.Id">
-                                                <label for="@item.Id">Toggle</label>
-                                            </div>
-
-                                        }
-                                        <input type="hidden" value="@item.Id" class="Id" id="DriverId" />
-                                    </td>
-
-                                    <td>
-                                        <a href="/CustomerSites/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                        <a href="/CustomerSites/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-
-                                    </td>
-                                </tr>
-                            }
+                           
                         </tbody>
                     </table>
                     <!-- datatable end -->
@@ -84,49 +50,86 @@
 
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
     <script>
-
-        $(document).ready(function () {
-
-            $(".IsActive").click(function () {
-                if (confirm("Are you sure")) {
-
-                    var act = false;
-                    if (this.checked) {
-                        act = true;
-                    }
-
-                    var Data = JSON.stringify(
-                        {
-                            IsActive: act,
-                            Id: $(this).data("value"),
-                        })
-                    // alert(Data);
-                    ajaxRequest("POST", "/CustomerSites/ChangeStatus", Data, "json").then(function (result) {
-                        if (result != "failed") {
-                            //console.log(result);
-                            window.location.reload();
-                        }
-                        else {
-                            alert('there is some problem');
-                        }
-                    })
-                }
-                else {
-                    return false;
-                }
-            });
-        });
-
-    </script>
-
-
-    <script>
         $(document).ready(function () {
             $("#RegisteredMenu").attr("aria-expanded", "true");
             $('#RegisteredUl').css('display', 'block');
             $('#RegisteredLi').addClass('active');
         });
 
+    </script>
+
+    <script>
+        $(document).ready(function () {
+          
+            $("#dt-basic-example1").DataTable({
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/CustomerSites/All",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "SiteName", "SiteName": "SiteName", "autoWidth": true },
+                    { "data": "ContactPersonName", "ContactPersonName": "ContactPersonName", "autoWidth": true },
+                    { "data": "ContactPhone", "ContactPhone": "ContactPhone", "autoWidth": true },
+                    { "data": "Address", "Address": "Address", "autoWidth": true },
+                    { "data": "CreatedDates", "CreatedDates": "CreatedDates", "autoWidth": true },
+                    { "data": "UserName", "UserName": "UserName", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            if (row.IsActive == true) {
+                                return '<div class="switchToggle"><input onclick="ChangeStatus(' + row.Id + ',' + false + ');" IsActive type="checkbox" data-value="' + row.Id + '" id="' + row.Id + '" checked><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+                            else {
+                                return '<div class="switchToggle"><input type="checkbox" onclick="ChangeStatus(' + row.Id + ',' + true + ');" class="IsActive" data-value="' + row.Id + '" id="' + row.Id + '"><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+
+                        }
+                    },
+                    {
+                        render: function (data, type, row) {
+
+                            return '<div class="pull-right"><a href="/CustomerSites/Edit/' + row.Id + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></a>  <a href="/CustomerSites/Details/' + row.Id + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></a>';
+                        }
+                    }
+                ]
+            });
+        });
+
+       
+        function ChangeStatus(Id, value) {
+
+            if (confirm("Are you sure")) {
+
+                var act = value;
+
+                var Data = JSON.stringify(
+                    {
+                        IsActive: act,
+                        Id: Id,
+                    })
+                // alert(Data);
+                ajaxRequest("POST", "/CustomerSites/ChangeStatus", Data, "json").then(function (result) {
+                    if (result != "failed") {
+                        $('#dt-basic-example1').DataTable().ajax.reload();
+                    }
+                    else {
+                        alert('there is some problem');
+                    }
+                })
+            }
+            else {
+                $('#dt-basic-example1').DataTable().ajax.reload();
+            }
+        }
     </script>
 
 }

@@ -327,7 +327,7 @@ namespace IT.Web_New.Controllers
             CompanyId = Convert.ToInt32(Session["CompanyId"]);
             try
             {
-                if (CompId == CompanyId)
+                if (CompId < 1)
                 {
                     CompanyId = Convert.ToInt32(Session["CompanyId"]);
                     ViewBag.LayoutName = "~/Views/Shared/_layout.cshtml";
@@ -365,7 +365,7 @@ namespace IT.Web_New.Controllers
             CompanyId = Convert.ToInt32(Session["CompanyId"]);
             try
             {
-                if (CompId == CompanyId)
+                if (CompId < 1)
                 {
                     CompanyId = Convert.ToInt32(Session["CompanyId"]);
                     ViewBag.LayoutName = "~/Views/Shared/_layout.cshtml";

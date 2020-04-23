@@ -147,43 +147,41 @@
         });
 
    
-    function Edit(Id) {
-    $('#Id').val(Id);
-    $('#VehicleForm').attr('action', "/Vehicle/Edit").submit();
-    }
+        function Edit(Id) {
+            $('#Id').val(Id);
+            $('#VehicleForm').attr('action', "/Vehicle/Edit").submit();
+        }
 
-    function Details(Id) {
-    $('#Id').val(Id);
-    $('#VehicleForm').attr('action', "/Vehicle/Details").submit();
-    }
+        function Details(Id) {
+            $('#Id').val(Id);
+            $('#VehicleForm').attr('action', "/Vehicle/Details").submit();
+        }
 
-    function ChangeStatus(Id, value) {
+        function ChangeStatus(Id, value) {
 
-    var answer = confirm("Are you sure");
-    if (answer) {
+            if (confirm("Are you sure")) {
 
-    var act = value;
+                var act = value;
 
-    var Data = JSON.stringify(
-    {
-    IsActive: act,
-    Id: Id,
-    })
-    // alert(Data);
-    ajaxRequest("POST", "/Vehicle/ChangeStatus", Data, "json").then(function (result) {
-    if (result != "failed") {
-    $("#dt-basic-example1").ajax.reload();
-    }
-    else {
-    $("#dt-basic-example1").ajax.reload();
-    }
-    })
-    }
-    else {
-    alert();
-    $("#dt-basic-example1").ajax().reload();
-    }
-    }
+                var Data = JSON.stringify(
+                    {
+                        IsActive: act,
+                        Id: Id,
+                    })
+                // alert(Data);
+                ajaxRequest("POST", "/AwfDriver/ChangeStatus", Data, "json").then(function (result) {
+                    if (result != "failed") {
+                        $('#dt-basic-example1').DataTable().ajax.reload();
+                    }
+                    else {
+                        alert('there is some problem');
+                    }
+                })
+            }
+            else {
+                $('#dt-basic-example1').DataTable().ajax.reload();
+            }
+        }
     </script>
 
 }

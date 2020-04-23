@@ -43,6 +43,8 @@ namespace IT.Web_New.Controllers
                 {
                     userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(userList.Data.ToString()));
 
+
+                    userViewModel.ImageUrl = usercCompany.ImageUrl;
                     return View(userViewModel);
                 }
 
@@ -95,6 +97,7 @@ namespace IT.Web_New.Controllers
                 {
                     userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(userList.Data.ToString()));
 
+                    userViewModel.ImageUrl = usercCompany.ImageUrl;
                     return View(userViewModel);
                 }
 

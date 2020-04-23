@@ -24,7 +24,7 @@
                                 <th>License Expiry</th>
                                 <th>Facebook</th>
                                 <th>IsActive</th>
-                                <th>Actions</th>
+                                <th style="width:100px">Actions</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -36,6 +36,10 @@
     </div>
 </div>
 
+<form id="DriverForm" method="post" style="display:none">
+    <input type="hidden" id="Id" value="0" name="id" />
+    <input type="hidden" id="CompanyId" value="0" name="CompId" />
+</form>
 
 @section scripts{
 
@@ -43,36 +47,7 @@
     <script>
 
         $(document).ready(function () {
-
-            $(".IsActive").click(function () {
-                if (confirm("Are you sure")) {
-
-                    var act = false;
-                    if (this.checked) {
-                        act = true;
-                    }
-
-                    var Data = JSON.stringify(
-                        {
-                            IsActive: act,
-                            Id: $(this).data("value"),
-                        })
-                    // alert(Data);
-                    ajaxRequest("POST", "/Driver/ChangeStatus", Data, "json").then(function (result) {
-                        if (result != "failed") {
-                            //console.log(result);
-                            window.location.reload();
-                        }
-                        else {
-                            alert('there is some problem');
-                        }
-                    })
-                }
-                else {
-                    return false;
-                }
-            });
-
+            
             $("#dt-basic-example1").DataTable({
                 "paging": true,
                 "responsive": true,
@@ -92,7 +67,7 @@
                     { "data": "Name", "Name": "Name", "autoWidth": true },
                     { "data": "Contact", "name": "Contact", "autoWidth": true },
                     { "data": "Email", "name": "Email", "autoWidth": true },
-                    { "data": "LicenseExpiry", "name": "LicenseExpiry", "autoWidth": true },
+                    { "data": "LicenseExpiry", "LicenseExpiry": "LicenseExpiry", "autoWidth": true },
                     { "data": "Facebook", "name": "Facebook", "autoWidth": true },
                     {
                         render: function (data, type, row) {
@@ -113,6 +88,16 @@
             });
 
         });
+
+        function Edit(Id) {
+            $('#Id').val(Id);
+            $('#DriverForm').attr('action', "/Driver/Edit").submit();
+        }
+
+        function Details(Id) {
+            $('#Id').val(Id);
+            $('#DriverForm').attr('action', "/Driver/Details").submit();
+        }
 
         function ChangeStatus(Id, value) {
 

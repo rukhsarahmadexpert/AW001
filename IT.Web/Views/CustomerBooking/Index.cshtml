@@ -44,44 +44,44 @@
                             @foreach (var item in customerBookingViewModels)
                             {
 
-                            <tr>
-                                <td>@item.CompanyName</td>
-                                <td>@item.ProductName</td>
-                                <td>@item.CreatedDate.ToString("dd-MMM-yyyy")</td>
-                                <td>@item.DueDate.ToString("dd-MMM-yyyy")</td>
-                                <td>@Math.Round(item.UnitPrice, 2)</td>
-                                <td>@item.BookQuantity</td>
-                                <td>@Math.Round(item.VAT, 2)</td>
-                                <td>@Math.Round(item.TotalAmount, 2)</td>
-                                <td>
-                                    @if (item.IsActive == true && item.IsOpen == true && item.IsAccepted == false)
-                                    {
-                                        <span class="badge badge-primary">pending</span>
+                                <tr>
+                                    <td>@item.CompanyName</td>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.CreatedDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>@item.DueDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>@Math.Round(item.UnitPrice, 2)</td>
+                                    <td>@item.BookQuantity</td>
+                                    <td>@Math.Round(item.VAT, 2)</td>
+                                    <td>@Math.Round(item.TotalAmount, 2)</td>
+                                    <td>
+                                        @if (item.IsActive == true && item.IsOpen == true && item.IsAccepted == false)
+                                        {
+                                            <span class="badge badge-primary">pending</span>
 
-                                    }
-                                    else if (item.IsActive == true && item.IsOpen == true && item.IsAccepted == true)
-                                    {
-                                        <span class="badge badge-success">Accepted</span>
-                                    }
-                                    else if (item.IsActive == false && item.IsOpen == true && item.IsAccepted == false)
-                                    {
-                                        <span class="badge badge-danger">Rejected</span>
-                                    }
+                                        }
+                                        else if (item.IsActive == true && item.IsOpen == true && item.IsAccepted == true)
+                                        {
+                                            <span class="badge badge-success">Accepted</span>
+                                        }
+                                        else if (item.IsActive == false && item.IsOpen == true && item.IsAccepted == false)
+                                        {
+                                            <span class="badge badge-danger">Rejected</span>
+                                        }
 
-                                    else if (item.IsActive == false && item.IsOpen == false && item.IsAccepted == true)
-                                    {
-                                        <span class="badge badge-Secondary">Completed</span>
-                                    }
+                                        else if (item.IsActive == false && item.IsOpen == false && item.IsAccepted == true)
+                                        {
+                                            <span class="badge badge-Secondary">Completed</span>
+                                        }
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
 
-                                    <a href="/CustomerBooking/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                    <a href="/CustomerBooking/CustomerBookingGetById/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                        <a href="/CustomerBooking/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                        <a href="/CustomerBooking/CustomerBookingGetById/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
 
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             }
 
                         </tbody>
@@ -95,6 +95,65 @@
 </div>
 
 @section scripts{
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#dt-basic-example1").DataTable({
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Driver/All",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "Name", "Name": "Name", "autoWidth": true },
+                    { "data": "Contact", "name": "Contact", "autoWidth": true },
+                    { "data": "Email", "name": "Email", "autoWidth": true },
+                    { "data": "LicenseExpiry", "LicenseExpiry": "LicenseExpiry", "autoWidth": true },
+                    { "data": "Facebook", "name": "Facebook", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            if (row.IsActive == true) {
+                                return '<div class="switchToggle"><input onclick="ChangeStatus(' + row.Id + ',' + false + ');" IsActive type="checkbox" data-value="' + row.Id + '" id="' + row.Id + '" checked><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+                            else {
+                                return '<div class="switchToggle"><input type="checkbox" onclick="ChangeStatus(' + row.Id + ',' + true + ');" class="IsActive" data-value="' + row.Id + '" id="' + row.Id + '"><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+                        }
+                    },
+                    {
+                        render: function (data, type, row) {
+                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>'
+                        }
+                    }
+                ]
+            });
+
+        });
+
+        function Edit(Id) {
+            $('#Id').val(Id);
+            $('#DriverForm').attr('action', "/Driver/Edit").submit();
+        }
+
+        function Details(Id) {
+            $('#Id').val(Id);
+            $('#DriverForm').attr('action', "/Driver/Details").submit();
+        }
+
+        
+    </script>
 
     <script>
         $(document).ready(function () {

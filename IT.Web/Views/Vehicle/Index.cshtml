@@ -115,28 +115,28 @@
         }
 
         function ChangeStatus(Id, value) {
-            
-            var answer = confirm("Are you sure");
-            if (answer) {
-                var act = value;               
+
+            if (confirm("Are you sure")) {      
+
+                var act = value;
+
                 var Data = JSON.stringify(
                     {
                         IsActive: act,
                         Id: Id,
                     })
                 // alert(Data);
-                ajaxRequest("POST", "/Vehicle/ChangeStatus", Data, "json").then(function (result) {
+                ajaxRequest("POST", "/Driver/ChangeStatus", Data, "json").then(function (result) {
                     if (result != "failed") {
-                        $("#dt-basic-example1").ajax.reload();
+                        $('#dt-basic-example1').DataTable().ajax.reload();
                     }
                     else {
-                        $("#dt-basic-example1").ajax.reload();
+                        alert('there is some problem');
                     }
                 })
             }
             else {
-                alert();
-                $("#dt-basic-example1").ajax().reload();
+                $('#dt-basic-example1').DataTable().ajax.reload();
             }
         }
     </script>

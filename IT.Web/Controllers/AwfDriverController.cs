@@ -50,7 +50,6 @@ namespace IT.Web_New.Controllers
             }
         }
 
-
         [HttpPost]
         public ActionResult All()
         {
