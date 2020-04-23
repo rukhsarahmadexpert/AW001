@@ -201,20 +201,28 @@ namespace IT.Web_New.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         public JsonResult GetAll()
         {
-            DataTablesParm parm = new DataTablesParm();
             try
             {
-                int pageNo = 1;
-                int totalCount = 0;
-                parm.iDisplayStart = 0;
-                parm.iDisplayLength = 20;
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                var sortColumn = Request.Form.GetValues("columns[" +
+                Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                string search = Request.Form.GetValues("search[value]")[0];
 
-                if (parm.iDisplayStart >= parm.iDisplayLength)
+                DataTablesParm parm = new DataTablesParm();
+            
+                int pageNo = Convert.ToInt32(draw);
+                int totalCount = 0;
+                
+                if (Convert.ToInt32(start) >= Convert.ToInt32(length))
                 {
-                    pageNo = (parm.iDisplayStart / parm.iDisplayLength) + 1;
+                    pageNo = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
                 }
 
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
@@ -240,8 +248,8 @@ namespace IT.Web_New.Controllers
                                        x.GrandTotal.ToString().Contains(parm.sSearch) ||
                                        x.UserName.ToLower().Contains(parm.sSearch.ToLower()) ||
                                        x.PONumber.ToString().Contains(parm.sSearch))
-                                       .Skip((pageNo - 1) * parm.iDisplayLength)
-                                       .Take(parm.iDisplayLength)
+                                       .Skip((pageNo - 1) * Convert.ToInt32(length))
+                                       .Take(Convert.ToInt32(length))
                            .Select(x => new LPOInvoiceViewModel
                            {
                                Id = x.Id,
@@ -265,8 +273,8 @@ namespace IT.Web_New.Controllers
                             totalCount = lPOInvoiceViewModels.Count();
 
                             lPOInvoiceViewModels = lPOInvoiceViewModels
-                                                  .Skip((pageNo - 1) * parm.iDisplayLength)
-                                                  .Take(parm.iDisplayLength)
+                                                  .Skip((pageNo - 1) * Convert.ToInt32(length))
+                                                  .Take(Convert.ToInt32(length))
                                 .Select(x => new LPOInvoiceViewModel
                                 {
                                     Id = x.Id,
