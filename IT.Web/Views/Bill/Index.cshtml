@@ -84,40 +84,89 @@
         });
 
         var BindDataTable = function (response) {
-            $('#BillTable').DataTable({
-                responsive: true,
-                "bRetrieve": true,
-                "bServerSide": true,
+            $("#BillTable").DataTable({
+                "paging": true,
+                "responsive": true,
                 "processing": true,
-                "sAjaxSource": "/Bill/GetAll",
-                "fnServerData": function (sSource, aoData, fnCallback) {
-                    $.ajax({
-                        type: "Get",
-                        data: aoData,
-                        url: sSource,
-                        success: fnCallback
-                    })
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Bill/GetAll",
+                    "type": "POST",
+                    "datatype": "json"
                 },
-                "aoColumns": [
-                    { "mData": "Name" },
-                    { "mData": "Product" },
-                    { "mData": "TotalQuantity" },
-                    { "mData": "UnitName" },
-                    { "mData": "RefrenceNumber" },
-                    { "mData": "FDate" },
-                    { "mData": "DDate" },
-                    { "mData": "Total" },
-                    { "mData": "VAT" },
-                    { "mData": "GrandTotal" },
-                    { "mData": "UserName" },
+
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "Name", "Name": "Name", "autoWidth": true },
+                    { "data": "Product", "name": "Product", "autoWidth": true },
+                    { "data": "TotalQuantity", "name": "TotalQuantity", "autoWidth": true },
+                    { "data": "UnitName", "name": "UnitName", "autoWidth": true },
+                    { "data": "RefrenceNumber", "name": "RefrenceNumber", "autoWidth": true },
+                    { "data": "FDate", "name": "FDate", "autoWidth": true },
+                    { "data": "DDate", "name": "DDate", "autoWidth": true },
+                    { "data": "Total", "name": "Total", "autoWidth": true },
+                    { "data": "VAT", "name": "VAT", "autoWidth": true },
+                    { "data": "GrandTotal", "name": "GrandTotal", "autoWidth": true },
+                    { "data": "UserName", "name": "UserName", "autoWidth": true },
+                    //{
+                    //    render: function (data, type, row) {
+                    //        if (row.IsActive == true) {
+                    //            return '<div class="switchToggle"><input onclick="ChangeStatus(' + row.Id + ',' + false + ');" IsActive type="checkbox" data-value="' + row.Id + '" id="' + row.Id + '" checked><label for="' + row.Id + '">Toggle</label></div>'
+                    //        }
+                    //        else {
+                    //            return '<div class="switchToggle"><input type="checkbox" onclick="ChangeStatus(' + row.Id + ',' + true + ');" class="IsActive" data-value="' + row.Id + '" id="' + row.Id + '"><label for="' + row.Id + '">Toggle</label></div>'
+                    //        }
+                    //    }
+                    //},
                     {
-                        "mData": "Id",
-                        "render": function (Id, type, full, meta) {
-                            return '<a href="#" onclick="ViewBill(' + Id + ')"><i class="fal fa-eye"></i></a>' + ' | ' + '<a href="#" onclick="EditBill(' + Id + ')"><i class="fal fa-pencil"></i></a>'
+                        render: function (data, type, row) {
+                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="EditBill(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="ViewBill(' + row.Id + ')"><i class="fal fa-eye"></i></button>'
                         }
-                    },
+                    }
                 ]
-            })
+            });
+
+
+            //$('#BillTable').DataTable({
+            //    responsive: true,
+            //    "bRetrieve": true,
+            //    "bServerSide": true,
+            //    "processing": true,
+            //    "searching": true,
+            //    "serverSide": true,
+            //    "paging": true,
+            //    "sAjaxSource": "/Bill/GetAll",
+            //    "fnServerData": function (sSource, aoData, fnCallback) {
+            //        $.ajax({
+            //            type: "Get",
+            //            data: aoData,
+            //            url: sSource,
+            //            success: fnCallback
+            //        })
+            //    },
+            //    "aoColumns": [
+            //        { "mData": "Name" },
+            //        { "mData": "Product" },
+            //        { "mData": "TotalQuantity" },
+            //        { "mData": "UnitName" },
+            //        { "mData": "RefrenceNumber" },
+            //        { "mData": "FDate" },
+            //        { "mData": "DDate" },
+            //        { "mData": "Total" },
+            //        { "mData": "VAT" },
+            //        { "mData": "GrandTotal" },
+            //        { "mData": "UserName" },
+            //        {
+            //            "mData": "Id",
+            //            "render": function (Id, type, full, meta) {
+            //                return '<a href="#" onclick="ViewBill(' + Id + ')"><i class="fal fa-eye"></i></a>' + ' | ' + '<a href="#" onclick="EditBill(' + Id + ')"><i class="fal fa-pencil"></i></a>'
+            //            }
+            //        },
+            //    ]
+            //})
         }
 
 

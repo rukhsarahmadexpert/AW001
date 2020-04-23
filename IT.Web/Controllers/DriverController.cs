@@ -87,18 +87,24 @@ namespace IT.Web_New.Controllers
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
                 pagingParameterModel.CompanyId = CompanyId;
 
-                if (Convert.ToInt32(start) == 0)
+
+                if (Convert.ToInt32(start) >= Convert.ToInt32(length))
                 {
-                    pagingParameterModel.pageNumber = 1;
-                    pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.PageSize = pageSize;
+                    pagingParameterModel.pageNumber = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
                 }
-                else
-                {
-                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
-                    pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.PageSize = pageSize;
-                }
+
+                //if (Convert.ToInt32(start) == 0)
+                //{
+                //    pagingParameterModel.pageNumber = 1;
+                //    pagingParameterModel._pageSize = pageSize;
+                //    pagingParameterModel.PageSize = pageSize;
+                //}
+                //else
+                //{
+                //    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                //    pagingParameterModel._pageSize = pageSize;
+                //    pagingParameterModel.PageSize = pageSize;
+                //}
 
                 var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
                 int TotalRow = 0;
@@ -149,7 +155,7 @@ namespace IT.Web_New.Controllers
         {
             return View(new DriverViewModel());
         }
-
+                
         [HttpPost]
         public ActionResult Create(DriverViewModel driverViewModel)
         {
@@ -368,12 +374,10 @@ namespace IT.Web_New.Controllers
                 if (CompId < 1)
                 {
                     CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                    ViewBag.LayoutName = "~/Views/Shared/_layout.cshtml";
-                    
+                    ViewBag.LayoutName = "~/Views/Shared/_layout.cshtml";                    
                 }
                 else
-                {
-                    //VehicleViewModel vehicleViewModel = new VehicleViewModel();
+                {                   
                     CompanyId = CompId;
                     ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
                 }
