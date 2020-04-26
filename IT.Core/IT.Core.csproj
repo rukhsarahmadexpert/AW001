@@ -64,6 +64,7 @@
     <Compile Include="ViewModels\CustomerOrderDeliverVewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderGroupViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderListViewModel.cs" />
+    <Compile Include="ViewModels\CustomerOrderSiteAssignedViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderStatistics.cs" />
     <Compile Include="ViewModels\CustomerOrderViewModel.cs" />
     <Compile Include="ViewModels\CustomerRemainingBookingViewModel.cs" />
