@@ -231,6 +231,70 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
+        
+        [HttpGet]
+        public ActionResult SiteAssiedOrder()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult SiteAssignedOrderAll()
+        {
+          var orderSiteAssignedList =  new List<CustomerOrderSiteAssignedViewModel>();
+
+            try
+            {                
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                var sortColumn = Request.Form.GetValues("columns[" +
+                Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                string search = Request.Form.GetValues("search[value]")[0];
+                //int skip = start != null ? Convert.ToInt32(start) : 0;
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                if (Convert.ToInt32(start) == 0)
+                {
+                    pagingParameterModel.pageNumber = 1;
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                    pagingParameterModel.CompanyId = CompanyId;
+                }
+                else
+                {
+                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.CompanyId = CompanyId;
+                }
+
+                var assignedOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderGroupAsignedForSite");
+
+                if (assignedOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    int TotalRow = 0;
+                    if (assignedOrderList.Data != "[]" && assignedOrderList.Data != null)
+                    {
+                        orderSiteAssignedList = (new JavaScriptSerializer().Deserialize<List<CustomerOrderSiteAssignedViewModel>>(assignedOrderList.Data.ToString()));
+
+                        TotalRow = orderSiteAssignedList.Count;
+
+                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = orderSiteAssignedList }, JsonRequestBehavior.AllowGet);
+                        //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
+                    }
+                }
+                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = orderSiteAssignedList }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
 
         [HttpPost]
         public ActionResult AcceptOrder(CustomerOrderViewModel customerOrderViewModel)

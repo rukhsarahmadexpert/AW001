@@ -1014,6 +1014,7 @@
     <Content Include="Views\LPO\LPOAllCustomer.cshtml" />
     <Content Include="Views\Shared\UpdateReason\_ReasonPartialView.cshtml" />
     <Content Include="Views\Shared\UpdateReason\_UpdateReasonListView.cshtml" />
+    <Content Include="Views\CustomerOrder\SiteAssiedOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

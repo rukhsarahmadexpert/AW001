@@ -182,7 +182,7 @@
 <input type="hidden" value="0" id="BookingSelectdId" />
 <input type="hidden" value="@(Model.IsBulk == true ? "Driver" : "Sites")"  id="SitesDriver" />
 
-<div class="modal fade " id="acceptModel" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="acceptModel" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-right">
         <div class="modal-content">
             <div class="modal-header">
@@ -293,6 +293,7 @@
 </style>
 
 @section scripts{
+
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa5w6RTuDzjLCfA1sXmJyD9uTwmqjLHnw&callback=initMap">
     </script>
@@ -313,11 +314,7 @@
         });
         // }
     </script>
-    <!--Load the API from the specified URL
-    * The async attribute allows the browser to render the page while the API loads
-    * The key parameter will contain your own API key (which is not needed for this tutorial)
-    * The callback parameter executes the initMap() function-->
-
+   
     <script>
         $(document).ready(function () {
 

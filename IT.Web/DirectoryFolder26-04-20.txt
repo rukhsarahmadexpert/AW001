@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 26-Apr-20 12:49:09 PM26-Apr-20 12:49:05 PMError Message:    at IT.Web_New.Controllers.CustomerOrderController.Admin(String OrderProgress) in D:\RepoNew\AW002\IT.Web\Controllers\CustomerOrderControlException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.CustomerOrderController Error Action Name: AdminUserId: 1CompanyId2
+--------------------------------*End*------------------------------------------
+
+
+
