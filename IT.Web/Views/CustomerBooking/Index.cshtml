@@ -140,10 +140,48 @@
 
                         }, "autoWidth": true
                     },
-                    { "data": "UnitPrice", "name":"UnitPrice", "autoWidth": true },
-                    { "data": "BookQuantity", "name": "BookQuantity", "autoWidth": true },
-                    { "data": "VAT", "name": "VAT", "autoWidth": true },
-                    { "data": "TotalAmount", "name": "TotalAmount", "autoWidth": true },
+                   
+                    {
+                        "data": "UnitPrice", "type": "decimal",
+
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var newvat = value;
+                            return (newvat.toFixed(2));
+
+                        }, "autoWidth": true
+                    },
+                    {
+                        "data": "BookQuantity", "type": "decimal",
+
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var newvat = value;
+                            return (newvat.toFixed(2));
+
+                        }, "autoWidth": true
+                    },
+                    {
+                        "data": "VAT", "type": "decimal",
+
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var newvat = value;                            
+                            return (newvat.toFixed(2));
+
+                        }, "autoWidth": true
+                    },
+                   
+                    {
+                        "data": "TotalAmount", "type": "decimal",
+
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var newvat = value;
+                            return (newvat.toFixed(2));
+
+                        }, "autoWidth": true
+                    },
                     {
                          render: function (data, type, row) {
                              if (row.IsActive == true && row.IsOpen == true && row.IsAccepted == false) {
@@ -162,7 +200,7 @@
                     },
                     {
                         render: function (data, type, row) {
-                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>';
+                            return '<div class="pull-right"><a href="/CustomerBooking/Edit/' + row.Id + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></a>  <a href="/CustomerBooking/Details/' + row.Id + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></a>';
                         }
                     }
                 ]

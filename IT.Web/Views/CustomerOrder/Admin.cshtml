@@ -24,285 +24,132 @@
                      <div class="tab-pane" id="tab-All" role="tabpanel" aria-labelledby="tab-All">
                         <ul class="nav nav-tabs nav-tabs-clean AllOrder" id="tabs" role="tablist">
                             <li class="nav-item all" style="width:60px">
-                                <form action="/CustomerOrder/Admin" method="post">
-                                    <input type="hidden" value="All" name="OrderProgress" />
-                                    <input type="submit" class="nav-link bg-primary text-white fs-lg fw-400 " style="font-size:14px !important" value="All" />
-                                </form>
+                                <button class="nav-link bg-transparent fs-lg fw-400" onclick="GetCustomerOrderByStatus('All')">All</button>
                             </li>
                         </ul>
                      </div>
 
             </div>
             <div class="panel-container show">
-                <div class="panel-content" >
+                <div class="panel-content">
                     <div style="margin-bottom:100px">
-                    <div class="tab-pane" id="tab-All" role="tabpanel" aria-labelledby="tab-All">
-                        <ul class="nav nav-tabs nav-tabs-clean" id="tabs" role="tablist">
-                           
-                            <li class="nav-item created  bg-success col-md-2 col-6 text-white" style="width:120px" >
-                                <form action="/CustomerOrder/Admin" method="post">
-                                    <input type="hidden" value="Order Created" name="OrderProgress" />
-                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400"  value="Created Order" />
-                                </form>
-                            </li>
-                            <li class="nav-item accepted  bg-warning col-md-2 col-6 text-white" style="width:120px">
-                                <form action="/CustomerOrder/Admin" method="post">
-                                    <input type="hidden" value="Order Assigned" name="OrderProgress" />
-                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Assign Order" />
-                                </form>
-                             </li>
+                        <div class="tab-pane" id="tab-All" role="tabpanel" aria-labelledby="tab-All">
+                            <ul class="nav nav-tabs nav-tabs-clean" id="tabs" role="tablist">
 
-                            <li class="nav-item accepted  bg-info col-md-2 col-6 text-white" style="width:120px">
-                                <form action="/CustomerOrder/Admin" method="post">
-                                    <input type="hidden" value="Order Accepted" name="OrderProgress" />
-                                    <input type="submit"  class="nav-link bg-transparent fs-lg fw-400" value="Accepted  Order" />
-                                </form>
-                             </li>
-
-                            <li class="nav-item rejected bg-danger col-md-2 col-6 text-white" style="width:120px">
-                                <form action="/CustomerOrder/Admin" method="post">
-                                    <input type="hidden" value="Order Rejected" name="OrderProgress" />
-                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Rejected Order" />
-                                </form>
-                             </li>
-
-                            <li class="nav-item running bg-secondary col-md-2 col-6 text-white" style="width:120px">
-                                <form action="/CustomerOrder/Admin" method="post">
-                                    <input type="hidden" value="Order Running" name="OrderProgress" />
-                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Running Order" />
-                                </form>
-                              </li>
-
-                            <li class="nav-item delivered bg-dark col-md-2 col-6 text-white" style="width:120px">
-                                <form action="/CustomerOrder/Admin" method="post">
-                                    <input type="hidden" value="Order Deliverd" name="OrderProgress" />
-                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Delivered Order" />
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                    <thead class="bg-primary-600">
-                        <tr>
-                            <th>Customer Order Number</th>
-                            <th>Delivery Note Number</th>
-                            <th>Order Quantity</th>
-                            <th>Deliver Quantity</th>
-                            <th>Order Progress</th>
-                            <th>UserName</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in customerNoteOrderViewModel)
-                        {
-                            <tr>
-                                <td>@item.CustomerOrderNumber</td>
-                                <td>@item.DeliveryNoteNumber</td>
-                                <td>@item.OrderQuantity</td>
-                                <td>@item.DeliverdQuantity</td>
-                                <td>
-                                    @if (item.OrderProgress == "Order Accepted")
-                                    {
-                                        <span class="badge badge-success">Order Accepted</span>
-                                    }
-                                    else if (item.OrderProgress == "Order Created")
-                                    {
-                                        <span class="badge badge-primary">Order Created</span>
-                                    }
-                                    else if (item.OrderProgress == "Order Assigned")
-                                    {
-                                        <span class="badge badge-warning">Order Assigned</span>
-                                    }
-                                    else if (item.OrderProgress == "Order Rejected")
-                                    {
-                                        <span class="badge badge-danger">Order Rejected</span>
-                                    }
-                                    else if (item.OrderProgress == "Order Running")
-                                    {
-                                        <span class="badge badge-dark">Order Running</span>
-                                    }
-                                    else if (item.OrderProgress == "Order Deliverd")
-                                    {
-                                        <span class="badge badge-info">Order Deliverd</span>
-                                    }
-                                </td>
-                                <td>@item.UserName</td>
-                                <td>
-                                    <form action="/CustomerOrder/OrderDetails" method="post">
-                                        <input type="hidden" name="Id" value="@item.Id" />
-                                        <button type="submit" title="view Order Details"><i class="fal fa-eye"></i></button>&nbsp; &nbsp;
+                                <li class="nav-item created  bg-success col-md-2 col-6 text-white" style="width:120px">
+                                    <form action="/CustomerOrder/Admin" method="post">
+                                        <input type="hidden" value="Order Created" name="OrderProgress" />
+                                        <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Created Order" />
                                     </form>
-                                </td>
-                            </tr>
-                        }
+                                </li>
+                                <li class="nav-item accepted  bg-warning col-md-2 col-6 text-white" style="width:120px">
+                                    <form action="/CustomerOrder/Admin" method="post">
+                                        <input type="hidden" value="Order Assigned" name="OrderProgress" />
+                                        <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Assign Order" />
+                                    </form>
+                                </li>
 
-                    </tbody>
+                                <li class="nav-item accepted  bg-info col-md-2 col-6 text-white" style="width:120px">
+                                    <form action="/CustomerOrder/Admin" method="post">
+                                        <input type="hidden" value="Order Accepted" name="OrderProgress" />
+                                        <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Accepted  Order" />
+                                    </form>
+                                </li>
 
-                </table>
-                <!-- datatable end -->
+                                <li class="nav-item rejected bg-danger col-md-2 col-6 text-white" style="width:120px">
+                                    <form action="/CustomerOrder/Admin" method="post">
+                                        <input type="hidden" value="Order Rejected" name="OrderProgress" />
+                                        <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Rejected Order" />
+                                    </form>
+                                </li>
+
+                                <li class="nav-item running bg-secondary col-md-2 col-6 text-white" style="width:120px">
+                                    <button class="nav-link bg-transparent fs-lg fw-400" onclick="GetCustomerOrderByStatus("Order Running")">Order Running</button>
+                                </li>
+
+                                <li class="nav-item delivered bg-dark col-md-2 col-6 text-white" style="width:120px">
+                                    <button class="nav-link bg-transparent fs-lg fw-400" onclick="GetCustomerOrderByStatus("Order Delivered")">Order Delivered</button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+
+                   
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-primary-600">
+                            <tr>
+                                <th>Customer Order Number</th>
+                                <th>Delivery Note Number</th>
+                                <th>Order Quantity</th>
+                                <th>Deliver Quantity</th>
+                                <th>Order Progress</th>
+                                <th>UserName</th>
+                                <th width="100px">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*@foreach (var item in customerNoteOrderViewModel)
+                {
+                    <tr>
+                        <td>@item.CustomerOrderNumber</td>
+                        <td>@item.DeliveryNoteNumber</td>
+                        <td>@item.OrderQuantity</td>
+                        <td>@item.DeliverdQuantity</td>
+                        <td>
+                            @if (item.OrderProgress == "Order Accepted")
+                            {
+                                <span class="badge badge-success">Order Accepted</span>
+                            }
+                            else if (item.OrderProgress == "Order Created")
+                            {
+                                <span class="badge badge-primary">Order Created</span>
+                            }
+                            else if (item.OrderProgress == "Order Assigned")
+                            {
+                                <span class="badge badge-warning">Order Assigned</span>
+                            }
+                            else if (item.OrderProgress == "Order Rejected")
+                            {
+                                <span class="badge badge-danger">Order Rejected</span>
+                            }
+                            else if (item.OrderProgress == "Order Running")
+                            {
+                                <span class="badge badge-dark">Order Running</span>
+                            }
+                            else if (item.OrderProgress == "Order Deliverd")
+                            {
+                                <span class="badge badge-info">Order Deliverd</span>
+                            }
+                        </td>
+                        <td>@item.UserName</td>
+                        <td>
+                            <form action="/CustomerOrder/OrderDetails" method="post">
+                                <input type="hidden" name="Id" value="@item.Id" />
+                                <button type="submit" title="view Order Details"><i class="fal fa-eye"></i></button>&nbsp; &nbsp;
+                            </form>
+                        </td>
+                    </tr>
+                }*@
+
+                        </tbody>
+
+                    </table>
+                    <!-- datatable end -->
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<form action="/CustomerOrder/Admin" method="post" id="CustomerOrderLoad" style="display:none">
+    <input type="hidden" value="Order Running" name="OrderProgress"  id="OrderProgress"/>                                                       
+</form>
 
 
-
-
-<!-- Page heading removed for composed layout -->
-@*<div class="px-3 px-sm-5 pt-4">
-        <a href="/Driver/Create"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Order</i></span>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div id="panel-1" class="panel">
-                <div class="panel-hdr">
-                    <div class="tab-content">*@
-@*<div class="tab-pane" id="tab-All" role="tabpanel" aria-labelledby="tab-All">
-     <ul class="nav nav-tabs nav-tabs-clean px-3 px-sm-5" id="tabs" role="tablist">
-        <li class="nav-item all">
-            <a class="nav-link active bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-All" role="tab">All Order</a>
-        </li>
-        <li class="nav-item created">
-            <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-created" role="tab">Created Order</a>
-        </li>
-
-        <li class="nav-item accepted">
-            <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-accepted" role="tab">Accepted Order</a>
-        </li>
-
-        <li class="nav-item rejected">
-            <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-rejected" role="tab">Rejected Order</a>
-        </li>
-
-        <li class="nav-item running">
-            <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-running" role="tab">Running Order</a>
-        </li>
-
-        <li class="nav-item delivered">
-            <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-delivered" role="tab">Delivered Order</a>
-        </li>
-    </ul>*@
-
-@*<div class="panel-container show">
-                            <div class="panel-content">
-                                <table id="dt-basic-example" class="table table-bordered table-hover table-striped">
-                                    <thead class="bg-primary-600">
-                                        <tr>
-                                            <th>Customer Order Number</th>
-                                            <th>Delivery Note Number</th>
-                                            <th>Order Quantity</th>
-                                            <th>Deliver Quantity</th>
-                                            <th>OrderProgress</th>
-                                            <th>UserName</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in customerNoteOrderViewModel)
-                                        {
-
-                                            <tr>
-                                                <td>@item.CustomerOrderNumber</td>
-                                                <td>@item.DeliveryNoteNumber</td>
-                                                <td>@item.OrderQuantity</td>
-                                                <td>@item.DeliverdQuantity</td>
-                                                <td>@item.OrderProgress</td>
-                                                <td>@item.UserName</td>
-                                                <td>
-                                                    <a href="/CustomerOrder/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                                    <a href="/CustomerOrder/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                                    <i class="fal fa-trash-alt">
-                                                </td>
-                                            </tr>
-                                        }
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
-@*<div class="tab-pane" id="tab-accepted" role="tabpanel" aria-labelledby="tab-accepted">
-        @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-    </div>
-    <div class="tab-pane" id="tab-rejected" role="tabpanel" aria-labelledby="tab-rejected">
-        @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-    </div>
-    <div class="tab-pane" id="tab-running" role="tabpanel" aria-labelledby="tab-running">
-        @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-    </div>
-    <div class="tab-pane" id="tab-delivered" role="tabpanel" aria-labelledby="tab-delivered">
-        @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-    </div>
-    <div class="tab-pane active" id="tab-created" role="tabpanel" aria-labelledby="tab-created">
-        @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-    </div>*@
-
-@*</div>*@
-
-
-@*@section Scripts{
-
-    <script>
-        $(document).ready(function () {
-
-            //PostAjax('All');
-
-            $('.created').click(function () {
-                PostAjax('Order Created');
-            })
-
-            $('.accepted').click(function () {
-                PostAjax('Order Accepted');
-            })
-
-            $('.rejected').click(function () {
-                PostAjax('Order Rejected');
-            })
-
-            $('.running').click(function () {
-                PostAjax('Order Running');
-            })
-
-            $('.delivered').click(function () {
-                PostAjax('Order Delivered');
-            })
-
-
-        })
-
-
-
-        function PostAjax(OrderStatus) {
-
-            var data = {
-                OrderProgress: OrderStatus
-            }
-            $.ajax({
-                type: "GET",
-                url: '/CustomerOrder/Admin',
-                data: data,
-                dataType: 'json',
-                success: function (result) {
-                    console.log(result);
-                },
-                error: function (ex) {
-                    console.log('error');
-                }
-
-            });
-        }
-
-    </script>
-}*@
-
+<form id="OrderForm" method="post" style="display:none">
+    <input type="hidden" id="Id" value="0" name="id" />
+    @*<input type="hidden" id="CompanyId" value="0" name="CompId" />*@
+</form>
 
 
 @section scripts{
@@ -310,12 +157,123 @@
 <script>
     $(document).ready(function () {
         //alert();
+        //PostAjax('All');
         $("#CustomerOrderMenu").attr("aria-expanded", "true");
         $('#CustomerOrderUl').css('display', 'block');
         $('#CustomerOrderlLi').addClass('active');
+
+        GetCustomerOrderByStatus("All");
     });
 
+    function PostAjax(OrderStatus) {
+
+
+        var Ods = localStorage.getItem("OrderStatus");
+        if (Ods != null || Ods != '') {
+            OrderStatus = Ods;           
+        }
+
+        var data = {
+            OrderProgress: OrderStatus
+        }
+        $.ajax({
+            type: "POST",
+            url: '/CustomerOrder/GetAll',
+            data: data,
+            dataType: 'json',
+            success: function (result) {
+                localStorage.setItem("OrderStatus", OrderStatus);
+                console.log(result);
+                //ajax.reload();
+            },
+            error: function (ex) {
+                console.log('error');
+            }
+        });
+    }
+
+
+
+    function GetCustomerOrderByStatus(OrderProgress) {
+        //alert(OrderProgress);
+            $("#dt-basic-example1").DataTable({
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/CustomerOrder/All/" + OrderProgress,
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "CustomerOrderNumber", "name": "CustomerOrderNumber", "autoWidth": true },
+                    { "data": "DeliveryNoteNumber", "name": "DeliveryNoteNumber", "autoWidth": true },
+                    { "data": "OrderQuantity", "name": "OrderQuantity", "autoWidth": true },
+                    { "data": "DeliverdQuantity", "name": "DeliverdQuantity", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            if (row.OrderProgress == "Order Accepted") {
+                                return '<span class="badge badge-success">Order Accepted</span>'
+                            }
+                            else if (row.OrderProgress == "Order Created") {
+                                return '<span class="badge badge-primary">Order Created</span>'
+                            }
+                            else if (row.OrderProgress == "Order Assigned") {
+                                return '<span class="badge badge-warning">Order Assigned</span>'
+                            }
+                            else if (row.OrderProgress == "Order Rejected") {
+                                return '<span class="badge badge-danger">Order Rejected</span>'
+                            }
+                            else if (row.OrderProgress == "Order Running") {
+                                return '<span class="badge badge-dark">Order Running</span>'
+                            }
+                            else if (row.OrderProgress == "Order Deliverd") {
+                                return '<span class="badge badge-info">Order Deliverd</span>'
+                            }
+
+                        }
+                    },
+                    { "data": "UserName", "name": "UserName", "autoWidth": true },
+
+                    {
+                        render: function (data, type, row) {
+
+                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>';
+
+                        }
+                    }
+                ]
+            });
+        
+    }
+
+
+    //function GetCustomerOrderByStatus(OrderProgress) {
+    //    alert
+    //    localStorage.getItem(OrderProgress);
+    //    $('#OrderProgress').val(OrderProgress);
+    //    $('CustomerOrderLoad').submit();
+    //}
+
+    function Edit(Id) {
+        $('#Id').val(Id);
+        $('#OrderForm').attr('action', "/CustomerOrder/OrderDetails").submit();
+    }
+
+    function Details(Id) {
+        $('#Id').val(Id);
+        $('#OrderForm').attr('action', "/CustomerOrder/OrderDetails").submit();
+    }
+
 </script>
+
+
 
     }
 

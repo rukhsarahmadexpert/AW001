@@ -28,7 +28,7 @@
 
                             </div>-->
                     <!-- datatable start -->
-                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
                                 <th>Product Name</th>
@@ -39,14 +39,14 @@
                                 <th>VAT</th>
                                 <th>Total Amount</th>
                                 <th>IsActive</th>
-                                <th>Actions</th>
+                                <th width="100px">Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="trData">
-                            @foreach (var item in customerBookingViewModels)
+                        <tbody>
+                            @*@foreach (var item in customerBookingViewModels)
                             {
 
-                                <tr >
+                                <tr>
                                     <td>@item.ProductName</td>
                                     <td>@item.CreatedDate</td>
                                     <td>@item.DueDate</td>
@@ -81,7 +81,7 @@
 
                                     </td>
                                 </tr>
-                            }
+                            }*@
 
                         </tbody>
 
@@ -98,21 +98,122 @@
 
 
     <script>
+
+        $(document).ready(function () {
+            $("#dt-basic-example1").DataTable({
+
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/CustomerBooking/CustomerAll",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "ProductName", "name": "ProductName", "autoWidth": true },
+                    {
+                        "data": "CreatedDate", "type": "date ",
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var date = value;
+                            var nowDate = new Date(parseInt(date.substr(6)));
+                            return (nowDate.getDate() + "-" + nowDate.getMonth() + "-" + nowDate.getFullYear());
+                        }, "autoWidth": true
+                    },
+                    {
+                        "data": "DueDate", "type": "date ",
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var date = value;
+                            var nowDate = new Date(parseInt(date.substr(6)));
+                            return (nowDate.getDate() + "-" + nowDate.getMonth() + "-" + nowDate.getFullYear());
+                        }, "autoWidth": true
+                    },
+                    {
+                        "data": "UnitPrice", "type": "decimal",
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var newvat = value;
+                            return (newvat.toFixed(2));
+                        }, "autoWidth": true
+                    },
+                    {
+                        "data": "BookQuantity", "type": "decimal",
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var newvat = value;
+                            return (newvat.toFixed(2));
+                        }, "autoWidth": true
+                    },
+                    {
+                        "data": "VAT", "type": "decimal",
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var newvat = value;
+                            return (newvat.toFixed(2));
+                        }, "autoWidth": true
+                    },
+
+                    {
+                        "data": "TotalAmount", "type": "decimal",
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var newvat = value;
+                            return (newvat.toFixed(2));
+                        }, "autoWidth": true
+                    },
+                    {
+                        render: function (data, type, row) {
+                            if (row.IsActive == true && row.IsOpen == true && row.IsAccepted == false) {
+                                return '<span class="badge badge-primary">pending</span>';
+                            }
+                            else if (row.IsActive == true && row.IsOpen == true && row.IsAccepted == true) {
+                                return '<span class="badge badge-success">Accepted</span>';
+                            }
+                            else if (row.IsActive == false && row.IsOpen == true && row.IsAccepted == false) {
+                                return '<span class="badge badge-danger">Rejected</span>';
+                            }
+                            else if (row.IsActive == false && row.IsOpen == false && row.IsAccepted == true) {
+                                return '<span class="badge badge-Secondary">Completed</span>';
+                            }
+                        }
+                    },
+                    {
+                        render: function (data, type, row) {
+
+                            return '<div class="pull-right"><a href="/CustomerBooking/Edit/' + row.Id + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></a>  <a href="/CustomerBooking/CustomerDetails/' + row.Id + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></a>';
+                           
+                        }
+                    }
+                ]
+            });
+
+        });
+    </script>
+
+
+    <script>
         $(document).ready(function () {
             $("#CustomerMyBookinMenu").attr("aria-expanded", "true");
             $('#CustomerbookingUl').css('display', 'block');
             $('#CustomerNewOrderProcessingli').addClass('active');
         });
 
-        $(document).ready(function () {
-            setInterval(function () {
-                $("#trData").load(" #trData tr ");
-            //alert('dd');
-            }, 10000);
-        });
+        //$(document).ready(function () {
+        //    setInterval(function () {
+        //        $("#trData").load(" #trData tr ");
+        //        //alert('dd');
+        //    }, 10000);
+        //});
     </script>
 
-  
-    
+
+
 
 } 
