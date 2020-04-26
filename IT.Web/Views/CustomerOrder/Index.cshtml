@@ -6,14 +6,12 @@
 
     ViewBag.Title = "AW Fuel - Customer Order List";
     //Layout = "~/Views/Shared/_Layout.cshtml";
-    Layout = ViewBag.LayoutName;
+    //Layout = ViewBag.LayoutName;
 
     List<IT.Core.ViewModels.CustomerNoteOrderViewModel> customerNoteOrderViewModel = new List<IT.Core.ViewModels.CustomerNoteOrderViewModel>();
     customerNoteOrderViewModel = Model as List<IT.Core.ViewModels.CustomerNoteOrderViewModel>;
-
 }
 @*<label>Rukhsar</label>*@
-
 
 <div class="row">
     <div class="col-xl-12">
@@ -22,6 +20,14 @@
                 <h2>
                     <a class=" btn btn-primary btn-md" href="/CustomerOrder/Create"> <i class="fal fa-plus-circle"></i> Request New Delivery</a>
                 </h2>
+
+                <div class="tab-pane" id="tab-All" role="tabpanel" aria-labelledby="tab-All">
+                    <ul class="nav nav-tabs nav-tabs-clean AllOrder" id="tabs" role="tablist">
+                        <li class="nav-item all " style="width:60px">
+                            <button class="nav-link bg-primary-700 text-white fs-lg fw-400" onclick="GetCustomerOrderByStatus('All')">All</button>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
@@ -29,61 +35,48 @@
                         <div class="tab-pane" id="tab-All" role="tabpanel" aria-labelledby="tab-All">
                             <ul class="nav nav-tabs nav-tabs-clean" id="tabs" role="tablist">
                                 <li class="nav-item created  bg-success col-md-2 col-6 text-white" style="width:120px">
-                                    <form action="/CustomerOrder/Index" method="post">
-                                        <input type="hidden" value="Order Created" name="OrderProgress" />
-                                        <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Created Order" />
-                                    </form>
+                                    <button class="nav-link bg-transparent fs-lg fw-400" onclick="GetCustomerOrderByStatus('Order Created')">Created Order</button>
                                 </li>
 
-                                <li class="nav-item accepted  bg-warning col-md-2 col-6 text-white" style="width:120px">
-                                    <form action="/CustomerOrder/Index" method="post">
-                                        <input type="hidden" value="Order Accepted" name="OrderProgress" />
-                                        <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Assign Order" />
-                                    </form>
+                                <li class="nav-item  accepted  bg-warning col-md-2 col-6 text-white" style="width:120px">
+                                    <button class="nav-link bg-transparent fs-lg fw-400" onclick="GetCustomerOrderByStatus('Order Assigned')">Assign Order</button>
                                 </li>
 
                                 <li class="nav-item accepted  bg-info col-md-2 col-6 text-white" style="width:120px">
-                                    <form action="/CustomerOrder/Index" method="post">
-                                        <input type="hidden" value="Order Accepted" name="OrderProgress" />
-                                        <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Accepted  Order" />
-                                    </form>
+                                    <button class="nav-link bg-transparent fs-lg fw-400" onclick="GetCustomerOrderByStatus('Order Accepted')">Order Accepted</button>
                                 </li>
 
                                 <li class="nav-item rejected bg-danger col-md-2 col-6 text-white" style="width:120px">
-                                    <form action="/CustomerOrder/Index" method="post">
-                                        <input type="hidden" value="Order Rejected" name="OrderProgress" />
-                                        <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Rejected Order" />
-                                    </form>
+                                    <button class="nav-link bg-transparent fs-lg fw-400" onclick="GetCustomerOrderByStatus('Order Rejected')">Order Rejected</button>
                                 </li>
 
                                 <li class="nav-item running bg-secondary col-md-2 col-6 text-white" style="width:120px">
-                                    <form action="/CustomerOrder/Index" method="post">
-                                        <input type="hidden" value="Order Running" name="OrderProgress" />
-                                        <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Running Order" />
-                                    </form>
+                                    <button class="nav-link bg-transparent fs-lg fw-400" onclick="GetCustomerOrderByStatus('Order Running')">Order Running</button>
                                 </li>
 
                                 <li class="nav-item delivered bg-dark col-md-2 col-6 text-white" style="width:120px">
-                                    <form action="/CustomerOrder/Index" method="post">
-                                        <input type="hidden" value="Order Deliverd" name="OrderProgress" />
-                                        <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Delivered Order" />
-                                    </form>
+                                    <button class="nav-link bg-transparent fs-lg fw-400" onclick="GetCustomerOrderByStatus('Order Delivered')">Order Delivered</button>
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div>                  
+                                <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
+                                    <thead class="bg-primary-600">
+                                        <tr>
+                                            <th>Customer Order Number</th>
+                                            <th>Delivery Note Number</th>
+                                            <th>Ordered Quantity</th>
+                                            <th>Delivered Quantity</th>
+                                            <th>Is Sent</th>
+                                            <th>Order Progress</th>
+                                            <th>User Name</th>
+                                            <th width="100px">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="EmptyTableData">
 
-                    <div class="px-3 px-sm-5 pb-4">
-                        <div class="tab-content">
-
-                            <!-- All tab stated -->
-                            <div class="tab-pane active" id="tab-created" role="tabpanel" aria-labelledby="tab-created">
-
-                                @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-                            </div>
-                        </div>
-                    </div>
-
+                                    </tbody>
+                                </table>                            
                     <!-- datatable end -->
                 </div>
             </div>
@@ -91,67 +84,77 @@
     </div>
 </div>
 
+<form action="/CustomerOrder/Index" method="post" id="CustomerOrderLoad" style="display:none">
+    <input type="hidden" value="Order Running" name="OrderProgress" id="OrderProgress" />
+</form>
+
+
+<form id="OrderForm" method="post" style="display:none">
+    <input type="hidden" id="Id" value="0" name="id" />
+    @*<input type="hidden" id="CompanyId" value="0" name="CompId" />*@
+</form>
+
 
 @section Scripts{
 
-    <script>
-        $(document).ready(function () {
+    @*<script>
+            $(document).ready(function () {
 
-            //alert();
+                //alert();
 
-            PostAjax('All');
+                PostAjax('All');
 
-            $('.created').click(function () {
-                PostAjax('Order Created');
+                $('.created').click(function () {
+                    PostAjax('Order Created');
+                })
+
+                $('.accepted').click(function () {
+                    PostAjax('Order Accepted');
+                })
+
+                $('.rejected').click(function () {
+                    PostAjax('Order Rejected');
+                })
+
+                $('.running').click(function () {
+                    PostAjax('Order Running');
+                })
+
+                $('.delivered').click(function () {
+                    PostAjax('Order Delivered');
+                })
             })
 
-            $('.accepted').click(function () {
-                PostAjax('Order Accepted');
-            })
-
-            $('.rejected').click(function () {
-                PostAjax('Order Rejected');
-            })
-
-            $('.running').click(function () {
-                PostAjax('Order Running');
-            })
-
-            $('.delivered').click(function () {
-                PostAjax('Order Delivered');
-            })
-        })
 
 
+            function PostAjax(OrderStatus) {
 
-        function PostAjax(OrderStatus) {
 
-            
-            var Ods = localStorage.getItem("OrderStatus");
-            if (Ods != null || Ods != '') {
-                OrderStatus = Ods;
-            }
-
-            var data = {
-                OrderProgress: OrderStatus
-            }
-            $.ajax({
-                type: "POST",
-                url: '/CustomerOrder/GetAll',
-                data: data,
-                dataType: 'json',
-                success: function (result) {
-                    localStorage.setItem("OrderStatus", OrderStatus);
-                    console.log(result);
-                    //ajax.reload();
-                },
-                error: function (ex) {
-                    console.log('error');
+                var Ods = localStorage.getItem("OrderStatus");
+                if (Ods != null || Ods != '') {
+                    OrderStatus = Ods;
                 }
-            });
-        }
 
-    </script>
+                var data = {
+                    OrderProgress: OrderStatus
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/CustomerOrder/GetAll',
+                    data: data,
+                    dataType: 'json',
+                    success: function (result) {
+                        localStorage.setItem("OrderStatus", OrderStatus);
+                        console.log(result);
+                        //ajax.reload();
+                    },
+                    error: function (ex) {
+                        console.log('error');
+                    }
+                });
+            }
+
+        </script>*@
 
 
     <script>
@@ -159,23 +162,78 @@
             $("#CustomerDeliveryMenu").attr("aria-expanded", "true");
             $('#CustomerDeliveryUl').css('display', 'block');
             $('#CustomerDeliveryLi').addClass('active');
+            GetCustomerOrderByStatus('All');
         });
+        function GetCustomerOrderByStatus(OrderProgress) {
+            //alert(OrderProgress);
+            //$('#dt-basic-example1').dataTable().fnClearTable();
+            $('#dt-basic-example1').dataTable().fnDestroy();
+            $('#EmptyTableData').empty();
+            $("#dt-basic-example1").DataTable({
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/CustomerOrder/CustomerAll/?OrderProgress=" + OrderProgress,
+                    "type": "POST",
+                    "datatype": "json"
+                },
 
-    </script>
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "CustomerOrderNumber", "name": "CustomerOrderNumber", "autoWidth": true },
+                    { "data": "DeliveryNoteNumber", "name": "DeliveryNoteNumber", "autoWidth": true },
+                    { "data": "OrderQuantity", "name": "OrderQuantity", "autoWidth": true },
+                    { "data": "DeliverdQuantity", "name": "DeliverdQuantity", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            if (row.IsSend == true) {
+                                return '<span class="badge badge-success">Order Sended</span>'
+                            }
+                            else {
+                                return '<span class="badge badge-warning">Not Sended</span>'
+                            }
+                           
+                        }
+                    },
+                    {
+                        render: function (data, type, row) {
+                            if (row.OrderProgress == "Order Accepted") {
+                                return '<span class="badge badge-success">Order Accepted</span>'
+                            }
+                            else if (row.OrderProgress == "Order Created") {
+                                return '<span class="badge badge-primary">Order Created</span>'
+                            }
+                            else if (row.OrderProgress == "Order Assigned") {
+                                return '<span class="badge badge-warning">Order Assigned</span>'
+                            }
+                            else if (row.OrderProgress == "Order Rejected") {
+                                return '<span class="badge badge-danger">Order Rejected</span>'
+                            }
+                            else if (row.OrderProgress == "Order Running") {
+                                return '<span class="badge badge-dark">Order Running</span>'
+                            }
+                            else if (row.OrderProgress == "Order Deliverd") {
+                                return '<span class="badge badge-info">Order Deliverd</span>'
+                            }
+                        }
+                    },
+                    { "data": "UserName", "name": "UserName", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
 
-  
-
-        @*<script>
-            $(document).ready(function () {
-                setInterval(function () {
-                    $("#trData").load(" #trData tr ");
-                    //alert('dd');
-                }, 5000);
+                            return '<div class="pull-right"><a href="/CustomerOrder/Edit/' + row.OrderId + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.OrderId + ')"><i class="fal fa-pencil"></i></a>  <a href="/CustomerOrder/Details/' + row.OrderId + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.OrderId + ')"><i class="fal fa-eye"></i></a>';                            
+                        }
+                    }
+                ]
             });
-        </script>*@
-
-
-
+        }
+       
+    </script>
 }
 
 
