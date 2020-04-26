@@ -18,6 +18,7 @@ namespace IT.Core.ViewModels
         public DateTime CreatedDate { get; set; }
         public bool IsRead { get; set; }
         public bool IsActive { get; set; }
+        public bool IsBulk { get; set; }
         public string CustomerNote { get; set; }
         public bool IsCustomerViewNotification { get; set; }
         public bool IsTrue { get; set; }

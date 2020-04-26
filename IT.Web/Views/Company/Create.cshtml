@@ -56,19 +56,19 @@
                                         Company <span class="fw-300"><i>Registration</i></span>
                                     </h2>
 
-                                  </div>
-                                  <div class="panel-container show">
-                                      <div class="panel-content">
-                                          <form action="/Company/Create" method="post" enctype="multipart/form-data">
-                                              <div class="row">
-                                                  <div class="col-md-6 col-xl-6 p-2">
-                                                      <div class="input-group flex-nowrap">
-                                                          <div class="input-group-prepend">
-                                                              <span class="input-group-text"><i class="fal fa-industry fs-xl"></i></span>
-                                                          </div>
-                                                          <input id="Name" name="Name" required type="text" class="form-control" placeholder="Compnay Name" aria-label="CompanyName" aria-describedby="addon-wrapping-left">
-                                                      </div>
-                                                  </div>
+                                </div>
+                                <div class="panel-container show">
+                                    <div class="panel-content">
+                                        <form action="/Company/Create" method="post" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="col-md-6 col-xl-6 p-2">
+                                                    <div class="input-group flex-nowrap">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fal fa-industry fs-xl"></i></span>
+                                                        </div>
+                                                        <input id="Name" name="Name" required type="text" class="form-control" placeholder="Compnay Name" aria-label="CompanyName" aria-describedby="addon-wrapping-left">
+                                                    </div>
+                                                </div>
 
                                                 <div class="col-md-6 col-xl-6 p-2">
                                                     <div class="input-group " form-group flex-nowrap">
@@ -91,122 +91,122 @@
                                                 </div>
                                             </div>
 
-                                              <div class="row">
-                                                  <div class="col-xl-6 col-md-6 p-2">
-                                                      <div class="input-group flex-nowrap">
-                                                          <div class="input-group-prepend">
-                                                              <span class="input-group-text"><i class="fal fa-envelope fs-xl"></i></span>
-                                                          </div>
-                                                          <input id="Email" name="Email" type="email" class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="addon-wrapping-left">
-                                                      </div>
-                                                  </div>
+                                            <div class="row">
+                                                <div class="col-xl-6 col-md-6 p-2">
+                                                    <div class="input-group flex-nowrap">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fal fa-envelope fs-xl"></i></span>
+                                                        </div>
+                                                        <input id="Email" name="Email" type="email" class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="addon-wrapping-left">
+                                                    </div>
+                                                </div>
 
-                                                  <div class="col-xl-6 col-md-6 p-2">
-                                                      <div class="input-group flex-nowrap">
-                                                          <div class="input-group-prepend">
-                                                              <span class="input-group-text"><i class="fal fa-phone fs-xl"></i></span>
-                                                          </div>
-                                                          <input id="Phone" name="Phone" type="text" class="form-control" placeholder="Phone Number" aria-label="Phone" aria-describedby="addon-wrapping-left">
-                                                      </div>
-                                                  </div>
-                                              </div>
+                                                <div class="col-xl-6 col-md-6 p-2">
+                                                    <div class="input-group flex-nowrap">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fal fa-phone fs-xl"></i></span>
+                                                        </div>
+                                                        <input id="Phone" name="Phone" type="text" class="form-control" placeholder="Phone Number" aria-label="Phone" aria-describedby="addon-wrapping-left">
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                              <div class="row">
-                                                  <div class="col-xl-6 col-md-6 p-2">
-                                                      <div class="input-group flex-nowrap">
-                                                          <div class="input-group-prepend">
-                                                              <span class="input-group-text"><i class="fal fa-mobile fs-xl"></i></span>
-                                                          </div>
-                                                          <input id="Cell" name="Cell" type="text" class="form-control" placeholder="Mobile Number" aria-label="Mobile" aria-describedby="addon-wrapping-left">
-                                                      </div>
-                                                  </div>
+                                            <div class="row">
+                                                <div class="col-xl-6 col-md-6 p-2">
+                                                    <div class="input-group flex-nowrap">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fal fa-mobile fs-xl"></i></span>
+                                                        </div>
+                                                        <input id="Cell" name="Cell" type="text" class="form-control" placeholder="Mobile Number" aria-label="Mobile" aria-describedby="addon-wrapping-left">
+                                                    </div>
+                                                </div>
 
-                                                  <div class="col-xl-6 col-md-6 p-2">
-                                                      <div class="input-group flex-nowrap">
-                                                          <div class="input-group-prepend">
-                                                              <span class="input-group-text"><i class="fal fa-credit-card fs-xl"></i></span>
-                                                          </div>
-                                                          <input id="TRN" name="TRN" type="text" class="form-control" placeholder="Trn Number" aria-label="TrnNumber" aria-describedby="addon-wrapping-left">
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="row ">
-                                                  <div class="col-xl-6 col-md-6 p-2">
-                                                      <div class="input-group " form-group flex-nowrap">
-                                                          <div class="input-group-prepend">
-                                                              <span class="input-group-text"><i class="fal fa-flag fs-xl"></i></span>
-                                                          </div>
-                                                          <select class="select2 form-control" name="Country" id="Country" >
-                                                              @*<option value="" disabled selected hidden>Country</option>*@
-                                                              @if (countryViewModels != null)
-                                                              {
-                                                                  foreach (var item in countryViewModels)
-                                                                  {
-                                                                  <option value="@item.CountryName">@item.CountryName</option>
-                                                                  }
-                                                              }
-                                                          </select>
-                                                      </div>
+                                                <div class="col-xl-6 col-md-6 p-2">
+                                                    <div class="input-group flex-nowrap">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fal fa-credit-card fs-xl"></i></span>
+                                                        </div>
+                                                        <input id="TRN" name="TRN" type="text" class="form-control" placeholder="Trn Number" aria-label="TrnNumber" aria-describedby="addon-wrapping-left">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row ">
+                                                <div class="col-xl-6 col-md-6 p-2">
+                                                    <div class="input-group " form-group flex-nowrap">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fal fa-flag fs-xl"></i></span>
+                                                        </div>
+                                                        <select class="select2 form-control" name="Country" id="Country">
+                                                            @*<option value="" disabled selected hidden>Country</option>*@
+                                                            @if (countryViewModels != null)
+                                                            {
+                                                                foreach (var item in countryViewModels)
+                                                                {
+                                                                    <option value="@item.CountryName">@item.CountryName</option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
 
-                                                  </div>
+                                                </div>
 
-                                                  <div class="col-xl-6 col-md-6 p-2">
-                                                      <div class="input-group " form-group flex-nowrap">
-                                                          <div class="input-group-prepend">
-                                                              <span class="input-group-text"><i class="fal fa-chess-rook fs-xl"></i></span>
-                                                          </div>
-                                                          <select class="select2 form-control" name="State" id="State" >
-                                                              @*<option value="" disabled selected hidden>State</option>*@
-                                                              @if(countryViewModels != null)
-                                                              { 
-                                                                      foreach (var item in countryViewModels)
-                                                                      {
-                                                                          if (item.stateViewModels != null)
-                                                                          {
-                                                                              foreach (var item1 in item.stateViewModels)
-                                                                              {
-                                                                              <option value="@item1.States">@item1.States</option>
-                                                                              }
-                                                                          }
-                                                                      }
-                                                              }
-                                                              </select>
-                                                      </div>
-                                                  </div>
-                                              </div>
+                                                <div class="col-xl-6 col-md-6 p-2">
+                                                    <div class="input-group " form-group flex-nowrap">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fal fa-chess-rook fs-xl"></i></span>
+                                                        </div>
+                                                        <select class="select2 form-control" name="State" id="State">
+                                                            @*<option value="" disabled selected hidden>State</option>*@
+                                                            @if (countryViewModels != null)
+                                                            {
+                                                                foreach (var item in countryViewModels)
+                                                                {
+                                                                    if (item.stateViewModels != null)
+                                                                    {
+                                                                        foreach (var item1 in item.stateViewModels)
+                                                                        {
+                                                                            <option value="@item1.States">@item1.States</option>
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                              <div class="row ">
-                                                  <div class="col-xl-6 col-md-6 p-2">
+                                            <div class="row ">
+                                                <div class="col-xl-6 col-md-6 p-2">
 
-                                                      <div class="input-group " form-group flex-nowrap">
-                                                          <div class="input-group-prepend">
-                                                              <span class="input-group-text"><i class="fal fa-building fs-xl"></i></span>
-                                                          </div>
-                                                          <select class="select2 form-control" name="City" id="City">
-                                                              <option value="" disabled selected hidden>City</option>
-                                                              @if (countryViewModels != null)
-                                                              {
-                                                                  foreach (var item in countryViewModels)
-                                                                  {
-                                                                      if (item.stateViewModels != null)
-                                                                      {                                                                        
-                                                                          foreach (var item1 in item.stateViewModels)
-                                                                          {
-                                                                              if (item1.cityViewModels != null)
-                                                                              {
-                                                                                  foreach (var item3 in item1.cityViewModels)
-                                                                                  {
-                                                                                      <option value="@item3.CityName">@item3.CityName</option>
-                                                                                  }
-                                                                              }
-                                                                          }
-                                                                      }
-                                                                  }
-                                                              }
+                                                    <div class="input-group " form-group flex-nowrap">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fal fa-building fs-xl"></i></span>
+                                                        </div>
+                                                        <select class="select2 form-control" name="City" id="City">
+                                                            <option value="" disabled selected hidden>City</option>
+                                                            @if (countryViewModels != null)
+                                                            {
+                                                                foreach (var item in countryViewModels)
+                                                                {
+                                                                    if (item.stateViewModels != null)
+                                                                    {
+                                                                        foreach (var item1 in item.stateViewModels)
+                                                                        {
+                                                                            if (item1.cityViewModels != null)
+                                                                            {
+                                                                                foreach (var item3 in item1.cityViewModels)
+                                                                                {
+                                                                                    <option value="@item3.CityName">@item3.CityName</option>
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
 
-                                                          </select>
-                                                      </div>
-                                                  </div>
+                                                        </select>
+                                                    </div>
+                                                </div>
 
                                                 <div class="col-xl-6 col-md-6 p-2">
                                                     <div class="input-group flex-nowrap">
@@ -243,7 +243,7 @@
                                                 <div class="col-md-12">
                                                     <label class=newbtn>
                                                         <img id="MulkiaFront1Preview" class="blah" src="/assets/staticImages/icon1.png">
-                                                        <input id="LogoUrl"                          name="LogoUrl" class='pic' onchange="readURL(this);" type="file">
+                                                        <input id="LogoUrl" name="LogoUrl" class='pic' onchange="readURL(this);" type="file">
                                                     </label>
                                                 </div>
                                                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
@@ -256,7 +256,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    </div>                                  
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -280,24 +280,12 @@
 
                         $('#LogoUrl').val('LogoUrl');
                     }
-                </script>
-
-
-                <!-- this overlay is activated only when mobile menu is triggered -->
-                <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
-                <!-- BEGIN Page Footer -->
-                <!-- END Page Footer -->
-                <!-- BEGIN Shortcuts -->
-                <!-- modal shortcut -->
+                </script>   <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
 
             </div>
         </div>
     </div>
-    <!-- END Page Wrapper -->
-    <!-- BEGIN Quick Menu -->
-    <!-- to add more items, please make sure to change the variable '$menu-items: number;' in your _page-components-shortcut.scss -->
-    <!-- END Quick Menu -->
-    <!-- BEGIN Messenger -->
+
     <div class="modal fade js-modal-messenger modal-backdrop-transparent" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-right">
             <div class="modal-content h-100">
@@ -836,14 +824,15 @@
     <script type="text/javascript">
         /* Activate smart panels */
         $('#js-page-content').smartPanel();
-
     </script>
     <!-- The order of scripts is irrelevant. Please check out the plugin pages for more details about these plugins below: -->
     <script src="~/assets/js/statistics/peity/peity.bundle.js"></script>
     <script src="~/assets/js/statistics/flot/flot.bundle.js"></script>
     <script src="~/assets/js/statistics/easypiechart/easypiechart.bundle.js"></script>
     <script src="~/assets/js/datagrid/datatables/datatables.bundle.js"></script>
+    <script src="~/Scripts/CustomScript/common-script.js"></script>
     <script>
+
         /* defined datas */
         var dataTargetProfit = [
             [1354586000000, 153],
@@ -978,7 +967,6 @@
                     ]
 
                 });
-
 
             /* flot toggle example */
             var flot_toggle = function () {
@@ -1286,6 +1274,23 @@
     </script>
 
 
+    <script>
+        $(document).ready(function () {
+            $('#State').change(function () {               
+                var StateName = $(this).val();
+               
+                ajaxRequest("GET", "/Country/CityAll?StateName=" + StateName, "", "json").then(function (result) {
+
+                    console.log(result)
+                    $('#City').empty();
+                    $.each(result, function (item, value) {
+                        $('#City').append("<option value=" + value.Id + ">" + value.CityName + "</option>")
+                    })
+                })
+
+            })
+        })
+    </script>
 
     <style>
 
@@ -1308,9 +1313,6 @@
         }
     </style>
 
-
-
 </body>
-
 </html>
 

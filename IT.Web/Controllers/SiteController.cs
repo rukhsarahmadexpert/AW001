@@ -153,6 +153,11 @@ namespace IT.Web_New.Controllers
                 {
                     SiteViewModel = (new JavaScriptSerializer().Deserialize<SiteViewModel>(SiteResult.Data.ToString()));
                 }
+
+                if (Request.IsAjaxRequest()){
+
+                    return Json(SiteViewModel, JsonRequestBehavior.AllowGet);
+                }                
                 return View("Create", SiteViewModel);
             }
             catch (Exception ex)

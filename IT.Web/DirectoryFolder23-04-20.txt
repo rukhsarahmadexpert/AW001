@@ -1,0 +1,19 @@
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 23-Apr-20 1:05:41 PM23-Apr-20 1:05:37 PMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web.Controllers.CustomerBookingController Error Action Name: AllUserId: 1CompanyId2
+--------------------------------*End*------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 23-Apr-20 1:05:49 PM23-Apr-20 1:05:45 PMError Message:    at IT.Web_New.Controllers.HomeController.UpdateToken(LoginViewModel loginViewModel) in D:\RepoNew\AW002\IT.Web\Controllers\HomeControllerException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: UpdateTokenUserId: 1CompanyId2
+--------------------------------*End*------------------------------------------
+
+
+

@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 25-Apr-20 10:36:37 AM25-Apr-20 10:35:05 AMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
+--------------------------------*End*------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 25-Apr-20 10:41:49 AM25-Apr-20 10:41:29 AMError Message:    at ASP._Page_Views_Home_Details_cshtml.Execute() in D:\RepoNew\AW002\IT.Web\Views\Home\Details.cshtml:line 120
+   at System.Web.WebPagesException Type: System.NullReferenceExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
+--------------------------------*End*------------------------------------------
+
+
+
