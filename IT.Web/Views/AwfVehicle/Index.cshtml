@@ -32,7 +32,7 @@
                                 <th>Mulkia Expiry</th>
                                 <th>Insurance Expiry</th>
                                 <th>IsActive</th>
-                                <th>Actions</th>
+                                <th width="100px">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -120,7 +120,7 @@
                     { "data": "IsActive", "name": "IsActive", "autoWidth": true },
                     {
                         render: function (data, type, row) {
-                            return '<div class="pull-right"><button  class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></button>  <button  class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></button>'
+                            return '<div class="pull-right"><a href="/AwfVehicle/Edit/' + row.Id + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></a>  <a href="/AwfVehicle/Details/' + row.Id + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></a>';
                         }
                     }
                 ]

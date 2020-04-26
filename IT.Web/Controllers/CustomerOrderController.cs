@@ -28,27 +28,100 @@ namespace IT.Web_New.Controllers
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult Index(string OrderProgress = "all", string IsSend = "true", int CompId = 0)
         {
+            //if (CompId == 0)
+            //{
+            //    CompanyId = Convert.ToInt32(Session["CompanyId"]);
+            //    ViewBag.LayoutName = "~/Views/Shared/_Layout.cshtml";
+            //}
+            //else
+            //{
+            //    CompanyId = CompId;
+            //    ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
+            //}
+            try
+            {
+                return View();
+              //  CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                //PagingParameterModel pagingParameterModel = new PagingParameterModel
+                //{ 
+                //    pageNumber = 1,
+                //    _pageSize = 1,
+                //    CompanyId = CompanyId,
+                //    PageSize = 100,
+                //};
+                //pagingParameterModel.OrderProgress = OrderProgress;
+                //if (IsSend == "False")
+                //{
+                //    pagingParameterModel.IsSend = false;
+                //}
+                //else
+                //{
+                //    pagingParameterModel.IsSend = true;
+                //}
+                //var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId", false);
+
+
+                //if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                //{
+                //    customerNoteOrderViewModel = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
+                //}
+
+                //return View(customerNoteOrderViewModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult CustomerAll(string OrderProgress = "all", string IsSend = "true", int CompId = 0)
+        {
             if (CompId == 0)
             {
-                CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                ViewBag.LayoutName = "~/Views/Shared/_Layout.cshtml";
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);             
             }
             else
             {
-                CompanyId = CompId;
-                ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
+                CompanyId = CompId;                
             }
+            //List<CustomerNoteOrderViewModel> customerNoteOrderViewModels = new List<CustomerNoteOrderViewModel>();
             try
             {
-              //  CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                PagingParameterModel pagingParameterModel = new PagingParameterModel
-                { 
-                    pageNumber = 1,
-                    _pageSize = 1,
-                    CompanyId = CompanyId,
-                    PageSize = 100,
-                };
-                pagingParameterModel.OrderProgress = OrderProgress;
+                // CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                var sortColumn = Request.Form.GetValues("columns[" +
+                Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                string search = Request.Form.GetValues("search[value]")[0];
+                //int skip = start != null ? Convert.ToInt32(start) : 0;
+
+                if (OrderProgress == null)
+                {
+                    OrderProgress = "All";
+                }
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                if (Convert.ToInt32(start) == 0)
+                {
+                    pagingParameterModel.pageNumber = 1;
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                    pagingParameterModel.IsSend = true;
+                    pagingParameterModel.OrderProgress = OrderProgress;
+                    pagingParameterModel.CompanyId = CompanyId;
+                }
+                else
+                {
+                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.IsSend = true;
+                    pagingParameterModel.OrderProgress = OrderProgress;
+                    pagingParameterModel.CompanyId = CompanyId;
+                }
                 if (IsSend == "False")
                 {
                     pagingParameterModel.IsSend = false;
@@ -58,14 +131,18 @@ namespace IT.Web_New.Controllers
                     pagingParameterModel.IsSend = true;
                 }
                 var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId", false);
-
-
                 if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    customerNoteOrderViewModel = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
+                    int TotalRow = 0;
+                    if (CustomerOrderList.Data != "[]" && CustomerOrderList.Data != null)
+                    {
+                        customerNoteOrderViewModel = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
+                        TotalRow = customerNoteOrderViewModel.Count;
+                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = customerNoteOrderViewModel }, JsonRequestBehavior.AllowGet);
+                        //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
+                    }
                 }
-
-                return View(customerNoteOrderViewModel);
+                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = customerNoteOrderViewModel }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -139,37 +216,99 @@ namespace IT.Web_New.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
-        public ActionResult Admin(string OrderProgress)
+        public ActionResult Admin()
+        {  
+            try
+            {
+                return View();
+                //if (OrderProgress == null)
+                //{
+                //    OrderProgress = "All";
+                //}
+                //PagingParameterModel pagingParameterModel = new PagingParameterModel
+                //{ 
+                //    pageNumber = 1,
+                //    _pageSize = 1,
+                //    CompanyId = CompanyId,
+                //    OrderProgress = OrderProgress,
+                //    IsSend = true,
+                //    PageSize = 100,
+                //};
+                //var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/GetAllCustomerOrderGroupByAdmin", false);
+
+                //if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                //{
+                //    if (CustomerOrderList.Data != null && CustomerOrderList.Data != "[]")
+                //    {
+                //        customerNoteOrderViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
+                //    }
+                //}
+                //return View(customerNoteOrderViewModels);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult All(string OrderProgress)
         {
             List<CustomerNoteOrderViewModel> customerNoteOrderViewModels = new List<CustomerNoteOrderViewModel>();
             try
             {
+               // CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                var sortColumn = Request.Form.GetValues("columns[" +
+                Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                string search = Request.Form.GetValues("search[value]")[0];
+                //int skip = start != null ? Convert.ToInt32(start) : 0;
+
                 if (OrderProgress == null)
                 {
                     OrderProgress = "All";
                 }
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel
-                { 
-                    pageNumber = 1,
-                    _pageSize = 1,
-                    CompanyId = CompanyId,
-                    OrderProgress = OrderProgress,
-                    IsSend = true,
-                    PageSize = 100,
-                };
-
-                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/GetAllCustomerOrderGroupByAdmin", false);
-
-                if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                if (Convert.ToInt32(start) == 0)
                 {
-                    if (CustomerOrderList.Data != null && CustomerOrderList.Data != "[]")
-                    {
-                        customerNoteOrderViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
-                    }
+                    pagingParameterModel.pageNumber = 1;
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                    pagingParameterModel.IsSend = true;
+                    pagingParameterModel.OrderProgress = OrderProgress;
+                    pagingParameterModel.CompanyId = 0;
+                }
+                else
+                {
+                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.IsSend = true;
+                    pagingParameterModel.OrderProgress = OrderProgress;
+                    pagingParameterModel.CompanyId = 0;
                 }
 
-                return View(customerNoteOrderViewModels);
+                var customerNoteList = webServices.Post(pagingParameterModel, "CustomerOrder/GetAllCustomerOrderGroupByAdmin");
+
+                if (customerNoteList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    int TotalRow = 0;
+                    if (customerNoteList.Data != "[]" && customerNoteList.Data != null)
+                    {
+                        customerNoteOrderViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(customerNoteList.Data.ToString()));
+
+                        TotalRow = customerNoteOrderViewModels.Count;
+
+                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = customerNoteOrderViewModels }, JsonRequestBehavior.AllowGet);
+                        //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
+                    }
+                }
+                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = customerNoteOrderViewModels }, JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception ex)
             {
