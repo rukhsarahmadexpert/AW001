@@ -510,6 +510,8 @@ namespace IT.Web_New.Controllers
                             content.Add(new StringContent(driverViewModel.Contact ?? ""), "Contact");
                             content.Add(new StringContent(driverViewModel.Email ?? ""), "Email");
                             content.Add(new StringContent(driverViewModel.Facebook ?? ""), "Facebook");
+                            content.Add(new StringContent(driverViewModel.LicenseExpiry ?? ""), "DrivingLicenseExpiryDate");
+                            
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
 
                             if (driverViewModel.LicienceList.ToList().Count == 1)

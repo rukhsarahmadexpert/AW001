@@ -81,6 +81,8 @@ namespace IT.Web.Controllers
                     pagingParameterModel.PageSize = pageSize;
                     pagingParameterModel.CompanyId = 0;
                     pagingParameterModel.SerachKey = search;
+                    pagingParameterModel.sortColumn = sortColumn;
+                    pagingParameterModel.sortColumnDir = sortColumnDir;
                 }
                 else
                 {
@@ -88,6 +90,8 @@ namespace IT.Web.Controllers
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.CompanyId = 0;
                     pagingParameterModel.SerachKey = search;
+                    pagingParameterModel.sortColumn = sortColumn;
+                    pagingParameterModel.sortColumnDir = sortColumnDir;
                 }
 
                 var BookingList = webServices.Post(pagingParameterModel, "CustomerBooking/All");
@@ -804,5 +808,6 @@ namespace IT.Web.Controllers
             stram.Seek(0, SeekOrigin.Begin);
             return new FileStreamResult(stram, "application/pdf");
         }
+
     }
 }

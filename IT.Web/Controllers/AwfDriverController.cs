@@ -585,23 +585,55 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpPost]
-        public ActionResult DriverAllOnline()
+        public ActionResult DriverAllOnline(DriverViewModel driverViewModel)
         {
-
             try
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
-                var DriverInfo = webServices.Post(new DriverViewModel(), "AWFDriver/DriverAllOnline/" + CompanyId);
-                if (DriverInfo.StatusCode == System.Net.HttpStatusCode.Accepted)
+                if (driverViewModel.Name == "Driver")
                 {
-                    var OnlineDriverList = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverInfo.Data.ToString()));
-                    return Json(OnlineDriverList, JsonRequestBehavior.AllowGet);
+                    var DriverInfo = webServices.Post(new DriverViewModel(), "AWFDriver/DriverAllOnline/" + CompanyId);
+                    if (DriverInfo.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        var OnlineDriverList = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverInfo.Data.ToString()));
+                        OnlineDriverList.Insert(0, new DriverViewModel() { Id = 0, Name = "Select Driver" });
+
+                        return Json(OnlineDriverList, JsonRequestBehavior.AllowGet);
+                    }
                 }
+                else
+                {
+                    var siteViewModels = new List<SiteViewModel>();
+                    CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
+                    PagingParameterModel pagingParameterModel = new PagingParameterModel
+                    {
+                        pageNumber = 1,
+                        _pageSize = 1,
+                        CompanyId = CompanyId,
+                        PageSize = 100,
+                    };
+                    var SiteList = webServices.Post(pagingParameterModel, "Site/All");
+                    if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        siteViewModels = (new JavaScriptSerializer().Deserialize<List<SiteViewModel>>(SiteList.Data.ToString()));
+                    }
+                    siteViewModels.Insert(0, new SiteViewModel() { Id = 0, SiteName = "Select Site" });
+
+                    var OnlineDriverList = new List<DriverViewModel>();
+
+                    foreach (var item in siteViewModels)
+                    {
+                        OnlineDriverList.Add(new DriverViewModel()
+                        {
+                            Id = item.Id,
+                            Name = item.SiteName
+                        });
+                    }
+                    return Json(OnlineDriverList, JsonRequestBehavior.AllowGet);
+                    
+                }
                 return Json("failed", JsonRequestBehavior.AllowGet);
-
-
             }
             catch (Exception)
             {

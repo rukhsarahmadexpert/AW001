@@ -205,7 +205,7 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpGet]
-        public ActionResult CityAll()
+        public ActionResult CityAll(string StateName)
         {
             try
             {
@@ -217,6 +217,11 @@ namespace IT.Web_New.Controllers
                 }
                 if (Request.IsAjaxRequest())
                 {
+                    if(StateName != null)
+                    {
+                        cityViewModels = cityViewModels.Where(x => x.StateName == StateName).ToList();
+                    }
+
                     return Json(cityViewModels, JsonRequestBehavior.AllowGet);
                 }
                 return View(cityViewModels);

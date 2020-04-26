@@ -18,6 +18,8 @@ namespace IT.Core.ViewModels
         public int CompanyId { get; set; }
         public string SerachKey { get; set; }
         public string OrderProgress { get; set; }
+        public string sortColumn { get; set; }
+        public string sortColumnDir { get; set; }
         public bool IsSend { get; set; }
         public int DriverId { get; set; }
 
