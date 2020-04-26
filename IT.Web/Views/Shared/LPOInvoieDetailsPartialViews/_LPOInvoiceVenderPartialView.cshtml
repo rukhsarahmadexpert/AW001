@@ -46,32 +46,42 @@
         {
             <h5 class="font-weight-bold"><u>Vender Info:</u></h5>
         }
-        @if (lpoRemainingQuantityViewModel.LPOQuantity == 0)
+
+        @if (LPOInvoiceViewModel.Id > 0)
         {
-            <select class="form-control" id="VenderId">
-                @if(venderViewModels != null)
-                {
-                    foreach (var item in venderViewModels)
+            
+        }
+        else
+        {
+            if (lpoRemainingQuantityViewModel.LPOQuantity == 0)
+            {
+                <select class="form-control" id="VenderId">
+                    @if (venderViewModels != null)
                     {
-                        <option value="@item.Id" @(item.Id == LPOInvoiceViewModel.UpdatedBy ? "selected='selected'" : "")>@item.Name</option>
+                        foreach (var item in venderViewModels)
+                        {
+                            <option value="@item.Id" @(item.Id == LPOInvoiceViewModel.UpdatedBy ? "selected='selected'" : "")>@item.Name</option>
+                        }
                     }
-                }
-            </select>
-         }
-        
-         <div class="form-group">
-                <p style="margin-top:10px">
-                </p>
-                @if (lpoRemainingQuantityViewModel.LPOQuantity != 0)
-                {
-                    <p><i class="glyphicon glyphicon-user"> </i>Company Name: <span id="ContactPerson">@LPOInvoiceViewModel.Name</span></p>
-                }
-                <p><i class="glyphicon glyphicon-road"></i> Address: <span id="VenderAddress">@LPOInvoiceViewModel.Address</span></p>
-                <p><i class="glyphicon glyphicon-earphone"></i>Land Line : <span id="VenderPhone">@LPOInvoiceViewModel.LandLine</span></p>
-                <p><i class="glyphicon glyphicon-earphone"></i>Mobile : <span id="VenderCell">@LPOInvoiceViewModel.Mobile</span></p>
-                <p><i class="glyphicon glyphicon-envelope"></i>Email :<span id="VenderEmail">@LPOInvoiceViewModel.Email</span></p>
-                <p> <i class="glyphicon glyphicon-text-width"></i>TRN : <span id="VenderVAT">@LPOInvoiceViewModel.TRN</span></p>
-            </div>        
+                </select>
+            }
+        }
+
+
+
+        <div class="form-group">
+            <p style="margin-top:10px">
+            </p>
+            @if (lpoRemainingQuantityViewModel.LPOQuantity != 0)
+            {
+                <p><i class="glyphicon glyphicon-user"> </i>Company Name: <span id="ContactPerson">@LPOInvoiceViewModel.Name</span></p>
+            }
+            <p><i class="glyphicon glyphicon-road"></i> Address: <span id="VenderAddress">@LPOInvoiceViewModel.Address</span></p>
+            <p><i class="glyphicon glyphicon-earphone"></i>Land Line : <span id="VenderPhone">@LPOInvoiceViewModel.LandLine</span></p>
+            <p><i class="glyphicon glyphicon-earphone"></i>Mobile : <span id="VenderCell">@LPOInvoiceViewModel.Mobile</span></p>
+            <p><i class="glyphicon glyphicon-envelope"></i>Email :<span id="VenderEmail">@LPOInvoiceViewModel.Email</span></p>
+            <p> <i class="glyphicon glyphicon-text-width"></i>TRN : <span id="VenderVAT">@LPOInvoiceViewModel.TRN</span></p>
+        </div>
     </div>
     
     <div class="col-md-4">

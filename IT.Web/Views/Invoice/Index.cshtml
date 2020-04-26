@@ -30,7 +30,7 @@
                                 <th>VAT </th>
                                 <th>Grand Total</th>
                                 <th>Oprater</th>
-                                <th>Action</th>
+                                <th width="100px">Action</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -85,7 +85,7 @@
                     {
                         "mData": "Id",
                         "render": function (Id, type, full, meta) {
-                            return '<a href="#" onclick="EditInvoice(' + Id + ')"><i class="fal fa-edit"></i>Edit</a>' + ' | ' + '<a href="#" onclick="ViewInvoice(' + Id + ')"><i class="fal fa-eye"></i>Details</a> ' + ' | ' + '<a href="#" onclick="CreateBill(' + Id + ')">Invoice</a>'
+                            return '<a class="text-primary" style="cursor:pointer" onclick="EditInvoice(' + Id + ')"><i class="fal fa-edit"></i></a>' + ' | ' + '<a class="text-primary" style="cursor:pointer" onclick="ViewInvoice(' + Id + ')"><i class="fal fa-eye"></i></a> ' + ' | ' + '<a class="text-primary" style="cursor:pointer" onclick="CreateBill(' + Id + ')">Invoice</a>'
                         }
                     },
                 ]
