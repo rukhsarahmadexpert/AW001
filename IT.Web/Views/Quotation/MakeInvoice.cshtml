@@ -54,27 +54,28 @@
 @section Scripts{
 
     <script>
-
+      
         $('#SaveDraft').click(function () {
-            debugger;
-            alert();
+            //debugger;
+            //alert();
+           
             if (IsBillValid()) {
+
+                $("#SaveDraft").text('please wait...');
+                $("#SaveDraft").attr("disabled", true);
 
                 var Data = JSON.stringify({
                     FDate: $('#FromDate').val(),
                     DDate: $('#DueDate').val(),
-                    RefrenceNumber: $('#RefrenceNumber').text(),
+                    RefrenceNumber: $('#RefrenceNumber').val(),
                     Id: $('#LPOId').val(),
                     PONumber: $('#PONumber').text(),
                     LPOId: $('#LPOId').val()
                 })
 
-                ajaxRequest("POST", "/CreateFromQuotation", Data, "json").then(function (result) {
-
+                   ajaxRequest("POST", "/Invoice/CreateFromQuotation",  Data, "json").then(function (result) {
                     if (result != "Failed") {
-                        sucessAdd();
-
-                        window.location.href = "/Invoice";
+                        window.location.href = "/Invoice/Index";
                     }
                     else {
                         alert('Failed your opration');
@@ -85,9 +86,10 @@
 
 
         function IsBillValid() {
+            debugger;
             var IsValid = true;
 
-            if ($('#RefrenceNumber').text().trim() == "") {
+            if ($('#RefrenceNumber').val().trim() == "") {
                 $('#RefrenceNumber').css('border-color', 'Red');
                 IsValid = false;
             }

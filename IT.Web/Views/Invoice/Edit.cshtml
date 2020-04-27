@@ -93,7 +93,8 @@
             }
             else {
                 if (ValidLPO()) {
-
+                    $("#SaveDraft").text('please wait...');
+                    $("#SaveDraft").attr("disabled", true);
                     localStorage.removeItem("SendByEmail");
                     $('#IsDownload').val('');
                     CreateLPOInvoice("/Invoice/Update");
@@ -107,6 +108,8 @@
             }
             else {
                 if (ValidLPO()) {
+                    $("#SaveDownload").text('please wait...');
+                    $("#SaveDownload").attr("disabled", true);
                     localStorage.removeItem("SendByEmail");
                     $('#IsDownload').val("True");
                     CreateLPOInvoice("/Invoice/Update");
@@ -198,14 +201,12 @@
                                 //response(result, btnName, Message, returnulr, F)
 
                                 var SendEmail = localStorage.getItem("SendByEmail");
-
+                                localStorage.setItem("Id", result);
                                 if (SendEmail != null) {
-
-                                    localStorage.setItem("Id", result);
                                     window.location.href = "/Email";
                                 }
                                 else {
-                                    window.location.href = "/Invoice/Details/" + result;
+                                    window.location.href = "/Invoice/Index/";
                                 }
                             }
                             else {

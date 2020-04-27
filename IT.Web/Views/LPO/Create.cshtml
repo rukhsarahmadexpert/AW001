@@ -130,7 +130,9 @@
             }
         })
 
-        $('#SaveDraft').click(function () {
+        $('#SaveDraft').click(function () {\
+            $("#SaveDraft").text('please wait...');
+            $("#SaveDraft").attr("disabled", true);
             if (ValidLPO()) {
                 localStorage.clear();
                 CreateLPOInvoice("/LPO/Create");
@@ -138,6 +140,8 @@
         });
 
         $('#SaveDownload').click(function () {
+            $("#SaveDownload").text('please wait...');
+            $("#SaveDownload").attr("disabled", true);
             if (ValidLPO()) {
                 localStorage.clear();
                 $('#Flage').val("Download");
