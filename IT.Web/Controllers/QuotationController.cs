@@ -78,17 +78,12 @@ namespace IT.Web_New.Controllers
 
                 //int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                if (HttpContext.Cache["QuotationData"] != null)
-                {
-                    lPOInvoiceViewModels = HttpContext.Cache["QuotationData"] as List<LPOInvoiceViewModel>;
-                }
-                else
-                {
+                
+                
                     var result = webServices.Post(new VehicleViewModel(), "Quotation/All");
                     lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
 
-                    HttpContext.Cache["QuotationData"] = lPOInvoiceViewModels;
-                }
+                   
                 if (parm.sSearch != null)
                 {
                     totalCount = lPOInvoiceViewModels.Where(x => x.Name.ToLower().Contains(parm.sSearch.ToLower()) ||

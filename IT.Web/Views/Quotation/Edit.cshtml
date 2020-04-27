@@ -44,8 +44,6 @@
     </div>
 </div>
 
-
-
 <div class="modal fade" id="ModelEditLPO" data-backdrop="static" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -65,12 +63,7 @@
         </div>
     </div>
 </div>
-
-
-
 <input hidden id="IsDownload" />
-
-
 
 @section Scripts{
     <script src="~/Scripts/Common-Scripts/LOP-Invoice.js"></script>
@@ -110,13 +103,13 @@
         });
 
         $('#SaveDraft').click(function () {
-
             if ($('#ReasonUpdated').val() == "") {
                 alert("Please explain reason");
             }
             else {
                 if (ValidLPO()) {
-
+                    $("#SaveDraft").text('please wait...');
+                    $("#SaveDraft").attr("disabled", true);
                     localStorage.removeItem("SendByEmail");
 
                     $('#IsDownload').val('');
@@ -131,6 +124,8 @@
             }
             else {
                 if (ValidLPO()) {
+                    $("#SaveDownload").text('please wait...');
+                    $("#SaveDownload").attr("disabled", true);
                     localStorage.removeItem("SendByEmail");
                     $('#IsDownload').val("True");
                     CreateLPOInvoice("/Quotation/Update");
