@@ -3,14 +3,6 @@
     ViewBag.Title = "Index";
 }
 
-
-<ol class="breadcrumb page-breadcrumb">
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Mena Energy</a></li>
-
-    <li class="breadcrumb-item active">Drivers</li>
-    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-</ol>
-
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -39,7 +31,7 @@
                                 <th>Grand Total</th>
                                 <th>Is Updated</th>
                                 <th>Oprater</th>
-                                <th>Action</th>
+                                <th width="100px">Action</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -95,7 +87,7 @@
                     {
                         "mData": "Id",
                         "render": function (Id, type, full, meta) {
-                            return '<a href="#" onclick="EditLPO(' + Id + ')"><i class="fal fa-edit"></i>Edit</a>' + ' | ' + '<a href="#" onclick="ViewLPO(' + Id + ')"><i class="fal fa-eye"></i>Details</a>' + ' | ' + '<a href="#" onclick="CreateBill(' + Id + ')">Create Bill</a>'
+                            return '<a href="#" onclick="EditLPO(' + Id + ')"><i class="fal fa-edit"></i></a>' + ' | ' + '<a href="#" onclick="ViewLPO(' + Id + ')"><i class="fal fa-eye"></i></a>' + ' | ' + '<a href="#" onclick="CreateBill(' + Id + ')">Create Bill</a>'
                         }
                     },
                 ]

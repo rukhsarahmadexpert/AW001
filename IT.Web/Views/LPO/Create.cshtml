@@ -60,23 +60,47 @@
         $(document).ready(function () {
 
             $('#Venders').change(function () {
+               
                 var Id = 0;
                 Id = $(this).val();
 
                 if (Id > 0) {
-                    ajaxRequest("GET", "/Vender/Edit/" + Id, "json").then(function (result) {
-                        if (result != "Failed") {
+                    if ($('#LpoType').val() == "ForAdmin") {
 
-                            $('#VenderAddress').text(result.Address);
-                            $('#VenderPhone').text(result.LandLine);
-                            $('#VenderEmail').text(result.Email);
-                            $('#VenderVAT').text(result.TRN);
-                            $('#ContactPerson').text(result.Representative);
-                        }
-                        else {
-                            alert('data not found');
-                        }
-                    });
+                        ajaxRequest("GET", "/Vender/Edit/" + Id, "json").then(function (result) {
+                            if (result != "Failed") {
+
+                                $('#VenderAddress').text(result.Address);
+                                $('#VenderPhone').text(result.LandLine);
+                                $('#VenderEmail').text(result.Email);
+                                $('#VenderVAT').text(result.TRN);
+                                $('#ContactPerson').text(result.Representative);
+                            }
+                            else {
+                                alert('data not found');
+                            }
+                        });
+                    }
+                    else {
+
+                        ajaxRequest("GET", "/Company/CompanyEdit/" + Id, "json").then(function (result) {
+                           
+                            if (result != "Failed") {
+                                console.log(result);
+                                $('#VenderAddress').text(result.Address);
+                                $('#VenderPhone').text(result.LandLine);
+                                $('#VenderEmail').text(result.Email);
+                                $('#VenderVAT').text(result.TRN);
+                                $('#ContactPerson').text(result.Representative);
+                            }
+                            else {
+                                alert('data not found');
+                            }
+                        });
+
+                    }
+
+                   
                 }
             });
 
@@ -93,8 +117,7 @@
                 {
                     ajaxRequest("POST", "/Vender/VenderList", "", "json").then(function (result) {
                         if (result != "Failed") {
-                            console.log(result);
-
+                          
                             $('#Venders').empty();
                             $(".Venderlbl").text("Vendor");
                             $.each(result, function (item, valu) {
@@ -109,8 +132,7 @@
                             {
                                 if (result != "Failed")
                                 {
-                                    console.log(result);
-
+                                   
                                     $('#Venders').empty();
                                     $(".Venderlbl").text("Customer");
                                     $.each(result, function (item, valu) {
@@ -130,19 +152,21 @@
             }
         })
 
-        $('#SaveDraft').click(function () {\
-            $("#SaveDraft").text('please wait...');
-            $("#SaveDraft").attr("disabled", true);
+        $('#SaveDraft').click(function () {
+           
             if (ValidLPO()) {
+                $("#SaveDraft").text('please wait...');
+                $("#SaveDraft").attr("disabled", true);
                 localStorage.clear();
                 CreateLPOInvoice("/LPO/Create");
             }
         });
 
         $('#SaveDownload').click(function () {
-            $("#SaveDownload").text('please wait...');
-            $("#SaveDownload").attr("disabled", true);
+            
             if (ValidLPO()) {
+                $("#SaveDownload").text('please wait...');
+                $("#SaveDownload").attr("disabled", true);
                 localStorage.clear();
                 $('#Flage').val("Download");
                 CreateLPOInvoice("/LPO/Create");

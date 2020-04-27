@@ -513,6 +513,15 @@ namespace IT.Web_New.Controllers
                 {
                     userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(userList.Data.ToString()));
 
+
+                    if (Request.IsAjaxRequest())
+                    {
+                        return Json(userViewModel, JsonRequestBehavior.AllowGet);
+                    }
+                    
+
+                  
+
                 }
 
                 ViewBag.userViewModel = userViewModel;
