@@ -401,13 +401,14 @@ namespace IT.Web_New.Controllers
                     pagingParameterModel.pageNumber = 1;
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.PageSize = pageSize;
-                    pagingParameterModel.CompanyId = CompanyId;
+                    pagingParameterModel.SerachKey = search;
                 }
                 else
                 {
                     pagingParameterModel.pageNumber = Convert.ToInt32(draw);
                     pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.CompanyId = CompanyId;
+                    pagingParameterModel.PageSize = pageSize;
+                    pagingParameterModel.SerachKey = search;
                 }
 
                 var assignedOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderGroupAsignedForSite");
@@ -433,8 +434,7 @@ namespace IT.Web_New.Controllers
                 throw;
             }
         }
-
-
+        
         [HttpPost]
         public ActionResult AcceptOrder(CustomerOrderViewModel customerOrderViewModel)
         {
@@ -728,6 +728,63 @@ namespace IT.Web_New.Controllers
                     }
                 }
                 return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeliverdSiteAssignedOrder(CustomerOrderDeliverVewModel customerOrderDeliverVewModel)
+        {
+            try
+            {
+                //return Json("success", JsonRequestBehavior.AllowGet);
+                
+                var customerOrderGroupDeliverd = webServices.Post(customerOrderDeliverVewModel, "CustomerOrder/CustomerOrderDetailsGroupDeliveryByDriver", false);
+
+                if (customerOrderGroupDeliverd.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (customerOrderGroupDeliverd.Data != null || customerOrderGroupDeliverd.Data != "[]")
+                    {
+                        int Result = (new JavaScriptSerializer().Deserialize<int>(customerOrderGroupDeliverd.Data.ToString()));
+                    }
+                    return Json("success", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("Failed", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CustomerOrderDetailsGroupAsignedByOrderId(SearchViewModel searchViewModel)
+        {
+            try
+            {
+               var ResultData = new CustomerGroupOrderDetailsViewModel();
+                //return Json("success", JsonRequestBehavior.AllowGet);
+
+                var customerOrderGroupAssignDetails = webServices.Post(new CustomerGroupOrderDetailsViewModel(), "CustomerOrder/CustomerOrderDetailsGroupAsignedByOrderId/" + searchViewModel.Id, false);
+
+                if (customerOrderGroupAssignDetails.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (customerOrderGroupAssignDetails.Data != null || customerOrderGroupAssignDetails.Data != "[]")
+                    {
+                        ResultData = (new JavaScriptSerializer().Deserialize<List<CustomerGroupOrderDetailsViewModel>>(customerOrderGroupAssignDetails.Data.ToString())).FirstOrDefault();
+                    }
+                    return Json(ResultData, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("Failed", JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {

@@ -70,7 +70,7 @@
                     ajaxRequest("POST", "/AWFVehicle/ChangeStatus", Data, "json").then(function (result) {
                         if (result != "failed") {
                             //console.log(result);
-                            window.location.reload();
+                            $('#dt-basic-example1').DataTable().ajax.reload();
                         }
                         else {
                             alert('there is some problem');
@@ -91,9 +91,7 @@
             $("#VehicleMenu").attr("aria-expanded", "true");
             $('#VehicleUl').css('display', 'block');
             $('#VehicleLi').addClass('active');
-        });
 
-        $(function () {
             $("#dt-basic-example1").DataTable({
                 "paging": true,
                 "responsive": true,
@@ -126,7 +124,6 @@
                 ]
             });
         });
-
 
     </script>
 
