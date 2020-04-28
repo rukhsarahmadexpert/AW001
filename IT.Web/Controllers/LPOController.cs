@@ -368,7 +368,7 @@ namespace IT.Web_New.Controllers
                 LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel
                 {
                     FromDate = System.DateTime.Now,
-                    DueDate = System.DateTime.Now,
+                    DueDate = System.DateTime.Now.AddMonths(1),
                 };
                 return View(lPOInvoiceVModel);
             }
@@ -607,6 +607,11 @@ namespace IT.Web_New.Controllers
                 };
                 ViewBag.VatDrop = model;
 
+                VenderController venderController = new VenderController();
+
+                venderViewModels = venderController.Venders();
+                ViewBag.Vender = venderViewModels;
+
                 if (Result.Data != "[]")
                 {
                     lPOInvoiceViewModel = (new JavaScriptSerializer().Deserialize<LPOInvoiceViewModel>(Result.Data.ToString()));
@@ -769,7 +774,10 @@ namespace IT.Web_New.Controllers
                 List<IT.Web.Models.LPOInvoiceDetailsModel> lPOInvoiceDetails = new List<LPOInvoiceDetailsModel>();
                 List<VenderModel> venderModels = new List<VenderModel>();
 
-                var LPOInvoice = webServices.Post(new IT.Web.Models.LPOInvoiceModel(), "LPO/EditReport/" + Id);
+                var lPOInvoice = new LPOInvoiceModel();
+                lPOInvoice.Id = Id;
+                
+                var LPOInvoice = webServices.Post(lPOInvoice, "LPO/EditReport/" + Id);
 
                 var LPOInvoiceModel = new IT.Web.Models.LPOInvoiceModel();
                 if (LPOInvoice.Data != "[]")
@@ -849,8 +857,7 @@ namespace IT.Web_New.Controllers
             }
 
         }
-
-
+        
         [HttpGet]
         public ActionResult PrintLPO(int Id)
         {
