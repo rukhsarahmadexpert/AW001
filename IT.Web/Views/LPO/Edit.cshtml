@@ -80,6 +80,14 @@
 @section Scripts{
     <script src="~/Scripts/Common-Scripts/LOP-Invoice.js"></script>
     <script>
+
+        $(document).ready(function () {
+            $("#PurchaseMenu").attr("aria-expanded", "true");
+            $('#PurchaseUl').css('display', 'block');
+            $('#PurchaseLpoLi').addClass('active');
+            GetCustomerOrderByStatus('All');
+        });
+
         $('#Venders').change(function () {
             var Id = 0;
             Id = $(this).val();

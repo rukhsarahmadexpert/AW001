@@ -74,14 +74,14 @@
                     <div class="col-md-5" style="border-left:1px solid black">  
                         <h4><label class="form-control text-success">Order Delivery Information:</label></h4>
                         <input type="hidden" id="DetailsId"/>
-                        <input type="number" id="Quantity" class="form-control" autocomplete="off" placeholder="Deliverd Quantity"/>
+                        <input required type="number" id="Quantity" class="form-control" autocomplete="off" placeholder="Deliverd Quantity"/>
                         <textarea id="Note" rows="8" class="form-control mt-3"  placeholder="Note"></textarea>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="SaveDeliverd">Save Deliverd changes</button>
+                <button type="button" class="btn btn-primary" id="SaveDeliverd">Save Delivered changes</button>
             </div>
         </div>
     </div>
@@ -123,7 +123,28 @@
                     { "data": "SIteName", "name": "SIteName", "autoWidth": true },
                     { "data": "CustomerOrderId", "name": "CustomerOrderId", "autoWidth": true },
                     { "data": "RequestedQuantity", "name": "RequestedQuantity", "autoWidth": true },
-                    { "data": "OrderProgress", "name": "OrderProgress", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            if (row.OrderProgress == "Order Accepted") {
+                                return '<span class="badge badge-success">Order Accepted</span>'
+                            }
+                            else if (row.OrderProgress == "Order Created") {
+                                return '<span class="badge badge-primary">Order Created</span>'
+                            }
+                            else if (row.OrderProgress == "Order Assigned") {
+                                return '<span class="badge badge-warning">Order Assigned</span>'
+                            }
+                            else if (row.OrderProgress == "Order Rejected") {
+                                return '<span class="badge badge-danger">Order Rejected</span>'
+                            }
+                            else if (row.OrderProgress == "Order Running") {
+                                return '<span class="badge badge-dark">Order Running</span>'
+                            }
+                            else if (row.OrderProgress == "Order Deliverd") {
+                                return '<span class="badge badge-info">Order Deliverd</span>'
+                            }
+                        }
+                    },
                     { "data": "UserName", "name": "UserName", "autoWidth": true },  
                     {
                         render: function (data, type, row) {
@@ -135,6 +156,9 @@
             
             $('#SaveDeliverd').click(function () {
 
+                $("#SaveDeliverd").text('please wait...');
+                $("#SaveDeliverd").attr("disabled", true);
+
                 var Data = JSON.stringify({
 
                     Id: $('#DetailsId').val(),
@@ -145,13 +169,16 @@
 
                 ajaxRequest("POST", "/CustomerOrder/DeliverdSiteAssignedOrder", Data, "json").then(function (result)
                 {
-                    if(result != "Falid")
+                    if (result != "Failed")
                     {
-                        $('#dt-basic-example1').DataTable().ajax.reload();
+                        //$('#dt-basic-example1').DataTable().ajax.reload();
+                        alert('success');
+                        location.reload();
                     }
                     else
                     {
-                        alert('falied');
+                        alert('Failed');
+                        location.reload();
                     }
                 })
                 

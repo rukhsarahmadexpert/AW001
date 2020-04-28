@@ -57,6 +57,13 @@
 @section Scripts{
 
     <script>
+
+        $(document).ready(function () {
+            $("#PurchaseMenu").attr("aria-expanded", "true");
+            $('#PurchaseUl').css('display', 'block');
+            $('#PurchaseLpoLi').addClass('active');
+            GetCustomerOrderByStatus('All');
+        });
         $(document).ready(function () {
 
             $('#Venders').change(function () {
