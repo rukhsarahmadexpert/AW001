@@ -217,7 +217,7 @@ namespace IT.Web_New.Controllers
                 LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel
                 {
                     FromDate = System.DateTime.Now,
-                    DueDate = System.DateTime.Now,
+                    DueDate = System.DateTime.Now.AddMonths(1),
                 };
                 return View(lPOInvoiceVModel);
             }
