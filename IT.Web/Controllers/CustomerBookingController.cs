@@ -31,24 +31,6 @@ namespace IT.Web.Controllers
             try
             {
                 return View();
-                //CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
-                //PagingParameterModel pagingParameterModel = new PagingParameterModel
-                //{
-                //    pageNumber = 1,
-                //    CompanyId = 0,
-                //    PageSize = 50
-                //};
-
-                //var CustomerBookingList = webServices.Post(pagingParameterModel, "CustomerBooking/All");
-
-                //if (CustomerBookingList.StatusCode == System.Net.HttpStatusCode.Accepted)
-                //{
-                //    customerBookingViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerBookingViewModel>>(CustomerBookingList.Data.ToString()));
-                //}
-
-                //return View(customerBookingViewModels);
-
             }
             catch (Exception ex)
             {
