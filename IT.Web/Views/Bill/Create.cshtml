@@ -82,6 +82,8 @@
 
             if (IsBillValid()) {
                 if (ValidLPO()) {
+                    $("#BillSave").text('please wait...');
+                    $("#BillSave").attr("disabled", true);
                     localStorage.clear();
                     CreateLPOInvoice("/Bill/Create");
                 }
