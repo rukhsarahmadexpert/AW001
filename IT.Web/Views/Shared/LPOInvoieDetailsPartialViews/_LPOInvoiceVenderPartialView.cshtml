@@ -47,8 +47,14 @@
             <h5 class="font-weight-bold"><u>Vender Info:</u></h5>
         }
 
-       
-            @if (lpoRemainingQuantityViewModel == null || lpoRemainingQuantityViewModel.LPOQuantity == 0)
+
+        @if (lpoRemainingQuantityViewModel == null || lpoRemainingQuantityViewModel.LPOQuantity == 0)
+        {
+            if (LPOInvoiceViewModel.Id > 0)
+            {
+
+            }
+            else
             {
                 <select class="form-control" id="VenderId">
                     @if (venderViewModels != null)
@@ -59,8 +65,10 @@
                         }
                     }
                 </select>
-            
             }
+
+
+        }
 
 
         <div class="form-group">
