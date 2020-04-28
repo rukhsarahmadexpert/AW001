@@ -67,7 +67,7 @@
                 if (Id > 0) {
                     ajaxRequest("GET", "/Company/Details/" + Id, "json").then(function (result) {
                         if (result != "Failed") {
-                            console.log(result);
+                            //console.log(result);
                             $('#VenderAddress').text(result.Address);
                             $('#VenderPhone').text(result.Phone);
                             $('#VenderEmail').text(result.Email);
