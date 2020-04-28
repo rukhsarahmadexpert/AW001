@@ -101,14 +101,8 @@
         });
 
           $('#SaveEmail').click(function () {
-
-            @*var Id = $('#LPOId').val();*@
-
-           // alert(Id);
-
             window.location.href = "/Email";
-
-        });
+          });
 
         $('#SaveDraft').click(function () {
 
@@ -119,8 +113,8 @@
         else
         {
             if (ValidLPO()) {
-                // $('#ModelEditLPO').click(function())
-
+                $("#SaveDraft").text('please wait...');
+                $("#SaveDraft").attr("disabled", true);
                 $('#IsDownload').val('');
                 CreateLPOInvoice("/LPO/Update");
             }
@@ -133,7 +127,8 @@
             }
             else {
                 if (ValidLPO()) {
-
+                    $("#SaveDownload").text('please wait...');
+                    $("#SaveDownload").attr("disabled", true);
                     $('#IsDownload').val("True");
                     CreateLPOInvoice("/LPO/Update");
                 }
@@ -144,8 +139,6 @@
 
         function CreateLPOInvoice(Url) {
             if (1 == 1) {
-
-
                 var list = [], orderItem, CurrentRow;
                 var formData = new FormData();
 

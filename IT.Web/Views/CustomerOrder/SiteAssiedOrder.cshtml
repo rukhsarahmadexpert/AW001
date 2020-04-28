@@ -10,10 +10,6 @@
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
-                    <!--      <div class="panel-tag">
-                                <p>Drivers Base Information</p>
-                            </div>-->
-                    <!-- datatable start -->
                     <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
@@ -96,6 +92,15 @@
     <script>
 
         $(document).ready(function () {
+          
+            $("#CustomerDeliveryMenu").attr("aria-expanded", "true");
+            $('#CustomerDeliveryUl').css('display', 'block');
+            $('#CustomerDeliveryLi').addClass('active');
+        });
+
+        $(document).ready(function () {
+
+          
 
             $("#dt-basic-example1").DataTable({
                 "paging": true,
