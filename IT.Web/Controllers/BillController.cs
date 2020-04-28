@@ -90,6 +90,10 @@ namespace IT.Web_New.Controllers
                     }
                 }
                 lPOInvoiceViewModel.Heading = "BILL";
+
+                lPOInvoiceViewModel.FromDate = System.DateTime.Now;
+                lPOInvoiceViewModel.DueDate = System.DateTime.Now.AddMonths(1);
+
                 ViewBag.lPOInvoiceViewModel = lPOInvoiceViewModel;
                 ViewBag.lpoRemainingQuantityViewModel = lpoRemainingQuantityViewModel;
                 lPOInvoiceViewModel.RefrenceNumber = lPOInvoiceViewModel.PONumber;
@@ -171,26 +175,26 @@ namespace IT.Web_New.Controllers
         public ActionResult Create(LPOInvoiceViewModel lPOInvoiceViewModel)
         {
             try
-            {
-               
+            {               
                 // return Json("Success",JsonRequestBehavior.AllowGet);
 
                 lPOInvoiceViewModel.FromDate = Convert.ToDateTime(lPOInvoiceViewModel.FromDate);
                 lPOInvoiceViewModel.DueDate = Convert.ToDateTime(lPOInvoiceViewModel.DueDate);
 
                 lPOInvoiceViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
-                var result = webServices.Post(lPOInvoiceViewModel, "BILL/Add");
-                int Res = (new JavaScriptSerializer()).Deserialize<int>(result.Data);
-
-                if (Res > 0)
+                var result = webServices.Post(lPOInvoiceViewModel, "Bill/Add");
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    HttpContext.Cache.Remove("AWFuelBillData");
-                    return Json(Res, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
+                    if (result.Data != "[]" && result.Data != null)
+                    {
+                        int Res = (new JavaScriptSerializer()).Deserialize<int>(result.Data);
+                        //HttpContext.Cache.Remove("AWFuelBillData");
+                        return Json(Res, JsonRequestBehavior.AllowGet);
+                    }
+                }                
+               
                     return Json("Failed", JsonRequestBehavior.AllowGet);
-                }
+                
             }
             catch (Exception ex)
             {
@@ -499,6 +503,24 @@ namespace IT.Web_New.Controllers
                     SearchViewModel searchViewModel = new SearchViewModel {
                         Id = Id
                     };
+
+
+                    var Res = webServices.Post(new DriverViewModel(), "Vender/All");
+                    if (Res.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        if (Res.StatusCode == System.Net.HttpStatusCode.Accepted)
+                            if (Res.Data != "[]")
+                            {
+                                venderViewModels = (new JavaScriptSerializer()).Deserialize<List<VenderViewModel>>(Res.Data.ToString());
+                                venderViewModels.Insert(0, new VenderViewModel() { Id = 0, Name = "Select Vender" });
+                            }
+                            else
+                            {
+                                venderViewModels.Add(new VenderViewModel() { Id = 0, Name = "Select Vender" });
+                            }
+                    }
+
+                    ViewBag.Vender = venderViewModels;
 
                     var ResultRemainingQuanntity = webServices.Post(searchViewModel, "Bill/LPOGetRemainingDetails");
 
