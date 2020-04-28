@@ -48,7 +48,15 @@
 
 @section Scripts{
 
+     
     <script>
+        $(document).ready(function () {
+            $("#PurchaseMenu").attr("aria-expanded", "true");
+            $('#PurchaseUl').css('display', 'block');
+            $('#PurchaseLpoLi').addClass('active');
+            GetCustomerOrderByStatus('All');
+        });
+
 
         $(document).ready(function () {
             BindDataTable();
@@ -87,7 +95,7 @@
                     {
                         "mData": "Id",
                         "render": function (Id, type, full, meta) {
-                            return '<a href="#" onclick="EditLPO(' + Id + ')"><i class="fal fa-edit"></i></a>' + ' | ' + '<a href="#" onclick="ViewLPO(' + Id + ')"><i class="fal fa-eye"></i></a>' + ' | ' + '<a href="#" onclick="CreateBill(' + Id + ')">Create Bill</a>'
+                            return '<a class="text-primary" style="cursor:pointer" onclick="EditLPO(' + Id + ')"><i class="fal fa-edit"></i></a>' + ' | ' + '<a class="text-primary" style="cursor:pointer" onclick="ViewLPO(' + Id + ')"><i class="fal fa-eye"></i></a>' + ' | ' + '<a class="text-primary" style="cursor:pointer" onclick="CreateBill(' + Id + ')">Create Bill</a>'
                         }
                     },
                 ]
@@ -107,7 +115,7 @@
 
         function CreateBill(Id) {
 
-            window.location.href = "/Bill-Create/" + Id;
+            window.location.href = "/Bill/Create/" + Id;
         }
     </script>
 

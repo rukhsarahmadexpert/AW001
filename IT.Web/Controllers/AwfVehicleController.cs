@@ -82,11 +82,56 @@ namespace IT.Web_New.Controllers
 
             }
             catch (Exception ex)
-            {
+            {                               
                 throw;
             }
         }
 
+        [HttpGet]
+        public ActionResult AwfAdminVehicleAll()
+        {
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                {
+                    //pageNumber = 1,
+                    //_pageSize = 10,
+                    CompanyId = CompanyId,
+                    //PageSize = 100,
+                };
+
+                var VehicleList = webServices.Post(pagingParameterModel, "AWFVehicle/All");
+
+                if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (VehicleList.Data != "[]" && VehicleList.Data != null)
+                    {
+                        VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
+                    }
+                }
+
+                if (VehicleViewModels == null || VehicleViewModels.Count < 1)
+                {
+                    VehicleViewModel vehicleViewModel = new VehicleViewModel
+                    {
+                        Id = 0,
+                        TraficPlateNumber = "Select Vehicle"
+                    };
+                    VehicleViewModels.Add(vehicleViewModel);
+                }
+                else
+                {
+                    VehicleViewModels.Insert(0, new VehicleViewModel() { Id = 0, TraficPlateNumber = "Select Vehicle" });
+                }
+                return Json(VehicleViewModels, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         [HttpPost]
         public ActionResult ChangeStatus(VehicleViewModel vehicleViewModel)

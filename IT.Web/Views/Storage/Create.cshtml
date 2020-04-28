@@ -62,7 +62,6 @@
                             <th>#</th>
                             <th>Source</th>
                             <th>Site / Vehicle</th>
-                           
                             <th>Site Action</th>
                         </tr>
                     </thead>
@@ -163,7 +162,7 @@
                     loadOptionSelect("/Vehicle/Index", "#SiteVehicleRow1", "#SourceRow1");
                 }
                 if (val == "admin vehicle") {
-                    loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow1", "#SourceRow1");
+                    loadOptionSelect("/AWFVehicle/AwfAdminVehicleAll", "#SiteVehicleRow1", "#SourceRow1");
                 }
             });
             $('#SourceRow2').change(function () {
@@ -178,7 +177,7 @@
                     loadOptionSelect("/Vehicle/Index", "#SiteVehicleRow2", "#SourceRow2");
                 }
                 if (val == "admin vehicle") {
-                    loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow2", "#SourceRow2");
+                    loadOptionSelect("/AWFVehicle/AwfAdminVehicleAll", "#SiteVehicleRow2", "#SourceRow2");
                 }
             });
             $('#SaveRecord').click(function () {
