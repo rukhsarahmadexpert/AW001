@@ -171,9 +171,8 @@
                 {
                     if (result != "Failed")
                     {
-                        //$('#dt-basic-example1').DataTable().ajax.reload();
-                        alert('success');
-                        location.reload();
+                        $('#default-example-modal-lg-center').modal('hide');
+                        $('#dt-basic-example1').DataTable().ajax.reload();
                     }
                     else
                     {
