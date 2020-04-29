@@ -103,22 +103,14 @@ namespace IT.Web_New.Controllers
                 string search = Request.Form.GetValues("search[value]")[0];
                 //int skip = start != null ? Convert.ToInt32(start) : 0;
 
+                int page = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                if (Convert.ToInt32(start) == 0)
-                {
-                    pagingParameterModel.pageNumber = 1;
-                    pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.PageSize = pageSize;
-                    pagingParameterModel.CompanyId = CompanyId;
-                }
-                else
-                {
-                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
-                    pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.CompanyId = CompanyId;
-                }
-
+                pagingParameterModel.pageNumber = page;
+                pagingParameterModel._pageSize = pageSize;
+                pagingParameterModel.PageSize = pageSize;
+                pagingParameterModel.CompanyId = CompanyId;
+                
                 var StorageList = webServices.Post(pagingParameterModel, "Storage/AllWeb");
                 int TotalCount = 0;
                 if (StorageList.StatusCode == System.Net.HttpStatusCode.Accepted)
