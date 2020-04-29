@@ -82,7 +82,7 @@ namespace IT.Web_New.Controllers
             }
             catch (Exception ex)
             {                               
-                throw;
+                throw ex;
             }
         }
 

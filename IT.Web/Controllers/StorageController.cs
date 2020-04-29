@@ -18,62 +18,64 @@ namespace IT.Web_New.Controllers
         WebServices webServices = new WebServices();
         List<StorageViewModel> storageViewModels = new List<StorageViewModel>();
         StorageViewModel StorageViewModel = new StorageViewModel();
+        int CompanyId = 0;
 
         [HttpGet]
         public ActionResult Index()
         {
             try
             {
-                List<StorageViewModel> storageViewModels2 = new List<StorageViewModel>();
+                //List<StorageViewModel> storageViewModels2 = new List<StorageViewModel>();
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel
-                { 
-                    pageNumber = 1,
-                    _pageSize = 1,
-                    Id = 0,
-                    PageSize = 100,
-                 };
-                var StorageList = webServices.Post(pagingParameterModel, "Storage/All");
+                //PagingParameterModel pagingParameterModel = new PagingParameterModel
+                //{ 
+                //    pageNumber = 1,
+                //    _pageSize = 1,
+                //    Id = 0,
+                //    PageSize = 100,
+                // };
+                //var StorageList = webServices.Post(pagingParameterModel, "Storage/All");
 
-                if (StorageList.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {
-                    if (StorageList.Data != "[]")
-                    {
-                        storageViewModels = (new JavaScriptSerializer().Deserialize<List<StorageViewModel>>(StorageList.Data.ToString()));
+                //if (StorageList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                //{
+                //    if (StorageList.Data != "[]")
+                //    {
+                //        storageViewModels = (new JavaScriptSerializer().Deserialize<List<StorageViewModel>>(StorageList.Data.ToString()));
 
-                        if (storageViewModels.Count > 0)
-                        {
-                            StorageViewModel storageViewModelObj = new StorageViewModel();
+                //        if (storageViewModels.Count > 0)
+                //        {
+                //            StorageViewModel storageViewModelObj = new StorageViewModel();
 
-                            foreach (var item in storageViewModels)
-                            {
-                                if (item.Action == true)
-                                {
-                                    storageViewModelObj.Id = item.Id;
-                                    storageViewModelObj.StockIn = item.StockIn;
-                                    storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
-                                    if (item.Source == "Client Vehicle")
-                                    {
-                                        storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumberClient;
-                                    }
-                                    storageViewModelObj.ToSource = item.Source;
-                                    storageViewModelObj.UserName = item.UserName;
-                                }
-                                else
-                                {
-                                    storageViewModelObj.StockOut = item.StockOut;
-                                    storageViewModelObj.From = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
-                                    storageViewModelObj.Source = item.Source;
+                //            foreach (var item in storageViewModels)
+                //            {
+                //                if (item.Action == true)
+                //                {
+                //                    storageViewModelObj.Id = item.Id;
+                //                    storageViewModelObj.StockIn = item.StockIn;
+                //                    storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
+                //                    if (item.Source == "Client Vehicle")
+                //                    {
+                //                        storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumberClient;
+                //                    }
+                //                    storageViewModelObj.ToSource = item.Source;
+                //                    storageViewModelObj.UserName = item.UserName;
+                //                }
+                //                else
+                //                {
+                //                    storageViewModelObj.StockOut = item.StockOut;
+                //                    storageViewModelObj.From = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
+                //                    storageViewModelObj.Source = item.Source;
 
-                                    storageViewModels2.Add(storageViewModelObj);
-                                    storageViewModelObj = new StorageViewModel();
-                                }
-                            }
-                        }
-                    }
-                    return View(storageViewModels2);
-                }
-                return View(storageViewModels);
+                //                    storageViewModels2.Add(storageViewModelObj);
+                //                    storageViewModelObj = new StorageViewModel();
+                //                }
+                //            }
+                //        }
+                //    }
+                //    return View(storageViewModels2);
+                //}
+                //return View(storageViewModels);
+                return View();
 
             }
             catch (Exception ex)
@@ -81,6 +83,61 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
 
+        }
+
+        [HttpPost]
+        public ActionResult All()
+        {
+
+            List<StorageViewModel> storageViewModels2 = new List<StorageViewModel>();
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                var sortColumn = Request.Form.GetValues("columns[" +
+                Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                string search = Request.Form.GetValues("search[value]")[0];
+                //int skip = start != null ? Convert.ToInt32(start) : 0;
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                if (Convert.ToInt32(start) == 0)
+                {
+                    pagingParameterModel.pageNumber = 1;
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                    pagingParameterModel.CompanyId = CompanyId;
+                }
+                else
+                {
+                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.CompanyId = CompanyId;
+                }
+
+                var StorageList = webServices.Post(pagingParameterModel, "Storage/AllWeb");
+                int TotalCount = 0;
+                if (StorageList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (StorageList.Data != "[]")
+                    {
+                        storageViewModels = (new JavaScriptSerializer().Deserialize<List<StorageViewModel>>(StorageList.Data.ToString()));
+                        TotalCount = storageViewModels[0].TotalRows;
+                    }
+                   
+                    return Json(new { draw = draw, recordsFiltered = TotalCount, recordsTotal = TotalCount, data = storageViewModels }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = storageViewModels }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {                                       
+                throw ex;
+            }
         }
 
         [HttpGet]
