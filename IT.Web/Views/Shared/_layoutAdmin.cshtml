@@ -691,7 +691,7 @@
                 <!-- BEGIN Page Content -->
                 <!-- the #js-page-content id is needed for some plugins to initialize -->
                 <main id="js-page-content" role="main" class="page-content">
-                    @Html.Partial("~/Views/Shared/_LoaderPartialView.cshtml")
+                    @*@Html.Partial("~/Views/Shared/_LoaderPartialView.cshtml")*@
                     @RenderBody()
                 </main>
                 <!-- END Page Content -->
@@ -1981,7 +1981,7 @@
     <script src="~/Scripts/firebass.app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-messaging.js"></script>
     <script src="~/app.js"></script>
-    <script src="~/Scripts/Common-Scripts/LoaderScript.js"></script>
+    @*<script src="~/Scripts/Common-Scripts/LoaderScript.js"></script>*@
     
 </body>
 </html>
