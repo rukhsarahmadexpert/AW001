@@ -549,9 +549,8 @@
                 <!-- BEGIN Page Content -->
                 <!-- the #js-page-content id is needed for some plugins to initialize -->
                 <main id="js-page-content" role="main" class="page-content">
-
+                    @Html.Partial("~/Views/Shared/_LoaderPartialView.cshtml")
                     @RenderBody()
-
                 </main>
                 <!-- END Page Content -->
                 <!-- this overlay is activated only when mobile menu is triggered -->
@@ -1661,7 +1660,7 @@
     <script src="~/Scripts/firebass.app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-messaging.js"></script>
     <script src="~/app.js"></script>
-  
+
     <!-- Getbutton.io widget -->
     <script type="text/javascript">
         (function () {
@@ -1680,8 +1679,6 @@
 
     <script>
         $(document).ready(function () {
-
-
 
             $.plot('#flotBar1', [
 
@@ -1763,9 +1760,7 @@
         });
 
     </script>
-
-
-
+    <script src="~/Scripts/Common-Scripts/LoaderScript.js"></script>
 
 </body>
 </html>

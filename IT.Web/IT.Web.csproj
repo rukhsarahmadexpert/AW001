@@ -474,6 +474,7 @@
     <Content Include="assets\img\favicon\apple-touch-icon.png" />
     <Content Include="assets\img\favicon\favicon-32x32.png" />
     <Content Include="assets\img\favicon\safari-pinned-tab.svg" />
+    <Content Include="assets\img\loader-blue.gif" />
     <Content Include="assets\img\loading.gif" />
     <Content Include="assets\img\logo-1.svg" />
     <Content Include="assets\img\logo-2.svg" />
@@ -710,6 +711,7 @@
     <Content Include="PDF\5-INV-001.pdf" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\Common-Scripts\LoaderScript.js" />
     <Content Include="Scripts\CustomScript\DeleteFireBaseToken.js" />
     <Content Include="Scripts\CustomScript\TokenScript.js" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
@@ -1016,6 +1018,7 @@
     <Content Include="Views\Shared\UpdateReason\_ReasonPartialView.cshtml" />
     <Content Include="Views\Shared\UpdateReason\_UpdateReasonListView.cshtml" />
     <Content Include="Views\CustomerOrder\SiteAssiedOrder.cshtml" />
+    <Content Include="Views\Shared\_LoaderPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

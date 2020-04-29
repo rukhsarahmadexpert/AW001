@@ -36,7 +36,6 @@ namespace IT.Web_New.Controllers
                     {
                         employeeViewModels = (new JavaScriptSerializer()).Deserialize<List<EmployeeViewModel>>(results.Data.ToString());
 
-                        
                     }
                
                 return View(employeeViewModels);
