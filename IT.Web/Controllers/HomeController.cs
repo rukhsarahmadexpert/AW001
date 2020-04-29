@@ -110,6 +110,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult About()
         {
 
@@ -125,7 +126,8 @@ namespace IT.Web_New.Controllers
             }
             return View();
         }
-               
+             
+        [HttpGet]
         public ActionResult BulkStorage()
         {
             var result = webServices.Post(new ServiceViewModel(), "OurServices/All");
@@ -140,7 +142,8 @@ namespace IT.Web_New.Controllers
             }
             return View();
         }
-              
+            
+        [HttpGet]
         public ActionResult FuelTransportation()
         {
             var result = webServices.Post(new ServiceViewModel(), "OurServices/All");
@@ -155,7 +158,8 @@ namespace IT.Web_New.Controllers
             }
             return View();
         }
-               
+            
+        [HttpGet]
         public ActionResult Products()
         {
             var result = webServices.Post(new ServiceViewModel(), "OurServices/All");
@@ -171,14 +175,15 @@ namespace IT.Web_New.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Training()
         {
             return View();
         }
 
+        [HttpGet]
         public ActionResult Contact()
-        {
-           
+        {           
             return View();
         }
 
@@ -270,6 +275,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Policy()
         {
 
@@ -286,6 +292,7 @@ namespace IT.Web_New.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult StorgeGraphPartialView()
         {
             return PartialView("~/Views/Shared/PartialView/StorageGraph/StorgeGraphPartialView.cshtml");

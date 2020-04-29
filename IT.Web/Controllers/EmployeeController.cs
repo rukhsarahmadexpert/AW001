@@ -76,8 +76,7 @@ namespace IT.Web_New.Controllers
                 return Json("Failed", JsonRequestBehavior.AllowGet);
             }
         }
-
-
+        
         [HttpGet]
         public ActionResult Details(int Id)
         {

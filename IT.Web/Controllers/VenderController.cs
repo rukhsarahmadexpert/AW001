@@ -74,8 +74,7 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
-
-
+        
         [HttpPost]
         public ActionResult ChangeStatus(VenderViewModel venderViewModel)
         {
@@ -199,7 +198,6 @@ namespace IT.Web_New.Controllers
                     venderViewModel = (new JavaScriptSerializer().Deserialize<VenderViewModel>(venderResult.Data.ToString()));
                 }
 
-
                 if (Request.IsAjaxRequest())
                 {
                     return Json(venderViewModel, JsonRequestBehavior.AllowGet);
@@ -234,8 +232,7 @@ namespace IT.Web_New.Controllers
             }
             return venderViewModels1;
         }
-
-
+        
         [HttpPost]
         public ActionResult VenderList()
         {

@@ -29,8 +29,7 @@ namespace IT.Web_New.Controllers
         {
             return View();
         }
-
-
+        
         [HttpPost]
         public ActionResult All()
         {
@@ -332,7 +331,6 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-
                 vehicleViewModel.Id = Id;
                 vehicleViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 var Result = webServices.Post(vehicleViewModel, "AWFVehicle/Edit");

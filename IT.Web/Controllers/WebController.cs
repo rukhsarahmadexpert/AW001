@@ -42,7 +42,6 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult AppVersionAdd()
         {
-
             return View(new AppVersionViewModel());
 
         }
