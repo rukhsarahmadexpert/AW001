@@ -67,14 +67,13 @@ namespace IT.Web.MISC
                     {
                         string error = "Log Written Date:" + " " + DateTime.Now.ToString() + exceptionLogViewModel.ExceptionDatetime + "Error Message:" + " " + exceptionLogViewModel.ExceptionDescription + "Exception Type:" + " " + exceptionLogViewModel.ExceptionType + "Error Controller :" + " " + exceptionLogViewModel.ControllerName + " Error Action Name:" + " " + exceptionLogViewModel.ActionName + "UserId:" + " " + exceptionLogViewModel.UserId + "CompanyId" + exceptionLogViewModel.CompanyId;
 
-                        sw.WriteLine("-------------------------------------------------------------------------------------");
+                        sw.WriteLine("-------------------------------------------------------------------------------");
                         sw.WriteLine(line);
                         sw.WriteLine(error);
                         sw.WriteLine("--------------------------------*End*------------------------------------------");
                         sw.WriteLine(line);
                         sw.Flush();
                         sw.Close();
-
                     }
                     filterContext.Result = new ViewResult()
                     {
@@ -86,7 +85,7 @@ namespace IT.Web.MISC
             catch (Exception)
             {
                 var model = new HandleErrorInfo(filterContext.Exception, "Controller", "Action");
-                string filepath = HttpContext.Current.Server.MapPath("~/DirectoryFolder");
+                string filepath = HttpContext.Current.Server.MapPath("~/DirectoryFolder/");
                 if (!Directory.Exists(filepath))
                 {
                     Directory.CreateDirectory(filepath);

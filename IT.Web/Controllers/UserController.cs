@@ -599,6 +599,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult UpdateForGotPassword(UserViewModel userViewModel)
         {
             try

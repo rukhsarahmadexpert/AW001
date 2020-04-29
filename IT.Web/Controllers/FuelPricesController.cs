@@ -38,8 +38,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
+        
         [HttpPost]
         public ActionResult ChangeStatus(FuelPricesViewModel fuelPricesViewModel)
         {
@@ -65,7 +64,6 @@ namespace IT.Web.Controllers
             }
         }
 
-
         public ActionResult Create()
         {
             
@@ -86,8 +84,7 @@ namespace IT.Web.Controllers
             ViewBag.productUnitViewModels = productUnitViewModels;
             return View(new FuelPricesViewModel());
         }
-
-
+        
         [HttpPost]
         public ActionResult Create(FuelPricesViewModel fuelPricesViewModel)
         {
@@ -154,8 +151,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
+        
         [HttpGet]
         public ActionResult Details(int Id)
         {

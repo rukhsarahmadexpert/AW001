@@ -26,22 +26,6 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                //CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
-                //PagingParameterModel pagingParameterModel = new PagingParameterModel
-                //{
-                //    pageNumber = 1,
-                //    CompanyId = CompanyId,
-                //    PageSize = 100,
-                //};
-                //var DriverList = webServices.Post(pagingParameterModel, "AWFDriver/All");
-
-                //if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
-                //{
-                //    driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
-                //}
-
-                //return View(driverViewModels);
                 return View();
             }
             catch (Exception ex)

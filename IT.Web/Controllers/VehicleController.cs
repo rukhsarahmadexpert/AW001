@@ -25,6 +25,7 @@ namespace IT.Web_New.Controllers
         public List<DriverViewModel> VehicleViewModel { get; private set; }
         public List<VehicleViewModel> VehicleViewModels { get; private set; }
         int CompanyId = 0;
+
         [HttpGet]
         public ActionResult Index(int CompId = 0)
         {
@@ -87,8 +88,7 @@ namespace IT.Web_New.Controllers
                 return View();
             }
         }
-
-
+        
         [HttpPost]
         public ActionResult All(int CompId = 0)
         {
