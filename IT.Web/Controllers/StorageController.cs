@@ -127,12 +127,10 @@ namespace IT.Web_New.Controllers
                     {
                         storageViewModels = (new JavaScriptSerializer().Deserialize<List<StorageViewModel>>(StorageList.Data.ToString()));
                         TotalCount = storageViewModels[0].TotalRows;
-                    }
-                   
+                    }                   
                     return Json(new { draw = draw, recordsFiltered = TotalCount, recordsTotal = TotalCount, data = storageViewModels }, JsonRequestBehavior.AllowGet);
                 }
                 return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = storageViewModels }, JsonRequestBehavior.AllowGet);
-
             }
             catch (Exception ex)
             {                                       
