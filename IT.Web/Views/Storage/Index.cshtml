@@ -22,7 +22,7 @@
                                 <p>Drivers Base Information</p>
                             </div>-->
                     <!-- datatable start -->
-                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
                                 <th style="background-color:orangered">From Source</th>
@@ -36,26 +36,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (storageViewModels != null && storageViewModels.Count > 0)
+                            @*@if (storageViewModels != null && storageViewModels.Count > 0)
                             {
                                 foreach (var item in storageViewModels)
                                 {
-                                <tr>
-                                    <td style="background-color:orangered; color:white">@item.Source</td>
-                                    <td style="background-color:orangered; color:white">@item.From</td>
-                                    <td style="background-color:orangered; color:white">@item.StockOut</td>
-                                    <td style="background-color:orange; color:white">@item.ToSource</td>
-                                    <td style="background-color:orange; color:white">@item.To</td>
-                                    <td style="background-color:orange; color:white">@item.StockIn</td>
-                                    <td>@item.UserName</td>
-                                    <td>
-                                        <a href="/Storage/Index/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                        <a href="/Storage/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                       
-                                    </td> 
-                                </tr>
+                                    <tr>
+                                        <td style="background-color:orangered; color:white">@item.Source</td>
+                                        <td style="background-color:orangered; color:white">@item.From</td>
+                                        <td style="background-color:orangered; color:white">@item.StockOut</td>
+                                        <td style="background-color:orange; color:white">@item.ToSource</td>
+                                        <td style="background-color:orange; color:white">@item.To</td>
+                                        <td style="background-color:orange; color:white">@item.StockIn</td>
+                                        <td>@item.UserName</td>
+                                        <td>
+                                            <a href="/Storage/Index/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                            <a href="/Storage/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+
+                                        </td>
+                                    </tr>
                                 }
-                            }
+                            }*@
                         </tbody>
                     </table>
                     <!-- datatable end -->
@@ -68,12 +68,50 @@
 @section scripts{
 
     <script>
-    $(document).ready(function () {
-        //alert();
-        $("#StorageMenu").attr("aria-expanded", "true");
-        $('#StorageUl').css('display', 'block');
-        $('#StorageLi').addClass('active');
-    });
+        $(document).ready(function () {
+            //alert();
+            $("#StorageMenu").attr("aria-expanded", "true");
+            $('#StorageUl').css('display', 'block');
+            $('#StorageLi').addClass('active');
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            //alert();
+          
+            $("#dt-basic-example1").DataTable({
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Storage/All",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "Source", "name": "Source", "autoWidth": true },
+                    { "data": "From", "name": "From", "autoWidth": true },
+                    { "data": "StockOut", "name": "StockOut", "autoWidth": true },
+                    { "data": "ToSource", "name": "ToSource", "autoWidth": true },
+                    { "data": "To", "name": "To", "autoWidth": true },
+                    { "data": "StockIn", "name": "StockIn", "autoWidth": true },
+                    { "data": "UserName", "name": "UserName", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            return '<div class="pull-right"><a href="/Storage/Edit/' + row.Id + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></a>  <a href="/Storage/Index/' + row.Id + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></a>';
+                        }
+                    }
+                ]
+            });
+        });
 
     </script>
 

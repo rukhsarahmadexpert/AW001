@@ -30,6 +30,7 @@ namespace IT.Core.ViewModels
         public string From { get; set; }
         public string To { get; set; }
         public string ToSource { get; set; }
+        public int TotalRows { get; set; }
         public string TrafficPlateNumberClient { get; set; }
 
         public List<UploadDocumentsViewModel> uploadDocumentsViewModels { get; set; }
