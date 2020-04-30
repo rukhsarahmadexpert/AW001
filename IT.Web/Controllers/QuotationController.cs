@@ -77,11 +77,9 @@ namespace IT.Web_New.Controllers
                 }
 
                 //int CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
-                
-                
-                    var result = webServices.Post(new VehicleViewModel(), "Quotation/All");
-                    lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
+                                
+                var result = webServices.Post(new VehicleViewModel(), "Quotation/All");
+                lPOInvoiceViewModels = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceViewModel>>(result.Data.ToString());
 
                    
                 if (parm.sSearch != null)
