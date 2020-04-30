@@ -1,0 +1,30 @@
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: Apr 29,2020 04:39:08 PMApr 29,2020 04:39:04 PMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
+--------------------------------*End*------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: Apr 29,2020 04:39:24 PMApr 29,2020 04:39:20 PMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
+--------------------------------*End*------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: Apr 29,2020 04:39:38 PMApr 29,2020 04:39:34 PMError Message:    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCoException Type: System.AggregateExceptionError Controller : IT.Web_New.Controllers.HomeController Error Action Name: DetailsUserId: 0CompanyId0
+--------------------------------*End*------------------------------------------
+
+
+

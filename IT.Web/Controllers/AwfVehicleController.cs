@@ -48,20 +48,12 @@ namespace IT.Web_New.Controllers
 
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
-                if (Convert.ToInt32(start) == 0)
-                {
-                    pagingParameterModel.pageNumber = 1;
+                int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+                pagingParameterModel.pageNumber = pageNumer;
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.PageSize = pageSize;
                     pagingParameterModel.CompanyId = CompanyId;
-                }
-                else
-                {
-                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
-                    pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.CompanyId = CompanyId;
-                }
-
+                
                 var VehicleList = webServices.Post(pagingParameterModel, "AWFVehicle/All");
                                 
                 if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -71,7 +63,7 @@ namespace IT.Web_New.Controllers
                     {
                         VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
 
-                        TotalRow = VehicleViewModels.Count;
+                        TotalRow = VehicleViewModels[0].TotalRows;
 
                         return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));

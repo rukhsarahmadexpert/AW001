@@ -103,10 +103,10 @@ namespace IT.Web_New.Controllers
                 string search = Request.Form.GetValues("search[value]")[0];
                 //int skip = start != null ? Convert.ToInt32(start) : 0;
 
-                int page = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+                int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
 
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
-                pagingParameterModel.pageNumber = page;
+                pagingParameterModel.pageNumber = pageNumer;
                 pagingParameterModel._pageSize = pageSize;
                 pagingParameterModel.PageSize = pageSize;
                 pagingParameterModel.CompanyId = CompanyId;

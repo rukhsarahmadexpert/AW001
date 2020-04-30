@@ -23,51 +23,25 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult Index(int CompId = 0)
         {
-            if (CompId == 0)
-            {
-                CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                ViewBag.LayoutName = "~/Views/Shared/_Layout.cshtml";
-            }
-            else
-            {
-                CompanyId = CompId;
-                ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
-            }
-            if (Request.IsAjaxRequest())
-            {
-                try
-                {
-                    PagingParameterModel pagingParameterModel = new PagingParameterModel
-                    {
-                        pageNumber = 1,
-                        _pageSize = 1000,
-                        PageSize = 1000,
-                        CompanyId = CompanyId,
-                    };
-                    var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
-
-                    if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
-                    {
-                        driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));                                              
-                    }
-                    return Json(driverViewModels, JsonRequestBehavior.AllowGet);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            else
-            {
+            
                 return View();
-            }
+         
         }
 
         [HttpPost]
         public ActionResult All(int CompId = 0)
         {
+            if (CompId == 0)
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+            }
+            else
+            {
+                CompanyId = CompId;
+            }
             try
             {
+
                 var draw = Request.Form.GetValues("draw").FirstOrDefault();
                 var start = Request.Form.GetValues("start").FirstOrDefault();
                 var length = Request.Form.GetValues("length").FirstOrDefault();
@@ -92,19 +66,11 @@ namespace IT.Web_New.Controllers
                 {
                     pagingParameterModel.pageNumber = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
                 }
-
-                //if (Convert.ToInt32(start) == 0)
-                //{
-                //    pagingParameterModel.pageNumber = 1;
-                //    pagingParameterModel._pageSize = pageSize;
-                //    pagingParameterModel.PageSize = pageSize;
-                //}
-                //else
-                //{
-                //    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
-                //    pagingParameterModel._pageSize = pageSize;
-                //    pagingParameterModel.PageSize = pageSize;
-                //}
+                int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+                    pagingParameterModel.pageNumber = pageNumer;
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+               
 
                 var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
                 int TotalRow = 0;
@@ -113,7 +79,7 @@ namespace IT.Web_New.Controllers
                     if (DriverList.Data != "[]")
                     {
                         driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
-                        TotalRow = driverViewModels.Count;
+                        TotalRow = driverViewModels[0].TotalRows;
                     }
                     return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = driverViewModels }, JsonRequestBehavior.AllowGet);
                 }

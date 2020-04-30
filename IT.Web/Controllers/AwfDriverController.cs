@@ -52,19 +52,12 @@ namespace IT.Web_New.Controllers
 
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
-                if (Convert.ToInt32(start) == 0)
-                {
-                    pagingParameterModel.pageNumber = 1;
+                int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+                    pagingParameterModel.pageNumber = pageNumer;
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.PageSize = pageSize;
                     pagingParameterModel.CompanyId = CompanyId;
-                }
-                else
-                {
-                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
-                    pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.CompanyId = CompanyId;
-                }
+              
 
                 var DriverList = webServices.Post(pagingParameterModel, "AWFDriver/All");
 
@@ -75,7 +68,7 @@ namespace IT.Web_New.Controllers
                     {
                         driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
 
-                        TotalRow = driverViewModels.Count;
+                        TotalRow = driverViewModels[0].TotalRows;
 
                         return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = driverViewModels }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
