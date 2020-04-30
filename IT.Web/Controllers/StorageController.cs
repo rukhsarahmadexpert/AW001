@@ -103,10 +103,10 @@ namespace IT.Web_New.Controllers
                 string search = Request.Form.GetValues("search[value]")[0];
                 //int skip = start != null ? Convert.ToInt32(start) : 0;
 
-                int page = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+                int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
 
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
-                pagingParameterModel.pageNumber = page;
+                pagingParameterModel.pageNumber = pageNumer;
                 pagingParameterModel._pageSize = pageSize;
                 pagingParameterModel.PageSize = pageSize;
                 pagingParameterModel.CompanyId = CompanyId;
@@ -119,12 +119,10 @@ namespace IT.Web_New.Controllers
                     {
                         storageViewModels = (new JavaScriptSerializer().Deserialize<List<StorageViewModel>>(StorageList.Data.ToString()));
                         TotalCount = storageViewModels[0].TotalRows;
-                    }
-                   
+                    }                   
                     return Json(new { draw = draw, recordsFiltered = TotalCount, recordsTotal = TotalCount, data = storageViewModels }, JsonRequestBehavior.AllowGet);
                 }
                 return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = storageViewModels }, JsonRequestBehavior.AllowGet);
-
             }
             catch (Exception ex)
             {                                       

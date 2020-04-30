@@ -53,7 +53,7 @@
                     <div class="col-12">
                         <div class="form-group mb-2">
                             <label class="form-label" for="simpleinput">Description</label>
-                            <textarea id="Description" name="Description" class="form-control Description" placeholder="Description">@storageViewModels[0].Decription ?? storageViewModels[1].Decription</textarea>
+                            <textarea id="Description" name="Description" class="form-control Description" placeholder="Description">@storageViewModels[0].Decription</textarea>
                         </div>
                     </div>
                 </div>
@@ -252,13 +252,14 @@
                     return true
                 }
                 else if (val == "site") {
+                   
                     loadOptionSelect("/Site/Index", "#SiteVehicleRow1", "#SourceRow1");
                 }
                 if (val == "client vehicle") {
-                    loadOptionSelect("/Vehicle/Index", "#SiteVehicleRow1", "#SourceRow1");
+                    loadOptionSelect("/Vehicle/VehicleIndexToSelect", "#SiteVehicleRow1", "#SourceRow1");
                 }
                 if (val == "admin vehicle") {
-                    loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow1", "#SourceRow1");
+                    loadOptionSelect("/AWFVehicle/AwfAdminVehicleAll", "#SiteVehicleRow1", "#SourceRow1");
                 }
             });
 
@@ -271,10 +272,10 @@
                     loadOptionSelect("/Site/Index", "#SiteVehicleRow2", "#SourceRow2");
                 }
                 if (val == "client vehicle") {
-                    loadOptionSelect("/Vehicle/Index", "#SiteVehicleRow2", "#SourceRow2");
+                    loadOptionSelect("/Vehicle/VehicleIndexToSelect", "#SiteVehicleRow2", "#SourceRow2");
                 }
                 if (val == "admin vehicle") {
-                    loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow2", "#SourceRow2");
+                    loadOptionSelect("/AWFVehicle/AwfAdminVehicleAll", "#SiteVehicleRow2", "#SourceRow2");
                 }
             });
 
@@ -400,8 +401,8 @@
         //select for source load
 
         function loadOptionSelect(url, targetId, sourceId) {
-            ajaxRequest("POST", url, "", "json").then(function (result) {
-                //debugger;
+            ajaxRequest("GET", url, "", "json").then(function (result) {
+                debugger;
                 if (result != "failed") {
                     $(targetId).empty();
                     $.each(result, function (value, item) {

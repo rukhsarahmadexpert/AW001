@@ -27,12 +27,25 @@ namespace IT.Web_New.Controllers
         int CompanyId = 0;
 
         [HttpGet]
-        public ActionResult Index(int CompId = 0)
+        public ActionResult Index()
+        {                 
+                try
+                {
+                    return View();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+        }
+
+        [HttpGet]
+        public ActionResult VehicleIndexToSelect(int CompId = 0)
         {
             if (CompId == 0)
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                ViewBag.LayoutName = "~/Views/Shared/_Layout.cshtml";
             }
             else
             {
@@ -42,17 +55,14 @@ namespace IT.Web_New.Controllers
             if (Request.IsAjaxRequest())
             {
                 VehicleViewModels = new List<VehicleViewModel>();
-                                
+
                 try
                 {
                     PagingParameterModel pagingParameterModel = new PagingParameterModel
                     {
-                        pageNumber = 1,
-                        _pageSize = 1,
                         CompanyId = CompanyId,
-                        PageSize = 1000,
                     };
-                    
+
                     var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
 
                     if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -66,7 +76,8 @@ namespace IT.Web_New.Controllers
                     if (VehicleViewModels == null || VehicleViewModels.Count < 1)
                     {
                         VehicleViewModel vehicleViewModel = new VehicleViewModel
-                        {                            Id = 0,
+                        {
+                            Id = 0,
                             TraficPlateNumber = "Select Vehicle"
                         };
                         VehicleViewModels.Add(vehicleViewModel);
@@ -88,17 +99,16 @@ namespace IT.Web_New.Controllers
                 return View();
             }
         }
-        
+
         [HttpPost]
         public ActionResult All(int CompId = 0)
         {
+            VehicleViewModels = new List<VehicleViewModel>();
             try
             {
-                ViewBag.LayoutName = "~/Views/Shared/_Layout.cshtml";
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]); ;
                 if (CompId > 0)
                 {
-                    ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
                     CompanyId = CompId;
                 }
                 var draw = Request.Form.GetValues("draw").FirstOrDefault();
@@ -113,19 +123,12 @@ namespace IT.Web_New.Controllers
 
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
-                if (Convert.ToInt32(start) == 0)
-                {
-                    pagingParameterModel.pageNumber = 1;
+                int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+                pagingParameterModel.pageNumber = pageNumer;
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.PageSize = pageSize;
                     pagingParameterModel.CompanyId = CompanyId;
-                }
-                else
-                {
-                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
-                    pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.CompanyId = CompanyId;
-                }
+                
 
                 var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
 
@@ -136,7 +139,7 @@ namespace IT.Web_New.Controllers
                     {
                         VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
 
-                        TotalRow = VehicleViewModels.Count;
+                        TotalRow = VehicleViewModels[0].TotalRows;
 
                         return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));

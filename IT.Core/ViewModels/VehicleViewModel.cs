@@ -47,6 +47,7 @@ namespace IT.Core.ViewModels
         public string Oprater { get; set; }
         public bool IsActive { get; set; }
         public string OrderProgress { get; set; }
+        public int TotalRows { get; set; }
 
         public HttpPostedFileBase MulkiaFront1File { get; set; }
         public HttpPostedFileBase MulkiaBack1File { get; set; }
