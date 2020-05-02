@@ -32,7 +32,9 @@ namespace IT.Core.ViewModels
         public string CurrentStatus { get; set; }
         public int UpdatedBy { get; set; }
         public int UserId { get; set; }
+        public int TotalRows { get; set; }
         public List<UploadDocumentsViewModel> uploadDocumentsViewModels { get; set; }
     }
 }
+
 

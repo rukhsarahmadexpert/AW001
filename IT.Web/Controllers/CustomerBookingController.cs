@@ -56,25 +56,15 @@ namespace IT.Web.Controllers
 
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
-                if (Convert.ToInt32(start) == 0)
-                {
-                    pagingParameterModel.pageNumber = 1;
+                int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+                    pagingParameterModel.pageNumber = pageNumer;
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.PageSize = pageSize;
                     pagingParameterModel.CompanyId = 0;
                     pagingParameterModel.SerachKey = search;
                     pagingParameterModel.sortColumn = sortColumn;
                     pagingParameterModel.sortColumnDir = sortColumnDir;
-                }
-                else
-                {
-                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
-                    pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.CompanyId = 0;
-                    pagingParameterModel.SerachKey = search;
-                    pagingParameterModel.sortColumn = sortColumn;
-                    pagingParameterModel.sortColumnDir = sortColumnDir;
-                }
+               
 
                 var BookingList = webServices.Post(pagingParameterModel, "CustomerBooking/All");
 
@@ -85,7 +75,7 @@ namespace IT.Web.Controllers
                     {
                         customerBookingViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerBookingViewModel>>(BookingList.Data.ToString()));
 
-                        TotalRow = customerBookingViewModels.Count;
+                        TotalRow = customerBookingViewModels[0].TotalRows;
 
                         return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = customerBookingViewModels }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
@@ -147,21 +137,13 @@ namespace IT.Web.Controllers
 
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
-                if (Convert.ToInt32(start) == 0)
-                {
-                    pagingParameterModel.pageNumber = 1;
+                int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+                    pagingParameterModel.pageNumber = pageNumer;
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.PageSize = pageSize;
                     pagingParameterModel.CompanyId = CompanyId;
                     pagingParameterModel.SerachKey = search;
-                }
-                else
-                {
-                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
-                    pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.CompanyId = CompanyId;
-                    pagingParameterModel.SerachKey = search;
-                }
+                
 
                 var BookingList = webServices.Post(pagingParameterModel, "CustomerBooking/All");
 
@@ -172,7 +154,7 @@ namespace IT.Web.Controllers
                     {
                         customerBookingViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerBookingViewModel>>(BookingList.Data.ToString()));
 
-                        TotalRow = customerBookingViewModels.Count;
+                        TotalRow = customerBookingViewModels[0].TotalRows;
 
                         return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = customerBookingViewModels }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));

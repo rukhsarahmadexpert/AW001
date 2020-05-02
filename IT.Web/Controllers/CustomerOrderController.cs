@@ -105,23 +105,14 @@ namespace IT.Web_New.Controllers
                 }
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
-                if (Convert.ToInt32(start) == 0)
-                {
-                    pagingParameterModel.pageNumber = 1;
+                int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+                pagingParameterModel.pageNumber = pageNumer;
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.PageSize = pageSize;
                     pagingParameterModel.IsSend = true;
                     pagingParameterModel.OrderProgress = OrderProgress;
                     pagingParameterModel.CompanyId = CompanyId;
-                }
-                else
-                {
-                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
-                    pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.IsSend = true;
-                    pagingParameterModel.OrderProgress = OrderProgress;
-                    pagingParameterModel.CompanyId = CompanyId;
-                }
+               
                 if (IsSend == "False")
                 {
                     pagingParameterModel.IsSend = false;
@@ -137,7 +128,7 @@ namespace IT.Web_New.Controllers
                     if (CustomerOrderList.Data != "[]" && CustomerOrderList.Data != null)
                     {
                         customerNoteOrderViewModel = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
-                        TotalRow = customerNoteOrderViewModel.Count;
+                        TotalRow = customerNoteOrderViewModel[0].TotalRows;
                         return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = customerNoteOrderViewModel }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                     }
@@ -274,23 +265,13 @@ namespace IT.Web_New.Controllers
                 }
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
-                if (Convert.ToInt32(start) == 0)
-                {
-                    pagingParameterModel.pageNumber = 1;
+                int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+                pagingParameterModel.pageNumber = pageNumer;
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.PageSize = pageSize;
                     pagingParameterModel.IsSend = true;
                     pagingParameterModel.OrderProgress = OrderProgress;
                     pagingParameterModel.CompanyId = 0;
-                }
-                else
-                {
-                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
-                    pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.IsSend = true;
-                    pagingParameterModel.OrderProgress = OrderProgress;
-                    pagingParameterModel.CompanyId = 0;
-                }
 
                 var customerNoteList = webServices.Post(pagingParameterModel, "CustomerOrder/GetAllCustomerOrderGroupByAdmin");
 
@@ -301,7 +282,7 @@ namespace IT.Web_New.Controllers
                     {
                         customerNoteOrderViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(customerNoteList.Data.ToString()));
 
-                        TotalRow = customerNoteOrderViewModels.Count;
+                        TotalRow = customerNoteOrderViewModels[0].TotalRows;
 
                         return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = customerNoteOrderViewModels }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));

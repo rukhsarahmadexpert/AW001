@@ -1,7 +1,7 @@
 ﻿@model List<IT.Core.ViewModels.SiteViewModel>
 @{
     ViewBag.Title = "AW Fuel - Sites";
-    
+
     List<IT.Core.ViewModels.SiteViewModel> siteViewModels = new List<IT.Core.ViewModels.SiteViewModel>();
     siteViewModels = Model as List<IT.Core.ViewModels.SiteViewModel>;
 
@@ -23,7 +23,7 @@
                                 <p>Drivers Base Information</p>
                             </div>-->
                     <!-- datatable start -->
-                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
                                 <th>Site Name</th>
@@ -36,7 +36,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in siteViewModels)
+                            @*@foreach (var item in siteViewModels)
                             {
                                 <tr>
                                     <td>@item.SiteName</td>
@@ -66,10 +66,10 @@
                                     <td>
                                         <a href="/Site/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
                                         <a href="/Site/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                       
+
                                     </td>
                                 </tr>
-                            }
+                            }*@
                         </tbody>
                     </table>
                     <!-- datatable end -->
@@ -123,6 +123,52 @@
             $("#MasterMenu").attr("aria-expanded", "true");
             $('#MasterUl').css('display', 'block');
             $('#SitesLi').addClass('active');
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+         
+            $("#dt-basic-example1").DataTable({
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Site/All",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                    { "data": "SiteName", "name": "SiteName", "autoWidth": true },
+                    { "data": "ContactPersonName", "name": "ContactPersonName", "autoWidth": true },
+                    { "data": "ContactPhone", "name": "ContactPhone", "autoWidth": true },
+                    { "data": "Address", "name": "Address", "autoWidth": true },
+                    { "data": "CreatedDates", "name": "CreatedDates", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            if (row.IsActive == true) {
+                                return '<div class="switchToggle"><input onclick="ChangeStatus(' + row.Id + ',' + false + ');" IsActive type="checkbox" data-value="' + row.Id + '" id="' + row.Id + '" checked><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+                            else {
+                                return '<div class="switchToggle"><input type="checkbox" onclick="ChangeStatus(' + row.Id + ',' + true + ');" class="IsActive" data-value="' + row.Id + '" id="' + row.Id + '"><label for="' + row.Id + '">Toggle</label></div>'
+                            }
+
+                        }
+                    },
+                    {
+                        render: function (data, type, row) {
+                            return '<div class="pull-right"><a href="/Site/Edit/' + row.Id + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Edit(' + row.Id + ')"><i class="fal fa-pencil"></i></a>  <a href="/Site/Details/' + row.Id + '" class="btn btn-primary btn-sm" data-id="Id" onclick="Details(' + row.Id + ')"><i class="fal fa-eye"></i></a>';
+                        }
+                    }
+                ]
+            });
         });
 
     </script>
