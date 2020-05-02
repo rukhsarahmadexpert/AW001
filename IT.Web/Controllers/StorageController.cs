@@ -82,13 +82,11 @@ namespace IT.Web_New.Controllers
             {
                 throw ex;
             }
-
         }
 
         [HttpPost]
         public ActionResult All()
         {
-
             List<StorageViewModel> storageViewModels2 = new List<StorageViewModel>();
             try
             {

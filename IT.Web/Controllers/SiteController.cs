@@ -32,7 +32,7 @@ namespace IT.Web_New.Controllers
                 PagingParameterModel pagingParameterModel = new PagingParameterModel
                 {
                     pageNumber = 1,
-                    _pageSize = 1,
+                    _pageSize = 100,
                     CompanyId = CompanyId,
                     PageSize = 100,
                 };
@@ -50,18 +50,14 @@ namespace IT.Web_New.Controllers
                         {
                             Id = 0,
                             SiteName= "Select Site"
-
                         };
-
                         siteViewModels.Add(siteViewModel);
                     }
                     else
                     {
                         siteViewModels.Insert(0, new SiteViewModel() { Id = 0, SiteName = "Select Site" });
                     }
-                    return Json(siteViewModels, JsonRequestBehavior.AllowGet);
-
-                   
+                    return Json(siteViewModels, JsonRequestBehavior.AllowGet);                   
                 }
                 return View(siteViewModels);
             }
@@ -196,7 +192,7 @@ namespace IT.Web_New.Controllers
                 PagingParameterModel pagingParameterModel = new PagingParameterModel
                 { 
                     pageNumber = 1,
-                    _pageSize = 1,
+                    _pageSize = 100,
                     CompanyId = Id,
                     PageSize = 100,
                 };

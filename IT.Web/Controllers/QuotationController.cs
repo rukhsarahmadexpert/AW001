@@ -39,7 +39,7 @@ namespace IT.Web_New.Controllers
                 PagingParameterModel pagingParameterModel = new PagingParameterModel
                 { 
                     pageNumber = 1,
-                    _pageSize = 1,
+                    _pageSize = 100,
                     CompanyId = CompanyId,
                     PageSize = 100,
                 };

@@ -58,16 +58,14 @@ namespace IT.Web_New.Controllers
                     pagingParameterModel.PageSize = pageSize;
                     pagingParameterModel.CompanyId = CompanyId;
               
-
                 var DriverList = webServices.Post(pagingParameterModel, "AWFDriver/All");
 
                 if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     int TotalRow = 0;
                     if (DriverList.Data != "[]" && DriverList.Data != null)
-                    {
+                    {                       
                         driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
-
                         TotalRow = driverViewModels[0].TotalRows;
 
                         return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = driverViewModels }, JsonRequestBehavior.AllowGet);
@@ -75,7 +73,6 @@ namespace IT.Web_New.Controllers
                     }
                 }
                 return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = driverViewModels }, JsonRequestBehavior.AllowGet);
-
             }
             catch (Exception ex)
             {
@@ -126,7 +123,6 @@ namespace IT.Web_New.Controllers
                 }
 
                 return View(driverViewModel);
-
             }
             catch (Exception ex)
             {
@@ -313,12 +309,10 @@ namespace IT.Web_New.Controllers
                     driverViewModel = (new JavaScriptSerializer().Deserialize<DriverViewModel>(addResult.Data.ToString()));
                     driverViewModel.LicenseExpiry = driverViewModel.LicenseExpiry ?? System.DateTime.Now.ToString("yyyy-MM-dd");
                 }
-
                 return View(driverViewModel);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -462,7 +456,6 @@ namespace IT.Web_New.Controllers
                                 {
                                     return Redirect(nameof(Index));
                                 }
-
                             }
                         }
                     }
@@ -528,9 +521,7 @@ namespace IT.Web_New.Controllers
 
                     driverViewModel = (new JavaScriptSerializer().Deserialize<DriverViewModel>(DriverInfo.Data.ToString()));
                 }
-
                 return Redirect(nameof(DriverLoginHistoryAllForAdmin));
-
             }
             catch (Exception ex)
             {
