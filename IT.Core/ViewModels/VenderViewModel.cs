@@ -31,5 +31,6 @@ namespace IT.Core.ViewModels
         public string TRN { get; set; }
         public string Representative { get; set; }
         public string Title { get; set; }
+        public int TotalRows { get; set; }
     }
 }

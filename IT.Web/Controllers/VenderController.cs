@@ -43,18 +43,10 @@ namespace IT.Web_New.Controllers
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
                 pagingParameterModel.CompanyId = CompanyId;
 
-                if (Convert.ToInt32(start) == 0)
-                {
-                    pagingParameterModel.pageNumber = 1;
-                    pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.PageSize = pageSize;                   
-                }
-                else
-                {
-                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                    int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+                    pagingParameterModel.pageNumber = pageNumer;
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.PageSize = pageSize;
-                }
 
                 var DriverList = webServices.Post(pagingParameterModel, "Vender/All");
                 int TotalRow = 0;
@@ -63,7 +55,7 @@ namespace IT.Web_New.Controllers
                     if (DriverList.Data != "[]")
                     {
                         venderViewModels = (new JavaScriptSerializer().Deserialize<List<VenderViewModel>>(DriverList.Data.ToString()));
-                        TotalRow = venderViewModels.Count;
+                        TotalRow = venderViewModels[0].TotalRows;
                     }
                     return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = venderViewModels }, JsonRequestBehavior.AllowGet);
                 }                

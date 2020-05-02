@@ -44,9 +44,11 @@ namespace IT.Core.ViewModels
         public string RejectedReason { get; set; }
         public string IsAwfuelAdmin { get; set; }
         public string ReasonDescription { get; set; }
+        public int TotalRows { get; set; }
         public List<UploadDocumentsViewModel> uploadDocumentsViewModels { get; set; }
         public UpdateReasonDescriptionViewModel UpdateReasonDescriptionViewModel { get; set; }
         public List<UpdateReasonDescriptionViewModel> updateReasonDescriptionViewModels { get; set; }
 
     }
 }
+

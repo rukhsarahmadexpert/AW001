@@ -38,5 +38,7 @@ namespace IT.Core.ViewModels
         public bool IsSend { get; set; }
         public string CustomerOrderNumber { get; set; }
         public string DeliveryNoteNumber { get; set; }
+        public int TotalRows { get; set; }
     }
 }
+
