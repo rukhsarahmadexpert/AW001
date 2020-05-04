@@ -517,11 +517,9 @@ namespace IT.Web_New.Controllers
                     {
                         return Json("Failed", JsonRequestBehavior.AllowGet);
                     }
-
                 }
                 else
                 {
-
                     OrderNumber orderNumber = new OrderNumber();
 
                     customerOrderListViewModel.CustomerId = Convert.ToInt32(Session["CompanyId"]);
@@ -540,16 +538,13 @@ namespace IT.Web_New.Controllers
                             return Json(customerOrderListViewModel, JsonRequestBehavior.AllowGet);
                         }
                     }
-
                 }
                 return Json("Failed", JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-
         }
 
         [HttpPost]
@@ -564,7 +559,6 @@ namespace IT.Web_New.Controllers
                     customerOrderGroupViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderGroupViewModel>(CustomerOrderList.Data.ToString()));
                 }
                 return RedirectToAction("Details", new { searchViewModel.Id });
-
             }
             catch (Exception)
             {
