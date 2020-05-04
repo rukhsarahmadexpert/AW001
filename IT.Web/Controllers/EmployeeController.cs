@@ -29,24 +29,18 @@ namespace IT.Web_New.Controllers
             try
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
-                
                     var results = webServices.Post(new EmployeeViewModel(), "AWFEmployee/All/" + CompanyId);
                     if (results.StatusCode == System.Net.HttpStatusCode.Accepted)
                     {
                         employeeViewModels = (new JavaScriptSerializer()).Deserialize<List<EmployeeViewModel>>(results.Data.ToString());
 
                     }
-               
                 return View(employeeViewModels);
-
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
         }
 
         [HttpPost]
@@ -55,10 +49,8 @@ namespace IT.Web_New.Controllers
             try
             {
                 var Result = new ServiceResponseModel();
-
                 employeeViewModel.UpdatedBy = Convert.ToInt32(Session["UserId"]);
                 Result = webServices.Post(employeeViewModel, "AWFEmployee/ChangeStatus");
-
                 if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
 
