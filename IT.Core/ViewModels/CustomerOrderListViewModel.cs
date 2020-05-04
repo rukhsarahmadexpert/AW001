@@ -39,6 +39,7 @@ namespace IT.Core.ViewModels
         public int BookingId { get; set; }
         public bool IsBulk { get; set; }
         public bool IsforSite { get; set; }
+        public bool IsSelfPickup { get; set; }
 
         public List<CustomerOrderViewModel> customerOrderViewModels { get; set; }
     

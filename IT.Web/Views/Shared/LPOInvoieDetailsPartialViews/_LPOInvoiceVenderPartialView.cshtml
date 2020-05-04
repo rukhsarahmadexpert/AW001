@@ -103,37 +103,12 @@
                                 @lpoRemainingQuantityViewModel.BillQuantity
                             </td>
                             <td>
-                                <a href="/Bill/BillAllByLpoId/@lpoRemainingQuantityViewModel.LPOId" title="All bill from this LPO">Bill <i class="fal fa-eye"></i></a>  | <a href="/LPO/Details/@lpoRemainingQuantityViewModel.LPOId" title="LPO Details">Lpo <i class="fal fa-eye"></i></a>
+                                <a class="btn btn-sm btn-outline-primary" href="/Bill/BillAllByLpoId/@lpoRemainingQuantityViewModel.LPOId" title="All bill from this LPO">BILL LIST</a>  <br />  <a style="margin-top:2px" class="btn btn-sm btn-outline-primary" href="/LPO/Details/@lpoRemainingQuantityViewModel.LPOId" title="LPO Details">LPO LIST</a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                 <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Resverved</th>
-                        <th>Received</th>
-                        <th width="140px">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            @lpoRemainingQuantityViewModel.LPOId
-                        </td>
-                        <td>
-                            @lpoRemainingQuantityViewModel.LPOQuantity
-                        </td>
-                        <td>
-                            @lpoRemainingQuantityViewModel.BillQuantity
-                        </td>
-                        <td>
-                            <a href="/Bill/BillAllByLpoId/@lpoRemainingQuantityViewModel.LPOId" title="All bill from this LPO">BILL <i class="fal fa-eye"></i></a>  <br /> <a href="/LPO/Details/@lpoRemainingQuantityViewModel.LPOId" title="LPO Details">LPO <i class="fal fa-eye"></i></a> 
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                
             }
         }
     </div>
