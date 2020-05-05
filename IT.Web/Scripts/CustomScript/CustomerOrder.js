@@ -113,13 +113,17 @@ function CreateGroupOrder(Url)
     });
 
     var radioValue = $("input[name='defaultExampleRadios']:checked").val();
+    var radioValueSelf = $("input[name='Tranportation']:checked").val();
     
     var IsBulkTrue = false;
     if (radioValue.trim() != "Order by Vehicle") {
         IsBulkTrue = true;
     }
 
-    alert($('#Lattitue').val());
+    var IsSelfPickupTrue = false;
+    if (radioValueSelf.trim() != "Required Transportation") {
+        IsSelfPickupTrue = true;
+    }
 
     var empObj = {
         OrderId: $('#OrderId').val(),
@@ -131,6 +135,7 @@ function CreateGroupOrder(Url)
         LocationFullUrl: $('#LocationFullUrl').val(),
         SiteId: $('#Site').val(),
         IsBulk: IsBulkTrue,
+        IsSelfPickup: IsSelfPickupTrue
     };
 
     for (var key in empObj)
@@ -248,10 +253,10 @@ $('#defaultUncheckedRadio').change(function ()
     }
     else
     {
-            $('#TransportaionOption').css('display','none');
-            $(this).attr('checked', false);
-            $('#defaultCheckedRadio').attr('checked', true);
-            alert('Please remove added rows first');
+        $('#TransportaionOption').css('display', 'none');
+        $(this).attr('checked', false);
+        $('#defaultCheckedRadio').attr('checked', true);
+        alert('Please remove added rows first');  
     }  
 });
 

@@ -23,9 +23,7 @@ namespace IT.Web_New.Controllers
         [HttpGet]
         public ActionResult Index(int CompId = 0)
         {
-            
-                return View();
-         
+            return View();
         }
 
         [HttpPost]
@@ -66,7 +64,7 @@ namespace IT.Web_New.Controllers
                 {
                     pagingParameterModel.pageNumber = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
                 }
-                int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
+                   int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
                     pagingParameterModel.pageNumber = pageNumer;
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.PageSize = pageSize;
@@ -88,6 +86,45 @@ namespace IT.Web_New.Controllers
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AllDrivers(int CompId = 0)
+        {
+            try
+            {
+                if (CompId > 0)
+                {
+                    CompanyId = CompId;
+                }
+                else
+                {
+                    CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                }
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+                pagingParameterModel.CompanyId = CompanyId;
+                  
+                pagingParameterModel.pageNumber = 1;
+                pagingParameterModel._pageSize = 500;
+                pagingParameterModel.PageSize = 500;
+                var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
+
+                if(DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if(DriverList.Data != "[]")
+                    {
+                        driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
+                    }
+                    driverViewModels.Insert(0, new DriverViewModel() { Id = 0, Name = "Select Driver" });
+                }
+
+                return Json(driverViewModels, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 

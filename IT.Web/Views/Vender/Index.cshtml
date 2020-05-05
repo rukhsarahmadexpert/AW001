@@ -137,7 +137,7 @@
                 // alert(Data);
                 ajaxRequest("POST", "/Vender/ChangeStatus", Data, "json").then(function (result) {
                     if (result != "failed") {
-                        $('#dt-basic-example1').DataTable().ajax.reload();
+                        $("#dt-basic-example1").DataTable().ajax.reload();
                     }
                     else {
                         alert('there is some problem');
@@ -145,7 +145,7 @@
                 })
             }
             else {
-                $('#dt-basic-example1').DataTable().ajax.reload();
+                $("#dt-basic-example1").DataTable().ajax.reload();
             }
         }
 
