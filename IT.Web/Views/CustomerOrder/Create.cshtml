@@ -35,7 +35,7 @@
                     <input type="hidden" name="RequestedQuantity" id="RequestedQuantity" value="@Model.RequestedQuantity" />
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3" id="siteDiv">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text font-weight-bold" id="basic-addon1"> Sites</span>
                                 </div>
@@ -263,7 +263,8 @@
         })
 
         function LoadDriverVehicleFromDb() {
-            ajaxRequest("GET", "/Driver/Index", "", "json").then(function (result) {
+            
+            ajaxRequest("POST", "/Driver/AllDrivers", "", "json").then(function (result) {
                 $('#Driver').empty();
                 $.each(result, function (value, item) {
                     $('#Driver').append('<option value=' + item.id + '>' + item.Name + '</option>');
@@ -271,7 +272,7 @@
                 $('#Driver').prepend('<option value="0" selected="selected">Select Driver</option>');
             });
 
-            ajaxRequest("GET", "/Vehicle/Index", "", "json").then(function (result) {
+            ajaxRequest("GET", "/Vehicle/VehicleIndexToSelect", "", "json").then(function (result) {
                 $('#vehicle').empty();
                 $.each(result, function (value, item) {
                     $('#vehicle').append('<option value=' + item.id + '>' + item.TraficPlateNumber + '</option>');

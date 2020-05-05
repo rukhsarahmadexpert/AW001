@@ -28,16 +28,8 @@ namespace IT.Web_New.Controllers
 
         [HttpGet]
         public ActionResult Index()
-        {                 
-                try
-                {
-                    return View();
-
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+        {
+            return View();
         }
 
         [HttpGet]
