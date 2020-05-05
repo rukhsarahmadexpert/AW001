@@ -19,9 +19,10 @@
                         <div class="row">
                             <div class="col-md-2 col-xl-2 p-2">
                                 <label class="newbtn">
-                                    <img id="logoPreview" class="blah_cashCompany" src="https://awservices.somee.com/ClientDocument/@Model.LogoUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image" style="width:140px;">
+                                    <img id="logoPreview" class="blah_cashCompany imgHover" src="https://awservices.somee.com/ClientDocument/@Model.LogoUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image" style="width:140px;">
                                     <input id="LogoUrl" name="LogoUrl" class='pic' value="@Model.LogoUrl" onchange="readURL(this);" type="file">
                                 </label>
+
                             </div>
                             <div class="col-md-5 col-xl-5 p-2">
                                 <div class="input-group flex-nowrap">
@@ -184,6 +185,8 @@
         height: auto;
         margin-top: 20px;
     }
+
+.imgHover:hover {
+                  border: 2px dashed black; 
+}
 </style>
-
-

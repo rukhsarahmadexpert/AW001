@@ -108,14 +108,12 @@
                                                     {
                                                         <option value="0">Product Name</option>
                                                     }
-
                                                 </select>
                                             </td>
                                             <td>
                                                 <select class="form-control Driver" id="Driver">
                                                     @if (driverModels != null)
                                                     {
-
                                                         foreach (var item in driverModels)
                                                         {
                                                             <option value="@item.DriverId" @(item.DriverId == Modelitem.DriverId ? "selected='selected'" : "")>@item.DriverName</option>
@@ -140,7 +138,6 @@
                                                     {
                                                         <option value="0">Trafic Plate Number</option>
                                                     }
-
                                                 </select>
                                             </td>
                                             <td>

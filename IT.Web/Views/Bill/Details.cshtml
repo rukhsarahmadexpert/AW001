@@ -42,12 +42,9 @@
                                     @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_MainTablePartialView.cshtml")
                                     @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_FooterTotalPartialView.cshtml")
                                 </div>
-
                                 <p></p>
-
                                 <div class="row mt-3 mb-5">
                                     <div class="col-md-3">
-
                                         <form method="post" action="/Bill/UploadDocumentsAdd" enctype="multipart/form-data">
                                             <input type="hidden" id="BillId" name="BillId" value="@LPOInvoiceViewModel.Id" />
                                             @{
@@ -56,7 +53,6 @@
                                         </form>
                                     </div>
                                 </div>
-
                                 @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_FooterButtonPartialViewView.cshtml")
                             </div>
                         </div>
