@@ -767,5 +767,95 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult DirectSaleList()
+        {
+            //List<CustomerOrderListViewModel> customerOrderListViewModels = new List<CustomerOrderListViewModel>();
+            try
+            {
+            //    PagingParameterModel pagingParameterModel = new PagingParameterModel
+            //    {
+            //        pageNumber = 1,
+            //        PageSize = 10,
+            //    };
+            //    var directList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllDirectSale");
+            //    if (directList.StatusCode == System.Net.HttpStatusCode.Accepted)
+            //    {
+            //        if (directList.Data != "[]" && directList.Data != null)
+            //        {
+            //            customerOrderListViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerOrderListViewModel>>(directList.Data.ToString()));
+            //            return View(customerOrderListViewModels);
+            //        }
+
+            //    }
+                    
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+        [HttpPost]
+        public JsonResult DirectOrderAll()
+        {
+            var orderList = new List<CustomerOrderListViewModel>();
+
+            try
+            {
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                var sortColumn = Request.Form.GetValues("columns[" +
+                Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                string search = Request.Form.GetValues("search[value]")[0];
+                //int skip = start != null ? Convert.ToInt32(start) : 0;
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                if (Convert.ToInt32(start) == 0)
+                {
+                    pagingParameterModel.pageNumber = 1;
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                    pagingParameterModel.SerachKey = search;
+                }
+                else
+                {
+                    pagingParameterModel.pageNumber = Convert.ToInt32(draw);
+                    pagingParameterModel._pageSize = pageSize;
+                    pagingParameterModel.PageSize = pageSize;
+                    pagingParameterModel.SerachKey = search;
+                }
+
+                var assignedOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllDirectSale");
+
+                if (assignedOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    int TotalRow = 0;
+                    if (assignedOrderList.Data != "[]" && assignedOrderList.Data != null)
+                    {
+                        orderList = (new JavaScriptSerializer().Deserialize<List<CustomerOrderListViewModel>>(assignedOrderList.Data.ToString()));
+
+                        TotalRow = orderList.Count;
+
+                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = orderList }, JsonRequestBehavior.AllowGet);
+                        //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
+                    }
+                }
+                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = orderList }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

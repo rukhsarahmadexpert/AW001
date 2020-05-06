@@ -1,0 +1,163 @@
+﻿@model List<IT.Core.ViewModels.CustomerOrderListViewModel>
+@{
+    ViewBag.Title = "DirectSaleList";
+
+    List<IT.Core.ViewModels.CustomerOrderListViewModel> customerOrderListViewModels = new List<IT.Core.ViewModels.CustomerOrderListViewModel>();
+    customerOrderListViewModels = Model as List<IT.Core.ViewModels.CustomerOrderListViewModel>;
+}
+
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a class="btn btn-md btn-primary" href="/DirectSale/DirectSaleCreate">
+                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Direct Sale</i></span>
+                    </a>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                  
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-primary-600">
+                            <tr>
+                               
+                                <th>Order No</th>
+                                <th>Delivered Quantity</th>
+                                <th>OrderProgress</th>
+                                <th>Operater</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*@foreach (var item in customerOrderListViewModels)
+                                {
+                                    <tr>
+                                        <td>@item.CompanyName</td>
+                                        <td>@item.DeliverdQuantity</td>
+                                        <td>@item.RequestedQuantity</td>
+                                        <td>
+                                            <a href="/Site/Details/@item.OrderId"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                            <a href="/Site/Edit/@item.OrderId"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+
+                                        </td>
+                                    </tr>
+                                }*@
+                        </tbody>
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    
+    @*<script>
+
+        $(document).ready(function () {
+
+            $(".IsActive").click(function () {
+                if (confirm("Are you sure")) {
+
+                    var act = false;
+                    if (this.checked) {
+                        act = true;
+                    }
+
+                    var Data = JSON.stringify(
+                        {
+                            IsActive: act,
+                            Id: $(this).data("value"),
+                        })
+                    // alert(Data);
+                    ajaxRequest("POST", "/Site/ChangeStatus", Data, "json").then(function (result) {
+                        if (result != "failed") {
+                            //console.log(result);
+                            window.location.reload();
+                        }
+                        else {
+                            alert('there is some problem');
+                        }
+                    })
+                }
+                else {
+                    return false;
+                }
+            });
+        });
+
+    </script>*@
+
+    <script>
+        $(document).ready(function () {
+            $("#CustomerOrderMenu").attr("aria-expanded", "true");
+            $('#CustomerOrderUl').css('display', 'block');
+            $('#CustomerOrderlDirectLi').addClass('active');
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#dt-basic-example1").DataTable({
+                "paging": true,
+                "responsive": true,
+                "processing": true,
+                "searching": true,
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/CustomerOrder/DirectOrderAll",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    //{ "data": "Id", "name": "Id", "autoWidth": true },// key for edit delete
+                   
+                    { "data": "CustomerOrderId", "name": "CustomerOrderId", "autoWidth": true },
+                    { "data": "RequestedQuantity", "name": "RequestedQuantity", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            if (row.OrderProgress == "Order Accepted") {
+                                return '<span class="badge badge-success">Order Accepted</span>'
+                            }
+                            else if (row.OrderProgress == "Order Created") {
+                                return '<span class="badge badge-primary">Order Created</span>'
+                            }
+                            else if (row.OrderProgress == "Order Assigned") {
+                                return '<span class="badge badge-warning">Order Assigned</span>'
+                            }
+                            else if (row.OrderProgress == "Order Rejected") {
+                                return '<span class="badge badge-danger">Order Rejected</span>'
+                            }
+                            else if (row.OrderProgress == "Order Running") {
+                                return '<span class="badge badge-dark">Order Running</span>'
+                            }
+                            else if (row.OrderProgress == "Order Deliverd") {
+                                return '<span class="badge badge-info">Order Deliverd</span>'
+                            }
+                        }
+                    },
+                    { "data": "UserName", "name": "UserName", "autoWidth": true },
+                    {
+                        render: function (data, type, row) {
+                            return '<div class="pull-right" title="View Order and Deliver"><button  class="btn btn-info btn-sm" data-id="Id" onclick="Details(' + row.Id + "," + row.OrderId + ')"><i class="fal fa-eye"></i></button>'
+                        }
+                    }
+                ]
+            });
+        });
+
+    </script>
+
+
+}
+

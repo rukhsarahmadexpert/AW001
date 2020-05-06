@@ -164,14 +164,23 @@ namespace IT.Web_New.Controllers
                         content.Add(new StringContent(userViewModel.UserName ?? ""), "UserName");
                         content.Add(new StringContent(userViewModel.Gender ?? ""), "Gender");
                         content.Add(new StringContent(userViewModel.DOB.ToString() ?? System.DateTime.Now.ToString()), "DOB");
-
+                        var companyViewModel = new CompanyViewModel();
                         var result = webServices.PostMultiPart(content, "User/UserInformationUpdate", true);
                         if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                         {
                             userViewModel = (new JavaScriptSerializer().Deserialize<UserViewModel>(result.Data.ToString()));
                             //return RedirectToAction("/");
                           CompanyId = Convert.ToInt32(Session["companyId"]);
-                            if(CompanyId == 2)
+
+                            var userCompanyViewModel2 = Session["userCompanyViewModel"] as UserCompanyViewModel;
+
+                            userCompanyViewModel2.ImageUrl = userViewModel.ImageUrl;
+                            userCompanyViewModel2.FullName = userViewModel.FullName;
+
+                            Session["userCompanyViewModel"] = userCompanyViewModel2;
+                       
+
+                            if (CompanyId == 2)
                             {
                                 return RedirectToAction(nameof(AdminUserInformation));
                             }

@@ -15,7 +15,7 @@
                             
                             <label class=newbtn>
                                 <a style="cursor:pointer">
-                                    <img id="userImgPreview" class="blah" width="200px" style="border-radius:100%" src="http://awservices.somee.com/ClientDocument/@Model.ImageUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt="User Image">
+                                    <img id="userImgPreview" class="blah imgHover" width="200" style="border-radius:100%" src="http://awservices.somee.com/ClientDocument/@Model.ImageUrl" onerror="this.src='/assets/staticImages/icon1.png';" alt="User Image">
                                     <input id="userImg" hidden name="ImageUrl1" value="@Model.ImageUrl" width="21" class='pic' onchange="readURL(this);" type="file">
                                     <input type="hidden" name="ImageUrl" value="@Model.ImageUrl">
                                     <h5 class="mb-0 fw-700 text-center mt-3">
@@ -92,6 +92,30 @@
     </div>
 
 </form>
+
+<style>
+
+
+    .pic {
+        display: none;
+    }
+
+    .newbtn {
+        cursor: pointer;
+    }
+
+    .blah {
+        max-width: 100%;
+        width: 200px;
+        height: 200px;
+        max-height:100%;
+        margin-top: 20px;
+    }
+
+    .imgHover:hover {
+        border: 3px dotted #6a7eb5;
+    }
+</style>
 
 @section Scripts{
 
