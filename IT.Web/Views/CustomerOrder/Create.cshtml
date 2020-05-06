@@ -257,7 +257,7 @@
                 $("#SaveOrder").text('please wait...');
                 $("#SaveOrder").attr("disabled", true);
             });
-        })
+        });
 
         function LoadDriverVehicleFromDb() {
             
@@ -277,7 +277,7 @@
             });
         }
     </script>
-
+   
     <script>
         $(document).ready(function () {
             $("#CustomerDeliveryMenu").attr("aria-expanded", "true");
@@ -286,7 +286,7 @@
         });
 
     </script>
-
+   
     <script type="text/javascript">
         $('#vehicle').on('change', function () {
             if ($(this).val() == "CreateVehicle") {
