@@ -31,28 +31,69 @@
                                         <input type="button" class="btn-primary" id="ChangeDriver" value="Change Driver" />
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Plate Number: @Model.TraficPlateNumber</label>
+                              
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            Plate Number: <input type="text" class="form-control"  readonly value="@Model.TraficPlateNumber" />                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            Contact: <input type="text" name="ContactNumber" id="ContactNumber" class="form-control" value="@Model.ContactNumber" placeholder="Driver Contact Number" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            Product:
+                                            <select class="select2" id="ProductId" name="ProductId">
+                                                @foreach (var item in ViewBag.productViewModels)
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    Contact: <input type="text" name="ContactNumber" id="ContactNumber" class="form-control" value="@Model.ContactNumber" placeholder="Driver Contact Number"/>
+                                
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            Quantity:
+                                            <input type="number" required class="form-control Quantity" name="orderQuantity" id="orderQuantity" placeholder="please provide Quantity" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            Unit Price:
+                                            <input type="number" required class="form-control UnitPrice" name="UnitPrice" id="UnitPrice" placeholder="please provide Unit Price" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            VAT:
+                                            <select class="form-control" id="VATPercentage">
+                                                <option value="0">0</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    Quantity:
-                                    <input type="text" class="form-control" name="orderQuantity" id="orderQuantity" placeholder="please provide Quantity" />
+
+                                <div class="row mt-3">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4 col-sm-12">
+                                        VAT Amount:
+                                        <input type="text" id="VatAmount" readonly class="form-control float-right" value="0.00" />
+                                        <br />
+                                        Total Amount:
+                                        <input type="text" id="TotalAmount" readonly class="form-control float-right" value="0.00" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <select class="select2" id="ProductId" name="ProductId">
-                                        @foreach (var item in ViewBag.productViewModels)
-                                        {
-                                            <option value="@item.Id">@item.Name</option>
-                                        }
-                                    </select>
+                                    <input type="hidden" id="Lattitue" />
+                                    <input type="hidden" id="Longitude" />
+                                    <input type="hidden" id="LocationFullUrl" />
                                 </div>
-                                <input type="hidden" id="Lattitue" />
-                                <input type="hidden" id="Longitude" />
-                                <input type="text" id="LocationFullUrl" />
-                            </div>
                             <div class="col-md-12">
                                 <div class="row py-5">
                                     <div class="col-md-12">
@@ -94,7 +135,42 @@
                  $('#ContactNumber').val('');
              $('#driverId').val(0);
          });
+
+         $('#orderQuantity').keyup(function () {
+             VatCount();
+         });
+
+         $('#UnitPrice').keyup(function () {
+             VatCount();
+         });
+
+         $("#VATPercentage").change(function () {
+             VatCount();
+         })
     })
+
+    function VatCount() {
+
+        var price = 0.00;
+        var quantity = 0;
+        var total = 0.00;
+        var VatAmount = 0.00;
+        var GrandTotal = 0.00;
+
+        if ($("#orderQuantity").val() > 0 && $("#UnitPrice").val() > 0) {
+
+            price = $("#UnitPrice").val();
+            quantity = $("#orderQuantity").val();
+            total = price * quantity;
+            if ($("#VATPercentage").val() > 0) {
+                VatAmount = ((5 * total) / 100);
+            }
+            GrandTotal = VatAmount + total;
+
+            $('#VatAmount').val(VatAmount);
+            $('#TotalAmount').val(GrandTotal);
+        }
+    }
 
     function ValidateDirectOrder()
     {
@@ -140,7 +216,11 @@
                 orderQuantity: $('#orderQuantity').val(),
                 VehicleId: $('#vehicleId').val(),
                 DriverId: $('#driverId').val(),
-                ProductId: $('#ProductId').val(),                
+                ProductId: $('#ProductId').val(),  
+                UnitPrice: $('#UnitPrice').val(),
+                VATPercentage: $('#VATPercentage').val(),
+                VatAmount: $('#VatAmount').val(),
+                TotalAmount: $('#TotalAmount').val(),
             }
             list.push(orderItem);
 
@@ -159,10 +239,14 @@
             }
 
             for (var i = 0; i < list.length; i++) {
-                formData.append('customerOrderViewModels[' + i + '][orderQuantity]', list[i].orderQuantity),
+                    formData.append('customerOrderViewModels[' + i + '][orderQuantity]', list[i].orderQuantity),
                     formData.append('customerOrderViewModels[' + i + '][VehicleId]', list[i].VehicleId),
                     formData.append('customerOrderViewModels[' + i + '][DriverId]', list[i].DriverId),
                     formData.append('customerOrderViewModels[' + i + '][ProductId]', list[i].ProductId)
+                    formData.append('customerOrderViewModels[' + i + '][UnitPrice]', list[i].UnitPrice)
+                    formData.append('customerOrderViewModels[' + i + '][VATPercentage]', list[i].VATPercentage)
+                    formData.append('customerOrderViewModels[' + i + '][VatAmount]', list[i].VatAmount)
+                    formData.append('customerOrderViewModels[' + i + '][TotalAmount]', list[i].TotalAmount)
             }
             if (list.length > 0) {
 
