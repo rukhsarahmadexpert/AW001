@@ -1071,6 +1071,7 @@
     <Content Include="Views\Shared\UpdateReason\_UpdateReasonListView.cshtml" />
     <Content Include="Views\CustomerOrder\SiteAssiedOrder.cshtml" />
     <Content Include="Views\Shared\_LoaderPartialView.cshtml" />
+    <Content Include="Views\CustomerOrder\DirectSaleList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
