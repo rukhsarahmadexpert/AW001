@@ -73,7 +73,8 @@
 
                     <div class="form-group">
                         <label class="form-label" for="simpleinput">Date Of Birth</label>
-                        @Html.EditorFor(Model => Model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+                        @*@Html.EditorFor(Model => Model.DOB, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="date" id="DOB" name="DOB" value="@Convert.ToDateTime(Model.DOB ?? System.DateTime.Now).Year-@Convert.ToDateTime(Model.DOB ?? System.DateTime.Now).ToString("MM")-@Convert.ToDateTime(Model.DOB ?? System.DateTime.Now).ToString("dd")" class="form-control">
                     </div>
                 </div>
             </div>

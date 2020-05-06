@@ -29,6 +29,7 @@ namespace IT.Web_New.Controllers
             return View();
         }
 
+        [Autintication]
         [HttpGet]
         public ActionResult UserInformation()
         {
@@ -57,6 +58,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [Autintication]
         [HttpGet]
         public ActionResult AdminUserInformation()
         {
@@ -83,6 +85,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [Autintication]
         [HttpGet]
         public ActionResult UserInformationEdit()
         {
@@ -109,7 +112,8 @@ namespace IT.Web_New.Controllers
             }
 
         }
-        
+
+        [Autintication]
         [HttpGet]
         public ActionResult AdminUserInformationEdit()
         {
@@ -134,6 +138,7 @@ namespace IT.Web_New.Controllers
 
         }
 
+        [Autintication]
         [HttpPost]
         public ActionResult UserInformationUpdate(UserViewModel userViewModel, HttpPostedFileBase ImageUrl1)
         {

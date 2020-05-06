@@ -71,8 +71,9 @@
 
                     <div class="form-group">
                         <label class="form-label" for="simpleinput">Date Of Birth</label>
-                        <input type="date" id="DOB" name="DOB" value="2013-01-08" class="form-control">
-                     </div>
+                        <input type="date" id="DOB" name="DOB" value="@Convert.ToDateTime(Model.DOB ?? System.DateTime.Now).Year-@Convert.ToDateTime(Model.DOB ?? System.DateTime.Now).ToString("MM")-@Convert.ToDateTime(Model.DOB ?? System.DateTime.Now).ToString("dd")" class="form-control">
+
+                    </div>
                 </div>
             </div>
 

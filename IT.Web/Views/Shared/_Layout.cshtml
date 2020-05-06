@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@TempData["Title"] </title>
     @* @Styles.Render("~/Content/css")
-       @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/modernizr")
     *@
 
     @*<title>Dashbaord - Aw Fuel Trading </title>*@
@@ -31,8 +31,8 @@
     <link rel="stylesheet" media="screen, print" href="~/assets/css/vendors.bundle.css">
     <link rel="stylesheet" media="screen, print" href="~/assets/css/app.bundle.css">
     <!-- Place favicon.ico in the root directory -->
-    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/staticImages/logo-1.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/staticImages/logo-1.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/staticImages/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/staticImages/favicon.png">
 
     <!-- Optional: page related CSS -->
     <!-- PHP docs -->
@@ -46,21 +46,20 @@
     <style>
 
         .page-logo {
-        
-        background-color:white !important;
+            background-color: white !important;
+        }
+        /* pannel tolbar*/
+        .panel-toolbar {
+            display: none
         }
 
-
-            /* pannel tolbar*/
-            .panel-toolbar{
-            display:none
-        }
         .switchToggle input[type=checkbox] {
             height: 0;
             width: 0;
             visibility: hidden;
             position: absolute;
         }
+
         .switchToggle label {
             cursor: pointer;
             text-indent: -9999px;
@@ -72,7 +71,8 @@
             border-radius: 100px;
             position: relative;
         }
-        .switchToggle label:after {
+
+            .switchToggle label:after {
                 content: '';
                 position: absolute;
                 left: 2px;
@@ -1760,7 +1760,7 @@
         });
 
     </script>
-    <script src="~/Scripts/Common-Scripts/LoaderScript.js"></script>
+    @*<script src="~/Scripts/Common-Scripts/LoaderScript.js"></script>*@
 
 </body>
 </html>
