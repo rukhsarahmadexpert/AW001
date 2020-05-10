@@ -63,8 +63,7 @@ namespace IT.Web.Controllers
                     pagingParameterModel.CompanyId = 0;
                     pagingParameterModel.SerachKey = search;
                     pagingParameterModel.sortColumn = sortColumn;
-                    pagingParameterModel.sortColumnDir = sortColumnDir;
-               
+                    pagingParameterModel.sortColumnDir = sortColumnDir;               
 
                 var BookingList = webServices.Post(pagingParameterModel, "CustomerBooking/All");
 
@@ -96,22 +95,6 @@ namespace IT.Web.Controllers
             try
             {
                 return View();
-                //    CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
-                //    PagingParameterModel pagingParameterModel = new PagingParameterModel
-                //    {
-                //        pageNumber = 1,
-                //        CompanyId = CompanyId,
-                //        PageSize = 10
-                //    };
-
-                //    var CustomerBookingList = webServices.Post(pagingParameterModel, "CustomerBooking/All");
-
-                //    if (CustomerBookingList.StatusCode == System.Net.HttpStatusCode.Accepted)
-                //    {
-                //        customerBookingViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerBookingViewModel>>(CustomerBookingList.Data.ToString()));
-                //    }
-                //    return View(customerBookingViewModels);
             }
             catch (Exception ex)
             {
@@ -177,8 +160,7 @@ namespace IT.Web.Controllers
                 CustomerBookingReservedRemaining customerBookingReservedRemaining = new CustomerBookingReservedRemaining();
 
                 var CustomerBookingList = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingReserved");
-
-
+                
                 if (CustomerBookingList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     customerBookingReservedRemaining = (new JavaScriptSerializer().Deserialize<CustomerBookingReservedRemaining>(CustomerBookingList.Data.ToString()));
@@ -206,8 +188,7 @@ namespace IT.Web.Controllers
                 CustomerBookingReservedRemaining customerBookingReservedRemaining = new CustomerBookingReservedRemaining();
 
                 var CustomerBookingList = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingReserved");
-
-
+                
                 if (CustomerBookingList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     customerBookingReservedRemaining = (new JavaScriptSerializer().Deserialize<CustomerBookingReservedRemaining>(CustomerBookingList.Data.ToString()));
@@ -225,7 +206,6 @@ namespace IT.Web.Controllers
         [HttpGet]
         public ActionResult BookingRemaining()
         {
-
             try
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
@@ -236,8 +216,7 @@ namespace IT.Web.Controllers
                 CustomerBookingReservedRemaining customerBookingReservedRemaining = new CustomerBookingReservedRemaining();
 
                 var CustomerBookingList = webServices.Post(customerBookingViewModel, "CustomerBooking/CustomerBookingReserved");
-
-
+                
                 if (CustomerBookingList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     customerBookingReservedRemaining = (new JavaScriptSerializer().Deserialize<CustomerBookingReservedRemaining>(CustomerBookingList.Data.ToString()));
