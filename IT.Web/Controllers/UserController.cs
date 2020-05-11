@@ -531,7 +531,7 @@ namespace IT.Web_New.Controllers
                     {
                         var data = (new JavaScriptSerializer().Deserialize<SearchModelForRecover>(result.Data.ToString()));
 
-                        loginViewModel.Device = data.searchkey;
+                        loginViewModel.Device = data.Searchkey;
 
                         Session["loginViewModel"] = loginViewModel;
 
@@ -545,7 +545,7 @@ namespace IT.Web_New.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -572,9 +572,10 @@ namespace IT.Web_New.Controllers
 
                     if (loginViewModel.Device == searchViewModel.SearchKey2)
                     {
-                        UserViewModel userViewModel = new UserViewModel();
-                        userViewModel.UserName = loginViewModel.UserName;
-                       return RedirectToAction(nameof(UpdateForGotPassword));                       
+                        UserViewModel userViewModel = new UserViewModel { 
+                            UserName = loginViewModel.UserName
+                        };
+                    return RedirectToAction(nameof(UpdateForGotPassword));                       
                     }
                     else
                     {
@@ -602,14 +603,14 @@ namespace IT.Web_New.Controllers
                 var loginViewModel = new LoginViewModel();
                 loginViewModel = Session["loginViewModel"] as LoginViewModel;
 
-                UserViewModel userViewModel = new UserViewModel();
-                userViewModel.UserName = loginViewModel.UserName;
-                
-                return View(userViewModel);
+                UserViewModel userViewModel = new UserViewModel { 
+                    UserName = loginViewModel.UserName
+                };
+            return View(userViewModel);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -618,17 +619,17 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                if(!ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     ViewBag.success = "Password and Confirm Password not matched";
                     return View(userViewModel);
                 }
                 else
                 {
-                    ChangePasswordViewModel changePasswordViewModel = new ChangePasswordViewModel();
-                    changePasswordViewModel.Email = userViewModel.UserName;
-                    changePasswordViewModel.NewPassword = userViewModel.Password;
-
+                    ChangePasswordViewModel changePasswordViewModel = new ChangePasswordViewModel {
+                        Email = userViewModel.UserName,
+                        NewPassword = userViewModel.Password
+                    };
                     var Result = webServices.Post(changePasswordViewModel, "User/UpdatePassword");
                     if(Result.StatusCode == System.Net.HttpStatusCode.Accepted)
                     {
@@ -645,7 +646,7 @@ namespace IT.Web_New.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -654,7 +655,7 @@ namespace IT.Web_New.Controllers
     public class SearchModelForRecover
     {       
         public int Id { get; set; }
-        public string searchkey { get; set; }
+        public string Searchkey { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public int CompanyId { get; set; }

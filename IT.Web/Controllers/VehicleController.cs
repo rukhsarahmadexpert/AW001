@@ -19,7 +19,7 @@ namespace IT.Web_New.Controllers
         WebServices webServices = new WebServices();
         List<VehicleViewModel> vehicleViewModels = new List<VehicleViewModel>();
         VehicleViewModel vehicleViewModel = new VehicleViewModel();
-        List<VehicleTypeViewModel> vehicleTypeViewModels = new List<VehicleTypeViewModel>();
+        readonly List<VehicleTypeViewModel> vehicleTypeViewModels = new List<VehicleTypeViewModel>();
         DriverVehicelViewModel driverVehicelViewModel = new DriverVehicelViewModel();
 
         public List<DriverViewModel> VehicleViewModel { get; private set; }
@@ -133,16 +133,16 @@ namespace IT.Web_New.Controllers
 
                         TotalRow = VehicleViewModels[0].TotalRows;
 
-                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
+                        return Json(new { draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                     }
                 }
-                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
+                return Json(new { draw, recordsFiltered = 0, recordsTotal = 0, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
         
@@ -234,10 +234,10 @@ namespace IT.Web_New.Controllers
             VehicleTypeController vehicleTypeController = new VehicleTypeController();
             ViewBag.VehicleTypes = vehicleTypeController.VehicleTypes();
 
-            VehicleViewModel vehicle = new VehicleViewModel();
-            vehicle.InsuranceExpiryDate = System.DateTime.Now;
-            vehicle.MulkiaExpiryDate = System.DateTime.Now;
-
+            VehicleViewModel vehicle = new VehicleViewModel { 
+                InsuranceExpiryDate = System.DateTime.Now,
+                MulkiaExpiryDate = System.DateTime.Now
+            };
             return View(vehicle);
             //try
             //{
@@ -337,22 +337,22 @@ namespace IT.Web_New.Controllers
                                 content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
                                 content.Add(new StringContent("ClientDocs"), "ClientDocs");
                                 content.Add(new StringContent(vehicleViewModel.VehicleType.ToString()), "VehicleType");
-                                content.Add(new StringContent(vehicleViewModel.TraficPlateNumber == null ? "" : vehicleViewModel.TraficPlateNumber), "TraficPlateNumber");
-                                content.Add(new StringContent(vehicleViewModel.TCNumber == null ? "" : vehicleViewModel.TCNumber), "TCNumber");
-                                content.Add(new StringContent(vehicleViewModel.Model == null ? "" : vehicleViewModel.Model), "Model");
-                                content.Add(new StringContent(vehicleViewModel.Brand == null ? "" : vehicleViewModel.Brand), "Brand");
-                                content.Add(new StringContent(vehicleViewModel.Color == null ? "" : vehicleViewModel.Color), "Color");
-                                content.Add(new StringContent(vehicleViewModel.MulkiaExpiry == null ? "" : vehicleViewModel.MulkiaExpiry), "MulkiaExpiry");
-                                content.Add(new StringContent(vehicleViewModel.InsuranceExpiry == null ? "" : vehicleViewModel.InsuranceExpiry), "InsuranceExpiry");
-                                content.Add(new StringContent(vehicleViewModel.RegisteredRegion == null ? "" : vehicleViewModel.RegisteredRegion), "RegisteredRegion");
-                                content.Add(new StringContent(vehicleViewModel.Comments == null ? "" : vehicleViewModel.Comments), "Comments");
+                                content.Add(new StringContent(vehicleViewModel.TraficPlateNumber ?? ""), "TraficPlateNumber");
+                                content.Add(new StringContent(vehicleViewModel.TCNumber ?? "" ), "TCNumber");
+                                content.Add(new StringContent(vehicleViewModel.Model ?? "" ), "Model");
+                                content.Add(new StringContent(vehicleViewModel.Brand ?? "" ), "Brand");
+                                content.Add(new StringContent(vehicleViewModel.Color ?? ""  ), "Color");
+                                content.Add(new StringContent(vehicleViewModel.MulkiaExpiry ?? ""  ), "MulkiaExpiry");
+                                content.Add(new StringContent(vehicleViewModel.InsuranceExpiry ?? ""  ), "InsuranceExpiry");
+                                content.Add(new StringContent(vehicleViewModel.RegisteredRegion ?? "" ), "RegisteredRegion");
+                                content.Add(new StringContent(vehicleViewModel.Comments ?? "" ), "Comments");
 
                                 var result = webServices.PostMultiPart(content, "Vehicle/Add", true);
                                 if (result.StatusCode == System.Net.HttpStatusCode.OK)
                                 {
                                     if (result.Message != "\"TraficPlateNumber Already Availible\"")
                                     {
-                                        return RedirectToAction(nameof(Details), new { Id = vehicleViewModel.Id });
+                                        return RedirectToAction(nameof(Details), new { vehicleViewModel.Id });
                                     }
                                     else
                                     {
@@ -394,22 +394,22 @@ namespace IT.Web_New.Controllers
                                 content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
                                 content.Add(new StringContent("ClientDocs"), "ClientDocs");
                                 content.Add(new StringContent(vehicleViewModel.VehicleType.ToString()), "VehicleType");
-                                content.Add(new StringContent(vehicleViewModel.TraficPlateNumber == null ? "" : vehicleViewModel.TraficPlateNumber), "TraficPlateNumber");
-                                content.Add(new StringContent(vehicleViewModel.TCNumber == null ? "" : vehicleViewModel.TCNumber), "TCNumber");
-                                content.Add(new StringContent(vehicleViewModel.Model == null ? "" : vehicleViewModel.Model), "Model");
-                                content.Add(new StringContent(vehicleViewModel.Brand == null ? "" : vehicleViewModel.Brand), "Brand");
-                                content.Add(new StringContent(vehicleViewModel.Color == null ? "" : vehicleViewModel.Color), "Color");
-                                content.Add(new StringContent(vehicleViewModel.MulkiaExpiry == null ? "" : vehicleViewModel.MulkiaExpiry), "MulkiaExpiry");
-                                content.Add(new StringContent(vehicleViewModel.InsuranceExpiry == null ? "" : vehicleViewModel.InsuranceExpiry), "InsuranceExpiry");
-                                content.Add(new StringContent(vehicleViewModel.RegisteredRegion == null ? "" : vehicleViewModel.RegisteredRegion), "RegisteredRegion");
-                                content.Add(new StringContent(vehicleViewModel.Comments == null ? "" : vehicleViewModel.Comments), "Comments");
+                                content.Add(new StringContent(vehicleViewModel.TraficPlateNumber ?? "" ), "TraficPlateNumber");
+                                content.Add(new StringContent(vehicleViewModel.TCNumber ?? ""), "TCNumber");
+                                content.Add(new StringContent(vehicleViewModel.Model ?? ""), "Model");
+                                content.Add(new StringContent(vehicleViewModel.Brand ?? ""), "Brand");
+                                content.Add(new StringContent(vehicleViewModel.Color ?? ""), "Color");
+                                content.Add(new StringContent(vehicleViewModel.MulkiaExpiry ?? ""  ), "MulkiaExpiry");
+                                content.Add(new StringContent(vehicleViewModel.InsuranceExpiry ?? "" ), "InsuranceExpiry");
+                                content.Add(new StringContent(vehicleViewModel.RegisteredRegion ?? "" ), "RegisteredRegion");
+                                content.Add(new StringContent(vehicleViewModel.Comments ?? "" ), "Comments");
 
                                 var result = webServices.PostMultiPart(content, "Vehicle/Add", true);
                                 if (result.StatusCode == System.Net.HttpStatusCode.OK)
                                 {
                                     if (result.Message != "\"TraficPlateNumber Already Availible\"")
                                     {
-                                        return RedirectToAction(nameof(Details), new { Id = vehicleViewModel.Id });
+                                        return RedirectToAction(nameof(Details), new { vehicleViewModel.Id });
                                     }
                                     else
                                     {
@@ -578,18 +578,16 @@ namespace IT.Web_New.Controllers
                                 content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
                                 content.Add(new StringContent("ClientDocs"), "ClientDocs");
                                 content.Add(new StringContent(vehicleViewModel.VehicleType.ToString()), "VehicleType");
-                                content.Add(new StringContent(vehicleViewModel.TraficPlateNumber == null ? "" : vehicleViewModel.TraficPlateNumber), "TraficPlateNumber");
-                                content.Add(new StringContent(vehicleViewModel.TCNumber == null ? "" : vehicleViewModel.TCNumber), "TCNumber");
-                                content.Add(new StringContent(vehicleViewModel.Model == null ? "" : vehicleViewModel.Model), "Model");
-                                content.Add(new StringContent(vehicleViewModel.Brand == null ? "" : vehicleViewModel.Brand), "Brand");
-                                content.Add(new StringContent(vehicleViewModel.Color == null ? "" : vehicleViewModel.Color), "Color");
-                                content.Add(new StringContent(vehicleViewModel.MulkiaExpiry == null ? "" : vehicleViewModel.MulkiaExpiry), "MulkiaExpiry");
-                                content.Add(new StringContent(vehicleViewModel.InsuranceExpiry == null ? "" : vehicleViewModel.InsuranceExpiry), "InsuranceExpiry");
-                                content.Add(new StringContent(vehicleViewModel.RegisteredRegion == null ? "" : vehicleViewModel.RegisteredRegion), "RegisteredRegion");
-                                content.Add(new StringContent(vehicleViewModel.Comments == null ? "" : vehicleViewModel.Comments), "Comments");
-
-
-
+                                content.Add(new StringContent(vehicleViewModel.TraficPlateNumber ?? "" ), "TraficPlateNumber");
+                                content.Add(new StringContent(vehicleViewModel.TCNumber ?? ""  ), "TCNumber");
+                                content.Add(new StringContent(vehicleViewModel.Model ?? "" ), "Model");
+                                content.Add(new StringContent(vehicleViewModel.Brand ?? ""  ), "Brand");
+                                content.Add(new StringContent(vehicleViewModel.Color ?? ""  ), "Color");
+                                content.Add(new StringContent(vehicleViewModel.MulkiaExpiry ?? "" ), "MulkiaExpiry");
+                                content.Add(new StringContent(vehicleViewModel.InsuranceExpiry ?? "" ), "InsuranceExpiry");
+                                content.Add(new StringContent(vehicleViewModel.RegisteredRegion ?? "" ), "RegisteredRegion");
+                                content.Add(new StringContent(vehicleViewModel.Comments ?? ""), "Comments");
+                                                               
                                 var result = webServices.PostMultiPart(content, "Vehicle/update", true);
                                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                                 {
@@ -635,13 +633,12 @@ namespace IT.Web_New.Controllers
             try
             {
 
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = 0;
-                pagingParameterModel.PageSize = 100;
-                pagingParameterModel.CompanyId = CompanyId;
+                PagingParameterModel pagingParameterModel = new PagingParameterModel { 
+                    pageNumber = 1,
+                    _pageSize = 1,
+                    PageSize = 100,
+                    CompanyId = CompanyId
+                };
 
                 var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
 
@@ -662,8 +659,10 @@ namespace IT.Web_New.Controllers
         [NonAction]
         public DriverVehicelViewModel DriverVehicels(int CompanyId)
         {
-            SearchViewModel searchViewModel = new SearchViewModel();
-            searchViewModel.CompanyId = CompanyId;
+            SearchViewModel searchViewModel = new SearchViewModel { 
+                CompanyId = CompanyId
+            };
+
             var Result = webServices.Post(searchViewModel, "CustomerOrder/DriverandVehicellist", false);
 
             if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)
