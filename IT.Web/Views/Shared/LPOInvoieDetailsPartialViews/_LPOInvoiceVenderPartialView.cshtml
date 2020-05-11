@@ -50,24 +50,31 @@
 
         @if (lpoRemainingQuantityViewModel == null || lpoRemainingQuantityViewModel.LPOQuantity == 0)
         {
-            <select class="form-control" id="VenderId">
-                @if (venderViewModels != null)
-                {
-                    foreach (var item in venderViewModels)
+            if (LPOInvoiceViewModel.Id > 0)
+            {
+                <b>@LPOInvoiceViewModel.Name</b>
+            }
+            else
+            {
+                <select class="form-control" id="VenderId">
+                    @if (venderViewModels != null)
                     {
-                        <option value="@item.Id" @(item.Id == LPOInvoiceViewModel.UpdatedBy ? "selected='selected'" : "")>@item.Name</option>
+                        foreach (var item in venderViewModels)
+                        {
+                            <option value="@item.Id" @(item.Id == LPOInvoiceViewModel.UpdatedBy ? "selected='selected'" : "")>@item.Name</option>
+                        }
                     }
-                }
-            </select>
+                </select>
+            }
         }
 
         <div class="form-group">
             <p style="margin-top:10px">
             </p>
             @*@if (lpoRemainingQuantityViewModel.LPOQuantity != 0)
-                {
-                    <p><i class="glyphicon glyphicon-user"> </i>Company Name: <span id="ContactPerson">@LPOInvoiceViewModel.Name</span></p>
-                }*@
+            {
+                <p><i class="glyphicon glyphicon-user"> </i>Company Name: <span id="ContactPerson">@LPOInvoiceViewModel.Name</span></p>
+            }*@
             <p><i class="glyphicon glyphicon-road"></i> Address: <span id="VenderAddress">@LPOInvoiceViewModel.Address</span></p>
             <p><i class="glyphicon glyphicon-earphone"></i>Land Line : <span id="VenderPhone">@LPOInvoiceViewModel.LandLine</span></p>
             <p><i class="glyphicon glyphicon-earphone"></i>Mobile : <span id="VenderCell">@LPOInvoiceViewModel.Mobile</span></p>

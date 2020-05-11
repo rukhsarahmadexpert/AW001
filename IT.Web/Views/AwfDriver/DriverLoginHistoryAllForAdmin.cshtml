@@ -28,8 +28,6 @@
                                                         <th>Name</th>
                                                         <th>Image</th>
                                                         <th>Vehicle</th>
-                                                        <th>Order Status</th>
-                                                        <th>IsActive</th>
                                                         <th>Release Vehicle</th>
                                                        <!-- <th>Actions</th>-->
                                                     </tr>
@@ -51,24 +49,6 @@
 
                                                             </td>
                                                             <td>@item.TraficPlateNumber</td>
-                                                            <td>@item.OrderStatus</td>
-                                                            <td>
-                                                                @if (@item.IsActive == true)
-                                                                {
-                                                                    <div class="switchToggle">
-                                                                        <input type="checkbox" id="@item.DriverId" checked>
-                                                                        <label for="@item.DriverId">Toggle</label>
-                                                                    </div>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <div class="switchToggle">
-                                                                        <input type="checkbox" id="@item.DriverId">
-                                                                        <label for="@item.DriverId">Toggle</label>
-                                                                    </div>
-
-                                                                }
-                                                            </td>
                                                             <td>
                                                                 <div>
                                                                     <div class="row">

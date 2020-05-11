@@ -29,7 +29,15 @@
                             <div class="col-md-6 pt-3">
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Fuel Price</label>
-                                    <input type="text" id="Price" name="Price" value="@Model.Price" class="form-control" placeholder="Fuel Price">
+                                    @if (@Model.Price == 0)
+                                    {
+                                        <input type="text" id="Price" name="Price" class="form-control" placeholder="0.00">
+                                    }
+                                    else
+                                    {
+                                        <input type="text" id="Price" name="Price" class="form-control" value="@Math.Round(Model.Price, 2)" />
+                                    }
+
                                 </div>
                             </div>
 
