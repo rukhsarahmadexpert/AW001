@@ -244,7 +244,7 @@
                 </div>
                 <!-- BEGIN PRIMARY NAVIGATION -->
                 <nav id="js-primary-nav" class="primary-nav" role="navigation">
-                    <a href="/Company/AdminCompanyInformation/@userCompanyViewModel.CompanyId">
+                    <a id="UserProfileData" href="/Company/AdminCompanyInformation/@userCompanyViewModel.CompanyId">
                         <div class="info-card">
                             @if (UserImage == null)
                             {
@@ -1918,8 +1918,7 @@
         });
 
         $(document).ready(function () {
-
-
+            
             $('#imgVertical').hide();
             $('#LogoLarge').hide();
             $('#LogoSmall').click(function () {

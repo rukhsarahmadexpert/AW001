@@ -69,7 +69,7 @@
                                 <th>Order Quantity</th>
                                 <th>Deliver Quantity</th>
                                 <th>Order Progress</th>
-                                <th>UserName</th>
+                                <th>User Name</th>
                                 <th width="100px">Actions</th>
                             </tr>
                         </thead>
@@ -133,10 +133,10 @@
                     {
                         render: function (data, type, row) {
                             if (row.OrderProgress == "Order Accepted") {
-                                return '<span class="badge badge-success">Order Accepted</span>'
+                                return '<span class="badge badge-info">Order Accepted</span>'
                             }
                             else if (row.OrderProgress == "Order Created") {
-                                return '<span class="badge badge-primary">Order Created</span>'
+                                return '<span class="badge badge-success">Order Created</span>'
                             }
                             else if (row.OrderProgress == "Order Assigned") {
                                 return '<span class="badge badge-warning">Order Assigned</span>'
@@ -145,10 +145,10 @@
                                 return '<span class="badge badge-danger">Order Rejected</span>'
                             }
                             else if (row.OrderProgress == "Order Running") {
-                                return '<span class="badge badge-dark">Order Running</span>'
+                                return '<span class="badge badge-secondary">Order Running</span>'
                             }
                             else if (row.OrderProgress == "Order Deliverd") {
-                                return '<span class="badge badge-info">Order Deliverd</span>'
+                                return '<span class="badge badge-dark">Order Deliverd</span>'
                             }
                         }
                     },
