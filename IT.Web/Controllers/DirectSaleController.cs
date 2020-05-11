@@ -73,8 +73,6 @@ namespace IT.Web_New.Controllers
                 {
                     driverModel = (new JavaScriptSerializer().Deserialize<DriverModel>(DriverViewModelList.Data.ToString()));
 
-
-
                     TempData["driverModel"] = driverModel;
 
                     //return View("DirectsaleOrderAdd", driverModel);
@@ -184,6 +182,8 @@ namespace IT.Web_New.Controllers
         {
             try
             {
+                int count = 0;
+
                 DriverModel driverModel = new DriverModel
                 { 
                     VehicleId = Id
@@ -194,6 +194,7 @@ namespace IT.Web_New.Controllers
                     if (DetailsList.Data != "[]")
                     {
                         directSaleViewModels = (new JavaScriptSerializer().Deserialize<List<DirectSaleViewModel>>(DetailsList.Data.ToString()));
+                        count = directSaleViewModels.Count - 1;
                     }
                     DriverModel driverModel1 = new DriverModel
                     { 
@@ -201,11 +202,11 @@ namespace IT.Web_New.Controllers
                     VehicleId = directSaleViewModels[0].VehicleId,
                     TraficPlateNumber = directSaleViewModels[0].TraficPlateNumber,
                     };
-                    if (directSaleViewModels[0].ContactNumber != null)
+                    if (directSaleViewModels[count].ContactNumber != null)
                     {
-                        driverModel1.ContactNumber = directSaleViewModels[0].ContactNumber;
-                        driverModel1.DriverId = directSaleViewModels[0].DriverId;
-                        driverModel1.DriverName = directSaleViewModels[0].Name;
+                        driverModel1.ContactNumber = directSaleViewModels[count].ContactNumber;
+                        driverModel1.DriverId = directSaleViewModels[count].DriverId;
+                        driverModel1.DriverName = directSaleViewModels[count].Name;
                     }
                     TempData["driverModel"] = driverModel1;
 

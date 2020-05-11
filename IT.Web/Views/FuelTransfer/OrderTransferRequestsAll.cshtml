@@ -166,14 +166,14 @@
                                             <th scope="row">Created Date</th>
                                             <td id="Created_Date">td</td>
                                         </tr>
+                                            <tr>
+                                                <th scope="row">From Driver</th>
+                                                <td id="DriverName"></td>
 
-                                        <tr>
-                                            <th scope="row">From Driver</th>
-                                            <td id="DriverName"></td>
-                                            <input type="hidden" id="OrderId" />
-                                            <input type="hidden" id="From" />
-                                            <input type="hidden" id="OrderTransferRequestedId" />
-                                            <input type="hidden" id="description" />
+                                                <input type="hidden" id="OrderId" />
+                                                <input type="hidden" id="From" />
+                                                <input type="hidden" id="OrderTransferRequestedId" />
+                                                <input type="hidden" id="description" />
                                         </tr>
                                         <tr>
                                             <th scope="row">Request Type Name</th>
@@ -213,14 +213,12 @@
 
 
     <script>
-
         $(document).ready(function () {
-
+           
+            $('#SitesDriver').val('Driver');
             $('#OrderTransferToDriver').click(function () {
 
                 var Data = JSON.stringify({
-
-
                     OrderId: $('#OrderId').val(),
                     IsFullOrder: $('#IsFullPartial12').val(),
                     From: $('#From').val(),
