@@ -27,8 +27,9 @@ namespace IT.Web_New.Controllers
         int CompanyId = 0;
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int CompId = 0)
         {
+            ViewBag.CompanyId = CompId;
             return View();
         }
 
@@ -116,11 +117,10 @@ namespace IT.Web_New.Controllers
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
                 int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
-                pagingParameterModel.pageNumber = pageNumer;
+                    pagingParameterModel.pageNumber = pageNumer;
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.PageSize = pageSize;
-                    pagingParameterModel.CompanyId = CompanyId;
-                
+                    pagingParameterModel.CompanyId = CompanyId;                
 
                 var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
 
@@ -130,15 +130,11 @@ namespace IT.Web_New.Controllers
                     if (VehicleList.Data != "[]" && VehicleList.Data != null)
                     {
                         VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
-
                         TotalRow = VehicleViewModels[0].TotalRows;
-
                         return Json(new { draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
-                        //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                     }
                 }
                 return Json(new { draw, recordsFiltered = 0, recordsTotal = 0, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
-
             }
             catch (Exception ex)
             {

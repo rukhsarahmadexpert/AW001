@@ -49,7 +49,7 @@ namespace IT.Web_New.Controllers
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
                 int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
-                pagingParameterModel.pageNumber = pageNumer;
+                    pagingParameterModel.pageNumber = pageNumer;
                     pagingParameterModel._pageSize = pageSize;
                     pagingParameterModel.PageSize = pageSize;
                     pagingParameterModel.CompanyId = CompanyId;
@@ -68,7 +68,16 @@ namespace IT.Web_New.Controllers
                         return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                     }
+                    else
+                    {
+                        VehicleViewModels = new List<VehicleViewModel>();
+                    }
                 }
+                else
+                {
+                    VehicleViewModels = new List<VehicleViewModel>();
+                }
+
                 return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = VehicleViewModels }, JsonRequestBehavior.AllowGet);
 
             }

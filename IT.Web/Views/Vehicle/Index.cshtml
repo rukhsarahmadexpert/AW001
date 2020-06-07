@@ -54,8 +54,10 @@
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
 
     <script>
-
+      
         $(document).ready(function () {
+            var CompId = @ViewBag.CompanyId;
+           
             $("#CustomerVehicleMenu").attr("aria-expanded", "true");
             $('#CustomerVehicleUl').css('display', 'block');
             $('#CustomerVehicleLi').addClass('active');
@@ -69,7 +71,7 @@
                 "filter": false, // this is for disable filter (search box)
                 "orderMulti": false, // for disable multiple column at once
                 "ajax": {
-                    "url": "/Vehicle/All",
+                    "url": "/Vehicle/All/?CompId="+CompId,
                     "type": "POST",
                     "datatype": "json"
                 },

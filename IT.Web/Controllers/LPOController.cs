@@ -751,6 +751,7 @@ namespace IT.Web_New.Controllers
             }
         }
 
+        [NonAction]
         public FileResult Download(string FileName)
         {
             string PAth = Server.MapPath("~/PDF/" + FileName);
@@ -774,9 +775,10 @@ namespace IT.Web_New.Controllers
                 List<IT.Web.Models.LPOInvoiceDetailsModel> lPOInvoiceDetails = new List<LPOInvoiceDetailsModel>();
                 List<VenderModel> venderModels = new List<VenderModel>();
 
-                var lPOInvoice = new LPOInvoiceModel();
-                lPOInvoice.Id = Id;
-                
+                var lPOInvoice = new LPOInvoiceModel
+                {
+                    Id = Id
+                };
                 var LPOInvoice = webServices.Post(lPOInvoice, "LPO/EditReport/" + Id);
 
                 var LPOInvoiceModel = new IT.Web.Models.LPOInvoiceModel();
@@ -836,8 +838,10 @@ namespace IT.Web_New.Controllers
             {
                 lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
 
-                SearchViewModel searchViewModel = new SearchViewModel();
-                searchViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                SearchViewModel searchViewModel = new SearchViewModel
+                {
+                    CompanyId = Convert.ToInt32(Session["CompanyId"])
+                };
                 var result = webServices.Post(searchViewModel, "LPO/LPOAllCustomer");
 
                 if(result.StatusCode == System.Net.HttpStatusCode.Accepted)
