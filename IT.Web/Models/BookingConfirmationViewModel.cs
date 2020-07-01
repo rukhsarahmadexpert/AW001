@@ -16,5 +16,6 @@ namespace IT.Web.Models
         public string Address { get; set; }
         public string Country { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string OrderNo { get; set; }
     }
 }

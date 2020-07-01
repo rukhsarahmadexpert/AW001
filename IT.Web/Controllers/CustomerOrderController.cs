@@ -129,11 +129,11 @@ namespace IT.Web_New.Controllers
                     {
                         customerNoteOrderViewModel = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
                         TotalRow = customerNoteOrderViewModel[0].TotalRows;
-                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = customerNoteOrderViewModel }, JsonRequestBehavior.AllowGet);
+                        return Json(new { draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = customerNoteOrderViewModel }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                     }
                 }
-                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = customerNoteOrderViewModel }, JsonRequestBehavior.AllowGet);
+                return Json(new { draw, recordsFiltered = 0, recordsTotal = 0, data = customerNoteOrderViewModel }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -284,11 +284,11 @@ namespace IT.Web_New.Controllers
 
                         TotalRow = customerNoteOrderViewModels[0].TotalRows;
 
-                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = customerNoteOrderViewModels }, JsonRequestBehavior.AllowGet);
+                        return Json(new { draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = customerNoteOrderViewModels }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                     }
                 }
-                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = customerNoteOrderViewModels }, JsonRequestBehavior.AllowGet);
+                return Json(new { draw, recordsFiltered = 0, recordsTotal = 0, data = customerNoteOrderViewModels }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
@@ -403,16 +403,16 @@ namespace IT.Web_New.Controllers
 
                         TotalRow = orderSiteAssignedList.Count;
 
-                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = orderSiteAssignedList }, JsonRequestBehavior.AllowGet);
+                        return Json(new {  draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = orderSiteAssignedList }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                     }
                 }
-                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = orderSiteAssignedList }, JsonRequestBehavior.AllowGet);
+                return Json(new { draw, recordsFiltered = 0, recordsTotal = 0, data = orderSiteAssignedList }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
         
@@ -844,11 +844,11 @@ namespace IT.Web_New.Controllers
 
                         TotalRow = orderList.Count;
 
-                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = orderList }, JsonRequestBehavior.AllowGet);
+                        return Json(new { draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = orderList }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                     }
                 }
-                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = orderList }, JsonRequestBehavior.AllowGet);
+                return Json(new { draw, recordsFiltered = 0, recordsTotal = 0, data = orderList }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)

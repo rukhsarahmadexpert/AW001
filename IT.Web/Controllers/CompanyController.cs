@@ -11,7 +11,6 @@ using System.Web.Script.Serialization;
 
 namespace IT.Web_New.Controllers
 {
-
     [Autintication]
     [ExceptionLog]
     public class CompanyController : Controller
@@ -70,8 +69,9 @@ namespace IT.Web_New.Controllers
                     int pageNumer = (Convert.ToInt32(start) / Convert.ToInt32(length)) + 1;
                     pagingParameterModel.pageNumber = pageNumer;
                     pagingParameterModel._pageSize = pageSize;
-                    pagingParameterModel.PageSize = pageSize;
-                
+                    pagingParameterModel.PageSize = pageSize;                
+                    pagingParameterModel.sortColumn = sortColumn;                
+                    pagingParameterModel.sortColumnDir = sortColumnDir;                
 
                 var CompanyList = webServices.Post(pagingParameterModel, "Company/CompayAll");
                 if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -82,13 +82,12 @@ namespace IT.Web_New.Controllers
                         compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                         TotalRow = compnayModels[0].TotalRows;
 
-                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = compnayModels }, JsonRequestBehavior.AllowGet);
-
-
+                        return Json(new { draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = compnayModels }, JsonRequestBehavior.AllowGet);
+                        
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                     }
                 }
-                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = compnayModels }, JsonRequestBehavior.AllowGet);
+                return Json(new { draw, recordsFiltered = 0, recordsTotal = 0, data = compnayModels }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
@@ -96,7 +95,7 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
-
+         
         [HttpGet]
         public ActionResult Details(int id)
         {

@@ -68,15 +68,15 @@ namespace IT.Web_New.Controllers
                         driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
                         TotalRow = driverViewModels[0].TotalRows;
 
-                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = driverViewModels }, JsonRequestBehavior.AllowGet);
+                        return Json(new { draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = driverViewModels }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                     }
                 }
-                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = driverViewModels }, JsonRequestBehavior.AllowGet);
+                return Json(new { draw, recordsFiltered = 0, recordsTotal = 0, data = driverViewModels }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -126,15 +126,16 @@ namespace IT.Web_New.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            DriverViewModel driverViewModel = new DriverViewModel();
-            driverViewModel.LicenseExpiry = System.DateTime.Now.ToString("yyyy-MM-dd");
+            DriverViewModel driverViewModel = new DriverViewModel {
+                LicenseExpiry = System.DateTime.Now.ToString("yyyy-MM-dd")
+            };
 
             return View(driverViewModel);
         }

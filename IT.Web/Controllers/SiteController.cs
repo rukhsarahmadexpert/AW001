@@ -156,11 +156,11 @@ namespace IT.Web_New.Controllers
 
                         TotalRow = siteViewModels[0].TotalRows;
 
-                        return Json(new { draw = draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = siteViewModels }, JsonRequestBehavior.AllowGet);
+                        return Json(new { draw, recordsFiltered = TotalRow, recordsTotal = TotalRow, data = siteViewModels }, JsonRequestBehavior.AllowGet);
                         //compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
                     }
                 }
-                return Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = siteViewModels }, JsonRequestBehavior.AllowGet);
+                return Json(new { draw, recordsFiltered = 0, recordsTotal = 0, data = siteViewModels }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
