@@ -784,6 +784,7 @@
     <Content Include="Backup\DB_A415B5_AW_4_28_2020.bak" />
     <Content Include="Backup\DB_A415B5_AW_5_10_2020.bak" />
     <Content Include="Backup\DB_A415B5_AW_6_7_2020.bak" />
+    <Content Include="Backup\DB_A415B5_AW_6_27_2020.bak" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Common-Scripts\LOP-Invoice.js" />

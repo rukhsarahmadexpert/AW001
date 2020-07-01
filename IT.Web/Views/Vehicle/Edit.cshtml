@@ -170,8 +170,6 @@
     </div>
 </div>
 
-
-
 @section Scripts{
     <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
     <script>
@@ -208,22 +206,17 @@
 
     </script>
 
+    <script>
+        $(document).ready(function () {
+            $("#CustomerVehicleMenu").attr("aria-expanded", "true");
+            $('#CustomerVehicleUl').css('display', 'block');
+            // $('#VehicleLi').addClass('active');
+        });           
 
-
-            <script>
-                $(document).ready(function () {
-                    $("#CustomerVehicleMenu").attr("aria-expanded", "true");
-                    $('#CustomerVehicleUl').css('display', 'block');
-                    // $('#VehicleLi').addClass('active');
-                });
-
-            </script>
-
+    </script>
 
 }
 <style>
-
-
     .pic {
         display: none;
     }
