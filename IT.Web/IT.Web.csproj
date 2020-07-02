@@ -587,6 +587,8 @@
     <Content Include="assets\site\fonts\ionicons28b5-4.html" />
     <Content Include="assets\site\fonts\ionicons28b5.html" />
     <Content Include="assets\site\images\app-store.png" />
+    <Content Include="assets\site\images\aw-fuel-1.png" />
+    <Content Include="assets\site\images\aw-fuel.png" />
     <Content Include="assets\site\images\banner1.jpg" />
     <Content Include="assets\site\images\banner2.jpg" />
     <Content Include="assets\site\images\banner3.jpg" />
@@ -786,6 +788,7 @@
     <Content Include="Backup\DB_A415B5_AW_6_7_2020.bak" />
     <Content Include="Backup\DB_A415B5_AW_6_27_2020.bak" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Common-Scripts\LOP-Invoice.js" />
     <Content Include="Scripts\CustomScript\common-script.js" />
