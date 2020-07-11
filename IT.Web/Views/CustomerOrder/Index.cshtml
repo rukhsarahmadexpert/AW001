@@ -8,8 +8,7 @@
     //Layout = "~/Views/Shared/_Layout.cshtml";
     //Layout = ViewBag.LayoutName;
 
-    List<IT.Core.ViewModels.CustomerNoteOrderViewModel> customerNoteOrderViewModel = new List<IT.Core.ViewModels.CustomerNoteOrderViewModel>();
-    customerNoteOrderViewModel = Model as List<IT.Core.ViewModels.CustomerNoteOrderViewModel>;
+    int CompanyId = ViewBag.CompanyId;
 }
 @*<label>Rukhsar</label>*@
 
@@ -18,7 +17,7 @@
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    <a class=" btn btn-primary btn-md" href="/CustomerOrder/Create"> <i class="fal fa-plus-circle"></i> Request New Delivery</a>
+                    <a class=" btn btn-primary btn-md" href="/CustomerOrder/Create/@CompanyId"> <i class="fal fa-plus-circle"></i> Request New Delivery</a>
                 </h2>
 
                 <div class="tab-pane" id="tab-All" role="tabpanel" aria-labelledby="tab-All">

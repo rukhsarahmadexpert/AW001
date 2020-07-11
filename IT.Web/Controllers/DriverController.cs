@@ -94,32 +94,11 @@ namespace IT.Web_New.Controllers
         {
             try
             {
-                if (CompId > 0)
-                {
-                    CompanyId = CompId;
-                }
-                else
-                {
-                    CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                }
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-                pagingParameterModel.CompanyId = CompanyId;
-                  
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 500;
-                pagingParameterModel.PageSize = 500;
-                var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
-
-                if(DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {
-                    if(DriverList.Data != "[]")
-                    {
-                        driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
-                    }
-                    driverViewModels.Insert(0, new DriverViewModel() { Id = 0, Name = "Select Driver" });
-                }
+                driverViewModels = new List<DriverViewModel>();
+                driverViewModels = Drivers(CompId);
 
                 return Json(driverViewModels, JsonRequestBehavior.AllowGet);
+               
             }
             catch (Exception)
             {
@@ -153,6 +132,37 @@ namespace IT.Web_New.Controllers
             }
         }
         
+
+        public List<DriverViewModel> Drivers(int Id = 0)
+        {
+            if (Id > 0)
+            {
+                CompanyId = Id;
+            }
+            else
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+            }
+            PagingParameterModel pagingParameterModel = new PagingParameterModel();
+            pagingParameterModel.CompanyId = CompanyId;
+
+            pagingParameterModel.pageNumber = 1;
+            pagingParameterModel._pageSize = 500;
+            pagingParameterModel.PageSize = 500;
+            var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
+
+            if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                if (DriverList.Data != "[]")
+                {
+                    driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
+                }
+                driverViewModels.Insert(0, new DriverViewModel() { Id = 0, Name = "Select Driver" });
+            }
+            return driverViewModels;
+        }
+
+
         [HttpGet]
         public ActionResult Create()
         {

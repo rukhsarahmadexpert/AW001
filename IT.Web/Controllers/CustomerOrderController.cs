@@ -40,6 +40,7 @@ namespace IT.Web_New.Controllers
             //}
             try
             {
+                ViewBag.CompanyId = CompId;
                 return View();
               //  CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 //PagingParameterModel pagingParameterModel = new PagingParameterModel
@@ -466,18 +467,30 @@ namespace IT.Web_New.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(int Id =0)
         {
             try
             {
-                CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                driverVehicelViewModel = vehicleController.DriverVehicels(CompanyId);
+                if (Id > 0)
+                {
+                    CompanyId = Id;
+                }
+                else
+                {
+                    CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                }
+             
+
+               var driverVehicelViewModel = new DriverVehicelViewModel();
 
                 ProductController productController = new ProductController();
                 CustomerSitesController customerSites = new CustomerSitesController();
+                DriverController driverController = new DriverController();
+                driverVehicelViewModel = vehicleController.DriverVehicels(CompanyId);
 
                 driverVehicelViewModel.driverModels.Insert(0, new DriverModel() { DriverId = 0, DriverName = "Select Driver" });
                 driverVehicelViewModel.vehicleModels.Insert(0, new VehicleModel() { VehicelId = 0, TraficPlateNumber = "Select Vehicle" });
+                
 
                 ViewBag.driverModels = driverVehicelViewModel.driverModels;
                 ViewBag.vehicleModels = driverVehicelViewModel.vehicleModels;
@@ -546,7 +559,7 @@ namespace IT.Web_New.Controllers
                 throw ex;
             }
         }
-
+        
         [HttpPost]
         public ActionResult CustomerOrderSend(SearchViewModel searchViewModel)
         {
