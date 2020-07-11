@@ -589,6 +589,7 @@
     <Content Include="assets\site\images\app-store.png" />
     <Content Include="assets\site\images\aw-fuel-1.png" />
     <Content Include="assets\site\images\aw-fuel.png" />
+    <Content Include="assets\site\images\awfuel-trading.png" />
     <Content Include="assets\site\images\banner1.jpg" />
     <Content Include="assets\site\images\banner2.jpg" />
     <Content Include="assets\site\images\banner3.jpg" />
