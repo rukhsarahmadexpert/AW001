@@ -10,7 +10,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,6 +27,7 @@
     <meta property="og:description" content="AW FUEL trading are Trusted by Businesses across the UAE to Supply Diesel with Same Day and Next Day Deliveries available Nationwide throughout the United Arab Emirates." />
     <meta property="og:image" content="~/assets/site/images/aw-fuel-1.png" />
 
+    <title>Aw Fuel - Diesel Trading Company</title>
     <!-- plugins -->
     <link href="~/assets/site/css/plugins/bundle.css" rel="stylesheet">
     <!--main css file-->
@@ -45,31 +45,24 @@
     <!--back to top end-->
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-lg navbar-light navbar-default fixed-top navbar-transparent">
-
         <div class="clearfix"></div>
         <div class="container-fluid">
-
             <!-- Start Top Search -->
             <div class="top-search clearfix">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Type and Press Enter to Search">
                     <span class="input-group-addon close-search"><i class="ion-android-close"></i></span>
                 </div>
-
-
-
             </div><!-- End Top Search -->
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <a class="navbar-brand" href="/Home/Details">
                 <img src="~/assets/site/images/logo-light-3-4.svg" width="180px" alt="" class="logo-scroll">
                 <img src="~/assets/site/images/logo-light-3-4.svg" width="200px" alt="" class="logo-top">
             </a>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
-
                     <li class="nav-item dropdown ">
                         <a class="nav-link" href="/Home/Details" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">
                             Home
@@ -79,26 +72,19 @@
                         <a class="nav-link" href="http://awfuel.com/Home/Details#About" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">
                             Who we are ?
                         </a>
-
                     </li>
-
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="http://awfuel.com/Home/Details#whyChooseUs" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">
                             Why Choose Us ?
                         </a>
-
                     </li>
-
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="http://awfuel.com/Home/Details#Services" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">
                             What We Offer?
                         </a>
-
                     </li>
-
                     @if (userCompanyViewModel.CompanyId > 0)
                     {
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
@@ -136,7 +122,6 @@
                         <li class="nav-item"><a href="/User/Registration" class="btn btn-rounded btn-primary nav-link">Become a customer</a></li>
                         <li class="nav-item"><a href="/User/Login" class="btn btn-rounded btn-primary nav-link">Sign In</a></li>
                     }
-
                 </ul>
             </div>
             <!-- Start search Navigation -->
@@ -145,17 +130,14 @@
             </div>
         </div>
     </nav><!--navbar end-->
-
-
+    
     @RenderBody()
-
 
     <footer class="footer">
         <div class="space-50"></div>
         <div class="container">
             <div class="row vertical-align-child">
                 <div class="col-md-5 margin-b-30">
-                   
                     <p>
                         Find the cheapest fuel/diesel prices throughout the united arab emirates (UAE). <br />
                         Clever Combination - clever - cost - saving <br /> Diesel trading & transportation under one umbralla.
@@ -163,7 +145,6 @@
                 </div>
                 <div class="col-md-2 margin-b-30">
                     <ul class="list-unstyled">
-
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Terms</a></li>
                         <li><a href="/Home/Policy">Privacy Policy</a></li>
@@ -176,7 +157,6 @@
                         <li><a href="/Home/Products">Products</a></li>
                         <li><a href="/Home/BulkStorage">Bulk Storage</a></li>
                         <li><a href="/Home/FuelTransportation">FuelTransportation</a></li>
-
                     </ul>
                 </div>
                 <div class="col-md-3 margin-b-30">
@@ -192,7 +172,6 @@
             </div>
             <span><a href="https://itmolen.nl/">IT Molen</a> | &copy; Aw Fuel 2019 </span>
         </div>
-
         <div class="space-20"></div>
     </footer>
     <!-- jQuery plugins-->
