@@ -38,6 +38,7 @@ namespace IT.Web_New.Controllers
             //    CompanyId = CompId;
             //    ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
             //}
+
             try
             {
                 ViewBag.CompanyId = CompId;
